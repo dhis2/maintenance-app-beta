@@ -3,11 +3,11 @@ export {
     trackerProgramListSchema,
     trackerProgramInitialValues,
     trackerProgramValidate,
-} from './TrackerProgramsSchema'
+} from './trackerProgram/TrackerProgramsSchema'
 export {
     eventProgramFormSchema,
     eventProgramListSchema,
     eventProgramInitialValues,
     eventProgramValidate,
-} from './EventProgramsSchema'
+} from './eventProgram/EventProgramsSchema'
 export { stageListSchema } from './programStage/stageSchema'

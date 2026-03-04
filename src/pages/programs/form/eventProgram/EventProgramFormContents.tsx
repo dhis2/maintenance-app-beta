@@ -1,15 +1,17 @@
+import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import {
     CustomAttributesSection,
     SectionedFormSections,
-} from '../../../components'
+} from '../../../../components'
 import {
     SCHEMA_SECTIONS,
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
-} from '../../../lib'
+} from '../../../../lib'
+import { SetupFormContents } from '../common/SetupFormContents'
+import { StageDataFormContents } from '../common/StageDataFormContents'
 import { EventProgramFormDescriptor } from './eventProgramFormDescriptor'
-import { SetupFormContents } from './SetupFormContents'
 
 export const EventProgramFormContents = () => {
     const descriptor =
@@ -27,9 +29,11 @@ export const EventProgramFormContents = () => {
             {/*<EnrollmentSettingsFormContents*/}
             {/*    name={descriptor.getSection('enrollmentSettings').name}*/}
             {/*/>*/}
-            {/*<EnrollmentDataFormContents*/}
-            {/*    name={descriptor.getSection('enrollmentData').name}*/}
-            {/*/>*/}
+            <StageDataFormContents
+                name={descriptor.getSection('data').name}
+                sectionLabel={i18n.t('Data')}
+                isTrackerProgram={false}
+            />
             {/*<EnrollmentFormFormContents*/}
             {/*    name={descriptor.getSection('enrollmentForm').name}*/}
             {/*/>*/}

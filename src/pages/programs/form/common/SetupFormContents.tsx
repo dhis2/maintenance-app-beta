@@ -15,23 +15,23 @@ import {
     StandardFormField,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
-} from '../../../components'
-import { defaultDateTimeFormatter } from '../../../components/date'
+} from '../../../../components'
+import { defaultDateTimeFormatter } from '../../../../components/date'
 import {
     ModelSingleSelectFormField,
     useRefreshModelSingleSelect,
-} from '../../../components/metadataFormControls/ModelSingleSelect'
+} from '../../../../components/metadataFormControls/ModelSingleSelect'
 import {
     DEFAULT_CATEGORYCOMBO_SELECT_OPTION,
     useSchemaSectionHandleOrThrow,
-} from '../../../lib'
-import { DisplayableModel } from '../../../types/models'
-import classes from '../../dataElements/fields/CategoryComboField.module.css'
+} from '../../../../lib'
+import { DisplayableModel } from '../../../../types/models'
+import classes from '../../../dataElements/fields/CategoryComboField.module.css'
 import {
     CompleteEventsExpiryDaysField,
     ExpiryDaysWithPeriodTypeField,
     OpenDaysAfterCoEndDateField,
-} from './fields'
+} from '../fields'
 import setupClasses from './SetupFormContents.module.css'
 
 const CATEGORY_COMBOS_QUERY = {

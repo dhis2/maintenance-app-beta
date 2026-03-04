@@ -3,7 +3,7 @@ import { Checkbox, InputFieldFF } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
 import { useField } from 'react-final-form'
 import type { FieldMetaState } from 'react-final-form'
-import setupClasses from '../SetupFormContents.module.css'
+import setupClasses from '../common/SetupFormContents.module.css'
 
 function isEnabled(value: unknown): boolean {
     if (value == null || value === '') {

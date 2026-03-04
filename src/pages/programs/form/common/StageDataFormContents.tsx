@@ -48,12 +48,17 @@ const defaultRenderType = {
 export const StageDataFormContents = React.memo(function StageDataFormContents({
     name,
     sectionLabel,
+    isTrackerProgram = true,
 }: {
     name: string
     sectionLabel: string
+    isTrackerProgram?: boolean
 }) {
+    const fieldName = isTrackerProgram
+        ? 'programStageDataElements'
+        : 'programStages[0].programStageDataElements'
     const { input, meta } = useField<ProgramStageDataElementFormValue[]>(
-        'programStageDataElements',
+        fieldName,
         {
             multiple: true,
             validateFields: [],
@@ -184,14 +189,14 @@ export const StageDataFormContents = React.memo(function StageDataFormContents({
                                 <TableCell>
                                     <FieldRFF
                                         component={CheckboxFieldFF}
-                                        name={`programStageDataElements[${index}].compulsory`}
+                                        name={`${fieldName}[${index}].compulsory`}
                                         type="checkbox"
                                     />
                                 </TableCell>
                                 <TableCell>
                                     <FieldRFF
                                         component={CheckboxFieldFF}
-                                        name={`programStageDataElements[${index}].displayInReports`}
+                                        name={`${fieldName}[${index}].displayInReports`}
                                         type="checkbox"
                                     />
                                 </TableCell>
@@ -199,7 +204,7 @@ export const StageDataFormContents = React.memo(function StageDataFormContents({
                                     <TableCell>
                                         <FieldRFF
                                             component={CheckboxFieldFF}
-                                            name={`programStageDataElements[${index}].allowFutureDate`}
+                                            name={`${fieldName}[${index}].allowFutureDate`}
                                             type="checkbox"
                                             disabled={!isDateType}
                                         />
@@ -208,20 +213,20 @@ export const StageDataFormContents = React.memo(function StageDataFormContents({
                                 <TableCell>
                                     <FieldRFF
                                         component={CheckboxFieldFF}
-                                        name={`programStageDataElements[${index}].skipAnalytics`}
+                                        name={`${fieldName}[${index}].skipAnalytics`}
                                         type="checkbox"
                                     />
                                 </TableCell>
                                 <TableCell>
                                     <FieldRFF
                                         component={CheckboxFieldFF}
-                                        name={`programStageDataElements[${index}].skipSynchronization`}
+                                        name={`${fieldName}[${index}].skipSynchronization`}
                                         type="checkbox"
                                     />
                                 </TableCell>
                                 <TableCell>
                                     <RenderingOptionsSelect
-                                        fieldName="programStageDataElements"
+                                        fieldName={fieldName}
                                         index={index}
                                         device="DESKTOP"
                                         valueType={dataElement.valueType}
@@ -230,7 +235,7 @@ export const StageDataFormContents = React.memo(function StageDataFormContents({
                                 </TableCell>
                                 <TableCell>
                                     <RenderingOptionsSelect
-                                        fieldName="programStageDataElements"
+                                        fieldName={fieldName}
                                         index={index}
                                         device="MOBILE"
                                         valueType={dataElement.valueType}

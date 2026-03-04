@@ -1,38 +1,14 @@
 import i18n from '@dhis2/d2-i18n'
-import { object, z } from 'zod'
+import { z } from 'zod'
 import {
     getDefaultsOld,
     createFormValidate,
     modelFormSchemas,
     DEFAULT_CATEGORY_COMBO,
-} from '../../../lib'
+} from '../../../../lib'
 
 const { identifiable, withDefaultListColumns, modelReference } =
     modelFormSchemas
-
-const sharingSettingsSchema = z.object({
-    owner: z.string().optional(),
-    external: z.boolean().optional(),
-    public: z.string().optional(),
-    userGroups: z
-        .record(
-            z.object({
-                id: z.string(),
-                access: z.string(),
-                displayName: z.string().optional(),
-            })
-        )
-        .optional(),
-    users: z
-        .record(
-            z.object({
-                id: z.string(),
-                access: z.string(),
-                displayName: z.string().optional(),
-            })
-        )
-        .optional(),
-})
 
 const eventProgramBaseSchema = z.object({
     code: z.string().optional(),
@@ -93,7 +69,35 @@ const eventProgramBaseSchema = z.object({
     // relationshipLabel: z.string().optional(),
     // noteLabel: z.string().optional(),
     // displayFrontPageList: z.boolean().optional(),
-    // programStages: z.array(modelReference).default([]),
+    programStages: z
+        .array(
+            z.object({
+                id: z.string().optional(),
+                name: z.string().optional(),
+                notificationTemplates: z
+                    .array(z.object({ id: z.string().optional() }))
+                    .default([]),
+                programStageDataElements: z
+                    .array(z.object({ id: z.string().optional() }))
+                    .default([]),
+                programStageSections: z
+                    .array(z.object({ id: z.string().optional() }))
+                    .default([]),
+                validationStrategy: z
+                    .enum(['ON_COMPLETE', 'ON_UPDATE_AND_INSERT'])
+                    .default('ON_UPDATE_AND_INSERT'),
+            })
+        )
+        .default([
+            {
+                id: undefined,
+                name: undefined,
+                notificationTemplates: [],
+                programStageDataElements: [],
+                programStageSections: [],
+                validationStrategy: 'ON_UPDATE_AND_INSERT',
+            },
+        ]),
     // organisationUnits: z.array(modelReference).default([]),
     // notificationTemplates: z.array(modelReference).default([]),
     // sharing: sharingSettingsSchema.optional(),

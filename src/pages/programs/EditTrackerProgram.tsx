@@ -32,8 +32,8 @@ import {
 } from './form'
 import { ProgramNotificationListItem } from './form/ProgramNotificationsFormContents'
 import { ProgramStageListItem } from './form/ProgramStagesFormContents'
-import { TrackerProgramFormContents } from './form/TrackerProgramFormContents'
-import { TrackerProgramFormDescriptor } from './form/trackerProgramFormDescriptor'
+import { TrackerProgramFormContents } from './form/trackerProgram/TrackerProgramFormContents'
+import { TrackerProgramFormDescriptor } from './form/trackerProgram/trackerProgramFormDescriptor'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,

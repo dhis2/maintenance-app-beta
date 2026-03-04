@@ -1,8 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
-import { SectionedFormDescriptor } from '../../../lib'
-import { ProgramValues } from '../EditTrackerProgram'
+import { SectionedFormDescriptor } from '../../../../lib'
+import { ProgramValues } from '../../EditTrackerProgram'
 
-export const EventProgramFormDescriptor = {
+export const TrackerProgramFormDescriptor = {
     name: 'Program',
     label: 'Program',
     sections: [

@@ -34,11 +34,11 @@ import {
     composeAsyncValidators,
     useIsFieldValueUnique,
 } from '../../../../lib'
+import { StageDataFormContents } from '../common/StageDataFormContents'
 import styles from '../EnrollmentFormFormContents.module.css'
 import { ValidationStrategyField } from './fields'
 import { EditOrNewStageSectionForm } from './programStageSection/ProgramStageSectionForm'
 import { StageCreationAndSchedulingFormContents } from './StageCreationAndSchedulingFormContents'
-import { StageDataFormContents } from './StageDataFormContents'
 import { stageSchemaSection } from './StageForm'
 import { StageFormDescriptor } from './stageFormDescriptor'
 

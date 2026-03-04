@@ -5,7 +5,7 @@ import {
     createFormValidate,
     modelFormSchemas,
     DEFAULT_CATEGORY_COMBO,
-} from '../../../lib'
+} from '../../../../lib'
 
 const { identifiable, withDefaultListColumns, modelReference } =
     modelFormSchemas
