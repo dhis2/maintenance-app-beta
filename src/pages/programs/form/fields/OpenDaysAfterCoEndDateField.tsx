@@ -3,7 +3,7 @@ import { Checkbox, InputFieldFF } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
 import { useField } from 'react-final-form'
 import type { FieldMetaState } from 'react-final-form'
-import setupClasses from '../SetupFormContents.module.css'
+import setupClasses from '../common/SetupFormContents.module.css'
 
 function isEnabled(value: unknown): boolean {
     if (value == null || value === '') {
@@ -46,11 +46,6 @@ export function OpenDaysAfterCoEndDateField() {
                         {i18n.t(
                             'Close data entry a number of days after "Implementing partner" end date'
                         )}
-                        <span className={setupClasses.devNote}>
-                            {i18n.t(
-                                '(dev note: only shown if COC is selected and has end date)'
-                            )}
-                        </span>
                     </>
                 }
                 onChange={({ checked: isChecked }) => onToggle(isChecked)}

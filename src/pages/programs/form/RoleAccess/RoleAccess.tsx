@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom'
 import { useDebouncedCallback } from 'use-debounce'
 import type { SharingSettings } from '../../../../lib'
 import { areSharingPropertiesSimilar } from '../../../../lib'
-import type { ProgramValues } from '../../Edit'
+import type { ProgramValues } from '../../EditTrackerProgram'
 import css from './RoleAccess.module.css'
 import { RoleAccessBox } from './RoleAccessBox'
 

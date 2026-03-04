@@ -2,30 +2,31 @@ import React from 'react'
 import {
     CustomAttributesSection,
     SectionedFormSections,
-} from '../../../components'
+} from '../../../../components'
 import {
     SCHEMA_SECTIONS,
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
-} from '../../../lib'
-import { AccessAndSharingFormContents } from './AccessAndSharingFormContents'
+} from '../../../../lib'
+import { AccessAndSharingFormContents } from '../AccessAndSharingFormContents'
+import { SetupFormContents } from '../common/SetupFormContents'
+import { EnrollmentFormFormContents } from '../EnrollmentFormFormContents'
+import { EnrollmentSettingsFormContents } from '../EnrollmentSettingsFormContents'
+import { ProgramCustomizationFormContents } from '../ProgramCustomizationFormContents'
+import { ProgramNotificationsFormContents } from '../ProgramNotificationsFormContents'
+import { ProgramStagesFormContents } from '../ProgramStagesFormContents'
 import { EnrollmentDataFormContents } from './EnrollmentDataFormContents'
-import { EnrollmentFormFormContents } from './EnrollmentFormFormContents'
-import { EnrollmentSettingsFormContents } from './EnrollmentSettingsFormContents'
-import { ProgramFormDescriptor } from './formDescriptor'
-import { ProgramCustomizationFormContents } from './ProgramCustomizationFormContents'
-import { ProgramNotificationsFormContents } from './ProgramNotificationsFormContents'
-import { ProgramStagesFormContents } from './ProgramStagesFormContents'
-import { SetupFormContents } from './SetupFormContents'
+import { TrackerProgramFormDescriptor } from './trackerProgramFormDescriptor'
 
-export const ProgramFormContents = () => {
-    const descriptor = useSectionedFormContext<typeof ProgramFormDescriptor>()
+export const TrackerProgramFormContents = () => {
+    const descriptor =
+        useSectionedFormContext<typeof TrackerProgramFormDescriptor>()
     useSyncSelectedSectionWithScroll()
     return (
         <SectionedFormSections>
             <SetupFormContents
-                name={descriptor.getSection('enrollmentDetails').name}
-            />
+                name={descriptor.getSection('programDetails').name}
+            ></SetupFormContents>
             <ProgramCustomizationFormContents
                 name={descriptor.getSection('programCustomization').name}
             />

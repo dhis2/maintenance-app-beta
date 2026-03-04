@@ -19,14 +19,14 @@ import {
     StandardFormSection,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
-} from '../../../components'
-import css from '../../../components/metadataFormControls/ModelTransfer/ModelTransfer.module.css'
+} from '../../../../components'
+import css from '../../../../components/metadataFormControls/ModelTransfer/ModelTransfer.module.css'
 import {
     InfoIconWithTooltip,
     TooltipWrapper,
-} from '../../../components/tooltip'
-import { ProgramTrackedEntityAttribute } from '../../../types/generated'
-import { ProgramsFromFilters } from '../Edit'
+} from '../../../../components/tooltip'
+import { ProgramTrackedEntityAttribute } from '../../../../types/generated'
+import { ProgramsFromFilters } from '../../EditTrackerProgram'
 
 const defaultRenderType = {
     MOBILE: { type: 'DEFAULT' },

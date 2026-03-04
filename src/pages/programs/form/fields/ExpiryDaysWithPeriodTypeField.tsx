@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { Field as FieldRFF, useField, useForm } from 'react-final-form'
 import type { FieldMetaState } from 'react-final-form'
 import { Program } from '../../../../types/generated'
-import setupClasses from '../SetupFormContents.module.css'
+import setupClasses from '../common/SetupFormContents.module.css'
 
 const EXPIRY_PERIOD_TYPE_OPTIONS = Object.entries(Program.expiryPeriodType).map(
     ([, value]) => ({ label: value, value })
