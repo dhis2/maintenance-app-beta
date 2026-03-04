@@ -1,3 +1,18 @@
+## [0.136.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.136.0...v0.136.1) (2026-03-04)
+
+
+### Bug Fixes
+
+* double expression ([b1134f0](https://github.com/dhis2/maintenance-app-beta/commit/b1134f01d7f017e44437d48362c3246a89cb8810))
+* save button without closing page ([a46a554](https://github.com/dhis2/maintenance-app-beta/commit/a46a5542244bc37a4e54edbe3867d86c30ab8c2b))
+* success alert when saving ([9d56487](https://github.com/dhis2/maintenance-app-beta/commit/9d5648778f791d1b6fbc05c4e69d83fb6f9ec378))
+* wrap form footer for program disaggregations ([55b93b7](https://github.com/dhis2/maintenance-app-beta/commit/55b93b7fe8f9c093c20ce4ee87b64d0c46b70f98))
+
+
+### Features
+
+* event programs setup ([#787](https://github.com/dhis2/maintenance-app-beta/issues/787)) [skip release] ([499bafa](https://github.com/dhis2/maintenance-app-beta/commit/499bafacb0ae0ab5cc3aa80c944932764bc008e9))
+
 # [0.136.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.135.0...v0.136.0) (2026-03-03)
 
 
