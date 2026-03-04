@@ -41,7 +41,7 @@ export const CategoryComboFormFields = () => {
 
             <StandardFormSection>
                 <StandardFormSectionTitle>
-                    {i18n.t('Data configuration')}
+                    {i18n.t('Category combination usage')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
@@ -49,9 +49,7 @@ export const CategoryComboFormFields = () => {
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
-                    <HorizontalFieldGroup
-                        label={'Data dimension type (required)'}
-                    >
+                    <HorizontalFieldGroup label={'Type'} required>
                         <Field<string | undefined>
                             name="dataDimensionType"
                             component={RadioFieldFF}

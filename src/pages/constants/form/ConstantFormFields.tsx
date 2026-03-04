@@ -32,9 +32,7 @@ function ConstantFormFields() {
             <DefaultIdentifiableFields />
 
             <StandardFormField>
-                <DescriptionField
-                    helpText={i18n.t('Explain the purpose of this constant.')}
-                />
+                <DescriptionField />
             </StandardFormField>
 
             <StandardFormField>
@@ -44,10 +42,10 @@ function ConstantFormFields() {
                     inputWidth="400px"
                     dataTest="formfields-value"
                     type="number"
-                    label={i18n.t('Value (required)')}
+                    label={i18n.t('Value')}
                     required
                     helpText={i18n.t(
-                        'Enter the numeric value to be used as the constant.'
+                        'The numeric value to be used as the constant.'
                     )}
                 />
             </StandardFormField>

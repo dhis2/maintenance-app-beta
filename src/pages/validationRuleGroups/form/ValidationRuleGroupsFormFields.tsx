@@ -35,11 +35,7 @@ export function ValidationRuleGroupsFormFields() {
                     <CodeField schemaSection={schemaSection} />
                 </StandardFormField>
                 <StandardFormField>
-                    <DescriptionField
-                        helpText={i18n.t(
-                            'Explain the purpose of this validation rule group.'
-                        )}
-                    />
+                    <DescriptionField />
                 </StandardFormField>
             </StandardFormSection>
 
@@ -69,6 +65,7 @@ export function ValidationRuleGroupsFormFields() {
                         filterPlaceholderPicked={i18n.t(
                             'Filter selected validation rules'
                         )}
+                        maxSelections={Infinity}
                     />
                 </StandardFormField>
             </StandardFormSection>

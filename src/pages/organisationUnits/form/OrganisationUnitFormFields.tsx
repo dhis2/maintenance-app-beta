@@ -37,7 +37,7 @@ export function OrganisationUnitFormField() {
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Choose where this new organisation unit should be placed in the existing hierarchy'
+                        'Choose where this organisation unit is positioned in the hierarchy.'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
@@ -51,7 +51,7 @@ export function OrganisationUnitFormField() {
 
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Set up the basic information for this organisation unit'
+                        'Set up the basic information for this organisation unit.'
                     )}
                 </StandardFormSectionDescription>
                 <DefaultIdentifiableFields />
@@ -123,9 +123,6 @@ export function OrganisationUnitFormField() {
                         label={i18n.t('URL')}
                         name="url"
                         type="url"
-                        helpText={i18n.t(
-                            'A web link that provides extra information.'
-                        )}
                     />
                 </StandardFormField>
             </StandardFormSection>

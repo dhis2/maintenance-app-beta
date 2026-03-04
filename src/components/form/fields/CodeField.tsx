@@ -7,14 +7,18 @@ import { useValidator } from '../../../lib/models/useFieldValidators'
 
 export function CodeField({
     schemaSection,
+    helpText,
     modelId,
     required = false,
 }: {
     schemaSection: SchemaSection
+    helpText?: string
     modelId?: string
     required?: boolean
 }) {
     const validator = useValidator({ schemaSection, property: 'code', modelId })
+
+    const helpString = helpText || i18n.t('An optional unique identifier.')
 
     return (
         <FieldRFF
@@ -22,7 +26,8 @@ export function CodeField({
             dataTest="formfields-code"
             inputWidth="150px"
             name="code"
-            label={required ? i18n.t('Code (required)') : i18n.t('Code')}
+            label={i18n.t('Code')}
+            helpText={helpString}
             validateFields={[]}
             validate={(code?: string) => validator(code)}
             required={required}

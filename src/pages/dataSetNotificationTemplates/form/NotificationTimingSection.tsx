@@ -1,13 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
-import {
-    SingleSelectFieldFF,
-    InputFieldFF,
-    SingleSelectField,
-    SingleSelectOption,
-} from '@dhis2/ui'
+import { InputFieldFF, Radio, RadioFieldFF } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
 import { Field as FieldRFF, useField, useForm } from 'react-final-form'
-import { StandardFormField } from '../../../components'
+import { HorizontalFieldGroup, StandardFormField } from '../../../components'
 import { getConstantTranslation } from '../../../lib'
 
 export const triggerOptions = [
@@ -21,23 +16,25 @@ export const triggerOptions = [
     },
 ]
 
-export const notificationTypeOptions = [
-    {
-        label: getConstantTranslation('COLLECTIVE_SUMMARY'),
-        value: 'COLLECTIVE_SUMMARY',
-    },
-    {
-        label: getConstantTranslation('SINGLE_NOTIFICATION'),
-        value: 'SINGLE_NOTIFICATION',
-    },
-]
-
 export const NotificationTimingSection = () => {
-    const { input: triggerInput, meta: triggerMeta } = useField(
-        'dataSetNotificationTrigger'
-    )
+    const completionField = useField('dataSetNotificationTrigger', {
+        type: 'radio',
+        value: 'DATA_SET_COMPLETION',
+    })
+    const scheduledDaysField = useField('dataSetNotificationTrigger', {
+        type: 'radio',
+        value: 'SCHEDULED_DAYS',
+    })
+    const collectiveSummaryField = useField('sendStrategy', {
+        type: 'radio',
+        value: 'COLLECTIVE_SUMMARY',
+    })
+    const singleNotificationField = useField('sendStrategy', {
+        type: 'radio',
+        value: 'SINGLE_NOTIFICATION',
+    })
     const form = useForm()
-    const isScheduledDays = triggerInput.value === 'SCHEDULED_DAYS'
+    const isScheduledDays = scheduledDaysField.input.checked
 
     // Subscribe to relativeScheduledDays to determine sign
     const { input: relativeScheduledDaysInput } = useField<
@@ -68,43 +65,51 @@ export const NotificationTimingSection = () => {
     return (
         <div>
             <StandardFormField>
-                <SingleSelectFieldFF
-                    name="dataSetNotificationTrigger"
-                    dataTest="formfields-dataSetNotificationTrigger"
+                <HorizontalFieldGroup
                     label={i18n.t('When to send notification')}
-                    inputWidth="500px"
-                    options={triggerOptions}
-                    input={triggerInput}
-                    meta={triggerMeta}
-                />
+                    dataTest="formfields-dataSetNotificationTrigger"
+                >
+                    <RadioFieldFF
+                        label={getConstantTranslation('DATA_SET_COMPLETION')}
+                        input={completionField.input}
+                        meta={completionField.meta}
+                    />
+                    <RadioFieldFF
+                        label={getConstantTranslation('SCHEDULED_DAYS')}
+                        input={scheduledDaysField.input}
+                        meta={scheduledDaysField.meta}
+                    />
+                </HorizontalFieldGroup>
             </StandardFormField>
 
             {isScheduledDays && (
                 <div data-test="scheduledDaysSelector">
                     <StandardFormField>
-                        <SingleSelectField
+                        <HorizontalFieldGroup
                             label={i18n.t(
                                 'Send before or after scheduled date'
                             )}
-                            selected={beforeAfter}
                             dataTest="formfields-beforeOrAfter"
-                            onChange={({ selected }: { selected: string }) => {
-                                setBeforeAfter(selected as 'BEFORE' | 'AFTER')
-                                handleBeforeAfterChange(
-                                    selected as 'BEFORE' | 'AFTER'
-                                )
-                            }}
-                            inputWidth="120px"
                         >
-                            <SingleSelectOption
+                            <Radio
                                 label={i18n.t('Before')}
                                 value="BEFORE"
+                                checked={beforeAfter === 'BEFORE'}
+                                onChange={() => {
+                                    setBeforeAfter('BEFORE')
+                                    handleBeforeAfterChange('BEFORE')
+                                }}
                             />
-                            <SingleSelectOption
+                            <Radio
                                 label={i18n.t('After')}
                                 value="AFTER"
+                                checked={beforeAfter === 'AFTER'}
+                                onChange={() => {
+                                    setBeforeAfter('AFTER')
+                                    handleBeforeAfterChange('AFTER')
+                                }}
                             />
-                        </SingleSelectField>
+                        </HorizontalFieldGroup>
                     </StandardFormField>
                     <StandardFormField>
                         <FieldRFF<string | undefined>
@@ -122,13 +127,13 @@ export const NotificationTimingSection = () => {
                             name="relativeScheduledDays"
                             type="number"
                             inputWidth="80px"
-                            format={(value) => {
+                            format={(value: string | undefined) => {
                                 const parsed = Math.abs(
                                     parseInt(value ?? '', 10)
                                 )
                                 return isNaN(parsed) ? '' : String(parsed)
                             }}
-                            parse={(value) => {
+                            parse={(value: string | undefined) => {
                                 const parsed = parseInt(value ?? '', 10)
                                 if (isNaN(parsed)) {
                                     return undefined
@@ -141,19 +146,25 @@ export const NotificationTimingSection = () => {
                     </StandardFormField>
 
                     <StandardFormField>
-                        <FieldRFF<string | undefined>
-                            inputWidth="500px"
+                        <HorizontalFieldGroup
+                            label={i18n.t('Send notification as')}
                             dataTest="formfields-notification-type"
-                            initialValue="SINGLE_NOTIFICATION"
-                            name="sendStrategy"
-                            render={(props) => (
-                                <SingleSelectFieldFF
-                                    {...props}
-                                    label={i18n.t('Send notification as')}
-                                    options={notificationTypeOptions}
-                                />
-                            )}
-                        />
+                        >
+                            <RadioFieldFF
+                                label={getConstantTranslation(
+                                    'COLLECTIVE_SUMMARY'
+                                )}
+                                input={collectiveSummaryField.input}
+                                meta={collectiveSummaryField.meta}
+                            />
+                            <RadioFieldFF
+                                label={getConstantTranslation(
+                                    'SINGLE_NOTIFICATION'
+                                )}
+                                input={singleNotificationField.input}
+                                meta={singleNotificationField.meta}
+                            />
+                        </HorizontalFieldGroup>
                     </StandardFormField>
                 </div>
             )}

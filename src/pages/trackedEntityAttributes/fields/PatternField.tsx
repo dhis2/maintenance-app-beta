@@ -21,7 +21,9 @@ export function PatternField() {
             placeholder={
                 'e.g. ORG_UNIT_CODE(...) + "-" + CURRENT_DATE(yyyyww) + "-" + SEQUENTIAL(#####)'
             }
-            helpText={i18n.t('Pattern must use the DHIS2 TextPattern syntax.')}
+            helpText={i18n.t(
+                'Use DHIS2 TextPattern syntax to define how values are generated.'
+            )}
             validateFields={[]}
             validate={validate}
         />

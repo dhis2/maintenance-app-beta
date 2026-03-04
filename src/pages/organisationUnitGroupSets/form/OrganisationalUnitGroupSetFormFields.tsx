@@ -10,11 +10,9 @@ import {
     StandardFormSectionTitle,
     StandardFormSectionDescription,
     DescriptionField,
-    HorizontalFieldGroup,
     ModelTransferField,
 } from '../../../components'
 import { SECTIONS_MAP } from '../../../lib'
-import { DataDimensionField } from '../../dataElementGroupSets/fields'
 
 export const OrganisationalUnitGroupSetFormFields = () => {
     const section = SECTIONS_MAP.organisationUnitGroupSet
@@ -27,7 +25,7 @@ export const OrganisationalUnitGroupSetFormFields = () => {
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Set up the basic information for this organisational unit group set.'
+                        'Set up the basic information for this organisation unit group set.'
                     )}
                 </StandardFormSectionDescription>
                 <DefaultIdentifiableFields />
@@ -38,7 +36,9 @@ export const OrganisationalUnitGroupSetFormFields = () => {
                     <FieldRFF
                         component={CheckboxFieldFF}
                         name="compulsory"
-                        label={i18n.t('Compulsory')}
+                        label={i18n.t(
+                            'Compulsory: all organisation units must belong to at least one group in this group set.'
+                        )}
                         type="checkbox"
                         validateFields={[]}
                     />
@@ -47,7 +47,9 @@ export const OrganisationalUnitGroupSetFormFields = () => {
                     <FieldRFF
                         component={CheckboxFieldFF}
                         name="dataDimension"
-                        label={i18n.t('Data dimension')}
+                        label={i18n.t(
+                            'Show as data dimension in analytics apps'
+                        )}
                         type="checkbox"
                         validateFields={[]}
                     />
@@ -56,7 +58,12 @@ export const OrganisationalUnitGroupSetFormFields = () => {
                     <FieldRFF
                         component={CheckboxFieldFF}
                         name="includeSubhierarchyInAnalytics"
-                        label={i18n.t('Include subhierarchy in analytics')}
+                        label={i18n.t(
+                            'Inherit parent organisation unit groups'
+                        )}
+                        helpText={i18n.t(
+                            'Use the closest parent’s group when an organisation unit has no group assigned.'
+                        )}
                         type="checkbox"
                         validateFields={[]}
                     />
@@ -95,6 +102,7 @@ export const OrganisationalUnitGroupSetFormFields = () => {
                             filterPlaceholderPicked={i18n.t(
                                 'Filter selected organisation unit groups'
                             )}
+                            maxSelections={Infinity}
                         />
                     </StandardFormField>
                 </StandardFormField>

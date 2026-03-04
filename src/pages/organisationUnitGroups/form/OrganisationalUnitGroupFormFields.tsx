@@ -23,7 +23,7 @@ export const OrganisationalUnitGroupFormFields = () => {
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Set up the basic information for this organisational unit group.'
+                        'Set up the basic information for this organisation unit group.'
                     )}
                 </StandardFormSectionDescription>
                 <DefaultIdentifiableFields />
@@ -37,8 +37,13 @@ export const OrganisationalUnitGroupFormFields = () => {
                         {i18n.t('Organisation units')}
                     </label>
                 </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t(
+                        'Choose the organisation units to include in this group.'
+                    )}
+                </StandardFormSectionDescription>
                 <StandardFormField>
-                    <OrganisationUnitField />
+                    <OrganisationUnitField label={''} />
                 </StandardFormField>
             </StandardFormSection>
             <CustomAttributesSection schemaSection={section} />

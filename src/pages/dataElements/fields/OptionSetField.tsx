@@ -43,7 +43,7 @@ export function OptionSetField() {
                     },
                 }}
                 helpText={i18n.t(
-                    'Choose a set of predefined options for data entry.'
+                    'Limit data entry to a predefined list of options. Overrides value type selection to match the option set.'
                 )}
             />
         </EditableFieldWrapper>
@@ -61,25 +61,26 @@ export function OptionSetField() {
                     !selection || selection?.valueType === valueTypeInput?.value
                 )
             }}
-            modalTitle={i18n.t('Option set update will change value type')}
-            modalMessage={i18n.t(
-                'Updating the option set will change the value type which may cause problems when generating analytics tables if there is existing data for this data element.'
-            )}
+            modalTitle={i18n.t('Change option set and value type?')}
             modalMessageSelectionSpecificConfirmation={(selection) =>
                 i18n.t(
-                    'Are you sure you want to change the option set to {{optionSet}} which will change the value type from {{currentValueType}} to {{newValueType}}?',
+                    'Current option set {{currentOptionSet}} uses value type {{currentValueType}}, but {{newOptionSet}} uses value type {{newValueType}}. If this data element already has data, making this change can make existing values incompatible and affect analytics tables. Continue anyway?',
                     {
-                        optionSet:
-                            selection?.displayName ?? i18n.t('this option set'),
+                        currentOptionSet:
+                            input.value?.displayName ??
+                            i18n.t('current option set'),
                         currentValueType: getConstantTranslation(
                             valueTypeInput.value
                         ),
+                        newOptionSet:
+                            selection?.displayName ?? i18n.t('new option set'),
                         newValueType: getConstantTranslation(
                             selection.valueType
                         ),
                     }
                 )
             }
+            confirmButtonLabel={() => i18n.t('Change option set')}
         />
     )
 }

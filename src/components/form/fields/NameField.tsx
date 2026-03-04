@@ -30,9 +30,6 @@ export function NameField({
         ? undefined
         : checkNameDuplicate
 
-    const helpString =
-        helpText || i18n.t('A name should be concise and easy to recognize.')
-
     return (
         <FieldRFF name="name" validate={validator}>
             {({ input, meta }) => (
@@ -53,10 +50,10 @@ export function NameField({
                     dataTest="formfields-name"
                     required
                     inputWidth="400px"
-                    label={i18n.t('{{fieldLabel}} (required)', {
+                    label={i18n.t('{{fieldLabel}}', {
                         fieldLabel: i18n.t('Name'),
                     })}
-                    helpText={helpString}
+                    helpText={helpText}
                     validationText={warning}
                     warning={!!warning}
                 />

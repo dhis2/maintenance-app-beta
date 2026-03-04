@@ -12,9 +12,9 @@ export function MinCharactersToSearchField() {
             dataTest="formfields-minCharactersToSearch"
             type="number"
             min="0"
-            label={i18n.t('Minimum characters to search')}
+            label={i18n.t('Minimum characters required to search')}
             helpText={i18n.t(
-                'Set the minimum characters required to start a search.'
+                'Users must enter at least this many characters to search. Enter 0 for no minimum.'
             )}
             format={(value: unknown) => value?.toString()}
             parse={(value: unknown) => {

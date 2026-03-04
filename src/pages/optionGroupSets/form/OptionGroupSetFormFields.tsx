@@ -61,17 +61,15 @@ function OptionGroupSetFormFields() {
                     <CodeField schemaSection={schemaSection} />
                 </StandardFormField>
                 <StandardFormField>
-                    <DescriptionField
-                        helpText={i18n.t(
-                            'Explain the purpose of this option group set.'
-                        )}
-                    />
+                    <DescriptionField />
                 </StandardFormField>
                 <StandardFormField>
                     <FieldRFF
                         component={CheckboxFieldFF}
                         name="dataDimension"
-                        label={i18n.t('Data dimension')}
+                        label={i18n.t(
+                            'Show as data dimension in analytics apps'
+                        )}
                         type="checkbox"
                         dataTest="formfields-dataDimension"
                     />
@@ -137,12 +135,13 @@ function OptionGroupSetFormFields() {
                             filterPlaceholderPicked={i18n.t(
                                 'Filter selected option groups'
                             )}
+                            maxSelections={Infinity}
                         />
                     </StandardFormField>
                 ) : (
                     <NoticeBox className={styles.noOptionSetWarning}>
                         {i18n.t(
-                            'You must select an option set before you can select options.'
+                            'Choose an option set to start adding option groups.'
                         )}
                     </NoticeBox>
                 )}
