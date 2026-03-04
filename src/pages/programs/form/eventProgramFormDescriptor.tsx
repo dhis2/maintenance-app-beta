@@ -1,13 +1,13 @@
 import i18n from '@dhis2/d2-i18n'
 import { SectionedFormDescriptor } from '../../../lib'
-import { ProgramValues } from '../Edit'
+import { ProgramValues } from '../EditTrackerProgram'
 
-export const ProgramFormDescriptor = {
+export const EventProgramFormDescriptor = {
     name: 'Program',
     label: 'Program',
     sections: [
         {
-            name: 'enrollmentDetails',
+            name: 'programDetails',
             label: i18n.t('Program Details'),
             fields: [
                 { name: 'name', label: i18n.t('Name') },

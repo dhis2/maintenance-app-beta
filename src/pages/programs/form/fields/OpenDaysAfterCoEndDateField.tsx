@@ -46,11 +46,6 @@ export function OpenDaysAfterCoEndDateField() {
                         {i18n.t(
                             'Close data entry a number of days after "Implementing partner" end date'
                         )}
-                        <span className={setupClasses.devNote}>
-                            {i18n.t(
-                                '(dev note: only shown if COC is selected and has end date)'
-                            )}
-                        </span>
                     </>
                 }
                 onChange={({ checked: isChecked }) => onToggle(isChecked)}

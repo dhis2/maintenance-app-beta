@@ -26,7 +26,7 @@ import {
     TooltipWrapper,
 } from '../../../components/tooltip'
 import { ProgramTrackedEntityAttribute } from '../../../types/generated'
-import { ProgramsFromFilters } from '../Edit'
+import { ProgramsFromFilters } from '../EditTrackerProgram'
 
 const defaultRenderType = {
     MOBILE: { type: 'DEFAULT' },
