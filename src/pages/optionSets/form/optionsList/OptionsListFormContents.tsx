@@ -5,10 +5,11 @@ import React, { useState } from 'react'
 import { useField } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
+    DrawerHeader,
+    DrawerPortal,
     SectionedFormSection,
     StandardFormSectionTitle,
     StandardFormSectionDescription,
-    DrawerPortal,
 } from '../../../../components'
 import { useSchemaSectionHandleOrThrow } from '../../../../lib'
 import { EditOrNewOptionForm, SubmittedOptionFormValues } from './OptionEdit'
@@ -56,6 +57,20 @@ const OptionListNewOrEdit = () => {
                 onClose={() => {
                     setOptionsDrawerState({ open: false, id: undefined })
                 }}
+                header={
+                    <DrawerHeader
+                        onClose={() =>
+                            setOptionsDrawerState({
+                                open: false,
+                                id: undefined,
+                            })
+                        }
+                    >
+                        {optionsDrawerState.id === undefined
+                            ? i18n.t('New option')
+                            : i18n.t('Edit option')}
+                    </DrawerHeader>
+                }
             >
                 <EditOrNewOptionForm
                     onSubmitted={onSubmitted}

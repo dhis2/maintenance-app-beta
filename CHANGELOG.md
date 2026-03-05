@@ -1,3 +1,64 @@
+## [0.136.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.136.0...v0.136.1) (2026-03-04)
+
+
+### Bug Fixes
+
+* double expression ([b1134f0](https://github.com/dhis2/maintenance-app-beta/commit/b1134f01d7f017e44437d48362c3246a89cb8810))
+* save button without closing page ([a46a554](https://github.com/dhis2/maintenance-app-beta/commit/a46a5542244bc37a4e54edbe3867d86c30ab8c2b))
+* success alert when saving ([9d56487](https://github.com/dhis2/maintenance-app-beta/commit/9d5648778f791d1b6fbc05c4e69d83fb6f9ec378))
+* wrap form footer for program disaggregations ([55b93b7](https://github.com/dhis2/maintenance-app-beta/commit/55b93b7fe8f9c093c20ce4ee87b64d0c46b70f98))
+
+
+### Features
+
+* event programs setup ([#787](https://github.com/dhis2/maintenance-app-beta/issues/787)) [skip release] ([499bafa](https://github.com/dhis2/maintenance-app-beta/commit/499bafacb0ae0ab5cc3aa80c944932764bc008e9))
+
+# [0.136.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.135.0...v0.136.0) (2026-03-03)
+
+
+### Bug Fixes
+
+* tooltip with conditional text ([6fa2cea](https://github.com/dhis2/maintenance-app-beta/commit/6fa2cead5d554fe802a1307f6f02f790e0df6601))
+
+
+### Features
+
+* get tea value type for edit form ([5357e02](https://github.com/dhis2/maintenance-app-beta/commit/5357e029812d3521be72ba5b5703f7d93e832f06))
+
+# [0.135.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.134.0...v0.135.0) (2026-03-03)
+
+
+### Bug Fixes
+
+* add span with tab index back into drawer ([#784](https://github.com/dhis2/maintenance-app-beta/issues/784)) ([097b982](https://github.com/dhis2/maintenance-app-beta/commit/097b9822dd9dd887face0133e8b1214c75d4dde0))
+* make required labels clear ([#785](https://github.com/dhis2/maintenance-app-beta/issues/785)) ([bcdadc6](https://github.com/dhis2/maintenance-app-beta/commit/bcdadc6812d4ebdac6460ce380d5f535ef6f4019))
+
+
+### Features
+
+* [DHIS2-20784] Program rule form ([#752](https://github.com/dhis2/maintenance-app-beta/issues/752)) ([7a9c577](https://github.com/dhis2/maintenance-app-beta/commit/7a9c5770a5063c4f0ec131d56ec525503324dffe))
+
+# [0.134.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.133.1...v0.134.0) (2026-03-02)
+
+
+### Features
+
+* move programsWip to programs ([#782](https://github.com/dhis2/maintenance-app-beta/issues/782)) ([f3d7e80](https://github.com/dhis2/maintenance-app-beta/commit/f3d7e805dd2f29b2dc2bab6f9900683042a574fd))
+
+## [0.133.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.133.0...v0.133.1) (2026-03-02)
+
+
+### Bug Fixes
+
+* reapply non editing of event programs ([f6f6fed](https://github.com/dhis2/maintenance-app-beta/commit/f6f6fed47c8100c09ba3df0efc2570fe6a213682))
+
+# [0.133.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.132.0...v0.133.0) (2026-03-02)
+
+
+### Features
+
+* **drawer:** header/footer, globalShell conditional height, cleanup ([#773](https://github.com/dhis2/maintenance-app-beta/issues/773)) ([7528300](https://github.com/dhis2/maintenance-app-beta/commit/7528300336966dc5dd0d446212a39d6a747a3b3f))
+
 # [0.132.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.131.0...v0.132.0) (2026-02-26)
 
 

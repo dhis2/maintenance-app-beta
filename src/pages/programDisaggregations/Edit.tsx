@@ -3,16 +3,20 @@ import { Button, CircularLoader, NoticeBox } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
 import React, { useMemo } from 'react'
-import { Form as ReactFinalForm } from 'react-final-form'
-import { useParams } from 'react-router-dom'
+import { Form as ReactFinalForm, useForm, useFormState } from 'react-final-form'
+import { To, useParams } from 'react-router-dom'
+import { createPortalToFooter } from '../../app/layout'
 import {
-    DefaultFormFooter,
     DefaultSectionedFormSidebar,
+    FormFooterWrapper,
     SectionedFormLayout,
+    StandardFormActions,
 } from '../../components'
 import {
     DEFAULT_FIELD_FILTERS,
+    getSectionPath,
     SectionedFormProvider,
+    SECTIONS_MAP,
     useBoundResourceQueryFn,
 } from '../../lib'
 import {
@@ -56,6 +60,8 @@ export type ProgramIndicatorWithMapping = {
     name: string
     id: string
 }
+
+const section = SECTIONS_MAP.programDisaggregation
 
 export const Component = () => {
     const id = useParams().id!
@@ -126,10 +132,16 @@ export const Component = () => {
             return []
         }, [initialValues.programIndicatorMappings])
 
+    const closeOnSubmitRef = React.useRef(false)
+    const setCloseOnSubmit = (value: boolean) => {
+        closeOnSubmitRef.current = value
+    }
+    const listPath = `/${getSectionPath(section)}`
+
     return (
         <ReactFinalForm
             initialValues={initialValues}
-            onSubmit={useOnSubmit(id, initialValues)}
+            onSubmit={useOnSubmit(id, initialValues, closeOnSubmitRef)}
             mutators={{ ...arrayMutators }}
             destroyOnUnregister={false}
             subscription={{}}
@@ -202,7 +214,10 @@ export const Component = () => {
                                             programQuery?.data?.displayName
                                         }
                                     />
-                                    <DefaultFormFooter />
+                                    <ProgramDisaggregationFooter
+                                        cancelTo={listPath}
+                                        setCloseOnSubmit={setCloseOnSubmit}
+                                    />
                                 </form>
                             </SectionedFormLayout>
                         )}
@@ -210,5 +225,39 @@ export const Component = () => {
                 )
             }}
         </ReactFinalForm>
+    )
+}
+
+type ProgramDisaggregationFooterProps = {
+    cancelTo: To
+    setCloseOnSubmit: (value: boolean) => void
+}
+
+const ProgramDisaggregationFooter = ({
+    cancelTo,
+    setCloseOnSubmit,
+}: ProgramDisaggregationFooterProps) => {
+    const { submit } = useForm()
+
+    const { submitting } = useFormState({
+        subscription: { submitting: true },
+    })
+
+    const handleSubmit = (shouldClose: boolean) => {
+        setCloseOnSubmit(shouldClose)
+        submit()
+    }
+
+    return createPortalToFooter(
+        <FormFooterWrapper>
+            <StandardFormActions
+                cancelLabel={i18n.t('Cancel')}
+                submitLabel={i18n.t('Save and close')}
+                submitting={submitting}
+                onSubmitClick={() => handleSubmit(true)}
+                onSaveClick={() => handleSubmit(false)}
+                cancelTo={cancelTo}
+            />
+        </FormFooterWrapper>
     )
 }
