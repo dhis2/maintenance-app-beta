@@ -17,6 +17,7 @@ const ConfirmationModal = ({
     modalTitle,
     modalMessage,
     modalMessageSelectionSpecificConfirmation,
+    confirmButtonLabel,
     children,
 }: {
     onClose: () => void
@@ -25,6 +26,7 @@ const ConfirmationModal = ({
     modalTitle?: string
     modalMessage?: string
     modalMessageSelectionSpecificConfirmation?: string
+    confirmButtonLabel?: string
     children?: React.ReactNode
 }) => (
     <>
@@ -54,7 +56,7 @@ const ConfirmationModal = ({
                             destructive
                             onClick={confirmSelection}
                         >
-                            {i18n.t('Yes, change')}
+                            {confirmButtonLabel ?? i18n.t('Yes, change')}
                         </Button>
                     </ButtonStrip>
                 </ModalActions>
@@ -71,6 +73,7 @@ export const ConfirmationModalWrapper = ({
     modalTitle,
     modalMessage,
     modalMessageSelectionSpecificConfirmation,
+    confirmButtonLabel,
 }: {
     onChange: (event: any) => void
     renderComponent: (onChange: any) => React.JSX.Element
@@ -78,6 +81,7 @@ export const ConfirmationModalWrapper = ({
     modalTitle?: string
     modalMessage?: string
     modalMessageSelectionSpecificConfirmation?: (selection: any) => string
+    confirmButtonLabel?: (selection: any) => string
 }) => {
     const id = useParams()?.id
     const isEdit = !!id
@@ -107,6 +111,11 @@ export const ConfirmationModalWrapper = ({
                     ? modalMessageSelectionSpecificConfirmation(
                           unconfirmedSelection
                       )
+                    : undefined
+            }
+            confirmButtonLabel={
+                unconfirmedSelection && confirmButtonLabel
+                    ? confirmButtonLabel(unconfirmedSelection)
                     : undefined
             }
         >
