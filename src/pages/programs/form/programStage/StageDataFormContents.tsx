@@ -72,13 +72,19 @@ export const StageDataFormContents = React.memo(function StageDataFormContents({
     return (
         <SectionedFormSection name={name}>
             <StandardFormSectionTitle>{sectionLabel}</StandardFormSectionTitle>
-            <StandardFormSubsectionTitle>
-                {i18n.t('Program stage data', { nsSeparator: '~:~' })}
-            </StandardFormSubsectionTitle>
+            {isTrackerProgram && (
+                <StandardFormSubsectionTitle>
+                    {i18n.t('Program stage data', { nsSeparator: '~:~' })}
+                </StandardFormSubsectionTitle>
+            )}
             <StandardFormSectionDescription>
-                {i18n.t(
-                    'Configure data collection for events in this program stage.'
-                )}
+                {isTrackerProgram
+                    ? i18n.t(
+                          'Configure data collection for events in this program stage.'
+                      )
+                    : i18n.t(
+                          'Configure data collection for events in this program.'
+                      )}
             </StandardFormSectionDescription>
             <Field
                 error={meta.invalid}

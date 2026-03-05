@@ -129,7 +129,7 @@ export function SectionFormSectionsList<TValues extends Section, TExtraProps>({
             </div>
 
             <div className={css.sectionItems}>
-                {sectionFieldArray.value.map((section, index) => {
+                {sectionFieldArray.value?.map((section, index) => {
                     if (section.deleted) {
                         return (
                             <div
@@ -181,7 +181,7 @@ export function SectionFormSectionsList<TValues extends Section, TExtraProps>({
                         secondary
                         small
                         onClick={() => setOrderSectionsFormOpen(true)}
-                        disabled={sectionFieldArray.value.length <= 1}
+                        disabled={sectionFieldArray.value?.length <= 1}
                     >
                         {i18n.t('Reorder sections')}
                     </Button>
