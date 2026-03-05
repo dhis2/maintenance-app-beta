@@ -33,7 +33,7 @@ export const CategoryFormFields = () => {
 
             <StandardFormSection>
                 <StandardFormSectionTitle>
-                    {i18n.t('Category')}
+                    {i18n.t('Category usage')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
