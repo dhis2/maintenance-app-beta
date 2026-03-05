@@ -10,26 +10,7 @@ import {
 } from '../../../lib'
 import { ConfirmationModalWrapper } from '../../confirmationModal'
 
-function getValueTypeHelpText(schemaSection: {
-    name: string
-    title: string
-}): string {
-    const objectType =
-        schemaSection.name === 'programRuleVariable'
-            ? i18n.t('variable')
-            : schemaSection.title
-    const optionSetSuffix =
-        schemaSection.name === 'optionSet'
-            ? ''
-            : ' ' +
-              i18n.t(
-                  'If you have chosen an Option set, this will be set automatically.'
-              )
-    return i18n.t(
-        'Select the kind of data this {{objectType}} collects.{{optionSetSuffix}}',
-        { objectType, optionSetSuffix }
-    )
-}
+const valueTypeHelpText = i18n.t('Choose the kind of data to collect.')
 
 const valueTypeDisabledHelpText = i18n.t(
     'Disabled as the value type must match the value type of the selected option set.'
@@ -95,7 +76,6 @@ export function ValueTypeField({
                 return showMultiTextOption || value !== 'MULTI_TEXT'
             }) || []
 
-    const valueTypeHelpText = getValueTypeHelpText(schemaSection)
     const combinedHelpText = disabled
         ? disabledText ?? valueTypeDisabledHelpText
         : valueTypeHelpText
@@ -110,7 +90,7 @@ export function ValueTypeField({
             inputWidth="400px"
             selected={input.value}
             onChange={onChange}
-            label={i18n.t('Value type (required)')}
+            label={i18n.t('Value type')}
             required={required}
             disabled={disabled}
             helpText={combinedHelpText}
@@ -130,25 +110,40 @@ export function ValueTypeField({
         input.onBlur()
     }
 
+    const objectType =
+        schemaSection.name === 'programRuleVariable'
+            ? i18n.t('variable')
+            : schemaSection.title.toLowerCase()
+
     if (isEdit && !externallyDisabled) {
         return (
             <ConfirmationModalWrapper
                 onChange={handleChange}
                 renderComponent={renderComponent}
-                modalTitle={i18n.t('Change value type')}
+                modalTitle={i18n.t('Change value type?')}
                 modalMessage={i18n.t(
-                    'Changing the value type may cause issues when generating analytics tables if data already exists.'
+                    'If this {{objectType}} already has data, changing its type can make existing values incompatible and affect analytics tables.',
+                    { objectType }
                 )}
                 modalMessageSelectionSpecificConfirmation={(selection) =>
                     i18n.t(
-                        'Are you sure you want to change the {{objectType}} to {{newObjectTypeValue}}?',
+                        'Change value type from {{currentSelection}} to {{newObjectTypeValue}}?',
                         {
-                            objectType: i18n.t('value type'),
+                            currentSelection: getConstantTranslation(
+                                input.value
+                            ),
                             newObjectTypeValue: selection?.selected
                                 ? getConstantTranslation(selection.selected)
                                 : i18n.t('undefined'),
                         }
                     )
+                }
+                confirmButtonLabel={(selection) =>
+                    i18n.t('Change to {{newValue}}', {
+                        newValue: selection?.selected
+                            ? getConstantTranslation(selection.selected)
+                            : i18n.t('undefined'),
+                    })
                 }
             />
         )
