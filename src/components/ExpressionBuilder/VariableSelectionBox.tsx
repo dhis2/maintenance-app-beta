@@ -46,7 +46,6 @@ export const VariableSelectionBox = ({
         'aggregationType',
         { subscription: { value: true } }
     )
-    console.log('aggType', aggregationTypeInput?.value)
 
     const elementTypes = getElementTypes(type, {
         aggregationType: aggregationTypeInput?.value,

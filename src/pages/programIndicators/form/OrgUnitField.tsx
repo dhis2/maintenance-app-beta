@@ -234,7 +234,6 @@ export const OrgUnitField = () => {
             <Box width="400px" minWidth="100px">
                 <SearchableSingleSelect
                     dataTest="org-unit-field"
-                    // selected={orgUnitFieldInput.value === '' ? staticOptions.eventDefault.value : orgUnitFieldInput.value}
                     selected={orgUnitFieldInput.value}
                     options={options}
                     onChange={({ selected }) =>
