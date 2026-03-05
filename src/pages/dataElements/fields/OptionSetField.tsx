@@ -43,7 +43,7 @@ export function OptionSetField() {
                     },
                 }}
                 helpText={i18n.t(
-                    'Choose a set of predefined options for data entry.'
+                    'Choose a set of predefined options for data entry. An option set will automatically set the value type.'
                 )}
             />
         </EditableFieldWrapper>

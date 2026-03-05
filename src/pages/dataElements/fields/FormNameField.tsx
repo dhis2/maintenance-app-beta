@@ -18,9 +18,7 @@ export function FormNameField() {
             inputWidth="400px"
             name="formName"
             label={i18n.t('Form name')}
-            helpText={i18n.t(
-                'An alternative name used in section or automatic data entry forms.'
-            )}
+            helpText={i18n.t('An alternative name used in data entry forms.')}
             validateFields={[]}
             validate={validate}
         />
