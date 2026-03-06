@@ -217,6 +217,7 @@ export const ProgramNotificationsFormFields = ({
                     </StandardFormSectionDescription>
                     <RecipientSection
                         isStageNotification={isStageNotification}
+                        isTrackerProgram={isTrackerProgram}
                     />
                 </SectionedFormSection>
             </SectionedFormSections>

@@ -33,7 +33,7 @@ import {
     PickWithFieldFilters,
     ProgramNotificationTemplate,
 } from '../../../../types/models'
-import { DisplayableModelAndStageId } from '../ProgramNotificationsFormContents'
+import { DisplayableModelAndStageId } from '../common/ProgramNotificationsFormContents'
 import { programNotificationFormDescriptor } from './programNotificationFormDescriptor'
 import { ProgramNotificationsFormFields } from './ProgramNotificationsFormFields'
 import { initialValues, validate } from './programNotificationTemplateSchema'
@@ -129,7 +129,7 @@ type OnSubmitWithClose = (
 
 export type NotificationFormProps = {
     isTrackerProgram: boolean
-    programStageSectionId: string | undefined
+    programStageId: string | undefined
     notification?: PartialNotificationFormValues
     onCancel?: () => void
     onSubmit: OnSubmitWithClose
@@ -137,7 +137,7 @@ export type NotificationFormProps = {
 
 export const NotificationForm = ({
     isTrackerProgram,
-    programStageSectionId,
+    programStageId,
     notification,
     onSubmit,
     onCancel,
@@ -150,7 +150,7 @@ export const NotificationForm = ({
                 program: { id: programId },
                 ...(isTrackerProgram
                     ? {}
-                    : { programStage: { id: programStageSectionId } }),
+                    : { programStage: { id: programStageId } }),
             } as PartialNotificationFormValues
         }, [notification, programId])
 
@@ -217,13 +217,13 @@ export const NotificationForm = ({
 
 export const EditNotificationForm = ({
     isTrackerProgram,
-    programStageSectionId,
+    programStageId,
     notification,
     onCancel,
     onSubmitted,
 }: {
     isTrackerProgram: boolean
-    programStageSectionId: string | undefined
+    programStageId: string | undefined
     notification: DisplayableModelAndStageId
     onCancel: () => void
     onSubmitted: (
@@ -305,7 +305,7 @@ export const EditNotificationForm = ({
             onSubmit={onFormSubmit}
             onCancel={onCancel}
             isTrackerProgram={isTrackerProgram}
-            programStageSectionId={programStageSectionId}
+            programStageId={programStageId}
         />
     )
 }
@@ -316,7 +316,7 @@ export const NewNotificationForm = ({
     programNotificationList,
     stagesNotificationList,
     isTrackerProgram,
-    programStageSectionId,
+    programStageId,
 }: {
     onCancel: () => void
     onSubmitted: (
@@ -326,7 +326,7 @@ export const NewNotificationForm = ({
     programNotificationList: { id: string }[]
     stagesNotificationList: Record<string, { id: string }[]>
     isTrackerProgram: boolean
-    programStageSectionId: string | undefined
+    programStageId: string | undefined
 }) => {
     const handleCreate = useCreateModel(notificationSchemaSection.namePlural)
     const engine = useDataEngine()
@@ -391,7 +391,7 @@ export const NewNotificationForm = ({
             onSubmit={onFormSubmit}
             onCancel={onCancel}
             isTrackerProgram={isTrackerProgram}
-            programStageSectionId={programStageSectionId}
+            programStageId={programStageId}
         />
     )
 }
@@ -415,9 +415,7 @@ export const EditOrNewNotificationForm = ({
     isTrackerProgram: boolean
 }) => {
     const { input } = useField('programStages')
-    const programStageSectionId = isTrackerProgram
-        ? undefined
-        : input?.value?.[0]?.id
+    const programStageId = isTrackerProgram ? undefined : input?.value?.[0]?.id
 
     if (notification === undefined) {
         return null
@@ -431,7 +429,7 @@ export const EditOrNewNotificationForm = ({
                 programNotificationList={programNotificationList}
                 stagesNotificationList={stagesNotificationList}
                 isTrackerProgram={isTrackerProgram}
-                programStageSectionId={programStageSectionId}
+                programStageId={programStageId}
             />
         )
     }
@@ -442,7 +440,7 @@ export const EditOrNewNotificationForm = ({
             onCancel={onCancel}
             onSubmitted={onSubmitted}
             isTrackerProgram={isTrackerProgram}
-            programStageSectionId={programStageSectionId}
+            programStageId={programStageId}
         />
     )
 }

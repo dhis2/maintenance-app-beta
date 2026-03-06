@@ -9,16 +9,16 @@ import {
     SectionedFormSection,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
-} from '../../../components'
-import { ListInFormItem } from '../../../components/formCreators/SectionFormList'
-import { SchemaName } from '../../../types'
-import { Access, DisplayableModel } from '../../../types/models'
+} from '../../../../components'
+import { ListInFormItem } from '../../../../components/formCreators/SectionFormList'
+import { SchemaName } from '../../../../types'
+import { Access, DisplayableModel } from '../../../../types/models'
 import {
     EditOrNewNotificationForm,
     SubmittedNotificationFormValues,
-} from './programNotification/NotificationForm'
-import css from './ProgramStagesForm.module.css'
-import { ProgramStageListItem } from './ProgramStagesFormContents'
+} from '../programNotification/NotificationForm'
+import css from '../ProgramStagesForm.module.css'
+import { ProgramStageListItem } from '../ProgramStagesFormContents'
 
 export type ProgramNotificationListItem = {
     id: string

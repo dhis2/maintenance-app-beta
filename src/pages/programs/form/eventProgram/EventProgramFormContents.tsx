@@ -9,9 +9,9 @@ import {
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
 } from '../../../../lib'
+import { ProgramNotificationsFormContents } from '../common/ProgramNotificationsFormContents'
 import { SetupFormContents } from '../common/SetupFormContents'
 import { StageDataFormContents } from '../common/StageDataFormContents'
-import { ProgramNotificationsFormContents } from '../ProgramNotificationsFormContents'
 import { EventProgramFormDescriptor } from './eventProgramFormDescriptor'
 
 export const EventProgramFormContents = () => {

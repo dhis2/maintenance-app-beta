@@ -30,7 +30,7 @@ import {
     trackerProgramInitialValues as programFormInitialValues,
     trackerProgramValidate,
 } from './form'
-import { ProgramNotificationListItem } from './form/ProgramNotificationsFormContents'
+import { ProgramNotificationListItem } from './form/common/ProgramNotificationsFormContents'
 import { ProgramStageListItem } from './form/ProgramStagesFormContents'
 import { TrackerProgramFormContents } from './form/trackerProgram/TrackerProgramFormContents'
 import { TrackerProgramFormDescriptor } from './form/trackerProgram/trackerProgramFormDescriptor'
