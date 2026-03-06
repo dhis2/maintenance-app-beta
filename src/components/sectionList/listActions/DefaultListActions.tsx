@@ -1,8 +1,11 @@
 import React from 'react'
-import { BaseListModel, TOOLTIPS, useSchemaFromHandle } from '../../../lib'
+import { BaseListModel, useSchemaFromHandle } from '../../../lib'
 import { canEditModel, canDeleteModel } from '../../../lib/models/access'
-import { TooltipWrapper } from '../../tooltip'
-import { ListActions, ActionEdit, ActionMore } from './SectionListActions'
+import {
+    ListActions,
+    ActionShowDetails,
+    ActionMore,
+} from './SectionListActions'
 
 export type DefaultListActionProps = {
     model: BaseListModel
@@ -27,13 +30,7 @@ export const DefaultListActions = ({
 
     return (
         <ListActions>
-            <TooltipWrapper
-                condition={!editable}
-                content={TOOLTIPS.noEditAccess}
-                dataTest="no-editable-tooltip"
-            >
-                <ActionEdit disabled={!editable} modelId={model.id} />
-            </TooltipWrapper>
+            <ActionShowDetails onClick={() => onShowDetailsClick(model)} />
             <ActionMore
                 deletable={deletable}
                 editable={editable}
