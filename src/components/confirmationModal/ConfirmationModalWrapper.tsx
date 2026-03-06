@@ -9,6 +9,7 @@ import {
 } from '@dhis2/ui'
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
+import styles from './ConfirmationModalWrapper.module.css'
 
 const ConfirmationModal = ({
     onClose,
@@ -36,9 +37,11 @@ const ConfirmationModal = ({
                     {modalTitle || i18n.t('Change this field')}
                 </ModalTitle>
                 <ModalContent>
-                    {modalMessage && <p>{modalMessage}</p>}
+                    {modalMessage && (
+                        <p className={styles.modalMessage}>{modalMessage}</p>
+                    )}
 
-                    <p>
+                    <p className={styles.modalMessage}>
                         {modalMessageSelectionSpecificConfirmation ??
                             i18n.t('Are you sure you want to change this?')}
                     </p>
@@ -56,7 +59,7 @@ const ConfirmationModal = ({
                             destructive
                             onClick={confirmSelection}
                         >
-                            {confirmButtonLabel ?? i18n.t('Yes, change')}
+                            {confirmButtonLabel ?? i18n.t('Change')}
                         </Button>
                     </ButtonStrip>
                 </ModalActions>
