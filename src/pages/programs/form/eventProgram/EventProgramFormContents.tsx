@@ -11,6 +11,7 @@ import {
 } from '../../../../lib'
 import { SetupFormContents } from '../common/SetupFormContents'
 import { StageDataFormContents } from '../common/StageDataFormContents'
+import { ProgramNotificationsFormContents } from '../ProgramNotificationsFormContents'
 import { EventProgramFormDescriptor } from './eventProgramFormDescriptor'
 
 export const EventProgramFormContents = () => {
@@ -34,15 +35,17 @@ export const EventProgramFormContents = () => {
                 sectionLabel={i18n.t('Data')}
                 isTrackerProgram={false}
             />
+
             {/*<EnrollmentFormFormContents*/}
             {/*    name={descriptor.getSection('enrollmentForm').name}*/}
             {/*/>*/}
             {/*<ProgramStagesFormContents*/}
             {/*    name={descriptor.getSection('programStages').name}*/}
             {/*/>*/}
-            {/*<ProgramNotificationsFormContents*/}
-            {/*    name={descriptor.getSection('programNotifications').name}*/}
-            {/*/>*/}
+            <ProgramNotificationsFormContents
+                name={descriptor.getSection('programNotifications').name}
+                isTrackerProgram={false}
+            />
             {/*<AccessAndSharingFormContents*/}
             {/*    name={descriptor.getSection('accessAndSharing').name}*/}
             {/*/>*/}
