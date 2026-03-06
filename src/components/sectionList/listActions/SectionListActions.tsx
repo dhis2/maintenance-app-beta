@@ -3,11 +3,12 @@ import {
     Button,
     FlyoutMenu,
     IconEdit16,
-    IconMore16,
+    IconInfo16,
     IconShare16,
     IconTranslate16,
     MenuItem,
     Popover,
+    Tooltip,
 } from '@dhis2/ui'
 import React, { useRef, useState } from 'react'
 import { useHref, useLinkClickHandler } from 'react-router-dom'
@@ -56,6 +57,34 @@ export const ActionEdit = ({
                 />
             </svg>
         </LinkButton>
+    )
+}
+
+export const ActionShowDetails = ({ onClick }: { onClick: () => void }) => {
+    return (
+        <Tooltip content={i18n.t('Show details')} openDelay={800}>
+            <Button
+                small
+                secondary
+                onClick={onClick}
+                dataTest="row-show-details-action-button"
+                icon={
+                    // TODO: replace with IconInfo16 when Button has been updated
+                    <svg
+                        width="22"
+                        height="24"
+                        viewBox="0 0 22 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M11 5C14.866 5 18 8.13401 18 12C18 15.866 14.866 19 11 19C7.13401 19 4 15.866 4 12C4 8.13401 7.13401 5 11 5ZM11 6C7.68629 6 5 8.68629 5 12C5 15.3137 7.68629 18 11 18C14.3137 18 17 15.3137 17 12C17 8.68629 14.3137 6 11 6ZM11.5 11V15H13V16H9V15H10.5V11H11.5ZM11 8C11.4142 8 11.75 8.33579 11.75 8.75C11.75 9.16421 11.4142 9.5 11 9.5C10.5858 9.5 10.25 9.16421 10.25 8.75C10.25 8.33579 10.5858 8 11 8Z"
+                            fill="#6C7787"
+                        />
+                    </svg>
+                }
+            />
+        </Tooltip>
     )
 }
 
@@ -128,16 +157,6 @@ export const ActionMore = ({
                     dataTest="row-actions-menu"
                 >
                     <FlyoutMenu>
-                        <MenuItem
-                            dense
-                            label={i18n.t('Show details')}
-                            icon={<IconMore16 />}
-                            onClick={() => {
-                                onShowDetailsClick()
-                                setOpen(false)
-                            }}
-                        />
-
                         <TooltipWrapper
                             condition={!editable}
                             content={TOOLTIPS.noEditAccess}
@@ -155,6 +174,15 @@ export const ActionMore = ({
                                 href={href}
                             />
                         </TooltipWrapper>
+                        <MenuItem
+                            dense
+                            label={i18n.t('Show details')}
+                            icon={<IconInfo16 />}
+                            onClick={() => {
+                                onShowDetailsClick()
+                                setOpen(false)
+                            }}
+                        />
 
                         {shareable && (
                             <TooltipWrapper
