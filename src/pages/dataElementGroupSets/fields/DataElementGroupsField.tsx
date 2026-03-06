@@ -16,8 +16,11 @@ export function DataElementGroupsField() {
             leftHeader={i18n.t('Available data element groups')}
             rightHeader={i18n.t('Selected data element groups')}
             filterPlaceholder={i18n.t('Filter available data element groups')}
-            filterPlaceholderPicked={i18n.t('Filter selected element groups')}
+            filterPlaceholderPicked={i18n.t(
+                'Filter selected data element groups'
+            )}
             maxSelections={Infinity}
+            enableOrderChange={true}
         />
     )
 }
