@@ -80,15 +80,18 @@ const eventProgramBaseSchema = z.object({
                 notificationTemplates: z
                     .array(z.object({ id: z.string().optional() }))
                     .default([]),
+                dataEntryForm: z
+                    .object({
+                        id: z.string().optional(),
+                        htmlCode: z.string().optional(),
+                    })
+                    .optional(),
                 programStageDataElements: z
                     .array(z.object({ id: z.string().optional() }))
                     .default([]),
                 programStageSections: z
                     .array(z.object({ id: z.string().optional() }))
                     .default([]),
-                validationStrategy: z
-                    .enum(['ON_COMPLETE', 'ON_UPDATE_AND_INSERT'])
-                    .default('ON_UPDATE_AND_INSERT'),
             })
         )
         .default([
@@ -100,7 +103,6 @@ const eventProgramBaseSchema = z.object({
                 notificationTemplates: [],
                 programStageDataElements: [],
                 programStageSections: [],
-                validationStrategy: 'ON_UPDATE_AND_INSERT',
             },
         ]),
     organisationUnits: z.array(modelReference).default([]),

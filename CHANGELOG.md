@@ -1,3 +1,10 @@
+## [0.136.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.136.1...v0.136.2) (2026-03-05)
+
+
+### Bug Fixes
+
+* program indicator updates [DHIS2-20957] [DHIS2-20974] ([#781](https://github.com/dhis2/maintenance-app-beta/issues/781)) ([10e6955](https://github.com/dhis2/maintenance-app-beta/commit/10e69559820291fe4bb88d49de28b9644fcd80dc))
+
 ## [0.136.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.136.0...v0.136.1) (2026-03-04)
 
 
