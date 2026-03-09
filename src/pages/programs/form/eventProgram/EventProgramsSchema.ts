@@ -6,6 +6,7 @@ import {
     modelFormSchemas,
     DEFAULT_CATEGORY_COMBO,
 } from '../../../../lib'
+import { sharingSettingsSchema } from '../common/sharingSettingsSchema'
 
 const { identifiable, withDefaultListColumns, modelReference } =
     modelFormSchemas
@@ -74,6 +75,8 @@ const eventProgramBaseSchema = z.object({
             z.object({
                 id: z.string().optional(),
                 name: z.string().optional(),
+                displayName: z.string().optional(),
+                sharing: sharingSettingsSchema.optional(),
                 notificationTemplates: z
                     .array(z.object({ id: z.string().optional() }))
                     .default([]),
@@ -95,14 +98,16 @@ const eventProgramBaseSchema = z.object({
             {
                 id: undefined,
                 name: undefined,
+                displayName: undefined,
+                sharing: undefined,
                 notificationTemplates: [],
                 programStageDataElements: [],
                 programStageSections: [],
             },
         ]),
-    // organisationUnits: z.array(modelReference).default([]),
+    organisationUnits: z.array(modelReference).default([]),
     // notificationTemplates: z.array(modelReference).default([]),
-    // sharing: sharingSettingsSchema.optional(),
+    sharing: sharingSettingsSchema.optional(),
     expiryDays: z.coerce.number().int().min(0).default(0),
     expiryPeriodType: z.string().optional().default('Weekly'),
     completeEventsExpiryDays: z.coerce.number().int().min(0).default(0),

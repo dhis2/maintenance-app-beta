@@ -169,19 +169,19 @@ export const EventProgramFormDescriptor = {
         //     label: i18n.t('Notifications'),
         //     fields: [],
         // },
-        // {
-        //     name: 'accessAndSharing',
-        //     label: i18n.t('Access and Sharing'),
-        //     fields: [
-        //         {
-        //             name: 'organisationUnits',
-        //             label: i18n.t('Organisation units'),
-        //         },
-        //         {
-        //             name: 'sharing',
-        //             label: i18n.t('Role access'),
-        //         },
-        //     ],
-        // },
+        {
+            name: 'accessAndSharing',
+            label: i18n.t('Access and Sharing'),
+            fields: [
+                {
+                    name: 'organisationUnits',
+                    label: i18n.t('Organisation units'),
+                },
+                {
+                    name: 'sharing',
+                    label: i18n.t('Role access'),
+                },
+            ],
+        },
     ],
 } as const satisfies SectionedFormDescriptor<ProgramValues>

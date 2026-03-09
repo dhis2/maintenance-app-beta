@@ -9,6 +9,7 @@ import {
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
 } from '../../../../lib'
+import { AccessAndSharingFormContents } from '../common/AccessAndSharingFormContents'
 import { SetupFormContents } from '../common/SetupFormContents'
 import { StageDataFormContents } from '../programStage/StageDataFormContents'
 import { StageFormFormContents } from '../programStage/StageFormFormContents'
@@ -47,9 +48,10 @@ export const EventProgramFormContents = () => {
             {/*<ProgramNotificationsFormContents*/}
             {/*    name={descriptor.getSection('programNotifications').name}*/}
             {/*/>*/}
-            {/*<AccessAndSharingFormContents*/}
-            {/*    name={descriptor.getSection('accessAndSharing').name}*/}
-            {/*/>*/}
+            <AccessAndSharingFormContents
+                name={descriptor.getSection('accessAndSharing').name}
+                showStageAccess={false}
+            />
             <CustomAttributesSection
                 schemaSection={SCHEMA_SECTIONS.program}
                 sectionedLayout
