@@ -1,3 +1,10 @@
+# [0.137.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.136.2...v0.137.0) (2026-03-09)
+
+
+### Features
+
+* program events data and form ([#794](https://github.com/dhis2/maintenance-app-beta/issues/794)) ([af8b932](https://github.com/dhis2/maintenance-app-beta/commit/af8b9325ec61a01e9766a4c89bd8843fc7058286))
+
 ## [0.136.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.136.1...v0.136.2) (2026-03-05)
 
 
