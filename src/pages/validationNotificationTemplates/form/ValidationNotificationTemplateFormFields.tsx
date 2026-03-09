@@ -1,8 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
-import { CheckboxFieldFF, SingleSelectFieldFF } from '@dhis2/ui'
+import { CheckboxFieldFF, RadioFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
 import {
+    HorizontalFieldGroup,
     SectionedFormSection,
     SectionedFormSections,
     StandardFormField,
@@ -21,17 +22,6 @@ import {
     getConstantTranslation,
 } from '../../../lib'
 import styles from './ValidationNotificationTemplateFormFields.module.css'
-
-const notificationTypeOptions = [
-    {
-        label: getConstantTranslation('COLLECTIVE_SUMMARY'),
-        value: 'COLLECTIVE_SUMMARY',
-    },
-    {
-        label: getConstantTranslation('SINGLE_NOTIFICATION'),
-        value: 'SINGLE_NOTIFICATION',
-    },
-]
 
 export const VALIDATION_RULE_VARIABLES = {
     rule_name: { label: i18n.t('Rule name'), type: 'VARIABLE' },
@@ -83,6 +73,14 @@ const UserGroupSelect = () => {
 export const ValidationNotificationTemplateFormFields = () => {
     const schemaSection = useSchemaSectionHandleOrThrow()
     useSyncSelectedSectionWithScroll()
+    const collectiveSummaryField = useField('sendStrategy', {
+        type: 'radio',
+        value: 'COLLECTIVE_SUMMARY',
+    })
+    const singleNotificationField = useField('sendStrategy', {
+        type: 'radio',
+        value: 'SINGLE_NOTIFICATION',
+    })
 
     return (
         <SectionedFormSections>
@@ -106,7 +104,7 @@ export const ValidationNotificationTemplateFormFields = () => {
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Select validation rules to trigger this notification.'
+                        'Choose which validation rules trigger this notification.'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
@@ -152,20 +150,23 @@ export const ValidationNotificationTemplateFormFields = () => {
                     <UserGroupSelect />
                 </StandardFormField>
                 <StandardFormField>
-                    <FieldRFF<string | undefined>
-                        inputWidth="500px"
+                    <HorizontalFieldGroup
+                        label={i18n.t('Send notification as')}
                         dataTest="formfields-notificationType"
-                        name="sendStrategy"
-                        placeholder={i18n.t('Choose notification')}
-                        render={(props) => (
-                            <SingleSelectFieldFF
-                                {...props}
-                                clearable
-                                label={i18n.t('Send notification as')}
-                                options={notificationTypeOptions}
-                            />
-                        )}
-                    />
+                    >
+                        <RadioFieldFF
+                            label={getConstantTranslation('COLLECTIVE_SUMMARY')}
+                            input={collectiveSummaryField.input}
+                            meta={collectiveSummaryField.meta}
+                        />
+                        <RadioFieldFF
+                            label={getConstantTranslation(
+                                'SINGLE_NOTIFICATION'
+                            )}
+                            input={singleNotificationField.input}
+                            meta={singleNotificationField.meta}
+                        />
+                    </HorizontalFieldGroup>
                 </StandardFormField>
                 <StandardFormField>
                     <FieldRFF
