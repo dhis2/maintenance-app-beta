@@ -74,6 +74,12 @@ const eventProgramBaseSchema = z.object({
             z.object({
                 id: z.string().optional(),
                 name: z.string().optional(),
+                enableUserAssignment: z.boolean().optional(),
+                blockEntryForm: z.boolean().optional(),
+                preGenerateUID: z.boolean().optional(),
+                validationStrategy: z
+                    .enum(['ON_COMPLETE', 'ON_UPDATE_AND_INSERT'])
+                    .default('ON_UPDATE_AND_INSERT'),
                 notificationTemplates: z
                     .array(z.object({ id: z.string().optional() }))
                     .default([]),
