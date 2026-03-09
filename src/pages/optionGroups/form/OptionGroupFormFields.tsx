@@ -76,6 +76,7 @@ export const OptionGroupFormFields = ({
                             filterPlaceholderPicked={i18n.t(
                                 'Filter selected options'
                             )}
+                            maxSelections={Infinity}
                         />
                     </StandardFormField>
                 ) : (
