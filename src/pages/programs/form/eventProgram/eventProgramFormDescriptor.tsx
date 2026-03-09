@@ -143,18 +143,27 @@ export const EventProgramFormDescriptor = {
         {
             name: 'data',
             label: i18n.t('Data', { nsSeparator: '~:~' }),
-            fields: [],
+            fields: [
+                {
+                    name: 'programStages[0].programStageDataElements',
+                    label: i18n.t('Data elements'),
+                },
+            ],
         },
         {
             name: 'form',
             label: i18n.t('Form', { nsSeparator: '~:~' }),
-            fields: [],
+            fields: [
+                {
+                    name: 'programStages[0].dataEntryForm',
+                    label: i18n.t('Custom form'),
+                },
+                {
+                    name: 'programStages[0].programStageSections',
+                    label: i18n.t('Sections'),
+                },
+            ],
         },
-        // {
-        //     name: 'programStages',
-        //     label: i18n.t('Program Stages'),
-        //     fields: [],
-        // },
         // {
         //     name: 'programNotifications',
         //     label: i18n.t('Notifications'),

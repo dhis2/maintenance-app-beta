@@ -32,8 +32,8 @@ export const StageFormFormContents = ({
     name: string
     isTrackerProgram?: boolean
 }) => {
-    const { values, dirtyFields } = useFormState({
-        subscription: { values: true, dirtyFields: true },
+    const { values } = useFormState({
+        subscription: { values: true },
     })
     const currentSections = isTrackerProgram
         ? values.programStageSections
