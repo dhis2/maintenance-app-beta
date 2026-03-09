@@ -11,9 +11,7 @@ import { validationStrategyOptions } from '../../constants'
 
 export function ValidationStrategyField({
     isTrackerProgram = true,
-}: {
-    isTrackerProgram?: boolean
-}) {
+}: Readonly<{ isTrackerProgram?: boolean }>) {
     const fieldName = isTrackerProgram
         ? 'validationStrategy'
         : 'programStages[0].validationStrategy'
