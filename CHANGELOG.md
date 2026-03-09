@@ -1,3 +1,10 @@
+# [0.138.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.137.0...v0.138.0) (2026-03-09)
+
+
+### Features
+
+* [DHIS2-21050] Event program access and sharing ([#789](https://github.com/dhis2/maintenance-app-beta/issues/789)) ([89442bd](https://github.com/dhis2/maintenance-app-beta/commit/89442bd1aa5724c7f075c0a3f9b40aa059f31623))
+
 # [0.137.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.136.2...v0.137.0) (2026-03-09)
 
 
