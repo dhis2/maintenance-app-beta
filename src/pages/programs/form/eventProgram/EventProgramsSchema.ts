@@ -53,16 +53,16 @@ const eventProgramBaseSchema = z.object({
     //         htmlCode: z.string().optional(),
     //     })
     //     .optional(),
-    // style: z
-    //     .object({
-    //         color: z.string().optional(),
-    //         icon: z.string().optional(),
-    //     })
-    //     .optional(),
+    style: z
+        .object({
+            color: z.string().optional(),
+            icon: z.string().optional(),
+        })
+        .optional(),
     // programStageLabel: z.string().optional(),
     // eventLabel: z.string().optional(),
     // enrollmentDateLabel: z.string().optional(),
-    // incidentDateLabel: z.string().optional(),
+    incidentDateLabel: z.string().optional(),
     // enrollmentLabel: z.string().optional(),
     // followUpLabel: z.string().optional(),
     // orgUnitLabel: z.string().optional(),

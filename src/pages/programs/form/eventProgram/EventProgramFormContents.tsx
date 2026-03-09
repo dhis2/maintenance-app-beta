@@ -11,6 +11,7 @@ import {
 } from '../../../../lib'
 import { SetupFormContents } from '../common/SetupFormContents'
 import { StageDataFormContents } from '../common/StageDataFormContents'
+import { EventProgramCustomizationFormContents } from './EventProgramCustomizationFormContents'
 import { EventProgramFormDescriptor } from './eventProgramFormDescriptor'
 
 export const EventProgramFormContents = () => {
@@ -23,9 +24,9 @@ export const EventProgramFormContents = () => {
                 name={descriptor.getSection('programDetails').name}
                 isTrackerProgram={false}
             />
-            {/*<ProgramCustomizationFormContents*/}
-            {/*    name={descriptor.getSection('programCustomization').name}*/}
-            {/*/>*/}
+            <EventProgramCustomizationFormContents
+                name={descriptor.getSection('programCustomization').name}
+            />
             {/*<EnrollmentSettingsFormContents*/}
             {/*    name={descriptor.getSection('enrollmentSettings').name}*/}
             {/*/>*/}
