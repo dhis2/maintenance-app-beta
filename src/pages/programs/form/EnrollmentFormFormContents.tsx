@@ -208,6 +208,7 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
                         schemaName={SchemaName.programSection}
                         level={'primary'}
                         otherProps={{ sectionsLength: sections.length }}
+                        withReordering
                     />
                 )}
                 {selectedFormType === FormType.CUSTOM && (

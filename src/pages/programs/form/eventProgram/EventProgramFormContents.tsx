@@ -10,7 +10,8 @@ import {
     useSyncSelectedSectionWithScroll,
 } from '../../../../lib'
 import { SetupFormContents } from '../common/SetupFormContents'
-import { StageDataFormContents } from '../common/StageDataFormContents'
+import { StageDataFormContents } from '../programStage/StageDataFormContents'
+import { StageFormFormContents } from '../programStage/StageFormFormContents'
 import { EventProgramFormDescriptor } from './eventProgramFormDescriptor'
 
 export const EventProgramFormContents = () => {
@@ -34,9 +35,12 @@ export const EventProgramFormContents = () => {
                 sectionLabel={i18n.t('Data')}
                 isTrackerProgram={false}
             />
-            {/*<EnrollmentFormFormContents*/}
-            {/*    name={descriptor.getSection('enrollmentForm').name}*/}
-            {/*/>*/}
+            <StageFormFormContents
+                name={descriptor.getSection('form').name}
+                sectionLabel={i18n.t('Form')}
+                isSubsection={false}
+                isTrackerProgram={false}
+            />
             {/*<ProgramStagesFormContents*/}
             {/*    name={descriptor.getSection('programStages').name}*/}
             {/*/>*/}

@@ -14,6 +14,7 @@ export const CustomFormEditEntry = ({
     elementTypes,
     updateCustomForm,
     customFormTarget,
+    fieldName = 'dataEntryForm',
 }: {
     level: 'primary' | 'secondary'
     loading: boolean
@@ -26,11 +27,12 @@ export const CustomFormEditEntry = ({
         existingFormId: string | undefined
     ) => Promise<unknown>
     customFormTarget: string
+    fieldName?: string
 }) => {
     const [customFormEditOpen, setCustomFormEditOpen] =
         React.useState<boolean>(false)
 
-    const { input: formInput } = useField('dataEntryForm')
+    const { input: formInput } = useField(fieldName)
     const addMode = !formInput?.value?.id // if there is no formId, you need to add a form
     const formDeleted = formInput?.value?.deleted
     const setCustomFormDeletedState = (deleted: boolean) => {
@@ -59,6 +61,7 @@ export const CustomFormEditEntry = ({
                         elementTypes={elementTypes}
                         updateCustomForm={updateCustomForm}
                         customFormTarget={customFormTarget}
+                        fieldName={fieldName}
                     />
                 )}
             </DrawerPortal>
