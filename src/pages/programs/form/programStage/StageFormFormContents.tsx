@@ -1,6 +1,7 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
+import cx from 'classnames'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useFormState } from 'react-final-form'
 import {
@@ -31,7 +32,9 @@ export const StageFormFormContents = ({
     name: string
     isTrackerProgram?: boolean
 }) => {
-    const { values } = useFormState({ subscription: { values: true } })
+    const { values, dirtyFields } = useFormState({
+        subscription: { values: true, dirtyFields: true },
+    })
     const currentSections = isTrackerProgram
         ? values.programStageSections
         : values.programStages?.[0].programStageSections
@@ -153,9 +156,13 @@ export const StageFormFormContents = ({
         <SectionedFormSection name={name}>
             <StandardFormSectionTitle>{sectionLabel}</StandardFormSectionTitle>
             <StandardFormSectionDescription>
-                {i18n.t(
-                    'Configure the form for data collection for events in this program stage.'
-                )}
+                {isTrackerProgram
+                    ? i18n.t(
+                          'Configure the form for data collection for events in this program stage.'
+                      )
+                    : i18n.t(
+                          'Configure the form for data collection for events in this program.'
+                      )}
             </StandardFormSectionDescription>
             <TabbedFormTypePicker
                 sectionsLength={currentSections?.length}
@@ -171,16 +178,24 @@ export const StageFormFormContents = ({
                             {i18n.t('Basic form')}
                         </StandardFormSectionTitle>
                         <div className={styles.basicFormDescription}>
-                            {i18n.t(
-                                'This form displays an auto-generated list of the data elements defined for this program stage.'
-                            )}
+                            {isTrackerProgram
+                                ? i18n.t(
+                                      'This form displays an auto-generated list of the data elements defined for this program stage.'
+                                  )
+                                : i18n.t(
+                                      'This form displays an auto-generated list of the data elements defined for this program.'
+                                  )}
                         </div>
                         <div>
                             <Button
                                 secondary
                                 small
                                 onClick={() => {
-                                    scrollToSection('stageData')
+                                    if (isTrackerProgram) {
+                                        scrollToSection('stageData')
+                                    } else {
+                                        scrollToSection('data')
+                                    }
                                 }}
                             >
                                 {i18n.t('Edit or rearrange the data elements')}
@@ -188,13 +203,19 @@ export const StageFormFormContents = ({
                         </div>
                     </div>
                 )}
-                {selectedFormType === FormType.SECTION && (
+                <div
+                    className={cx({
+                        [styles['hidden']]:
+                            selectedFormType !== FormType.SECTION,
+                    })}
+                >
                     <SectionFormSectionsList
                         sectionsFieldName={
                             isTrackerProgram
                                 ? 'programStageSections'
                                 : 'programStages[0].programStageSections'
                         }
+                        withReordering={isTrackerProgram}
                         SectionFormComponent={EditOrNewStageSectionForm}
                         schemaName={SchemaName.programStageSection}
                         level={isSubsection ? 'secondary' : 'primary'}
@@ -203,22 +224,29 @@ export const StageFormFormContents = ({
                             stageId: stageId,
                         }}
                     />
-                )}
-                {selectedFormType === FormType.CUSTOM && (
+                </div>
+                <div
+                    className={cx({
+                        [styles['hidden']]:
+                            selectedFormType !== FormType.CUSTOM,
+                    })}
+                >
                     <CustomFormEditEntry
                         level={isSubsection ? 'secondary' : 'primary'}
                         loading={loading}
                         refetch={refetch}
                         elementTypes={elementTypes}
                         updateCustomForm={updateOrCreateCustomForm}
-                        customFormTarget="program stage"
+                        customFormTarget={
+                            isTrackerProgram ? 'program stage' : 'program'
+                        }
                         fieldName={
                             isTrackerProgram
                                 ? 'dataEntryForm'
                                 : 'programStages[0].dataEntryForm'
                         }
                     />
-                )}
+                </div>
             </TabbedFormTypePicker>
         </SectionedFormSection>
     )

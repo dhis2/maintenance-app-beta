@@ -40,12 +40,14 @@ export function SectionFormSectionsList<TValues extends Section, TExtraProps>({
     schemaName,
     level,
     SectionFormComponent,
+    withReordering,
     otherProps,
 }: Readonly<{
     sectionsFieldName: string
     schemaName: SchemaName
     level: 'primary' | 'secondary'
     SectionFormComponent: SectionFormComponent<TValues, TExtraProps>
+    withReordering: boolean
     otherProps?: TExtraProps
 }>) {
     const [sectionFormOpen, setSectionFormOpen] = useState<
@@ -177,14 +179,16 @@ export function SectionFormSectionsList<TValues extends Section, TExtraProps>({
                     >
                         {i18n.t('Add section')}
                     </Button>
-                    <Button
-                        secondary
-                        small
-                        onClick={() => setOrderSectionsFormOpen(true)}
-                        disabled={sectionFieldArray.value?.length <= 1}
-                    >
-                        {i18n.t('Reorder sections')}
-                    </Button>
+                    {withReordering && (
+                        <Button
+                            secondary
+                            small
+                            onClick={() => setOrderSectionsFormOpen(true)}
+                            disabled={sectionFieldArray.value?.length <= 1}
+                        >
+                            {i18n.t('Reorder sections')}
+                        </Button>
+                    )}
                 </ButtonStrip>
             </div>
         </div>
