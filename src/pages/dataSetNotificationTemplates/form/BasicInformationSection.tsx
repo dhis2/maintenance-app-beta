@@ -5,6 +5,8 @@ import {
     ModelTransferField,
     NameField,
     StandardFormField,
+    StandardFormSectionDescription,
+    StandardFormSectionTitle,
 } from '../../../components'
 import { SchemaSection } from '../../../lib'
 
@@ -22,18 +24,22 @@ export const BasicInformationSection: React.FC<
         <StandardFormField>
             <CodeField schemaSection={section} />
         </StandardFormField>
+        <StandardFormSectionTitle>
+            {i18n.t('Data sets')}
+        </StandardFormSectionTitle>
+        <StandardFormSectionDescription>
+            {i18n.t('Choose which data sets to send this notification for')}
+        </StandardFormSectionDescription>
         <StandardFormField>
             <ModelTransferField
                 name="dataSets"
                 dataTest="formfields-dataSets"
                 query={{ resource: 'dataSets' }}
-                label={i18n.t(
-                    'Choose which data sets to send this notification for'
-                )}
                 leftHeader={i18n.t('Available Data Sets')}
                 rightHeader={i18n.t('Selected Data Sets')}
                 filterPlaceholder={i18n.t('Search data sets...')}
                 filterPlaceholderPicked={i18n.t('Filter selected data sets...')}
+                maxSelections={Infinity}
             />
         </StandardFormField>
     </>
