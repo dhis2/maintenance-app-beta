@@ -221,6 +221,22 @@ export const TrackedEntityAttributeFormFields = ({
                 </StandardFormField>
 
                 <StandardFormField>
+                    <FieldRFF
+                        component={CheckboxFieldFF}
+                        dataTest="formfields-skipAnalytics"
+                        name="skipAnalytics"
+                        label={i18n.t(
+                            'Do not expose this attribute in analytics'
+                        )}
+                        helpText={i18n.t(
+                            'When enabled, this tracked entity attribute is excluded from all analytics processing, including analytics tables and analytics apps.'
+                        )}
+                        type="checkbox"
+                        validateFields={[]}
+                    />
+                </StandardFormField>
+
+                <StandardFormField>
                     <AggregationTypeFieldByValueType />
                 </StandardFormField>
             </SectionedFormSection>

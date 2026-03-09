@@ -91,6 +91,10 @@ export const TrackedEntityAttributeFormDescriptor = {
                     label: i18n.t('Skip synchronization'),
                 },
                 {
+                    name: 'skipAnalytics',
+                    label: i18n.t('Do not expose this attribute in analytics'),
+                },
+                {
                     name: 'aggregationType',
                     label: i18n.t('Aggregation type'),
                 },
