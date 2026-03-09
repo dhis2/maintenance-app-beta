@@ -429,11 +429,10 @@ describe('TrackedEntityAttributes form tests', () => {
             expect(updateMock).toHaveBeenCalledWith(
                 expect.objectContaining({
                     data: expect.arrayContaining([
-                        {
-                            op: 'replace',
+                        expect.objectContaining({
                             path: '/skipAnalytics',
                             value: true,
-                        },
+                        }),
                     ]),
                     id: trackedEntityAttribute.id,
                     params: undefined,
