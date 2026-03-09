@@ -9,8 +9,16 @@ import {
 import { SectionedFormSection } from '../../../components/sectionedForm'
 import { RoleAccess } from './RoleAccess'
 
+type AccessAndSharingFormContentsProps = {
+    name: string
+    showStageAccess?: boolean
+}
+
 export const AccessAndSharingFormContents = React.memo(
-    function AccessAndSharingFormContents({ name }: { name: string }) {
+    function AccessAndSharingFormContents({
+        name,
+        showStageAccess = true,
+    }: AccessAndSharingFormContentsProps) {
         return (
             <SectionedFormSection name={name}>
                 <StandardFormSectionTitle>
@@ -30,11 +38,13 @@ export const AccessAndSharingFormContents = React.memo(
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Set up which user roles can access this program and program stages.'
+                        showStageAccess
+                            ? 'Set up which user roles can access this program and program stages.'
+                            : 'Set up which user roles can access this program.'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
-                    <RoleAccess />
+                    <RoleAccess showStageAccess={showStageAccess} />
                 </StandardFormField>
             </SectionedFormSection>
         )

@@ -23,7 +23,13 @@ type SharingDialogState = {
     id: string
 } | null
 
-export const RoleAccess = () => {
+type RoleAccessProps = {
+    showStageAccess?: boolean
+}
+
+export const RoleAccess = ({
+    showStageAccess = true,
+}: RoleAccessProps = {}) => {
     const { values } = useFormState<ProgramValues>()
     const form = useForm<ProgramValues>()
     const { id: programId } = useParams()
@@ -168,37 +174,40 @@ export const RoleAccess = () => {
                     })}
                     type="program"
                     sharing={values.sharing}
-                    onApplyToAllStages={handleApplyToAllStages}
+                    onApplyToAllStages={
+                        showStageAccess ? handleApplyToAllStages : undefined
+                    }
                     onEditAccess={() =>
                         setSharingDialog({ type: 'program', id: values.id })
                     }
                 />
 
-                {programStages.map((stage) => (
-                    <RoleAccessBox
-                        key={stage.id}
-                        title={i18n.t('Stage: {{name}}', {
-                            name: stage.displayName,
-                        })}
-                        type="stage"
-                        sharing={stage.sharing}
-                        isDifferentFromProgram={
-                            !areSharingPropertiesSimilar(
-                                stage.sharing,
-                                values.sharing
-                            )
-                        }
-                        onApplyProgramAccessRules={() =>
-                            handleApplyProgramAccessRules(stage.id)
-                        }
-                        onEditAccess={() =>
-                            setSharingDialog({
-                                type: 'programStage',
-                                id: stage.id,
-                            })
-                        }
-                    />
-                ))}
+                {showStageAccess &&
+                    programStages.map((stage) => (
+                        <RoleAccessBox
+                            key={stage.id}
+                            title={i18n.t('Stage: {{name}}', {
+                                name: stage.displayName,
+                            })}
+                            type="stage"
+                            sharing={stage.sharing}
+                            isDifferentFromProgram={
+                                !areSharingPropertiesSimilar(
+                                    stage.sharing,
+                                    values.sharing
+                                )
+                            }
+                            onApplyProgramAccessRules={() =>
+                                handleApplyProgramAccessRules(stage.id)
+                            }
+                            onEditAccess={() =>
+                                setSharingDialog({
+                                    type: 'programStage',
+                                    id: stage.id,
+                                })
+                            }
+                        />
+                    ))}
             </div>
 
             {sharingDialog && (
