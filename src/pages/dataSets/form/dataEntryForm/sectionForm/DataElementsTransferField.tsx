@@ -161,6 +161,13 @@ export const DataElementsTransferField = ({
                     filterablePicked
                     available={[...availableDataElements, ...input.value]}
                     maxSelections={Infinity}
+                    sourceEmptyPlaceholder={
+                        <p className={styles.emptyPlaceholder}>
+                            {i18n.t(
+                                'No data elements available. Add data elements to this data set to use them in sections.'
+                            )}
+                        </p>
+                    }
                 />
             </Field>
             {greyFieldModalOpen && (

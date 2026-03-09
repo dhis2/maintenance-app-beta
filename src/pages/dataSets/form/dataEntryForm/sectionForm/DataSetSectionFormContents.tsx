@@ -161,7 +161,7 @@ export const DataSetSectionFormContents = ({
                     <StandardFormField>
                         <DescriptionField
                             helpText={i18n.t(
-                                'Explain the purpose of this section, which will be shown in the data entry form.'
+                                'Shown in the data entry form with the section title.'
                             )}
                         />
                     </StandardFormField>
@@ -232,6 +232,13 @@ export const DataSetSectionFormContents = ({
                             filterablePicked
                             available={data?.indicators ?? []}
                             maxSelections={Infinity}
+                            sourceEmptyPlaceholder={
+                                <p className={styles.emptyPlaceholder}>
+                                    {i18n.t(
+                                        'No indicators available. Add indicators to this data set to use them in sections.'
+                                    )}
+                                </p>
+                            }
                         />
                     </Field>
                 </SectionedFormSection>
