@@ -39,11 +39,7 @@ export const OptionGroupFormFields = ({
                 <DefaultIdentifiableFields />
 
                 <StandardFormField>
-                    <DescriptionField
-                        helpText={i18n.t(
-                            'Explain the purpose of this option group.'
-                        )}
-                    />
+                    <DescriptionField />
                 </StandardFormField>
             </StandardFormSection>
 
@@ -52,7 +48,9 @@ export const OptionGroupFormFields = ({
                     {i18n.t('Options')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
-                    {i18n.t('Select the options that belong to this group.')}
+                    {i18n.t(
+                        'Choose the options to include in this option group.'
+                    )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
                     <OptionSetField isEdit={isEdit} />
@@ -83,7 +81,7 @@ export const OptionGroupFormFields = ({
                 ) : (
                     <NoticeBox className={styles.noOptionSetWarning}>
                         {i18n.t(
-                            'You must select an option set before you can select options.'
+                            'Choose an option set to start adding options.'
                         )}
                     </NoticeBox>
                 )}
