@@ -57,6 +57,7 @@ export const DataFormContents = React.memo(function DataFormContents({
                     filterPlaceholderPicked={i18n.t(
                         'Search selected indicators'
                     )}
+                    maxSelections={Infinity}
                 />
             </StandardFormField>
         </SectionedFormSection>

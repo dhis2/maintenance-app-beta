@@ -98,7 +98,7 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
             </StandardFormSectionTitle>
             <StandardFormSectionDescription>
                 {i18n.t(
-                    'Choose and configure how the data entry form looks and works for this data set.'
+                    'Choose and configure how the data entry form looks and works.'
                 )}
             </StandardFormSectionDescription>
             <TabbedFormTypePicker

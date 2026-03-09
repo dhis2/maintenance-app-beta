@@ -21,12 +21,10 @@ export const PeriodsContents = React.memo(function PeriodsContents({
     return (
         <SectionedFormSection name={name}>
             <StandardFormSectionTitle>
-                {i18n.t('Configure data entry periods')}
+                {i18n.t('Data entry periods')}
             </StandardFormSectionTitle>
             <StandardFormSectionDescription>
-                {i18n.t(
-                    'Choose for what time periods data can be entered for this data set'
-                )}
+                {i18n.t('Choose available time periods for data entry.')}
             </StandardFormSectionDescription>
             <StandardFormField>
                 <PeriodTypeField />
@@ -34,7 +32,8 @@ export const PeriodsContents = React.memo(function PeriodsContents({
             <StandardFormField>
                 <ToggledNumberInput
                     name="openFuturePeriods"
-                    label={i18n.t('Allow data entry for future periods')}
+                    label={i18n.t('Allow data entry in future periods')}
+                    inputLabel={i18n.t('Number of future periods')}
                     uncheckedValue={0}
                     min={'1'}
                 />
@@ -45,6 +44,7 @@ export const PeriodsContents = React.memo(function PeriodsContents({
                     label={i18n.t(
                         'Close data entry a certain number of days after period end (expiry days)'
                     )}
+                    inputLabel={i18n.t('Number of days')}
                     uncheckedValue={0}
                     min={'1'}
                 />

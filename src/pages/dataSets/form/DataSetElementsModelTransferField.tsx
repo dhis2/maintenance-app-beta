@@ -67,6 +67,7 @@ export function DataSetElementsModelTransferField() {
                     input.onBlur()
                 }}
                 enableOrderChange={false}
+                maxSelections={Infinity}
                 transform={(dataElements) => {
                     return dataElements.map((de) => ({
                         dataElement: {

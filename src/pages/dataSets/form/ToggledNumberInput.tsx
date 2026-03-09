@@ -10,12 +10,14 @@ type InputFieldRestProps = Omit<InputFieldProps, 'onChange' | 'value' | 'name'>
 export type HiddenInputFieldProps = InputFieldRestProps & {
     name: string
     label: string
+    inputLabel?: string
     uncheckedValue: number
 }
 
 export function ToggledNumberInput({
     name,
     label,
+    inputLabel,
     uncheckedValue,
     ...other
 }: HiddenInputFieldProps) {
@@ -73,6 +75,7 @@ export function ToggledNumberInput({
                     input={input}
                     meta={meta as FieldMetaState<string | undefined>}
                     inputWidth="250px"
+                    label={inputLabel}
                     className={classes.hiddenInputField}
                     {...other}
                 />
