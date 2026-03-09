@@ -5,9 +5,9 @@ import {
     StandardFormField,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
-} from '../../../components'
-import { SectionedFormSection } from '../../../components/sectionedForm'
-import { RoleAccess } from './RoleAccess'
+} from '../../../../components'
+import { SectionedFormSection } from '../../../../components/sectionedForm'
+import { RoleAccess } from '../RoleAccess'
 
 type AccessAndSharingFormContentsProps = {
     name: string

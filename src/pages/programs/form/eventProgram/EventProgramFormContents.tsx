@@ -9,7 +9,7 @@ import {
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
 } from '../../../../lib'
-import { AccessAndSharingFormContents } from '../AccessAndSharingFormContents'
+import { AccessAndSharingFormContents } from '../common/AccessAndSharingFormContents'
 import { SetupFormContents } from '../common/SetupFormContents'
 import { StageDataFormContents } from '../common/StageDataFormContents'
 import { EventProgramFormDescriptor } from './eventProgramFormDescriptor'

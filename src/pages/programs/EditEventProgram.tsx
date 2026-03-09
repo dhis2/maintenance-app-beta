@@ -74,7 +74,7 @@ const fieldFilters = [
     // 'relationshipLabel',
     // 'noteLabel',
     // 'displayFrontPageList',
-    'programStages[id,name,displayName,sharing,notificationTemplates[id,name,displayName,access],programStageDataElements[id,dataElement[id,displayName,valueType],compulsory,displayInReports,allowFutureDate,skipAnalytics,skipSynchronization,renderType,sortOrder]],programStageSections[id,displayName]',
+    'programStages[id,name,displayName,notificationTemplates[id,name,displayName,access],programStageDataElements[id,dataElement[id,displayName,valueType],compulsory,displayInReports,allowFutureDate,skipAnalytics,skipSynchronization,renderType,sortOrder]],programStageSections[id,displayName]',
     'organisationUnits[id,displayName,path]',
     'sharing',
     // 'notificationTemplates[id,name,displayName, access]',
