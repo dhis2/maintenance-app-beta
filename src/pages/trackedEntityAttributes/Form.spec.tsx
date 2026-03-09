@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { render } from '@testing-library/react'
+import { render, within } from '@testing-library/react'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/trackedEntityAttributes.json'
 import { FOOTER_ID } from '../../app/layout/Layout'
@@ -253,6 +253,29 @@ describe('TrackedEntityAttributes form tests', () => {
                 })
             )
         })
+
+        it('submits with skipAnalytics checked', async () => {
+            const aName = faker.word.words()
+            const aShortName = faker.word.words()
+            const { screen } = await renderForm()
+            await uiActions.enterName(aName, screen)
+            await uiActions.enterInputFieldValue(
+                'shortName',
+                aShortName,
+                screen
+            )
+            await uiActions.clickOnCheckboxField('skipAnalytics', screen)
+            await uiActions.submitForm(screen)
+            expect(createMock).toHaveBeenCalledWith(
+                expect.objectContaining({
+                    data: expect.objectContaining({
+                        name: aName,
+                        shortName: aShortName,
+                        skipAnalytics: true,
+                    }),
+                })
+            )
+        })
     })
 
     describe('Edit', () => {
@@ -375,6 +398,48 @@ describe('TrackedEntityAttributes form tests', () => {
                 params: undefined,
                 resource: 'trackedEntityAttributes',
             })
+        })
+
+        it('renders skipAnalytics as checked when true', async () => {
+            const { screen } = await renderForm({
+                trackedEntityAttributeOverwrites: {
+                    skipAnalytics: true,
+                },
+            })
+            const skipAnalyticsField = screen.getByTestId(
+                'formfields-skipAnalytics'
+            )
+            const checkbox = within(skipAnalyticsField).getByRole('checkbox')
+            expect(checkbox).toBeChecked()
+        })
+
+        it('submits updated skipAnalytics', async () => {
+            const fixedName = 'TEA skipAnalytics test'
+            const { screen, trackedEntityAttribute } = await renderForm({
+                trackedEntityAttributeOverwrites: {
+                    name: fixedName,
+                    skipAnalytics: false,
+                    valueType: 'TEXT',
+                    aggregationType: 'NONE',
+                },
+            })
+            await screen.findByDisplayValue(fixedName)
+            await uiActions.clickOnCheckboxField('skipAnalytics', screen)
+            await uiActions.submitForm(screen)
+            expect(updateMock).toHaveBeenCalledWith(
+                expect.objectContaining({
+                    data: expect.arrayContaining([
+                        {
+                            op: 'replace',
+                            path: '/skipAnalytics',
+                            value: true,
+                        },
+                    ]),
+                    id: trackedEntityAttribute.id,
+                    params: undefined,
+                    resource: 'trackedEntityAttributes',
+                })
+            )
         })
     })
 })
