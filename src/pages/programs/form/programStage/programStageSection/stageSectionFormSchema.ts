@@ -10,6 +10,7 @@ export const stageSectionFormSchema = identifiable.extend({
         MOBILE: z.object({ type: renderTypeSchema.default('LISTING') }),
         DESKTOP: z.object({ type: renderTypeSchema.default('LISTING') }),
     }),
+    sortOrder: z.coerce.number().int().default(0),
 })
 
 export const initialStageSectionValues = getDefaultsOld(stageSectionFormSchema)

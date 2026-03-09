@@ -31,6 +31,7 @@ export type CustomFormProps = {
         existingFormId: string | undefined
     ) => Promise<unknown>
     customFormTarget: string
+    fieldName?: string
 }
 
 const SubsectionSpacer = ({ children }: { children: React.ReactNode }) => (
@@ -91,12 +92,13 @@ export const CustomFormEdit = ({
     elementTypes,
     updateCustomForm,
     customFormTarget,
+    fieldName = 'dataEntryForm',
 }: CustomFormProps) => {
     const textAreaRef = useRef<HTMLTextAreaElement>(null)
     const [previewMode, setPreviewMode] = useState<boolean>(false)
     const [customFormSaving, setCustomFormSaving] = useState<boolean>(false)
     const [customFormError, setCustomFormError] = useState<string>('')
-    const { input: formInput } = useField('dataEntryForm')
+    const { input: formInput } = useField(fieldName)
     const { input: nameInput } = useField('name')
 
     const insertElement = ({
