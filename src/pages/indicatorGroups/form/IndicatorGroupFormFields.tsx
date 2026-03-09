@@ -32,11 +32,7 @@ function IndicatorGroupFormFields() {
                 <StandardFormField>
                     <CodeField schemaSection={section} />
                 </StandardFormField>
-                <DescriptionField
-                    helpText={i18n.t(
-                        'Explain the purpose of this indicator group.'
-                    )}
-                />
+                <DescriptionField />
             </StandardFormSection>
 
             <StandardFormSection>
@@ -64,6 +60,7 @@ function IndicatorGroupFormFields() {
                                 'Filter selected indicators'
                             )}
                             filterUnassignedTo={'indicatorGroups'}
+                            maxSelections={Infinity}
                         />
                     </StandardFormField>
                 </StandardFormField>
