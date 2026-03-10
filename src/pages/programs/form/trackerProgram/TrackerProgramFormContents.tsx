@@ -8,12 +8,12 @@ import {
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
 } from '../../../../lib'
-import { AccessAndSharingFormContents } from '../AccessAndSharingFormContents'
+import { AccessAndSharingFormContents } from '../common/AccessAndSharingFormContents'
+import { ProgramNotificationsFormContents } from '../common/ProgramNotificationsFormContents'
 import { SetupFormContents } from '../common/SetupFormContents'
 import { EnrollmentFormFormContents } from '../EnrollmentFormFormContents'
 import { EnrollmentSettingsFormContents } from '../EnrollmentSettingsFormContents'
 import { ProgramCustomizationFormContents } from '../ProgramCustomizationFormContents'
-import { ProgramNotificationsFormContents } from '../ProgramNotificationsFormContents'
 import { ProgramStagesFormContents } from '../ProgramStagesFormContents'
 import { EnrollmentDataFormContents } from './EnrollmentDataFormContents'
 import { TrackerProgramFormDescriptor } from './trackerProgramFormDescriptor'

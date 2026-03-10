@@ -744,7 +744,7 @@ export const generateDefaultListMultiActionsTests = ({
                 'section-list-row-checkbox'
             )
             await userEvent.click(firstRowCheckbox)
-            const toolbar = screen.getByTestId('multi-actions-toolbar')
+            let toolbar = await screen.findByTestId('multi-actions-toolbar')
             expect(toolbar).toBeVisible()
             expect(toolbar).toHaveTextContent('1 selected')
 
@@ -752,13 +752,18 @@ export const generateDefaultListMultiActionsTests = ({
                 'section-list-row-checkbox'
             )
             await userEvent.click(secondRowCheckbox)
+            toolbar = await screen.findByTestId('multi-actions-toolbar')
             expect(toolbar).toBeVisible()
-            expect(toolbar).toHaveTextContent('2 selected')
+            await waitFor(() => expect(toolbar).toHaveTextContent('2 selected'))
 
             await userEvent.click(within(toolbar).getByText('Deselect all'))
-            expect(firstRowCheckbox).not.toBeChecked()
-            expect(secondRowCheckbox).not.toBeChecked()
-            expect(toolbar).not.toBeVisible()
+            await waitFor(() => {
+                expect(firstRowCheckbox).not.toBeChecked()
+                expect(secondRowCheckbox).not.toBeChecked()
+                expect(
+                    screen.queryByTestId('multi-actions-toolbar')
+                ).not.toBeInTheDocument()
+            })
         })
         xit('should update sharing settings for multiple items', async () => {
             const resolvePromise = () => Promise.resolve({})

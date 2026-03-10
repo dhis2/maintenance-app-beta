@@ -59,8 +59,10 @@ type ProgramAttributesType = {
 }
 
 export const ProgramNotificationsFormFields = ({
+    isTrackerProgram,
     setSelectedSection,
 }: {
+    isTrackerProgram: boolean
     setSelectedSection: (name: string) => void
 }) => {
     useSyncSelectedSectionWithScroll(setSelectedSection)
@@ -167,6 +169,7 @@ export const ProgramNotificationsFormFields = ({
                     <BasicInformationSection
                         section={section}
                         programTemplateId={values.id}
+                        isTrackerProgram={isTrackerProgram}
                     />
                 </SectionedFormSection>
 
@@ -214,6 +217,7 @@ export const ProgramNotificationsFormFields = ({
                     </StandardFormSectionDescription>
                     <RecipientSection
                         isStageNotification={isStageNotification}
+                        isTrackerProgram={isTrackerProgram}
                     />
                 </SectionedFormSection>
             </SectionedFormSections>
