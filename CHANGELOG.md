@@ -1,3 +1,10 @@
+# [0.139.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.138.0...v0.139.0) (2026-03-10)
+
+
+### Features
+
+* add event program customization section ([#792](https://github.com/dhis2/maintenance-app-beta/issues/792)) ([2fe5087](https://github.com/dhis2/maintenance-app-beta/commit/2fe5087bee0db8eca7a6e503ddb38f186c2d119a))
+
 # [0.138.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.137.0...v0.138.0) (2026-03-09)
 
 
