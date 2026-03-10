@@ -1,3 +1,15 @@
+# [0.142.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.141.0...v0.142.0) (2026-03-10)
+
+
+### Bug Fixes
+
+* change attributes to tracked entity attributes where necessary ([#797](https://github.com/dhis2/maintenance-app-beta/issues/797)) ([e8f32fd](https://github.com/dhis2/maintenance-app-beta/commit/e8f32fd8952250e77a192b96fd49df220a014d88))
+
+
+### Features
+
+* [DHIS2-16455] Flag for non analyzable tracked entity attributes ([#793](https://github.com/dhis2/maintenance-app-beta/issues/793)) ([c68630d](https://github.com/dhis2/maintenance-app-beta/commit/c68630de97624e6ba5c83fd4920dd768772b37b8))
+
 # [0.141.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.140.0...v0.141.0) (2026-03-10)
 
 
