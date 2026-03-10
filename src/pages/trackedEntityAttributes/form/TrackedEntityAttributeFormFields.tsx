@@ -274,9 +274,9 @@ export const TrackedEntityAttributeFormFields = ({
                         }}
                         leftHeader={i18n.t('Available legends')}
                         rightHeader={i18n.t('Selected legends')}
-                        filterPlaceholder={i18n.t('Search available legends')}
+                        filterPlaceholder={i18n.t('Filter available legends')}
                         filterPlaceholderPicked={i18n.t(
-                            'Search selected legends'
+                            'Filter selected legends'
                         )}
                         enableOrderChange={true}
                         maxSelections={Infinity}

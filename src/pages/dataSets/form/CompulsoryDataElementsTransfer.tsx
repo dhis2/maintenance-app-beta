@@ -51,8 +51,8 @@ export const CompulsoryDataElementsTransfer = () => {
                     {i18n.t('Compulsory data elements')}
                 </TransferHeader>
             }
-            filterPlaceholder={i18n.t('Search available data elements')}
-            filterPlaceholderPicked={i18n.t('Search compulsory data elements')}
+            filterPlaceholder={i18n.t('Filter available data elements')}
+            filterPlaceholderPicked={i18n.t('Filter compulsory data elements')}
             filterable={true}
             filterablePicked={true}
             height="350px"

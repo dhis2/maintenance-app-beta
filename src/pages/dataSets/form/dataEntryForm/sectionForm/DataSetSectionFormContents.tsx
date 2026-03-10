@@ -219,10 +219,10 @@ export const DataSetSectionFormContents = ({
                                 </TransferHeader>
                             }
                             filterPlaceholder={i18n.t(
-                                'Search available indicators'
+                                'Filter available indicators'
                             )}
                             filterPlaceholderPicked={i18n.t(
-                                'Search selected indicators'
+                                'Filter selected indicators'
                             )}
                             enableOrderChange
                             height={'350px'}
