@@ -19,7 +19,6 @@ import {
     ValidationResult,
 } from './useExpressionValidator'
 import { VariableSelectionBox } from './VariableSelectionBox'
-// import { useExpressionValidator } from '../metadataFormControls/ExpressionBuilder/useExpressionValidator'
 
 const ValidationBox = ({
     response,

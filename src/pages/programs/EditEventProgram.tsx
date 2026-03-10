@@ -14,6 +14,7 @@ import {
     SectionedFormLayout,
 } from '../../components'
 import { Section } from '../../components/formCreators/SectionFormList'
+import { useHandleOnSubmitEditFormDeletions } from '../../components/sectionedForm/useHandleOnSubmitEditFormDeletions'
 import {
     createFormError,
     createJsonPatchOperations,
@@ -63,20 +64,20 @@ const fieldFilters = [
     // 'dataEntryForm[id,displayName,htmlCode]',
     // 'programSections[id,displayName,description,access,sortOrder]',
     // 'programTrackedEntityAttributes[id,displayName,valueType,renderType,allowFutureDate,mandatory,searchable,displayInList,trackedEntityAttribute[id,displayName,unique]]',
-    // 'style[color,icon]',
+    'style[color,icon]',
     // 'programStageLabel',
     // 'eventLabel',
     // 'enrollmentDateLabel',
-    // 'incidentDateLabel',
+    'incidentDateLabel',
     // 'enrollmentLabel',
     // 'followUpLabel',
     // 'orgUnitLabel',
     // 'relationshipLabel',
     // 'noteLabel',
     // 'displayFrontPageList',
-    'programStages[id,name,notificationTemplates[id,name,displayName,access],programStageDataElements[id,dataElement[id,displayName,valueType],compulsory,displayInReports,allowFutureDate,skipAnalytics,skipSynchronization,renderType,sortOrder]],programStageSections[id,displayName]',
-    // 'organisationUnits[id,displayName,path]',
-    // 'sharing',
+    'programStages[id,name,displayName,notificationTemplates[id,name,displayName,access],dataEntryForm[id,displayName,htmlCode],programStageDataElements[id,dataElement[id,displayName,valueType],compulsory,allowProvidedElsewhere,displayInReports,allowFutureDate,skipAnalytics,skipSynchronization,renderType,sortOrder]],programStageSections[id,displayName]',
+    'organisationUnits[id,displayName,path]',
+    'sharing',
     // 'notificationTemplates[id,name,displayName, access]',
     'expiryDays',
     'expiryPeriodType',
@@ -181,24 +182,18 @@ export const useOnSubmitProgramEdit = (modelId: string) => {
         [dataEngine]
     )
 
-    // const handleFormDeletions = useHandleOnSubmitEditFormDeletions(
-    //     section,
-    //     'programSections',
-    //     dataEngine,
-    //     queryClient
-    // )
+    const handleDeletions = useHandleOnSubmitEditFormDeletions(
+        SECTIONS_MAP.programStage,
+        'programStageSections',
+        dataEngine,
+        queryClient
+    )
 
     return useMemo<EnhancedOnSubmit<ProgramValues>>(
         () => async (values, form, options) => {
-            const formValues = form.getState().values
-
-            // const sections: Array<Section> = formValues.programSections
-            // const dataEntryForm: DataEntryForm = formValues.dataEntryForm
-            const stages: ProgramStageListItem[] = formValues.programStages
+            const stages: ProgramStageListItem[] = values.programStages
             // const notificationTemplates: ProgramNotificationListItem[] =
             //     formValues.notificationTemplates
-
-            // const stagesToDelete = stages.filter((stage) => stage.deleted)
 
             const stageNotificationTemplateDeleteFailures =
                 await handleStageNotificationDeletions({
@@ -223,96 +218,58 @@ export const useOnSubmitProgramEdit = (modelId: string) => {
                     ),
                 })
             }
+            const stageValues = values
+                .programStages?.[0] as Partial<StageFormValues>
+            const sections = stageValues.programStageSections || []
+            const dataEntryForm = stageValues.dataEntryForm
 
-            // const stagesDeletionResults = await Promise.allSettled(
-            //     stagesToDelete.map((stage) =>
-            //         dataEngine.mutate({
-            //             resource: 'programStages',
-            //             id: stage.id,
-            //             type: 'delete',
-            //         })
-            //     )
-            // )
+            const { error } = await handleDeletions(sections, dataEntryForm)
 
-            // const stagesDeletionFailures = stagesDeletionResults
-            //     .map((deletion, index) => ({
-            //         ...deletion,
-            //         stageName: stagesToDelete[index].displayName,
-            //     }))
-            //     .filter((deletion) => deletion.status === 'rejected')
+            if (error) {
+                return error
+            }
 
-            // if (stagesDeletionFailures.length > 0) {
-            //     await queryClient.invalidateQueries({
-            //         queryKey: [{ resource: 'programStages' }],
-            //     })
-            //     return createFormError({
-            //         message: i18n.t(
-            //             'There was an error deleting stages: {{stagesNames}}',
-            //             {
-            //                 stagesNames: stagesDeletionFailures
-            //                     .map((failure) => failure.stageName)
-            //                     .join(', '),
-            //                 nsSeparator: '~-~',
-            //             }
-            //         ),
-            //     })
-            // }
-
-            // const { customFormDeleteResult, error } = await handleFormDeletions(
-            //     sections,
-            //     dataEntryForm
-            // )
-
-            // if (error) {
-            //     return error
-            // }
-
-            // const sections = values.programStages[0]?.programStageSections ?? []
-            // const dataEntryForm = formValues.dataEntryForm
-
-            // const { customFormDeleteResult, error } = await handleDeletions(
-            //     sections,
-            //     dataEntryForm
-            // )
-
-            // if (error) {
-            //     return error
-            // }
-            // const nonDeletedProgramStageSections = sections.filter(
-            //     (section) => !section.deleted
-            // )
-            const stageTrimmedValues = values
-                .programStages[0] as Partial<StageFormValues>
-            // programStageSections: nonDeletedProgramStageSections,
-            // dataEntryForm:
-            //     customFormDeleteResult &&
-            //     customFormDeleteResult?.[0]?.status !== 'rejected'
-            //         ? null
-            //         : values.dataEntryForm,
-            // } as Partial<StageFormValues>
-
-            const stageJsonPatchOperations = createJsonPatchOperations({
-                values: stageTrimmedValues,
-                dirtyFields: { programStageDataElements: true },
-                originalValue: form.getState().initialValues.programStages,
-            })
-            const response = await handleStagePatch(
-                stageJsonPatchOperations,
-                stageTrimmedValues.id!
+            const stageFieldPrefix = 'programStages[0].'
+            const stageDirtyFields = Object.fromEntries(
+                Object.keys(form.getState().dirtyFields)
+                    .filter((field) => field.startsWith(stageFieldPrefix))
+                    .map((field) => [
+                        field.slice(stageFieldPrefix.length),
+                        true,
+                    ])
             )
-            if (response.error) {
-                return createFormError(response.error)
+
+            if (Object.keys(stageDirtyFields).length > 0) {
+                const trimmedStageValues = {
+                    ...stageValues,
+                    programStageSections:
+                        stageValues.programStageSections?.filter(
+                            (s) => !s.deleted
+                        ),
+                    dataEntryForm:
+                        stageValues.dataEntryForm &&
+                        !stageValues.dataEntryForm.deleted
+                            ? stageValues.dataEntryForm
+                            : null,
+                }
+
+                const stageJsonPatchOperations = createJsonPatchOperations({
+                    values: trimmedStageValues,
+                    dirtyFields: stageDirtyFields,
+                    originalValue: form.getState().initialValues.programStages,
+                })
+                const response = await handleStagePatch(
+                    stageJsonPatchOperations,
+                    stageValues.id!
+                )
+                if (response.error) {
+                    return createFormError(response.error)
+                }
             }
 
             const trimmedValues = {
                 ...values,
-                // programSections: sections.filter((section) => !section.deleted),
                 programStages: stages.map((stage) => ({ id: stage.id })),
-                // dataEntryForm:
-                //     customFormDeleteResult &&
-                //     customFormDeleteResult?.[0]?.status !== 'rejected'
-                //         ? null
-                //         : values.dataEntryForm,
                 // notificationTemplates: notificationTemplates.filter(
                 //     (nTemplate) => !nTemplate.deleted
                 // ),
@@ -320,7 +277,7 @@ export const useOnSubmitProgramEdit = (modelId: string) => {
 
             return submitEdit(trimmedValues, form, options)
         },
-        [submitEdit, handleStagePatch, dataEngine, queryClient]
+        [submitEdit, handleStagePatch, dataEngine, queryClient, handleDeletions]
     )
 }
 

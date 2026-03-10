@@ -6,6 +6,7 @@ import {
     modelFormSchemas,
     DEFAULT_CATEGORY_COMBO,
 } from '../../../../lib'
+import { sharingSettingsSchema } from '../common/sharingSettingsSchema'
 
 const { identifiable, withDefaultListColumns, modelReference } =
     modelFormSchemas
@@ -53,16 +54,16 @@ const eventProgramBaseSchema = z.object({
     //         htmlCode: z.string().optional(),
     //     })
     //     .optional(),
-    // style: z
-    //     .object({
-    //         color: z.string().optional(),
-    //         icon: z.string().optional(),
-    //     })
-    //     .optional(),
+    style: z
+        .object({
+            color: z.string().optional(),
+            icon: z.string().optional(),
+        })
+        .optional(),
     // programStageLabel: z.string().optional(),
     // eventLabel: z.string().optional(),
     // enrollmentDateLabel: z.string().optional(),
-    // incidentDateLabel: z.string().optional(),
+    incidentDateLabel: z.string().optional(),
     // enrollmentLabel: z.string().optional(),
     // followUpLabel: z.string().optional(),
     // orgUnitLabel: z.string().optional(),
@@ -74,33 +75,39 @@ const eventProgramBaseSchema = z.object({
             z.object({
                 id: z.string().optional(),
                 name: z.string().optional(),
+                displayName: z.string().optional(),
+                sharing: sharingSettingsSchema.optional(),
                 notificationTemplates: z
                     .array(z.object({ id: z.string().optional() }))
                     .default([]),
+                dataEntryForm: z
+                    .object({
+                        id: z.string().optional(),
+                        htmlCode: z.string().optional(),
+                    })
+                    .optional(),
                 programStageDataElements: z
                     .array(z.object({ id: z.string().optional() }))
                     .default([]),
                 programStageSections: z
                     .array(z.object({ id: z.string().optional() }))
                     .default([]),
-                validationStrategy: z
-                    .enum(['ON_COMPLETE', 'ON_UPDATE_AND_INSERT'])
-                    .default('ON_UPDATE_AND_INSERT'),
             })
         )
         .default([
             {
                 id: undefined,
                 name: undefined,
+                displayName: undefined,
+                sharing: undefined,
                 notificationTemplates: [],
                 programStageDataElements: [],
                 programStageSections: [],
-                validationStrategy: 'ON_UPDATE_AND_INSERT',
             },
         ]),
-    // organisationUnits: z.array(modelReference).default([]),
+    organisationUnits: z.array(modelReference).default([]),
     // notificationTemplates: z.array(modelReference).default([]),
-    // sharing: sharingSettingsSchema.optional(),
+    sharing: sharingSettingsSchema.optional(),
     expiryDays: z.coerce.number().int().min(0).default(0),
     expiryPeriodType: z.string().optional().default('Weekly'),
     completeEventsExpiryDays: z.coerce.number().int().min(0).default(0),

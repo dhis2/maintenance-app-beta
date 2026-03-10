@@ -8,7 +8,7 @@ import {
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
 } from '../../../../lib'
-import { AccessAndSharingFormContents } from '../AccessAndSharingFormContents'
+import { AccessAndSharingFormContents } from '../common/AccessAndSharingFormContents'
 import { ProgramNotificationsFormContents } from '../common/ProgramNotificationsFormContents'
 import { SetupFormContents } from '../common/SetupFormContents'
 import { EnrollmentFormFormContents } from '../EnrollmentFormFormContents'

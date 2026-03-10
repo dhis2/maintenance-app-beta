@@ -9,9 +9,12 @@ import {
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
 } from '../../../../lib'
+import { AccessAndSharingFormContents } from '../common/AccessAndSharingFormContents'
 import { ProgramNotificationsFormContents } from '../common/ProgramNotificationsFormContents'
 import { SetupFormContents } from '../common/SetupFormContents'
-import { StageDataFormContents } from '../common/StageDataFormContents'
+import { StageDataFormContents } from '../programStage/StageDataFormContents'
+import { StageFormFormContents } from '../programStage/StageFormFormContents'
+import { EventProgramCustomizationFormContents } from './EventProgramCustomizationFormContents'
 import { EventProgramFormDescriptor } from './eventProgramFormDescriptor'
 
 export const EventProgramFormContents = () => {
@@ -24,9 +27,9 @@ export const EventProgramFormContents = () => {
                 name={descriptor.getSection('programDetails').name}
                 isTrackerProgram={false}
             />
-            {/*<ProgramCustomizationFormContents*/}
-            {/*    name={descriptor.getSection('programCustomization').name}*/}
-            {/*/>*/}
+            <EventProgramCustomizationFormContents
+                name={descriptor.getSection('programCustomization').name}
+            />
             {/*<EnrollmentSettingsFormContents*/}
             {/*    name={descriptor.getSection('enrollmentSettings').name}*/}
             {/*/>*/}
@@ -35,10 +38,12 @@ export const EventProgramFormContents = () => {
                 sectionLabel={i18n.t('Data')}
                 isTrackerProgram={false}
             />
-
-            {/*<EnrollmentFormFormContents*/}
-            {/*    name={descriptor.getSection('enrollmentForm').name}*/}
-            {/*/>*/}
+            <StageFormFormContents
+                name={descriptor.getSection('form').name}
+                sectionLabel={i18n.t('Form')}
+                isSubsection={false}
+                isTrackerProgram={false}
+            />
             {/*<ProgramStagesFormContents*/}
             {/*    name={descriptor.getSection('programStages').name}*/}
             {/*/>*/}
@@ -46,9 +51,10 @@ export const EventProgramFormContents = () => {
                 name={descriptor.getSection('programNotifications').name}
                 isTrackerProgram={false}
             />
-            {/*<AccessAndSharingFormContents*/}
-            {/*    name={descriptor.getSection('accessAndSharing').name}*/}
-            {/*/>*/}
+            <AccessAndSharingFormContents
+                name={descriptor.getSection('accessAndSharing').name}
+                showStageAccess={false}
+            />
             <CustomAttributesSection
                 schemaSection={SCHEMA_SECTIONS.program}
                 sectionedLayout

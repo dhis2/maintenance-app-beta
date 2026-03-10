@@ -53,55 +53,20 @@ export const EventProgramFormDescriptor = {
                 },
             ],
         },
-        // {
-        //     name: 'programCustomization',
-        //     label: i18n.t('Program Customization'),
-        //     fields: [
-        //         {
-        //             name: 'style',
-        //             label: i18n.t('Visual configuration'),
-        //         },
-        //         {
-        //             name: 'incidentDateLabel',
-        //             label: i18n.t('Custom label for "Incident date"'),
-        //         },
-        //         {
-        //             name: 'enrollmentDateLabel',
-        //             label: i18n.t('Custom label for "Enrollment date"'),
-        //         },
-        //         {
-        //             name: 'enrollmentLabel',
-        //             label: i18n.t('Custom label for "Enrollment"'),
-        //         },
-        //         {
-        //             name: 'eventLabel',
-        //             label: i18n.t('Custom label for "Event"'),
-        //         },
-        //         {
-        //             name: 'programStageLabel',
-        //             label: i18n.t('Custom label for "Program stage"'),
-        //         },
-        //         {
-        //             name: 'followUpLabel',
-        //             label: i18n.t('Custom label for "Follow-up"'),
-        //         },
-        //         {
-        //             name: 'orgUnitLabel',
-        //             label: i18n.t('Custom label for "Registering unit"'),
-        //         },
-        //         {
-        //             name: 'relationshipLabel',
-        //             label: i18n.t('Custom label for "Relationship"'),
-        //         },
-        //         { name: 'noteLabel', label: i18n.t('Custom label for "Note"') },
-        //         {
-        //             name: 'displayFrontPageList',
-        //             label: i18n.t(
-        //                 'Display enrolled TEs in the front page list'
-        //             ),
-        //         },
-        //     ],
-        // },
+        {
+            name: 'programCustomization',
+            label: i18n.t('Program customization'),
+            fields: [
+                {
+                    name: 'style',
+                    label: i18n.t('Visual configuration'),
+                },
+                {
+                    name: 'incidentDateLabel',
+                    label: i18n.t('Custom label for "Report date"'),
+                },
+            ],
+        },
         // {
         //     name: 'enrollmentSettings',
         //     label: i18n.t('Enrollment: Settings', { nsSeparator: '~:~' }),
@@ -143,36 +108,45 @@ export const EventProgramFormDescriptor = {
         {
             name: 'data',
             label: i18n.t('Data', { nsSeparator: '~:~' }),
-            fields: [],
+            fields: [
+                {
+                    name: 'programStages[0].programStageDataElements',
+                    label: i18n.t('Data elements'),
+                },
+            ],
         },
-        // {
-        //     name: 'enrollmentForm',
-        //     label: i18n.t('Enrollment: Form', { nsSeparator: '~:~' }),
-        //     fields: [{ name: 'dataEntryForm', label: i18n.t('Custom form') }],
-        // },
-        // {
-        //     name: 'programStages',
-        //     label: i18n.t('Program Stages'),
-        //     fields: [],
-        // },
+        {
+            name: 'form',
+            label: i18n.t('Form', { nsSeparator: '~:~' }),
+            fields: [
+                {
+                    name: 'programStages[0].dataEntryForm',
+                    label: i18n.t('Custom form'),
+                },
+                {
+                    name: 'programStages[0].programStageSections',
+                    label: i18n.t('Sections'),
+                },
+            ],
+        },
         {
             name: 'programNotifications',
             label: i18n.t('Notifications'),
             fields: [],
         },
-        // {
-        //     name: 'accessAndSharing',
-        //     label: i18n.t('Access and Sharing'),
-        //     fields: [
-        //         {
-        //             name: 'organisationUnits',
-        //             label: i18n.t('Organisation units'),
-        //         },
-        //         {
-        //             name: 'sharing',
-        //             label: i18n.t('Role access'),
-        //         },
-        //     ],
-        // },
+        {
+            name: 'accessAndSharing',
+            label: i18n.t('Access and Sharing'),
+            fields: [
+                {
+                    name: 'organisationUnits',
+                    label: i18n.t('Organisation units'),
+                },
+                {
+                    name: 'sharing',
+                    label: i18n.t('Role access'),
+                },
+            ],
+        },
     ],
 } as const satisfies SectionedFormDescriptor<ProgramValues>
