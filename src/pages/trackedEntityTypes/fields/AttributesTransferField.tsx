@@ -52,7 +52,6 @@ export function AttributesTransferField() {
             error={meta.invalid}
             validationText={(meta.touched && meta.error?.toString()) || ''}
             name={name}
-            label={i18n.t('Tracked entity attributes')}
             className={css.moduleTransferField}
         >
             <ModelTransfer<

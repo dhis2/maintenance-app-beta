@@ -7,6 +7,7 @@ import {
     TableCellHead,
     TableHead,
     TableRow,
+    colors,
 } from '@dhis2/ui'
 import React from 'react'
 import { useField } from 'react-final-form'
@@ -41,16 +42,6 @@ export function AttributesConfigurationField() {
 
     const attributes = input.value || []
 
-    if (attributes.length === 0) {
-        return (
-            <div style={{ padding: '16px', textAlign: 'center' }}>
-                {i18n.t(
-                    'No attributes selected. Please select attributes in the transfer above.'
-                )}
-            </div>
-        )
-    }
-
     const updateAttribute: UpdateAttributeFn = (index, field, value) => {
         const updatedAttributes = [...attributes]
         updatedAttributes[index] = {
@@ -62,18 +53,21 @@ export function AttributesConfigurationField() {
     }
 
     return (
-        <>
+        <div style={{ paddingTop: '24px' }}>
             <StandardFormSectionTitle>
-                {i18n.t('Configure attributes')}
+                {i18n.t('Manage attributes')}
             </StandardFormSectionTitle>
 
             <StandardFormSectionDescription>
                 {i18n.t(
-                    'Choose which attributes to display, which are required, and which are searchable'
+                    'Choose which attributes to show, require, and make searchable.'
                 )}
             </StandardFormSectionDescription>
 
-            <Table data-test="formfields-attributes-configuration">
+            <Table
+                data-test="formfields-attributes-configuration"
+                suppressZebraStriping
+            >
                 <TableHead>
                     <TableRow>
                         <TableCellHead>{i18n.t('Name')}</TableCellHead>
@@ -85,6 +79,17 @@ export function AttributesConfigurationField() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
+                    {attributes.length === 0 && (
+                        <TableRow>
+                            <TableCell colSpan="4">
+                                <span style={{ color: colors.grey600 }}>
+                                    {i18n.t(
+                                        'No attributes selected yet. Choose attributes above to configure them.'
+                                    )}
+                                </span>
+                            </TableCell>
+                        </TableRow>
+                    )}
                     {attributes.map((attr, index) => (
                         <TableRow key={attr.trackedEntityAttribute.id}>
                             <TableCell>
@@ -132,7 +137,7 @@ export function AttributesConfigurationField() {
                     ))}
                 </TableBody>
             </Table>
-        </>
+        </div>
     )
 }
 
