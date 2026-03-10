@@ -67,44 +67,28 @@ export const EventProgramFormDescriptor = {
                 },
             ],
         },
-        // {
-        //     name: 'enrollmentSettings',
-        //     label: i18n.t('Enrollment: Settings', { nsSeparator: '~:~' }),
-        //     fields: [
-        //         {
-        //             name: 'trackedEntityType',
-        //             label: i18n.t('Tracked entity type'),
-        //         },
-        //         {
-        //             name: 'onlyEnrollOnce',
-        //             label: i18n.t('Only allow one enrollment'),
-        //         },
-        //         {
-        //             name: 'selectEnrollmentDatesInFuture',
-        //             label: i18n.t('Allow enrollment dates in the future'),
-        //         },
-        //         {
-        //             name: 'displayIncidentDate',
-        //             label: i18n.t('Collect an incident date'),
-        //         },
-        //         {
-        //             name: 'selectIncidentDatesInFuture',
-        //             label: i18n.t('Allow incident dates in the future'),
-        //         },
-        //         {
-        //             name: 'useFirstStageDuringRegistration',
-        //             label: i18n.t(
-        //                 'Collect data for the first stage during enrollment'
-        //             ),
-        //         },
-        //         {
-        //             name: 'ignoreOverdueEvents',
-        //             label: i18n.t(
-        //                 'Do not create overdue events when automatically creating program stage events'
-        //             ),
-        //         },
-        //     ],
-        // },
+        {
+            name: 'programSettings',
+            label: i18n.t('Settings'),
+            fields: [
+                {
+                    name: 'programStages[0].enableUserAssignment',
+                    label: i18n.t('Allow user assignment of events'),
+                },
+                {
+                    name: 'programStages[0].blockEntryForm',
+                    label: i18n.t('Block entry form after completed'),
+                },
+                {
+                    name: 'programStages[0].preGenerateUID',
+                    label: i18n.t('Pre-generate event UID'),
+                },
+                {
+                    name: 'programStages[0].validationStrategy',
+                    label: i18n.t('Validation strategy'),
+                },
+            ],
+        },
         {
             name: 'data',
             label: i18n.t('Data', { nsSeparator: '~:~' }),
