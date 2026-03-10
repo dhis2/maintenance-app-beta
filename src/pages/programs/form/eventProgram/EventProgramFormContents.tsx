@@ -16,6 +16,7 @@ import { StageDataFormContents } from '../programStage/StageDataFormContents'
 import { StageFormFormContents } from '../programStage/StageFormFormContents'
 import { EventProgramCustomizationFormContents } from './EventProgramCustomizationFormContents'
 import { EventProgramFormDescriptor } from './eventProgramFormDescriptor'
+import { ProgramSettingsFormContents } from './ProgramSettingsFormContents'
 
 export const EventProgramFormContents = () => {
     const descriptor =
@@ -30,9 +31,9 @@ export const EventProgramFormContents = () => {
             <EventProgramCustomizationFormContents
                 name={descriptor.getSection('programCustomization').name}
             />
-            {/*<EnrollmentSettingsFormContents*/}
-            {/*    name={descriptor.getSection('enrollmentSettings').name}*/}
-            {/*/>*/}
+            <ProgramSettingsFormContents
+                name={descriptor.getSection('programSettings').name}
+            />
             <StageDataFormContents
                 name={descriptor.getSection('data').name}
                 sectionLabel={i18n.t('Data')}

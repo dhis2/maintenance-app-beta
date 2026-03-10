@@ -1,3 +1,24 @@
+# [0.141.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.140.0...v0.141.0) (2026-03-10)
+
+
+### Bug Fixes
+
+* validation strategy props ([d23a568](https://github.com/dhis2/maintenance-app-beta/commit/d23a568924ee28e3a4f6fade68608698b24b464c))
+
+
+### Features
+
+* add program settings content ([7629d7c](https://github.com/dhis2/maintenance-app-beta/commit/7629d7c64ce82ea4ffe96a53c691e41bee0a4b76))
+* add program settings form ([baed58d](https://github.com/dhis2/maintenance-app-beta/commit/baed58d2a3235f353e1323e0c2c36f954c8ff159))
+* add validation strategy default value ([73a0ac3](https://github.com/dhis2/maintenance-app-beta/commit/73a0ac353454817f006a96d7bec572a1719f00e8))
+
+# [0.140.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.139.0...v0.140.0) (2026-03-10)
+
+
+### Features
+
+* event notifications [DHISs-21049] ([#790](https://github.com/dhis2/maintenance-app-beta/issues/790)) ([c915085](https://github.com/dhis2/maintenance-app-beta/commit/c915085ddd4d275b3511e260622d68d990f3789e))
+
 # [0.139.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.138.0...v0.139.0) (2026-03-10)
 
 

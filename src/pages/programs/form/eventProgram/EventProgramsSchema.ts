@@ -77,6 +77,12 @@ const eventProgramBaseSchema = z.object({
                 name: z.string().optional(),
                 displayName: z.string().optional(),
                 sharing: sharingSettingsSchema.optional(),
+                enableUserAssignment: z.boolean().optional(),
+                blockEntryForm: z.boolean().optional(),
+                preGenerateUID: z.boolean().optional(),
+                validationStrategy: z
+                    .enum(['ON_COMPLETE', 'ON_UPDATE_AND_INSERT'])
+                    .default('ON_UPDATE_AND_INSERT'),
                 notificationTemplates: z
                     .array(z.object({ id: z.string().optional() }))
                     .default([]),
@@ -103,6 +109,7 @@ const eventProgramBaseSchema = z.object({
                 notificationTemplates: [],
                 programStageDataElements: [],
                 programStageSections: [],
+                validationStrategy: 'ON_UPDATE_AND_INSERT',
             },
         ]),
     organisationUnits: z.array(modelReference).default([]),
