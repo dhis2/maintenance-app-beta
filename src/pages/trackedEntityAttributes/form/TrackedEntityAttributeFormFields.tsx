@@ -183,7 +183,7 @@ export const TrackedEntityAttributeFormFields = ({
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        "Configure how this tracker entity attribute's values are displayed, inherited, or synchronized across the system."
+                        "Configure how this tracked entity attribute's values are displayed, inherited, or synchronized across the system."
                     )}
                 </StandardFormSectionDescription>
 
