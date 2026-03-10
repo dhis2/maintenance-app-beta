@@ -91,7 +91,7 @@ const ProgramNotificationListNewOrEdit = ({
         ).fields
 
     const handleDeletedProgramNotification = (index: number) => {
-        const list = programNotificationsFieldArray.value ?? []
+        const list = programNotificationsFieldArray?.value ?? []
         programNotificationsFieldArray.update(index, {
             ...list[index],
             deleted: true,
@@ -99,8 +99,8 @@ const ProgramNotificationListNewOrEdit = ({
     }
 
     const handleCancelDeletedProgramNotification = (index: number) => {
-        const list = programNotificationsFieldArray.value ?? []
-        programNotificationsFieldArray.update(index, {
+        const list = programNotificationsFieldArray?.value ?? []
+        programNotificationsFieldArray?.update(index, {
             ...list[index],
             deleted: false,
         })
@@ -108,7 +108,7 @@ const ProgramNotificationListNewOrEdit = ({
 
     return (
         <>
-            {(programNotificationsFieldArray.value ?? []).map(
+            {(programNotificationsFieldArray?.value ?? []).map(
                 (notification, index) => {
                     if (notification.deleted) {
                         return (
@@ -254,7 +254,7 @@ const NotificationListNewOrEdit = ({
 
     const programNotificationsFieldArray = isTrackerProgram
         ? programNotificationsFieldArrayFromForm
-        : { value: [], push: () => {}, update: () => {} }
+        : undefined
     const [notificationFormOpen, setNotificationFormOpen] =
         React.useState<NotificationFormOpen>()
 
@@ -273,7 +273,7 @@ const NotificationListNewOrEdit = ({
         const stageId = notificationValues?.programStage?.id
 
         if (!isEditNotification && stageId === undefined) {
-            programNotificationsFieldArray.push(notificationValues)
+            programNotificationsFieldArray?.push(notificationValues)
             return
         }
 
@@ -339,13 +339,13 @@ const NotificationListNewOrEdit = ({
             return
         }
 
-        const index = programNotificationsFieldArray.value.findIndex(
+        const index = programNotificationsFieldArray?.value?.findIndex(
             (s) => s.id === openNotificationId
         )
 
-        if (index !== -1) {
-            programNotificationsFieldArray.update(index, {
-                ...programNotificationsFieldArray.value[index],
+        if (index && index !== -1) {
+            programNotificationsFieldArray?.update(index, {
+                ...programNotificationsFieldArray?.value?.[index],
                 ...notificationValues,
             })
         }
@@ -402,9 +402,9 @@ const NotificationListNewOrEdit = ({
                             notification={notificationFormOpen}
                             onCancel={onCloseNotificationForm}
                             onSubmitted={handleSubmittedNotification}
-                            programNotificationList={programNotificationsFieldArray.value.map(
-                                (n) => ({ id: n.id })
-                            )}
+                            programNotificationList={(
+                                programNotificationsFieldArray?.value ?? []
+                            ).map((n) => ({ id: n.id }))}
                             stagesNotificationList={Object.fromEntries(
                                 stagesFieldArray.value.map((stage) => [
                                     stage.id,
@@ -427,7 +427,7 @@ const NotificationListNewOrEdit = ({
                             s?.notificationTemplates?.length === 0 ||
                             s.deleted
                     ) &&
-                        programNotificationsFieldArray.value.length === 0 && (
+                        programNotificationsFieldArray?.value?.length === 0 && (
                             <NoticeBox className={css.formTypeInfo}>
                                 {i18n.t('No notifications have been added yet')}
                             </NoticeBox>
