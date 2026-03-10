@@ -54,6 +54,7 @@ export const TrackedEntityAttributeFormFields = ({
 
     const { systemInfo } = useConfig()
     const valueType = valueTypeInput.value
+    const isSkipAnalyticsAvailable = useFeatureAvailable(FEATURES.skipAnalytics)
     const isUnique = uniqueInput.value
     const isOrgunitScope = orgunitScopeInput.value
     const isGenerated = generatedInput.value
@@ -182,7 +183,7 @@ export const TrackedEntityAttributeFormFields = ({
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        "Configure how this tracker entity attribute's values are displayed, inherited, or synchronized across the system."
+                        "Configure how this tracked entity attribute's values are displayed, inherited, or synchronized across the system."
                     )}
                 </StandardFormSectionDescription>
 
@@ -219,6 +220,24 @@ export const TrackedEntityAttributeFormFields = ({
                         validateFields={[]}
                     />
                 </StandardFormField>
+
+                {isSkipAnalyticsAvailable && (
+                    <StandardFormField>
+                        <FieldRFF
+                            component={CheckboxFieldFF}
+                            dataTest="formfields-skipAnalytics"
+                            name="skipAnalytics"
+                            label={i18n.t(
+                                'Do not expose this attribute in analytics'
+                            )}
+                            helpText={i18n.t(
+                                'When enabled, this tracked entity attribute is excluded from all analytics processing, including analytics tables and analytics apps.'
+                            )}
+                            type="checkbox"
+                            validateFields={[]}
+                        />
+                    </StandardFormField>
+                )}
 
                 <StandardFormField>
                     <AggregationTypeFieldByValueType />
