@@ -582,7 +582,12 @@ describe('Organisation unit list', () => {
         const tableRows = screen.getAllByTestId('dhis2-uicore-datatablerow')
         expect(tableRows.length).toBe(4)
 
-        const secondChildCheckBox = within(tableRows[3]).getByRole('checkbox')
+        const secondChildCell = await screen.findByText(child2.displayName!)
+        const secondChildRow = secondChildCell.closest('tr')
+        expect(secondChildRow).not.toBeNull()
+        const secondChildCheckBox = within(
+            secondChildRow as HTMLElement
+        ).getByRole('checkbox')
         await userEvent.click(secondChildCheckBox)
 
         const toolbar = screen.getByTestId('multi-actions-toolbar')
@@ -619,9 +624,13 @@ describe('Organisation unit list', () => {
         expect(tableRows.length).toBe(4)
 
         const rootRow = tableRows[1]
-        const secondChildRow = tableRows[3]
+        const secondChildCell = await screen.findByText(child2.displayName!)
+        const secondChildRow = secondChildCell.closest('tr')
+        expect(secondChildRow).not.toBeNull()
         await userEvent.click(within(rootRow).getByRole('checkbox'))
-        await userEvent.click(within(secondChildRow).getByRole('checkbox'))
+        await userEvent.click(
+            within(secondChildRow as HTMLElement).getByRole('checkbox')
+        )
 
         const toolbar = screen.getByTestId('multi-actions-toolbar')
         await userEvent.click(within(toolbar).getByText('Download'))

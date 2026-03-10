@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useField } from 'react-final-form'
 import type { FieldMetaState } from 'react-final-form'
 import setupClasses from '../common/SetupFormContents.module.css'
+import { formatNumericInput, parseNumericInput } from './numericInputParsing'
 
 function isEnabled(value: unknown): boolean {
     if (value == null || value === '') {
@@ -15,12 +16,8 @@ function isEnabled(value: unknown): boolean {
 
 export function CompleteEventsExpiryDaysField() {
     const { input, meta } = useField('completeEventsExpiryDays', {
-        parse: (rawValue?: string) =>
-            rawValue === undefined || rawValue === ''
-                ? undefined
-                : Number(rawValue),
-        format: (numericValue: number | undefined) =>
-            numericValue?.toString() ?? '',
+        parse: parseNumericInput,
+        format: formatNumericInput,
     })
     const [checked, setChecked] = useState(() => isEnabled(input.value))
 

@@ -1,3 +1,24 @@
+# [0.139.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.138.0...v0.139.0) (2026-03-10)
+
+
+### Features
+
+* add event program customization section ([#792](https://github.com/dhis2/maintenance-app-beta/issues/792)) ([2fe5087](https://github.com/dhis2/maintenance-app-beta/commit/2fe5087bee0db8eca7a6e503ddb38f186c2d119a))
+
+# [0.138.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.137.0...v0.138.0) (2026-03-09)
+
+
+### Features
+
+* [DHIS2-21050] Event program access and sharing ([#789](https://github.com/dhis2/maintenance-app-beta/issues/789)) ([89442bd](https://github.com/dhis2/maintenance-app-beta/commit/89442bd1aa5724c7f075c0a3f9b40aa059f31623))
+
+# [0.137.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.136.2...v0.137.0) (2026-03-09)
+
+
+### Features
+
+* program events data and form ([#794](https://github.com/dhis2/maintenance-app-beta/issues/794)) ([af8b932](https://github.com/dhis2/maintenance-app-beta/commit/af8b9325ec61a01e9766a4c89bd8843fc7058286))
+
 ## [0.136.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.136.1...v0.136.2) (2026-03-05)
 
 

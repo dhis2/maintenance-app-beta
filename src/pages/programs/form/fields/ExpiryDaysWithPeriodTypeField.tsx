@@ -5,6 +5,7 @@ import { Field as FieldRFF, useField, useForm } from 'react-final-form'
 import type { FieldMetaState } from 'react-final-form'
 import { Program } from '../../../../types/generated'
 import setupClasses from '../common/SetupFormContents.module.css'
+import { formatNumericInput, parseNumericInput } from './numericInputParsing'
 
 const EXPIRY_PERIOD_TYPE_OPTIONS = Object.entries(Program.expiryPeriodType).map(
     ([, value]) => ({ label: value, value })
@@ -21,12 +22,8 @@ function isEnabled(value: unknown): boolean {
 export function ExpiryDaysWithPeriodTypeField() {
     const form = useForm()
     const { input, meta } = useField('expiryDays', {
-        parse: (rawValue?: string) =>
-            rawValue === undefined || rawValue === ''
-                ? undefined
-                : Number(rawValue),
-        format: (numericValue: number | undefined) =>
-            numericValue?.toString() ?? '',
+        parse: parseNumericInput,
+        format: formatNumericInput,
     })
     const [checked, setChecked] = useState(() => isEnabled(input.value))
 
