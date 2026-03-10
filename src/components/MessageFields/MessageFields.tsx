@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button, IconErrorFilled24, theme } from '@dhis2/ui'
-import React, { useRef, useState, RefObject } from 'react'
+import React, { useRef, useState, useEffect, RefObject } from 'react'
 import { Field as FieldRFF, useField, FieldInputProps } from 'react-final-form'
 import { StandardFormField } from '../standardForm'
 import styles from './MessageFields.module.css'
@@ -20,28 +20,32 @@ const insertElement = ({
     type: MessageVariablesType
     elementRef: RefObject<HTMLInputElement | HTMLTextAreaElement>
     input: FieldInputProps<string>
-}) => {
-    if (elementRef.current) {
-        const elementText =
-            type === 'VARIABLE'
-                ? `V{${id}}`
-                : type === 'ATTRIBUTE'
-                ? `A{${id}}`
-                : `#{${id}}`
-
-        const cursorStartIndex = elementRef.current?.selectionStart ?? 0
-        const startText = elementRef.current?.value.slice(0, cursorStartIndex)
-        const endText = elementRef.current?.value.slice(cursorStartIndex)
-        const newText = `${startText}${elementText}${endText}`
-        input.onChange(newText)
-
-        // force focus then blur to trigger rerun of validations
-        elementRef.current?.focus()
-        elementRef.current?.blur()
-
-        // then focus
-        elementRef.current?.focus()
+}): number | undefined => {
+    if (!elementRef.current) {
+        return
     }
+
+    const elementText =
+        type === 'VARIABLE'
+            ? `V{${id}}`
+            : type === 'ATTRIBUTE'
+            ? `A{${id}}`
+            : `#{${id}}`
+
+    const cursorStartIndex = elementRef.current.selectionStart ?? 0
+    const value = elementRef.current.value
+    const newText =
+        value.slice(0, cursorStartIndex) +
+        elementText +
+        value.slice(cursorStartIndex)
+    input.onChange(newText)
+
+    // force focus then blur to trigger rerun of validations
+    elementRef.current.focus()
+    elementRef.current.blur()
+    elementRef.current.focus()
+
+    return cursorStartIndex + elementText.length
 }
 
 export const MessageFields = ({
@@ -58,6 +62,20 @@ export const MessageFields = ({
     const messageRef = useRef<HTMLTextAreaElement>(null)
 
     const [subjectTemplateSelected, setSubjectTemplateSelected] = useState(true)
+
+    const pendingCursorRef = useRef<{
+        elementRef: RefObject<HTMLInputElement | HTMLTextAreaElement>
+        position: number
+    } | null>(null)
+
+    useEffect(() => {
+        if (pendingCursorRef.current) {
+            const { elementRef, position } = pendingCursorRef.current
+            elementRef.current?.setSelectionRange(position, position)
+            pendingCursorRef.current = null
+        }
+    })
+
     return (
         <div className={styles.validationRuleContentContainer}>
             <div className={styles.validationRuleFieldsContainer}>
@@ -100,14 +118,6 @@ export const MessageFields = ({
                                             </div>
                                         )}
                                     </div>
-                                    <p
-                                        id="subjectTemplate-help"
-                                        className={styles.fieldHelpText}
-                                    >
-                                        {i18n.t(
-                                            'Used as the template for the subject field.'
-                                        )}
-                                    </p>
                                     {showError && (
                                         <div
                                             className={styles.errorStyling}
@@ -133,9 +143,7 @@ export const MessageFields = ({
                                         }
                                     >
                                         {messageTemplateRequired
-                                            ? i18n.t(
-                                                  'Message body (required) *'
-                                              )
+                                            ? i18n.t('Message body *')
                                             : i18n.t('Message body')}
                                     </div>
                                     <div className={styles.validationRuleField}>
@@ -165,14 +173,6 @@ export const MessageFields = ({
                                             </div>
                                         )}
                                     </div>
-                                    <p
-                                        id="messageTemplate-help"
-                                        className={styles.fieldHelpText}
-                                    >
-                                        {i18n.t(
-                                            'Used as the template for the message field.'
-                                        )}
-                                    </p>
                                     {showError && (
                                         <div
                                             className={styles.errorStyling}
@@ -195,19 +195,27 @@ export const MessageFields = ({
                 {Object.keys(messageVariables).map((v) => (
                     <div key={v} className={styles.variableButton}>
                         <Button
+                            secondary
                             dataTest={`validationRule_button_${v}`}
                             small
                             onClick={() => {
-                                insertElement({
+                                const elementRef = subjectTemplateSelected
+                                    ? subjectRef
+                                    : messageRef
+                                const position = insertElement({
                                     id: v,
                                     type: messageVariables[v].type,
-                                    elementRef: subjectTemplateSelected
-                                        ? subjectRef
-                                        : messageRef,
+                                    elementRef,
                                     input: subjectTemplateSelected
                                         ? subjectTemplateInput
                                         : messageTemplateInput,
                                 })
+                                if (position !== undefined) {
+                                    pendingCursorRef.current = {
+                                        elementRef,
+                                        position,
+                                    }
+                                }
                             }}
                         >
                             {messageVariables[v].label}
