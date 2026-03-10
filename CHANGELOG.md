@@ -1,3 +1,10 @@
+# [0.140.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.139.0...v0.140.0) (2026-03-10)
+
+
+### Features
+
+* event notifications [DHISs-21049] ([#790](https://github.com/dhis2/maintenance-app-beta/issues/790)) ([c915085](https://github.com/dhis2/maintenance-app-beta/commit/c915085ddd4d275b3511e260622d68d990f3789e))
+
 # [0.139.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.138.0...v0.139.0) (2026-03-10)
 
 
