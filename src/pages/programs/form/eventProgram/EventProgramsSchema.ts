@@ -104,6 +104,7 @@ const eventProgramBaseSchema = z.object({
                 notificationTemplates: [],
                 programStageDataElements: [],
                 programStageSections: [],
+                validationStrategy: 'ON_UPDATE_AND_INSERT',
             },
         ]),
     // organisationUnits: z.array(modelReference).default([]),
