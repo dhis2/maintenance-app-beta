@@ -37,14 +37,14 @@ export const StageFormFormContents = ({
     })
     const currentSections = isTrackerProgram
         ? values.programStageSections
-        : values.programStages?.[0].programStageSections
+        : values.programStages?.[0]?.programStageSections
     const currentForm = isTrackerProgram
         ? values.dataEntryForm
-        : values.programStages?.[0].dataEntryForm
-    const stageId = isTrackerProgram ? values.id : values.programStages[0].id
+        : values.programStages?.[0]?.dataEntryForm
+    const stageId = isTrackerProgram ? values.id : values.programStages[0]?.id
     const hasDataElements = isTrackerProgram
         ? values.programStageDataElements?.length > 0
-        : values.programStages?.[0].programStageDataElements?.length > 0
+        : values.programStages?.[0]?.programStageDataElements?.length > 0
     const [selectedFormType, setSelectedFormType] = useState<FormType>(
         FormType.DEFAULT
     )
