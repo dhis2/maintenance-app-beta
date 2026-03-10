@@ -100,7 +100,7 @@ export const TrackedEntityAttributeFormFields = ({
                 <StandardFormField>
                     <DescriptionField
                         helpText={i18n.t(
-                            'Shown as help text when collecting data, use to provide more context and information'
+                            'Used to provide more information when collecting data.'
                         )}
                     />
                 </StandardFormField>
@@ -135,7 +135,7 @@ export const TrackedEntityAttributeFormFields = ({
                         component={CheckboxFieldFF}
                         dataTest="formfields-unique"
                         name="unique"
-                        label={i18n.t('Data value must be unique')}
+                        label={i18n.t('Unique values only')}
                         type="checkbox"
                         disabled={uniqueDisabled}
                         validateFields={[]}
@@ -182,7 +182,7 @@ export const TrackedEntityAttributeFormFields = ({
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        "Configure how this tracker entity attribute's values are displayed, inherited, or synchronized across the system."
+                        'Configure how values are displayed, inherited, and synchronized.'
                     )}
                 </StandardFormSectionDescription>
 
@@ -200,7 +200,7 @@ export const TrackedEntityAttributeFormFields = ({
                         dataTest="formfields-displayInListNoProgram"
                         name="displayInListNoProgram"
                         label={i18n.t(
-                            'Show in lists and search results even when a program is not selected'
+                            'Show in lists and search results when no program is selected'
                         )}
                         type="checkbox"
                         validateFields={[]}
@@ -213,7 +213,7 @@ export const TrackedEntityAttributeFormFields = ({
                         dataTest="formfields-skipSynchronization"
                         name="skipSynchronization"
                         label={i18n.t(
-                            "Do not synchronize this attribute and it's values"
+                            'Skip synchronization for this attribute and its values'
                         )}
                         type="checkbox"
                         validateFields={[]}
@@ -258,7 +258,7 @@ export const TrackedEntityAttributeFormFields = ({
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Legends assigned to this tracker entity attribute are used in data analysis apps.'
+                        'Choose legends to visually categorize values in analytics apps.'
                     )}
                 </StandardFormSectionDescription>
 

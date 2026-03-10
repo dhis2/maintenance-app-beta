@@ -17,9 +17,9 @@ export function FieldMaskField() {
             inputWidth="400px"
             dataTest="formfields-fieldMask"
             name="fieldMask"
-            label={i18n.t('Format for data entry')}
+            label={i18n.t('Field mask')}
             helpText={i18n.t(
-                'Provide a formatting hint or example. This will only be shown in Android Capture app.'
+                'Use a pattern to limit what information can be entered. See documentation for details.'
             )}
             validateFields={[]}
             validate={validate}
