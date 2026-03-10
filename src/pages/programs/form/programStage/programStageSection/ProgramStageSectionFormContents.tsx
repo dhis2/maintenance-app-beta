@@ -163,10 +163,10 @@ export const ProgramStageSectionFormContents = () => {
                                 </TransferHeader>
                             }
                             filterPlaceholder={i18n.t(
-                                'Search available data elements'
+                                'Filter available data elements'
                             )}
                             filterPlaceholderPicked={i18n.t(
-                                'Search selected data elements'
+                                'Filter selected data elements'
                             )}
                             enableOrderChange
                             height={'350px'}

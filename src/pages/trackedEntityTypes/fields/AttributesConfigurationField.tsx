@@ -64,7 +64,7 @@ export function AttributesConfigurationField() {
     return (
         <>
             <StandardFormSectionTitle>
-                {i18n.t('Configure attributes')}
+                {i18n.t('Configure tracked entity attributes')}
             </StandardFormSectionTitle>
 
             <StandardFormSectionDescription>
