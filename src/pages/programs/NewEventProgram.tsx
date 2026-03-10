@@ -19,11 +19,12 @@ import {
     useNavigateWithSearchState,
 } from '../../lib'
 import { defaultNavigateTo, EnhancedOnSubmit } from '../../lib/form/useOnSubmit'
+import { ProgramValues } from './EditTrackerProgram'
 import { eventProgramInitialValues, eventProgramValidate } from './form'
 import { EventProgramFormContents } from './form/eventProgram/EventProgramFormContents'
 import { EventProgramFormDescriptor } from './form/eventProgram/eventProgramFormDescriptor'
 
-const useOnSubmitEventProgram = (): EnhancedOnSubmit<any> => {
+const useOnSubmitEventProgram = (): EnhancedOnSubmit<ProgramValues> => {
     const createProgramStage = useCreateModel(
         SECTIONS_MAP.programStage.namePlural
     )
