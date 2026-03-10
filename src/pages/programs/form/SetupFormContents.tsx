@@ -16,13 +16,13 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
-import { defaultDateTimeFormatter } from '../../../components/date'
 import {
     ModelSingleSelectFormField,
     useRefreshModelSingleSelect,
 } from '../../../components/metadataFormControls/ModelSingleSelect'
 import {
     DEFAULT_CATEGORYCOMBO_SELECT_OPTION,
+    selectedLocale,
     useSchemaSectionHandleOrThrow,
 } from '../../../lib'
 import { DisplayableModel } from '../../../types/models'
@@ -51,7 +51,7 @@ export const SetupFormContents = React.memo(function SetupFormContents({
 }: {
     name: string
 }) {
-    const { input: versionInput } = useField('version')
+    const { input: versionInput, meta: versionMeta } = useField('version')
     const version = Number(versionInput.value) || 0
 
     const { values } = useFormState({ subscription: { values: true } })
@@ -89,29 +89,53 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                     label={i18n.t('Version')}
                     helpText={
                         values.lastUpdated
-                            ? i18n.t('Last updated:  {{date}}', {
-                                  date: defaultDateTimeFormatter.format(
-                                      fromServerDate(values.lastUpdated)
-                                  ),
-                                  nsSeparator: '~:~',
-                              })
+                            ? i18n.t(
+                                  'Updated to version {{version}} on {{date}}',
+                                  {
+                                      version: versionMeta.initial ?? version,
+                                      date: new Intl.DateTimeFormat(
+                                          selectedLocale,
+                                          { dateStyle: 'medium' }
+                                      ).format(
+                                          fromServerDate(values.lastUpdated)
+                                      ),
+                                      nsSeparator: '~:~',
+                                  }
+                              )
                             : undefined
                     }
                 >
                     <div className={setupClasses.versionFieldRow}>
                         <Input
                             value={String(version)}
-                            disabled
-                            width="100px"
+                            readOnly
+                            dense
+                            width="80px"
                             dataTest="formfields-version"
                         />
                         <Button
                             small
+                            secondary
                             icon={<IconAdd16 />}
                             onClick={() => versionInput.onChange(version + 1)}
                             dataTest="formfields-version-increment"
-                            title={i18n.t('Increase version')}
-                        />
+                            title={i18n.t('New version')}
+                        >
+                            {i18n.t('New version')}
+                        </Button>
+                        {versionMeta.dirty && (
+                            <Button
+                                small
+                                secondary
+                                onClick={() =>
+                                    versionInput.onChange(versionMeta.initial)
+                                }
+                                dataTest="formfields-version-reset"
+                                title={i18n.t('Reset version')}
+                            >
+                                {i18n.t('Reset version')}
+                            </Button>
+                        )}
                     </div>
                 </Field>
             </StandardFormField>
