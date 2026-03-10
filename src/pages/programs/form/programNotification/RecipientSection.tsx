@@ -65,8 +65,10 @@ type ProgramStageWithDEs = {
 
 export const RecipientSection = ({
     isStageNotification,
+    isTrackerProgram,
 }: {
     isStageNotification: boolean
+    isTrackerProgram: boolean
 }) => {
     const { input: recipientInput, meta: recipientMeta } = useField(
         'notificationRecipient',
@@ -106,9 +108,11 @@ export const RecipientSection = ({
 
     const recipientOptions = useMemo(() => {
         return isStageNotification || recipientInput.value === 'DATA_ELEMENT'
-            ? programStageRecipientOptions
+            ? programStageRecipientOptions.filter((opt) =>
+                  isTrackerProgram ? true : opt.value !== 'PROGRAM_ATTRIBUTE'
+              )
             : programRecipientOptions
-    }, [isStageNotification, recipientInput.value])
+    }, [isStageNotification, recipientInput.value, isTrackerProgram])
 
     return (
         <div>

@@ -10,6 +10,7 @@ import {
     useSyncSelectedSectionWithScroll,
 } from '../../../../lib'
 import { AccessAndSharingFormContents } from '../common/AccessAndSharingFormContents'
+import { ProgramNotificationsFormContents } from '../common/ProgramNotificationsFormContents'
 import { SetupFormContents } from '../common/SetupFormContents'
 import { StageDataFormContents } from '../programStage/StageDataFormContents'
 import { StageFormFormContents } from '../programStage/StageFormFormContents'
@@ -46,9 +47,10 @@ export const EventProgramFormContents = () => {
             {/*<ProgramStagesFormContents*/}
             {/*    name={descriptor.getSection('programStages').name}*/}
             {/*/>*/}
-            {/*<ProgramNotificationsFormContents*/}
-            {/*    name={descriptor.getSection('programNotifications').name}*/}
-            {/*/>*/}
+            <ProgramNotificationsFormContents
+                name={descriptor.getSection('programNotifications').name}
+                isTrackerProgram={false}
+            />
             <AccessAndSharingFormContents
                 name={descriptor.getSection('accessAndSharing').name}
                 showStageAccess={false}

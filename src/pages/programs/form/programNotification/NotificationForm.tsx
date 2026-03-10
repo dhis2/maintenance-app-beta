@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 import arrayMutators from 'final-form-arrays'
 import isEqual from 'lodash/isEqual'
 import React, { useMemo } from 'react'
-import { useFormState } from 'react-final-form'
+import { useField, useFormState } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
     DrawerFormFooter,
@@ -33,7 +33,7 @@ import {
     PickWithFieldFilters,
     ProgramNotificationTemplate,
 } from '../../../../types/models'
-import { DisplayableModelAndStageId } from '../ProgramNotificationsFormContents'
+import { DisplayableModelAndStageId } from '../common/ProgramNotificationsFormContents'
 import { programNotificationFormDescriptor } from './programNotificationFormDescriptor'
 import { ProgramNotificationsFormFields } from './ProgramNotificationsFormFields'
 import { initialValues, validate } from './programNotificationTemplateSchema'
@@ -128,12 +128,16 @@ type OnSubmitWithClose = (
 ) => ReturnType<BaseOnSubmit>
 
 export type NotificationFormProps = {
+    isTrackerProgram: boolean
+    programStageId: string | undefined
     notification?: PartialNotificationFormValues
     onCancel?: () => void
     onSubmit: OnSubmitWithClose
 }
 
 export const NotificationForm = ({
+    isTrackerProgram,
+    programStageId,
     notification,
     onSubmit,
     onCancel,
@@ -144,6 +148,9 @@ export const NotificationForm = ({
             return {
                 ...(notification ?? initialValues),
                 program: { id: programId },
+                ...(isTrackerProgram
+                    ? {}
+                    : { programStage: { id: programStageId } }),
             } as PartialNotificationFormValues
         }, [notification, programId])
 
@@ -182,6 +189,7 @@ export const NotificationForm = ({
                                 <div>
                                     <ProgramNotificationsFormFields
                                         setSelectedSection={setSelectedSection}
+                                        isTrackerProgram={isTrackerProgram}
                                     />
                                     <SectionedFormErrorNotice />
                                 </div>
@@ -208,10 +216,14 @@ export const NotificationForm = ({
 }
 
 export const EditNotificationForm = ({
+    isTrackerProgram,
+    programStageId,
     notification,
     onCancel,
     onSubmitted,
 }: {
+    isTrackerProgram: boolean
+    programStageId: string | undefined
     notification: DisplayableModelAndStageId
     onCancel: () => void
     onSubmitted: (
@@ -292,6 +304,8 @@ export const EditNotificationForm = ({
             }}
             onSubmit={onFormSubmit}
             onCancel={onCancel}
+            isTrackerProgram={isTrackerProgram}
+            programStageId={programStageId}
         />
     )
 }
@@ -301,6 +315,8 @@ export const NewNotificationForm = ({
     onSubmitted,
     programNotificationList,
     stagesNotificationList,
+    isTrackerProgram,
+    programStageId,
 }: {
     onCancel: () => void
     onSubmitted: (
@@ -309,6 +325,8 @@ export const NewNotificationForm = ({
     ) => void
     programNotificationList: { id: string }[]
     stagesNotificationList: Record<string, { id: string }[]>
+    isTrackerProgram: boolean
+    programStageId: string | undefined
 }) => {
     const handleCreate = useCreateModel(notificationSchemaSection.namePlural)
     const engine = useDataEngine()
@@ -372,6 +390,8 @@ export const NewNotificationForm = ({
             notification={undefined}
             onSubmit={onFormSubmit}
             onCancel={onCancel}
+            isTrackerProgram={isTrackerProgram}
+            programStageId={programStageId}
         />
     )
 }
@@ -382,6 +402,7 @@ export const EditOrNewNotificationForm = ({
     onSubmitted,
     programNotificationList,
     stagesNotificationList,
+    isTrackerProgram,
 }: {
     notification: DisplayableModelAndStageId | null | undefined
     onCancel: () => void
@@ -391,7 +412,11 @@ export const EditOrNewNotificationForm = ({
     ) => void
     programNotificationList: { id: string }[]
     stagesNotificationList: Record<string, { id: string }[]>
+    isTrackerProgram: boolean
 }) => {
+    const { input } = useField('programStages')
+    const programStageId = isTrackerProgram ? undefined : input?.value?.[0]?.id
+
     if (notification === undefined) {
         return null
     }
@@ -403,6 +428,8 @@ export const EditOrNewNotificationForm = ({
                 onCancel={onCancel}
                 programNotificationList={programNotificationList}
                 stagesNotificationList={stagesNotificationList}
+                isTrackerProgram={isTrackerProgram}
+                programStageId={programStageId}
             />
         )
     }
@@ -412,6 +439,8 @@ export const EditOrNewNotificationForm = ({
             notification={notification}
             onCancel={onCancel}
             onSubmitted={onSubmitted}
+            isTrackerProgram={isTrackerProgram}
+            programStageId={programStageId}
         />
     )
 }
