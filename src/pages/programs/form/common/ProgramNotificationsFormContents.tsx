@@ -9,16 +9,16 @@ import {
     SectionedFormSection,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
-} from '../../../components'
-import { ListInFormItem } from '../../../components/formCreators/SectionFormList'
-import { SchemaName } from '../../../types'
-import { Access, DisplayableModel } from '../../../types/models'
+} from '../../../../components'
+import { ListInFormItem } from '../../../../components/formCreators/SectionFormList'
+import { SchemaName } from '../../../../types'
+import { Access, DisplayableModel } from '../../../../types/models'
 import {
     EditOrNewNotificationForm,
     SubmittedNotificationFormValues,
-} from './programNotification/NotificationForm'
-import css from './ProgramStagesForm.module.css'
-import { ProgramStageListItem } from './ProgramStagesFormContents'
+} from '../programNotification/NotificationForm'
+import css from '../ProgramStagesForm.module.css'
+import { ProgramStageListItem } from '../ProgramStagesFormContents'
 
 export type ProgramNotificationListItem = {
     id: string
@@ -32,7 +32,13 @@ export type DisplayableModelAndStageId = DisplayableModel & { stageId?: string }
 type NotificationFormOpen = DisplayableModelAndStageId | null | undefined
 
 export const ProgramNotificationsFormContents = React.memo(
-    function ProgramNotificationsContents({ name }: { name: string }) {
+    function ProgramNotificationsContents({
+        name,
+        isTrackerProgram = true,
+    }: {
+        name: string
+        isTrackerProgram?: boolean
+    }) {
         return (
             <SectionedFormSection name={name}>
                 <StandardFormSectionTitle>
@@ -41,7 +47,9 @@ export const ProgramNotificationsFormContents = React.memo(
                 <StandardFormSectionDescription>
                     {i18n.t('Set up notifications for this program.')}
                 </StandardFormSectionDescription>
-                <NotificationListNewOrEdit />
+                <NotificationListNewOrEdit
+                    isTrackerProgram={isTrackerProgram}
+                />
             </SectionedFormSection>
         )
     }
@@ -83,7 +91,7 @@ const ProgramNotificationListNewOrEdit = ({
         ).fields
 
     const handleDeletedProgramNotification = (index: number) => {
-        const list = programNotificationsFieldArray.value ?? []
+        const list = programNotificationsFieldArray?.value ?? []
         programNotificationsFieldArray.update(index, {
             ...list[index],
             deleted: true,
@@ -91,8 +99,8 @@ const ProgramNotificationListNewOrEdit = ({
     }
 
     const handleCancelDeletedProgramNotification = (index: number) => {
-        const list = programNotificationsFieldArray.value ?? []
-        programNotificationsFieldArray.update(index, {
+        const list = programNotificationsFieldArray?.value ?? []
+        programNotificationsFieldArray?.update(index, {
             ...list[index],
             deleted: false,
         })
@@ -100,7 +108,7 @@ const ProgramNotificationListNewOrEdit = ({
 
     return (
         <>
-            {(programNotificationsFieldArray.value ?? []).map(
+            {(programNotificationsFieldArray?.value ?? []).map(
                 (notification, index) => {
                     if (notification.deleted) {
                         return (
@@ -140,9 +148,11 @@ const ProgramNotificationListNewOrEdit = ({
 }
 
 const StageNotificationListNewOrEdit = ({
+    isTrackerProgram,
     stageIndex,
     setNotificationFormOpen,
 }: {
+    isTrackerProgram: boolean
     stageIndex: number
     setNotificationFormOpen: Dispatch<SetStateAction<NotificationFormOpen>>
 }) => {
@@ -202,15 +212,18 @@ const StageNotificationListNewOrEdit = ({
                         key={notification.id}
                         item={{
                             ...notification,
-                            description: i18n.t(
-                                'Notification type: Stage | Stage: {{stageDisplayName}}',
-                                {
-                                    stageDisplayName:
-                                        stagesFieldArray?.value?.[stageIndex]
-                                            .displayName,
-                                    nsSeparator: '~:~',
-                                }
-                            ),
+                            description: isTrackerProgram
+                                ? i18n.t(
+                                      'Notification type: Stage | Stage: {{stageDisplayName}}',
+                                      {
+                                          stageDisplayName:
+                                              stagesFieldArray?.value?.[
+                                                  stageIndex
+                                              ].displayName,
+                                          nsSeparator: '~:~',
+                                      }
+                                  )
+                                : undefined,
                         }}
                         schemaName={SchemaName.programNotificationTemplate}
                         onClick={() => setNotificationFormOpen(notification)}
@@ -224,17 +237,24 @@ const StageNotificationListNewOrEdit = ({
     )
 }
 
-const NotificationListNewOrEdit = () => {
+const NotificationListNewOrEdit = ({
+    isTrackerProgram,
+}: {
+    isTrackerProgram: boolean
+}) => {
     const modelId = useParams().id as string
 
     const stagesFieldArray =
         useFieldArray<ProgramStageListItem>('programStages').fields
 
-    const programNotificationsFieldArray =
+    const programNotificationsFieldArrayFromForm =
         useFieldArray<ProgramNotificationListItem>(
             'notificationTemplates'
         ).fields
 
+    const programNotificationsFieldArray = isTrackerProgram
+        ? programNotificationsFieldArrayFromForm
+        : undefined
     const [notificationFormOpen, setNotificationFormOpen] =
         React.useState<NotificationFormOpen>()
 
@@ -253,7 +273,7 @@ const NotificationListNewOrEdit = () => {
         const stageId = notificationValues?.programStage?.id
 
         if (!isEditNotification && stageId === undefined) {
-            programNotificationsFieldArray.push(notificationValues)
+            programNotificationsFieldArray?.push(notificationValues)
             return
         }
 
@@ -319,13 +339,13 @@ const NotificationListNewOrEdit = () => {
             return
         }
 
-        const index = programNotificationsFieldArray.value.findIndex(
+        const index = programNotificationsFieldArray?.value?.findIndex(
             (s) => s.id === openNotificationId
         )
 
-        if (index !== -1) {
-            programNotificationsFieldArray.update(index, {
-                ...programNotificationsFieldArray.value[index],
+        if (index && index !== -1) {
+            programNotificationsFieldArray?.update(index, {
+                ...programNotificationsFieldArray?.value?.[index],
                 ...notificationValues,
             })
         }
@@ -382,9 +402,9 @@ const NotificationListNewOrEdit = () => {
                             notification={notificationFormOpen}
                             onCancel={onCloseNotificationForm}
                             onSubmitted={handleSubmittedNotification}
-                            programNotificationList={programNotificationsFieldArray.value.map(
-                                (n) => ({ id: n.id })
-                            )}
+                            programNotificationList={(
+                                programNotificationsFieldArray?.value ?? []
+                            ).map((n) => ({ id: n.id }))}
                             stagesNotificationList={Object.fromEntries(
                                 stagesFieldArray.value.map((stage) => [
                                     stage.id,
@@ -394,6 +414,7 @@ const NotificationListNewOrEdit = () => {
                                         ([] as SubmittedNotificationFormValues[]),
                                 ])
                             )}
+                            isTrackerProgram={isTrackerProgram}
                         />
                     </div>
                 )}
@@ -406,7 +427,7 @@ const NotificationListNewOrEdit = () => {
                             s?.notificationTemplates?.length === 0 ||
                             s.deleted
                     ) &&
-                        programNotificationsFieldArray.value.length === 0 && (
+                        programNotificationsFieldArray?.value?.length === 0 && (
                             <NoticeBox className={css.formTypeInfo}>
                                 {i18n.t('No notifications have been added yet')}
                             </NoticeBox>
@@ -421,6 +442,7 @@ const NotificationListNewOrEdit = () => {
                                 } as NotificationFormOpen)
                             }
                             stageIndex={index}
+                            isTrackerProgram={isTrackerProgram}
                         />
                     ))}
                     <ProgramNotificationListNewOrEdit

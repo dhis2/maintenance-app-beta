@@ -129,11 +129,11 @@ export const EventProgramFormDescriptor = {
                 },
             ],
         },
-        // {
-        //     name: 'programNotifications',
-        //     label: i18n.t('Notifications'),
-        //     fields: [],
-        // },
+        {
+            name: 'programNotifications',
+            label: i18n.t('Notifications'),
+            fields: [],
+        },
         {
             name: 'accessAndSharing',
             label: i18n.t('Access and Sharing'),
