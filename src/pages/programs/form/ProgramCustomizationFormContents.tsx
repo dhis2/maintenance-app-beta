@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { CheckboxFieldFF, InputFieldFF } from '@dhis2/ui'
+import { InputFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field } from 'react-final-form'
 import {
@@ -191,18 +191,6 @@ export const ProgramCustomizationFormContents = React.memo(
                         )}
                         dataTest="formfields-noteLabel"
                         validate={noteLabelValidator}
-                    />
-                </StandardFormField>
-
-                <StandardFormField>
-                    <Field
-                        name="displayFrontPageList"
-                        type="checkbox"
-                        component={CheckboxFieldFF}
-                        label={i18n.t(
-                            'Display enrolled TEs in the front page list'
-                        )}
-                        dataTest="formfields-displayFrontPageList"
                     />
                 </StandardFormField>
             </SectionedFormSection>

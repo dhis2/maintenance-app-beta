@@ -29,6 +29,7 @@ import { DisplayableModel } from '../../../types/models'
 import classes from '../../dataElements/fields/CategoryComboField.module.css'
 import {
     CompleteEventsExpiryDaysField,
+    DisplayFrontPageListField,
     ExpiryDaysWithPeriodTypeField,
     OpenDaysAfterCoEndDateField,
 } from './fields'
@@ -251,6 +252,9 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                         return Number.parseInt(value as string, 10)
                     }}
                 />
+            </StandardFormField>
+<StandardFormField>
+                <DisplayFrontPageListField />
             </StandardFormField>
         </SectionedFormSection>
     )
