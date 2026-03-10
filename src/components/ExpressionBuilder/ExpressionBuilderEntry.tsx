@@ -15,6 +15,7 @@ type ExpressionBuilderEntryProps = Readonly<{
     title: string
     editButtonText: string
     setUpButtonText: string
+    clearButtonText?: string
     validationResource: string
     descriptionFieldName?: string
     helpText?: string
@@ -31,6 +32,7 @@ export const ExpressionBuilderEntry = ({
     title,
     editButtonText,
     setUpButtonText,
+    clearButtonText = i18n.t('Clear expression'),
     validationResource,
     validateSchemaSection,
     validateProperty,
@@ -121,7 +123,7 @@ export const ExpressionBuilderEntry = ({
                     </Button>
                     {clearable && descriptionToShow && !disabled && (
                         <Button small secondary onClick={clearExpression}>
-                            {i18n.t('Clear expression')}
+                            {clearButtonText}
                         </Button>
                     )}
                 </ButtonStrip>
