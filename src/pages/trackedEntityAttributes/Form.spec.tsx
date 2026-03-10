@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { render, within } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/trackedEntityAttributes.json'
 import { FOOTER_ID } from '../../app/layout/Layout'
