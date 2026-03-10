@@ -6,11 +6,11 @@ import {
     Popper,
     Button,
 } from '@dhis2/ui'
-import cx from 'classnames'
 import React, { useRef, useState } from 'react'
 import { CompactPicker } from 'react-color'
 import { AVAILABLE_COLORS } from './availableColors'
 import classes from './ColorPicker.module.css'
+import { EmptySwatchIcon } from './EmptySwatchIcon'
 
 export function ColorPicker({
     onColorPick,
@@ -28,17 +28,31 @@ export function ColorPicker({
                 type="button"
                 ref={ref}
                 onClick={() => setShowPicker(true)}
-                className={cx(classes.container, {
-                    [classes.hasColor]: !!color,
-                })}
+                className={classes.container}
                 data-test="colorpicker-trigger"
+                aria-expanded={showPicker}
+                aria-haspopup="true"
+                aria-label={
+                    color
+                        ? `${i18n.t('Color')}: ${color}`
+                        : i18n.t('Color: none selected')
+                }
             >
+                <span className={classes.label}>{i18n.t('Color')}</span>
+                <span className={classes.colorSwatch}>
+                    {color ? (
+                        <span
+                            className={classes.chosenColor}
+                            style={{ background: color }}
+                        />
+                    ) : (
+                        <EmptySwatchIcon className={classes.emptyColor} />
+                    )}
+                </span>
                 <span
-                    className={classes.chosenColor}
-                    style={{ background: color }}
-                />
-
-                <span className={classes.openCloseIconContainer}>
+                    className={classes.openCloseIconContainer}
+                    aria-hidden="true"
+                >
                     {showPicker ? <IconChevronUp16 /> : <IconChevronDown16 />}
                 </span>
             </button>

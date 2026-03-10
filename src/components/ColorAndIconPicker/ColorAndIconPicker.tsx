@@ -1,3 +1,4 @@
+import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import classes from './ColorAndIconPicker.module.css'
 import { ColorPicker } from './ColorPicker'
@@ -15,7 +16,11 @@ export function ColorAndIconPicker({
     icon?: string
 }) {
     return (
-        <div className={classes.container}>
+        <div
+            className={classes.container}
+            role="group"
+            aria-label={i18n.t('Color and icon')}
+        >
             <ColorPicker color={color} onColorPick={onColorPick} />
             <IconPicker icon={icon} onIconPick={onIconPick} />
         </div>
