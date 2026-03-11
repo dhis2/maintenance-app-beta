@@ -1,3 +1,10 @@
+# [0.143.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.142.0...v0.143.0) (2026-03-11)
+
+
+### Features
+
+* new event program ([#796](https://github.com/dhis2/maintenance-app-beta/issues/796)) ([be07be4](https://github.com/dhis2/maintenance-app-beta/commit/be07be4d9b5001aee4d120e3d7beb27b0d057555))
+
 # [0.142.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.141.0...v0.142.0) (2026-03-10)
 
 
