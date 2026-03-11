@@ -75,38 +75,12 @@ export const EnrollmentSettingsFormContents = React.memo(
                 </StandardFormField>
 
                 <StandardFormField>
-                    <span className={styles.enrollmentOptionLabel}>
-                        {i18n.t('Multiple enrollments')}
-                    </span>
-                    <div className={styles.radioGroup}>
-                        <Field name="onlyEnrollOnce" type="radio" value={true}>
-                            {({ input }) => (
-                                <Radio
-                                    checked={input.checked}
-                                    onChange={() => input.onChange(true)}
-                                    label={i18n.t('Only allow one enrollment')}
-                                    value="true"
-                                />
-                            )}
-                        </Field>
-
-                        <Field name="onlyEnrollOnce" type="radio" value={false}>
-                            {({ input }) => (
-                                <Radio
-                                    checked={input.checked}
-                                    onChange={() => input.onChange(false)}
-                                    label={i18n.t('Allow multiple enrollments')}
-                                    value="false"
-                                />
-                            )}
-                        </Field>
-                    </div>
-
-                    <StandardFormSectionDescription>
-                        {i18n.t(
-                            'Applies to the entire lifetime of a tracked entity.'
-                        )}
-                    </StandardFormSectionDescription>
+                    <Field
+                        name="onlyEnrollOnce"
+                        type="checkbox"
+                        component={CheckboxFieldFF}
+                        label={i18n.t('Limit to one lifetime enrollment')}
+                    />
                 </StandardFormField>
 
                 <StandardFormField>
