@@ -180,14 +180,14 @@ export const SCHEMA_SECTIONS = {
         namePlural: 'programIndicators',
         title: i18n.t('Program indicator'),
         titlePlural: i18n.t('Program indicators'),
-        parentSectionKey: 'programsAndTracker',
+        parentSectionKey: 'indicator',
     },
     programIndicatorGroup: {
         name: SchemaName.programIndicatorGroup,
         namePlural: 'programIndicatorGroups',
         title: i18n.t('Program indicator group'),
         titlePlural: i18n.t('Program indicator groups'),
-        parentSectionKey: 'programsAndTracker',
+        parentSectionKey: 'indicator',
     },
     programRule: {
         name: SchemaName.programRule,
