@@ -117,6 +117,7 @@ const StageFormDrawerFooter = ({
     })
     return (
         <DrawerLayout
+            nestedSectionForm
             footer={
                 <DrawerFormFooter
                     submitLabel={i18n.t('Save stage and close')}

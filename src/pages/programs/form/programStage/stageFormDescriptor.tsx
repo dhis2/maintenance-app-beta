@@ -34,28 +34,7 @@ export const StageFormDescriptor = {
                 },
             ],
         },
-        {
-            name: 'stageTerminology',
-            label: i18n.t('Stage: Terminology', { nsSeparator: '~:~' }),
-            fields: [
-                {
-                    name: 'executionDateLabel',
-                    label: i18n.t('Custom label for report date'),
-                },
-                {
-                    name: 'dueDateLabel',
-                    label: i18n.t('Custom label for due date'),
-                },
-                {
-                    name: 'programStageLabel',
-                    label: i18n.t('Custom label for program stage'),
-                },
-                {
-                    name: 'eventLabel',
-                    label: i18n.t('Custom label for event'),
-                },
-            ],
-        },
+
         {
             name: 'stageCreationAndScheduling',
             label: i18n.t('Stage: Creation and Scheduling', {
@@ -127,6 +106,28 @@ export const StageFormDescriptor = {
             name: 'stageForm',
             label: i18n.t('Stage: Form', { nsSeparator: '~:~' }),
             fields: [],
+        },
+        {
+            name: 'stageTerminology',
+            label: i18n.t('Stage: Terminology', { nsSeparator: '~:~' }),
+            fields: [
+                {
+                    name: 'executionDateLabel',
+                    label: i18n.t('Custom label for report date'),
+                },
+                {
+                    name: 'dueDateLabel',
+                    label: i18n.t('Custom label for due date'),
+                },
+                {
+                    name: 'programStageLabel',
+                    label: i18n.t('Custom label for program stage'),
+                },
+                {
+                    name: 'eventLabel',
+                    label: i18n.t('Custom label for event'),
+                },
+            ],
         },
     ],
 } as const satisfies SectionedFormDescriptor<StageFormValues>
