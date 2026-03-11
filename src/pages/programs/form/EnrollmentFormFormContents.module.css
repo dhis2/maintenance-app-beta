@@ -5,12 +5,12 @@
     margin-block-start: var(--spacers-dp16);
     max-width: 720px;
     display: flex;
-    gap: var(--spacers-dp8);
+    gap: 0;
     flex-direction: column;
 }
 
 .basicFormDescription {
-    color: var(--colors-grey600);
+    color: var(--colors-grey700);
     padding: 0;
-    margin: 0;
+    margin: 0 0 var(--spacers-dp12) 0;
 }
