@@ -41,7 +41,9 @@ export function CompleteEventsExpiryDaysField() {
     return (
         <div className={setupClasses.setupCheckboxBlock}>
             <Checkbox
-                label={i18n.t('Lock completed events after a number of days')}
+                label={i18n.t(
+                    'Lock events after a number of days after completion'
+                )}
                 onChange={({ checked: isChecked }) => onToggle(isChecked)}
                 checked={checked}
             />
