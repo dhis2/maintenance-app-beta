@@ -18,7 +18,7 @@ import {
 import { useModelListView } from '../../components/sectionList/listView'
 import { ModelValueRenderer } from '../../components/sectionList/modelValue/ModelValueRenderer'
 import { SectionListTitle } from '../../components/sectionList/SectionListTitle'
-import { Toolbar } from '../../components/sectionList/toolbar'
+import { DefaultToolbar } from '../../components/sectionList/toolbar'
 import { useSelectedModels } from '../../components/sectionList/useSelectedModels'
 import {
     getIn,
@@ -140,7 +140,7 @@ every item when interacting with a row */
                 </Button>
             </div>
             <div className={css.listDetailsWrapper}>
-                <Toolbar
+                <DefaultToolbar
                     selectedModels={new Set()}
                     onDeselectAll={() => {}}
                     downloadable={false}
