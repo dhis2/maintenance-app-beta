@@ -15,8 +15,11 @@ export function MinAttributesRequiredField() {
             label={i18n.t('Minimum number of attributes required to search')}
             format={(value: unknown) => value?.toString()}
             parse={(value: unknown) => {
-                if (value === undefined || value === '') {
+                if (value === undefined) {
                     return 1
+                }
+                if (value === '') {
+                    return 0
                 }
                 return Number.parseInt(value as string, 10)
             }}

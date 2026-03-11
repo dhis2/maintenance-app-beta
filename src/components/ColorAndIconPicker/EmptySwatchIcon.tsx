@@ -1,6 +1,8 @@
 import React from 'react'
 
-export function EmptySwatchIcon({ className }: { className?: string }) {
+export function EmptySwatchIcon({
+    className,
+}: Readonly<{ className?: string }>) {
     return (
         <svg
             className={className}

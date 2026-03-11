@@ -7,7 +7,6 @@ import { FOOTER_ID } from '../../app/layout/Layout'
 import { SECTIONS_MAP, generateDhis2Id } from '../../lib'
 import {
     randomLongString,
-    testAttributeForm,
     testUserGroup,
     testValidationRule,
     testValidationNotificationTemplateForm,
@@ -21,7 +20,6 @@ import { VALIDATION_RULE_VARIABLES } from './form/ValidationNotificationTemplate
 import { Component as New } from './New'
 import resetAllMocks = jest.resetAllMocks
 
-const testAttribute = testAttributeForm
 const VALIDATION_RULES = Object.keys(VALIDATION_RULE_VARIABLES)
 
 const section = SECTIONS_MAP.validationNotificationTemplate
@@ -223,51 +221,6 @@ describe('Validation Notification form tests', () => {
                 screen
             )
         })
-        it('allows you to clear sendNotification', async () => {
-            const notificationTypeOptions = [
-                { displayName: 'Collective summary' },
-                { displayName: 'Single notification' },
-            ]
-            const randomSelectionIndex = Math.floor(
-                notificationTypeOptions.length * Math.random()
-            )
-            const { screen } = await renderForm()
-            await uiAssertions.expectSelectToExistWithOptions(
-                screen.getByTestId('formfields-notificationType'),
-                { options: notificationTypeOptions },
-                screen
-            )
-            await uiActions.pickOptionFromSelect(
-                screen.getByTestId('formfields-notificationType'),
-                randomSelectionIndex,
-                screen
-            )
-            // relevant value type is selected and value type is disabled
-            await uiAssertions.expectSelectToExistWithOptions(
-                screen.getByTestId('formfields-notificationType'),
-                {
-                    options: notificationTypeOptions,
-                    selected:
-                        notificationTypeOptions?.[randomSelectionIndex]
-                            ?.displayName,
-                    disabled: false,
-                },
-                screen
-            )
-            await uiActions.clearSingleSelect(
-                'formfields-notificationType',
-                screen
-            )
-            await uiAssertions.expectSelectToExistWithOptions(
-                screen.getByTestId('formfields-notificationType'),
-                {
-                    options: notificationTypeOptions,
-                    selected: '',
-                    disabled: false,
-                },
-                screen
-            )
-        })
     })
     describe('New', () => {
         const renderForm = generateRenderer(
@@ -357,14 +310,15 @@ describe('Validation Notification form tests', () => {
             )
 
             const notificationTypeOptions = [
-                { displayName: 'Collective summary' },
-                { displayName: 'Single notification' },
+                { label: 'Collective summary', checked: false },
+                { label: 'Single notification', checked: false },
             ]
-            await uiAssertions.expectSelectToExistWithOptions(
-                screen.getByTestId('formfields-notificationType'),
-                { options: notificationTypeOptions },
+            uiAssertions.expectRadioFieldToExist(
+                'notificationType',
+                notificationTypeOptions,
                 screen
             )
+
             uiAssertions.expectCheckboxFieldToExist(
                 'notifyUsersInHierarchyOnly',
                 false,
@@ -388,9 +342,14 @@ describe('Validation Notification form tests', () => {
             const aMessage = faker.company.buzzPhrase()
 
             const notificationTypeOptions = [
-                { displayName: 'Collective summary', id: 'COLLECTIVE_SUMMARY' },
                 {
-                    displayName: 'Single notification',
+                    label: 'Collective summary',
+                    checked: false,
+                    id: 'COLLECTIVE_SUMMARY',
+                },
+                {
+                    label: 'Single notification',
+                    checked: false,
                     id: 'SINGLE_NOTIFICATION',
                 },
             ]
@@ -415,9 +374,9 @@ describe('Validation Notification form tests', () => {
                 aMessage,
                 screen
             )
-            await uiActions.pickOptionFromSelect(
-                screen.getByTestId('formfields-notificationType'),
-                notificationOptionIndex,
+            uiActions.pickRadioField(
+                'notificationType',
+                notificationTypeOptions[notificationOptionIndex].label,
                 screen
             )
 
@@ -566,18 +525,22 @@ describe('Validation Notification form tests', () => {
                 },
                 screen
             )
-
-            const notificationTypeOptions = [
-                { displayName: 'Collective summary' },
-                { displayName: 'Single notification' },
-            ]
-            await uiAssertions.expectSelectToExistWithOptions(
-                screen.getByTestId('formfields-notificationType'),
-                {
-                    options: notificationTypeOptions,
-                    selected: validationNotificationTemplate.notificationType,
-                    disabled: false,
-                },
+            uiAssertions.expectRadioFieldToExist(
+                'notificationType',
+                [
+                    {
+                        label: 'Collective summary',
+                        checked:
+                            validationNotificationTemplate.sendStrategy ===
+                            'COLLECTIVE_SUMMARY',
+                    },
+                    {
+                        label: 'Single notification',
+                        checked:
+                            validationNotificationTemplate.sendStrategy ===
+                            'SINGLE_NOTIFICATION',
+                    },
+                ],
                 screen
             )
             uiAssertions.expectCheckboxFieldToExist(

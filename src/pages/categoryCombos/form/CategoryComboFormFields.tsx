@@ -49,7 +49,11 @@ export const CategoryComboFormFields = () => {
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
-                    <HorizontalFieldGroup label={'Type'} required>
+                    <HorizontalFieldGroup
+                        label={'Type'}
+                        required
+                        dataTest="formfields-dataDimensionType"
+                    >
                         <Field<string | undefined>
                             name="dataDimensionType"
                             component={RadioFieldFF}
