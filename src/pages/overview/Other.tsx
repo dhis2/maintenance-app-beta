@@ -38,14 +38,6 @@ export const OtherCardGroup = ({ showTitle }: { showTitle?: boolean }) => {
                     'Create constants which can be included in expressions of indicator and validation rules.'
                 )}
             </SummaryCard>
-            <SummaryCard section={SECTIONS_MAP.dataApprovalLevel}>
-                {i18n.t(
-                    'Configure data approval levels for use in data approval workflows.'
-                )}
-            </SummaryCard>
-            <SummaryCard section={SECTIONS_MAP.dataApprovalWorkflow}>
-                {i18n.t('Configure data approval workflows.')}
-            </SummaryCard>
             <SummaryCard section={SECTIONS_MAP.externalMapLayer}>
                 {i18n.t('Configure external map layers for use in GIS.')}
             </SummaryCard>
@@ -64,29 +56,6 @@ export const OtherCardGroup = ({ showTitle }: { showTitle?: boolean }) => {
                     'Create and manage locales for database content. A locale is a combination of language and country.'
                 )}
             </SummaryCard>
-            <SummaryCard section={SECTIONS_MAP.optionGroup}>
-                {i18n.t(
-                    'Create a group of options from option sets that has a similar functional area or meaning.'
-                )}
-            </SummaryCard>
-            <SummaryCard section={SECTIONS_MAP.optionGroupSet}>
-                {i18n.t('Create, modify and view sets of option groups.')}
-            </SummaryCard>
-            <SummaryCard section={SECTIONS_MAP.optionSet}>
-                {i18n.t(
-                    'Create option sets which can be included in data elements and produce drop-down lists in data entry forms.'
-                )}
-            </SummaryCard>
-            <SummaryCard section={SECTIONS_MAP.predictor}>
-                {i18n.t(
-                    'Create predictors which can be used to predict future data values.'
-                )}
-            </SummaryCard>
-            <SummaryCard section={SECTIONS_MAP.predictorGroup}>
-                {i18n.t(
-                    'Create predictor groups that contain several related predictors.'
-                )}
-            </SummaryCard>
             <SummaryCard section={SECTIONS_MAP.pushAnalysis}>
                 {i18n.t(
                     'Manage analytics to be emailed to specific user groups on a daily, weekly or monthly basis.'
@@ -96,12 +65,6 @@ export const OtherCardGroup = ({ showTitle }: { showTitle?: boolean }) => {
                 {i18n.t(
                     'Create SQL database views, typically based on resource tables, to provide convenient views for third-party tools.'
                 )}
-            </SummaryCard>
-            <SummaryCard
-                section={SECTIONS_MAP.programDisaggregation}
-                hideNew={true}
-            >
-                {i18n.t('Set disaggregation mappings for program indicators.')}
             </SummaryCard>
         </SummaryCardGroup>
     )
