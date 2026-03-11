@@ -213,7 +213,7 @@ describe('Tracked entity types form tests', () => {
             }
         )
 
-        it('contain all needed field', async () => {
+        it('contains all needed field', async () => {
             const { screen, attributes } = await renderForm()
 
             uiAssertions.expectNameFieldExist('', screen)
@@ -221,16 +221,13 @@ describe('Tracked entity types form tests', () => {
             uiAssertions.expectColorAndIconFieldToExist(screen)
             uiAssertions.expectTextAreaFieldToExist('description', null, screen)
 
-            await uiAssertions.expectSelectToExistWithOptions(
-                screen.getByTestId('formfields-featureType'),
-                {
-                    options: [
-                        { displayName: '<No value>' },
-                        { displayName: 'None' },
-                        { displayName: 'Point' },
-                        { displayName: 'Polygon' },
-                    ],
-                },
+            await uiAssertions.expectRadioFieldToExist(
+                'featureType',
+                [
+                    { label: 'Point', checked: false },
+                    { label: 'Polygon', checked: false },
+                    { label: 'Do not collect location data', checked: false },
+                ],
                 screen
             )
 
@@ -246,7 +243,7 @@ describe('Tracked entity types form tests', () => {
             expect(minAttributesInput).toBeVisible()
             expect(
                 within(minAttributesInput).getByRole('spinbutton')
-            ).toHaveValue(0)
+            ).toHaveValue(1)
 
             const maxTeiCountInput = screen.getByTestId(
                 'formfields-maxteicount'
@@ -306,7 +303,7 @@ describe('Tracked entity types form tests', () => {
                         description: aDescription,
                         allowAuditLog: true,
                         featureType: undefined,
-                        minAttributesRequiredToSearch: 0,
+                        minAttributesRequiredToSearch: 1,
                         maxTeiCountToReturn: 0,
                         style: {},
                         trackedEntityTypeAttributes: [],
@@ -534,16 +531,22 @@ describe('Tracked entity types form tests', () => {
                 trackedEntityType.description,
                 screen
             )
-            await uiAssertions.expectSelectToExistWithOptions(
-                screen.getByTestId('formfields-featureType'),
-                {
-                    options: [
-                        { displayName: '<No value>' },
-                        { displayName: 'None' },
-                        { displayName: 'Point' },
-                        { displayName: 'Polygon' },
-                    ],
-                },
+            await uiAssertions.expectRadioFieldToExist(
+                'featureType',
+                [
+                    {
+                        label: 'Point',
+                        checked: trackedEntityType.featureType === 'POINT',
+                    },
+                    {
+                        label: 'Polygon',
+                        checked: trackedEntityType.featureType === 'POLYGON',
+                    },
+                    {
+                        label: 'Do not collect location data',
+                        checked: trackedEntityType.featureType === 'NONE',
+                    },
+                ],
                 screen
             )
             uiAssertions.expectCheckboxFieldToExist(

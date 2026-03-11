@@ -131,7 +131,11 @@ export const ProgramIndicatorsFormFields = () => {
                     />
                 </StandardFormField>
                 <StandardFormField dataTest="analytics-type-field">
-                    <FieldGroup label={i18n.t('Data source')} required>
+                    <FieldGroup
+                        label={i18n.t('Data source')}
+                        required
+                        dataTest="formfields-analyticsType"
+                    >
                         <RadioFieldFF
                             label={`${
                                 PROGRAM_INDICATOR_SPECIFIC_TRANSLATIONS.EVENT

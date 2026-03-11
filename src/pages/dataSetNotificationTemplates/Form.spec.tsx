@@ -269,6 +269,11 @@ describe('DataSetNotificationTemplate form tests', () => {
             async (textInput, outputNumber, outputBeforeAfter) => {
                 const { screen } = await renderForm()
 
+                await uiActions.pickRadioField(
+                    'dataSetNotificationTrigger',
+                    'Scheduled days',
+                    screen
+                )
                 await uiActions.enterInputFieldValue(
                     'relativeScheduledDays',
                     textInput,
@@ -281,13 +286,18 @@ describe('DataSetNotificationTemplate form tests', () => {
                     screen,
                     'spinbutton'
                 )
-                const options = [
-                    { displayName: 'Before' },
-                    { displayName: 'After' },
-                ]
-                await uiAssertions.expectSelectToExistWithOptions(
-                    screen.getByTestId('formfields-beforeOrAfter'),
-                    { options: options, selected: outputBeforeAfter },
+                uiAssertions.expectRadioFieldToExist(
+                    'beforeOrAfter',
+                    [
+                        {
+                            label: 'Before',
+                            checked: outputBeforeAfter === 'Before',
+                        },
+                        {
+                            label: 'After',
+                            checked: outputBeforeAfter === 'After',
+                        },
+                    ],
                     screen
                 )
             }
@@ -295,48 +305,24 @@ describe('DataSetNotificationTemplate form tests', () => {
         it('shows notificationDays input only if notification is scheduled days', async () => {
             // select scheduled days
             const { screen } = await renderForm()
-            const scheduledDaysIndex = triggerOptions
-                .map((o) => o.value)
-                .indexOf('SCHEDULED_DAYS')
-            const dataSetCompletionIndex = triggerOptions
-                .map((o) => o.value)
-                .indexOf('DATA_SET_COMPLETION')
             // select 'Scheduled days'
-            await uiActions.pickOptionFromSelect(
-                screen.getByTestId('formfields-dataSetNotificationTrigger'),
-                scheduledDaysIndex,
+            await uiActions.pickRadioField(
+                'dataSetNotificationTrigger',
+                'Scheduled days',
                 screen
             )
-            await uiAssertions.expectSelectToExistWithOptions(
-                screen.getByTestId('formfields-dataSetNotificationTrigger'),
-                {
-                    options: triggerOptions.map(({ label }) => ({
-                        displayName: label,
-                    })),
-                    selected: 'Scheduled days',
-                },
-                screen
-            )
+
             // assert that scheduled days selector is in document
             expect(
                 screen.getByTestId('scheduledDaysSelector')
             ).toBeInTheDocument()
-            // select 'Scheduled days'
-            await uiActions.pickOptionFromSelect(
-                screen.getByTestId('formfields-dataSetNotificationTrigger'),
-                dataSetCompletionIndex,
+            // select 'Data set completion'
+            await uiActions.pickRadioField(
+                'dataSetNotificationTrigger',
+                'Data set completion',
                 screen
             )
-            await uiAssertions.expectSelectToExistWithOptions(
-                screen.getByTestId('formfields-dataSetNotificationTrigger'),
-                {
-                    options: triggerOptions.map(({ label }) => ({
-                        displayName: label,
-                    })),
-                    selected: 'Data set completion',
-                },
-                screen
-            )
+
             // assert that scheduled days selector is not in document
             expect(screen.queryByTestId('scheduledDaysSelector')).toBe(null)
         })
@@ -352,19 +338,9 @@ describe('DataSetNotificationTemplate form tests', () => {
                 .indexOf('ORGANISATION_UNIT_CONTACT')
 
             // select 'User group'
-            await uiActions.pickOptionFromSelect(
-                screen.getByTestId('formfields-notification-recipient'),
-                userGroupIndex,
-                screen
-            )
-            await uiAssertions.expectSelectToExistWithOptions(
-                screen.getByTestId('formfields-notification-recipient'),
-                {
-                    options: recipientOptions.map(({ label }) => ({
-                        displayName: label,
-                    })),
-                    selected: 'User group',
-                },
+            await uiActions.pickRadioField(
+                'notification-recipient',
+                'User group',
                 screen
             )
 
@@ -389,19 +365,9 @@ describe('DataSetNotificationTemplate form tests', () => {
             expect(screen.queryByTestId('formFields-sendSms')).toBe(null)
 
             // select 'Organisation unit contact'
-            await uiActions.pickOptionFromSelect(
-                screen.getByTestId('formfields-notification-recipient'),
-                orgUnitContactIndex,
-                screen
-            )
-            await uiAssertions.expectSelectToExistWithOptions(
-                screen.getByTestId('formfields-notification-recipient'),
-                {
-                    options: recipientOptions.map(({ label }) => ({
-                        displayName: label,
-                    })),
-                    selected: 'Organisation unit contact',
-                },
+            await uiActions.pickRadioField(
+                'notification-recipient',
+                'Organisation unit contact',
                 screen
             )
 
@@ -496,24 +462,21 @@ describe('DataSetNotificationTemplate form tests', () => {
                 '',
                 screen
             )
-            await uiAssertions.expectSelectToExistWithOptions(
-                screen.getByTestId('formfields-dataSetNotificationTrigger'),
-                {
-                    options: triggerOptions.map(({ label }) => ({
-                        displayName: label,
-                    })),
-                    selected: 'Scheduled days',
-                },
+            uiAssertions.expectRadioFieldToExist(
+                'dataSetNotificationTrigger',
+                [
+                    { label: 'Data set completion', checked: false },
+                    { label: 'Scheduled days', checked: false },
+                ],
                 screen
             )
-            await uiAssertions.expectSelectToExistWithOptions(
-                screen.getByTestId('formfields-notification-recipient'),
-                {
-                    options: recipientOptions.map(({ label }) => ({
-                        displayName: label,
-                    })),
-                    selected: 'User group',
-                },
+
+            uiAssertions.expectRadioFieldToExist(
+                'notification-recipient',
+                [
+                    { label: 'User group', checked: false },
+                    { label: 'Organisation unit contact', checked: false },
+                ],
                 screen
             )
         })
@@ -545,12 +508,24 @@ describe('DataSetNotificationTemplate form tests', () => {
                 aMessage,
                 screen
             )
+            await uiActions.pickRadioField(
+                'dataSetNotificationTrigger',
+                'Scheduled days',
+                screen
+            )
+
             await uiActions.enterInputFieldValue(
                 'relativeScheduledDays',
                 '3',
                 screen,
                 { type: 'spinbutton' }
             )
+            await uiActions.pickRadioField(
+                'notification-recipient',
+                'User group',
+                screen
+            )
+
             await uiActions.pickOptionFromSelect(
                 screen.getByTestId('formfields-recipientUserGroup'),
                 userGroupsSelectIndex,
@@ -573,7 +548,7 @@ describe('DataSetNotificationTemplate form tests', () => {
                         ],
                         subjectTemplate: aSubject,
                         messageTemplate: aMessage,
-                        sendStrategy: 'SINGLE_NOTIFICATION',
+                        sendStrategy: undefined,
                         notificationRecipient: 'USER_GROUP',
                         recipientUserGroup: {
                             id: userGroups[userGroupsSelectIndex].id,
@@ -684,26 +659,24 @@ describe('DataSetNotificationTemplate form tests', () => {
                 dataSetNotificationTemplate.messageTemplate,
                 screen
             )
-            await uiAssertions.expectSelectToExistWithOptions(
-                screen.getByTestId('formfields-dataSetNotificationTrigger'),
-                {
-                    options: triggerOptions.map(({ label }) => ({
-                        displayName: label,
-                    })),
-                    selected: 'Scheduled days',
-                },
+            uiAssertions.expectRadioFieldToExist(
+                'dataSetNotificationTrigger',
+                [
+                    { label: 'Data set completion', checked: false },
+                    { label: 'Scheduled days', checked: true },
+                ],
                 screen
             )
-            await uiAssertions.expectSelectToExistWithOptions(
-                screen.getByTestId('formfields-notification-recipient'),
-                {
-                    options: recipientOptions.map(({ label }) => ({
-                        displayName: label,
-                    })),
-                    selected: 'User group',
-                },
+
+            uiAssertions.expectRadioFieldToExist(
+                'notification-recipient',
+                [
+                    { label: 'User group', checked: true },
+                    { label: 'Organisation unit contact', checked: false },
+                ],
                 screen
             )
+
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('formfields-recipientUserGroup'),
                 {
