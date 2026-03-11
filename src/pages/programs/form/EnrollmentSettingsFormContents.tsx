@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { CheckboxFieldFF, Radio } from '@dhis2/ui'
+import { CheckboxFieldFF } from '@dhis2/ui'
 import React, { useEffect } from 'react'
 import { Field, useField, useFormState } from 'react-final-form'
 import {
@@ -47,9 +47,7 @@ export const EnrollmentSettingsFormContents = React.memo(
                     {i18n.t('Enrollment: Settings', { nsSeparator: '~:~' })}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
-                    {i18n.t(
-                        'Configure settings related to enrollment in this program.'
-                    )}
+                    {i18n.t('Configure enrollment options for this program.')}
                 </StandardFormSectionDescription>
                 <StandardFormField>
                     <ModelSingleSelectFormField
@@ -57,9 +55,6 @@ export const EnrollmentSettingsFormContents = React.memo(
                         inputWidth="500px"
                         name="trackedEntityType"
                         label={i18n.t('Tracked entity type')}
-                        helpText={i18n.t(
-                            'Choose what this program will be tracking'
-                        )}
                         query={{
                             resource: 'trackedEntityTypes',
                             params: {
@@ -100,16 +95,19 @@ export const EnrollmentSettingsFormContents = React.memo(
                     />
                 </StandardFormField>
 
-                <StandardFormField>
-                    <div className={styles.selectIncidentDatesInFuture}>
-                        <CheckboxFieldFF
-                            input={selectIncidentDatesInput}
-                            meta={selectIncidentDatesMeta}
-                            disabled={!values.displayIncidentDate}
-                            label={i18n.t('Allow incident dates in the future')}
-                        />
-                    </div>
-                </StandardFormField>
+                {values.displayIncidentDate && (
+                    <StandardFormField>
+                        <div className={styles.selectIncidentDatesInFuture}>
+                            <CheckboxFieldFF
+                                input={selectIncidentDatesInput}
+                                meta={selectIncidentDatesMeta}
+                                label={i18n.t(
+                                    'Allow incident dates in the future'
+                                )}
+                            />
+                        </div>
+                    </StandardFormField>
+                )}
 
                 <StandardFormField>
                     <Field
@@ -117,7 +115,7 @@ export const EnrollmentSettingsFormContents = React.memo(
                         type="checkbox"
                         component={CheckboxFieldFF}
                         label={i18n.t(
-                            'Collect data for the first stage during enrollment'
+                            'Show first program stage during enrollment'
                         )}
                     />
                 </StandardFormField>
