@@ -25,9 +25,9 @@ export const OtherCardGroup = ({ showTitle }: { showTitle?: boolean }) => {
             title={showTitle ? TITLE : undefined}
             section={OVERVIEW_SECTIONS.other}
         >
-            <SummaryCard section={SECTIONS_MAP.analyticsTableHook}>
+            <SummaryCard section={SECTIONS_MAP.icon}>
                 {i18n.t(
-                    'Configure hooks in SQL that run during the analytics process.'
+                    'Upload, modify and view icons which can be assigned to other metadata.'
                 )}
             </SummaryCard>
             <SummaryCard section={SECTIONS_MAP.attribute}>
@@ -40,11 +40,6 @@ export const OtherCardGroup = ({ showTitle }: { showTitle?: boolean }) => {
             </SummaryCard>
             <SummaryCard section={SECTIONS_MAP.externalMapLayer}>
                 {i18n.t('Configure external map layers for use in GIS.')}
-            </SummaryCard>
-            <SummaryCard section={SECTIONS_MAP.icon}>
-                {i18n.t(
-                    'Upload, modify and view icons which can be assigned to other metadata.'
-                )}
             </SummaryCard>
             <SummaryCard section={SECTIONS_MAP.legendSet}>
                 {i18n.t(
@@ -59,6 +54,11 @@ export const OtherCardGroup = ({ showTitle }: { showTitle?: boolean }) => {
             <SummaryCard section={SECTIONS_MAP.pushAnalysis}>
                 {i18n.t(
                     'Manage analytics to be emailed to specific user groups on a daily, weekly or monthly basis.'
+                )}
+            </SummaryCard>
+            <SummaryCard section={SECTIONS_MAP.analyticsTableHook}>
+                {i18n.t(
+                    'Configure hooks in SQL that run during the analytics process.'
                 )}
             </SummaryCard>
             <SummaryCard section={SECTIONS_MAP.sqlView}>
