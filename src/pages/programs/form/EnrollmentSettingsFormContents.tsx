@@ -8,6 +8,7 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
+import { FeatureTypeField } from '../../../components/form/fields'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
 import styles from './EnrollmentSettingsFormContents.module.css'
 
@@ -67,6 +68,10 @@ export const EnrollmentSettingsFormContents = React.memo(
                             },
                         }}
                     />
+                </StandardFormField>
+
+                <StandardFormField>
+                    <FeatureTypeField />
                 </StandardFormField>
 
                 <StandardFormField>

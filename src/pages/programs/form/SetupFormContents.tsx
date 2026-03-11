@@ -6,10 +6,10 @@ import { Field as FieldRFF, useField, useFormState } from 'react-final-form'
 import { useHref } from 'react-router'
 import {
     CodeField,
+    ColorAndIconField,
     DescriptionField,
     EditableFieldWrapper,
-    FeatureTypeField,
-    NameField,
+        NameField,
     SectionedFormSection,
     ShortNameField,
     StandardFormField,
@@ -86,6 +86,9 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                 <DescriptionField />
             </StandardFormField>
             <StandardFormField>
+                <ColorAndIconField />
+            </StandardFormField>
+            <StandardFormField>
                 <Field
                     label={i18n.t('Version')}
                     helpText={
@@ -139,26 +142,6 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                         )}
                     </div>
                 </Field>
-            </StandardFormField>
-            <StandardFormField>
-                <FeatureTypeField />
-            </StandardFormField>
-            <StandardFormField>
-                <ModelSingleSelectFormField
-                    showNoValueOption
-                    inputWidth="400px"
-                    dataTest="formfields-relatedProgram"
-                    name="relatedProgram"
-                    label={i18n.t('Related program')}
-                    query={{
-                        resource: 'programs',
-                        params: {
-                            fields: ['id', 'displayName'],
-                            order: ['displayName'],
-                            filter: ['id:ne:' + values.id],
-                        },
-                    }}
-                />
             </StandardFormField>
             <StandardFormField>
                 <EditableFieldWrapper
