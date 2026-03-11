@@ -1,8 +1,8 @@
 const config = {
     id: '3c6d0723-904c-4c7a-bbd6-35f3c3aa356b',
     type: 'app',
-    title: 'Maintenance (Preview)',
-    name: 'maintenance-preview',
+    title: 'Metadata Management',
+    name: 'metadata-management',
     entryPoints: {
         app: './src/App.tsx',
     },
