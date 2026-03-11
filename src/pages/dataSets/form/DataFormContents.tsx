@@ -53,9 +53,9 @@ export const DataFormContents = React.memo(function DataFormContents({
                     }}
                     leftHeader={i18n.t('Available indicators')}
                     rightHeader={i18n.t('Selected indicators')}
-                    filterPlaceholder={i18n.t('Search available indicators')}
+                    filterPlaceholder={i18n.t('Filter available indicators')}
                     filterPlaceholderPicked={i18n.t(
-                        'Search selected indicators'
+                        'Filter selected indicators'
                     )}
                     maxSelections={Infinity}
                 />

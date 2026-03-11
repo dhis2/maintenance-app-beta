@@ -24,7 +24,7 @@ import {
 } from '../../../components/formCreators/TabbedFormTypePicker'
 import { FORM_SECTION_PARAM_KEY, scrollToSection } from '../../../lib'
 import { SchemaName } from '../../../types'
-import { ProgramValues } from '../Edit'
+import { ProgramValues } from '../EditTrackerProgram'
 import styles from './EnrollmentFormFormContents.module.css'
 import { EditOrNewEnrollmentSectionForm } from './sectionForm/EntrollmentSectionForm'
 
@@ -208,6 +208,7 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
                         schemaName={SchemaName.programSection}
                         level={'primary'}
                         otherProps={{ sectionsLength: sections.length }}
+                        withReordering
                     />
                 )}
                 {selectedFormType === FormType.CUSTOM && (

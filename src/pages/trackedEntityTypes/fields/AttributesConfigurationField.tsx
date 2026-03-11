@@ -55,7 +55,7 @@ export function AttributesConfigurationField() {
     return (
         <div style={{ paddingTop: '24px' }}>
             <StandardFormSectionTitle>
-                {i18n.t('Manage attributes')}
+                {i18n.t('Manage tracked entity attributes')}
             </StandardFormSectionTitle>
 
             <StandardFormSectionDescription>

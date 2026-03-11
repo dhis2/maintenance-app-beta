@@ -138,8 +138,8 @@ export const AdvancedFormContents = React.memo(function AdvancedFormContents({
                     }}
                     leftHeader={i18n.t('Available legends')}
                     rightHeader={i18n.t('Selected legends')}
-                    filterPlaceholder={i18n.t('Search available legends')}
-                    filterPlaceholderPicked={i18n.t('Search selected legends')}
+                    filterPlaceholder={i18n.t('Filter available legends')}
+                    filterPlaceholderPicked={i18n.t('Filter selected legends')}
                     maxSelections={Infinity}
                     leftFooter={<></>}
                     enableOrderChange={false}

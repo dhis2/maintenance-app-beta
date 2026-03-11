@@ -9,11 +9,12 @@ import { SchemaSection } from '../../../../lib'
 type BasicInformationSectionProps = {
     section: SchemaSection
     programTemplateId?: string
+    isTrackerProgram: boolean
 }
 
 export const BasicInformationSection: React.FC<
     BasicInformationSectionProps
-> = ({ section, programTemplateId }) => {
+> = ({ section, programTemplateId, isTrackerProgram }) => {
     const { values } = useFormState({ subscription: { values: true } })
     const [isStageNotification, setIsStageNotification] = useState(
         values.programStage?.id
@@ -34,39 +35,40 @@ export const BasicInformationSection: React.FC<
                     modelId={programTemplateId}
                 />
             </StandardFormField>
-
-            <StandardFormField>
-                <p>{i18n.t('Notification type')}</p>
-                <Radio
-                    disabled={values.id}
-                    checked={!isStageNotification}
-                    onChange={({ checked }) => {
-                        setIsStageNotification(!checked)
-                        if (checked) {
-                            input.onChange(undefined)
-                            input.onBlur()
-                        }
-                    }}
-                    label={i18n.t(
-                        'Program: Send when there is activity in the program or enrollment',
-                        { nsSeparator: '~:~' }
-                    )}
-                />
-                <Radio
-                    disabled={values.id}
-                    checked={isStageNotification}
-                    onChange={({ checked }) => {
-                        setIsStageNotification(checked)
-                    }}
-                    label={i18n.t(
-                        'Stage: Send when there is activity in a specific stage',
-                        {
-                            nsSeparator: '~:~',
-                        }
-                    )}
-                />
-            </StandardFormField>
-            {isStageNotification && (
+            {isTrackerProgram && (
+                <StandardFormField>
+                    <p>{i18n.t('Notification type')}</p>
+                    <Radio
+                        disabled={values.id}
+                        checked={!isStageNotification}
+                        onChange={({ checked }) => {
+                            setIsStageNotification(!checked)
+                            if (checked) {
+                                input.onChange(undefined)
+                                input.onBlur()
+                            }
+                        }}
+                        label={i18n.t(
+                            'Program: Send when there is activity in the program or enrollment',
+                            { nsSeparator: '~:~' }
+                        )}
+                    />
+                    <Radio
+                        disabled={values.id}
+                        checked={isStageNotification}
+                        onChange={({ checked }) => {
+                            setIsStageNotification(checked)
+                        }}
+                        label={i18n.t(
+                            'Stage: Send when there is activity in a specific stage',
+                            {
+                                nsSeparator: '~:~',
+                            }
+                        )}
+                    />
+                </StandardFormField>
+            )}
+            {isStageNotification && isTrackerProgram && (
                 <StandardFormField>
                     <ModelSingleSelectField
                         input={input}

@@ -1,12 +1,11 @@
-import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Button, CheckboxFieldFF, InputFieldFF } from '@dhis2/ui'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { CheckboxFieldFF, InputFieldFF } from '@dhis2/ui'
+import React, { useMemo } from 'react'
 import { Field, useFormState } from 'react-final-form'
 import {
     ColorAndIconField,
-    DescriptionField,
     CustomAttributesSection,
+    DescriptionField,
     FeatureTypeField,
     SectionedFormSection,
     SectionedFormSections,
@@ -14,33 +13,22 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../../components'
-import { CustomFormDataPayload } from '../../../../components/customForm/CustomFormEdit'
-import { CustomFormEditEntry } from '../../../../components/customForm/CustomFormEditEntry'
-import { useProgramsStageSectionCustomFormElements } from '../../../../components/customForm/useGetCustomFormElements'
-import { SectionFormSectionsList } from '../../../../components/formCreators/SectionFormList'
 import {
-    FormType,
-    TabbedFormTypePicker,
-} from '../../../../components/formCreators/TabbedFormTypePicker'
-import {
+    composeAsyncValidators,
     FEATURES,
     SCHEMA_SECTIONS,
-    SchemaName,
-    scrollToSection,
     useFeatureAvailable,
+    useIsFieldValueUnique,
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
     useValidator,
-    composeAsyncValidators,
-    useIsFieldValueUnique,
 } from '../../../../lib'
-import styles from '../EnrollmentFormFormContents.module.css'
 import { ValidationStrategyField } from './fields'
-import { EditOrNewStageSectionForm } from './programStageSection/ProgramStageSectionForm'
 import { StageCreationAndSchedulingFormContents } from './StageCreationAndSchedulingFormContents'
 import { StageDataFormContents } from './StageDataFormContents'
 import { stageSchemaSection } from './StageForm'
 import { StageFormDescriptor } from './stageFormDescriptor'
+import { StageFormFormContents } from './StageFormFormContents'
 
 export const StageFormContents = ({
     isSubsection,
@@ -55,17 +43,6 @@ export const StageFormContents = ({
     const showValidationStrategy = useFeatureAvailable(
         FEATURES.validationStrategy
     )
-    const [selectedFormType, setSelectedFormType] = useState<FormType>(
-        FormType.DEFAULT
-    )
-
-    useEffect(() => {
-        if (values.dataEntryForm) {
-            setSelectedFormType(FormType.CUSTOM)
-        } else if (values.programStageSections?.length > 0) {
-            setSelectedFormType(FormType.SECTION)
-        }
-    }, [values.dataEntryForm, values.programStageSections])
 
     const checkDuplicateName = useIsFieldValueUnique({
         model: 'programStages',
@@ -106,101 +83,6 @@ export const StageFormContents = ({
         schemaSection: stageSchemaSection,
         property: 'eventLabel',
     })
-
-    const dataEngine = useDataEngine()
-
-    const { loading, elementTypes, refetch } =
-        useProgramsStageSectionCustomFormElements(values.id)
-    const createProgramStageCustomForm = useCallback(
-        async (
-            data: CustomFormDataPayload,
-            onSuccess: (data: CustomFormDataPayload) => void,
-            onError: (e: Error) => void
-        ) => {
-            try {
-                const response = await dataEngine.mutate(
-                    {
-                        resource: `dataEntryForms`,
-                        type: 'create',
-                        data: data,
-                    },
-                    {
-                        onError,
-                    }
-                )
-                await dataEngine.mutate(
-                    {
-                        resource: `programStages`,
-                        id: values.id as string,
-                        type: 'json-patch',
-                        data: [
-                            {
-                                op: 'replace',
-                                path: '/dataEntryForm',
-                                value: { id: data.id },
-                            },
-                        ],
-                    },
-                    {
-                        onComplete: () => {
-                            // use the data we passed if form was saved and associated to program
-                            onSuccess(data)
-                        },
-                    }
-                )
-                return { data: response }
-            } catch (error) {
-                console.error(error)
-            }
-        },
-        [dataEngine, values.id]
-    )
-
-    const updateProgramStageCustomForm = useCallback(
-        async (
-            data: CustomFormDataPayload,
-            onSuccess: (data: CustomFormDataPayload) => void,
-            onError: (e: Error) => void
-        ) => {
-            try {
-                const response = await dataEngine.mutate(
-                    {
-                        resource: `dataEntryForms`,
-                        id: data.id,
-                        type: 'json-patch',
-                        data: [
-                            {
-                                op: 'replace',
-                                path: '/htmlCode',
-                                value: data.htmlCode,
-                            },
-                        ],
-                    },
-                    {
-                        onComplete: () => {
-                            // the response from this post is empty, so we use the data we passed if it was successful
-                            onSuccess(data)
-                        },
-                        onError,
-                    }
-                )
-                return { data: response }
-            } catch (error) {
-                console.error(error)
-            }
-        },
-        [dataEngine]
-    )
-
-    const updateOrCreateCustomForm = (
-        data: CustomFormDataPayload,
-        onSuccess: (data: CustomFormDataPayload) => void,
-        onError: (e: Error) => void,
-        existingFormId: string | undefined
-    ) =>
-        existingFormId
-            ? updateProgramStageCustomForm(data, onSuccess, onError)
-            : createProgramStageCustomForm(data, onSuccess, onError)
 
     return (
         <SectionedFormSections>
@@ -332,77 +214,11 @@ export const StageFormContents = ({
                 name={descriptor.getSection('stageData').name}
                 sectionLabel={descriptor.getSection('stageData').label}
             />
-            <SectionedFormSection
+            <StageFormFormContents
+                isSubsection={isSubsection}
                 name={descriptor.getSection('stageForm').name}
-            >
-                <StandardFormSectionTitle>
-                    {i18n.t('Program stage form')}
-                </StandardFormSectionTitle>
-                <StandardFormSectionDescription>
-                    {i18n.t(
-                        'Configure the form for data collection for events in this program stage.'
-                    )}
-                </StandardFormSectionDescription>
-                <TabbedFormTypePicker
-                    sectionsLength={values.programStageSections?.length}
-                    hasDataEntryForm={!!values.dataEntryForm}
-                    hasDataToDisplay={
-                        values.programStageDataElements?.length > 0
-                    }
-                    onFormTypeChange={setSelectedFormType}
-                    selectedFormType={selectedFormType}
-                    modelId={values.id}
-                >
-                    {selectedFormType === FormType.DEFAULT && (
-                        <div className={styles.basicFormDetails}>
-                            <StandardFormSectionTitle>
-                                {i18n.t('Basic form')}
-                            </StandardFormSectionTitle>
-                            <div className={styles.basicFormDescription}>
-                                {i18n.t(
-                                    'This form displays an auto-generated list of the data elements defined for this program stage.'
-                                )}
-                            </div>
-                            <div>
-                                <Button
-                                    secondary
-                                    small
-                                    onClick={() => {
-                                        scrollToSection('stageData')
-                                    }}
-                                >
-                                    {i18n.t(
-                                        'Edit or rearrange the data elements'
-                                    )}
-                                </Button>
-                            </div>
-                        </div>
-                    )}
-                    {selectedFormType === FormType.SECTION && (
-                        <SectionFormSectionsList
-                            sectionsFieldName={'programStageSections'}
-                            SectionFormComponent={EditOrNewStageSectionForm}
-                            schemaName={SchemaName.programStageSection}
-                            level={isSubsection ? 'secondary' : 'primary'}
-                            otherProps={{
-                                sectionsLength:
-                                    values.programStageSections?.length,
-                                stageId: values.id,
-                            }}
-                        />
-                    )}
-                    {selectedFormType === FormType.CUSTOM && (
-                        <CustomFormEditEntry
-                            level={isSubsection ? 'secondary' : 'primary'}
-                            loading={loading}
-                            refetch={refetch}
-                            elementTypes={elementTypes}
-                            updateCustomForm={updateOrCreateCustomForm}
-                            customFormTarget="program stage"
-                        />
-                    )}
-                </TabbedFormTypePicker>
-            </SectionedFormSection>
+                sectionLabel={i18n.t('Program stage form')}
+            />
             <CustomAttributesSection
                 schemaSection={SCHEMA_SECTIONS.programStage}
                 sectionedLayout

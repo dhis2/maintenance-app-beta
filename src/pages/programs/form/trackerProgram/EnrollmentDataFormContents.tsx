@@ -19,14 +19,14 @@ import {
     StandardFormSection,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
-} from '../../../components'
-import css from '../../../components/metadataFormControls/ModelTransfer/ModelTransfer.module.css'
+} from '../../../../components'
+import css from '../../../../components/metadataFormControls/ModelTransfer/ModelTransfer.module.css'
 import {
     InfoIconWithTooltip,
     TooltipWrapper,
-} from '../../../components/tooltip'
-import { ProgramTrackedEntityAttribute } from '../../../types/generated'
-import { ProgramsFromFilters } from '../Edit'
+} from '../../../../components/tooltip'
+import { ProgramTrackedEntityAttribute } from '../../../../types/generated'
+import { ProgramsFromFilters } from '../../EditTrackerProgram'
 
 const defaultRenderType = {
     MOBILE: { type: 'DEFAULT' },
@@ -215,13 +215,17 @@ export const EnrollmentDataFormContents = React.memo(
                                 input.onChange(selectedAttributes)
                                 input.onBlur()
                             }}
-                            leftHeader={i18n.t('Available attributes')}
-                            rightHeader={i18n.t('Selected attributes')}
+                            leftHeader={i18n.t(
+                                'Available tracked entity attributes'
+                            )}
+                            rightHeader={i18n.t(
+                                'Selected tracked entity attributes'
+                            )}
                             filterPlaceholder={i18n.t(
-                                'Filter available attributes'
+                                'Filter available tracked entity attributes'
                             )}
                             filterPlaceholderPicked={i18n.t(
-                                'Filter selected attributes'
+                                'Filter selected tracked entity attributes'
                             )}
                             maxSelections={Infinity}
                             query={{
@@ -243,11 +247,11 @@ export const EnrollmentDataFormContents = React.memo(
                 </StandardFormSection>
                 <StandardFormSection>
                     <StandardFormSectionTitle>
-                        {i18n.t('Configure attributes')}
+                        {i18n.t('Configure tracked entity attributes')}
                     </StandardFormSectionTitle>
                     <StandardFormSectionDescription>
                         {i18n.t(
-                            'Attributes can be collected in different ways with different options.'
+                            'Tracked entity attributes can be collected in different ways with different options.'
                         )}
                     </StandardFormSectionDescription>
                     <Table>

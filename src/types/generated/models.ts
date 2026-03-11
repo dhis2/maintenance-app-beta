@@ -9093,6 +9093,7 @@ export type TrackedEntityAttribute = {
     queryMods: QueryModifiers
     sharing: Sharing
     shortName: string
+    skipAnalytics: boolean
     skipSynchronization: boolean
     sortOrderInListNoProgram: number
     sortOrderInVisitSchedule: number

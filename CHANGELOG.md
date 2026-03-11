@@ -1,3 +1,86 @@
+# [0.143.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.142.0...v0.143.0) (2026-03-11)
+
+
+### Features
+
+* new event program ([#796](https://github.com/dhis2/maintenance-app-beta/issues/796)) ([be07be4](https://github.com/dhis2/maintenance-app-beta/commit/be07be4d9b5001aee4d120e3d7beb27b0d057555))
+
+# [0.142.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.141.0...v0.142.0) (2026-03-10)
+
+
+### Bug Fixes
+
+* change attributes to tracked entity attributes where necessary ([#797](https://github.com/dhis2/maintenance-app-beta/issues/797)) ([e8f32fd](https://github.com/dhis2/maintenance-app-beta/commit/e8f32fd8952250e77a192b96fd49df220a014d88))
+
+
+### Features
+
+* [DHIS2-16455] Flag for non analyzable tracked entity attributes ([#793](https://github.com/dhis2/maintenance-app-beta/issues/793)) ([c68630d](https://github.com/dhis2/maintenance-app-beta/commit/c68630de97624e6ba5c83fd4920dd768772b37b8))
+
+# [0.141.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.140.0...v0.141.0) (2026-03-10)
+
+
+### Bug Fixes
+
+* validation strategy props ([d23a568](https://github.com/dhis2/maintenance-app-beta/commit/d23a568924ee28e3a4f6fade68608698b24b464c))
+
+
+### Features
+
+* add program settings content ([7629d7c](https://github.com/dhis2/maintenance-app-beta/commit/7629d7c64ce82ea4ffe96a53c691e41bee0a4b76))
+* add program settings form ([baed58d](https://github.com/dhis2/maintenance-app-beta/commit/baed58d2a3235f353e1323e0c2c36f954c8ff159))
+* add validation strategy default value ([73a0ac3](https://github.com/dhis2/maintenance-app-beta/commit/73a0ac353454817f006a96d7bec572a1719f00e8))
+
+# [0.140.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.139.0...v0.140.0) (2026-03-10)
+
+
+### Features
+
+* event notifications [DHISs-21049] ([#790](https://github.com/dhis2/maintenance-app-beta/issues/790)) ([c915085](https://github.com/dhis2/maintenance-app-beta/commit/c915085ddd4d275b3511e260622d68d990f3789e))
+
+# [0.139.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.138.0...v0.139.0) (2026-03-10)
+
+
+### Features
+
+* add event program customization section ([#792](https://github.com/dhis2/maintenance-app-beta/issues/792)) ([2fe5087](https://github.com/dhis2/maintenance-app-beta/commit/2fe5087bee0db8eca7a6e503ddb38f186c2d119a))
+
+# [0.138.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.137.0...v0.138.0) (2026-03-09)
+
+
+### Features
+
+* [DHIS2-21050] Event program access and sharing ([#789](https://github.com/dhis2/maintenance-app-beta/issues/789)) ([89442bd](https://github.com/dhis2/maintenance-app-beta/commit/89442bd1aa5724c7f075c0a3f9b40aa059f31623))
+
+# [0.137.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.136.2...v0.137.0) (2026-03-09)
+
+
+### Features
+
+* program events data and form ([#794](https://github.com/dhis2/maintenance-app-beta/issues/794)) ([af8b932](https://github.com/dhis2/maintenance-app-beta/commit/af8b9325ec61a01e9766a4c89bd8843fc7058286))
+
+## [0.136.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.136.1...v0.136.2) (2026-03-05)
+
+
+### Bug Fixes
+
+* program indicator updates [DHIS2-20957] [DHIS2-20974] ([#781](https://github.com/dhis2/maintenance-app-beta/issues/781)) ([10e6955](https://github.com/dhis2/maintenance-app-beta/commit/10e69559820291fe4bb88d49de28b9644fcd80dc))
+
+## [0.136.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.136.0...v0.136.1) (2026-03-04)
+
+
+### Bug Fixes
+
+* double expression ([b1134f0](https://github.com/dhis2/maintenance-app-beta/commit/b1134f01d7f017e44437d48362c3246a89cb8810))
+* save button without closing page ([a46a554](https://github.com/dhis2/maintenance-app-beta/commit/a46a5542244bc37a4e54edbe3867d86c30ab8c2b))
+* success alert when saving ([9d56487](https://github.com/dhis2/maintenance-app-beta/commit/9d5648778f791d1b6fbc05c4e69d83fb6f9ec378))
+* wrap form footer for program disaggregations ([55b93b7](https://github.com/dhis2/maintenance-app-beta/commit/55b93b7fe8f9c093c20ce4ee87b64d0c46b70f98))
+
+
+### Features
+
+* event programs setup ([#787](https://github.com/dhis2/maintenance-app-beta/issues/787)) [skip release] ([499bafa](https://github.com/dhis2/maintenance-app-beta/commit/499bafacb0ae0ab5cc3aa80c944932764bc008e9))
+
 # [0.136.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.135.0...v0.136.0) (2026-03-03)
 
 

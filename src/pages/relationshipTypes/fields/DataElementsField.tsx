@@ -130,9 +130,9 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
                             newLink={newDataElementLink}
                         />
                     }
-                    filterPlaceholder={i18n.t('Search available data elements')}
+                    filterPlaceholder={i18n.t('Filter available data elements')}
                     filterPlaceholderPicked={i18n.t(
-                        'Search selected data elements'
+                        'Filter selected data elements'
                     )}
                     filterable
                     filterablePicked

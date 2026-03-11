@@ -54,10 +54,10 @@ export const ProgramIndicatorGroupsFormFields = () => {
                         leftHeader={i18n.t('Available program indicators')}
                         rightHeader={i18n.t('Selected program indicators')}
                         filterPlaceholder={i18n.t(
-                            'Search available program indicators'
+                            'Filter available program indicators'
                         )}
                         filterPlaceholderPicked={i18n.t(
-                            'Search selected program indicators'
+                            'Filter selected program indicators'
                         )}
                         dataTest="program-indicators-transfer"
                         maxSelections={Infinity}

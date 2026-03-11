@@ -9,10 +9,15 @@ import {
 } from '../../../../../lib'
 import { validationStrategyOptions } from '../../constants'
 
-export function ValidationStrategyField() {
+export function ValidationStrategyField({
+    isTrackerProgram = true,
+}: Readonly<{ isTrackerProgram?: boolean }>) {
+    const fieldName = isTrackerProgram
+        ? 'validationStrategy'
+        : 'programStages[0].validationStrategy'
     const schemaSection = useSchemaSectionHandleOrThrow()
     const schema = useSchema(schemaSection.name)
-    const { input, meta } = useField('validationStrategy')
+    const { input, meta } = useField(fieldName)
 
     const schemaOptions =
         schema.properties?.validationStrategy?.constants?.map(
@@ -27,7 +32,7 @@ export function ValidationStrategyField() {
 
     return (
         <SingleSelectFieldFF
-            name="validationStrategy"
+            name={fieldName}
             label={i18n.t('Validation strategy')}
             inputWidth="400px"
             options={options}

@@ -15,23 +15,23 @@ import {
     StandardFormField,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
-} from '../../../components'
-import { defaultDateTimeFormatter } from '../../../components/date'
+} from '../../../../components'
+import { defaultDateTimeFormatter } from '../../../../components/date'
 import {
     ModelSingleSelectFormField,
     useRefreshModelSingleSelect,
-} from '../../../components/metadataFormControls/ModelSingleSelect'
+} from '../../../../components/metadataFormControls/ModelSingleSelect'
 import {
     DEFAULT_CATEGORYCOMBO_SELECT_OPTION,
     useSchemaSectionHandleOrThrow,
-} from '../../../lib'
-import { DisplayableModel } from '../../../types/models'
-import classes from '../../dataElements/fields/CategoryComboField.module.css'
+} from '../../../../lib'
+import { DisplayableModel } from '../../../../types/models'
+import classes from '../../../dataElements/fields/CategoryComboField.module.css'
 import {
     CompleteEventsExpiryDaysField,
     ExpiryDaysWithPeriodTypeField,
     OpenDaysAfterCoEndDateField,
-} from './fields'
+} from '../fields'
 import setupClasses from './SetupFormContents.module.css'
 
 const CATEGORY_COMBOS_QUERY = {
@@ -48,8 +48,10 @@ const addDefaultCategoryComboTransform = <TCatCombo extends DisplayableModel>(
 
 export const SetupFormContents = React.memo(function SetupFormContents({
     name,
+    isTrackerProgram = true,
 }: {
     name: string
+    isTrackerProgram?: boolean
 }) {
     const { input: versionInput } = useField('version')
     const version = Number(versionInput.value) || 0
@@ -118,23 +120,25 @@ export const SetupFormContents = React.memo(function SetupFormContents({
             <StandardFormField>
                 <FeatureTypeField />
             </StandardFormField>
-            <StandardFormField>
-                <ModelSingleSelectFormField
-                    showNoValueOption
-                    inputWidth="400px"
-                    dataTest="formfields-relatedProgram"
-                    name="relatedProgram"
-                    label={i18n.t('Related program')}
-                    query={{
-                        resource: 'programs',
-                        params: {
-                            fields: ['id', 'displayName'],
-                            order: ['displayName'],
-                            filter: ['id:ne:' + values.id],
-                        },
-                    }}
-                />
-            </StandardFormField>
+            {isTrackerProgram && (
+                <StandardFormField>
+                    <ModelSingleSelectFormField
+                        showNoValueOption
+                        inputWidth="400px"
+                        dataTest="formfields-relatedProgram"
+                        name="relatedProgram"
+                        label={i18n.t('Related program')}
+                        query={{
+                            resource: 'programs',
+                            params: {
+                                fields: ['id', 'displayName'],
+                                order: ['displayName'],
+                                filter: ['id:ne:' + values.id],
+                            },
+                        }}
+                    />
+                </StandardFormField>
+            )}
             <StandardFormField>
                 <EditableFieldWrapper
                     onRefresh={() => refreshCategoryCombos()}
@@ -165,69 +169,73 @@ export const SetupFormContents = React.memo(function SetupFormContents({
             <StandardFormField>
                 <OpenDaysAfterCoEndDateField />
             </StandardFormField>
-            <StandardFormField>
-                <FieldRFF
-                    name="minAttributesRequiredToSearch"
-                    component={InputFieldFF}
-                    type="number"
-                    min="0"
-                    inputWidth="200px"
-                    label={i18n.t(
-                        'Minimum number of attributes required to search'
-                    )}
-                    dataTest="formfields-minattributesrequiredtosearch"
-                    format={(value: unknown) => {
-                        if (value === undefined || value === null) {
+            {isTrackerProgram && (
+                <StandardFormField>
+                    <FieldRFF
+                        name="minAttributesRequiredToSearch"
+                        component={InputFieldFF}
+                        type="number"
+                        min="0"
+                        inputWidth="200px"
+                        label={i18n.t(
+                            'Minimum number of attributes required to search'
+                        )}
+                        dataTest="formfields-minattributesrequiredtosearch"
+                        format={(value: unknown) => {
+                            if (value === undefined || value === null) {
+                                return ''
+                            }
+                            if (
+                                typeof value === 'number' ||
+                                typeof value === 'string'
+                            ) {
+                                return String(value)
+                            }
                             return ''
-                        }
-                        if (
-                            typeof value === 'number' ||
-                            typeof value === 'string'
-                        ) {
-                            return String(value)
-                        }
-                        return ''
-                    }}
-                    parse={(value: unknown) => {
-                        if (value === undefined || value === '') {
-                            return 0
-                        }
-                        return Number.parseInt(value as string, 10)
-                    }}
-                />
-            </StandardFormField>
-            <StandardFormField>
-                <FieldRFF
-                    name="maxTeiCountToReturn"
-                    component={InputFieldFF}
-                    type="number"
-                    min="0"
-                    inputWidth="200px"
-                    label={i18n.t(
-                        'Maximum number of search results to display'
-                    )}
-                    helpText={i18n.t('Entering 0 shows all search results')}
-                    dataTest="formfields-maxteicounttoreturn"
-                    format={(value: unknown) => {
-                        if (value === undefined || value === null) {
+                        }}
+                        parse={(value: unknown) => {
+                            if (value === undefined || value === '') {
+                                return 0
+                            }
+                            return Number.parseInt(value as string, 10)
+                        }}
+                    />
+                </StandardFormField>
+            )}
+            {isTrackerProgram && (
+                <StandardFormField>
+                    <FieldRFF
+                        name="maxTeiCountToReturn"
+                        component={InputFieldFF}
+                        type="number"
+                        min="0"
+                        inputWidth="200px"
+                        label={i18n.t(
+                            'Maximum number of search results to display'
+                        )}
+                        helpText={i18n.t('Entering 0 shows all search results')}
+                        dataTest="formfields-maxteicounttoreturn"
+                        format={(value: unknown) => {
+                            if (value === undefined || value === null) {
+                                return ''
+                            }
+                            if (
+                                typeof value === 'number' ||
+                                typeof value === 'string'
+                            ) {
+                                return String(value)
+                            }
                             return ''
-                        }
-                        if (
-                            typeof value === 'number' ||
-                            typeof value === 'string'
-                        ) {
-                            return String(value)
-                        }
-                        return ''
-                    }}
-                    parse={(value: unknown) => {
-                        if (value === undefined || value === '') {
-                            return 0
-                        }
-                        return Number.parseInt(value as string, 10)
-                    }}
-                />
-            </StandardFormField>
+                        }}
+                        parse={(value: unknown) => {
+                            if (value === undefined || value === '') {
+                                return 0
+                            }
+                            return Number.parseInt(value as string, 10)
+                        }}
+                    />
+                </StandardFormField>
+            )}
         </SectionedFormSection>
     )
 })

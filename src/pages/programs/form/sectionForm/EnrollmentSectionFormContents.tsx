@@ -157,7 +157,7 @@ export const EnrollmentSectionFormContents = ({
                 </SectionedFormSection>
                 <SectionedFormSection name="sectionAttributes">
                     <StandardFormSectionTitle>
-                        {i18n.t('Section attributes')}
+                        {i18n.t('Section tracked entity attributes')}
                     </StandardFormSectionTitle>
                     <StandardFormSectionDescription>
                         {i18n.t(
@@ -183,19 +183,23 @@ export const EnrollmentSectionFormContents = ({
                                 }}
                                 leftHeader={
                                     <TransferHeader>
-                                        {i18n.t('Available attributes')}
+                                        {i18n.t(
+                                            'Available tracked entity attributes'
+                                        )}
                                     </TransferHeader>
                                 }
                                 rightHeader={
                                     <TransferHeader>
-                                        {i18n.t('Selected attributes')}
+                                        {i18n.t(
+                                            'Selected tracked entity attributes'
+                                        )}
                                     </TransferHeader>
                                 }
                                 filterPlaceholder={i18n.t(
-                                    'Search available attributes'
+                                    'Filter available tracked entity attributes'
                                 )}
                                 filterPlaceholderPicked={i18n.t(
-                                    'Search selected attributes'
+                                    'Filter selected tracked entity attributes'
                                 )}
                                 enableOrderChange
                                 height={'350px'}

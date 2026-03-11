@@ -149,9 +149,9 @@ export const DataElementsTransferField = ({
                             </Button>
                         </div>
                     }
-                    filterPlaceholder={i18n.t('Search available data elements')}
+                    filterPlaceholder={i18n.t('Filter available data elements')}
                     filterPlaceholderPicked={i18n.t(
-                        'Search selected data elements'
+                        'Filter selected data elements'
                     )}
                     enableOrderChange
                     height={'350px'}

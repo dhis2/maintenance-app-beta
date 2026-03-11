@@ -25,8 +25,6 @@ import {
 import { PaddedContainer } from '../../../components/ExpressionBuilder/PaddedContainer'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
 import {
-    // Used directly to avoid key collision with PROGRAM_NOTIFICATION_TRIGGER.ENROLLMENT in allConstantTranslations
-    ANALYTICS_TYPE,
     getConstantTranslation,
     SECTIONS_MAP,
     useSchema,
@@ -38,6 +36,11 @@ import { ProgramIndicatorFormDescriptor } from './formDescriptor'
 import { OrgUnitField } from './OrgUnitField'
 
 const section = SECTIONS_MAP.programIndicator
+
+export const PROGRAM_INDICATOR_SPECIFIC_TRANSLATIONS: Record<string, string> = {
+    EVENT: i18n.t('Event'),
+    ENROLLMENT: i18n.t('Enrollment'),
+}
 
 export const ProgramIndicatorsFormFields = () => {
     const { input: decimalsInput, meta: decimalsMeta } = useField('decimals', {
@@ -130,14 +133,18 @@ export const ProgramIndicatorsFormFields = () => {
                 <StandardFormField dataTest="analytics-type-field">
                     <FieldGroup label={i18n.t('Data source')} required>
                         <RadioFieldFF
-                            label={`${ANALYTICS_TYPE.EVENT}: ${i18n.t(
+                            label={`${
+                                PROGRAM_INDICATOR_SPECIFIC_TRANSLATIONS.EVENT
+                            }: ${i18n.t(
                                 'Uses data from all events within a program stage'
                             )}`}
                             input={eventField.input}
                             meta={eventField.meta}
                         />
                         <RadioFieldFF
-                            label={`${ANALYTICS_TYPE.ENROLLMENT}: ${i18n.t(
+                            label={`${
+                                PROGRAM_INDICATOR_SPECIFIC_TRANSLATIONS.ENROLLMENT
+                            }: ${i18n.t(
                                 'Uses data combined from the latest events across the enrollment'
                             )}`}
                             input={enrollmentField.input}

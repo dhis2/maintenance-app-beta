@@ -5,36 +5,13 @@ import {
     createFormValidate,
     modelFormSchemas,
     DEFAULT_CATEGORY_COMBO,
-} from '../../../lib'
+} from '../../../../lib'
+import { sharingSettingsSchema } from '../common/sharingSettingsSchema'
 
 const { identifiable, withDefaultListColumns, modelReference } =
     modelFormSchemas
 
-const sharingSettingsSchema = z.object({
-    owner: z.string().optional(),
-    external: z.boolean().optional(),
-    public: z.string().optional(),
-    userGroups: z
-        .record(
-            z.object({
-                id: z.string(),
-                access: z.string(),
-                displayName: z.string().optional(),
-            })
-        )
-        .optional(),
-    users: z
-        .record(
-            z.object({
-                id: z.string(),
-                access: z.string(),
-                displayName: z.string().optional(),
-            })
-        )
-        .optional(),
-})
-
-const programBaseSchema = z.object({
+const trackerProgramBaseSchema = z.object({
     code: z.string().optional(),
     description: z.string().optional(),
     version: z.coerce
@@ -106,14 +83,21 @@ const programBaseSchema = z.object({
     maxTeiCountToReturn: z.coerce.number().int().min(0).default(0),
 })
 
-export const programFormSchema = identifiable.merge(programBaseSchema).extend({
-    name: z.string(),
-    shortName: z.string(),
-    programType: z.enum(['WITH_REGISTRATION']).default('WITH_REGISTRATION'),
-})
+export const trackerProgramFormSchema = identifiable
+    .merge(trackerProgramBaseSchema)
+    .extend({
+        shortName: z.string(),
+        programType: z.enum(['WITH_REGISTRATION']).default('WITH_REGISTRATION'),
+    })
 
-export const programListSchema = programBaseSchema.merge(withDefaultListColumns)
+export const trackerProgramListSchema = trackerProgramBaseSchema.merge(
+    withDefaultListColumns
+)
 
-export const initialValues = getDefaultsOld(programFormSchema)
+export const trackerProgramInitialValues = getDefaultsOld(
+    trackerProgramFormSchema
+)
 
-export const validate = createFormValidate(programFormSchema)
+export const trackerProgramValidate = createFormValidate(
+    trackerProgramFormSchema
+)

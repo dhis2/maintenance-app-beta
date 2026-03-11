@@ -1,45 +1,18 @@
-import arrayMutators from 'final-form-arrays'
 import React from 'react'
-import {
-    DefaultFormFooter,
-    DefaultSectionedFormSidebar,
-    FormBase,
-    SectionedFormErrorNotice,
-    SectionedFormLayout,
-} from '../../components'
-import { SectionedFormProvider, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
-import { initialValues, validate } from './form'
-import { ProgramFormDescriptor } from './form/formDescriptor'
-import { ProgramFormContents } from './form/ProgramFormContents'
-
-const section = SECTIONS_MAP.program
+import { useLocationSearchState } from '../../lib'
+import { NewEventProgram } from './NewEventProgram'
+import { NewTrackerProgram } from './NewTrackerProgram'
 
 export const Component = () => {
-    return (
-        <FormBase
-            onSubmit={useOnSubmitNew({ section })}
-            initialValues={initialValues}
-            validate={validate}
-            subscription={{}}
-            mutators={{ ...arrayMutators }}
-        >
-            {({ handleSubmit }) => {
-                return (
-                    <SectionedFormProvider
-                        formDescriptor={ProgramFormDescriptor}
-                    >
-                        <SectionedFormLayout
-                            sidebar={<DefaultSectionedFormSidebar />}
-                        >
-                            <form onSubmit={handleSubmit}>
-                                <ProgramFormContents />
-                                <DefaultFormFooter />
-                            </form>
-                            <SectionedFormErrorNotice />
-                        </SectionedFormLayout>
-                    </SectionedFormProvider>
-                )
-            }}
-        </FormBase>
+    const locationState = useLocationSearchState()
+    const queryParams = new URLSearchParams(locationState?.search)
+    const programType =
+        queryParams.get('programType') ||
+        ('WITHOUT_REGISTRATION' as 'WITHOUT_REGISTRATION' | 'WITH_REGISTRATION')
+
+    return programType === 'WITH_REGISTRATION' ? (
+        <NewTrackerProgram />
+    ) : (
+        <NewEventProgram />
     )
 }

@@ -152,9 +152,11 @@ export const TrackedEntityAttributesField = ({
                             newLink={newTrackedEntityAttributeLink}
                         />
                     }
-                    filterPlaceholder={i18n.t('Search available attributes')}
+                    filterPlaceholder={i18n.t(
+                        'Filter available tracked entity attributes'
+                    )}
                     filterPlaceholderPicked={i18n.t(
-                        'Search selected attributes'
+                        'Filter selected tracked entity attributes'
                     )}
                     filterable
                     filterablePicked

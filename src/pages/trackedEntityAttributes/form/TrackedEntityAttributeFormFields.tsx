@@ -54,6 +54,7 @@ export const TrackedEntityAttributeFormFields = ({
 
     const { systemInfo } = useConfig()
     const valueType = valueTypeInput.value
+    const isSkipAnalyticsAvailable = useFeatureAvailable(FEATURES.skipAnalytics)
     const isUnique = uniqueInput.value
     const isOrgunitScope = orgunitScopeInput.value
     const isGenerated = generatedInput.value
@@ -220,6 +221,24 @@ export const TrackedEntityAttributeFormFields = ({
                     />
                 </StandardFormField>
 
+                {isSkipAnalyticsAvailable && (
+                    <StandardFormField>
+                        <FieldRFF
+                            component={CheckboxFieldFF}
+                            dataTest="formfields-skipAnalytics"
+                            name="skipAnalytics"
+                            label={i18n.t(
+                                'Do not expose this attribute in analytics'
+                            )}
+                            helpText={i18n.t(
+                                'When enabled, this tracked entity attribute is excluded from all analytics processing, including analytics tables and analytics apps.'
+                            )}
+                            type="checkbox"
+                            validateFields={[]}
+                        />
+                    </StandardFormField>
+                )}
+
                 <StandardFormField>
                     <AggregationTypeFieldByValueType />
                 </StandardFormField>
@@ -274,9 +293,9 @@ export const TrackedEntityAttributeFormFields = ({
                         }}
                         leftHeader={i18n.t('Available legends')}
                         rightHeader={i18n.t('Selected legends')}
-                        filterPlaceholder={i18n.t('Search available legends')}
+                        filterPlaceholder={i18n.t('Filter available legends')}
                         filterPlaceholderPicked={i18n.t(
-                            'Search selected legends'
+                            'Filter selected legends'
                         )}
                         enableOrderChange={true}
                         maxSelections={Infinity}

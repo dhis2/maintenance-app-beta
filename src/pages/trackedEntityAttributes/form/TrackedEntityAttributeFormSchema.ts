@@ -36,6 +36,7 @@ const trackedEntityAttributeBaseSchema = z.object({
     inherit: z.boolean().default(false),
     displayInListNoProgram: z.boolean().default(false),
     skipSynchronization: z.boolean().default(false),
+    skipAnalytics: z.boolean().default(false),
     trigramIndexable: z.boolean().default(false),
     trigramIndexed: z.boolean().optional(),
     preferredSearchOperator: z.enum(['EQ', 'SW', 'EW', 'LIKE']).optional(),
