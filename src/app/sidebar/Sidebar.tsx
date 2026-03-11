@@ -106,6 +106,12 @@ const ExternalAppLinks = React.memo(
         const canOpenImportExport =
             userAuthorities.has('ALL') ||
             userAuthorities.has('M_dhis-web-import-export')
+        const filteredViewImport = filterValue
+            ? matchLabel(metadataImportLabel, filterValue)
+            : true
+        const filteredViewExport = filterValue
+            ? matchLabel(metadataExportLabel, filterValue)
+            : true
         return (
             <>
                 {canOpenDataAdministration &&
@@ -125,11 +131,7 @@ const ExternalAppLinks = React.memo(
                     )}
                 {canOpenImportExport && (
                     <>
-                        {(
-                            filterValue
-                                ? matchLabel(metadataImportLabel, filterValue)
-                                : true
-                        ) ? (
+                        {filteredViewImport ? (
                             <SidenavLink
                                 to={`${url}/${
                                     globalShellEnabled
@@ -141,11 +143,7 @@ const ExternalAppLinks = React.memo(
                                 external={true}
                             />
                         ) : null}
-                        {(
-                            filterValue
-                                ? matchLabel(metadataExportLabel, filterValue)
-                                : true
-                        ) ? (
+                        {filteredViewExport ? (
                             <SidenavLink
                                 to={`${url}/${
                                     globalShellEnabled
