@@ -220,7 +220,7 @@ export const StageFormFormContents = ({
                         schemaName={SchemaName.programStageSection}
                         level={isSubsection ? 'secondary' : 'primary'}
                         otherProps={{
-                            sectionsLength: currentSections?.length,
+                            sectionsLength: currentSections?.length ?? 0,
                             stageId: stageId,
                         }}
                     />
