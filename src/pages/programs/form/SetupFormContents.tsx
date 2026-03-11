@@ -9,7 +9,7 @@ import {
     ColorAndIconField,
     DescriptionField,
     EditableFieldWrapper,
-        NameField,
+    NameField,
     SectionedFormSection,
     ShortNameField,
     StandardFormField,
@@ -21,6 +21,7 @@ import {
     useRefreshModelSingleSelect,
 } from '../../../components/metadataFormControls/ModelSingleSelect'
 import {
+    DEFAULT_CATEGORY_COMBO,
     DEFAULT_CATEGORYCOMBO_SELECT_OPTION,
     selectedLocale,
     useSchemaSectionHandleOrThrow,
@@ -167,9 +168,16 @@ export const SetupFormContents = React.memo(function SetupFormContents({
             <StandardFormField>
                 <CompleteEventsExpiryDaysField />
             </StandardFormField>
-            <StandardFormField>
-                <OpenDaysAfterCoEndDateField />
-            </StandardFormField>
+            {values.categoryCombo?.id &&
+                values.categoryCombo.id !== DEFAULT_CATEGORY_COMBO.id && (
+                    <StandardFormField>
+                        <OpenDaysAfterCoEndDateField
+                            categoryCombinationDisplayName={
+                                values.categoryCombo.displayName
+                            }
+                        />
+                    </StandardFormField>
+                )}
             <StandardFormField>
                 <FieldRFF
                     name="minAttributesRequiredToSearch"
@@ -233,7 +241,7 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                     }}
                 />
             </StandardFormField>
-<StandardFormField>
+            <StandardFormField>
                 <DisplayFrontPageListField />
             </StandardFormField>
         </SectionedFormSection>

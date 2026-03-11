@@ -13,7 +13,11 @@ function isEnabled(value: unknown): boolean {
     return !Number.isNaN(numericValue) && numericValue !== 0
 }
 
-export function OpenDaysAfterCoEndDateField() {
+export function OpenDaysAfterCoEndDateField({
+    categoryCombinationDisplayName,
+}: {
+    categoryCombinationDisplayName: string
+}) {
     const { input, meta } = useField('openDaysAfterCoEndDate', {
         parse: (rawValue?: string) =>
             rawValue === undefined || rawValue === ''
@@ -41,18 +45,10 @@ export function OpenDaysAfterCoEndDateField() {
     return (
         <div className={setupClasses.setupCheckboxBlock}>
             <Checkbox
-                label={
-                    <>
-                        {i18n.t(
-                            'Close data entry a number of days after "Implementing partner" end date'
-                        )}
-                        <span className={setupClasses.devNote}>
-                            {i18n.t(
-                                '(dev note: only shown if COC is selected and has end date)'
-                            )}
-                        </span>
-                    </>
-                }
+                label={i18n.t(
+                    'Close data entry a number of days after end date of {{categoryCombinationDisplayName}}',
+                    { categoryCombinationDisplayName }
+                )}
                 onChange={({ checked: isChecked }) => onToggle(isChecked)}
                 checked={checked}
             />
