@@ -74,7 +74,7 @@ export const MessageFields = ({
             elementRef.current?.setSelectionRange(position, position)
             pendingCursorRef.current = null
         }
-    })
+    }, [pendingCursorRef.current])
 
     return (
         <div className={styles.validationRuleContentContainer}>
