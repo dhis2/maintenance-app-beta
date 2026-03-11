@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import {
     DefaultSectionedFormSidebar,
     FormBase,
@@ -6,7 +6,13 @@ import {
     SectionedFormLayout,
 } from '../../components'
 import { DefaultFormFooter } from '../../components/form/DefaultFormFooter'
-import { SectionedFormProvider, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
+import {
+    FEATURES,
+    SectionedFormProvider,
+    SECTIONS_MAP,
+    useFeatureAvailable,
+    useOnSubmitNew,
+} from '../../lib'
 import { initialValues, validate } from './form'
 import { TrackedEntityAttributeFormDescriptor } from './form/formDescriptor'
 import { TrackedEntityAttributeFormContents } from './form/TrackedEntityAttributeFormContents'
@@ -14,6 +20,21 @@ import { TrackedEntityAttributeFormContents } from './form/TrackedEntityAttribut
 const section = SECTIONS_MAP.trackedEntityAttribute
 
 export const Component = () => {
+    const isSearchPerformanceAvailable = useFeatureAvailable(
+        FEATURES.searchPerformance
+    )
+    const formDescriptor = useMemo(() => {
+        if (isSearchPerformanceAvailable) {
+            return TrackedEntityAttributeFormDescriptor
+        }
+        return {
+            ...TrackedEntityAttributeFormDescriptor,
+            sections: TrackedEntityAttributeFormDescriptor.sections.filter(
+                (s) => s.name !== 'searchPerformance'
+            ),
+        }
+    }, [isSearchPerformanceAvailable])
+
     return (
         <FormBase
             onSubmit={useOnSubmitNew({ section })}
@@ -22,9 +43,7 @@ export const Component = () => {
         >
             {({ handleSubmit }) => {
                 return (
-                    <SectionedFormProvider
-                        formDescriptor={TrackedEntityAttributeFormDescriptor}
-                    >
+                    <SectionedFormProvider formDescriptor={formDescriptor}>
                         <SectionedFormLayout
                             sidebar={<DefaultSectionedFormSidebar />}
                         >
