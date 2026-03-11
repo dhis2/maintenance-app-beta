@@ -301,7 +301,7 @@ export const StageFormContents = ({
                     </StandardFormSectionTitle>
                     <StandardFormSectionDescription>
                         {i18n.t(
-                            'Configure the form for data collection for events in this program stage.'
+                            'Choose and configure how the program stage form looks and works.'
                         )}
                     </StandardFormSectionDescription>
                     <TabbedFormTypePicker
@@ -321,7 +321,7 @@ export const StageFormContents = ({
                                 </StandardFormSectionTitle>
                                 <div className={styles.basicFormDescription}>
                                     {i18n.t(
-                                        'This form displays an auto-generated list of the data elements defined for this program stage.'
+                                        'Displays a form with the attributes in the order they were added to the enrollment.'
                                     )}
                                 </div>
                                 <div>
@@ -332,9 +332,7 @@ export const StageFormContents = ({
                                             scrollToSection('stageData')
                                         }}
                                     >
-                                        {i18n.t(
-                                            'Edit or rearrange the data elements'
-                                        )}
+                                        {i18n.t('Manage data elements')}
                                     </Button>
                                 </div>
                             </div>

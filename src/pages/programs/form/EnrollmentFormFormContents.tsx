@@ -165,7 +165,7 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
             </StandardFormSectionTitle>
             <StandardFormSectionDescription>
                 {i18n.t(
-                    'Choose and configure the type of form that will be used to collect information during enrollment.'
+                    'Choose and configure how the enrollment form looks and works.'
                 )}
             </StandardFormSectionDescription>
             <TabbedFormTypePicker
