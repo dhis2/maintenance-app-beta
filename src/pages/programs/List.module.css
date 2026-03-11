@@ -19,15 +19,20 @@
 
 .programTypeDescription {
     margin-top: var(--spacers-dp4);
-    margin-bottom: var(--spacers-dp32);
+    margin-bottom: var(--spacers-dp24);
     font-size: 14px;
-    color: var(--colors-grey600);
+    color: var(--colors-grey800);
 }
 .programTypeCard {
-    gap: 8px;
+    gap: var(--spacers-dp8);
+    background-color: var(--colors-white);
     border: 1px solid var(--colors-grey400);
     border-radius: 6px;
-    padding: var(--spacers-dp32);
+    padding: var(--spacers-dp24) var(--spacers-dp16);
+}
+.programTypeCard:hover {
+    border: 1px solid var(--colors-grey500);
+    cursor: pointer;
 }
 
 .programTypeCard svg {
@@ -35,10 +40,15 @@
 }
 
 .programTypeCardHighlighted svg {
-    fill: var(--colors-teal700);
+    fill: var(--colors-teal800);
 }
 
 .programTypeCardHighlighted {
+    border: 1px solid var(--colors-teal700);
+    background-color: var(--colors-teal050);
+}
+
+.programTypeCardHighlighted:hover {
     border: 1px solid var(--colors-teal700);
     background-color: var(--colors-teal050);
 }
@@ -58,7 +68,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--spacers-dp4);
+    gap: 6px;
     justify-content: flex-start;
 }
 
@@ -66,14 +76,25 @@
     margin: 0px;
 }
 
+.programTypeTitle h3 {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--colors-grey900);
+}
+
 .programTypeTitle p {
-    color: var(--colors-grey600);
+    color: var(--colors-grey700);
+}
+
+.programTypeCardHighlighted .programTypeTitle p {
+    color: var(--colors-grey900);
 }
 
 .programTypeCards {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    max-width: 1000px;
+    gap: var(--spacers-dp12);
+    min-width: 640px;
+    max-width: 960px;
     align-items: stretch;
 }
