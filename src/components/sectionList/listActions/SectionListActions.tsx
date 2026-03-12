@@ -69,7 +69,7 @@ export const ActionShowDetails = ({ onClick }: { onClick: () => void }) => {
                 onClick={onClick}
                 dataTest="row-show-details-action-button"
                 icon={
-                    // TODO: replace with IconInfo16 when Button has been updated
+                    // replace with IconInfo16 when Button has been updated
                     <svg
                         width="22"
                         height="24"
