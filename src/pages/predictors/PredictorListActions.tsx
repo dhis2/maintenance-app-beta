@@ -23,7 +23,7 @@ import {
 import React, { useRef, useState } from 'react'
 import { useHref, useLinkClickHandler } from 'react-router-dom'
 import {
-    ActionEdit,
+    ActionShowDetails,
     ListActions,
 } from '../../components/sectionList/listActions'
 import { DeleteAction } from '../../components/sectionList/listActions/DeleteAction'
@@ -186,13 +186,7 @@ export const PredictorListActions = ({
     return (
         <>
             <ListActions>
-                <TooltipWrapper
-                    condition={!editable}
-                    content={TOOLTIPS.noEditAccess}
-                    dataTest="no-editable-tooltip"
-                >
-                    <ActionEdit disabled={!editable} modelId={model.id} />
-                </TooltipWrapper>
+                <ActionShowDetails onClick={() => onShowDetailsClick(model)} />
                 <div ref={ref}>
                     <Button
                         small
