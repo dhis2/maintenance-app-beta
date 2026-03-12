@@ -1,4 +1,4 @@
 .container {
     display: flex;
-    gap: var(--spacers-dp8);
+    gap: var(--spacers-dp4);
 }

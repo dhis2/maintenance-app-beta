@@ -1,7 +1,7 @@
 .validationRuleContentContainer {
     display: flex;
     justify-content: flex-start;
-    gap: var(--spacers-dp32);
+    gap: var(--spacers-dp16);
 }
 
 .validationRuleFieldsContainer {
@@ -13,7 +13,8 @@
     min-width: 400px;
     height: 400px;
     overflow-y: auto;
-    border: 1px solid var(--colors-grey500);
+    border: 1px solid var(--colors-grey400);
+    border-radius: 5px;
     margin-block-start: 22px;
     padding: var(--spacers-dp8);
 }
@@ -26,12 +27,13 @@
 }
 
 .templateVariablesText {
-    font-weight: 300;
-    padding-block-end: var(--spacers-dp16);
+    font-size: 13px;
+    color: var(--colors-grey700);
+    padding-block-end: var(--spacers-dp8);
 }
 
 .variableButton {
-    margin-block-end: var(--spacers-dp8);
+    margin-block-end: var(--spacers-dp4);
 }
 
 .input {
@@ -87,6 +89,7 @@ textarea {
 .validationRuleField > textarea {
     height: 325px;
     resize: none;
+    line-height: 1.5;
 }
 
 .validationRuleField > input.dense,
@@ -146,11 +149,4 @@ textarea.disabled {
 .errorIcon {
     margin-inline-start: var(--spacers-dp8);
     display: inline-block;
-}
-
-.fieldHelpText {
-    font-size: 12px;
-    line-height: 14px;
-    margin-block: 4px;
-    color: var(--colors-grey700);
 }

@@ -301,6 +301,11 @@ describe('Categories form tests', () => {
                 categoryOptions[1].displayName,
                 screen
             )
+            await uiActions.pickRadioField(
+                'dataDimensionType',
+                'Disaggregation',
+                screen
+            )
 
             await uiActions.submitForm(screen)
 

@@ -10,7 +10,7 @@ export function OptionSetField() {
                 name="optionSet"
                 label={i18n.t('Option set')}
                 helpText={i18n.t(
-                    'Choose from a predefined list of Option sets. The Option set will automatically define the Value type.'
+                    'Limit data entry to a predefined list of options. Overrides value type selection to match the option set.'
                 )}
                 query={{
                     resource: 'optionSets',
@@ -20,7 +20,7 @@ export function OptionSetField() {
                     },
                 }}
                 clearable
-                clearText={i18n.t('<No value>')}
+                clearText={i18n.t('Clear')}
             />
         </div>
     )

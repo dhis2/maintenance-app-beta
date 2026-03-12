@@ -16,9 +16,6 @@ export function ColorAndIconField() {
         <Field
             dataTest="formfields-colorandicon"
             label={i18n.t('Visual configuration')}
-            helpText={i18n.t(
-                'A color and icon are helpful for identifying data elements in information-dense screens.'
-            )}
         >
             <ColorAndIconPicker
                 icon={iconInput.value}

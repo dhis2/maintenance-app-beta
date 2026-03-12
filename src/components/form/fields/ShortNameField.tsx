@@ -33,7 +33,7 @@ export function ShortNameField({
     const helpString =
         helpText ||
         i18n.t(
-            'A short, unique name. Displayed in analysis apps where space is limited, depending on user or system settings.'
+            'A short, unique name. Displayed in analytics apps where space is limited, depending on user or system settings.'
         )
 
     return (
@@ -56,13 +56,7 @@ export function ShortNameField({
                     dataTest="formfields-shortName"
                     required={isRequired}
                     inputWidth="400px"
-                    label={
-                        isRequired
-                            ? i18n.t('{{fieldLabel}} (required)', {
-                                  fieldLabel: i18n.t('Short name'),
-                              })
-                            : i18n.t('Short name')
-                    }
+                    label={i18n.t('Short name')}
                     helpText={helpString}
                     validationText={warning}
                     warning={!!warning}

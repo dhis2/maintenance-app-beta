@@ -26,17 +26,15 @@ function IndicatorGroupSetFormFields() {
                 </StandardFormSectionDescription>
                 <DefaultIdentifiableFields />
                 <StandardFormField>
-                    <DescriptionField
-                        helpText={i18n.t(
-                            'Explain the purpose of this indicator group set.'
-                        )}
-                    />
+                    <DescriptionField />
                 </StandardFormField>
                 <StandardFormField>
                     <FieldRFF
                         component={CheckboxFieldFF}
                         name="compulsory"
-                        label={i18n.t('Compulsory')}
+                        label={i18n.t(
+                            'Compulsory: all indicators must belong to at least one group in this group set.'
+                        )}
                         type="checkbox"
                     />
                 </StandardFormField>
@@ -68,6 +66,8 @@ function IndicatorGroupSetFormFields() {
                             filterPlaceholderPicked={i18n.t(
                                 'Filter selected indicator groups'
                             )}
+                            maxSelections={Infinity}
+                            enableOrderChange={true}
                         />
                     </StandardFormField>
                 </StandardFormField>

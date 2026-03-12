@@ -1,16 +1,23 @@
 .selectedOrgUnitInfo {
     display: flex;
-    gap: 4px;
+    gap: var(--spacers-dp4);
     flex-direction: row;
     align-items: center;
+    color: var(--colors-grey800);
+    margin: var(--spacers-dp12) 0 0 var(--spacers-dp8);
+}
+
+.selectedOrgUnitInfo p {
+    margin: 0;
+    color: var(--colors-grey900);
 }
 
 .selectedOrgUnitBox {
     width: 600px;
     height: 350px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--colors-grey300);
     border-radius: 4px;
-    padding: 10px;
+    padding: var(--spacers-dp8);
     resize: both;
     overflow: auto;
     white-space: pre-wrap;
