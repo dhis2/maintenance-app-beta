@@ -83,7 +83,10 @@ export const TrackedEntityAttributeFormFields = ({
                 </StandardFormSectionDescription>
 
                 <StandardFormField>
-                    <NameField schemaSection={section} />
+                    <NameField
+                        schemaSection={section}
+                        caseSensitiveUniqueness={true}
+                    />
                 </StandardFormField>
 
                 <StandardFormField>
@@ -91,7 +94,10 @@ export const TrackedEntityAttributeFormFields = ({
                 </StandardFormField>
 
                 <StandardFormField>
-                    <ShortNameField schemaSection={section} />
+                    <ShortNameField
+                        schemaSection={section}
+                        caseSensitiveUniqueness={true}
+                    />
                 </StandardFormField>
 
                 <StandardFormField>

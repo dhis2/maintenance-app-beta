@@ -9,12 +9,19 @@ export function NameField({
     schemaSection,
     helpText,
     modelId,
+    caseSensitiveUniqueness = false,
 }: {
     helpText?: string
     schemaSection: SchemaSection
     modelId?: string
+    caseSensitiveUniqueness?: boolean
 }) {
-    const validator = useValidator({ schemaSection, property: 'name', modelId })
+    const validator = useValidator({
+        schemaSection,
+        property: 'name',
+        modelId,
+        caseSensitive: caseSensitiveUniqueness,
+    })
     const schema = useSchema(schemaSection.name)
     const propertyDetails = schema.properties['name']
     const [warning, setWarning] = useState<string | undefined>()
@@ -25,6 +32,7 @@ export function NameField({
         message: i18n.t(
             'This name is already in use. Consider updating the name to avoid a duplication.'
         ),
+        caseSensitive: caseSensitiveUniqueness,
     })
     const uniquenessWarner = propertyDetails.unique
         ? undefined

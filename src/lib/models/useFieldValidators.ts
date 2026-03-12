@@ -16,10 +16,12 @@ export function useValidator({
     schemaSection,
     property,
     modelId,
+    caseSensitive = false,
 }: {
     schemaSection: SchemaSection
     property: string
     modelId?: string
+    caseSensitive?: boolean
 }) {
     const schema = useSchema(schemaSection.name)
     const propertyDetails = schema.properties[property]
@@ -29,6 +31,7 @@ export function useValidator({
         model: schemaSection.namePlural,
         field: property,
         id: resolvedModelId,
+        caseSensitive,
     }) as Validator
 
     const validators = useMemo(() => {
