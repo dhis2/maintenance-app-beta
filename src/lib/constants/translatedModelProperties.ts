@@ -11,6 +11,7 @@ const TRANSLATED_PROPERTY: Record<string, string> = {
     aggregateExportDataElement: i18n.t(
         'Data element for aggregate data export'
     ),
+    attributeCombo: i18n.t('Attribute category combination'),
     analyticsType: i18n.t('Analytics type'),
     bidirectional: i18n.t('Bidirectional'),
     category: i18n.t('Category'),
