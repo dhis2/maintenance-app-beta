@@ -171,7 +171,7 @@ export const StageDataFormContents = React.memo(function StageDataFormContents({
                         </TableCellHead>
                         {stageHasDateDataElements && (
                             <TableCellHead>
-                                {i18n.t('Future date')}
+                                {i18n.t('Allow future dates')}
                             </TableCellHead>
                         )}
                         <TableCellHead>
