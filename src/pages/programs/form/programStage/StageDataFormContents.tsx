@@ -65,9 +65,9 @@ export const StageDataFormContents = React.memo(function StageDataFormContents({
         }
     )
 
-    const stageHasDateDataElements =
-        input?.value &&
-        input.value.some((psde) => getValueType(psde) === 'DATE')
+    const stageHasDateDataElements = input.value.some(
+        (psde) => getValueType(psde) === 'DATE'
+    )
 
     return (
         <SectionedFormSection name={name}>
@@ -93,11 +93,7 @@ export const StageDataFormContents = React.memo(function StageDataFormContents({
                 className={css.moduleTransferField}
             >
                 <ModelTransfer
-                    selected={
-                        input.value
-                            ? input.value.map((psde) => psde.dataElement)
-                            : []
-                    }
+                    selected={input.value.map((psde) => psde.dataElement)}
                     onChange={({ selected }) => {
                         const existingDataElementsMap = new Map(
                             input.value.map((psde) => [
@@ -175,7 +171,7 @@ export const StageDataFormContents = React.memo(function StageDataFormContents({
                         </TableCellHead>
                         {stageHasDateDataElements && (
                             <TableCellHead>
-                                {i18n.t('Future date')}
+                                {i18n.t('Allow future dates')}
                             </TableCellHead>
                         )}
                         <TableCellHead>
@@ -191,90 +187,84 @@ export const StageDataFormContents = React.memo(function StageDataFormContents({
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {input.value &&
-                        input.value.map((dataElement, index) => {
-                            const dataElementId = dataElement.dataElement.id
-                            const isDateType =
-                                getValueType(dataElement) === 'DATE'
-                            const rowKey = dataElement.id || dataElementId
+                    {input.value.map((dataElement, index) => {
+                        const dataElementId = dataElement.dataElement.id
+                        const isDateType = getValueType(dataElement) === 'DATE'
+                        const rowKey = dataElement.id || dataElementId
 
-                            return (
-                                <TableRow key={rowKey}>
-                                    <TableCell>
-                                        {dataElement.dataElement.displayName}
-                                    </TableCell>
-                                    <TableCell>
-                                        <FieldRFF
-                                            component={CheckboxFieldFF}
-                                            name={`${fieldName}[${index}].compulsory`}
-                                            type="checkbox"
-                                        />
-                                    </TableCell>
-                                    {!isTrackerProgram && (
-                                        <TableCell>
-                                            <FieldRFF
-                                                component={CheckboxFieldFF}
-                                                name={`${fieldName}[${index}].allowProvidedElsewhere`}
-                                                type="checkbox"
-                                            />
-                                        </TableCell>
-                                    )}
+                        return (
+                            <TableRow key={rowKey}>
+                                <TableCell>
+                                    {dataElement.dataElement.displayName}
+                                </TableCell>
+                                <TableCell>
+                                    <FieldRFF
+                                        component={CheckboxFieldFF}
+                                        name={`${fieldName}[${index}].compulsory`}
+                                        type="checkbox"
+                                    />
+                                </TableCell>
+                                {!isTrackerProgram && (
                                     <TableCell>
                                         <FieldRFF
                                             component={CheckboxFieldFF}
-                                            name={`${fieldName}[${index}].displayInReports`}
+                                            name={`${fieldName}[${index}].allowProvidedElsewhere`}
                                             type="checkbox"
                                         />
                                     </TableCell>
-                                    {stageHasDateDataElements && (
-                                        <TableCell>
-                                            <FieldRFF
-                                                component={CheckboxFieldFF}
-                                                name={`${fieldName}[${index}].allowFutureDate`}
-                                                type="checkbox"
-                                                disabled={!isDateType}
-                                            />
-                                        </TableCell>
-                                    )}
+                                )}
+                                <TableCell>
+                                    <FieldRFF
+                                        component={CheckboxFieldFF}
+                                        name={`${fieldName}[${index}].displayInReports`}
+                                        type="checkbox"
+                                    />
+                                </TableCell>
+                                {stageHasDateDataElements && (
                                     <TableCell>
                                         <FieldRFF
                                             component={CheckboxFieldFF}
-                                            name={`${fieldName}[${index}].skipAnalytics`}
+                                            name={`${fieldName}[${index}].allowFutureDate`}
                                             type="checkbox"
+                                            disabled={!isDateType}
                                         />
                                     </TableCell>
-                                    <TableCell>
-                                        <FieldRFF
-                                            component={CheckboxFieldFF}
-                                            name={`${fieldName}[${index}].skipSynchronization`}
-                                            type="checkbox"
-                                        />
-                                    </TableCell>
-                                    <TableCell>
-                                        <RenderingOptionsSelect
-                                            fieldName={fieldName}
-                                            index={index}
-                                            device="DESKTOP"
-                                            valueType={getValueType(
-                                                dataElement
-                                            )}
-                                            required
-                                        />
-                                    </TableCell>
-                                    <TableCell>
-                                        <RenderingOptionsSelect
-                                            fieldName={fieldName}
-                                            index={index}
-                                            device="MOBILE"
-                                            valueType={getValueType(
-                                                dataElement
-                                            )}
-                                            required
-                                        />
-                                    </TableCell>
-                                </TableRow>
-                            )
-                        })}
+                                )}
+                                <TableCell>
+                                    <FieldRFF
+                                        component={CheckboxFieldFF}
+                                        name={`${fieldName}[${index}].skipAnalytics`}
+                                        type="checkbox"
+                                    />
+                                </TableCell>
+                                <TableCell>
+                                    <FieldRFF
+                                        component={CheckboxFieldFF}
+                                        name={`${fieldName}[${index}].skipSynchronization`}
+                                        type="checkbox"
+                                    />
+                                </TableCell>
+                                <TableCell>
+                                    <RenderingOptionsSelect
+                                        fieldName={fieldName}
+                                        index={index}
+                                        device="DESKTOP"
+                                        valueType={getValueType(dataElement)}
+                                        required
+                                    />
+                                </TableCell>
+                                <TableCell>
+                                    <RenderingOptionsSelect
+                                        fieldName={fieldName}
+                                        index={index}
+                                        device="MOBILE"
+                                        valueType={getValueType(dataElement)}
+                                        required
+                                    />
+                                </TableCell>
+                            </TableRow>
+                        )
+                    })}
                 </TableBody>
             </Table>
         </SectionedFormSection>

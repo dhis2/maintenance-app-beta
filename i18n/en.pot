@@ -5,6 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"POT-Creation-Date: 2026-03-11T13:07:57.819Z\n"
+"PO-Revision-Date: 2026-03-11T13:07:57.819Z\n"
 "POT-Creation-Date: 2026-03-10T15:21:15.088Z\n"
 "PO-Revision-Date: 2026-03-10T15:21:15.088Z\n"
 
@@ -2866,20 +2868,11 @@ msgstr ""
 "Select legends to visually categorize values for this data set in Data "
 "entry and Analytics apps."
 
-msgid "Search available legends"
-msgstr "Search available legends"
-
-msgid "Search selected legends"
-msgstr "Search selected legends"
-
 msgid "Compulsory data elements"
 msgstr "Compulsory data elements"
 
-msgid "Search available data elements"
-msgstr "Search available data elements"
-
-msgid "Search compulsory data elements"
-msgstr "Search compulsory data elements"
+msgid "Filter compulsory data elements"
+msgstr "Filter compulsory data elements"
 
 msgid "Approval workflow"
 msgstr "Approval workflow"
@@ -2909,14 +2902,14 @@ msgstr "Available indicators"
 msgid "Selected indicators"
 msgstr "Selected indicators"
 
-msgid "Search available indicators"
-msgstr "Search available indicators"
+msgid "Filter available indicators"
+msgstr "Filter available indicators"
 
-msgid "Search selected indicators"
-msgstr "Search selected indicators"
+msgid "Filter selected indicators"
+msgstr "Filter selected indicators"
 
-msgid "Search selected data elements"
-msgstr "Search selected data elements"
+msgid "Filter selected data elements"
+msgstr "Filter selected data elements"
 
 msgid "Custom disaggregation"
 msgstr "Custom disaggregation"
@@ -3273,12 +3266,6 @@ msgstr "Set up the basic information for this indicator group."
 
 msgid "Explain the purpose of this indicator group."
 msgstr "Explain the purpose of this indicator group."
-
-msgid "Filter available indicators"
-msgstr "Filter available indicators"
-
-msgid "Filter selected indicators"
-msgstr "Filter selected indicators"
 
 msgid "Configure indicator type merge"
 msgstr "Configure indicator type merge"
@@ -4420,11 +4407,11 @@ msgstr "Available program indicators"
 msgid "Selected program indicators"
 msgstr "Selected program indicators"
 
-msgid "Search available program indicators"
-msgstr "Search available program indicators"
+msgid "Filter available program indicators"
+msgstr "Filter available program indicators"
 
-msgid "Search selected program indicators"
-msgstr "Search selected program indicators"
+msgid "Filter selected program indicators"
+msgstr "Filter selected program indicators"
 
 msgid "Incident date"
 msgstr "Incident date"
@@ -5180,6 +5167,21 @@ msgstr "Used as the default registration date for events"
 msgid "Only integers are allowed"
 msgstr "Only integers are allowed"
 
+msgid "Program Settings"
+msgstr "Program Settings"
+
+msgid "Set up advanced options for this program."
+msgstr "Set up advanced options for this program."
+
+msgid "Allow user assignment of events"
+msgstr "Allow user assignment of events"
+
+msgid "Block entry form after completed"
+msgstr "Block entry form after completed"
+
+msgid "Pre-generate event UID"
+msgstr "Pre-generate event UID"
+
 msgid "Close data entry a number of days after the end of a period"
 msgstr "Close data entry a number of days after the end of a period"
 
@@ -5188,6 +5190,12 @@ msgstr "Lock completed events after a number of days"
 
 msgid "Close data entry a number of days after \"Implementing partner\" end date"
 msgstr "Close data entry a number of days after \"Implementing partner\" end date"
+
+msgid "Settings"
+msgstr "Settings"
+
+msgid "Validation strategy"
+msgstr "Validation strategy"
 
 msgid "Access and Sharing"
 msgstr "Access and Sharing"
@@ -5348,12 +5356,6 @@ msgstr "Configuration options"
 msgid "Set up more advanced options for this program stage."
 msgstr "Set up more advanced options for this program stage."
 
-msgid "Allow user assignment of events"
-msgstr "Allow user assignment of events"
-
-msgid "Pre-generate event UID"
-msgstr "Pre-generate event UID"
-
 msgid "Custom terminology"
 msgstr "Custom terminology"
 
@@ -5437,9 +5439,6 @@ msgstr "Standard interval days"
 msgid "Enter the number of days between repeated events."
 msgstr "Enter the number of days between repeated events."
 
-msgid "Validation strategy"
-msgstr "Validation strategy"
-
 msgid "Stage section"
 msgstr "Stage section"
 
@@ -5491,20 +5490,20 @@ msgstr "Stage: Data"
 msgid "Stage: Form"
 msgstr "Stage: Form"
 
-msgid "Section attributes"
-msgstr "Section attributes"
+msgid "Section tracked entity attributes"
+msgstr "Section tracked entity attributes"
 
-msgid "Available attributes"
-msgstr "Available attributes"
+msgid "Available tracked entity attributes"
+msgstr "Available tracked entity attributes"
 
-msgid "Selected attributes"
-msgstr "Selected attributes"
+msgid "Selected tracked entity attributes"
+msgstr "Selected tracked entity attributes"
 
-msgid "Search available attributes"
-msgstr "Search available attributes"
+msgid "Filter available tracked entity attributes"
+msgstr "Filter available tracked entity attributes"
 
-msgid "Search selected attributes"
-msgstr "Search selected attributes"
+msgid "Filter selected tracked entity attributes"
+msgstr "Filter selected tracked entity attributes"
 
 msgid "Saving a section does not save other changes to the program"
 msgstr "Saving a section does not save other changes to the program"
@@ -5518,17 +5517,15 @@ msgstr "Enrollment: Data"
 msgid "Choose the information to collect during enrollment."
 msgstr "Choose the information to collect during enrollment."
 
-msgid "Filter available attributes"
-msgstr "Filter available attributes"
+msgid "Configure tracked entity attributes"
+msgstr "Configure tracked entity attributes"
 
-msgid "Filter selected attributes"
-msgstr "Filter selected attributes"
-
-msgid "Configure attributes"
-msgstr "Configure attributes"
-
-msgid "Attributes can be collected in different ways with different options."
-msgstr "Attributes can be collected in different ways with different options."
+msgid ""
+"Tracked entity attributes can be collected in different ways with different "
+"options."
+msgstr ""
+"Tracked entity attributes can be collected in different ways with different "
+"options."
 
 msgid "Allow future dates"
 msgstr "Allow future dates"
@@ -5557,12 +5554,6 @@ msgid ""
 msgstr ""
 "Choose which tracked entity attributes are shown when viewing the "
 "relationship"
-
-msgid "Available tracked entity attributes"
-msgstr "Available tracked entity attributes"
-
-msgid "Selected tracked entity attributes"
-msgstr "Selected tracked entity attributes"
 
 msgid "Set up the basic information for this relationship type."
 msgstr "Set up the basic information for this relationship type."
@@ -5744,10 +5735,10 @@ msgid "Data handling"
 msgstr "Data handling"
 
 msgid ""
-"Configure how this tracker entity attribute's values are displayed, "
+"Configure how this tracked entity attribute's values are displayed, "
 "inherited, or synchronized across the system."
 msgstr ""
-"Configure how this tracker entity attribute's values are displayed, "
+"Configure how this tracked entity attribute's values are displayed, "
 "inherited, or synchronized across the system."
 
 msgid "Show in lists and search results even when a program is not selected"
@@ -5755,6 +5746,16 @@ msgstr "Show in lists and search results even when a program is not selected"
 
 msgid "Do not synchronize this attribute and it's values"
 msgstr "Do not synchronize this attribute and it's values"
+
+msgid "Do not expose this attribute in analytics"
+msgstr "Do not expose this attribute in analytics"
+
+msgid ""
+"When enabled, this tracked entity attribute is excluded from all analytics "
+"processing, including analytics tables and analytics apps."
+msgstr ""
+"When enabled, this tracked entity attribute is excluded from all analytics "
+"processing, including analytics tables and analytics apps."
 
 msgid "Search performance"
 msgstr "Search performance"
