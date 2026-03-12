@@ -16,7 +16,8 @@ import { SectionListEmpty, SectionListError } from './SectionListMessages'
 import { SectionListPagination } from './SectionListPagination'
 import { SectionListRow } from './SectionListRow'
 import { SectionListTitle } from './SectionListTitle'
-import { Toolbar } from './toolbar'
+import { DefaultToolbar } from './toolbar'
+import { DefaultToolbarProps } from './toolbar/DefaultToolbar'
 import { TranslationDialog } from './translation'
 import { SelectedColumn } from './types'
 import { useSelectedModels } from './useSelectedModels'
@@ -27,6 +28,7 @@ type SectionListWrapperProps = {
     error: FetchError | undefined
     refetch: () => void
     ActionsComponent?: React.ComponentType<DefaultListActionProps>
+    ToolbarComponent?: React.ComponentType<DefaultToolbarProps>
 }
 export const DefaultSectionListMessage = ({
     error,
@@ -52,6 +54,7 @@ export const SectionListWrapper = ({
     pager,
     refetch,
     ActionsComponent,
+    ToolbarComponent,
 }: SectionListWrapperProps) => {
     const { columns: headerColumns } = useModelListView()
     const schema = useSchemaFromHandle()
@@ -135,6 +138,19 @@ export const SectionListWrapper = ({
         ]
     )
 
+    const RenderedToolbarComponent =
+        ToolbarComponent !== undefined ? (
+            <ToolbarComponent
+                selectedModels={selectedModels}
+                onDeselectAll={clearAll}
+            />
+        ) : (
+            <DefaultToolbar
+                selectedModels={selectedModels}
+                onDeselectAll={clearAll}
+            />
+        )
+
     const isAllSelected = data ? checkAllSelected(data) : false
 
     return (
@@ -142,10 +158,7 @@ export const SectionListWrapper = ({
             <SectionListTitle />
             <FilterWrapper />
             <div className={css.listDetailsWrapper}>
-                <Toolbar
-                    selectedModels={selectedModels}
-                    onDeselectAll={clearAll}
-                />
+                {RenderedToolbarComponent}
                 <SectionList
                     headerColumns={headerColumns}
                     onSelectAll={handleSelectAll}

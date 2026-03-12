@@ -227,7 +227,7 @@ export const EnrollmentDataFormContents = React.memo(
                             filterPlaceholderPicked={i18n.t(
                                 'Filter selected tracked entity attributes'
                             )}
-                            maxSelections={Infinity}
+                            maxSelections={1}
                             query={{
                                 resource: 'trackedEntityAttributes',
                                 params: {
@@ -258,11 +258,6 @@ export const EnrollmentDataFormContents = React.memo(
                         <TableHead>
                             <TableRow>
                                 <TableCellHead>{i18n.t('Name')}</TableCellHead>
-                                {programHasDateAttributes && (
-                                    <TableCellHead>
-                                        {i18n.t('Allow future dates')}
-                                    </TableCellHead>
-                                )}
                                 <TableCellHead>
                                     {i18n.t('Required')}
                                 </TableCellHead>
@@ -272,6 +267,11 @@ export const EnrollmentDataFormContents = React.memo(
                                 <TableCellHead>
                                     {i18n.t('Display in list')}
                                 </TableCellHead>
+                                {programHasDateAttributes && (
+                                    <TableCellHead>
+                                        {i18n.t('Allow future dates')}
+                                    </TableCellHead>
+                                )}
                                 <TableCellHead>
                                     {i18n.t('Desktop Display')}
                                 </TableCellHead>
@@ -316,19 +316,6 @@ export const EnrollmentDataFormContents = React.memo(
                                                 )}
                                             </span>
                                         </TableCell>
-                                        {programHasDateAttributes && (
-                                            <TableCell>
-                                                <FieldRFF
-                                                    component={CheckboxFieldFF}
-                                                    name={`programTrackedEntityAttributes[${index}].allowFutureDate`}
-                                                    type="checkbox"
-                                                    disabled={
-                                                        attribute?.valueType !==
-                                                        'DATE'
-                                                    }
-                                                />
-                                            </TableCell>
-                                        )}
                                         <TableCell>
                                             <TooltipWrapper
                                                 condition={isMandatoryDisabled}
@@ -383,6 +370,19 @@ export const EnrollmentDataFormContents = React.memo(
                                                 type="checkbox"
                                             />
                                         </TableCell>
+                                        {programHasDateAttributes && (
+                                            <TableCell>
+                                                <FieldRFF
+                                                    component={CheckboxFieldFF}
+                                                    name={`programTrackedEntityAttributes[${index}].allowFutureDate`}
+                                                    type="checkbox"
+                                                    disabled={
+                                                        attribute?.valueType !==
+                                                        'DATE'
+                                                    }
+                                                />
+                                            </TableCell>
+                                        )}
                                         <TableCell>
                                             <RenderingOptionsSelect
                                                 fieldName="programTrackedEntityAttributes"

@@ -1,5 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
+import { NoticeBox } from '@dhis2/ui'
 import React from 'react'
+import { useFormState } from 'react-final-form'
 import {
     OrganisationUnitTreeWithToolbarFormField,
     StandardFormField,
@@ -19,6 +21,8 @@ export const AccessAndSharingFormContents = React.memo(
         name,
         showStageAccess = true,
     }: AccessAndSharingFormContentsProps) {
+        const { values } = useFormState({ subscription: { values: true } })
+
         return (
             <SectionedFormSection name={name}>
                 <StandardFormSectionTitle>
@@ -43,9 +47,17 @@ export const AccessAndSharingFormContents = React.memo(
                             : 'Set up which user roles can access this program.'
                     )}
                 </StandardFormSectionDescription>
-                <StandardFormField>
-                    <RoleAccess showStageAccess={showStageAccess} />
-                </StandardFormField>
+                {values.id ? (
+                    <StandardFormField>
+                        <RoleAccess showStageAccess={showStageAccess} />
+                    </StandardFormField>
+                ) : (
+                    <NoticeBox>
+                        {i18n.t(
+                            'Program must be saved to access sharing settings.'
+                        )}
+                    </NoticeBox>
+                )}
             </SectionedFormSection>
         )
     }

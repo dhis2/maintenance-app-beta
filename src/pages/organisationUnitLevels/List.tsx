@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import css from '../../components/sectionList/SectionList.module.css'
 import { SectionListTitle } from '../../components/sectionList/SectionListTitle'
-import { Toolbar } from '../../components/sectionList/toolbar'
+import { DefaultToolbar } from '../../components/sectionList/toolbar'
 import { TranslationDialog } from '../../components/sectionList/translation'
 import { BaseListModel } from '../../lib'
 import { ListRows } from './ListRows'
@@ -14,7 +14,7 @@ export const Component = () => {
         <div>
             <SectionListTitle />
             <div className={css.listDetailsWrapper}>
-                <Toolbar
+                <DefaultToolbar
                     selectedModels={new Set()}
                     onDeselectAll={() => {}}
                     downloadable={false}

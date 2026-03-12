@@ -20,7 +20,7 @@ type ProgramFieldProps = Readonly<{
 }>
 
 export function ProgramField({ disabled = false }: ProgramFieldProps) {
-    const programNewHref = useHref('/program/new')
+    const programNewHref = useHref('/programs/new')
     const refreshPrograms = useRefreshModelSingleSelect(PROGRAM_QUERY)
 
     const select = (
