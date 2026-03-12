@@ -43,7 +43,7 @@ export const TrackedEntityAttributeFormFields = ({
     basicSectionName: string
     dataCollectionSectionName: string
     dataHandlingSectionName: string
-    searchPerformanceSectionName: string
+    searchPerformanceSectionName?: string
     legendsSectionName: string
 }) => {
     const section = SECTIONS_MAP.trackedEntityAttribute
@@ -244,32 +244,33 @@ export const TrackedEntityAttributeFormFields = ({
                 </StandardFormField>
             </SectionedFormSection>
 
-            {isSearchPerformanceSectionAvailable && (
-                <SectionedFormSection name={searchPerformanceSectionName}>
-                    <StandardFormSectionTitle>
-                        {i18n.t('Search performance')}
-                    </StandardFormSectionTitle>
-                    <StandardFormSectionDescription>
-                        {i18n.t(
-                            'Adjust how this attribute is searched to balance performance and accuracy.'
-                        )}
-                    </StandardFormSectionDescription>
+            {isSearchPerformanceSectionAvailable &&
+                searchPerformanceSectionName && (
+                    <SectionedFormSection name={searchPerformanceSectionName}>
+                        <StandardFormSectionTitle>
+                            {i18n.t('Search performance')}
+                        </StandardFormSectionTitle>
+                        <StandardFormSectionDescription>
+                            {i18n.t(
+                                'Adjust how this attribute is searched to balance performance and accuracy.'
+                            )}
+                        </StandardFormSectionDescription>
 
-                    <StandardFormField>
-                        <PreferredSearchOperatorField />
-                    </StandardFormField>
+                        <StandardFormField>
+                            <PreferredSearchOperatorField />
+                        </StandardFormField>
 
-                    <StandardFormField>
-                        <BlockedSearchOperatorsField />
-                    </StandardFormField>
+                        <StandardFormField>
+                            <BlockedSearchOperatorsField />
+                        </StandardFormField>
 
-                    <StandardFormField>
-                        <MinCharactersToSearchField />
-                    </StandardFormField>
+                        <StandardFormField>
+                            <MinCharactersToSearchField />
+                        </StandardFormField>
 
-                    <TrigramIndexableField />
-                </SectionedFormSection>
-            )}
+                        <TrigramIndexableField />
+                    </SectionedFormSection>
+                )}
 
             <SectionedFormSection name={legendsSectionName}>
                 <StandardFormSectionTitle>

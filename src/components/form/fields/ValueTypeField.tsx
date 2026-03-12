@@ -19,7 +19,8 @@ function getValueTypeHelpText(schemaSection: {
             ? i18n.t('variable')
             : schemaSection.title
     const optionSetSuffix =
-        schemaSection.name === 'optionSet'
+        schemaSection.name === 'optionSet' ||
+        schemaSection.name === 'programRuleVariable'
             ? ''
             : ' ' +
               i18n.t(
@@ -130,7 +131,7 @@ export function ValueTypeField({
         input.onBlur()
     }
 
-    if (isEdit && !externallyDisabled) {
+    if (isEdit && !externallyDisabled && !isProgramRuleVariableForm) {
         return (
             <ConfirmationModalWrapper
                 onChange={handleChange}

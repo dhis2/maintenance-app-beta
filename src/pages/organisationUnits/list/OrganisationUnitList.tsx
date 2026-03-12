@@ -17,7 +17,7 @@ import {
 import { useModelListView } from '../../../components/sectionList/listView'
 import { ModelValue } from '../../../components/sectionList/modelValue/ModelValue'
 import { SectionListTitle } from '../../../components/sectionList/SectionListTitle'
-import { Toolbar } from '../../../components/sectionList/toolbar'
+import { DefaultToolbar } from '../../../components/sectionList/toolbar'
 import { TranslationDialog } from '../../../components/sectionList/translation'
 import {
     BaseListModel,
@@ -290,7 +290,7 @@ export const OrganisationUnitList = () => {
             <SectionListTitle />
             <IdentifiableFilter />
             <div className={css.listDetailsWrapper}>
-                <Toolbar
+                <DefaultToolbar
                     selectedModels={
                         new Set(
                             table

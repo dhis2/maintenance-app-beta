@@ -51,6 +51,7 @@ export const PredictorGroupFormFields = () => {
                         query={{
                             resource: 'predictors',
                         }}
+                        filterUnassignedTo="predictorGroups"
                         leftHeader={i18n.t('Available predictors')}
                         rightHeader={i18n.t('Selected predictors')}
                         filterPlaceholder={i18n.t(

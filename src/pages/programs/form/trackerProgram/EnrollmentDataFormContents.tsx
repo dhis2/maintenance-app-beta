@@ -227,7 +227,7 @@ export const EnrollmentDataFormContents = React.memo(
                             filterPlaceholderPicked={i18n.t(
                                 'Filter selected tracked entity attributes'
                             )}
-                            maxSelections={Infinity}
+                            maxSelections={1}
                             query={{
                                 resource: 'trackedEntityAttributes',
                                 params: {

@@ -7,6 +7,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "POT-Creation-Date: 2026-03-11T13:07:57.819Z\n"
 "PO-Revision-Date: 2026-03-11T13:07:57.819Z\n"
+"POT-Creation-Date: 2026-03-10T15:21:15.088Z\n"
+"PO-Revision-Date: 2026-03-10T15:21:15.088Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -47,6 +49,15 @@ msgstr "Merge {{modelName}}"
 
 msgid "Edit {{modelName}}"
 msgstr "Edit {{modelName}}"
+
+msgid "Metadata Integrity Checks"
+msgstr "Metadata Integrity Checks"
+
+msgid "Import Metadata"
+msgstr "Import Metadata"
+
+msgid "Export Metadata"
+msgstr "Export Metadata"
 
 msgid "Metadata Overview"
 msgstr "Metadata Overview"
@@ -1406,6 +1417,9 @@ msgstr "Predictor group"
 msgid "Predictor groups"
 msgstr "Predictor groups"
 
+msgid "Indicators and Predictors"
+msgstr "Indicators and Predictors"
+
 msgid "Programs and Tracker"
 msgstr "Programs and Tracker"
 
@@ -1414,6 +1428,9 @@ msgstr "Validation"
 
 msgid "Validations"
 msgstr "Validations"
+
+msgid "Data approval"
+msgstr "Data approval"
 
 msgid "Other"
 msgstr "Other"
@@ -3819,6 +3836,22 @@ msgstr ""
 "Classify category options groups to add more dimensionality to captured "
 "data for analysis."
 
+msgid "Data Approval"
+msgstr "Data Approval"
+
+msgid ""
+"Data approval workflows create a process for authorized users to review and "
+"approve data at specified levels."
+msgstr ""
+"Data approval workflows create a process for authorized users to review and "
+"approve data at specified levels."
+
+msgid "Configure data approval levels for use in data approval workflows."
+msgstr "Configure data approval levels for use in data approval workflows."
+
+msgid "Configure data approval workflows."
+msgstr "Configure data approval workflows."
+
 msgid ""
 "Data elements are fundamental units for data collection in DHIS2, "
 "representing individual data points for both tracker and aggregate data. "
@@ -3878,10 +3911,10 @@ msgstr "Create, update, view and delete data set notification templates."
 
 msgid ""
 "Indicators are used to calculate and analyze data based on data elements "
-"and other indicators."
+"and other indicators. Predictors are used to predict future data values."
 msgstr ""
 "Indicators are used to calculate and analyze data based on data elements "
-"and other indicators."
+"and other indicators. Predictors are used to predict future data values."
 
 msgid ""
 "Create, update, view and delete indicators, specify the numerator and "
@@ -3920,6 +3953,32 @@ msgstr ""
 
 msgid "Group program indicators for easier analysis."
 msgstr "Group program indicators for easier analysis."
+
+msgid "Create predictors which can be used to predict future data values."
+msgstr "Create predictors which can be used to predict future data values."
+
+msgid "Create predictor groups that contain several related predictors."
+msgstr "Create predictor groups that contain several related predictors."
+
+msgid "Option sets are used to limit data entry to defined values."
+msgstr "Option sets are used to limit data entry to defined values."
+
+msgid ""
+"Create option sets which can be included in data elements and produce "
+"drop-down lists in data entry forms."
+msgstr ""
+"Create option sets which can be included in data elements and produce "
+"drop-down lists in data entry forms."
+
+msgid ""
+"Create a group of options from option sets that has a similar functional "
+"area or meaning."
+msgstr ""
+"Create a group of options from option sets that has a similar functional "
+"area or meaning."
+
+msgid "Create, modify and view sets of option groups."
+msgstr "Create, modify and view sets of option groups."
 
 msgid ""
 "Organisation units are the structural entities within DHIS2 that define "
@@ -3980,12 +4039,6 @@ msgstr ""
 "Create constants which can be included in expressions of indicator and "
 "validation rules."
 
-msgid "Configure data approval levels for use in data approval workflows."
-msgstr "Configure data approval levels for use in data approval workflows."
-
-msgid "Configure data approval workflows."
-msgstr "Configure data approval workflows."
-
 msgid "Configure external map layers for use in GIS."
 msgstr "Configure external map layers for use in GIS."
 
@@ -4007,29 +4060,6 @@ msgstr ""
 "of language and country."
 
 msgid ""
-"Create a group of options from option sets that has a similar functional "
-"area or meaning."
-msgstr ""
-"Create a group of options from option sets that has a similar functional "
-"area or meaning."
-
-msgid "Create, modify and view sets of option groups."
-msgstr "Create, modify and view sets of option groups."
-
-msgid ""
-"Create option sets which can be included in data elements and produce "
-"drop-down lists in data entry forms."
-msgstr ""
-"Create option sets which can be included in data elements and produce "
-"drop-down lists in data entry forms."
-
-msgid "Create predictors which can be used to predict future data values."
-msgstr "Create predictors which can be used to predict future data values."
-
-msgid "Create predictor groups that contain several related predictors."
-msgstr "Create predictor groups that contain several related predictors."
-
-msgid ""
 "Manage analytics to be emailed to specific user groups on a daily, weekly "
 "or monthly basis."
 msgstr ""
@@ -4043,19 +4073,16 @@ msgstr ""
 "Create SQL database views, typically based on resource tables, to provide "
 "convenient views for third-party tools."
 
-msgid "Set disaggregation mappings for program indicators."
-msgstr "Set disaggregation mappings for program indicators."
-
 msgid ""
-"Programs and Tracker are used to collect, manage, and analyze event-based "
-"and longitudinal data. They allow you to define program stages, track "
-"entities such as people or items over time, and apply rules and "
-"relationships to support flexible data capture and analysis."
+"Programs are used to collect, manage, and analyze event-based and "
+"longitudinal data. They allow you to define program stages, track entities "
+"such as people or items over time, and apply rules and relationships to "
+"support flexible data capture and analysis."
 msgstr ""
-"Programs and Tracker are used to collect, manage, and analyze event-based "
-"and longitudinal data. They allow you to define program stages, track "
-"entities such as people or items over time, and apply rules and "
-"relationships to support flexible data capture and analysis."
+"Programs are used to collect, manage, and analyze event-based and "
+"longitudinal data. They allow you to define program stages, track entities "
+"such as people or items over time, and apply rules and relationships to "
+"support flexible data capture and analysis."
 
 msgid ""
 "Create, modify and view programs. A program has program stages and defines "
@@ -4094,6 +4121,9 @@ msgstr ""
 
 msgid "Variables you use to create program rule expressions."
 msgstr "Variables you use to create program rule expressions."
+
+msgid "Set disaggregation mappings for program indicators."
+msgstr "Set disaggregation mappings for program indicators."
 
 msgid ""
 "Validations are used to provide important feedback during data entry to "
@@ -5266,6 +5296,9 @@ msgstr "Configure data collection for events in this program stage."
 msgid "Configure data collection for events in this program."
 msgstr "Configure data collection for events in this program."
 
+msgid "Filter selected data elements"
+msgstr "Filter selected data elements"
+
 msgid "Configure data items"
 msgstr "Configure data items"
 
@@ -5932,3 +5965,11 @@ msgstr "Right side sliding window"
 
 msgid "Skip form validation"
 msgstr "Skip form validation"
+
+msgctxt "Application title"
+msgid "__MANIFEST_APP_TITLE"
+msgstr "Maintenance (Preview)"
+
+msgctxt "Application description"
+msgid "__MANIFEST_APP_DESCRIPTION"
+msgstr ""

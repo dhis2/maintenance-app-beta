@@ -169,15 +169,15 @@ export const StageDataFormContents = React.memo(function StageDataFormContents({
                         <TableCellHead>
                             {i18n.t('Display in reports')}
                         </TableCellHead>
-                        <TableCellHead>
-                            {i18n.t('Skip in analytics')}
-                        </TableCellHead>
-                        <TableCellHead>{i18n.t('Skip sync')}</TableCellHead>
                         {stageHasDateDataElements && (
                             <TableCellHead>
                                 {i18n.t('Future date')}
                             </TableCellHead>
                         )}
+                        <TableCellHead>
+                            {i18n.t('Skip in analytics')}
+                        </TableCellHead>
+                        <TableCellHead>{i18n.t('Skip sync')}</TableCellHead>
                         <TableCellHead>
                             {i18n.t('Desktop Display')}
                         </TableCellHead>
@@ -220,6 +220,16 @@ export const StageDataFormContents = React.memo(function StageDataFormContents({
                                         type="checkbox"
                                     />
                                 </TableCell>
+                                {stageHasDateDataElements && (
+                                    <TableCell>
+                                        <FieldRFF
+                                            component={CheckboxFieldFF}
+                                            name={`${fieldName}[${index}].allowFutureDate`}
+                                            type="checkbox"
+                                            disabled={!isDateType}
+                                        />
+                                    </TableCell>
+                                )}
                                 <TableCell>
                                     <FieldRFF
                                         component={CheckboxFieldFF}
@@ -234,16 +244,6 @@ export const StageDataFormContents = React.memo(function StageDataFormContents({
                                         type="checkbox"
                                     />
                                 </TableCell>
-                                {stageHasDateDataElements && (
-                                    <TableCell>
-                                        <FieldRFF
-                                            component={CheckboxFieldFF}
-                                            name={`${fieldName}[${index}].allowFutureDate`}
-                                            type="checkbox"
-                                            disabled={!isDateType}
-                                        />
-                                    </TableCell>
-                                )}
                                 <TableCell>
                                     <RenderingOptionsSelect
                                         fieldName={fieldName}

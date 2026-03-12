@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import {
     DefaultSectionedFormSidebar,
@@ -8,7 +8,13 @@ import {
     SectionedFormLayout,
 } from '../../components'
 import { DefaultFormFooter } from '../../components/form/DefaultFormFooter'
-import { SectionedFormProvider, SECTIONS_MAP, useOnSubmitEdit } from '../../lib'
+import {
+    FEATURES,
+    SectionedFormProvider,
+    SECTIONS_MAP,
+    useFeatureAvailable,
+    useOnSubmitEdit,
+} from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { fieldFilters } from './form/fieldFilters'
 import { TrackedEntityAttributeFormDescriptor } from './form/formDescriptor'
@@ -22,6 +28,20 @@ export const Component = () => {
     const modelId = useParams().id as string
     const section = SECTIONS_MAP.trackedEntityAttribute
     const queryFn = useBoundResourceQueryFn()
+    const isSearchPerformanceAvailable = useFeatureAvailable(
+        FEATURES.searchPerformance
+    )
+    const formDescriptor = useMemo(() => {
+        if (isSearchPerformanceAvailable) {
+            return TrackedEntityAttributeFormDescriptor
+        }
+        return {
+            ...TrackedEntityAttributeFormDescriptor,
+            sections: TrackedEntityAttributeFormDescriptor.sections.filter(
+                (s) => s.name !== 'searchPerformance'
+            ),
+        }
+    }, [isSearchPerformanceAvailable])
 
     const query = {
         resource: 'trackedEntityAttributes',
@@ -45,9 +65,7 @@ export const Component = () => {
         >
             {({ handleSubmit }) => {
                 return (
-                    <SectionedFormProvider
-                        formDescriptor={TrackedEntityAttributeFormDescriptor}
-                    >
+                    <SectionedFormProvider formDescriptor={formDescriptor}>
                         <SectionedFormLayout
                             sidebar={<DefaultSectionedFormSidebar />}
                         >

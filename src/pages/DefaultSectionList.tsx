@@ -4,6 +4,7 @@ import React from 'react'
 import { SectionListWrapper } from '../components'
 import { DefaultListActionProps } from '../components/sectionList/listActions/DefaultListActions'
 import { useModelListView } from '../components/sectionList/listView'
+import { DefaultToolbarProps } from '../components/sectionList/toolbar/DefaultToolbar'
 import {
     useSchemaFromHandle,
     useParamsForDataQuery,
@@ -19,10 +20,12 @@ type ModelListResponse = WrapQueryResponse<PagedResponse<BaseListModel, string>>
 export type DefaultSectionListProps = {
     filters?: string[]
     ActionsComponent?: React.ComponentType<DefaultListActionProps>
+    ToolbarComponent?: React.ComponentType<DefaultToolbarProps>
 }
 export const DefaultSectionList = ({
     filters,
     ActionsComponent,
+    ToolbarComponent,
 }: DefaultSectionListProps) => {
     const { columns } = useModelListView()
     const schema = useSchemaFromHandle()
@@ -60,6 +63,7 @@ export const DefaultSectionList = ({
                 pager={data?.result.pager}
                 refetch={refetch}
                 ActionsComponent={ActionsComponent}
+                ToolbarComponent={ToolbarComponent}
             />
         </div>
     )
