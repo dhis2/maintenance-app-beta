@@ -1,3 +1,15 @@
+## [0.144.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.144.1...v0.144.2) (2026-03-12)
+
+
+### Bug Fixes
+
+* **color-icon-picker:** improve empty state, add labels, improve accessibility ([2ca8958](https://github.com/dhis2/maintenance-app-beta/commit/2ca8958c9a748e6f7bef7730afbf3b6f1fdff59b))
+* **common:** change feature type to location type, use radio buttons ([2208fd0](https://github.com/dhis2/maintenance-app-beta/commit/2208fd04a0e11d23332ddec8ba5424f277e7c99f))
+* **forms:** labels, helptext, defaults, transfer functionality, component use across all object forms ([6cf6d8a](https://github.com/dhis2/maintenance-app-beta/commit/6cf6d8a3a9e98db3364efe5a55e6e195d90ea200))
+* **message-fields:** add pendingCursorRef.current to useEffect dependency array ([f9728de](https://github.com/dhis2/maintenance-app-beta/commit/f9728de057eb4944487d3da741684cfbd828da18))
+* **message-fields:** keep cursor position on variable insert, styles, helptext ([f94ed73](https://github.com/dhis2/maintenance-app-beta/commit/f94ed73f660850a3969a26476a8ef079f522891a))
+* **ModelTransfer:** destructure height and width props to allow overrides ([57bea9d](https://github.com/dhis2/maintenance-app-beta/commit/57bea9db6006ae0c99f92cba5450bb96578ec26f))
+
 ## [0.144.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.144.0...v0.144.1) (2026-03-12)
 
 
