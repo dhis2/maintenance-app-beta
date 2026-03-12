@@ -1,0 +1,12 @@
+.radioBox {
+    margin-bottom: var(--spacers-dp8);
+}
+
+.radioHelpText {
+    margin-left: var(--spacers-dp24) !important;
+    padding-left: var(--spacers-dp4);
+}
+
+.radioBox :first-child {
+    font-weight: 500;
+}

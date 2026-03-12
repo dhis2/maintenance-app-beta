@@ -10,6 +10,7 @@ import {
 } from '../../../../components'
 import { SectionedFormSection } from '../../../../components/sectionedForm'
 import { RoleAccess } from '../RoleAccess'
+import { AccessLevelContent } from './AccessLevelContent'
 
 type AccessAndSharingFormContentsProps = {
     name: string
@@ -25,6 +26,18 @@ export const AccessAndSharingFormContents = React.memo(
 
         return (
             <SectionedFormSection name={name}>
+                <StandardFormSectionTitle>
+                    {i18n.t('Access level')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t(
+                        'Set up how users can access program data outside their capture scope.'
+                    )}
+                </StandardFormSectionDescription>
+                <StandardFormField>
+                    <AccessLevelContent />
+                </StandardFormField>
+
                 <StandardFormSectionTitle>
                     {i18n.t('Organisation unit access')}
                 </StandardFormSectionTitle>
