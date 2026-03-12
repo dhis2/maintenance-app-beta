@@ -104,6 +104,7 @@ interface SidenavLinkProps {
     to: string | Partial<Path>
     label?: React.ReactNode
     end?: boolean
+    external?: boolean
     LinkComponent?: React.ComponentType<SidenavLinkComponentProps>
 }
 
@@ -138,6 +139,7 @@ export const SidenavLink = ({
     LinkComponent,
     label,
     end,
+    external,
 }: SidenavLinkProps) => {
     const linkElement = LinkComponent ? (
         <LinkComponent to={to} end={end}>
@@ -149,14 +151,16 @@ export const SidenavLink = ({
     ) : (
         <a
             href={to as string}
+            target={external ? '_blank' : undefined}
+            rel={external ? 'noopener noreferrer' : undefined}
             className={cx({
                 [styles['active']]: active,
             })}
         >
+            {label}
             {icon && (
                 <span className={styles['sidenav-item-icon']}>{icon}</span>
             )}
-            {label}
         </a>
     )
 

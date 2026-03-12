@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-03-05T15:24:30.517Z\n"
-"PO-Revision-Date: 2026-03-05T15:24:30.517Z\n"
+"POT-Creation-Date: 2026-03-10T15:21:15.088Z\n"
+"PO-Revision-Date: 2026-03-10T15:21:15.088Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -47,6 +47,15 @@ msgstr "Merge {{modelName}}"
 
 msgid "Edit {{modelName}}"
 msgstr "Edit {{modelName}}"
+
+msgid "Metadata Integrity Checks"
+msgstr "Metadata Integrity Checks"
+
+msgid "Import Metadata"
+msgstr "Import Metadata"
+
+msgid "Export Metadata"
+msgstr "Export Metadata"
 
 msgid "Metadata Overview"
 msgstr "Metadata Overview"
@@ -1406,6 +1415,9 @@ msgstr "Predictor group"
 msgid "Predictor groups"
 msgstr "Predictor groups"
 
+msgid "Indicators and Predictors"
+msgstr "Indicators and Predictors"
+
 msgid "Programs and Tracker"
 msgstr "Programs and Tracker"
 
@@ -1414,6 +1426,9 @@ msgstr "Validation"
 
 msgid "Validations"
 msgstr "Validations"
+
+msgid "Data approval"
+msgstr "Data approval"
 
 msgid "Other"
 msgstr "Other"
@@ -1457,8 +1472,8 @@ msgstr "Last value (last in org unit hierarchy)"
 msgid "Last value in period (sum in org unit hierarchy)"
 msgstr "Last value in period (sum in org unit hierarchy)"
 
-msgid "Lastinperiodaverageorgunit"
-msgstr "Lastinperiodaverageorgunit"
+msgid "Last value in period (average in org unit hierarchy)"
+msgstr "Last value in period (average in org unit hierarchy)"
 
 msgid "First value (sum in org unit hierarchy)"
 msgstr "First value (sum in org unit hierarchy)"
@@ -3834,6 +3849,22 @@ msgstr ""
 "Classify category options groups to add more dimensionality to captured "
 "data for analysis."
 
+msgid "Data Approval"
+msgstr "Data Approval"
+
+msgid ""
+"Data approval workflows create a process for authorized users to review and "
+"approve data at specified levels."
+msgstr ""
+"Data approval workflows create a process for authorized users to review and "
+"approve data at specified levels."
+
+msgid "Configure data approval levels for use in data approval workflows."
+msgstr "Configure data approval levels for use in data approval workflows."
+
+msgid "Configure data approval workflows."
+msgstr "Configure data approval workflows."
+
 msgid ""
 "Data elements are fundamental units for data collection in DHIS2, "
 "representing individual data points for both tracker and aggregate data. "
@@ -3893,10 +3924,10 @@ msgstr "Create, update, view and delete data set notification templates."
 
 msgid ""
 "Indicators are used to calculate and analyze data based on data elements "
-"and other indicators."
+"and other indicators. Predictors are used to predict future data values."
 msgstr ""
 "Indicators are used to calculate and analyze data based on data elements "
-"and other indicators."
+"and other indicators. Predictors are used to predict future data values."
 
 msgid ""
 "Create, update, view and delete indicators, specify the numerator and "
@@ -3935,6 +3966,32 @@ msgstr ""
 
 msgid "Group program indicators for easier analysis."
 msgstr "Group program indicators for easier analysis."
+
+msgid "Create predictors which can be used to predict future data values."
+msgstr "Create predictors which can be used to predict future data values."
+
+msgid "Create predictor groups that contain several related predictors."
+msgstr "Create predictor groups that contain several related predictors."
+
+msgid "Option sets are used to limit data entry to defined values."
+msgstr "Option sets are used to limit data entry to defined values."
+
+msgid ""
+"Create option sets which can be included in data elements and produce "
+"drop-down lists in data entry forms."
+msgstr ""
+"Create option sets which can be included in data elements and produce "
+"drop-down lists in data entry forms."
+
+msgid ""
+"Create a group of options from option sets that has a similar functional "
+"area or meaning."
+msgstr ""
+"Create a group of options from option sets that has a similar functional "
+"area or meaning."
+
+msgid "Create, modify and view sets of option groups."
+msgstr "Create, modify and view sets of option groups."
 
 msgid ""
 "Organisation units are the structural entities within DHIS2 that define "
@@ -3995,12 +4052,6 @@ msgstr ""
 "Create constants which can be included in expressions of indicator and "
 "validation rules."
 
-msgid "Configure data approval levels for use in data approval workflows."
-msgstr "Configure data approval levels for use in data approval workflows."
-
-msgid "Configure data approval workflows."
-msgstr "Configure data approval workflows."
-
 msgid "Configure external map layers for use in GIS."
 msgstr "Configure external map layers for use in GIS."
 
@@ -4022,29 +4073,6 @@ msgstr ""
 "of language and country."
 
 msgid ""
-"Create a group of options from option sets that has a similar functional "
-"area or meaning."
-msgstr ""
-"Create a group of options from option sets that has a similar functional "
-"area or meaning."
-
-msgid "Create, modify and view sets of option groups."
-msgstr "Create, modify and view sets of option groups."
-
-msgid ""
-"Create option sets which can be included in data elements and produce "
-"drop-down lists in data entry forms."
-msgstr ""
-"Create option sets which can be included in data elements and produce "
-"drop-down lists in data entry forms."
-
-msgid "Create predictors which can be used to predict future data values."
-msgstr "Create predictors which can be used to predict future data values."
-
-msgid "Create predictor groups that contain several related predictors."
-msgstr "Create predictor groups that contain several related predictors."
-
-msgid ""
 "Manage analytics to be emailed to specific user groups on a daily, weekly "
 "or monthly basis."
 msgstr ""
@@ -4058,19 +4086,16 @@ msgstr ""
 "Create SQL database views, typically based on resource tables, to provide "
 "convenient views for third-party tools."
 
-msgid "Set disaggregation mappings for program indicators."
-msgstr "Set disaggregation mappings for program indicators."
-
 msgid ""
-"Programs and Tracker are used to collect, manage, and analyze event-based "
-"and longitudinal data. They allow you to define program stages, track "
-"entities such as people or items over time, and apply rules and "
-"relationships to support flexible data capture and analysis."
+"Programs are used to collect, manage, and analyze event-based and "
+"longitudinal data. They allow you to define program stages, track entities "
+"such as people or items over time, and apply rules and relationships to "
+"support flexible data capture and analysis."
 msgstr ""
-"Programs and Tracker are used to collect, manage, and analyze event-based "
-"and longitudinal data. They allow you to define program stages, track "
-"entities such as people or items over time, and apply rules and "
-"relationships to support flexible data capture and analysis."
+"Programs are used to collect, manage, and analyze event-based and "
+"longitudinal data. They allow you to define program stages, track entities "
+"such as people or items over time, and apply rules and relationships to "
+"support flexible data capture and analysis."
 
 msgid ""
 "Create, modify and view programs. A program has program stages and defines "
@@ -4109,6 +4134,9 @@ msgstr ""
 
 msgid "Variables you use to create program rule expressions."
 msgstr "Variables you use to create program rule expressions."
+
+msgid "Set disaggregation mappings for program indicators."
+msgstr "Set disaggregation mappings for program indicators."
 
 msgid ""
 "Validations are used to provide important feedback during data entry to "
@@ -4868,18 +4896,6 @@ msgstr ""
 msgid "There was an error deleting stages: {{stagesNames}}"
 msgstr "There was an error deleting stages: {{stagesNames}}"
 
-msgid "Organisation unit access"
-msgstr "Organisation unit access"
-
-msgid "Set up which organisation units can collect data using this program."
-msgstr "Set up which organisation units can collect data using this program."
-
-msgid "Role access"
-msgstr "Role access"
-
-msgid "Set up which user roles can access this program and program stages."
-msgstr "Set up which user roles can access this program and program stages."
-
 msgid "Enrollment: Form"
 msgstr "Enrollment: Form"
 
@@ -5011,33 +5027,6 @@ msgstr ""
 msgid "Display enrolled TEs in the front page list"
 msgstr "Display enrolled TEs in the front page list"
 
-msgid "Set up notifications for this program."
-msgstr "Set up notifications for this program."
-
-msgid "New notification"
-msgstr "New notification"
-
-msgid "Edit notification"
-msgstr "Edit notification"
-
-msgid "Notification {{- notificationName}} will be removed on save"
-msgstr "Notification {{- notificationName}} will be removed on save"
-
-msgid "Restore notification"
-msgstr "Restore notification"
-
-msgid "Notification type: Stage | Stage: {{stageDisplayName}}"
-msgstr "Notification type: Stage | Stage: {{stageDisplayName}}"
-
-msgid "Program must be saved before notifications can be added"
-msgstr "Program must be saved before notifications can be added"
-
-msgid "No notifications have been added yet"
-msgstr "No notifications have been added yet"
-
-msgid "Add a notification"
-msgstr "Add a notification"
-
 msgid "Program Stages"
 msgstr "Program Stages"
 
@@ -5119,8 +5108,14 @@ msgstr "External"
 msgid "Group"
 msgstr "Group"
 
-msgid "Group"
-msgstr "Group"
+msgid "Organisation unit access"
+msgstr "Organisation unit access"
+
+msgid "Set up which organisation units can collect data using this program."
+msgstr "Set up which organisation units can collect data using this program."
+
+msgid "Role access"
+msgstr "Role access"
 
 msgid "Set up notifications for this program."
 msgstr "Set up notifications for this program."
@@ -5173,35 +5168,14 @@ msgstr "Maximum number of search results to display"
 msgid "Entering 0 shows all search results"
 msgstr "Entering 0 shows all search results"
 
-msgid "Configure data collection for events in this program stage."
-msgstr "Configure data collection for events in this program stage."
+msgid "Program customization"
+msgstr "Program customization"
 
-msgid "Filter selected data elements"
-msgstr "Filter selected data elements"
+msgid "Custom label for \"Report date\""
+msgstr "Custom label for \"Report date\""
 
-msgid "Configure data items"
-msgstr "Configure data items"
-
-msgid "Data elements can be collected in different ways with different options."
-msgstr "Data elements can be collected in different ways with different options."
-
-msgid "Display in reports"
-msgstr "Display in reports"
-
-msgid "Future date"
-msgstr "Future date"
-
-msgid "Skip in analytics"
-msgstr "Skip in analytics"
-
-msgid "Skip sync"
-msgstr "Skip sync"
-
-msgid "Desktop Display"
-msgstr "Desktop Display"
-
-msgid "Mobile Display"
-msgstr "Mobile Display"
+msgid "Used as the default registration date for events"
+msgstr "Used as the default registration date for events"
 
 msgid "Only integers are allowed"
 msgstr "Only integers are allowed"
@@ -5217,15 +5191,6 @@ msgstr "Close data entry a number of days after \"Implementing partner\" end dat
 
 msgid "Access and Sharing"
 msgstr "Access and Sharing"
-
-msgid "Notification type"
-msgstr "Notification type"
-
-msgid "Program: Send when there is activity in the program or enrollment"
-msgstr "Program: Send when there is activity in the program or enrollment"
-
-msgid "Stage: Send when there is activity in a specific stage"
-msgstr "Stage: Send when there is activity in a specific stage"
 
 msgid "Number of days"
 msgstr "Number of days"
@@ -5317,6 +5282,42 @@ msgstr "Completion options"
 msgid "Decide what should happen after a user completes this event."
 msgstr "Decide what should happen after a user completes this event."
 
+msgid "Configure data collection for events in this program stage."
+msgstr "Configure data collection for events in this program stage."
+
+msgid "Configure data collection for events in this program."
+msgstr "Configure data collection for events in this program."
+
+msgid "Filter selected data elements"
+msgstr "Filter selected data elements"
+
+msgid "Configure data items"
+msgstr "Configure data items"
+
+msgid "Data elements can be collected in different ways with different options."
+msgstr "Data elements can be collected in different ways with different options."
+
+msgid "Allow provided elsewhere"
+msgstr "Allow provided elsewhere"
+
+msgid "Display in reports"
+msgstr "Display in reports"
+
+msgid "Future date"
+msgstr "Future date"
+
+msgid "Skip in analytics"
+msgstr "Skip in analytics"
+
+msgid "Skip sync"
+msgstr "Skip sync"
+
+msgid "Desktop Display"
+msgstr "Desktop Display"
+
+msgid "Mobile Display"
+msgstr "Mobile Display"
+
 msgid "Stage"
 msgstr "Stage"
 
@@ -5377,12 +5378,22 @@ msgstr "Program stage form"
 msgid "Configure the form for data collection for events in this program stage."
 msgstr "Configure the form for data collection for events in this program stage."
 
+msgid "Configure the form for data collection for events in this program."
+msgstr "Configure the form for data collection for events in this program."
+
 msgid ""
 "This form displays an auto-generated list of the data elements defined for "
 "this program stage."
 msgstr ""
 "This form displays an auto-generated list of the data elements defined for "
 "this program stage."
+
+msgid ""
+"This form displays an auto-generated list of the data elements defined for "
+"this program."
+msgstr ""
+"This form displays an auto-generated list of the data elements defined for "
+"this program."
 
 msgid "Edit or rearrange the data elements"
 msgstr "Edit or rearrange the data elements"
@@ -5953,3 +5964,11 @@ msgstr "Right side sliding window"
 
 msgid "Skip form validation"
 msgstr "Skip form validation"
+
+msgctxt "Application title"
+msgid "__MANIFEST_APP_TITLE"
+msgstr "Maintenance (Preview)"
+
+msgctxt "Application description"
+msgid "__MANIFEST_APP_DESCRIPTION"
+msgstr ""

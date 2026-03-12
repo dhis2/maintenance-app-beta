@@ -1,9 +1,11 @@
+import { useConfig } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { IconChevronLeft24, InputEventPayload } from '@dhis2/ui'
+import { IconChevronLeft24, IconLaunch16, InputEventPayload } from '@dhis2/ui'
 import cx from 'classnames'
 import React, { PropsWithChildren, useEffect, useState } from 'react'
 import { matchPath, NavLink, useLocation } from 'react-router-dom'
 import { HidePreventUnmount } from '../../components'
+import { useCurrentUserAuthorities, useSystemSettingsStore } from '../../lib'
 import styles from './Sidebar.module.css'
 import { LinkItem, ParentLink, useSidebarLinks } from './SidebarLinks'
 import {
@@ -79,6 +81,88 @@ const SidebarParent = ({ label, links, isFiltered }: SidebarParentProps) => {
 const matchLabel = (label: string, filterValue: string) =>
     label.toLowerCase().includes(filterValue.toLowerCase())
 
+const integrityLabel = i18n.t('Metadata Integrity Checks')
+const metadataImportLabel = i18n.t('Import Metadata')
+const metadataExportLabel = i18n.t('Export Metadata')
+const externalLinkLabels = [
+    integrityLabel,
+    metadataImportLabel,
+    metadataExportLabel,
+]
+
+const ExternalAppLinks = React.memo(
+    ({ filterValue }: { filterValue: string }) => {
+        const userAuthorities = useCurrentUserAuthorities()
+        const config = useConfig()
+        const globalShellEnabled =
+            useSystemSettingsStore(
+                (state) => state.systemSettings?.globalShellEnabled
+            ) ?? false
+        const url = config?.systemInfo?.contextPath || ''
+
+        const canOpenDataAdministration =
+            userAuthorities.has('ALL') ||
+            userAuthorities.has('M_dhis-web-data-administration')
+        const canOpenImportExport =
+            userAuthorities.has('ALL') ||
+            userAuthorities.has('M_dhis-web-import-export')
+        const filteredViewImport = filterValue
+            ? matchLabel(metadataImportLabel, filterValue)
+            : true
+        const filteredViewExport = filterValue
+            ? matchLabel(metadataExportLabel, filterValue)
+            : true
+        return (
+            <>
+                {canOpenDataAdministration &&
+                    (filterValue
+                        ? matchLabel(integrityLabel, filterValue)
+                        : true) && (
+                        <SidenavLink
+                            to={`${url}/${
+                                globalShellEnabled
+                                    ? 'apps/data-administration'
+                                    : 'dhis-web-data-administration/index.html'
+                            }#/data-integrity`}
+                            label={integrityLabel}
+                            icon={<IconLaunch16 />}
+                            external={true}
+                        />
+                    )}
+                {canOpenImportExport && (
+                    <>
+                        {filteredViewImport ? (
+                            <SidenavLink
+                                to={`${url}/${
+                                    globalShellEnabled
+                                        ? 'apps/import-export'
+                                        : 'dhis-web-import-export/index.html'
+                                }#/import/metadata`}
+                                label={metadataImportLabel}
+                                icon={<IconLaunch16 />}
+                                external={true}
+                            />
+                        ) : null}
+                        {filteredViewExport ? (
+                            <SidenavLink
+                                to={`${url}/${
+                                    globalShellEnabled
+                                        ? 'apps/import-export'
+                                        : 'dhis-web-import-export/index.html'
+                                }#/export/metadata`}
+                                label={metadataExportLabel}
+                                icon={<IconLaunch16 />}
+                                external={true}
+                            />
+                        ) : null}
+                    </>
+                )}
+            </>
+        )
+    }
+)
+ExternalAppLinks.displayName = 'ExternalAppLinks'
+
 export const Sidebar = ({
     className,
     hideSidebar,
@@ -108,8 +192,14 @@ export const Sidebar = ({
         (acc, curr) => acc + curr.links.length,
         0
     )
+    const externalLinksLabelCount =
+        externalLinkLabels.filter((label) => matchLabel(label, filterValue))
+            ?.length ?? 0
 
-    const noMatch = isFiltered && numberOfFilteredLinks === 0
+    const noMatch =
+        isFiltered &&
+        numberOfFilteredLinks === 0 &&
+        externalLinksLabelCount === 0
 
     useEffect(() => {
         if (hideSidebar !== undefined) {
@@ -141,6 +231,7 @@ export const Sidebar = ({
                             />
                         </HidePreventUnmount>
                     ))}
+                    <ExternalAppLinks filterValue={filterValue} />
                 </SidenavItems>
             </Sidenav>
             <button
