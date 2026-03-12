@@ -141,9 +141,14 @@ export const RenderingOptionsSelect = ({
 
     const getOptionsFromData = () => {
         if (hasOptionSet) {
-            const nonSupported = valueType
-                ? nonSupportedRenderingOptionsWhenOptionSet[valueType]?.[device]
-                : nonSupportedRenderingOptionsWhenOptionSet.OPTION_SET[device]
+            const nonSupported =
+                (valueType
+                    ? nonSupportedRenderingOptionsWhenOptionSet[valueType]?.[
+                          device
+                      ]
+                    : nonSupportedRenderingOptionsWhenOptionSet.OPTION_SET[
+                          device
+                      ]) ?? []
             return (
                 data
                     ?.filter((ro) => ro.hasOptionSet)
@@ -156,7 +161,7 @@ export const RenderingOptionsSelect = ({
             )
         } else {
             const nonSupported =
-                nonSupportedRenderingOptions[valueType]?.[device]
+                nonSupportedRenderingOptions[valueType]?.[device] ?? []
             return (
                 data
                     ?.filter((ro) => ro.valueType === valueType)
