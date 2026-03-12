@@ -43,7 +43,7 @@ export const ActionEdit = ({
             state={preservedSearchState}
             dataTest="row-edit-action-button"
         >
-            {/* TODO: replace with IconEdit16 when LinkButton has been updated */}
+            {/* replace with IconEdit16 when LinkButton has been updated */}
             <svg
                 width="22"
                 height="24"

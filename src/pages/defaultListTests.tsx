@@ -449,43 +449,26 @@ export const generateDefaultListRowActionsTests = ({
                     .closest('a')
             ).not.toHaveAttribute('href')
         })
-        it('has a pencil icon that links to the edit page', async () => {
+        it('has a show details button as the default row action', async () => {
             const elementsWithEditAccess = generateRandomElement({
                 access: testAccess({ write: true }),
             })
             const elementsWithoutEditAccess = generateRandomElement({
                 access: testAccess({ write: false }),
             })
-            const { screen, elements } = await renderList({
+            const { screen } = await renderList({
                 elements: [elementsWithEditAccess, elementsWithoutEditAccess],
             })
             const tableRows = screen.getAllByTestId('section-list-row')
 
-            const editableElementEditButton = within(tableRows[0]).getByTestId(
-                'row-edit-action-button'
-            )
-            const editableElementNonEditableTooltip = within(
+            const editableRowShowDetailsButton = within(
                 tableRows[0]
-            ).queryByTestId('no-editable-tooltip-reference')
-            expect(editableElementEditButton).toBeVisible()
-            expect(editableElementEditButton.closest('a')).toHaveAttribute(
-                'href',
-                `/${section.namePlural}/${elements[0].id}`
-            )
-            expect(editableElementNonEditableTooltip).toBeNull()
-
-            const nonEditableElementEditButton = within(
+            ).getByTestId('row-show-details-action-button')
+            const nonEditableRowShowDetailsButton = within(
                 tableRows[1]
-            ).getByTestId('row-edit-action-button')
-            const nonEditableElementNonEditableTooltip = within(
-                tableRows[1]
-            ).queryByTestId('no-editable-tooltip-reference')
-            expect(nonEditableElementEditButton).toBeVisible()
-            expect(nonEditableElementEditButton.closest('a')).toHaveAttribute(
-                'href',
-                `/${section.namePlural}/${elements[1].id}`
-            )
-            expect(nonEditableElementNonEditableTooltip).not.toBeNull()
+            ).getByTestId('row-show-details-action-button')
+            expect(editableRowShowDetailsButton).toBeVisible()
+            expect(nonEditableRowShowDetailsButton).toBeVisible()
         })
         it('deletes an item when pressing the delete action and updates the list', async () => {
             const elementsWithDeleteAccess = generateRandomElement({
