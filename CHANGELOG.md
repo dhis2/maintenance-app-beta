@@ -1,3 +1,10 @@
+# [0.145.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.144.3...v0.145.0) (2026-03-12)
+
+
+### Features
+
+* filter out unsupported value types ([#805](https://github.com/dhis2/maintenance-app-beta/issues/805)) ([21d5e26](https://github.com/dhis2/maintenance-app-beta/commit/21d5e26c4d0b88915a47e336febcec42c178e873))
+
 ## [0.144.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.144.2...v0.144.3) (2026-03-12)
 
 
