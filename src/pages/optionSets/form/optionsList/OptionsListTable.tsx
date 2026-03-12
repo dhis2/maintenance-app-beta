@@ -10,6 +10,7 @@ import {
     TableHead,
     TableFoot,
     Pagination,
+    IconAdd16,
     IconArrowUp16,
     IconArrowDown16,
     IconEdit16,
@@ -82,6 +83,7 @@ const FilterAndSort = ({
         <div className={css.sortButtons}>
             <ButtonStrip>
                 <Button
+                    icon={<IconAdd16 />}
                     onClick={() => {
                         setOptionsDrawerState({ open: true, id: undefined })
                     }}
@@ -336,6 +338,7 @@ export const OptionsListTable = ({
                 <div className={css.sortButtons}>
                     <ButtonStrip>
                         <Button
+                            icon={<IconAdd16 />}
                             onClick={() => {
                                 setOptionsDrawerState({
                                     open: true,

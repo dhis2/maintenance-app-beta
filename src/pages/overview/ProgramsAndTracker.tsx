@@ -4,14 +4,14 @@ import { OVERVIEW_SECTIONS, SECTIONS_MAP } from '../../lib'
 import { SummaryCard, SummaryCardGroup } from './card'
 import { OverviewGroup, OverviewGroupSummary } from './group'
 
-const TITLE = SECTIONS_MAP.program.titlePlural
+const TITLE = i18n.t('Programs and Tracker')
 
 export const ProgramsAndTrackerOverview = () => {
     return (
         <OverviewGroup title={TITLE}>
             <OverviewGroupSummary>
                 {i18n.t(
-                    'Programs and Tracker are used to collect, manage, and analyze event-based and longitudinal data. They allow you to define program stages, track entities such as people or items over time, and apply rules and relationships to support flexible data capture and analysis.'
+                    'Programs are used to collect, manage, and analyze event-based and longitudinal data. They allow you to define program stages, track entities such as people or items over time, and apply rules and relationships to support flexible data capture and analysis.'
                 )}
             </OverviewGroupSummary>
             <ProgramsAndTrackersCardGroup />
@@ -58,6 +58,12 @@ export const ProgramsAndTrackersCardGroup = ({
                 {i18n.t(
                     'Variables you use to create program rule expressions.'
                 )}
+            </SummaryCard>
+            <SummaryCard
+                section={SECTIONS_MAP.programDisaggregation}
+                hideNew={true}
+            >
+                {i18n.t('Set disaggregation mappings for program indicators.')}
             </SummaryCard>
         </SummaryCardGroup>
     )

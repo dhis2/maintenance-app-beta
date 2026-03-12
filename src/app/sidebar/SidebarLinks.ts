@@ -75,6 +75,8 @@ export const sidebarLinks = {
             getSectionLinkItem(SECTIONS_MAP.indicatorGroupSet),
             getSectionLinkItem(SECTIONS_MAP.programIndicator),
             getSectionLinkItem(SECTIONS_MAP.programIndicatorGroup),
+            getSectionLinkItem(SECTIONS_MAP.predictor),
+            getSectionLinkItem(SECTIONS_MAP.predictorGroup),
         ],
     },
     organisationUnits: {
@@ -97,6 +99,16 @@ export const sidebarLinks = {
             getSectionLinkItem(SECTIONS_MAP.relationshipType),
             getSectionLinkItem(SECTIONS_MAP.programRule),
             getSectionLinkItem(SECTIONS_MAP.programRuleVariable),
+            getSectionLinkItem(SECTIONS_MAP.programDisaggregation),
+        ],
+    },
+    optionSet: {
+        label: OVERVIEW_SECTIONS.optionSet.titlePlural,
+        links: [
+            getOverviewLinkItem(OVERVIEW_SECTIONS.optionSet),
+            getSectionLinkItem(SECTIONS_MAP.optionSet),
+            getSectionLinkItem(SECTIONS_MAP.optionGroup),
+            getSectionLinkItem(SECTIONS_MAP.optionGroupSet),
         ],
     },
     validation: {
@@ -108,27 +120,27 @@ export const sidebarLinks = {
             getSectionLinkItem(SECTIONS_MAP.validationNotificationTemplate),
         ],
     },
+    dataApproval: {
+        label: OVERVIEW_SECTIONS.dataApproval.titlePlural,
+        links: [
+            getOverviewLinkItem(OVERVIEW_SECTIONS.dataApproval),
+            getSectionLinkItem(SECTIONS_MAP.dataApprovalLevel),
+            getSectionLinkItem(SECTIONS_MAP.dataApprovalWorkflow),
+        ],
+    },
     other: {
         label: OVERVIEW_SECTIONS.other.title,
         links: [
             getOverviewLinkItem(OVERVIEW_SECTIONS.other),
-            getSectionLinkItem(SECTIONS_MAP.analyticsTableHook),
+            getSectionLinkItem(SECTIONS_MAP.icon),
             getSectionLinkItem(SECTIONS_MAP.attribute),
             getSectionLinkItem(SECTIONS_MAP.constant),
-            getSectionLinkItem(SECTIONS_MAP.dataApprovalLevel),
-            getSectionLinkItem(SECTIONS_MAP.dataApprovalWorkflow),
             getSectionLinkItem(SECTIONS_MAP.externalMapLayer),
-            getSectionLinkItem(SECTIONS_MAP.icon),
             getSectionLinkItem(SECTIONS_MAP.legendSet),
             getSectionLinkItem(SECTIONS_MAP.locale),
-            getSectionLinkItem(SECTIONS_MAP.optionGroup),
-            getSectionLinkItem(SECTIONS_MAP.optionGroupSet),
-            getSectionLinkItem(SECTIONS_MAP.optionSet),
-            getSectionLinkItem(SECTIONS_MAP.predictor),
-            getSectionLinkItem(SECTIONS_MAP.predictorGroup),
             getSectionLinkItem(SECTIONS_MAP.pushAnalysis),
+            getSectionLinkItem(SECTIONS_MAP.analyticsTableHook),
             getSectionLinkItem(SECTIONS_MAP.sqlView),
-            getSectionLinkItem(SECTIONS_MAP.programDisaggregation),
         ],
     },
 } satisfies SidebarLinks
