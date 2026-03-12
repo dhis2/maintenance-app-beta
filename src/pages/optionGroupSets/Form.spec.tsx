@@ -233,7 +233,7 @@ describe('Option group sets form tests', () => {
             )
             expect(
                 screen.getByText(
-                    'You must select an option set before you can select options.'
+                    'Choose an option set to start adding option groups.'
                 )
             ).toBeInTheDocument()
             await uiActions.pickOptionFromSelect(

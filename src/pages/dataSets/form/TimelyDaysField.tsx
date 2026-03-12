@@ -22,7 +22,7 @@ export const TimelyDaysField = () => {
                 'Number of days after period to qualify for on time submission'
             )}
             helpText={i18n.t(
-                '"On time" submission rate can be using reporting dates in the Report app. Enter 0 to ignore timely submission.'
+                'Submissions made within this many days after the period end qualify as "on time" in reporting rates. Enter 0 to ignore.'
             )}
         />
     )

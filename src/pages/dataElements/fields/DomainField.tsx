@@ -37,12 +37,7 @@ export function DomainField() {
             required
             dataTest="formfields-domainType"
             name={name}
-            label={i18n.t('{{fieldLabel}} (required)', {
-                fieldLabel: i18n.t('Domain'),
-            })}
-            helpText={i18n.t(
-                'A data element can either be aggregated or tracked data.'
-            )}
+            label={i18n.t('Domain')}
             error={touched && !!error}
             validationText={touched ? error : undefined}
         >

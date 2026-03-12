@@ -65,7 +65,7 @@ export const PredictorFormFields = () => {
                     {i18n.t('Predictor logic')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
-                    {i18n.t('Define how predictions will be calculated')}
+                    {i18n.t('Configure how this predictor is calculated.')}
                 </StandardFormSectionDescription>
                 <StandardFormField>
                     <FieldRFF
@@ -119,13 +119,15 @@ export const PredictorFormFields = () => {
                 />
             </SectionedFormSection>
             <SectionedFormSection
-                name={descriptor?.getSection('outputDefinition')?.name ?? ''}
+                name={descriptor?.getSection('output')?.name ?? ''}
             >
                 <StandardFormSectionTitle>
-                    {i18n.t('Output definition')}
+                    {i18n.t('Output')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
-                    {i18n.t('Define where predictions will be output')}
+                    {i18n.t(
+                        'Configure where and how this predictor outputs data.'
+                    )}
                 </StandardFormSectionDescription>
                 <OperatorFields />
                 <StandardFormField>

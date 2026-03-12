@@ -1,0 +1,10 @@
+.modalMessage {
+    margin: 0;
+    color: var(--colors-grey900);
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.modalMessage:not(:last-child) {
+    margin-block-end: var(--spacers-dp16);
+}

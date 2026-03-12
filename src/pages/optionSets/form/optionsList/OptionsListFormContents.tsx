@@ -46,7 +46,7 @@ const OptionListNewOrEdit = () => {
     if (!modelId) {
         return (
             <NoticeBox>
-                {i18n.t('Option set must be saved before options can be added')}
+                {i18n.t('Save this option set to add options.')}
             </NoticeBox>
         )
     }
@@ -98,7 +98,7 @@ export const OptionsListFormContents = React.memo(
                     {i18n.t('Options')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
-                    {i18n.t('Define options for this option set')}
+                    {i18n.t('Create and manage options in this option set.')}
                 </StandardFormSectionDescription>
                 <OptionListNewOrEdit />
             </SectionedFormSection>

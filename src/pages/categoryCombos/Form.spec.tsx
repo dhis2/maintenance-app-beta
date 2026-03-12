@@ -252,9 +252,13 @@ describe('Category combos form tests', () => {
                 categories[0].displayName,
                 screen
             )
+            await uiActions.pickRadioField(
+                'dataDimensionType',
+                'Disaggregation',
+                screen
+            )
 
             await uiActions.submitForm(screen)
-
             await waitFor(() =>
                 expect(createMock).toHaveBeenCalledWith(
                     expect.objectContaining({

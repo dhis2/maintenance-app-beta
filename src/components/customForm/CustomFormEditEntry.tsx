@@ -72,10 +72,10 @@ export const CustomFormEditEntry = ({
                 <div className={css.description}>
                     {addMode
                         ? i18n.t(
-                              'A custom form must be added for it to be used for data entry (web).'
+                              'No custom form has been added yet. Create a custom form to use it for web data entry.'
                           )
                         : i18n.t(
-                              'This data set uses a custom form for data entry (web).'
+                              'This data set uses a custom form for web data entry.'
                           )}
                 </div>
             </div>
@@ -95,6 +95,15 @@ export const CustomFormEditEntry = ({
                     </div>
                 ) : (
                     <ButtonStrip>
+                        <Button
+                            secondary
+                            small
+                            onClick={() => setCustomFormEditOpen(true)}
+                        >
+                            {addMode
+                                ? i18n.t('Create custom form')
+                                : i18n.t('Edit custom form')}
+                        </Button>
                         {!addMode && (
                             <Button
                                 secondary
@@ -106,15 +115,6 @@ export const CustomFormEditEntry = ({
                                 {i18n.t('Delete custom form')}
                             </Button>
                         )}
-                        <Button
-                            secondary
-                            small
-                            onClick={() => setCustomFormEditOpen(true)}
-                        >
-                            {addMode
-                                ? i18n.t('Create custom form')
-                                : i18n.t('Edit custom form')}
-                        </Button>
                     </ButtonStrip>
                 )}
             </div>

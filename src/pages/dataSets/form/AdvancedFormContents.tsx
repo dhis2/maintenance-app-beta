@@ -44,26 +44,28 @@ const NotificationField = () => {
                     label={i18n.t('Send complete notifications')}
                 />
             </StandardFormField>
-            <div style={{ marginInlineStart: '24px' }}>
-                <StandardFormField>
-                    <ModelSingleSelectField
-                        input={notificationRecipientsInput}
-                        meta={notificationRecipientsMeta}
-                        label={i18n.t('Recipient user group')}
-                        query={NOTIFICATION_RECIPIENTS_QUERY}
-                        disabled={!notificationsEnabled}
-                    />
-                </StandardFormField>
-                <StandardFormField>
-                    <Field
-                        name="notifyCompletingUser"
-                        type="checkbox"
-                        component={CheckboxFieldFF}
-                        label={i18n.t('Send notification to completing user')}
-                        disabled={!notificationsEnabled}
-                    />
-                </StandardFormField>
-            </div>
+            {notificationsEnabled && (
+                <div style={{ marginInlineStart: '24px' }}>
+                    <StandardFormField>
+                        <ModelSingleSelectField
+                            input={notificationRecipientsInput}
+                            meta={notificationRecipientsMeta}
+                            label={i18n.t('Recipient user group')}
+                            query={NOTIFICATION_RECIPIENTS_QUERY}
+                        />
+                    </StandardFormField>
+                    <StandardFormField>
+                        <Field
+                            name="notifyCompletingUser"
+                            type="checkbox"
+                            component={CheckboxFieldFF}
+                            label={i18n.t(
+                                'Send notification to completing user'
+                            )}
+                        />
+                    </StandardFormField>
+                </div>
+            )}
         </>
     )
 }
@@ -79,9 +81,7 @@ export const AdvancedFormContents = React.memo(function AdvancedFormContents({
                 {i18n.t('Advanced options')}
             </StandardFormSectionTitle>
             <StandardFormSectionDescription>
-                {i18n.t(
-                    'These options are used for advanced data set configurations.'
-                )}
+                {i18n.t('Used for advanced data set configurations.')}
             </StandardFormSectionDescription>
             <StandardFormField>
                 <Field
@@ -89,7 +89,7 @@ export const AdvancedFormContents = React.memo(function AdvancedFormContents({
                     type="checkbox"
                     component={CheckboxFieldFF}
                     label={i18n.t(
-                        "Don't save this data to offline storage (skip offline)"
+                        'Do not save this data set to offline storage'
                     )}
                 />
             </StandardFormField>
@@ -99,7 +99,7 @@ export const AdvancedFormContents = React.memo(function AdvancedFormContents({
                     type="checkbox"
                     component={CheckboxFieldFF}
                     label={i18n.t(
-                        'Include data element descriptions in offline storage (data element decoration)'
+                        'Include data element descriptions in offline storage'
                     )}
                 />
             </StandardFormField>
@@ -108,15 +108,17 @@ export const AdvancedFormContents = React.memo(function AdvancedFormContents({
                     name="mobile"
                     type="checkbox"
                     component={CheckboxFieldFF}
-                    label={i18n.t('Use this data set with Java mobile client')}
+                    label={i18n.t(
+                        'Use this data set with the Java mobile client'
+                    )}
                 />
             </StandardFormField>
             <StandardFormSectionTitle>
-                {i18n.t('Notifications')}
+                {i18n.t('Completion notifcations')}
             </StandardFormSectionTitle>
             <StandardFormSectionDescription>
                 {i18n.t(
-                    'Send notifications when data sets are marked complete, using the DHIS2 Messages app.'
+                    'Send notifications when this data set is marked complete using the DHIS2 Messages app.'
                 )}
             </StandardFormSectionDescription>
             <NotificationField />
@@ -125,7 +127,7 @@ export const AdvancedFormContents = React.memo(function AdvancedFormContents({
             </StandardFormSectionTitle>
             <StandardFormSectionDescription>
                 {i18n.t(
-                    'Select legends to visually categorize values for this data set in Data entry and Analytics apps.'
+                    'Choose legends to visually categorize values in Data entry and Analytics apps.'
                 )}
             </StandardFormSectionDescription>
             <StandardFormField>
