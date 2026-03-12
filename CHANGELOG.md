@@ -1,3 +1,10 @@
+# [0.144.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.143.1...v0.144.0) (2026-03-12)
+
+
+### Features
+
+* change section ordering, add links ([#799](https://github.com/dhis2/maintenance-app-beta/issues/799)) ([b9df28e](https://github.com/dhis2/maintenance-app-beta/commit/b9df28ebff1ee68d0c5c37785fdc441d5de48e4d))
+
 ## [0.143.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.143.0...v0.143.1) (2026-03-12)
 
 
