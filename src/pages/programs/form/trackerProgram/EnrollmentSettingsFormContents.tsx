@@ -7,8 +7,8 @@ import {
     StandardFormField,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
-} from '../../../components'
-import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
+} from '../../../../components'
+import { ModelSingleSelectFormField } from '../../../../components/metadataFormControls/ModelSingleSelect'
 import styles from './EnrollmentSettingsFormContents.module.css'
 
 export const EnrollmentSettingsFormContents = React.memo(

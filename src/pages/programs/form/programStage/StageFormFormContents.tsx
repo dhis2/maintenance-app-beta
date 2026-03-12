@@ -18,7 +18,7 @@ import {
     TabbedFormTypePicker,
 } from '../../../../components/formCreators/TabbedFormTypePicker'
 import { SchemaName, scrollToSection } from '../../../../lib'
-import styles from '../EnrollmentFormFormContents.module.css'
+import styles from '../trackerProgram/EnrollmentFormFormContents.module.css'
 import { EditOrNewStageSectionForm } from './programStageSection/ProgramStageSectionForm'
 
 export const StageFormFormContents = ({
