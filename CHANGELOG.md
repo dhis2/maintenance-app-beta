@@ -1,3 +1,10 @@
+## [0.144.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.144.2...v0.144.3) (2026-03-12)
+
+
+### Bug Fixes
+
+* add case sensitivity option for name and short name uniqueness validation ([#806](https://github.com/dhis2/maintenance-app-beta/issues/806)) ([3a45a37](https://github.com/dhis2/maintenance-app-beta/commit/3a45a37f06ac7892987d0aae095fd16a46cf0556))
+
 ## [0.144.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.144.1...v0.144.2) (2026-03-12)
 
 
