@@ -9,12 +9,18 @@ export function ShortNameField({
     helpText,
     schemaSection,
     isRequired = true,
+    caseSensitiveUniqueness = false,
 }: {
     helpText?: string
     schemaSection: SchemaSection
     isRequired?: boolean
+    caseSensitiveUniqueness?: boolean
 }) {
-    const validator = useValidator({ schemaSection, property: 'shortName' })
+    const validator = useValidator({
+        schemaSection,
+        property: 'shortName',
+        caseSensitive: caseSensitiveUniqueness,
+    })
     const schema = useSchema(schemaSection.name)
     const propertyDetails = schema.properties['shortName']
     const [warning, setWarning] = useState<string | undefined>()
@@ -25,6 +31,7 @@ export function ShortNameField({
         message: i18n.t(
             'This short name is already in use. Consider updating the name to avoid a duplication.'
         ),
+        caseSensitive: caseSensitiveUniqueness,
     })
     const uniquenessWarner = propertyDetails.unique
         ? undefined

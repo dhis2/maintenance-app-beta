@@ -16,25 +16,24 @@ export function useIsFieldValueUnique({
     field,
     id,
     message,
+    caseSensitive = false,
 }: {
     model: string
     field: string
     id?: string
     message?: string
+    caseSensitive?: boolean
 }) {
     const [HAS_FIELD_VALUE_QUERY] = useState({
         result: {
             resource: model,
             params: (variables: Record<string, string>) => {
-                const equalOperation = Number.isNaN(
-                    Number(variables.value.trim())
-                )
-                    ? 'ieq'
-                    : 'eq'
+                const trimmed = variables.value.trim()
+                const isNumeric = !Number.isNaN(Number(trimmed))
+                const useExactMatch = isNumeric || caseSensitive
+                const equalOperation = useExactMatch ? 'eq' : 'ieq'
                 const filter = [
-                    `${
-                        variables.field
-                    }:${equalOperation}:${variables.value.trim()}`,
+                    `${variables.field}:${equalOperation}:${trimmed}`,
                 ]
 
                 if (variables.id) {
