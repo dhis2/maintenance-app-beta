@@ -20,24 +20,99 @@ type RenderingOptionsSelectProps = {
     required?: boolean
 }
 
-const nonSupportedRenderingOptions: Record<string, string[]> = {
-    TRUE_ONLY: [
-        'VERTICAL_RADIOBUTTONS',
-        'HORIZONTAL_RADIOBUTTONS',
-        'VERTICAL_CHECKBOXES',
-        'HORIZONTAL_CHECKBOXES',
-    ],
-    BOOLEAN: ['TOGGLE'],
-    INTEGER: ['SPINNER'],
-    INTEGER_POSITIVE: ['SPINNER'],
-    INTEGER_NEGATIVE: ['SPINNER'],
-    INTEGER_ZERO_OR_POSITIVE: ['SPINNER'],
-    NUMBER: ['SPINNER'],
-    UNIT_INTERVAL: ['SPINNER'],
-    PERCENTAGE: ['SPINNER'],
-    TEXT: [],
-    IMAGE: [],
-    MULTI_TEXT: ['SPINNER', 'ICON'],
+const nonSupportedRenderingOptions: Record<
+    string,
+    Record<'MOBILE' | 'DESKTOP', string[]>
+> = {
+    TRUE_ONLY: {
+        MOBILE: [
+            'VERTICAL_RADIOBUTTONS',
+            'HORIZONTAL_RADIOBUTTONS',
+            'VERTICAL_CHECKBOXES',
+            'HORIZONTAL_CHECKBOXES',
+        ],
+        DESKTOP: [
+            'VERTICAL_RADIOBUTTONS',
+            'HORIZONTAL_RADIOBUTTONS',
+            'VERTICAL_CHECKBOXES',
+            'HORIZONTAL_CHECKBOXES',
+        ],
+    },
+    BOOLEAN: { MOBILE: ['TOGGLE'], DESKTOP: ['TOGGLE'] },
+    INTEGER: { MOBILE: ['SPINNER'], DESKTOP: ['SPINNER'] },
+    INTEGER_POSITIVE: { MOBILE: ['SPINNER'], DESKTOP: ['SPINNER'] },
+    INTEGER_NEGATIVE: { MOBILE: ['SPINNER'], DESKTOP: ['SPINNER'] },
+    INTEGER_ZERO_OR_POSITIVE: { MOBILE: ['SPINNER'], DESKTOP: ['SPINNER'] },
+    NUMBER: { MOBILE: ['SPINNER'], DESKTOP: ['SPINNER'] },
+    UNIT_INTERVAL: { MOBILE: ['SPINNER'], DESKTOP: ['SPINNER'] },
+    PERCENTAGE: { MOBILE: ['SPINNER'], DESKTOP: ['SPINNER'] },
+    TEXT: { MOBILE: [], DESKTOP: ['GS1_DATAMATRIX'] },
+    IMAGE: { MOBILE: [], DESKTOP: ['CANVAS'] },
+    MULTI_TEXT: {
+        MOBILE: [
+            'VERTICAL_RADIOBUTTONS',
+            'HORIZONTAL_RADIOBUTTONS',
+            'SPINNER',
+            'ICON',
+            'SHARED_HEADER_RADIOBUTTONS',
+        ],
+        DESKTOP: [
+            'VERTICAL_RADIOBUTTONS',
+            'HORIZONTAL_RADIOBUTTONS',
+            'SPINNER',
+            'ICON',
+            'SHARED_HEADER_RADIOBUTTONS',
+        ],
+    },
+}
+
+const nonSupportedRenderingOptionsWhenOptionSet: Record<
+    string,
+    Record<'MOBILE' | 'DESKTOP', string[]>
+> = {
+    MULTI_TEXT: {
+        MOBILE: [
+            'VERTICAL_RADIOBUTTONS',
+            'HORIZONTAL_RADIOBUTTONS',
+            'SPINNER',
+            'ICON',
+            'SHARED_HEADER_RADIOBUTTONS',
+        ],
+        DESKTOP: [
+            'VERTICAL_RADIOBUTTONS',
+            'HORIZONTAL_RADIOBUTTONS',
+            'SPINNER',
+            'ICON',
+            'SHARED_HEADER_RADIOBUTTONS',
+        ],
+    },
+    TEXT: {
+        MOBILE: ['SPINNER', 'ICON'],
+        DESKTOP: ['SPINNER', 'ICON', 'VERTICAL_RADIOBUTTONS'],
+    },
+    LONG_TEXT: {
+        MOBILE: [
+            'DROPDOWN',
+            'HORIZONTAL_RADIOBUTTONS',
+            'VERTICAL_CHECKBOXES',
+            'HORIZONTAL_CHECKBOXES',
+            'SHARED_HEADER_RADIOBUTTONS',
+            'ICONS_AS_BUTTONS',
+            'SPINNER',
+            'ICON',
+        ],
+        DESKTOP: [
+            'DROPDOWN',
+            'HORIZONTAL_RADIOBUTTONS',
+            'VERTICAL_CHECKBOXES',
+            'HORIZONTAL_CHECKBOXES',
+            'SHARED_HEADER_RADIOBUTTONS',
+            'ICONS_AS_BUTTONS',
+            'SPINNER',
+            'ICON',
+        ],
+    },
+    OPTION_SET: { MOBILE: ['SPINNER', 'ICON'], DESKTOP: ['SPINNER', 'ICON'] },
 }
 
 export const RenderingOptionsSelect = ({
@@ -49,6 +124,7 @@ export const RenderingOptionsSelect = ({
     required = false,
 }: RenderingOptionsSelectProps) => {
     const queryFn = useBoundResourceQueryFn()
+
     const classLookup =
         fieldName === 'programStageDataElements'
             ? 'programstagedataelement'
@@ -63,34 +139,38 @@ export const RenderingOptionsSelect = ({
         queryFn: queryFn<RenderingOptionsResponse>,
     })
 
-    const optionsFromData =
-        (hasOptionSet
-            ? data
-                  ?.filter((ro) => ro.hasOptionSet)
-                  ?.find((ro) => ro.clazz.toLowerCase().includes(classLookup))
-                  ?.renderingTypes.map((rt) => ({
-                      value: rt,
-                      label: getConstantTranslation(rt),
-                  }))
-                  ?.filter(
-                      (rt) =>
-                          !nonSupportedRenderingOptions.MULTI_TEXT?.includes(
-                              rt.value
-                          )
-                  )
-            : data
-                  ?.filter((ro) => ro.valueType === valueType)
-                  ?.find((ro) => ro.clazz.toLowerCase().includes(classLookup))
-                  ?.renderingTypes.map((rt) => ({
-                      value: rt,
-                      label: getConstantTranslation(rt),
-                  }))
-                  ?.filter(
-                      (rt) =>
-                          !nonSupportedRenderingOptions[valueType]?.includes(
-                              rt.value
-                          )
-                  )) ?? []
+    const getOptionsFromData = () => {
+        if (hasOptionSet) {
+            const nonSupported = valueType
+                ? nonSupportedRenderingOptionsWhenOptionSet[valueType]?.[device]
+                : nonSupportedRenderingOptionsWhenOptionSet.OPTION_SET[device]
+            return (
+                data
+                    ?.filter((ro) => ro.hasOptionSet)
+                    ?.find((ro) => ro.clazz.toLowerCase().includes(classLookup))
+                    ?.renderingTypes.map((rt) => ({
+                        value: rt,
+                        label: getConstantTranslation(rt),
+                    }))
+                    ?.filter((rt) => !nonSupported.includes(rt.value)) ?? []
+            )
+        } else {
+            const nonSupported =
+                nonSupportedRenderingOptions[valueType]?.[device]
+            return (
+                data
+                    ?.filter((ro) => ro.valueType === valueType)
+                    ?.find((ro) => ro.clazz.toLowerCase().includes(classLookup))
+                    ?.renderingTypes.map((rt) => ({
+                        value: rt,
+                        label: getConstantTranslation(rt),
+                    }))
+                    ?.filter((rt) => !nonSupported.includes(rt.value)) ?? []
+            )
+        }
+    }
+
+    const optionsFromData = getOptionsFromData()
 
     return (
         <FieldRFF<string | undefined>
