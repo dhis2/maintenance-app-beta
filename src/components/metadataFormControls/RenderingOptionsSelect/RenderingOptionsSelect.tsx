@@ -6,7 +6,9 @@ import { getConstantTranslation, useBoundResourceQueryFn } from '../../../lib'
 
 type RenderingOptionsResponse = {
     renderingTypes: string[]
-    valueType: string
+    hasOptionSet: boolean
+    valueType?: string
+    clazz: string
 }[]
 
 type RenderingOptionsSelectProps = {
@@ -14,7 +16,28 @@ type RenderingOptionsSelectProps = {
     index: number
     device: 'MOBILE' | 'DESKTOP'
     valueType: string
+    hasOptionSet: boolean
     required?: boolean
+}
+
+const nonSupportedRenderingOptions: Record<string, string[]> = {
+    TRUE_ONLY: [
+        'VERTICAL_RADIOBUTTONS',
+        'HORIZONTAL_RADIOBUTTONS',
+        'VERTICAL_CHECKBOXES',
+        'HORIZONTAL_CHECKBOXES',
+    ],
+    BOOLEAN: ['TOGGLE'],
+    INTEGER: ['SPINNER'],
+    INTEGER_POSITIVE: ['SPINNER'],
+    INTEGER_NEGATIVE: ['SPINNER'],
+    INTEGER_ZERO_OR_POSITIVE: ['SPINNER'],
+    NUMBER: ['SPINNER'],
+    UNIT_INTERVAL: ['SPINNER'],
+    PERCENTAGE: ['SPINNER'],
+    TEXT: [],
+    IMAGE: [],
+    MULTI_TEXT: ['SPINNER', 'ICON'],
 }
 
 export const RenderingOptionsSelect = ({
@@ -22,29 +45,52 @@ export const RenderingOptionsSelect = ({
     index,
     device,
     valueType,
+    hasOptionSet,
     required = false,
 }: RenderingOptionsSelectProps) => {
     const queryFn = useBoundResourceQueryFn()
+    const classLookup =
+        fieldName === 'programStageDataElements'
+            ? 'programstagedataelement'
+            : 'programtrackedentityattribute'
 
     const { data, isLoading } = useQuery({
         queryKey: [
             {
                 resource: 'staticConfiguration/renderingOptions',
-                params: {
-                    fields: ['renderingTypes', 'valueType'],
-                },
             },
         ],
         queryFn: queryFn<RenderingOptionsResponse>,
     })
 
     const optionsFromData =
-        data
-            ?.find((ro) => ro.valueType === valueType)
-            ?.renderingTypes.map((rt) => ({
-                value: rt,
-                label: getConstantTranslation(rt),
-            })) ?? []
+        (hasOptionSet
+            ? data
+                  ?.filter((ro) => ro.hasOptionSet)
+                  ?.find((ro) => ro.clazz.toLowerCase().includes(classLookup))
+                  ?.renderingTypes.map((rt) => ({
+                      value: rt,
+                      label: getConstantTranslation(rt),
+                  }))
+                  ?.filter(
+                      (rt) =>
+                          !nonSupportedRenderingOptions.MULTI_TEXT?.includes(
+                              rt.value
+                          )
+                  )
+            : data
+                  ?.filter((ro) => ro.valueType === valueType)
+                  ?.find((ro) => ro.clazz.toLowerCase().includes(classLookup))
+                  ?.renderingTypes.map((rt) => ({
+                      value: rt,
+                      label: getConstantTranslation(rt),
+                  }))
+                  ?.filter(
+                      (rt) =>
+                          !nonSupportedRenderingOptions[valueType]?.includes(
+                              rt.value
+                          )
+                  )) ?? []
 
     return (
         <FieldRFF<string | undefined>

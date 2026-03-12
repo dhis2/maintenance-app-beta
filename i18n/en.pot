@@ -5,10 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-03-11T13:07:57.819Z\n"
-"PO-Revision-Date: 2026-03-11T13:07:57.819Z\n"
-"POT-Creation-Date: 2026-03-10T15:21:15.088Z\n"
-"PO-Revision-Date: 2026-03-10T15:21:15.088Z\n"
+"POT-Creation-Date: 2026-03-12T08:41:32.760Z\n"
+"PO-Revision-Date: 2026-03-12T08:41:32.760Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -4026,8 +4024,8 @@ msgstr ""
 msgid "Placeholder for other"
 msgstr "Placeholder for other"
 
-msgid "Configure hooks in SQL that run during the analytics process."
-msgstr "Configure hooks in SQL that run during the analytics process."
+msgid "Upload, modify and view icons which can be assigned to other metadata."
+msgstr "Upload, modify and view icons which can be assigned to other metadata."
 
 msgid "Create, modify and view attributes."
 msgstr "Create, modify and view attributes."
@@ -4042,9 +4040,6 @@ msgstr ""
 msgid "Configure external map layers for use in GIS."
 msgstr "Configure external map layers for use in GIS."
 
-msgid "Upload, modify and view icons which can be assigned to other metadata."
-msgstr "Upload, modify and view icons which can be assigned to other metadata."
-
 msgid ""
 "Create, modify and view predefined legends for maps and other "
 "visualisations."
@@ -4065,6 +4060,9 @@ msgid ""
 msgstr ""
 "Manage analytics to be emailed to specific user groups on a daily, weekly "
 "or monthly basis."
+
+msgid "Configure hooks in SQL that run during the analytics process."
+msgstr "Configure hooks in SQL that run during the analytics process."
 
 msgid ""
 "Create SQL database views, typically based on resource tables, to provide "
@@ -4883,6 +4881,24 @@ msgstr ""
 msgid "There was an error deleting stages: {{stagesNames}}"
 msgstr "There was an error deleting stages: {{stagesNames}}"
 
+msgid "Choose program type"
+msgstr "Choose program type"
+
+msgid "Choose how this program collects data. This cannot be changed later."
+msgstr "Choose how this program collects data. This cannot be changed later."
+
+msgid "Single event"
+msgstr "Single event"
+
+msgid "Collect standalone events with no person or entity attached."
+msgstr "Collect standalone events with no person or entity attached."
+
+msgid "Collect events for a person or other entity over time."
+msgstr "Collect events for a person or other entity over time."
+
+msgid "Continue"
+msgstr "Continue"
+
 msgid "Enrollment: Form"
 msgstr "Enrollment: Form"
 
@@ -5104,6 +5120,9 @@ msgstr "Set up which organisation units can collect data using this program."
 msgid "Role access"
 msgstr "Role access"
 
+msgid "Program must be saved to access sharing settings."
+msgstr "Program must be saved to access sharing settings."
+
 msgid "Set up notifications for this program."
 msgstr "Set up notifications for this program."
 
@@ -5295,9 +5314,6 @@ msgstr "Configure data collection for events in this program stage."
 
 msgid "Configure data collection for events in this program."
 msgstr "Configure data collection for events in this program."
-
-msgid "Filter selected data elements"
-msgstr "Filter selected data elements"
 
 msgid "Configure data items"
 msgstr "Configure data items"
@@ -5965,11 +5981,3 @@ msgstr "Right side sliding window"
 
 msgid "Skip form validation"
 msgstr "Skip form validation"
-
-msgctxt "Application title"
-msgid "__MANIFEST_APP_TITLE"
-msgstr "Maintenance (Preview)"
-
-msgctxt "Application description"
-msgid "__MANIFEST_APP_DESCRIPTION"
-msgstr ""
