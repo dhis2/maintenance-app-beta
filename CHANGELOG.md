@@ -1,3 +1,10 @@
+## [0.144.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.144.0...v0.144.1) (2026-03-12)
+
+
+### Bug Fixes
+
+* change allow date in future positioning ([#800](https://github.com/dhis2/maintenance-app-beta/issues/800)) ([4397f5e](https://github.com/dhis2/maintenance-app-beta/commit/4397f5eb39c28be23fe87fd9edc53e762e61e34b))
+
 # [0.144.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.143.1...v0.144.0) (2026-03-12)
 
 
