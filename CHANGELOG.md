@@ -1,3 +1,32 @@
+## [0.144.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.144.0...v0.144.1) (2026-03-12)
+
+
+### Bug Fixes
+
+* change allow date in future positioning ([#800](https://github.com/dhis2/maintenance-app-beta/issues/800)) ([4397f5e](https://github.com/dhis2/maintenance-app-beta/commit/4397f5eb39c28be23fe87fd9edc53e762e61e34b))
+
+# [0.144.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.143.1...v0.144.0) (2026-03-12)
+
+
+### Features
+
+* change section ordering, add links ([#799](https://github.com/dhis2/maintenance-app-beta/issues/799)) ([b9df28e](https://github.com/dhis2/maintenance-app-beta/commit/b9df28ebff1ee68d0c5c37785fdc441d5de48e4d))
+
+## [0.143.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.143.0...v0.143.1) (2026-03-12)
+
+
+### Bug Fixes
+
+* [DHIS2-21002][DHIS2-21023] Bug clean up for new maintenance app ([#788](https://github.com/dhis2/maintenance-app-beta/issues/788)) ([9f8b584](https://github.com/dhis2/maintenance-app-beta/commit/9f8b5846e60b40cf22ded61c88b8588523b798bb))
+* cleanup event programs ([9b82bf8](https://github.com/dhis2/maintenance-app-beta/commit/9b82bf83df52bf95c748065a55ba9f50c9a07234))
+
+# [0.143.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.142.0...v0.143.0) (2026-03-11)
+
+
+### Features
+
+* new event program ([#796](https://github.com/dhis2/maintenance-app-beta/issues/796)) ([be07be4](https://github.com/dhis2/maintenance-app-beta/commit/be07be4d9b5001aee4d120e3d7beb27b0d057555))
+
 # [0.142.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.141.0...v0.142.0) (2026-03-10)
 
 

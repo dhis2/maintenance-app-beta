@@ -1,9 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { useQueryParam } from 'use-query-params'
-import { LegacyAppRedirect } from '../../app/routes/LegacyAppRedirect'
-import { SECTIONS_MAP, useBoundResourceQueryFn } from '../../lib'
+import { useBoundResourceQueryFn } from '../../lib'
 import { EditEventProgram } from './EditEventProgram'
 import { EditTrackerProgram } from './EditTrackerProgram'
 
@@ -15,7 +13,6 @@ type ProgramValues = {
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const modelId = useParams().id as string
-    const [inDevMode] = useQueryParam('dev')
 
     const program = useQuery({
         queryFn: queryFn<ProgramValues>,
@@ -30,16 +27,8 @@ export const Component = () => {
         ] as const,
     })
 
-    if (
-        program?.data?.programType === 'WITHOUT_REGISTRATION' &&
-        inDevMode === 'yes'
-    ) {
+    if (program?.data?.programType === 'WITHOUT_REGISTRATION') {
         return <EditEventProgram />
     }
-
-    if (program?.data?.programType === 'WITHOUT_REGISTRATION') {
-        return <LegacyAppRedirect section={SECTIONS_MAP.program} />
-    }
-
     return <EditTrackerProgram />
 }

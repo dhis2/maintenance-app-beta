@@ -128,7 +128,7 @@ html {
     background: var(--sidenav-dark-bg-selected);
 }
 .sidenav-item-icon {
-    margin-right: 8px;
+    margin-left: 8px;
     width: 16px;
     height: 16px;
 }

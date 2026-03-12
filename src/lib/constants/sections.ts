@@ -180,14 +180,14 @@ export const SCHEMA_SECTIONS = {
         namePlural: 'programIndicators',
         title: i18n.t('Program indicator'),
         titlePlural: i18n.t('Program indicators'),
-        parentSectionKey: 'programsAndTracker',
+        parentSectionKey: 'indicator',
     },
     programIndicatorGroup: {
         name: SchemaName.programIndicatorGroup,
         namePlural: 'programIndicatorGroups',
         title: i18n.t('Program indicator group'),
         titlePlural: i18n.t('Program indicator groups'),
-        parentSectionKey: 'programsAndTracker',
+        parentSectionKey: 'indicator',
     },
     programRule: {
         name: SchemaName.programRule,
@@ -251,7 +251,7 @@ export const SCHEMA_SECTIONS = {
         namePlural: 'optionGroups',
         title: i18n.t('Option group'),
         titlePlural: i18n.t('Option groups'),
-        parentSectionKey: 'other',
+        parentSectionKey: 'optionSet',
     },
     attribute: {
         name: SchemaName.attribute,
@@ -265,21 +265,21 @@ export const SCHEMA_SECTIONS = {
         namePlural: 'optionSets',
         title: i18n.t('Option set'),
         titlePlural: i18n.t('Option sets'),
-        parentSectionKey: 'other',
+        parentSectionKey: 'optionSet',
     },
     optionGroupSet: {
         name: SchemaName.optionGroupSet,
         namePlural: 'optionGroupSets',
         title: i18n.t('Option group set'),
         titlePlural: i18n.t('Option group sets'),
-        parentSectionKey: 'other',
+        parentSectionKey: 'optionSet',
     },
     predictor: {
         name: SchemaName.predictor,
         namePlural: 'predictors',
         title: i18n.t('Predictor'),
         titlePlural: i18n.t('Predictors'),
-        parentSectionKey: 'other',
+        parentSectionKey: 'indicator',
     },
     pushAnalysis: {
         name: SchemaName.pushAnalysis,
@@ -301,14 +301,14 @@ export const SCHEMA_SECTIONS = {
         namePlural: 'dataApprovalLevels',
         title: i18n.t('Data approval level'),
         titlePlural: i18n.t('Data approval levels'),
-        parentSectionKey: 'other',
+        parentSectionKey: 'dataApproval',
     },
     dataApprovalWorkflow: {
         name: SchemaName.dataApprovalWorkflow,
         namePlural: 'dataApprovalWorkflows',
         title: i18n.t('Data approval workflow'),
         titlePlural: i18n.t('Data approval workflows'),
-        parentSectionKey: 'other',
+        parentSectionKey: 'dataApproval',
     },
     sqlView: {
         name: SchemaName.sqlView,
@@ -343,7 +343,7 @@ export const SCHEMA_SECTIONS = {
         namePlural: 'predictorGroups',
         title: i18n.t('Predictor group'),
         titlePlural: i18n.t('Predictor groups'),
-        parentSectionKey: 'other',
+        parentSectionKey: 'indicator',
     },
 } as const satisfies SchemaSectionMap
 
@@ -374,7 +374,7 @@ export const OVERVIEW_SECTIONS = {
         name: SchemaName.indicator,
         namePlural: 'indicators',
         title: i18n.t('Indicator'),
-        titlePlural: i18n.t('Indicators'),
+        titlePlural: i18n.t('Indicators and Predictors'),
         componentName: 'Indicators',
     },
     organisationUnit: {
@@ -391,12 +391,26 @@ export const OVERVIEW_SECTIONS = {
         titlePlural: i18n.t('Programs and Tracker'),
         componentName: 'ProgramsAndTracker',
     },
+    optionSet: {
+        name: SchemaName.optionSet,
+        namePlural: 'optionSets',
+        title: i18n.t('Option set'),
+        titlePlural: i18n.t('Option sets'),
+        componentName: 'OptionSets',
+    },
     validation: {
         name: 'validation',
         namePlural: 'validations',
         title: i18n.t('Validation'),
         titlePlural: i18n.t('Validations'),
         componentName: 'Validations',
+    },
+    dataApproval: {
+        name: 'dataApproval',
+        namePlural: 'dataApproval',
+        title: i18n.t('Data approval'),
+        titlePlural: i18n.t('Data approval'),
+        componentName: 'DataApproval',
     },
     other: {
         name: 'other',
@@ -435,7 +449,7 @@ export const NON_SCHEMA_SECTION = {
         namePlural: 'programDisaggregations',
         title: i18n.t('Program disaggregation'),
         titlePlural: i18n.t('Program disaggregations'),
-        parentSectionKey: 'other',
+        parentSectionKey: 'programsAndTracker',
         minApiVersion: 42,
         authorities: [
             {

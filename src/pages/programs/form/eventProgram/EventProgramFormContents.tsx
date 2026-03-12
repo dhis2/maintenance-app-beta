@@ -45,9 +45,6 @@ export const EventProgramFormContents = () => {
                 isSubsection={false}
                 isTrackerProgram={false}
             />
-            {/*<ProgramStagesFormContents*/}
-            {/*    name={descriptor.getSection('programStages').name}*/}
-            {/*/>*/}
             <ProgramNotificationsFormContents
                 name={descriptor.getSection('programNotifications').name}
                 isTrackerProgram={false}

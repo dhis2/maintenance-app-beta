@@ -4,14 +4,14 @@ import { OVERVIEW_SECTIONS, SECTIONS_MAP } from '../../lib'
 import { SummaryCard, SummaryCardGroup } from './card'
 import { OverviewGroup, OverviewGroupSummary } from './group'
 
-const TITLE = SECTIONS_MAP.indicator.titlePlural
+const TITLE = i18n.t('Indicators and Predictors')
 
 export const IndicatorsOverview = () => {
     return (
         <OverviewGroup title={TITLE}>
             <OverviewGroupSummary>
                 {i18n.t(
-                    'Indicators are used to calculate and analyze data based on data elements and other indicators.'
+                    'Indicators are used to calculate and analyze data based on data elements and other indicators. Predictors are used to predict future data values.'
                 )}
             </OverviewGroupSummary>
             <IndicatorsCardGroup />
@@ -52,6 +52,16 @@ export const IndicatorsCardGroup = ({ showTitle }: { showTitle?: boolean }) => {
             </SummaryCard>
             <SummaryCard section={SECTIONS_MAP.programIndicatorGroup}>
                 {i18n.t('Group program indicators for easier analysis.')}
+            </SummaryCard>
+            <SummaryCard section={SECTIONS_MAP.predictor}>
+                {i18n.t(
+                    'Create predictors which can be used to predict future data values.'
+                )}
+            </SummaryCard>
+            <SummaryCard section={SECTIONS_MAP.predictorGroup}>
+                {i18n.t(
+                    'Create predictor groups that contain several related predictors.'
+                )}
             </SummaryCard>
         </SummaryCardGroup>
     )
