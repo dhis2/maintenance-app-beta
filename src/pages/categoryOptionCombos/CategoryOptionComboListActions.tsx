@@ -14,7 +14,7 @@ import {
 import React, { useRef, useState } from 'react'
 import { useHref, useLinkClickHandler } from 'react-router-dom'
 import {
-    ActionEdit,
+    ActionShowDetails,
     ListActions,
 } from '../../components/sectionList/listActions'
 import css from '../../components/sectionList/listActions/SectionListActions.module.css'
@@ -60,12 +60,7 @@ export const CategoryOptionComboListActions = ({
 
     return (
         <ListActions>
-            <TooltipWrapper
-                condition={!editable}
-                content={TOOLTIPS.noEditAccess}
-            >
-                <ActionEdit disabled={!editable} modelId={model.id} />
-            </TooltipWrapper>
+            <ActionShowDetails onClick={() => onShowDetailsClick(model)} />
             <div ref={ref}>
                 <Button
                     small
