@@ -1,3 +1,15 @@
+# [0.146.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.145.1...v0.146.0) (2026-03-13)
+
+
+### Bug Fixes
+
+* **section-list:** change default row action to edit ([#791](https://github.com/dhis2/maintenance-app-beta/issues/791)) ([2ac86b6](https://github.com/dhis2/maintenance-app-beta/commit/2ac86b61f6d17a51ef5ed0a39eeb3ade2fc385f9))
+
+
+### Features
+
+* add attribute category combo ([#803](https://github.com/dhis2/maintenance-app-beta/issues/803)) ([7eeda61](https://github.com/dhis2/maintenance-app-beta/commit/7eeda619536cc0cfcf200c828d69fd4065de1303))
+
 ## [0.145.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.145.0...v0.145.1) (2026-03-13)
 
 
