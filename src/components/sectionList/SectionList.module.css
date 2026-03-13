@@ -63,6 +63,10 @@
     padding-inline-end: 0;
 }
 
+.listRow.clickable:hover td:nth-child(2) pre {
+    text-decoration: underline;
+}
+
 .listActions {
     display: flex;
     gap: var(--spacers-dp8);

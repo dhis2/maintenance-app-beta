@@ -1,7 +1,13 @@
 import { FetchError } from '@dhis2/app-runtime'
 import { SharingDialog } from '@dhis2/ui'
 import React, { useCallback, useState } from 'react'
-import { BaseListModel, canEditModel, useSchemaFromHandle } from '../../lib'
+import { useNavigate } from 'react-router-dom'
+import {
+    BaseListModel,
+    canEditModel,
+    useLocationSearchState,
+    useSchemaFromHandle,
+} from '../../lib'
 import { ModelCollection, Pager } from '../../types/models'
 import { DefaultDetailsPanelContent, DetailsPanel } from './detailsPanel'
 import { FilterWrapper } from './filters/FilterWrapper'
@@ -59,6 +65,9 @@ export const SectionListWrapper = ({
     const { columns: headerColumns } = useModelListView()
     const schema = useSchemaFromHandle()
 
+    const navigate = useNavigate()
+    const preservedSearchState = useLocationSearchState()
+
     const { selectedModels, checkAllSelected, add, remove, toggle, clearAll } =
         useSelectedModels()
     const [detailsId, setDetailsId] = useState<string | undefined>()
@@ -98,6 +107,19 @@ export const SectionListWrapper = ({
             )
         },
         [setDetailsId]
+    )
+
+    const handleRowClick = useCallback(
+        (model: BaseListModel) => {
+            if (!canEditModel(model)) {
+                return
+            }
+            navigate(model.id, {
+                relative: 'path',
+                state: preservedSearchState,
+            })
+        },
+        [navigate, preservedSearchState]
     )
 
     /* Note that SectionListRow is memoed, to prevent re-rendering
@@ -171,7 +193,7 @@ export const SectionListWrapper = ({
                             modelData={model}
                             selectedColumns={headerColumns}
                             onSelect={toggle}
-                            onClick={handleDetailsClick}
+                            onClick={handleRowClick}
                             selected={selectedModels.has(model.id)}
                             active={model.id === detailsId}
                             renderColumnValue={renderColumnValue}
