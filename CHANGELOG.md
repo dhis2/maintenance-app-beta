@@ -1,3 +1,10 @@
+## [0.145.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.145.0...v0.145.1) (2026-03-13)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#808](https://github.com/dhis2/maintenance-app-beta/issues/808)) ([e75f59c](https://github.com/dhis2/maintenance-app-beta/commit/e75f59c49de505c6a66ab4c9eb3a803fdc4834b1))
+
 # [0.145.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.144.3...v0.145.0) (2026-03-12)
 
 
