@@ -13,20 +13,20 @@ import {
     SectionedFormSection,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
-} from '../../../components'
-import { CustomFormDataPayload } from '../../../components/customForm/CustomFormEdit'
-import { CustomFormEditEntry } from '../../../components/customForm/CustomFormEditEntry'
-import { useProgramsCustomFormElements } from '../../../components/customForm/useGetCustomFormElements'
-import { SectionFormSectionsList } from '../../../components/formCreators/SectionFormList'
+} from '../../../../components'
+import { CustomFormDataPayload } from '../../../../components/customForm/CustomFormEdit'
+import { CustomFormEditEntry } from '../../../../components/customForm/CustomFormEditEntry'
+import { useProgramsCustomFormElements } from '../../../../components/customForm/useGetCustomFormElements'
+import { SectionFormSectionsList } from '../../../../components/formCreators/SectionFormList'
 import {
     FormType,
     TabbedFormTypePicker,
-} from '../../../components/formCreators/TabbedFormTypePicker'
-import { FORM_SECTION_PARAM_KEY, scrollToSection } from '../../../lib'
-import { SchemaName } from '../../../types'
-import { ProgramValues } from '../EditTrackerProgram'
+} from '../../../../components/formCreators/TabbedFormTypePicker'
+import { FORM_SECTION_PARAM_KEY, scrollToSection } from '../../../../lib'
+import { SchemaName } from '../../../../types'
+import { ProgramValues } from '../../EditTrackerProgram'
+import { EditOrNewEnrollmentSectionForm } from '../sectionForm/EntrollmentSectionForm'
 import styles from './EnrollmentFormFormContents.module.css'
-import { EditOrNewEnrollmentSectionForm } from './sectionForm/EntrollmentSectionForm'
 
 const useProgramField = <T extends keyof ProgramValues>(
     name: T,

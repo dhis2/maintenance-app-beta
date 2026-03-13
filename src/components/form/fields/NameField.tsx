@@ -9,12 +9,19 @@ export function NameField({
     schemaSection,
     helpText,
     modelId,
+    caseSensitiveUniqueness = false,
 }: {
     helpText?: string
     schemaSection: SchemaSection
     modelId?: string
+    caseSensitiveUniqueness?: boolean
 }) {
-    const validator = useValidator({ schemaSection, property: 'name', modelId })
+    const validator = useValidator({
+        schemaSection,
+        property: 'name',
+        modelId,
+        caseSensitive: caseSensitiveUniqueness,
+    })
     const schema = useSchema(schemaSection.name)
     const propertyDetails = schema.properties['name']
     const [warning, setWarning] = useState<string | undefined>()
@@ -25,13 +32,11 @@ export function NameField({
         message: i18n.t(
             'This name is already in use. Consider updating the name to avoid a duplication.'
         ),
+        caseSensitive: caseSensitiveUniqueness,
     })
     const uniquenessWarner = propertyDetails.unique
         ? undefined
         : checkNameDuplicate
-
-    const helpString =
-        helpText || i18n.t('A name should be concise and easy to recognize.')
 
     return (
         <FieldRFF name="name" validate={validator}>
@@ -53,10 +58,10 @@ export function NameField({
                     dataTest="formfields-name"
                     required
                     inputWidth="400px"
-                    label={i18n.t('{{fieldLabel}} (required)', {
+                    label={i18n.t('{{fieldLabel}}', {
                         fieldLabel: i18n.t('Name'),
                     })}
-                    helpText={helpString}
+                    helpText={helpText}
                     validationText={warning}
                     warning={!!warning}
                 />

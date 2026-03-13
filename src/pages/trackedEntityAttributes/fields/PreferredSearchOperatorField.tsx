@@ -52,7 +52,7 @@ export function PreferredSearchOperatorField() {
             name="preferredSearchOperator"
             label={i18n.t('Preferred search operator')}
             helpText={i18n.t(
-                'Apps will try to use this recommended operator to improve performance, but can still use others if needed.'
+                'Apps try to use this operator first, but may use others when needed.'
             )}
             error={
                 preferredOperatorMeta.touched && preferredOperatorMeta.invalid

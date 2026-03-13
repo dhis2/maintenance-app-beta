@@ -26,6 +26,7 @@ type ProgramStageDataElementFormValue = {
     id?: string
     dataElement: DataElement
     valueType: string
+    optionSet?: { id: string }
     compulsory: boolean
     displayInReports: boolean
     allowFutureDate: boolean
@@ -39,6 +40,9 @@ type ProgramStageDataElementFormValue = {
 
 const getValueType = (psde: ProgramStageDataElementFormValue): string =>
     psde.valueType ?? psde.dataElement?.valueType
+
+const getOptionSet = (psde: ProgramStageDataElementFormValue): string =>
+    psde.optionSet?.id ?? psde.dataElement?.optionSet?.id
 
 const defaultRenderType = {
     MOBILE: { type: 'DEFAULT' },
@@ -110,6 +114,7 @@ export const StageDataFormContents = React.memo(function StageDataFormContents({
                                     renderType:
                                         existing.renderType ||
                                         defaultRenderType,
+                                    optionSet: existing.optionSet,
                                 }
                             }
 
@@ -117,8 +122,10 @@ export const StageDataFormContents = React.memo(function StageDataFormContents({
                                 dataElement: {
                                     id: de.id,
                                     displayName: de.displayName,
+                                    optionSet: de.optionSet,
                                 },
                                 valueType: de.valueType,
+                                optionSet: de.optionSet,
                                 compulsory: false,
                                 displayInReports: false,
                                 allowFutureDate: false,
@@ -142,7 +149,12 @@ export const StageDataFormContents = React.memo(function StageDataFormContents({
                     query={{
                         resource: 'dataElements',
                         params: {
-                            fields: ['id', 'displayName', 'valueType'],
+                            fields: [
+                                'id',
+                                'displayName',
+                                'valueType',
+                                'optionSet',
+                            ],
                             filter: ['domainType:eq:TRACKER'],
                         },
                     }}
@@ -251,6 +263,9 @@ export const StageDataFormContents = React.memo(function StageDataFormContents({
                                         device="DESKTOP"
                                         valueType={getValueType(dataElement)}
                                         required
+                                        hasOptionSet={
+                                            !!getOptionSet(dataElement)
+                                        }
                                     />
                                 </TableCell>
                                 <TableCell>
@@ -260,6 +275,9 @@ export const StageDataFormContents = React.memo(function StageDataFormContents({
                                         device="MOBILE"
                                         valueType={getValueType(dataElement)}
                                         required
+                                        hasOptionSet={
+                                            !!getOptionSet(dataElement)
+                                        }
                                     />
                                 </TableCell>
                             </TableRow>

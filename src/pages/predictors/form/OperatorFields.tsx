@@ -36,7 +36,7 @@ export const OperatorFields = () => {
                     <ModelSingleSelectFormField
                         inputWidth="400px"
                         name="output"
-                        label={i18n.t('Output data element (required)')}
+                        label={i18n.t('Output data element')}
                         query={{
                             resource: 'dataElements',
                             params: {
@@ -68,11 +68,11 @@ export const OperatorFields = () => {
                             showNoValueOption={{
                                 value: DEFAULT_CATEGORY_OPTION_COMBO.id,
                                 label: i18n.t(
-                                    'Predict according to input category option combo'
+                                    'Predict using input category option combination'
                                 ),
                             }}
                             name="outputCombo"
-                            label={i18n.t('Output category option combo')}
+                            label={i18n.t('Output category option combination')}
                             query={{
                                 resource: 'categoryOptionCombos',
                                 params: {
@@ -85,7 +85,7 @@ export const OperatorFields = () => {
                                 },
                             }}
                             placeholder={i18n.t(
-                                'Predict according to input category option combo'
+                                'Predict using input category option combination'
                             )}
                             clearable={false}
                             dataTest="formfields-outputCombo"

@@ -17,9 +17,7 @@ const {
 
 const categoryOptionGroupBaseSchema = z.object({
     code: z.string().trim().optional(),
-    dataDimensionType: z
-        .nativeEnum(CategoryOptionGroup.dataDimensionType)
-        .default(CategoryOptionGroup.dataDimensionType.DISAGGREGATION),
+    dataDimensionType: z.nativeEnum(CategoryOptionGroup.dataDimensionType),
 })
 
 export const categoryOptionGroupFormSchema = identifiable

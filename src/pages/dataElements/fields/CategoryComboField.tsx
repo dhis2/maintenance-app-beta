@@ -48,9 +48,7 @@ export function CategoryComboField() {
                     required
                     name="categoryCombo"
                     dataTest="formfields-categorycombo"
-                    label={i18n.t('{{fieldLabel}} (required)', {
-                        fieldLabel: i18n.t('Category combination'),
-                    })}
+                    label={i18n.t('Category combination')}
                     helpText={i18n.t(
                         'Choose how this data element is disaggregated.'
                     )}

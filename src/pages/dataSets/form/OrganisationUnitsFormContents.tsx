@@ -17,7 +17,7 @@ export const OrganisationUnitsFormContents = React.memo(
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Configure which organisation units can collect data for this data set.'
+                        'Choose which organisation units can collect data.'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>

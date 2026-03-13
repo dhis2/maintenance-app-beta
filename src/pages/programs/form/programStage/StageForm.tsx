@@ -57,7 +57,7 @@ export const fieldFilters = [
     'programStageLabel',
     'eventLabel',
     'programStageSections[id,displayName]',
-    'programStageDataElements[id,dataElement[id,displayName,valueType],compulsory,displayInReports,allowFutureDate,skipAnalytics,skipSynchronization,renderType,sortOrder]',
+    'programStageDataElements[id,dataElement[id,displayName,valueType,optionSet],compulsory,displayInReports,allowFutureDate,skipAnalytics,skipSynchronization,renderType,sortOrder]',
     'dataEntryForm[id,displayName,htmlCode]',
     'repeatable',
     'standardInterval',

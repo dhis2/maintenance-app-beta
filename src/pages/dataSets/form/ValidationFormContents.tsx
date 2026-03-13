@@ -20,9 +20,7 @@ export const ValidationFormContents = React.memo(
                     {i18n.t('Validation and limitations')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
-                    {i18n.t(
-                        'Configure how data can and must be entered for this data'
-                    )}
+                    {i18n.t('Configure data entry rules and requirements.')}
                 </StandardFormSectionDescription>
                 <StandardFormField>
                     <DataApprovalWorkflowField />
@@ -32,9 +30,7 @@ export const ValidationFormContents = React.memo(
                         name="validCompleteOnly"
                         type="checkbox"
                         component={CheckboxFieldFF}
-                        label={i18n.t(
-                            'Completing a data set requires passing validation'
-                        )}
+                        label={i18n.t('Completing requires passing validation')}
                     />
                 </StandardFormField>
                 <StandardFormField>
@@ -43,7 +39,7 @@ export const ValidationFormContents = React.memo(
                         type="checkbox"
                         component={CheckboxFieldFF}
                         label={i18n.t(
-                            'Completing a data set requires all empty values to have a comment'
+                            'Completing requires all empty values to have a comment'
                         )}
                     />
                 </StandardFormField>
@@ -53,7 +49,7 @@ export const ValidationFormContents = React.memo(
                         type="checkbox"
                         component={CheckboxFieldFF}
                         label={i18n.t(
-                            'Completing a data set requires compulsory field to have a value'
+                            'Completing requires compulsory fields to have a value'
                         )}
                     />
                 </StandardFormField>
@@ -63,7 +59,7 @@ export const ValidationFormContents = React.memo(
                         type="checkbox"
                         component={CheckboxFieldFF}
                         label={i18n.t(
-                            'Data elements with category combinations require all fields to have a value if one has a value'
+                            'If one category combination field has a value, require all for that category combination to have a value'
                         )}
                     />
                 </StandardFormField>
@@ -72,13 +68,8 @@ export const ValidationFormContents = React.memo(
                 </StandardFormField>
 
                 <StandardFormSectionTitle>
-                    {i18n.t('Compulsory data entry')}
+                    {i18n.t('Compulsory data elements')}
                 </StandardFormSectionTitle>
-                <StandardFormSectionDescription>
-                    {i18n.t(
-                        'Optionally configure which data elements must have a value to complete this data set.'
-                    )}
-                </StandardFormSectionDescription>
                 <CompulsoryDataElementsTransfer />
             </SectionedFormSection>
         )

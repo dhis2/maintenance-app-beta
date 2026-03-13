@@ -9,7 +9,7 @@ export function DataDimensionField() {
             component={CheckboxFieldFF}
             dataTest="formfields-dataDimension"
             name="dataDimension"
-            label={i18n.t('Data dimension')}
+            label={i18n.t('Show as data dimension in analytics apps')}
             type="checkbox"
             validateFields={[]}
         />

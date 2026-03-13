@@ -9,6 +9,7 @@ import {
 } from '@dhis2/ui'
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
+import styles from './ConfirmationModalWrapper.module.css'
 
 const ConfirmationModal = ({
     onClose,
@@ -17,6 +18,7 @@ const ConfirmationModal = ({
     modalTitle,
     modalMessage,
     modalMessageSelectionSpecificConfirmation,
+    confirmButtonLabel,
     children,
 }: {
     onClose: () => void
@@ -25,6 +27,7 @@ const ConfirmationModal = ({
     modalTitle?: string
     modalMessage?: string
     modalMessageSelectionSpecificConfirmation?: string
+    confirmButtonLabel?: string
     children?: React.ReactNode
 }) => (
     <>
@@ -34,9 +37,11 @@ const ConfirmationModal = ({
                     {modalTitle || i18n.t('Change this field')}
                 </ModalTitle>
                 <ModalContent>
-                    {modalMessage && <p>{modalMessage}</p>}
+                    {modalMessage && (
+                        <p className={styles.modalMessage}>{modalMessage}</p>
+                    )}
 
-                    <p>
+                    <p className={styles.modalMessage}>
                         {modalMessageSelectionSpecificConfirmation ??
                             i18n.t('Are you sure you want to change this?')}
                     </p>
@@ -54,7 +59,7 @@ const ConfirmationModal = ({
                             destructive
                             onClick={confirmSelection}
                         >
-                            {i18n.t('Yes, change')}
+                            {confirmButtonLabel ?? i18n.t('Change')}
                         </Button>
                     </ButtonStrip>
                 </ModalActions>
@@ -71,6 +76,7 @@ export const ConfirmationModalWrapper = ({
     modalTitle,
     modalMessage,
     modalMessageSelectionSpecificConfirmation,
+    confirmButtonLabel,
 }: {
     onChange: (event: any) => void
     renderComponent: (onChange: any) => React.JSX.Element
@@ -78,6 +84,7 @@ export const ConfirmationModalWrapper = ({
     modalTitle?: string
     modalMessage?: string
     modalMessageSelectionSpecificConfirmation?: (selection: any) => string
+    confirmButtonLabel?: (selection: any) => string
 }) => {
     const id = useParams()?.id
     const isEdit = !!id
@@ -107,6 +114,11 @@ export const ConfirmationModalWrapper = ({
                     ? modalMessageSelectionSpecificConfirmation(
                           unconfirmedSelection
                       )
+                    : undefined
+            }
+            confirmButtonLabel={
+                unconfirmedSelection && confirmButtonLabel
+                    ? confirmButtonLabel(unconfirmedSelection)
                     : undefined
             }
         >

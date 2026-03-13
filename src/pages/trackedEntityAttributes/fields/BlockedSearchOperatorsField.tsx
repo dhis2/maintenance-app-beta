@@ -48,7 +48,7 @@ export function BlockedSearchOperatorsField() {
             name="blockedSearchOperators"
             label={i18n.t('Blocked search operators')}
             helpText={i18n.t(
-                'Searches with blocked search operators will return no results. This prevents inefficient searches.'
+                'Searches using these operators return no results. Use this to prevent inefficient searches.'
             )}
             error={blockedOperatorsMeta.touched && blockedOperatorsMeta.invalid}
             validationText={

@@ -31,7 +31,7 @@ import {
     trackerProgramValidate,
 } from './form'
 import { ProgramNotificationListItem } from './form/common/ProgramNotificationsFormContents'
-import { ProgramStageListItem } from './form/ProgramStagesFormContents'
+import { ProgramStageListItem } from './form/trackerProgram/ProgramStagesFormContents'
 import { TrackerProgramFormContents } from './form/trackerProgram/TrackerProgramFormContents'
 import { TrackerProgramFormDescriptor } from './form/trackerProgram/trackerProgramFormDescriptor'
 
@@ -48,7 +48,6 @@ const fieldFilters = [
     'categoryCombo[id,displayName]',
     'lastUpdated',
     'dataEntryForm',
-    'programTrackedEntityAttributes',
     'trackedEntityType[id,displayName,name,trackedEntityTypeAttributes[trackedEntityAttribute[id,displayName,unique,valueType],mandatory,searchable,displayInList]]',
     'onlyEnrollOnce',
     'selectEnrollmentDatesInFuture',
@@ -58,7 +57,7 @@ const fieldFilters = [
     'ignoreOverdueEvents',
     'dataEntryForm[id,displayName,htmlCode]',
     'programSections[id,displayName,description,access,sortOrder]',
-    'programTrackedEntityAttributes[id,displayName,valueType,renderType,allowFutureDate,mandatory,searchable,displayInList,trackedEntityAttribute[id,displayName,unique]]',
+    'programTrackedEntityAttributes[id,displayName,valueType,renderType,allowFutureDate,mandatory,searchable,displayInList,trackedEntityAttribute[id,displayName,unique,optionSet,valueType]]',
     'style[color,icon]',
     'programStageLabel',
     'eventLabel',

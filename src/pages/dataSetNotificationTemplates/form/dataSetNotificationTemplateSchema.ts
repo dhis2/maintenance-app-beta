@@ -46,17 +46,12 @@ const dataSetNotificationTemplateBaseSchema = z.object({
 
 export const dataSetNotificationTemplateFormSchema =
     dataSetNotificationTemplateBaseSchema.merge(identifiable).extend({
-        dataSetNotificationTrigger: z
-            .nativeEnum(DataSetNotificationTemplate.dataSetNotificationTrigger)
-            .default(
-                DataSetNotificationTemplate.dataSetNotificationTrigger
-                    .SCHEDULED_DAYS
-            ),
-        notificationRecipient: z
-            .nativeEnum(DataSetNotificationTemplate.notificationRecipient)
-            .default(
-                DataSetNotificationTemplate.notificationRecipient.USER_GROUP
-            ),
+        dataSetNotificationTrigger: z.nativeEnum(
+            DataSetNotificationTemplate.dataSetNotificationTrigger
+        ),
+        notificationRecipient: z.nativeEnum(
+            DataSetNotificationTemplate.notificationRecipient
+        ),
     })
 
 export const dataSetNotificationTemplateListSchema =

@@ -105,8 +105,9 @@ export function IconPickerModal({
                 <div
                     className={classes.iconsContainer}
                     data-test="icons-container"
+                    aria-label={i18n.t('Available icons')}
                 >
-                    <div className={classes.iconMessage}>
+                    <div className={classes.iconMessage} aria-live="polite">
                         {icons.isLoading && <LoadingSpinner />}
                         {icons.isSuccess && displayIcons.length === 0 ? (
                             <div className={classes.emptyIconSearchMessage}>
@@ -117,6 +118,8 @@ export function IconPickerModal({
                     {displayIcons.map(({ key, href }: Icon) => (
                         <div
                             key={key}
+                            role="button"
+                            aria-pressed={key === icon}
                             className={cx(classes.iconContainer, {
                                 [classes.active]: key === icon,
                             })}

@@ -38,7 +38,7 @@ import {
     StageFormValues,
     stageSchemaSection,
 } from './form/programStage/StageForm'
-import { ProgramStageListItem } from './form/ProgramStagesFormContents'
+import { ProgramStageListItem } from './form/trackerProgram/ProgramStagesFormContents'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -52,7 +52,7 @@ const fieldFilters = [
     'categoryCombo[id,displayName]',
     'style[color,icon]',
     'incidentDateLabel',
-    'programStages[id,name,displayName,enableUserAssignment,blockEntryForm,preGenerateUID,validationStrategy,notificationTemplates[id,name,displayName,access],dataEntryForm[id,displayName,htmlCode],programStageDataElements[id,dataElement[id,displayName,valueType],compulsory,allowProvidedElsewhere,displayInReports,allowFutureDate,skipAnalytics,skipSynchronization,renderType,sortOrder],programStageSections[id,displayName]]',
+    'programStages[id,name,displayName,enableUserAssignment,blockEntryForm,preGenerateUID,validationStrategy,notificationTemplates[id,name,displayName,access],dataEntryForm[id,displayName,htmlCode],programStageDataElements[id,dataElement[id,displayName,valueType,optionSet],compulsory,allowProvidedElsewhere,displayInReports,allowFutureDate,skipAnalytics,skipSynchronization,renderType,sortOrder],programStageSections[id,displayName]]',
     'organisationUnits[id,displayName,path]',
     'sharing',
     'expiryDays',

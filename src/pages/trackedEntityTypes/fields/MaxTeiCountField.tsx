@@ -15,6 +15,7 @@ export function MaxTeiCountField() {
             label={i18n.t(
                 'Maximum number of tracked entity instances to return when searching'
             )}
+            helpText={i18n.t('Entering 0 shows all search results')}
             format={(value: unknown) => value?.toString()}
             parse={(value: unknown) => {
                 if (value === undefined || value === '') {
