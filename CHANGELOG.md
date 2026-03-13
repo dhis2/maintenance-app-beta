@@ -1,3 +1,11 @@
+## [0.146.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.146.0...v0.146.1) (2026-03-13)
+
+
+### Bug Fixes
+
+* import translation files ([#810](https://github.com/dhis2/maintenance-app-beta/issues/810)) ([44ff70f](https://github.com/dhis2/maintenance-app-beta/commit/44ff70f676cff7ae06421fb2e2923370e85e1e7d))
+* skip flaky tests ([#811](https://github.com/dhis2/maintenance-app-beta/issues/811)) ([4c317b4](https://github.com/dhis2/maintenance-app-beta/commit/4c317b4dcbe17bc59bf4a9a343679ab8a69fe708))
+
 # [0.146.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.145.1...v0.146.0) (2026-03-13)
 
 
