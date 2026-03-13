@@ -1,0 +1,3525 @@
+# Translators:
+# Jiří Podhorecký <jirka.p@volny.cz>, 2025
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2025-09-19T09:43:03.099Z\n"
+"PO-Revision-Date: 2025-09-23 13:28+0000\n"
+"Last-Translator: Jiří Podhorecký <jirka.p@volny.cz>, 2025\n"
+"Language-Team: Czech (https://app.transifex.com/hisp-uio/teams/100509/cs/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: cs\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+
+msgid "schemas"
+msgstr "schémata"
+
+msgid "This page is not enabled for for the software version you are using"
+msgstr "Tato stránka není povolena pro verzi softwaru, kterou používáte"
+
+msgid "You do not have the authority to view this page."
+msgstr "K zobrazení této stránky nemáte oprávnění."
+
+msgid ""
+"You are missing the required authority ({{authority}}) to view this page."
+msgstr ""
+"K zobrazení této stránky vám chybí potřebné oprávnění ({{authority}})."
+
+msgid "Section is not implemented yet"
+msgstr "Sekce zatím není implementována"
+
+msgid ""
+"This section has not been implemented yet. Click the button below to go to "
+"the corresponding page in the legacy app."
+msgstr ""
+"Tento oddíl zatím nebyl implementován. Kliknutím na tlačítko níže přejdete "
+"na příslušnou stránku ve starší aplikaci."
+
+msgid "Go to legacy app"
+msgstr "Přejít na starší aplikaci"
+
+msgid "Not found"
+msgstr "Nenalezeno"
+
+msgid "The page you are looking for does not exist."
+msgstr "Hledaná stránka neexistuje."
+
+msgid "New {{modelName}}"
+msgstr "Nový {{modelName}}"
+
+msgid "Merge {{modelName}}"
+msgstr "Sloučit {{modelName}}"
+
+msgid "Edit {{modelName}}"
+msgstr "Upravit {{modelName}}"
+
+msgid "Metadata Overview"
+msgstr "Přehled metadat"
+
+msgid "No menu items found for"
+msgstr "Nebyly nalezeny žádné položky nabídky"
+
+msgid "Overview"
+msgstr "Přehled"
+
+msgid "Search menu items"
+msgstr "Položky menu Vyhledávání"
+
+msgid "All"
+msgstr "Vše"
+
+msgid "Positive"
+msgstr "Pozitivní"
+
+msgid "Negative"
+msgstr "Negativní"
+
+msgid "Outline"
+msgstr "Obrys"
+
+msgid "Search icons"
+msgstr "Ikony pro vyhledávání"
+
+msgid "No icons match the search."
+msgstr "Hledání neodpovídají žádné ikony."
+
+msgid "Select"
+msgstr "Vybrat"
+
+msgid "Remove icon"
+msgstr "Odebrat ikonu"
+
+msgid "Cancel"
+msgstr "Zrušit"
+
+msgid "Message subject"
+msgstr "Předmět zprávy"
+
+msgid "Message body (required) *"
+msgstr "Tělo zprávy (povinné) *"
+
+msgid "Message body"
+msgstr "Tělo zprávy"
+
+msgid "Insert a variable:"
+msgstr "Vložení proměnné:"
+
+msgid "Clear all"
+msgstr "Vymazat vše"
+
+msgid "Filter options"
+msgstr "Možnosti filtru"
+
+msgid "Retry"
+msgstr "Opakovat"
+
+msgid "Required"
+msgstr "Vyžadováno"
+
+msgid "Please enter a GeoJSON value"
+msgstr "Zadejte prosím hodnotu GeoJSON"
+
+msgid "Exit without saving"
+msgstr "Odejít bez uložení"
+
+msgid "Create {{modelName}} "
+msgstr "Vytvořit {{modelName}} "
+
+msgid "Validation errors"
+msgstr "Chyby ověření"
+
+msgid "Some fields have validation errors. Please fix them before saving."
+msgstr ""
+"V některých polích se vyskytují chyby ověření. Před uložením je prosím "
+"opravte."
+
+msgid "Something went wrong when submitting the form"
+msgstr "Při odesílání formuláře se něco pokazilo"
+
+msgid "Hide error details"
+msgstr "Skrýt podrobnosti o chybě"
+
+msgid "Show error details"
+msgstr "Zobrazit podrobnosti o chybě"
+
+msgid "Save and close"
+msgstr "Uložit a zavřít"
+
+msgid "<No value>"
+msgstr "<No value>"
+
+msgid "Attributes"
+msgstr "Atributy"
+
+msgid "Set up information for the attributes assigned to {{modelName}}."
+msgstr "Nastavení informací o atributech přiřazených k {{modelName}}."
+
+msgid "Code"
+msgstr "Kód"
+
+msgid "Description"
+msgstr "Popis"
+
+msgid "A name should be concise and easy to recognize."
+msgstr "Název by měl být stručný a snadno rozpoznatelný."
+
+msgid "{{fieldLabel}} (required)"
+msgstr "{{fieldLabel}} (povinné)"
+
+msgid "Name"
+msgstr "název"
+
+msgid "Level"
+msgstr "Úroveň"
+
+msgid "Group"
+msgstr "Skupina"
+
+msgid "Deselect all"
+msgstr "Odznačit vše"
+
+msgid "Select units by group or level..."
+msgstr "Vyberte jednotky podle skupiny nebo úrovně..."
+
+msgid "Search"
+msgstr "Hledat"
+
+msgid "No selected units"
+msgstr "Žádné vybrané jednotky"
+
+msgid "{{numberOfUnits}} selected units"
+msgstr "{{numberOfUnits}} vybrané jednotky"
+
+msgid "No organisation units match your search."
+msgstr "Vašemu hledání neodpovídají žádné organizační jednotky."
+
+msgid ""
+"There are too many results to display. Please narrow\n"
+"                        down the search."
+msgstr ""
+"Výsledků je příliš mnoho na to, aby se zobrazily. Zúžte prosím\n"
+"                        vyhledávání."
+
+msgid "Search for organisation units"
+msgstr "Vyhledávání organizačních jednotek"
+
+msgid "Select organisation units"
+msgstr "Vybrat organizační jednotky"
+
+msgid ""
+"A short, unique name (max 50 characters). Displayed in analysis apps where "
+"space is limited, depending on user or system settings."
+msgstr ""
+"Krátký, jedinečný název (max. 50 znaků). Zobrazuje se v analytických "
+"aplikacích, kde je v závislosti na nastavení uživatele nebo systému omezený "
+"prostor."
+
+msgid "Short name"
+msgstr "Krátký název"
+
+msgid "Failed to load {{label}}"
+msgstr "Nepodařilo se načíst {{label}}"
+
+msgid "Failed to load"
+msgstr "Nepodařilo se načíst"
+
+msgid "Merging cannot be undone"
+msgstr "Sloučení nelze vrátit zpět"
+
+msgid "Confirmation code does not match"
+msgstr "Potvrzovací kód neodpovídá"
+
+msgid "Target must be specified to merge"
+msgstr "Pro sloučení musí být zadán cíl"
+
+msgid "Correct confirmation code must be entered to merge"
+msgstr "Pro sloučení je nutné zadat správný potvrzovací kód."
+
+msgid "Merge"
+msgstr "Spojit"
+
+msgid "Merging..."
+msgstr "Sloučení..."
+
+msgid "Merge complete"
+msgstr "Sloučení dokončeno"
+
+msgid "Back to list"
+msgstr "Zpět na seznam"
+
+msgid "Sources"
+msgstr "Zdroje"
+
+msgid "Select models to merge"
+msgstr "Výběr modelů ke sloučení"
+
+msgid "Target"
+msgstr "Cíl"
+
+msgid "Select the model to merge into"
+msgstr "Vyberte model, do kterého se má sloučit"
+
+msgid "No potential targets available. Remove an item from sources."
+msgstr ""
+"Nejsou k dispozici žádné potenciální cíle. Odstranění položky ze zdrojů."
+
+msgid "At least one source is required"
+msgstr "Je vyžadován alespoň jeden zdroj"
+
+msgid "Valid expression"
+msgstr "Platný výraz"
+
+msgid "Add operators, variables, functions, and constants from right sidebar"
+msgstr ""
+"Přidání operátorů, proměnných, funkcí a konstant z pravého postranního "
+"panelu"
+
+msgid "Apply"
+msgstr "Použít"
+
+msgid "(No Value)"
+msgstr "(Bez hodnoty)"
+
+msgid "Description (required)"
+msgstr "Popis (povinné)"
+
+msgid "Invalid expression"
+msgstr "Neplatný výraz"
+
+msgid "Could not validate expression"
+msgstr "Nepodařilo se ověřit platnost výrazu"
+
+msgid "Loading..."
+msgstr "Načítání ..."
+
+msgid "Filter available items"
+msgstr "Filtrování dostupných položek"
+
+msgid "Filter selected items"
+msgstr "Filtrování vybraných položek"
+
+msgid "Show only unassigned items"
+msgstr "Zobrazit pouze nepřiřazené položky"
+
+msgid "Refresh list"
+msgstr "Obnovit seznam"
+
+msgid "Add new"
+msgstr "Přidat nový"
+
+msgid "Something went wrong"
+msgstr "Něco se pokazilo"
+
+msgid "Actions"
+msgstr "Akce"
+
+msgid "There aren't any items that match your filter."
+msgstr "Neexistují žádné položky, které by odpovídaly vašemu filtru."
+
+msgid "An error occurred"
+msgstr "Vyskytla se chyba"
+
+msgid "An error occurred while loading the items."
+msgstr "Při načítání položek došlo k chybě."
+
+msgid "{{modelName}} management"
+msgstr "{{modelName}} řízení"
+
+msgid "Metadata access"
+msgstr "Přístup k metadatům"
+
+msgid "Metadata view and edit"
+msgstr "Zobrazení a úprava metadat"
+
+msgid "Metadata view only"
+msgstr "Pouze zobrazení metadat"
+
+msgid "Data access"
+msgstr "Přístup k datům"
+
+msgid "Data view and capture"
+msgstr "Zobrazení a zachycení dat"
+
+msgid "Data view only"
+msgstr "Pouze zobrazení dat"
+
+msgid "Successfully updated sharing for {{number}} items"
+msgstr "Úspěšná aktualizace sdílení pro položky {{number}} "
+
+msgid "An unknown error occurred"
+msgstr "Nastala neznámá chyba"
+
+msgid "Failed to update sharing"
+msgstr "Nepodařilo se aktualizovat sdílení"
+
+msgid "Update sharing for users and groups"
+msgstr "Aktualizace sdílení pro uživatele a skupiny"
+
+msgid "User or group"
+msgstr "Uživatel nebo skupina"
+
+msgid "Add to actions"
+msgstr "Přidat k akcím"
+
+msgid "Access to be updated for {{number}} items"
+msgstr "Přístup bude aktualizován k {{number}} položkám  "
+
+msgid "Update sharing for {{number}} items"
+msgstr "Aktualizace sdílení pro {{number}} položky  "
+
+msgid "Update sharing"
+msgstr "Aktualizovat sdílení"
+
+msgid "Created by"
+msgstr "Vytvořil"
+
+msgid "Created"
+msgstr "Vytvořeno"
+
+msgid "Last updated by"
+msgstr "Naposledy aktualizováno uživatelem"
+
+msgid "Last updated"
+msgstr "Naposledy aktualizováno"
+
+msgid "Id"
+msgstr "Id"
+
+msgid "API URL"
+msgstr "API URL"
+
+msgid "API URL link"
+msgstr "Odkaz na URL API"
+
+msgid "Copy"
+msgstr "Kopírovat"
+
+msgid "Edit"
+msgstr "Upravit"
+
+msgid "Details"
+msgstr "Detaily"
+
+msgid "Failed to load details"
+msgstr "Nepodařilo se načíst podrobnosti"
+
+msgid "Download"
+msgstr "Stáhnout"
+
+msgid "Download {{section}}"
+msgstr "Stáhnout {{section}}"
+
+msgid "Uncompressed"
+msgstr "Nekomprimovaný"
+
+msgid "{{model}} to include"
+msgstr "{{model}} zahrnout"
+
+msgid "All ({{number}})"
+msgstr "Vše ({{number}})"
+
+msgid "No items selected"
+msgstr "Nevybrány žádné položky"
+
+msgid "Only selected ({{number}})"
+msgstr "Pouze vybrané ({{number}})"
+
+msgid "Only selected"
+msgstr "Pouze vybrané"
+
+msgid "No filters applied"
+msgstr "Nejsou použity žádné filtry"
+
+msgid "Only items that match selected filters ({{number}})"
+msgstr "Pouze položky, které odpovídají vybraným filtrům ({{number}})"
+
+msgid "Only items that match selected filters"
+msgstr "Pouze položky, které odpovídají vybraným filtrům"
+
+msgid "Include user sharing settings"
+msgstr "Zahrnout nastavení sdílení uživatelů"
+
+msgid "Clear all filters"
+msgstr "Vymazat všechny filtry"
+
+msgid "Category combo"
+msgstr "Kombinovaná kategorie"
+
+msgid "Category"
+msgstr "Kategorie"
+
+msgid "Category option"
+msgstr "Možnosti kategorie"
+
+msgid "Category option group"
+msgstr "Skupina možností kategorie"
+
+msgid "Type to filter options"
+msgstr "Zadáním filtrujete možnosti"
+
+msgid "No matches"
+msgstr "Žádné shody"
+
+msgid "Data element"
+msgstr "Datový prvek"
+
+msgid "Data element group"
+msgstr "Skupina datových prvků"
+
+msgid "Data element group set"
+msgstr "Sada datových prvků skupiny"
+
+msgid "Data set"
+msgstr "Datová sada"
+
+msgid "Search by form name"
+msgstr "Vyhledávání podle názvu formuláře"
+
+msgid "Search by name, code or ID"
+msgstr "Vyhledávání podle názvu, kódu nebo ID"
+
+msgid "Indicator"
+msgstr "Indikátor"
+
+msgid "Indicator group"
+msgstr "Skupina indikátorů"
+
+msgid "Indicator group set"
+msgstr "Sada skupin indikátorů"
+
+msgid "Indicator Type"
+msgstr "Typ indikátoru"
+
+msgid "Program"
+msgstr "Program"
+
+msgid "Program indicator"
+msgstr "Indikátor programu"
+
+msgid "Program indicator group"
+msgstr "Skupina indikátorů programu"
+
+msgid "Public access"
+msgstr "Veřejný přístup"
+
+msgid "Delete"
+msgstr "Vymazat"
+
+msgid "Successfully deleted {{modelType}} \"{{displayName}}\""
+msgstr "Úspěšně odstraněn {{modelType}} \"{{displayName}}\""
+
+msgid "Are you sure that you want to delete this {{modelType}}?"
+msgstr "Opravdu chcete tuto stránku {{modelType}} odstranit?"
+
+msgid "Something went wrong deleting the {{modelType}}"
+msgstr "Něco se pokazilo při mazání {{modelType}}"
+
+msgid "Failed to delete {{modelType}} \"{{displayName}}\"! {{messages}}"
+msgstr "Nepodařilo se odstranit {{modelType}} \"{{displayName}}\"! {{messages}}"
+
+msgid "Try again"
+msgstr "Zkusit znovu"
+
+msgid "Confirm deletion"
+msgstr "Potvrdit vymazání"
+
+msgid "Show details"
+msgstr "Ukázat detaily"
+
+msgid "Sharing settings"
+msgstr "Nastavení sdílení"
+
+msgid "Translate"
+msgstr "Přeložit"
+
+msgid "At least one column must be selected"
+msgstr "Musí být vybrán alespoň jeden sloupec"
+
+msgid "Columns"
+msgstr "Sloupce"
+
+msgid "Filters"
+msgstr "Filtry"
+
+msgid "Available columns"
+msgstr "Dostupné sloupce"
+
+msgid "Selected columns"
+msgstr "Vybrané sloupce"
+
+msgid "Available filters"
+msgstr "Dostupné filtry"
+
+msgid "Selected filters"
+msgstr "Vybrané filtry"
+
+msgid "Failed to save"
+msgstr "Uložení se nezdařilo"
+
+msgid "Reset to default"
+msgstr "Obnovit do základního nastavení"
+
+msgid "Manage {{section}} view"
+msgstr "Správa zobrazení {{section}} "
+
+msgid "Update view"
+msgstr "Aktualizovat zobrazení"
+
+msgid "None"
+msgstr "Žádný"
+
+msgid "Public can edit"
+msgstr "Veřejnost může upravovat"
+
+msgid "Public can view"
+msgstr "Veřejnost může prohlížet"
+
+msgid "Public cannot access"
+msgstr "Veřejnost nemá přístup"
+
+msgid "New"
+msgstr "Nový"
+
+msgid "Manage View"
+msgstr "Správa zobrazení"
+
+msgid "{{number}} selected"
+msgstr "{{number}} vybráno"
+
+msgid "Merge..."
+msgstr "Sloučení..."
+
+msgid "Choose a Locale to translate from the menu above"
+msgstr "Vyberte si z horního menu jazyk, do kterého chcete překládat"
+
+msgid "Translate: {{modelName}}"
+msgstr "Přeložit: {{modelName}}"
+
+msgid "Base locale reference"
+msgstr "Odkaz na základní národní prostředí"
+
+msgid "Translation updated successfully"
+msgstr "Překlad byl úspěšně aktualizován"
+
+msgid "Save translations"
+msgstr "Uložit překlady"
+
+msgid "Can edit and capture"
+msgstr "Může upravovat a snímat"
+
+msgid "View only"
+msgstr "Pouze zobrazení"
+
+msgid "No access"
+msgstr "Žádný přístup"
+
+msgid "Edit and view"
+msgstr "Upravit a zobrazit"
+
+msgid "Search for a user or group"
+msgstr "Vyhledání uživatele nebo skupiny"
+
+msgid "Save"
+msgstr "Uložit"
+
+msgid "Categories"
+msgstr "Kategorie"
+
+msgid "Category options"
+msgstr "Možnosti kategorie"
+
+msgid "Category combination"
+msgstr "Kombinace kategorie"
+
+msgid "Category combinations"
+msgstr "Kombinace kategorií"
+
+msgid "Category option combination"
+msgstr "Kombinace možností kategorie"
+
+msgid "Category option combinations"
+msgstr "Kombinace možností kategorie"
+
+msgid "Category option groups"
+msgstr "Skupiny možností kategorií"
+
+msgid "Category option group set"
+msgstr "Sada skupin možností kategorie"
+
+msgid "Category option group sets"
+msgstr "Sady skupin možností kategorií"
+
+msgid "Data elements"
+msgstr "Datové prvky"
+
+msgid "Data element groups"
+msgstr "Skupiny datových prvků"
+
+msgid "Data element group sets"
+msgstr "Skupiny datových prvků"
+
+msgid "Data sets"
+msgstr "Datové sady"
+
+msgid "Data set notification"
+msgstr "Oznámení o sadě dat"
+
+msgid "Data set notifications"
+msgstr "Oznámení sady dat"
+
+msgid "Indicators"
+msgstr "Indikátory"
+
+msgid "Indicator type"
+msgstr "Typ indikátoru"
+
+msgid "Indicator types"
+msgstr "Typy indikátorů"
+
+msgid "Indicator groups"
+msgstr "Skupiny indikátorů"
+
+msgid "Indicator group sets"
+msgstr "Sady skupin indikátorů"
+
+msgid "Organisation unit"
+msgstr "Organizační jednotka"
+
+msgid "Organisation units"
+msgstr "Organizační jednotky"
+
+msgid "Organisation unit group"
+msgstr "Skupina organizační jednotky"
+
+msgid "Organisation unit groups"
+msgstr "Skupiny organizačních jednotek"
+
+msgid "Organisation unit group set"
+msgstr "Sada skupiny organizačních jednotek"
+
+msgid "Organisation unit group sets"
+msgstr "Sady skupin organizačních jednotek"
+
+msgid "Organisation unit level"
+msgstr "Úroveň organizační jednotky"
+
+msgid "Organisation unit levels"
+msgstr "Úrovně organizačních jednotek"
+
+msgid "Tracked entity attribute"
+msgstr "Atribut trasované entity"
+
+msgid "Tracked entity attributes"
+msgstr "Atributy trasované entity"
+
+msgid "Tracked entity type"
+msgstr "Typ trasované entity"
+
+msgid "Tracked entity types"
+msgstr "typy trasovaných entit"
+
+msgid "Programs"
+msgstr "Programy"
+
+msgid "Program indicators"
+msgstr "Indikátory programu"
+
+msgid "Program indicator groups"
+msgstr "Skupiny indikátorů programu"
+
+msgid "Program rule"
+msgstr "Pravidlo programu"
+
+msgid "Program rules"
+msgstr "Pravidla programu"
+
+msgid "Program rule variable"
+msgstr "Proměnná pravidla programu"
+
+msgid "Program rule variables"
+msgstr "Proměnné pravidla programu"
+
+msgid "Program stage"
+msgstr "Programová fáze"
+
+msgid "Program stages"
+msgstr "Fáze programu"
+
+msgid "Relationship type"
+msgstr "Typ vztahu"
+
+msgid "Relationship types"
+msgstr "Typy vztahů"
+
+msgid "Validation rule"
+msgstr "Pravidlo ověření"
+
+msgid "Validation rules"
+msgstr "Pravidla ověřování"
+
+msgid "Validation rule group"
+msgstr "Skupina pravidel ověření"
+
+msgid "Validation rule groups"
+msgstr "Skupiny pravidel ověření"
+
+msgid "Validation notification"
+msgstr "Oznámení o ověření"
+
+msgid "Constant"
+msgstr "Konstantní"
+
+msgid "Constants"
+msgstr "Konstanty"
+
+msgid "Option group"
+msgstr "Skupina možností"
+
+msgid "Option groups"
+msgstr "Skupiny možností"
+
+msgid "Attribute"
+msgstr "Atribut"
+
+msgid "Option set"
+msgstr "Sada možností"
+
+msgid "Option sets"
+msgstr "Sady možností"
+
+msgid "Option group set"
+msgstr "Sada skupin možností"
+
+msgid "Option group sets"
+msgstr "Sady skupin možností"
+
+msgid "Predictor"
+msgstr "Prediktor"
+
+msgid "Predictors"
+msgstr "Prediktory"
+
+msgid "Push analysis"
+msgstr "Analýza push"
+
+msgid "Push analyses"
+msgstr "Analýzy Push"
+
+msgid "External map layer"
+msgstr "Externí vrstva mapy"
+
+msgid "External map layers"
+msgstr "Externí mapové vrstvy"
+
+msgid "Data approval level"
+msgstr "Úroveň schválení dat"
+
+msgid "Data approval levels"
+msgstr "Úrovně schválení dat"
+
+msgid "Data approval workflow"
+msgstr "Pracovní postup schválení dat"
+
+msgid "Data approval workflows"
+msgstr "Pracovní postupy pro schvalování dat"
+
+msgid "SQL view"
+msgstr "SQL pohled"
+
+msgid "SQL views"
+msgstr "SQL pohledy"
+
+msgid "Legend"
+msgstr "Legenda"
+
+msgid "Legends"
+msgstr "Legendy"
+
+msgid "Programs and Tracker"
+msgstr "Programy a Tracker"
+
+msgid "Validation"
+msgstr "Ověření"
+
+msgid "Validations"
+msgstr "Ověření"
+
+msgid "Other"
+msgstr "jiný"
+
+msgid "Locale"
+msgstr "Národní prostředí"
+
+msgid "Locales"
+msgstr "Národní prostředí"
+
+msgid "Program disaggregation"
+msgstr "Rozčlenění programu"
+
+msgid "Program disaggregations"
+msgstr "Rozčlenění programů"
+
+msgid "You do not have access to edit this item."
+msgstr "K úpravám této položky nemáte přístup."
+
+msgid "You do not have access to delete this item."
+msgstr "K odstranění této položky nemáte přístup."
+
+msgid "Sum"
+msgstr "Součet"
+
+msgid "Average"
+msgstr "Průměr"
+
+msgid "Average (sum in org unit)"
+msgstr "Průměr (součet v organizační jednotce)"
+
+msgid "Last value (sum in org unit hierarchy)"
+msgstr "Poslední hodnota (součet v hierarchii org. jednotek)"
+
+msgid "Last value (average in org unit)"
+msgstr "Poslední hodnota (průměr v organizační jednotce)"
+
+msgid "Last value (last in org unit hierarchy)"
+msgstr "Poslední hodnota (poslední v hierarchii organizačních jednotek)"
+
+msgid "Last value in period (sum in org unit hierarchy)"
+msgstr "Poslední hodnota v období (součet v hierarchii org. jednotek)"
+
+msgid "Lastinperiodaverageorgunit"
+msgstr "Poslední v období průměrné organizační jednotky"
+
+msgid "First value (sum in org unit hierarchy)"
+msgstr "První hodnota (součet v hierarchii organizačních jednotek)"
+
+msgid "First value (average in org unit hierarchy)"
+msgstr "První hodnota (průměr v hierarchii organizačních jednotek)"
+
+msgid "First value (first in org unit hierarchy)"
+msgstr "První hodnota (první v hierarchii organizačních jednotek)"
+
+msgid "Count"
+msgstr "Počet"
+
+msgid "Standard deviation"
+msgstr "Standardní odchylka"
+
+msgid "Variance"
+msgstr "Rozptyl"
+
+msgid "Min"
+msgstr "Min"
+
+msgid "Max"
+msgstr "Max"
+
+msgid "Min (sum in org unit)"
+msgstr "Min (součet v org. jedn.)"
+
+msgid "Max (sum in org unit)"
+msgstr "Max (součet v org. jedn.)"
+
+msgid "Custom"
+msgstr "Vlastní"
+
+msgid "Default"
+msgstr "Výchozí"
+
+msgid "Aggregate"
+msgstr "Agregát"
+
+msgid "Tracker"
+msgstr "Trasovač"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "Long text"
+msgstr "Dlouhý text"
+
+msgid "Text with multiple values"
+msgstr "Text s více hodnotami"
+
+msgid "Letter"
+msgstr "Písmeno"
+
+msgid "Phone number"
+msgstr "Telefonní číslo"
+
+msgid "Email"
+msgstr "E-mail"
+
+msgid "Yes/No"
+msgstr "Ano / Ne"
+
+msgid "Yes only"
+msgstr "Pouze ano"
+
+msgid "Date"
+msgstr "datum"
+
+msgid "Date and time"
+msgstr "Datum a čas"
+
+msgid "Time"
+msgstr "Čas"
+
+msgid "Number"
+msgstr "Číslo"
+
+msgid "Unit interval"
+msgstr "Jednotkový interval"
+
+msgid "Percentage"
+msgstr "Procento"
+
+msgid "Integer"
+msgstr "Celé číslo"
+
+msgid "Positive integer"
+msgstr "Kladné celé číslo"
+
+msgid "Negative integer"
+msgstr "Záporné celé číslo"
+
+msgid "Positive or Zero integer"
+msgstr "Kladné nebo nulové celé číslo"
+
+msgid "Tracker associate"
+msgstr "přidružený trasovač"
+
+msgid "Username"
+msgstr "Uživatelské jméno"
+
+msgid "Coordinate"
+msgstr "Souřadnice"
+
+msgid "Reference"
+msgstr "Odkaz"
+
+msgid "Age"
+msgstr "Stáří"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "File"
+msgstr "Soubor"
+
+msgid "Image"
+msgstr "Obrázek"
+
+msgid "GeoJSON"
+msgstr "GeoJSON"
+
+msgid "Disaggregation"
+msgstr "Rozčlenění"
+
+msgid "Point"
+msgstr "Bod"
+
+msgid "MultiPoint"
+msgstr "MultiPoint"
+
+msgid "LineString"
+msgstr "LineString"
+
+msgid "MultiLineString"
+msgstr "MultiLineString"
+
+msgid "Polygon"
+msgstr "Polygon"
+
+msgid "MultiPolygon"
+msgstr "MultiPolygon"
+
+msgid "GeometryCollection"
+msgstr "GeometryCollection"
+
+msgid "Section"
+msgstr "Sekce"
+
+msgid "Section Multi-org"
+msgstr "Sekce Multi-org"
+
+msgid "Event"
+msgstr "Událost"
+
+msgid "Enrollment"
+msgstr "Zápis"
+
+msgid "BiMonthly"
+msgstr "BiMonthly"
+
+msgid "BiWeekly"
+msgstr ""
+
+msgid "Daily"
+msgstr "Denně"
+
+msgid "FinancialApril"
+msgstr ""
+
+msgid "FinancialJuly"
+msgstr ""
+
+msgid "FinancialNov"
+msgstr ""
+
+msgid "FinancialOct"
+msgstr ""
+
+msgid "Monthly"
+msgstr "Měsíčně"
+
+msgid "Quarterly"
+msgstr "Čtvrtletně"
+
+msgid "QuarterlyNov"
+msgstr ""
+
+msgid "SixMonthlyApril"
+msgstr ""
+
+msgid "SixMonthlyNov"
+msgstr ""
+
+msgid "SixMonthly"
+msgstr ""
+
+msgid "TwoYearly"
+msgstr ""
+
+msgid "Weekly"
+msgstr "Týdně"
+
+msgid "WeeklySaturday"
+msgstr ""
+
+msgid "WeeklySunday"
+msgstr ""
+
+msgid "WeeklyThursday"
+msgstr ""
+
+msgid "WeeklyWednesday"
+msgstr ""
+
+msgid "Yearly"
+msgstr "Ročně"
+
+msgid "Collective summary"
+msgstr "Souhrnné shrnutí"
+
+msgid "Single notification"
+msgstr "Jediné oznámení"
+
+msgid "Scheduled days"
+msgstr "Plánované dny"
+
+msgid "Data set completion"
+msgstr "Doplnění datové sady"
+
+msgid "Organisation unit contact"
+msgstr "Kontakt na organizační jednotku"
+
+msgid "User group"
+msgstr "Uživatelská skupina"
+
+msgid "Aggregation type"
+msgstr "Typ agregace"
+
+msgid "Category option combination for aggregate data export"
+msgstr "Kombinace možností kategorie pro export agregovaných dat"
+
+msgid "Attribute option combination for aggregate data export"
+msgstr "Kombinace možností atributů pro export agregovaných dat"
+
+msgid "Analytics type"
+msgstr "Typ analytiky"
+
+msgid "Compulsory"
+msgstr "Povinný"
+
+msgid "Data dimension"
+msgstr "Datová dimenze"
+
+msgid "Data dimension type"
+msgstr "Typ datové dimenze"
+
+msgid "Display in form"
+msgstr "Zobrazit ve formuláři"
+
+msgid "Domain type"
+msgstr "Typ domény"
+
+msgid "Expression"
+msgstr "Výraz"
+
+msgid "Favorite"
+msgstr "Oblíbený"
+
+msgid "Filter"
+msgstr "Filtr"
+
+msgid "Form name"
+msgstr "Název formuláře"
+
+msgid "Form type"
+msgstr "Typ formuláře"
+
+msgid "Ignore data approval"
+msgstr "Ignorovat schválení dat"
+
+msgid "Sharing"
+msgstr "Sdílení"
+
+msgid "Owner"
+msgstr "Majitel"
+
+msgid "Value type"
+msgstr "Typ hodnoty"
+
+msgid "Zero is significant"
+msgstr "Nula je významná"
+
+msgid "Enable tracked entity instance audit log"
+msgstr "Povolit protokol auditu instance trasované entity"
+
+msgid "Feature type"
+msgstr "Typ funkce"
+
+msgid "Maximum number of tracked entity instances to return in search"
+msgstr ""
+"Maximální počet trasovaných instancí entit, které se mají vrátit při hledání"
+
+msgid "Minimum number of attributes required to search"
+msgstr "Minimální počet atributů požadovaných pro vyhledávání"
+
+msgid "This field requires a unique value, please choose another one"
+msgstr "Toto pole vyžaduje jedinečnou hodnotu, zvolte prosím jinou."
+
+msgid "Unknown error"
+msgstr "Neznámá chyba"
+
+msgid "Unknown"
+msgstr "Neznámý"
+
+msgid "{{label}} (required)"
+msgstr "{{label}} (povinné)"
+
+msgid "Saved successfully"
+msgstr "Úspěšně uloženo"
+
+msgid "No changes to be saved"
+msgstr "Žádné změny nelze uložit"
+
+msgid "Cannot save empty object"
+msgstr "Nelze uložit prázdný objekt"
+
+msgid "Created successfully"
+msgstr "Úspěšně vytvořeno"
+
+msgid "Please provide a positive integer"
+msgstr "Zadejte kladné celé číslo"
+
+msgid "Please provide a negative integer"
+msgstr "Uveďte záporné celé číslo"
+
+msgid "Please provide a 0 or positive integer"
+msgstr "Uveďte prosím 0 nebo celé kladné číslo"
+
+msgid "Please provide valid percantage (0-100)."
+msgstr "Uveďte prosím platnou procentuální hodnotu (0-100)."
+
+msgid "Please provide valid unit interval (0-1)."
+msgstr "Uveďte platný jednotkový interval (0-1)."
+
+msgid "Must be checked"
+msgstr "Musí být zkontrolováno"
+
+msgid "Please provide a time."
+msgstr "Uveďte prosím čas."
+
+msgid "Please provide a date."
+msgstr "Uveďte prosím datum."
+
+msgid "Period type"
+msgstr "Typ období"
+
+msgid "Message template"
+msgstr "Šablona zprávy"
+
+msgid "Favourite"
+msgstr "Oblíbené stránky"
+
+msgid "Data set notification trigger"
+msgstr "Spouštěč oznámení sady dat"
+
+msgid "Notification recipient"
+msgstr "Příjemce oznámení"
+
+msgid "Notify parent organisation unit only"
+msgstr "Upozornit pouze nadřazenou organizační jednotku"
+
+msgid "Notify users in hierarchy only"
+msgstr "Informovat uživatele pouze v hierarchii"
+
+msgid "Relative scheduled days"
+msgstr "Relativní plánované dny"
+
+msgid "Send notification as"
+msgstr "Odeslat oznámení jako"
+
+msgid "Subject template"
+msgstr "Šablona předmětu"
+
+msgid "Offline levels"
+msgstr "Úrovně offline"
+
+msgid "Factor"
+msgstr "činitel"
+
+msgid "Program name"
+msgstr "Název programu"
+
+msgid "Decimals in data output"
+msgstr "Desetinná místa ve výstupu dat"
+
+msgid "Value"
+msgstr "Hodnota"
+
+msgid "Mandatory"
+msgstr "Povinné"
+
+msgid "Unique"
+msgstr "Unikátní"
+
+msgid "Category attribute"
+msgstr "Atribut kategorie"
+
+msgid "Category option attribute"
+msgstr "Atribut možnosti Kategorie"
+
+msgid "Category option combo attribute"
+msgstr "Kombo atribut možností kategorie"
+
+msgid "Category option group attribute"
+msgstr "Atribut skupiny možností kategorie"
+
+msgid "Category option group set attribute"
+msgstr "Atribut sady skupiny možností kategorie "
+
+msgid "Constant attribute"
+msgstr "Konstantní atribut"
+
+msgid "Data element attribute"
+msgstr "Atribut datového prvku"
+
+msgid "Data element group attribute"
+msgstr "Atribut skupiny datových prvků"
+
+msgid "Data element group set attribute"
+msgstr "Atribut sady skupin datových prvků"
+
+msgid "Data set attribute"
+msgstr "Atribut datové sady"
+
+msgid "Document attribute"
+msgstr "Atribut dokumentu"
+
+msgid "Event chart attribute"
+msgstr "Atribut grafu událostí"
+
+msgid "Event report attribute"
+msgstr "Atribut hlášení události"
+
+msgid "Indicator attribute"
+msgstr "Atribut indikátoru"
+
+msgid "Indicator group attribute"
+msgstr "Atribut skupiny indikátorů"
+
+msgid "Legend set attribute"
+msgstr "Atribut Legenda set"
+
+msgid "Map attribute"
+msgstr "Atribut mapy"
+
+msgid "Option attribute"
+msgstr "Atribut možnosti"
+
+msgid "Option set attribute"
+msgstr "Atribut sady možností"
+
+msgid "Organisation unit attribute"
+msgstr "Atribut organizační jednotky"
+
+msgid "Organisation unit group attribute"
+msgstr "Atribut skupiny organizačních jednotek"
+
+msgid "Organisation unit group set attribute"
+msgstr "Atribut sady organizačních jednotek"
+
+msgid "Program attribute"
+msgstr "Atribut programu"
+
+msgid "Program indicator attribute"
+msgstr "Atribut indikátoru programu"
+
+msgid "Program stage attribute"
+msgstr "Atribut fáze programu"
+
+msgid "Relationship type attribute"
+msgstr "Atribut typu vztahu"
+
+msgid "Section attribute"
+msgstr "Atribut oddílu"
+
+msgid "SQL view attribute"
+msgstr "Atribut zobrazení SQL"
+
+msgid "Tracked entity attribute attribute"
+msgstr "Atribut atributu trasované entity"
+
+msgid "Tracked entity type attribute"
+msgstr "Atribut typu trasované entity"
+
+msgid "User attribute"
+msgstr "Atribut uživatele"
+
+msgid "User group attribute"
+msgstr "Atribut skupiny uživatelů"
+
+msgid "Validation rule attribute"
+msgstr "Atribut ověřovacího pravidla"
+
+msgid "Validation rule group attribute"
+msgstr "Atribut skupiny ověřovacích pravidel"
+
+msgid "Visualization attribute"
+msgstr "Atribut vizualizace"
+
+msgid "Basic information"
+msgstr "Základní informace"
+
+msgid "Data and options"
+msgstr "Data a možnosti"
+
+msgid "Sort order"
+msgstr "Pořadí řazení"
+
+msgid "Category option combo"
+msgstr "Kombinace možnosti kategorie"
+
+msgid "Document"
+msgstr "Dokument"
+
+msgid "Event chart"
+msgstr "Tabulka událostí"
+
+msgid "Event report"
+msgstr "Zpráva o události"
+
+msgid "Legend set"
+msgstr "Sada legend"
+
+msgid "Map"
+msgstr "Mapa"
+
+msgid "Option"
+msgstr "Volba"
+
+msgid "User"
+msgstr "Uživatel"
+
+msgid "Visualization"
+msgstr "Vizualizace"
+
+msgid "Objects to which this attribute can be applied"
+msgstr "Objekty, na které lze tento atribut použít"
+
+msgid ""
+"Choose from a predefined list of option sets. The option set will "
+"automatically define the value type."
+msgstr ""
+"Vyberte z předdefinovaného seznamu sad možností. Sada možností automaticky "
+"definuje typ hodnoty."
+
+msgid "Remove option set"
+msgstr "Odstranit sadu možností"
+
+msgid ""
+"Enter a number to decide where this attribute appears in list and forms"
+msgstr ""
+"Zadáním čísla určíte, kde se tento atribut zobrazí v seznamu a formulářích"
+
+msgid ""
+"Select the kind of data this attribute collects. If you have chosen an "
+"option set, this will be set automatically."
+msgstr ""
+"Vyberte druh dat, která tento atribut shromažďuje. Pokud jste zvolili sadu "
+"možností, nastaví se automaticky."
+
+msgid ""
+"Disabled as the value type must match the value type of the selected option "
+"set"
+msgstr ""
+"Zakázáno, protože typ hodnoty musí odpovídat typu hodnoty vybrané sady "
+"možností"
+
+msgid "Set up the basic information for this attribute."
+msgstr "Nastavení základních informací o tomto atributu."
+
+msgid "Explain the purpose of this attribute."
+msgstr "Vysvětlete účel tohoto atributu."
+
+msgid "Configure how this attribute wil be collected, analyzed, and stored."
+msgstr ""
+"Konfigurace způsobu shromažďování, analýzy a ukládání tohoto atributu."
+
+msgid "Make this a mandatory attribute"
+msgstr "Tento atribut je povinný"
+
+msgid "No duplicate values allowed"
+msgstr "Duplicitní hodnoty nejsou povoleny"
+
+msgid "Set up the basic information for this category."
+msgstr "Nastavte základní informace o této kategorii."
+
+msgid "Explain the purpose of this category."
+msgstr "Vysvětlete účel této kategorie."
+
+msgid "Data configuration"
+msgstr "Konfigurace dat"
+
+msgid "Choose how this category will be used to capture and analyze data."
+msgstr ""
+"Zvolte, jakým způsobem bude tato kategorie sloužit k získávání a analýze "
+"dat."
+
+msgid "Use as data dimension"
+msgstr "Použít jako datovou dimenzi"
+
+msgid "Make available to analytics apps as a selectable dimension."
+msgstr "Zpřístupnění analytickým aplikacím jako volitelná dimenze."
+
+msgid "Choose the options to include in this category."
+msgstr "Vyberte možnosti, které chcete do této kategorie zahrnout."
+
+msgid "Available category options"
+msgstr "Dostupné možnosti kategorií"
+
+msgid "Selected category options"
+msgstr "Vybrané možnosti kategorie"
+
+msgid "Filter available category options"
+msgstr "Filtrování dostupných možností kategorií"
+
+msgid "Filter selected category options"
+msgstr "Možnosti filtrování vybraných kategorií"
+
+msgid "Available categories"
+msgstr "Dostupné kategorie"
+
+msgid "Selected categories"
+msgstr "Vybrané kategorie"
+
+msgid "Filter available categories"
+msgstr "Filtrování dostupných kategorií"
+
+msgid "Filter selected categories"
+msgstr "Filtrování vybraných kategorií"
+
+msgid "More than 4 Categories"
+msgstr "Více než 4 kategorie"
+
+msgid "A Category combination with more than 4 categories is not recommended."
+msgstr "Kombinace kategorií s více než 4 kategoriemi se nedoporučuje."
+
+msgid "Identical Category Combination"
+msgstr "Kombinace identických kategorií"
+
+msgid ""
+"One or more Category combinations with the same categories already exist in the system. \n"
+"        It is strongly discouraged to have more than one Category combination with the same categories."
+msgstr ""
+"V systému již existuje jedna nebo více kombinací kategorií se stejnými kategoriemi. \n"
+"        Důrazně se nedoporučuje mít více než jednu kombinaci kategorií se stejnými kategoriemi."
+
+msgid "Set up the basic information for this category combination."
+msgstr "Nastavte základní informace pro tuto kombinaci kategorií."
+
+msgid ""
+"Choose how this category combination will be used to capture and analyze "
+"data."
+msgstr ""
+"Zvolte, jakým způsobem bude tato kombinace kategorií použita k získávání a "
+"analýze dat."
+
+msgid "Skip category total in reports"
+msgstr "Přeskočit součet kategorie v přehledech"
+
+msgid "Choose the categories to include in this category combination."
+msgstr "Vyberte kategorie, které chcete zahrnout do této kombinace kategorií."
+
+msgid "At least one category is required"
+msgstr "Je vyžadována alespoň jedna kategorie"
+
+msgid ""
+"The number of generated category option combinations exceeds the limit of "
+"{{limit}}"
+msgstr ""
+"Počet vygenerovaných kombinací možností kategorií překračuje limit {{limit}}"
+
+msgid "Set up the basic information for this category option combination."
+msgstr "Nastavte základní informace pro tuto kombinaci možností kategorie."
+
+msgid "Set up the basic information for this category option group set."
+msgstr ""
+"Nastavení základních informací pro tuto sadu skupin možností kategorie."
+
+msgid "Explain the purpose of this category option group set."
+msgstr "Vysvětlete účel této sady skupin možností kategorií."
+
+msgid ""
+"Choose how this category option group set will be used to capture and "
+"analyze data."
+msgstr ""
+"Zvolte, jak bude tato sada skupin možností kategorií použita k zachycení a "
+"analýze dat."
+
+msgid ""
+"Choose the category option groups to include in this category option group "
+"set."
+msgstr ""
+"Vyberte skupiny možností kategorie, které chcete zahrnout do této sady "
+"skupin možností kategorie."
+
+msgid "Available category option groups"
+msgstr "Dostupné skupiny možností kategorií"
+
+msgid "Selected category option groups"
+msgstr "Skupiny možností vybrané kategorie"
+
+msgid "Filter available category option groups"
+msgstr "Filtrování dostupných skupin možností kategorií"
+
+msgid "Filter selected category option groups"
+msgstr "Filtrování vybraných skupin možností kategorií"
+
+msgid "Set up the basic information for this category option group."
+msgstr "Nastavte základní informace pro tuto skupinu možností kategorie."
+
+msgid "Explain the purpose of this category option group."
+msgstr "Vysvětlete účel této skupiny možností kategorií."
+
+msgid ""
+"Choose how this category option  will be used to capture and analyze data."
+msgstr ""
+"Zvolte, jakým způsobem bude tato možnost kategorie použita k zachycení a "
+"analýze dat."
+
+msgid "Choose the options to include in this category option group."
+msgstr ""
+"Vyberte možnosti, které chcete zahrnout do této skupiny možností kategorie."
+
+msgid "Configure category options merge"
+msgstr "Konfigurace sloučení možností kategorií"
+
+msgid "The category options merge operation is complete."
+msgstr "Operace sloučení možností kategorií je dokončena."
+
+msgid "All selected category options were merged successfully."
+msgstr "Všechny vybrané možnosti kategorií byly úspěšně sloučeny."
+
+msgid "Set up the basic information for this category option."
+msgstr "Nastavení základních informací pro tuto možnost kategorie."
+
+msgid "An alternative name used in section or automatic data entry forms."
+msgstr ""
+"Alternativní název používaný ve formulářích pro zadávání údajů do sekcí nebo"
+" automatické zadávání údajů."
+
+msgid "Availability configuration"
+msgstr "Konfigurace dostupnosti"
+
+msgid ""
+"Choose when, and for which organisation units, this category option will be "
+"available."
+msgstr ""
+"Zvolte, kdy a pro které organizační jednotky bude tato možnost kategorie k "
+"dispozici."
+
+msgid "Form name should not exceed 230 characters"
+msgstr "Název formuláře by neměl přesáhnout 230 znaků"
+
+msgid "End date should be after start date"
+msgstr "Datum ukončení by mělo následovat po datu zahájení"
+
+msgid ""
+"The merge operation will merge the source category options into\n"
+"                the target category option. One or many source category options\n"
+"                can be specified"
+msgstr ""
+"Operace sloučení sloučí možnosti zdrojové kategorie do možnosti cílové "
+"kategorie. Lze zadat jednu nebo více možností zdrojové kategorie."
+
+msgid ""
+"Only one target should be specified. The merge operation will\n"
+"                transfer all of the category options metadata associations to the\n"
+"                source category options over to the target category option."
+msgstr ""
+"Měl by být zadán pouze jeden cíl. Operace sloučení přenese všechna metadata "
+"asociace kategorií ze zdrojových kategorií do cílové kategorie."
+
+msgid "Category options to be merged (source)"
+msgstr "Možnosti kategorií, které mají být sloučeny (zdroj)"
+
+msgid "Select category options to merge"
+msgstr "Vyberte možnosti kategorií, které chcete sloučit"
+
+msgid "Category option to merge into (target)"
+msgstr "Možnost sloučení do kategorie (cíl)"
+
+msgid "Select category option to merge into"
+msgstr "Vyberte možnost kategorie, do které chcete sloučit"
+
+msgid "No category options available. Remove one from source."
+msgstr ""
+"Nejsou k dispozici žádné možnosti kategorií. Odstraňte jednu ze zdroje."
+
+msgid "Merge settings"
+msgstr "Nastavení sloučení"
+
+msgid ""
+"What should happen to the source category options after the merge is "
+"complete?"
+msgstr "Co se má stát s možnostmi zdrojové kategorie po dokončení sloučení?"
+
+msgid "Set up the basic information for this constant."
+msgstr "Nastavte základní informace o této konstantě."
+
+msgid "Explain the purpose of this constant."
+msgstr "Vysvětlete účel této konstanty."
+
+msgid "Value (required)"
+msgstr "Hodnota (povinné)"
+
+msgid "Enter the numeric value to be used as the constant."
+msgstr "Zadejte číselnou hodnotu, která se použije jako konstanta."
+
+msgid "Available data element groups"
+msgstr "Dostupné skupiny datových prvků"
+
+msgid "Selected data element groups"
+msgstr "Vybrané skupiny datových prvků"
+
+msgid "Filter available data element groups"
+msgstr "Filtrování dostupných skupin datových prvků"
+
+msgid "Filter selected element groups"
+msgstr "Filtrování vybraných skupin prvků"
+
+msgid "Set up the information for this data element group set."
+msgstr "Nastavení informací pro tuto sadu skupin datových prvků."
+
+msgid "Explain the purpose of this data element group set."
+msgstr "Vysvětlete účel této sady skupin datových prvků."
+
+msgid "Available data elements"
+msgstr "Dostupné datové prvky"
+
+msgid "Selected data elements"
+msgstr "Vybrané datové prvky"
+
+msgid "Filter available data elements"
+msgstr "Filtrování dostupných datových prvků"
+
+msgid "Filter selected elements"
+msgstr "Filtrování vybraných prvků"
+
+msgid "Set up the information for this data element group."
+msgstr "Nastavte informace pro tuto skupinu datových prvků."
+
+msgid "Explain the purpose of this data element group."
+msgstr "Vysvětlete účel této skupiny datových prvků."
+
+msgid "Aggregation level(s)"
+msgstr "Úroveň (úrovně) agregace"
+
+msgid "The default way to aggregate this data element in analytics."
+msgstr "Výchozí způsob agregace tohoto datového prvku v analytice."
+
+msgid "Disabled for the selected value type."
+msgstr "Zakázáno pro vybraný typ hodnoty."
+
+msgid "Choose how this data element is disaggregated."
+msgstr "Zvolte způsob členění tohoto datového prvku."
+
+msgid "Color and icon"
+msgstr "Barva a ikona"
+
+msgid ""
+"A color and icon are helpful for identifying data elements in information-"
+"dense screens."
+msgstr ""
+"Barva a ikona jsou užitečné pro identifikaci datových prvků na obrazovkách s"
+" velkým množstvím informací."
+
+msgid "Domain"
+msgstr "Doména"
+
+msgid "A data element can either be aggregated or tracked data."
+msgstr "Datovým prvkem mohou být buď agregovaná, nebo sledovaná data."
+
+msgid "Field mask"
+msgstr "Maska pole"
+
+msgid "Use a pattern to limit what information can be entered."
+msgstr "Pomocí vzoru omezte, jaké informace lze zadat."
+
+msgid "e.g. 999-000-0000"
+msgstr "např. 999-000-0000"
+
+msgid "Available legends"
+msgstr "Dostupné legendy"
+
+msgid "Selected legends"
+msgstr "Vybrané legendy"
+
+msgid "Filter available legends"
+msgstr "Filtrovat dostupné legendy"
+
+msgid "Filter selected legends"
+msgstr "Filtrovat vybrané legendy"
+
+msgid "Option set comment"
+msgstr "Komentář k sadě možností"
+
+msgid "Choose a set of predefined comments for data entry."
+msgstr "Vyberte sadu předdefinovaných komentářů pro zadávání dat."
+
+msgid "Choose a set of predefined options for data entry."
+msgstr "Vyberte sadu předdefinovaných možností pro zadávání dat."
+
+msgid "Url"
+msgstr "Url"
+
+msgid "A web link that provides extra information."
+msgstr "Webový odkaz, který poskytuje další informace."
+
+msgid "The type of data that will be recorded."
+msgstr "Typ dat, která budou zaznamenána."
+
+msgid "Store zero data values"
+msgstr "Uložit nulové hodnoty dat"
+
+msgid "Set up the information for this data element."
+msgstr "Nastavení informací pro tento datový prvek."
+
+msgid "Explain the purpose of this data element."
+msgstr "Vysvětlete účel tohoto datového prvku."
+
+msgid "Disaggregation and Option sets"
+msgstr "Rozčlenění a sady možností"
+
+msgid "Set up disaggregation and predefined options."
+msgstr "Nastavení rozčlenění a předdefinovaných možností."
+
+msgid ""
+"Visualize values for this data element in Analytics app. Multiple legends "
+"can be applied."
+msgstr ""
+"Vizualizace hodnot tohoto datového prvku v aplikaci Analytics. Lze použít "
+"více legend."
+
+msgid "Aggregation levels"
+msgstr "Úrovně agregace"
+
+msgid ""
+"By default, aggregation starts at the lowest assigned organisation unit. You"
+" can override this by choosing a different level. Choosing a higher level "
+"means that data from lower levels will not be included in the aggregation."
+msgstr ""
+"Ve výchozím nastavení začíná agregace u nejnižší přiřazené organizační "
+"jednotky. Toto nastavení můžete zrušit výběrem jiné úrovně. Výběr vyšší "
+"úrovně znamená, že data z nižších úrovní nebudou do agregace zahrnuta."
+
+msgid "Error"
+msgstr "Chyba"
+
+msgid "Error loading notification template"
+msgstr "Šablona oznámení o chybě při načítání"
+
+msgid "Choose which data sets to send this notification for"
+msgstr "Zvolte, pro které datové sady se má toto oznámení odeslat"
+
+msgid "Available Data Sets"
+msgstr "Dostupné datové sady"
+
+msgid "Selected Data Sets"
+msgstr "Vybrané datové sady"
+
+msgid "Search data sets..."
+msgstr "Hledat datové sady..."
+
+msgid "Filter selected data sets..."
+msgstr "Filtrovat vybrané datové sady..."
+
+msgid "Data set name"
+msgstr "Název datové sady"
+
+msgid "Current date"
+msgstr "Dnešní datum"
+
+msgid "Data set description"
+msgstr "Popis datové sady"
+
+msgid "Complete registration organisation unit"
+msgstr "Dokončit registraci organizační jednotky "
+
+msgid "Complete registration period"
+msgstr "Kompletní registrační období"
+
+msgid "Complete registration user"
+msgstr "Dokončit registraci uživatele"
+
+msgid "Complete registration time"
+msgstr "Kompletní čas registrace"
+
+msgid "Complete registration att opt combo"
+msgstr "Dokončit registraci atributu kombinace možností"
+
+msgid "Set up the basic information for the notification template."
+msgstr "Nastavte základní informace pro šablonu oznámení."
+
+msgid "Message content"
+msgstr "Obsah zprávy"
+
+msgid "Configure the templates for the notification content and subject."
+msgstr "Konfigurace šablon pro obsah a předmět oznámení."
+
+msgid "Notification timing"
+msgstr "Načasování oznámení"
+
+msgid "Choose what triggers the notification and when it should be sent."
+msgstr "Zvolte, co má být spouštěčem oznámení a kdy má být odesláno."
+
+msgid "Recipient"
+msgstr "Příjemce"
+
+msgid "Choose who recieves the notification."
+msgstr "Zvolte, kdo obdrží oznámení."
+
+msgid "SMS"
+msgstr "SMS"
+
+msgid "When to send notification"
+msgstr "Kdy odeslat oznámení"
+
+msgid "Send notification"
+msgstr "Odeslat oznámení"
+
+msgid "days"
+msgstr "dnů"
+
+msgid "Before"
+msgstr "Před"
+
+msgid "After"
+msgstr "Po"
+
+msgid "scheduled date"
+msgstr "plánované datum"
+
+msgid "Recipient type"
+msgstr "Typ příjemce"
+
+msgid "User Group Recipients"
+msgstr "Příjemci skupiny uživatelů"
+
+msgid "Used as the template for the subject field."
+msgstr "Používá se jako šablona pro pole předmětu."
+
+msgid "Subject"
+msgstr "Předmět"
+
+msgid "Used as template for the message field."
+msgstr "Používá se jako šablona pro pole zprávy."
+
+msgid "Message"
+msgstr "Zpráva"
+
+msgid "Please enter a maximum of {{upperBound}} characters"
+msgstr "Zadejte prosím maximálně {{upperBound}} znaků"
+
+msgid "Edit Data Set Notification"
+msgstr "Oznámení o úpravě datové sady"
+
+msgid "Trigger"
+msgstr "Spouštěč"
+
+msgid "Send strategy"
+msgstr "Strategie odesílání"
+
+msgid "Recipient user group"
+msgstr "Skupina uživatelů příjemce"
+
+msgid "Delivery channels"
+msgstr "Doručovací kanály"
+
+msgid "Send complete notifications"
+msgstr "Odesílání kompletních oznámení"
+
+msgid "Send notification to completing user"
+msgstr "Odeslat oznámení dokončujícímu se uživateli"
+
+msgid "Advanced options"
+msgstr "Pokročilé možnosti"
+
+msgid "These options are used for advanced data set configurations."
+msgstr "Tyto možnosti se používají pro pokročilé konfigurace datových sad."
+
+msgid "Don't save this data to offline storage (skip offline)"
+msgstr "Neukládat tato data do offline úložiště (přeskočit offline)"
+
+msgid ""
+"Include data element descriptions in offline storage (data element "
+"decoration)"
+msgstr ""
+"Zahrnout popisy datových prvků do offline úložiště (dekorace datových prvků)"
+
+msgid "Use this data set with Java mobile client"
+msgstr "Použití této datové sady s mobilním klientem Java"
+
+msgid "Notifications"
+msgstr "Oznámení"
+
+msgid ""
+"Send notifications when data sets are marked complete, using the DHIS2 "
+"Messages app."
+msgstr ""
+"Odesílání oznámení o označení datových sad jako kompletních pomocí aplikace "
+"Zprávy DHIS2."
+
+msgid "Choose legends that will do something (?????????)"
+msgstr "Vyberte si legendy, které něco dokážou (?????????)."
+
+msgid "Search available legends"
+msgstr "Hledání dostupných legend"
+
+msgid "Search selected legends"
+msgstr "Hledání vybraných legend"
+
+msgid "Compulsory data elements"
+msgstr "Povinné datové prvky"
+
+msgid "Search available data elements"
+msgstr "Vyhledávání dostupných datových prvků"
+
+msgid "Search compulsory data elements"
+msgstr "Vyhledávání povinných datových prvků"
+
+msgid "Approval workflow"
+msgstr "Pracovní postup schvalování"
+
+msgid "Configure data elements"
+msgstr "Konfigurace datových prvků"
+
+msgid "Choose what data is collected for this data set."
+msgstr "Zvolte, jaká data se pro tuto sadu dat shromažďují."
+
+msgid "Data set disaggregation"
+msgstr "Rozdělení datových souborů"
+
+msgid ""
+"Choose an optional category combination to disaggregate the entire data set."
+msgstr ""
+"Zvolte volitelnou kombinaci kategorií pro rozčlenění celé datové sady."
+
+msgid "Choose indicators to calculate and show in the data entry form."
+msgstr ""
+"Vyberte ukazatele, které se mají vypočítat a zobrazit ve formuláři pro "
+"zadávání dat."
+
+msgid "Available indicators"
+msgstr "Dostupné indikátory"
+
+msgid "Selected indicators"
+msgstr "Vybrané indikátory"
+
+msgid "Search available indicators"
+msgstr "Vyhledávání dostupných indikátorů"
+
+msgid "Search selected indicators"
+msgstr "Vyhledávání vybraných ukazatelů"
+
+msgid "Search selected data elements"
+msgstr "Vyhledávání vybraných datových prvků"
+
+msgid "Custom disaggregation"
+msgstr "Vlastní rozčlenění"
+
+msgid "Override data element category combination"
+msgstr "Přepsání kombinace kategorií datových prvků"
+
+msgid "No data elements selected"
+msgstr "Nejsou vybrány žádné datové prvky"
+
+msgid "Close"
+msgstr "Zavřít"
+
+msgid "Should not exceed {{maxLength}} characters"
+msgstr "Nemělo by přesáhnout {{maxLength}} znaků"
+
+msgid "Display title / subtitle"
+msgstr "Zobrazení názvu / podnázvu"
+
+msgid "Title"
+msgstr "Titul"
+
+msgid "Subtitle"
+msgstr "Podtitul"
+
+msgid "Position"
+msgstr "Pozice"
+
+msgid "Line start"
+msgstr ""
+
+msgid "Center"
+msgstr "střed"
+
+msgid "Line end"
+msgstr ""
+
+msgid "Section display mode"
+msgstr "Režim zobrazení sekce"
+
+msgid "Single page: all sections shown consecutively in one form"
+msgstr ""
+"Jedna stránka: všechny oddíly jsou zobrazeny postupně v jednom formuláři."
+
+msgid "Tabs: show a tab for each section"
+msgstr "Karty: zobrazí kartu pro každou sekci"
+
+msgid "Horizontal tabs"
+msgstr "Vodorovné karty"
+
+msgid "Vertical tabs"
+msgstr "Svislé karty"
+
+msgid "Render multi-organisation unit forms vertically"
+msgstr "Vertikální vykreslování formulářů jednotek s více organizacemi"
+
+msgid "Only applied to section forms using multiple organisation units"
+msgstr ""
+"Platí pouze pro formuláře oddílů, které používají více organizačních "
+"jednotek"
+
+msgid "Configure which organisation units can collect data for this data set."
+msgstr ""
+"Konfigurace organizačních jednotek, které mohou shromažďovat data pro tuto "
+"datovou sadu."
+
+msgid "Change period type"
+msgstr "Změna typu období"
+
+msgid ""
+"Changing the period type will make previously entered data for this data set"
+" not appear in the data entry app. This can lead to duplicate data entry."
+msgstr ""
+"Změna typu období způsobí, že se dříve zadané údaje pro tuto datovou sadu "
+"nezobrazí v aplikaci pro zadávání údajů. To může vést k duplicitnímu "
+"zadávání údajů."
+
+msgid ""
+"Are you sure you want to change the period type to "
+"{{preselectedPeriodType}}?"
+msgstr "Opravdu chcete změnit typ období na {{preselectedPeriodType}}?"
+
+msgid "Yes, change"
+msgstr "Ano, změnit"
+
+msgid "Configure data entry periods"
+msgstr "Konfigurace období zadávání dat"
+
+msgid "Choose for what time periods data can be entered for this data set"
+msgstr "Zvolte, pro jaká časová období lze zadávat data pro tuto datovou sadu"
+
+msgid "Allow data entry for future periods"
+msgstr "Umožnit zadávání dat pro budoucí období"
+
+msgid ""
+"Close data entry a certain number of days after period end (expiry days)"
+msgstr ""
+"Uzavřít zadávání dat určitý počet dní po skončení období (dny platnosti)."
+
+msgid "Limit data entry by period"
+msgstr "Omezit zadávání dat podle období"
+
+msgid "Optionally configure when data can be entered for certain periods"
+msgstr "Volitelně nastavte, kdy lze zadávat data za určitá období"
+
+msgid "A data set with this name already exists"
+msgstr "Datová sada s tímto názvem již existuje"
+
+msgid "Set up the basic information for this data set."
+msgstr "Nastavte základní informace pro tuto datovou sadu."
+
+msgid "Number of days after period to qualify for on time submission"
+msgstr "Počet dní po uplynutí lhůty pro včasné podání žádosti"
+
+msgid ""
+"\"On time\" submission rate can be using reporting dates in the Report app. "
+"Enter 0 to ignore timely submission."
+msgstr ""
+"\"Míra včasného podání může být pomocí dat hlášení v aplikaci Report. "
+"Zadáním hodnoty 0 ignorujete včasné podání."
+
+msgid "Value should be bigger than 0"
+msgstr "Hodnota by měla být větší než 0"
+
+msgid "Validation and limitations"
+msgstr "Ověřování a omezení"
+
+msgid "Configure how data can and must be entered for this data"
+msgstr "Nakonfigurujte, jak mohou a musí být data pro tato data zadávána"
+
+msgid "Completing a data set requires passing validation"
+msgstr "Dokončení datového souboru vyžaduje úspěšné ověření"
+
+msgid "Completing a data set requires all empty values to have a comment"
+msgstr ""
+"Doplnění datové sady vyžaduje, aby všechny prázdné hodnoty byly opatřeny "
+"komentářem"
+
+msgid "Completing a data set requires compulsory field to have a value"
+msgstr "Vyplnění datové sady vyžaduje, aby povinné pole mělo hodnotu"
+
+msgid ""
+"Data elements with category combinations require all fields to have a value "
+"if one has a value"
+msgstr ""
+"Datové prvky s kombinací kategorií vyžadují, aby všechna pole měla hodnotu, "
+"pokud jedno z nich má hodnotu"
+
+msgid "Compulsory data entry"
+msgstr "Povinné zadávání dat"
+
+msgid ""
+"Optionally configure which data elements must have a value to complete this "
+"data set."
+msgstr ""
+"Volitelně nakonfigurujte, které datové prvky musí mít hodnotu, aby byla tato"
+" datová sada úplná."
+
+msgid "Data set must be saved before form type can be configured."
+msgstr "Před konfigurací typu formuláře musí být uložena datová sada."
+
+msgid "Data entry form"
+msgstr "Formulář pro zadávání údajů"
+
+msgid ""
+"Choose and configure how the data entry form looks and works for this data "
+"set."
+msgstr ""
+"Zvolte a nakonfigurujte vzhled a fungování formuláře pro zadávání dat pro "
+"tuto datovou sadu."
+
+msgid "Default form"
+msgstr "Výchozí formulář"
+
+msgid "Data elements are displayed in a standard list"
+msgstr "Datové prvky se zobrazují ve standardním seznamu"
+
+msgid "Section form"
+msgstr "Formulář sekce"
+
+msgid "Group data into sections with additional options"
+msgstr "Seskupení dat do sekcí s dalšími možnostmi"
+
+msgid "Custom form"
+msgstr "Vlastní formulář"
+
+msgid "Build and style a custom form layout"
+msgstr "Vytvoření a stylování vlastního rozvržení formuláře"
+
+msgid "Display options"
+msgstr "Možnosti zobrazení"
+
+msgid "Sections"
+msgstr "Sekce"
+
+msgid "Configure data and options for form sections."
+msgstr "Konfigurace dat a možností pro sekce formuláře."
+
+msgid "Section {{sectionName}} will be removed on save"
+msgstr "Sekce {{sectionName}} bude při uložení odstraněna"
+
+msgid "Restore section"
+msgstr "Obnovit sekci"
+
+msgid "Add section"
+msgstr "Přidat sekci"
+
+msgid "Reorder sections"
+msgstr "Změnit pořadí sekcí"
+
+msgid "Copy ID"
+msgstr "Kopírovat ID"
+
+msgid "New sections order saved successfully"
+msgstr "Nové pořadí sekcí úspěšně uloženo"
+
+msgid "Error saving new sections order."
+msgstr "Chyba při ukládání nového pořadí sekcí."
+
+msgid "Reorder form sections"
+msgstr "Změna pořadí sekcí formuláře"
+
+msgid "(marked for deletion)"
+msgstr "(označeno ke smazání)"
+
+msgid "Save section ordering"
+msgstr "Řazení sekcí pro ukládání"
+
+msgid "Custom form saved"
+msgstr "Vlastní formulář uložen"
+
+msgid "Custom form (preview)"
+msgstr "Vlastní formulář (náhled)"
+
+msgid "Define a custom form for this data set by editing HTML below."
+msgstr "Definujte vlastní formulář pro tuto datovou sadu úpravou HTML níže."
+
+msgid "Preview"
+msgstr "Náhled"
+
+msgid "Nothing to preview"
+msgstr "Nic k náhledu"
+
+msgid "Preview of custom form"
+msgstr "Náhled vlastního formuláře"
+
+msgid "Save custom form"
+msgstr "Uložit vlastní formulář"
+
+msgid "Saving a custom form does not save other changes to the data set"
+msgstr "Uložením vlastního formuláře se neuloží další změny v datové sadě"
+
+msgid "A custom form must be added for it to be used for data entry (web)."
+msgstr ""
+"Aby bylo možné použít vlastní formulář pro zadávání dat (web), je nutné jej "
+"přidat."
+
+msgid "This data set uses a custom form for data entry (web)."
+msgstr "Tato datová sada používá pro zadávání dat vlastní formulář (web)."
+
+msgid "Custom form will be removed on save"
+msgstr "Vlastní formulář bude při uložení odstraněn"
+
+msgid "Restore custom form"
+msgstr "Obnovit vlastní formulář"
+
+msgid "Delete custom form"
+msgstr "Odstranit vlastní formulář"
+
+msgid "Create custom form"
+msgstr "Vytvořit vlastní formulář"
+
+msgid "Edit custom form"
+msgstr "Upravit vlastní formulář"
+
+msgid "Select elements"
+msgstr "Vybrat prvky"
+
+msgid "Elements cannot be added while previewing the form"
+msgstr "Prvky nelze přidávat při náhledu formuláře"
+
+msgid "Filter elements"
+msgstr "Filtrovat prvky"
+
+msgid "Insert grey (disabled) fields"
+msgstr "Vložit šedá (deaktivovaná) pole"
+
+msgid "Totals"
+msgstr "Součty"
+
+msgid "Flags"
+msgstr "Vlajky"
+
+msgid "Filter by category combination"
+msgstr "Filtrování podle kombinace kategorií"
+
+msgid "<No filter>"
+msgstr "<No filter>"
+
+msgid "Manage enabled/disabled fields"
+msgstr "Správa povolených/zakázaných polí"
+
+msgid "Section setup"
+msgstr "Nastavení sekce"
+
+msgid "Setup the basic information for this section."
+msgstr "Nastavení základních informací pro tuto sekci."
+
+msgid ""
+"Explain the purpose of this section, which will be shown in the data entry "
+"form."
+msgstr ""
+"Vysvětlete účel této sekce, který bude uveden ve formuláři pro zadávání dat."
+
+msgid "Section data elements"
+msgstr "Datové prvky sekce"
+
+msgid "Choose what data is collected for this section."
+msgstr "Zvolte, jaká data se v této sekci shromažďují."
+
+msgid "Section indicators"
+msgstr "Indikátory sekcí"
+
+msgid "Choose what indicators are shown in this section."
+msgstr "Zvolte, jaké indikátory se v této části zobrazí."
+
+msgid "Customize how this section looks in the form."
+msgstr "Přizpůsobte vzhled této sekce formuláře."
+
+msgid "Row totals"
+msgstr "Součty řádků"
+
+msgid "Column totals"
+msgstr "Součty sloupců"
+
+msgid "Disable automatic grouping of data elements"
+msgstr "Zakázat automatické seskupování datových prvků"
+
+msgid "Display mode"
+msgstr "Zobrazovací mód"
+
+msgid "Default: data elements as rows, categories as columns"
+msgstr "Výchozí: datové prvky jako řádky, kategorie jako sloupce"
+
+msgid "Pivot: categories as rows, data elements as columns"
+msgstr "Pivot: kategorie jako řádky, datové prvky jako sloupce"
+
+msgid "Move a category to rows: default mode with one category moved to rows"
+msgstr ""
+"Přesun kategorie do řádků: výchozí režim s jednou kategorií přesunutou do "
+"řádků"
+
+msgid "Category to move to rows"
+msgstr "Kategorie pro přesun do řádků"
+
+msgid "Content to display before a section"
+msgstr "Obsah, který se zobrazí před sekcí"
+
+msgid "HTML links and basic styling can be included"
+msgstr "Lze zahrnout odkazy HTML a základní stylování"
+
+msgid "Content to display after a section"
+msgstr "Obsah, který se zobrazí za sekcí"
+
+msgid "Save section"
+msgstr "Uložit sekci"
+
+msgid "Saving a section does not save other changes to the data set"
+msgstr "Uložením sekce se neuloží další změny v datové sadě."
+
+msgid "Disabled"
+msgstr "Zakázáno"
+
+msgid "Enabled"
+msgstr "Povoleno"
+
+msgid "Update"
+msgstr "Aktualizovat"
+
+msgid "Add period entry rule"
+msgstr "Přidat pravidlo pro zadávání období"
+
+msgid "Year"
+msgstr "Rok"
+
+msgid "Period"
+msgstr "Období"
+
+msgid "Opening date"
+msgstr "Datum otevření"
+
+msgid "Closing date"
+msgstr "Konečné datum"
+
+msgid "Closing date must be after start date"
+msgstr "Datum ukončení musí být po datu zahájení"
+
+msgid "Update period entry rule"
+msgstr "Pravidlo pro zadání období aktualizace"
+
+msgid "Opening date: {{openingDate}}"
+msgstr "Datum zahájení: {{openingDate}}"
+
+msgid "No opening date"
+msgstr "Žádné datum zahájení"
+
+msgid "Closing date: {{closingDate}}"
+msgstr "Datum ukončení: {{closingDate}}"
+
+msgid "No closing date"
+msgstr "Žádné datum ukončení"
+
+msgid "Remove"
+msgstr "Odstranit"
+
+msgid "Add a period entry rule"
+msgstr "Přidat pravidlo pro zadání období"
+
+msgid "The number should not have decimals"
+msgstr "Číslo by nemělo mít desetinná místa"
+
+msgid "Setup"
+msgstr "Nastavení"
+
+msgid "Data"
+msgstr "Data"
+
+msgid "Data Elements"
+msgstr "Datové prvky"
+
+msgid "Periods"
+msgstr "Období"
+
+msgid "Close data entry a certain number of days after period end"
+msgstr "Zavřít zadávání dat určitý počet dní po skončení období"
+
+msgid "Close data entry after category option end date"
+msgstr "Zavřít zadávání dat po datu ukončení možnosti kategorie"
+
+msgid "Organisation Units"
+msgstr "Organizační jednotky"
+
+msgid "Form"
+msgstr "Formulář"
+
+msgid "Display Options"
+msgstr "Možnosti zobrazení"
+
+msgid "Advanced"
+msgstr "Pokročilý"
+
+msgid "Set up the basic information for this indicator group set."
+msgstr "Nastavení základních informací pro tuto sadu skupin indikátorů."
+
+msgid "Explain the purpose of this indicator group set."
+msgstr "Vysvětlete účel této skupiny indikátorů."
+
+msgid "Choose the indicators to include in this indicator group."
+msgstr "Vyberte indikátory, které chcete do této skupiny indikátorů zahrnout."
+
+msgid "Available indicator groups"
+msgstr "Dostupné skupiny indikátorů"
+
+msgid "Selected indicator groups"
+msgstr "Vybrané skupiny indikátorů"
+
+msgid "Filter available indicator groups"
+msgstr "Filtrovat dostupné skupiny indikátorů"
+
+msgid "Filter selected indicator groups"
+msgstr "Filtrovat vybrané skupiny indikátorů"
+
+msgid "Set up the basic information for this indicator group."
+msgstr "Nastavte základní informace pro tuto skupinu indikátorů."
+
+msgid "Explain the purpose of this indicator group."
+msgstr "Vysvětlete účel této skupiny indikátorů."
+
+msgid "Filter available indicators"
+msgstr "Filtrovat dostupné indikátory"
+
+msgid "Filter selected indicators"
+msgstr "Filtrovat vybrané indikátory"
+
+msgid "Configure indicator type merge"
+msgstr "Konfigurace sloučení typu indikátoru "
+
+msgid "The indicator types merge operation is complete."
+msgstr "Operace sloučení typů indikátorů je dokončena."
+
+msgid "All selected indicator types were merged successfully."
+msgstr "Všechny vybrané typy indikátorů byly úspěšně sloučeny."
+
+msgid "Set up the basic information for this Indicator Type."
+msgstr "Nastavte základní informace pro tento typ indikátoru."
+
+msgid ""
+"The merge operation will merge the source indicator types into\n"
+"                the target indicator type. One or many source indicator types\n"
+"                can be specified"
+msgstr ""
+
+msgid ""
+"Only one target should be specified. The merge operation will\n"
+"                transfer all of the indicator metadata associations to the\n"
+"                source indicator types over to the target indicator type."
+msgstr ""
+
+msgid "Indicator types to be merged (source)"
+msgstr "Typy indikátorů, které mají být sloučeny (zdroj)"
+
+msgid "Select indicator types to merge"
+msgstr "Vyberte typy indikátorů, které chcete sloučit"
+
+msgid "Indicator type to merge into (target)"
+msgstr "Typ indikátoru, do kterého se má sloučit (cíl)"
+
+msgid "Select indicator type to merge into"
+msgstr "Vyberte typ indikátoru, do kterého se má sloučit"
+
+msgid "No indicator types available. Remove one from source."
+msgstr "Nejsou k dispozici žádné typy indikátorů. Odstraňte jeden ze zdroje."
+
+msgid ""
+"What should happen to the source indicator types after the merge is "
+"complete?"
+msgstr "Co se má stát se zdrojovými typy indikátorů po dokončení sloučení?"
+
+msgid "Conflicting factors"
+msgstr "Protichůdné faktory"
+
+msgid "It is not recommended to merge indicator types with different factors."
+msgstr "Nedoporučuje se slučovat typy indikátorů s různými faktory."
+
+msgid "Configure indicator merge"
+msgstr "Konfigurace sloučení indikátorů"
+
+msgid "The indicator merge operation is complete."
+msgstr "Operace sloučení indikátorů je dokončena."
+
+msgid "All selected indicators were merged successfully."
+msgstr "Všechny vybrané indikárory byly úspěšně sloučeny."
+
+msgid "Denominator Expression"
+msgstr "Výraz jmenovatele"
+
+msgid "Edit denominator expression"
+msgstr "Upravit výraz jmenovatele"
+
+msgid "Summarise what this denominator expression measures."
+msgstr "Shrňte, co tento výraz ve jmenovateli měří."
+
+msgid "Set up the basic information for this indicator."
+msgstr "Nastavení základních informací pro tento indikátor."
+
+msgid "Explain the purpose of this indicator."
+msgstr "Vysvětlete účel tohoto indikátoru."
+
+msgid "Calculation details"
+msgstr "Podrobnosti o výpočtu"
+
+msgid ""
+"Define how the indicator is calculated and how it's result will be "
+"displayed."
+msgstr "Definujte, jak se indikátor vypočítá a jak se zobrazí jeho výsledek."
+
+msgid ""
+"Select how the indicator result should be expressed (per cent, per thousand,"
+" etc.)"
+msgstr ""
+"Zvolte, jak má být výsledek indikátoru vyjádřen (v procentech, v tisících "
+"atd.)"
+
+msgid "Use annualized calculation"
+msgstr "Použijte anualizovaný výpočet"
+
+msgid ""
+"Select how many decimal places to display in outputs for this indicator"
+msgstr ""
+"Vyberte, kolik desetinných míst se má zobrazit ve výstupech tohoto "
+"indikátoru."
+
+msgid "Number of decimal places to show"
+msgstr "Počet desetinných míst, která se mají zobrazit"
+
+msgid "Select number of decimals"
+msgstr "Výběr počtu desetinných míst"
+
+msgid ""
+"Select legends to visually categorize values for this indicator in data "
+"entry and analytics apps."
+msgstr ""
+"Vyberte legendy pro vizuální kategorizaci hodnot tohoto indikátoru v "
+"aplikacích pro zadávání dat a analýzu."
+
+msgid "Mapping Settings"
+msgstr "Nastavení mapování"
+
+msgid ""
+"Configure how this indicator links to specific category and attribute "
+"combinations for data export."
+msgstr ""
+"Konfigurace propojení tohoto indikátoru s konkrétními kombinacemi kategorií "
+"a atributů pro export dat."
+
+msgid ""
+"Map this indicator to a specific category option combinations when exporting"
+" aggregate data."
+msgstr ""
+"Při exportu souhrnných dat přiřaďte tento indikátor ke kombinaci možností "
+"konkrétní kategorie."
+
+msgid ""
+"Map this indicator to a specific attribute option combinations when "
+"exporting aggregate data."
+msgstr ""
+"Při exportu agregovaných dat mapujte tento indikátor na kombinace možností "
+"konkrétního atributu."
+
+msgid "Numerator Expression"
+msgstr "Výraz čitatele"
+
+msgid "Edit numerator expression"
+msgstr "Upravit výraz čitatele"
+
+msgid "Summarise what this numerator expression measures."
+msgstr "Shrňte, co tento výraz v čitateli měří."
+
+msgid "Indicators Form"
+msgstr "Formulář indikátorů"
+
+msgid "Numerator description"
+msgstr "Popis čitatele"
+
+msgid "Numerator"
+msgstr "čitatel"
+
+msgid "Denominator description"
+msgstr "Popis jmenovatele"
+
+msgid "Denominator"
+msgstr "Jmenovatel"
+
+msgid "Annualized"
+msgstr "Anualizováno"
+
+msgid "Legend sets"
+msgstr "Sady legend"
+
+msgid "Mapping settings"
+msgstr "Nastavení mapování"
+
+msgid "Numerator is required"
+msgstr "Vyžaduje se čitatel"
+
+msgid "Denominator is required"
+msgstr "Vyžaduje se jmenovatel"
+
+msgid ""
+"The merge operation will merge the source indicators into\n"
+"                the target indicator. One or many source indicators\n"
+"                can be specified"
+msgstr ""
+
+msgid ""
+"Only one target should be specified. The merge operation will\n"
+"                transfer all of the indicator metadata associations to the\n"
+"                source indicators over to the target indicator."
+msgstr ""
+
+msgid "Indicators to be merged (source)"
+msgstr "Indikátory ke sloučení (zdroj)"
+
+msgid "Select indicators to merge"
+msgstr "Výběr indikátorů ke sloučení"
+
+msgid "Indicator to merge into (target)"
+msgstr "Indikátor ke sloučení do (cíl)"
+
+msgid "Select indicator to merge into"
+msgstr "Vyberte indikátor pro sloučení do"
+
+msgid "No indicators available. Remove one from source."
+msgstr "Nejsou k dispozici žádné indikátory. Odstraňte jeden ze zdroje."
+
+msgid ""
+"What should happen to the source indicators after the merge is complete?"
+msgstr "Co se má stát se zdrojovými indikátory po dokončení sloučení?"
+
+msgid "Set up the basic information for this option group set."
+msgstr "Nastavení základních informací pro tuto sadu skupin možností."
+
+msgid "Explain the purpose of this option group set."
+msgstr "Vysvětlete účel této sady skupin možností."
+
+msgid "Choose the option groups to include in this option group set."
+msgstr ""
+"Vyberte skupiny možností, které chcete zahrnout do této sady skupin "
+"možností."
+
+msgid "Available option groups"
+msgstr "Dostupné skupiny možností"
+
+msgid "Selected option groups"
+msgstr "Vybrané skupiny možností"
+
+msgid "Filter available option groups"
+msgstr "Filtrování dostupných skupin možností"
+
+msgid "Filter selected option groups"
+msgstr "Filtrování vybraných skupin možností"
+
+msgid "You must select an option set before you can select options."
+msgstr "Před výběrem možností je nutné vybrat sadu možností."
+
+msgid "Set up the basic information for this option group."
+msgstr "Nastavte základní informace pro tuto skupinu možností."
+
+msgid "Explain the purpose of this option group."
+msgstr "Vysvětlete účel této skupiny možností."
+
+msgid "Options"
+msgstr "Možnosti"
+
+msgid "Select the options that belong to this group."
+msgstr ""
+
+msgid "Available options"
+msgstr "Dostupné možnosti"
+
+msgid "Selected options"
+msgstr "Vybrané možnosti"
+
+msgid "Filter available options"
+msgstr "Filtrovat dostupné možnosti"
+
+msgid "Filter selected options"
+msgstr "Filtrovat vybrané možnosti"
+
+msgid "Set up the basic information for this organisational unit group set."
+msgstr ""
+
+msgid "Include subhierarchy in analytics"
+msgstr "Zahrnout do analytiky subhierarchii"
+
+msgid "Choose the groups to include in this organisation unit group set."
+msgstr ""
+
+msgid "Available organisation unit groups"
+msgstr "Dostupné skupiny organizačních jednotek"
+
+msgid "Selected organisation unit groups"
+msgstr "Vybrané skupiny organizačních jednotek"
+
+msgid "Filter available organisation unit groups"
+msgstr ""
+
+msgid "Filter selected organisation unit groups"
+msgstr "Filtrování vybraných skupin organizačních jednotek"
+
+msgid "Set up the basic information for this organisational unit group."
+msgstr "Nastavte základní informace pro tuto skupinu organizačních jednotek."
+
+msgid "Error saving organisation unit levels"
+msgstr "Úrovně organizačních jednotek pro ukládání chyb"
+
+msgid "Longitude"
+msgstr "Zeměpisná délka"
+
+msgid "{{type}} coordinates are not editable"
+msgstr "{{type}} souřadnice nelze upravovat"
+
+msgid "Upload an image"
+msgstr "Nahrajte obrázek"
+
+msgid "Max size 10MB. Supported file size are .jpg, .png, and .gif."
+msgstr ""
+"Maximální velikost 10 MB. Podporované velikosti souborů jsou .jpg, .png a "
+".gif."
+
+msgid "Preview of current icon"
+msgstr "Náhled aktuální ikony"
+
+msgid "Placement in hierarchy"
+msgstr "Umístění v hierarchii"
+
+msgid ""
+"Choose where this new organisation unit should be placed in the existing "
+"hierarchy"
+msgstr ""
+"Zvolte, kam má být tato nová organizační jednotka umístěna ve stávající "
+"hierarchii."
+
+msgid "Set up the basic information for this organisation unit"
+msgstr "Nastavení základních informací o této organizační jednotce"
+
+msgid "Closed date"
+msgstr "Uzavřené datum"
+
+msgid "Comment"
+msgstr "Komentář"
+
+msgid "Contact person"
+msgstr "Kontaktní osoba"
+
+msgid "Address"
+msgstr "Adresa"
+
+msgid "Location"
+msgstr "Umístění"
+
+msgid "Set up the organisation unit location."
+msgstr "Nastavení umístění organizační jednotky."
+
+msgid "Reference assignment"
+msgstr "Referenční přiřazení"
+
+msgid "Assign the organisation unit to related objects."
+msgstr "Přiřazení organizační jednotky k souvisejícím objektům."
+
+msgid "Available data sets"
+msgstr "Dostupné datové sady"
+
+msgid "Selected data sets"
+msgstr "Vybrané datové sady"
+
+msgid "Filter available data sets"
+msgstr "Filtrování dostupných datových sad"
+
+msgid "Filter selected data sets"
+msgstr "Filtrování vybraných datových sad"
+
+msgid "Available programs"
+msgstr "Dostupné programy"
+
+msgid "Selected programs"
+msgstr "Vybrané programy"
+
+msgid "Filter available programs"
+msgstr "Filtrování dostupných programů"
+
+msgid "Filter selected programs"
+msgstr "Filtrování vybraných programů"
+
+msgid "Organisation unit will be positioned inside {{displayName}}"
+msgstr "Organizační jednotka bude umístěna uvnitř {{displayName}}"
+
+msgid "Creating first organisation unit"
+msgstr "Vytvoření první organizační jednotky"
+
+msgid ""
+"This is the first organisation unit and will be created as the root of the "
+"hierarchy."
+msgstr ""
+"Jedná se o první organizační jednotku, která bude vytvořena jako kořen "
+"hierarchie."
+
+msgid "Must be a valid mobile number"
+msgstr "Musí být platné mobilní číslo"
+
+msgid "Must be a valid url"
+msgstr "Musí to být platná url adresa"
+
+msgid ""
+"Longitude should be between -90 and 90. Latitude should be between -180 and "
+"180"
+msgstr ""
+"Zeměpisná délka by se měla pohybovat mezi -90 a 90. Zeměpisná šířka by měla "
+"být mezi -180 a 180"
+
+msgid "Parent organisation unit cannot be itself or a descendant of itself."
+msgstr ""
+"Nadřazená organizační jednotka nemůže být sama sebou ani svým potomkem."
+
+msgid ""
+"The organisation unit was saved successfully but there was a problem saving ${fieldToSaveSeparatelyErrors.join(\n"
+"                            ' and '\n"
+"                        )}"
+msgstr ""
+"Organizační jednotka byla úspěšně uložena, ale došlo k problému při ukládání ${fieldToSaveSeparatelyErrors.join(\n"
+"                            ' a '\n"
+"                        )}"
+
+msgid "No organisation units available"
+msgstr "Žádné organizační jednotky nejsou k dispozici"
+
+msgid "Load more for {{orgUnitName}}"
+msgstr "Načíst další pro {{orgUnitName}}"
+
+msgid "Metadata management"
+msgstr "Správa metadat"
+
+msgid ""
+"Categories are typically a concept, for example \"Gender\", \"Age\" or "
+"\"Disease Status\". Use categories to disaggregate data elements into "
+"individual components. You can also use category combinations to assign "
+"metadata attributes to all data recorded in a specific dataset."
+msgstr ""
+"Kategorie jsou obvykle pojmy, například \"Pohlaví\", \"Věk\" nebo \"Stav "
+"onemocnění\". Kategorie slouží k rozčlenění datových prvků na jednotlivé "
+"složky. Kombinace kategorií můžete použít také k přiřazení atributů metadat "
+"všem údajům zaznamenaným v určité datové sadě."
+
+msgid "Individual values or options that can be selected within a category."
+msgstr "Jednotlivé hodnoty nebo možnosti, které lze v rámci kategorie vybrat."
+
+msgid "Disaggregate data elements into individual components."
+msgstr "Rozčlenění datových prvků na jednotlivé složky."
+
+msgid ""
+"Combine multiple categories into a related set that can be assigned to data "
+"elements for dissagregation. Can also be used to to assign metadata "
+"attributes to data sets or programs."
+msgstr ""
+"Sloučení více kategorií do příbuzné sady, kterou lze přiřadit datovým prvkům"
+" za účelem rozčlenění. Lze použít také k přiřazení atributů metadat datovým "
+"souborům nebo programům."
+
+msgid ""
+"Specify code and attributes to enable easier data exchange with other "
+"systems."
+msgstr ""
+"Určete kód a atributy, které umožní snadnější výměnu dat s jinými systémy."
+
+msgid ""
+"Group category options and improve analysis with category option group sets."
+msgstr ""
+"Seskupte možnosti kategorií a vylepšete analýzu pomocí sad skupin možností "
+"kategorií."
+
+msgid ""
+"Classify category options groups to add more dimensionality to captured data"
+" for analysis."
+msgstr ""
+"Klasifikujte skupiny možností kategorií, abyste zachyceným datům přidali "
+"další dimenzionalitu pro účely analýzy."
+
+msgid ""
+"Data elements are fundamental units for data collection in DHIS2, "
+"representing individual data points for both tracker and aggregate data. "
+"They serve as the building blocks for capturing, analysing, and reporting "
+"information."
+msgstr ""
+"Datové prvky jsou základními jednotkami pro sběr dat v DHIS2 a představují "
+"jednotlivé datové body pro sledování i souhrnné údaje. Slouží jako stavební "
+"prvky pro zachycování, analýzu a vykazování informací."
+
+msgid ""
+"Create, update, view and delete data elements: the foundation of data "
+"collection and analysis."
+msgstr ""
+"Vytváření, aktualizace, prohlížení a mazání datových prvků: základ sběru a "
+"analýzy dat."
+
+msgid ""
+"Improve analysis of single data elements by combining them into data element"
+" groups."
+msgstr ""
+"Zlepšení analýzy jednotlivých datových prvků jejich spojením do skupin "
+"datových prvků."
+
+msgid ""
+"Add another level of organisation by grouping data element groups into group"
+" sets."
+msgstr ""
+"Přidejte další úroveň organizace seskupením skupin datových prvků do "
+"skupinových sad."
+
+msgid ""
+"Data sets are collections of data elements grouped for aggregate data entry,"
+" validation, access, collection frequency and reporting. Data entry forms "
+"are defined and configured by data sets. They help streamline the management"
+" of data collection routines and ensure consistency across different stages "
+"of data handling within DHIS2."
+msgstr ""
+"Datové sady jsou soubory datových prvků seskupených za účelem souhrnného "
+"zadávání dat, validace, přístupu, četnosti sběru a podávání zpráv. Formuláře"
+" pro zadávání dat jsou definovány a konfigurovány podle datových sad. "
+"Pomáhají zefektivnit řízení postupů sběru dat a zajišťují konzistenci v "
+"různých fázích zpracování dat v rámci DHIS2."
+
+msgid ""
+"Create, update, view and delete data sets, specify the related data "
+"elements, period type organisation units, sharing settings and workflow "
+"approval here."
+msgstr ""
+"Zde můžete vytvářet, aktualizovat, zobrazovat a odstraňovat datové sady, "
+"zadávat související datové prvky, organizační jednotky typu období, "
+"nastavení sdílení a schvalování pracovních postupů."
+
+msgid "Create, update, view and delete data set notification templates."
+msgstr ""
+"Vytvářet, aktualizovat, zobrazovat a odstraňovat šablony oznámení datových "
+"sad."
+
+msgid ""
+"Indicators are used to calculate and analyze data based on data elements and"
+" other indicators."
+msgstr ""
+"Indikátory se používají k výpočtu a analýze dat na základě datových prvků a "
+"dalších indikátorů."
+
+msgid ""
+"Create, update, view and delete indicators, specify the numerator and "
+"denominator, and set the indicator type."
+msgstr ""
+"Vytvářet, aktualizovat, zobrazovat a odstraňovat indikátory, zadávat "
+"čitatele a jmenovatele a nastavovat typ indikátoru."
+
+msgid ""
+"Create, modify, view and delete indicator types. An indicator type is a "
+"factor for an indicator, like percentage."
+msgstr ""
+"Vytvářejte, upravujte, zobrazujte a odstraňujte typy indikátorů. Typ "
+"indikátoru je faktor pro indikátor, například procento."
+
+msgid ""
+"Create, modify, view and delete indicator groups. Groups are used for "
+"improved analysis."
+msgstr ""
+"Vytvářejte, upravujte, zobrazujte a odstraňujte skupiny indikátorů. Skupiny "
+"se používají pro vylepšenou analýzu."
+
+msgid ""
+"Create, modify, view and delete indicator group sets. Group sets are used "
+"for improved analysis."
+msgstr ""
+"Vytvářejte, upravujte, zobrazujte a odstraňujte sady skupin indikátorů. "
+"Skupinové sady se používají pro vylepšenou analýzu."
+
+msgid ""
+"Create, update, view and delete program indicators, define expressions and "
+"filters, and configure analytics settings."
+msgstr ""
+"Vytvářejte, aktualizujte, zobrazujte a odstraňujte indikátory programu, "
+"definujte výrazy a filtry a konfigurujte nastavení analytiky."
+
+msgid "Group program indicators for easier analysis."
+msgstr "Seskupte indikátory programu pro snadnější analýzu."
+
+msgid ""
+"Organisation units are the structural entities within DHIS2 that define "
+"locations or points of service where data is collected. Examples include "
+"regions, hospitals, clinics, or departments. They help establish the "
+"hierarchy and scope for data access, collection, reporting, and analysis. "
+"Organisation units can be organised into groups and group sets."
+msgstr ""
+"Organizační jednotky jsou strukturální jednotky v rámci DHIS2, které "
+"definují místa nebo místa poskytování služeb, kde se shromažďují údaje. "
+"Příkladem jsou regiony, nemocnice, kliniky nebo oddělení. Pomáhají stanovit "
+"hierarchii a rozsah pro přístup k údajům, jejich sběr, vykazování a analýzu."
+" Organizační jednotky mohou být uspořádány do skupin a skupinových souborů."
+
+msgid "Create, update, view and delete individual organisation units."
+msgstr ""
+"Vytvářet, aktualizovat, zobrazovat a odstraňovat jednotlivé organizační "
+"jednotky."
+
+msgid ""
+"Categorise similar organisation units into groups, like hospitals or "
+"clinics, enabling efficient data aggregation and analysis across diverse "
+"locations in DHIS2."
+msgstr ""
+"Kategorizovat podobné organizační jednotky do skupin, jako jsou nemocnice "
+"nebo kliniky, což umožní efektivní agregaci a analýzu dat z různých míst v "
+"DHIS2."
+
+msgid ""
+"Organise multiple groups with shared characteristics into sets, allowing for"
+" another level of data analysis and comparison across the organisation "
+"structure."
+msgstr ""
+"Uspořádat více skupin se společnými charakteristikami do souborů, což umožní"
+" další úroveň analýzy dat a srovnání napříč organizační strukturou."
+
+msgid ""
+"Organisation unit levels define hierarchical layers within the organisation "
+"structure, such as national or regional tiers, and specify the names used "
+"for each level."
+msgstr ""
+"Úrovně organizačních jednotek definují hierarchické úrovně v rámci "
+"organizační struktury, jako jsou národní nebo regionální úrovně, a určují "
+"názvy používané pro jednotlivé úrovně."
+
+msgid "Placeholder for other"
+msgstr "Zástupný symbol pro další"
+
+msgid "Create, modify and view attributes."
+msgstr "Vytvářejte, upravujte a zobrazujte atributy."
+
+msgid ""
+"Create a group of options from option sets that has a similar functional "
+"area or meaning."
+msgstr ""
+"Vytvořte skupinu možností ze sad možností, které mají podobnou funkční "
+"oblast nebo význam."
+
+msgid "Create, modify and view sets of option groups."
+msgstr "Vytvářejte, upravujte a zobrazujte sady skupin možností."
+
+msgid "Set disaggregation mappings for program indicators."
+msgstr "Nastavení mapování členění pro indikátory programu."
+
+msgid ""
+"Validations are used to provide important feedback during data entry to "
+"enhance data quality. Validation rules define expected criteria for specific"
+" data elements and display warnings at three levels of importance if these "
+"criteria are not met."
+msgstr ""
+"Validace slouží k poskytování důležité zpětné vazby při zadávání dat, aby se"
+" zvýšila jejich kvalita. Validační pravidla definují očekávaná kritéria pro "
+"konkrétní datové prvky a zobrazují varování na třech úrovních důležitosti, "
+"pokud tato kritéria nejsou splněna."
+
+msgid "Sends a notification when a validation rule failed."
+msgstr "Odešle oznámení, když pravidlo validace selže."
+
+msgid "Manage"
+msgstr "Spravovat"
+
+msgid "Program Disaggregation Form"
+msgstr "Formulář pro rozdělení programu"
+
+msgid "Program indicator mappings"
+msgstr "Mapování indikátorů programu"
+
+msgid "Disaggregation categories"
+msgstr "Rozčlenění Kategorií"
+
+msgid "Attribute categories"
+msgstr "Kategorie atributů"
+
+msgid "Could not load programs or indicators data."
+msgstr "Nepodařilo se načíst programy nebo data indikátorů."
+
+msgid "Add a category"
+msgstr "Přidat kategorii"
+
+msgid "Add categories from a category combo"
+msgstr "Přidání kategorií z kombinace kategorií"
+
+msgid "Rename category mapping"
+msgstr "Přejmenování mapování kategorií"
+
+msgid "{{- categoryMappingName}} mapping will be removed on save"
+msgstr "{{- categoryMappingName}} mapování bude při uložení odstraněno"
+
+msgid "Restore mapping"
+msgstr "Obnovit mapování"
+
+msgid "Category mapping: "
+msgstr "Mapování kategorií: "
+
+msgid "No new categories to add"
+msgstr "Žádné nové kategorie k přidání"
+
+msgid "{{newlyAddedCount}} categories added"
+msgstr "{{newlyAddedCount}} kategorie přidány"
+
+msgid ""
+"{{newlyAddedCount}} categories added ({{alreadyAddedCount}} already in the "
+"list)"
+msgstr ""
+"{{newlyAddedCount}} kategorie přidány ({{alreadyAddedCount}} již v seznamu)"
+
+msgid "Category:"
+msgstr "Kategorie:"
+
+msgid "Suggested based on Program Indicator selections"
+msgstr "Navrženo na základě výběru ukazatele programu"
+
+msgid "Add category"
+msgstr "Přidat kategorii"
+
+msgid "All mappings for {{- categoryName}} will be removed on save"
+msgstr "Všechna mapování pro {{- categoryName}} budou při uložení odstraněna."
+
+msgid "Restore mappings"
+msgstr "Obnovit mapování"
+
+msgid "Remove category mappings"
+msgstr "Odstranění mapování kategorií"
+
+msgid "Add mapping"
+msgstr "Přidat mapování"
+
+msgid "Disaggregation category mappings"
+msgstr "Mapování kategorií rozčlenění"
+
+msgid "Define expressions to map individual data to category options."
+msgstr "Definujte výrazy pro mapování jednotlivých dat na možnosti kategorií."
+
+msgid "Attribute category mappings"
+msgstr "Mapování kategorií atributů"
+
+msgid "Program indicator selection"
+msgstr "Výběr indikátoru programu"
+
+msgid ""
+"Choose program indicators and assign category combinations and category "
+"mappings to be used for disaggregation."
+msgstr ""
+"Vyberte indikátory programu a přiřaďte kombinace kategorií a mapování "
+"kategorií, které se použijí pro rozčlenění."
+
+msgid "Add a program indicator"
+msgstr "Přidání indikátoru programu"
+
+msgid "All mappings for {{- programIndicator}} will be removed on save"
+msgstr ""
+
+msgid "Program Indicator:"
+msgstr "Indikátor programu:"
+
+msgid "Remove program indicator mapping"
+msgstr "Odstranění mapování indikátoru programu"
+
+msgid "Attribute category combination"
+msgstr "Kombinace kategorií atributů"
+
+msgid "Data element for aggregate data export"
+msgstr "Datový prvek pro export souhrnných dat"
+
+msgid "There are some invalid expressions"
+msgstr "Jsu tu některé neplatné výrazy"
+
+msgid "No changes to save"
+msgstr "Žádné změny k uložení"
+
+msgid "Error while saving disaggregation categories"
+msgstr "Chyba při ukládání kategorií členění"
+
+msgid ""
+"Error while updating mappings for program indicators with ids: ${errors\n"
+"                            .map((r) => r.id)\n"
+"                            .join(' - ')}"
+msgstr ""
+
+msgid "Could not delete program mappings"
+msgstr "Nelze odstranit mapování programů"
+
+msgid "Select a Program"
+msgstr "Výběr programu"
+
+msgid "Programs with existing mappings"
+msgstr ""
+
+msgid "Could not load programs."
+msgstr "Nelze načíst programy."
+
+msgid "No programs with existing mappings found."
+msgstr "Nebyly nalezeny žádné programy s existujícími mapováními."
+
+msgid "Delete Mapping"
+msgstr "Odstranit mapování"
+
+msgid "This action cannot be undone."
+msgstr "Tuto akci nelze vzít zpět."
+
+msgid "Are you sure you want to delete this program mapping configuration?"
+msgstr ""
+
+msgid "Set up the basic information for this program indicator group."
+msgstr ""
+
+msgid ""
+"Choose the program indicators to include in this program indicator group."
+msgstr ""
+
+msgid "Available program indicators"
+msgstr ""
+
+msgid "Selected program indicators"
+msgstr ""
+
+msgid "Search available program indicators"
+msgstr ""
+
+msgid "Search selected program indicators"
+msgstr ""
+
+msgid "Incident date"
+msgstr "Datum incidentu"
+
+msgid "Event date"
+msgstr "Datum události"
+
+msgid "Enrollment date"
+msgstr "Datum zápisu"
+
+msgid "Before start of reporting period"
+msgstr "Před začátkem vykazovaného období"
+
+msgid "Before end of reporting period"
+msgstr "Před koncem vykazovaného období"
+
+msgid "After start of reporting period"
+msgstr "Po začátku vykazovaného období"
+
+msgid "After end of reporting period"
+msgstr "Po skončení vykazovaného období"
+
+msgid "Offset"
+msgstr ""
+
+msgid "Type"
+msgstr "Typ"
+
+msgid "Boundary target"
+msgstr "Hraniční cíl"
+
+msgid "Custom boundary text"
+msgstr "Vlastní text hranic"
+
+msgid "Analytics period boundary type"
+msgstr "Typ hranice období Analytiky"
+
+msgid "Offset period by amount"
+msgstr "Odsadit období podle množství"
+
+msgid "Edit analytics period boundary"
+msgstr ""
+
+msgid "Add analytics period boundary"
+msgstr ""
+
+msgid "Update analytics period boundary"
+msgstr ""
+
+msgid "Add a period boundary"
+msgstr ""
+
+msgid "Event organisation unit default"
+msgstr ""
+
+msgid "Enrollment organisation unit default"
+msgstr ""
+
+msgid "Enrollment organisation unit"
+msgstr "Organizační jednotka zápisu"
+
+msgid "Owner at start organisation unit"
+msgstr "Vlastník při zahájení Organizační jednotky"
+
+msgid "Owner at end organisation unit"
+msgstr "Vlastník při ukončení Organizační jednotky"
+
+msgid "Registration organisation unit"
+msgstr "Registrace Organizační jednotky"
+
+msgid "Organisation unit field"
+msgstr "Pole organizační jednotky"
+
+msgid "Set up the basic information for this program indicator."
+msgstr ""
+
+msgid "Explain the purpose of this program indicator."
+msgstr ""
+
+msgid "Configuration"
+msgstr "Konfigurace"
+
+msgid ""
+"Choose which program and which data types this program indicator applies to."
+msgstr ""
+
+msgid "Program (required)"
+msgstr "Program (povinné)"
+
+msgid "Analytics type (required)"
+msgstr "Typ analytiky (povinné)"
+
+msgid "Configure the program indicator expression."
+msgstr "Konfigurace výrazu indikátoru programu."
+
+msgid ""
+"Configure the program indicator filter that controls what data will be "
+"evaluated bt the main expression."
+msgstr ""
+
+msgid "Period boundaries"
+msgstr "Hranice období"
+
+msgid "Set up time constraints, which determine what data will be evaluated."
+msgstr "Nastavte časová omezení, která určují, jaká data budou vyhodnocena."
+
+msgid "Set up advanced properties for this program indicator."
+msgstr "Nastavení pokročilých vlastností tohoto indikátoru programu."
+
+msgid "Show program indicators in data entry forms"
+msgstr "Zobrazení indikátorů programu ve formulářích pro zadávání dat"
+
+msgid "Set up the program indicator legends."
+msgstr "Nastavte legendy indikátoru programu."
+
+msgid "Program Indicators Form"
+msgstr ""
+
+msgid "Recipients"
+msgstr "Příjemci"
+
+msgid "Recipient user groups"
+msgstr "Skupiny uživatelů příjemců"
+
+msgid "Notify users in hiearchy only"
+msgstr ""
+
+msgid "Rule name"
+msgstr "Název pravidla"
+
+msgid "Rule description"
+msgstr "Popis pravidla"
+
+msgid "Operator"
+msgstr "Operátor"
+
+msgid "Importance"
+msgstr "Důležitost"
+
+msgid "Left side description"
+msgstr "Popis na levé straně"
+
+msgid "Right side description"
+msgstr "Popis na pravé straně"
+
+msgid "Left side value"
+msgstr "Hodnota na levé straně"
+
+msgid "Right side value"
+msgstr "Hodnota na pravé straně"
+
+msgid "Organisation unit name"
+msgstr "Název organizační jednotky"
+
+msgid "Set up the basic information for this validation notification."
+msgstr ""
+
+msgid "Available validation rules"
+msgstr "Dostupná pravidla ověřování"
+
+msgid "Selected validation rules"
+msgstr ""
+
+msgid "Filter available validation rules"
+msgstr ""
+
+msgid "Filter selected validation rules"
+msgstr ""
+
+msgid "What should this notification send?"
+msgstr ""
+
+msgid "Available user groups"
+msgstr "Dostupné skupiny uživatelů"
+
+msgid "Selected user groups"
+msgstr "Vybrané skupiny uživatelů"
+
+msgid "Filter available user groups"
+msgstr ""
+
+msgid "Filter selected user groups"
+msgstr ""
