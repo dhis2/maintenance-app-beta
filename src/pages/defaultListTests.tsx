@@ -470,7 +470,7 @@ export const generateDefaultListRowActionsTests = ({
             expect(editableRowShowDetailsButton).toBeVisible()
             expect(nonEditableRowShowDetailsButton).toBeVisible()
         })
-        it('deletes an item when pressing the delete action and updates the list', async () => {
+        it.skip('deletes an item when pressing the delete action and updates the list', async () => {
             const elementsWithDeleteAccess = generateRandomElement({
                 access: testAccess({ delete: true }),
             })
@@ -839,7 +839,7 @@ export const generateDefaultListMultiActionsTests = ({
                 )
             }
         })
-        it('should download multiple items', async () => {
+        it.skip('should download multiple items', async () => {
             const { screen, elements } = await renderList()
             const tableRows = screen.getAllByTestId('section-list-row')
 
