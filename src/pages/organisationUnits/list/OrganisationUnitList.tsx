@@ -9,13 +9,18 @@ import {
 } from '@tanstack/react-table'
 import { difference } from 'lodash'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { IdentifiableFilter, SectionList } from '../../../components'
+import {
+    IdentifiableFilter,
+    OrganisationUnitGroupFilter,
+    SectionList,
+} from '../../../components'
 import {
     DefaultDetailsPanelContent,
     DetailsPanel,
 } from '../../../components/sectionList/detailsPanel'
 import { useModelListView } from '../../../components/sectionList/listView'
 import { ModelValue } from '../../../components/sectionList/modelValue/ModelValue'
+import { SectionListLoader } from '../../../components/sectionList/SectionListLoader'
 import { SectionListTitle } from '../../../components/sectionList/SectionListTitle'
 import { DefaultToolbar } from '../../../components/sectionList/toolbar'
 import { TranslationDialog } from '../../../components/sectionList/translation'
@@ -24,6 +29,7 @@ import {
     SchemaName,
     useSchema,
     useSectionListFilter,
+    useSectionListFilters,
 } from '../../../lib'
 import { getFieldFilter } from '../../../lib/models/path'
 import { useCurrentUserRootOrgUnits } from '../../../lib/user/currentUserStore'
@@ -153,6 +159,7 @@ const transformToOrgUnitListItems = (
 export const OrganisationUnitList = () => {
     const columnDefinitions = useColumns()
     const [identifiableFilter] = useSectionListFilter('identifiable')
+    const [filters] = useSectionListFilters()
     const userRootOrgUnits = useCurrentUserRootOrgUnits()
 
     const initialExpandedState = useMemo(() => {
@@ -171,7 +178,8 @@ export const OrganisationUnitList = () => {
     const [translationDialogModel, setTranslationDialogModel] = useState<
         BaseListModel | undefined
     >(undefined)
-    const isFiltering = !!identifiableFilter
+    const organisationUnitGroupId = filters.organisationUnitGroup?.[0]
+    const isFiltering = !!identifiableFilter || !!organisationUnitGroupId
 
     const handleDetailsClick = useCallback(
         ({ id }: BaseListModel) => {
@@ -198,6 +206,7 @@ export const OrganisationUnitList = () => {
         searchQuery: identifiableFilter,
         fieldFilters,
         enabled: isFiltering,
+        organisationUnitGroupId,
     })
 
     // expand ancestors when filtering, so that matches are visible
@@ -285,10 +294,18 @@ export const OrganisationUnitList = () => {
         enableSubRowSelection: false,
     })
 
+    const allQueries = queries.concat(orgUnitFiltered)
+    const isFetching = allQueries.some(
+        (query) => query.isLoading || query.isFetching
+    )
+
     return (
         <div>
             <SectionListTitle />
-            <IdentifiableFilter />
+            <div className={css.filterRow}>
+                <IdentifiableFilter />
+                <OrganisationUnitGroupFilter />
+            </div>
             <div className={css.listDetailsWrapper}>
                 <DefaultToolbar
                     selectedModels={
@@ -312,20 +329,28 @@ export const OrganisationUnitList = () => {
                 >
                     <OrganisationUnitListMessage
                         isFiltering={isFiltering}
-                        queries={queries.concat(orgUnitFiltered)}
+                        queries={allQueries}
                         orgUnitCount={table.getRowCount()}
                     />
-                    {table.getRowModel().rows.map((row) => (
-                        <OrganisationUnitRow
-                            key={row.id}
-                            row={row}
-                            onShowDetailsClick={handleDetailsClick}
-                            isFiltering={isFiltering}
-                            hasErrored={hasErrored}
-                            fetchNextPage={fetchNextPage}
-                            onOpenTranslationClick={setTranslationDialogModel}
-                        />
-                    ))}
+                    {isFetching ? (
+                        <SectionListLoader />
+                    ) : (
+                        table
+                            .getRowModel()
+                            .rows.map((row) => (
+                                <OrganisationUnitRow
+                                    key={row.id}
+                                    row={row}
+                                    onShowDetailsClick={handleDetailsClick}
+                                    isFiltering={isFiltering}
+                                    hasErrored={hasErrored}
+                                    fetchNextPage={fetchNextPage}
+                                    onOpenTranslationClick={
+                                        setTranslationDialogModel
+                                    }
+                                />
+                            ))
+                    )}
                 </SectionList>
                 {detailsId && (
                     <DetailsPanel
