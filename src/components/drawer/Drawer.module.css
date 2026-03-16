@@ -130,10 +130,6 @@
     overflow: auto;
 }
 
-.drawerBodyScrollableNestedSectionForm {
-    background-color: var(--colors-grey200);
-}
-
 .drawerFooter {
     flex-shrink: 0;
     width: 100%;
