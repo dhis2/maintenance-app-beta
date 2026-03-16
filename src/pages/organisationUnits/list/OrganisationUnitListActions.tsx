@@ -139,7 +139,7 @@ const OrganisationUnitActionMore = ({
                         />
                         <MenuItem
                             dense
-                            label={i18n.t('Add child')}
+                            label={i18n.t('Add a unit inside')}
                             icon={<IconDimensionOrgUnit16 />}
                             onClick={(_, e) => {
                                 handleAddChildClick(e)
