@@ -1,3 +1,10 @@
+## [0.147.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.147.0...v0.147.1) (2026-03-16)
+
+
+### Bug Fixes
+
+* fix locale parsing ([#747](https://github.com/dhis2/maintenance-app-beta/issues/747)) ([4dff585](https://github.com/dhis2/maintenance-app-beta/commit/4dff585be830c588aec34620497e55d3eb922d92))
+
 # [0.147.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.146.1...v0.147.0) (2026-03-16)
 
 
