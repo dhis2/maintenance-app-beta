@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { Field, NoticeBox, OrganisationUnitTree } from '@dhis2/ui'
 import { IconInfo16 } from '@dhis2/ui-icons'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useField } from 'react-final-form'
 import { useCurrentUserRootOrgUnits } from '../../../lib/user/currentUserStore'
 import classes from './OrganisationUnitSelector.module.css'
@@ -14,9 +14,24 @@ export function OrganisationUnitSelector() {
             !value && userRootOrgUnits.length > 0 ? 'Required' : undefined,
     })
     const userRootOrgUnits = useCurrentUserRootOrgUnits()
-    const userRootOrgUnitsIds = userRootOrgUnits.map((unit) => unit.id)
-    const userRootOrgUnitsPaths = userRootOrgUnits.map((unit) => unit.path)
-    const selectedPath = input.value?.path ? [input.value.path] : []
+    const userRootOrgUnitsIds = useMemo(
+        () => userRootOrgUnits.map((unit) => unit.id),
+        [userRootOrgUnits]
+    )
+    const userRootOrgUnitsPaths = useMemo(
+        () => userRootOrgUnits.map((unit) => unit.path),
+        [userRootOrgUnits]
+    )
+
+    const { initiallyExpanded, selectedPath } = useMemo(() => {
+        const selectedPath: string[] = input.value?.path
+            ? [input.value.path]
+            : []
+        return {
+            initiallyExpanded: [...userRootOrgUnitsPaths, ...selectedPath],
+            selectedPath,
+        }
+    }, [userRootOrgUnitsPaths, input])
 
     const handleChange = (orgUnit: {
         displayName: string
@@ -41,14 +56,12 @@ export function OrganisationUnitSelector() {
                 <>
                     <div className={classes.selectedOrgUnitBox}>
                         <OrganisationUnitTree
+                            key={initiallyExpanded.join(',')}
                             onChange={handleChange}
                             singleSelection
                             roots={userRootOrgUnitsIds}
                             selected={selectedPath}
-                            initiallyExpanded={[
-                                ...userRootOrgUnitsPaths,
-                                ...selectedPath,
-                            ]}
+                            initiallyExpanded={initiallyExpanded}
                         />
                     </div>
                     {input.value?.displayName && (

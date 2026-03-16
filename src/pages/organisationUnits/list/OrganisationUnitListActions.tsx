@@ -2,8 +2,12 @@ import i18n from '@dhis2/d2-i18n'
 import {
     Button,
     FlyoutMenu,
+    IconArrowRightMulti16,
+    IconArrowUp16,
+    IconDimensionOrgUnit16,
     IconEdit16,
     IconInfo16,
+    IconLocation16,
     IconMore24,
     IconTranslate16,
     MenuItem,
@@ -63,6 +67,7 @@ type OrganisationUnitActionMoreProps = {
     onShowDetailsClick: (model: BaseListModel) => void
 }
 
+export const ORG_UNIT_PARENT_SEARCH_PARAM = 'parent-org-unit'
 const OrganisationUnitActionMore = ({
     deletable,
     model,
@@ -77,6 +82,14 @@ const OrganisationUnitActionMore = ({
 
     const handleEditClick = useLinkClickHandler(
         { pathname: model.id },
+        { state: preservedSearchState }
+    )
+
+    const handleAddChildClick = useLinkClickHandler(
+        {
+            pathname: 'new',
+            search: `${ORG_UNIT_PARENT_SEARCH_PARAM}=` + model.id,
+        },
         { state: preservedSearchState }
     )
 
@@ -124,6 +137,15 @@ const OrganisationUnitActionMore = ({
                             icon={<IconTranslate16 />}
                             onClick={() => {
                                 onTranslateClick()
+                                setOpen(false)
+                            }}
+                        />
+                        <MenuItem
+                            dense
+                            label={i18n.t('Add child')}
+                            icon={<IconDimensionOrgUnit16 />}
+                            onClick={(_, e) => {
+                                handleAddChildClick(e)
                                 setOpen(false)
                             }}
                         />
