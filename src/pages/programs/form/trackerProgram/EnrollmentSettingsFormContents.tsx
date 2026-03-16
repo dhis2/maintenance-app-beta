@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { CheckboxFieldFF, Radio } from '@dhis2/ui'
+import { CheckboxFieldFF } from '@dhis2/ui'
 import React, { useEffect } from 'react'
 import { Field, useField, useFormState } from 'react-final-form'
 import {

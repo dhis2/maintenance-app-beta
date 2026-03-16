@@ -16,9 +16,9 @@ function isEnabled(value: unknown): boolean {
 
 export function OpenDaysAfterCoEndDateField({
     categoryCombinationDisplayName,
-}: {
+}: Readonly<{
     categoryCombinationDisplayName: string
-}) {
+}>) {
     const { input, meta } = useField('openDaysAfterCoEndDate', {
         parse: parseNumericInput,
         format: formatNumericInput,
