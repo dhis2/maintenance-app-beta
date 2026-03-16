@@ -170,6 +170,10 @@ export const TrackerProgramFormDescriptor = {
             label: i18n.t('Access and Sharing'),
             fields: [
                 {
+                    name: 'accessLevel',
+                    label: i18n.t('Access Level'),
+                },
+                {
                     name: 'organisationUnits',
                     label: i18n.t('Organisation units'),
                 },
