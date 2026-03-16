@@ -19,7 +19,6 @@ export const TrackerProgramFormDescriptor = {
                     label: i18n.t('Visual configuration'),
                 },
                 { name: 'version', label: i18n.t('Version') },
-                { name: 'relatedProgram', label: i18n.t('Related program') },
                 {
                     name: 'categoryCombo',
                     label: i18n.t('Category combination'),

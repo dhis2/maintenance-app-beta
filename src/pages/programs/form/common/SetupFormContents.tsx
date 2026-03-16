@@ -150,25 +150,6 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                     <FeatureTypeField />
                 </StandardFormField>
             )}
-            {isTrackerProgram && (
-                <StandardFormField>
-                    <ModelSingleSelectFormField
-                        showNoValueOption
-                        inputWidth="400px"
-                        dataTest="formfields-relatedProgram"
-                        name="relatedProgram"
-                        label={i18n.t('Related program')}
-                        query={{
-                            resource: 'programs',
-                            params: {
-                                fields: ['id', 'displayName'],
-                                order: ['displayName'],
-                                filter: ['id:ne:' + values.id],
-                            },
-                        }}
-                    />
-                </StandardFormField>
-            )}
             <StandardFormField>
                 <EditableFieldWrapper
                     onRefresh={() => refreshCategoryCombos()}
