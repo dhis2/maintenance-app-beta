@@ -1,3 +1,10 @@
+## [0.148.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.148.0...v0.148.1) (2026-03-16)
+
+
+### Bug Fixes
+
+* build to d2-ci ([#815](https://github.com/dhis2/maintenance-app-beta/issues/815)) ([9392d57](https://github.com/dhis2/maintenance-app-beta/commit/9392d572765f031a2d3296003133256f22033dd6))
+
 # [0.148.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.147.1...v0.148.0) (2026-03-16)
 
 
