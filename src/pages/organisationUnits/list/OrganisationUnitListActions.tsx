@@ -2,12 +2,9 @@ import i18n from '@dhis2/d2-i18n'
 import {
     Button,
     FlyoutMenu,
-    IconArrowRightMulti16,
-    IconArrowUp16,
     IconDimensionOrgUnit16,
     IconEdit16,
     IconInfo16,
-    IconLocation16,
     IconMore24,
     IconTranslate16,
     MenuItem,
