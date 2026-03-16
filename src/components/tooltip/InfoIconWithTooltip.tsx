@@ -14,18 +14,20 @@ export const InfoIconWithTooltip = ({
     ...tooltipProps
 }: InfoIconWithTooltipProps) => {
     return (
-        <span
-            style={{
-                display: 'flex',
-                gap: '2px',
-                fontSize: '12px',
-                color: colors.grey700,
-            }}
-        >
-            <Tooltip content={content} {...tooltipProps}>
+        <Tooltip content={content} {...tooltipProps}>
+            <span
+                style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '2px',
+                    fontSize: '12px',
+                    color: colors.grey700,
+                    cursor: 'default',
+                }}
+            >
                 <IconInfo16 color={iconColor} />
-            </Tooltip>
-            {text && <span>{text}</span>}
-        </span>
+                {text && <span>{text}</span>}
+            </span>
+        </Tooltip>
     )
 }
