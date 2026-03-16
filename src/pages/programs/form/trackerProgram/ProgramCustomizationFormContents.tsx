@@ -8,8 +8,8 @@ import {
     StandardFormField,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
-} from '../../../components'
-import { useSchemaSectionHandleOrThrow, useValidator } from '../../../lib'
+} from '../../../../components'
+import { useSchemaSectionHandleOrThrow, useValidator } from '../../../../lib'
 
 export const ProgramCustomizationFormContents = React.memo(
     function ProgramCustomizationFormContents({ name }: { name: string }) {

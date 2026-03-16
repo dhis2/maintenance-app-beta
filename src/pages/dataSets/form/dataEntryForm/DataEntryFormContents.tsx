@@ -98,7 +98,7 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
             </StandardFormSectionTitle>
             <StandardFormSectionDescription>
                 {i18n.t(
-                    'Choose and configure how the data entry form looks and works for this data set.'
+                    'Choose and configure how the data entry form looks and works.'
                 )}
             </StandardFormSectionDescription>
             <TabbedFormTypePicker
@@ -116,7 +116,7 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
                         </StandardFormSectionTitle>
                         <div className={classes.basicFormDescription}>
                             {i18n.t(
-                                'This form displays an auto-generated list of the data elements defined for this data set.'
+                                'Displays a form with the data elements in the order they were added to this data set.'
                             )}
                         </div>
                         <Link
@@ -127,7 +127,7 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
                             }}
                         >
                             <Button secondary small>
-                                {i18n.t('Edit the data elements')}
+                                {i18n.t('Manage data elements')}
                             </Button>
                         </Link>
                     </div>

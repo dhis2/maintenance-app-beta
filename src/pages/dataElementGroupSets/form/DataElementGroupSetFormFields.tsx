@@ -37,11 +37,7 @@ export function DataElementGroupSetFormFields() {
                 <DefaultIdentifiableFields />
 
                 <StandardFormField>
-                    <DescriptionField
-                        helpText={i18n.t(
-                            'Explain the purpose of this data element group set.'
-                        )}
-                    />
+                    <DescriptionField />
                 </StandardFormField>
 
                 <StandardFormField>
@@ -59,8 +55,9 @@ export function DataElementGroupSetFormFields() {
                 </StandardFormSectionTitle>
 
                 <StandardFormSectionDescription>
-                    {/* TODO: ADD DESCRIPTION */}
-                    {''}
+                    {i18n.t(
+                        'Choose the data element groups to include in this data element group set.'
+                    )}
                 </StandardFormSectionDescription>
 
                 <StandardFormField>

@@ -37,7 +37,10 @@ export const SectionListRow = React.memo(function SectionListRow<
     const editAccess = canEditModel(modelData)
     return (
         <DataTableRow
-            className={cx(css.listRow, { [css.active]: active })}
+            className={cx(css.listRow, {
+                [css.active]: active,
+                [css.clickable]: editAccess,
+            })}
             dataTest={`section-list-row`}
             selected={selected}
         >

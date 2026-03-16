@@ -119,11 +119,7 @@ export function ImageField() {
                     />
                 )}
             </FileList>
-            <Help>
-                {i18n.t(
-                    'Max size 10MB. Supported file size are .jpg, .png, and .gif.'
-                )}
-            </Help>
+            <Help>{i18n.t('JPG, PNG or GIF · max 10 MB')}</Help>
         </UIField>
     )
 }
@@ -138,13 +134,13 @@ const ImagePreview = ({
     const baseUrl = useConfig().baseUrl
 
     if (fileBase64) {
-        return <img src={fileBase64} alt={i18n.t('Preview of current icon')} />
+        return <img src={fileBase64} alt={i18n.t('Preview of current image')} />
     }
 
     if (fileResource && fileResource.id) {
         const src = `${baseUrl}/api/fileResources/${fileResource.id}/data`
 
-        return <img src={src} alt={i18n.t('Preview of current icon')} />
+        return <img src={src} alt={i18n.t('Preview of current image')} />
     }
     return null
 }

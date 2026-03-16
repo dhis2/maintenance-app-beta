@@ -3,7 +3,7 @@ import {
     Button,
     FlyoutMenu,
     IconEdit16,
-    IconMore16,
+    IconInfo16,
     IconMore24,
     IconTranslate16,
     MenuItem,
@@ -15,10 +15,10 @@ import { useHref, useLinkClickHandler } from 'react-router-dom'
 import { DeleteAction } from '../../../components/sectionList/listActions/DeleteAction'
 import {
     ListActions,
-    ActionEdit,
+    ActionShowDetails,
 } from '../../../components/sectionList/listActions/SectionListActions'
 import { TooltipWrapper } from '../../../components/tooltip'
-import { BaseListModel, TOOLTIPS } from '../../../lib'
+import { BaseListModel, TOOLTIPS, useLocationSearchState } from '../../../lib'
 import { canDeleteModel } from '../../../lib/models/access'
 
 type OrganisationUnitListActionProps = {
@@ -43,7 +43,7 @@ export const OrganisationUnitListActions = ({
 
     return (
         <ListActions>
-            <ActionEdit modelId={model.id} />
+            <ActionShowDetails onClick={() => onShowDetailsClick(model)} />
             <OrganisationUnitActionMore
                 deletable={deletable}
                 model={model}
@@ -73,8 +73,12 @@ const OrganisationUnitActionMore = ({
     const [open, setOpen] = useState(false)
     const ref = useRef(null)
     const href = useHref(model.id, { relative: 'path' })
+    const preservedSearchState = useLocationSearchState()
 
-    const handleEditClick = useLinkClickHandler(model.id)
+    const handleEditClick = useLinkClickHandler(
+        { pathname: model.id },
+        { state: preservedSearchState }
+    )
 
     return (
         <div ref={ref}>
@@ -96,15 +100,6 @@ const OrganisationUnitActionMore = ({
                     <FlyoutMenu>
                         <MenuItem
                             dense
-                            label={i18n.t('Show details')}
-                            icon={<IconMore16 />}
-                            onClick={() => {
-                                onShowDetailsClick(model)
-                                setOpen(false)
-                            }}
-                        />
-                        <MenuItem
-                            dense
                             label={i18n.t('Edit')}
                             icon={<IconEdit16 />}
                             onClick={(_, e) => {
@@ -113,6 +108,15 @@ const OrganisationUnitActionMore = ({
                             }}
                             target="_blank"
                             href={href}
+                        />
+                        <MenuItem
+                            dense
+                            label={i18n.t('Show details')}
+                            icon={<IconInfo16 />}
+                            onClick={() => {
+                                onShowDetailsClick(model)
+                                setOpen(false)
+                            }}
                         />
                         <MenuItem
                             dense

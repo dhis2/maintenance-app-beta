@@ -1,3 +1,56 @@
+## [0.146.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.146.0...v0.146.1) (2026-03-13)
+
+
+### Bug Fixes
+
+* import translation files ([#810](https://github.com/dhis2/maintenance-app-beta/issues/810)) ([44ff70f](https://github.com/dhis2/maintenance-app-beta/commit/44ff70f676cff7ae06421fb2e2923370e85e1e7d))
+* skip flaky tests ([#811](https://github.com/dhis2/maintenance-app-beta/issues/811)) ([4c317b4](https://github.com/dhis2/maintenance-app-beta/commit/4c317b4dcbe17bc59bf4a9a343679ab8a69fe708))
+
+# [0.146.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.145.1...v0.146.0) (2026-03-13)
+
+
+### Bug Fixes
+
+* **section-list:** change default row action to edit ([#791](https://github.com/dhis2/maintenance-app-beta/issues/791)) ([2ac86b6](https://github.com/dhis2/maintenance-app-beta/commit/2ac86b61f6d17a51ef5ed0a39eeb3ade2fc385f9))
+
+
+### Features
+
+* add attribute category combo ([#803](https://github.com/dhis2/maintenance-app-beta/issues/803)) ([7eeda61](https://github.com/dhis2/maintenance-app-beta/commit/7eeda619536cc0cfcf200c828d69fd4065de1303))
+
+## [0.145.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.145.0...v0.145.1) (2026-03-13)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#808](https://github.com/dhis2/maintenance-app-beta/issues/808)) ([e75f59c](https://github.com/dhis2/maintenance-app-beta/commit/e75f59c49de505c6a66ab4c9eb3a803fdc4834b1))
+
+# [0.145.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.144.3...v0.145.0) (2026-03-12)
+
+
+### Features
+
+* filter out unsupported value types ([#805](https://github.com/dhis2/maintenance-app-beta/issues/805)) ([21d5e26](https://github.com/dhis2/maintenance-app-beta/commit/21d5e26c4d0b88915a47e336febcec42c178e873))
+
+## [0.144.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.144.2...v0.144.3) (2026-03-12)
+
+
+### Bug Fixes
+
+* add case sensitivity option for name and short name uniqueness validation ([#806](https://github.com/dhis2/maintenance-app-beta/issues/806)) ([3a45a37](https://github.com/dhis2/maintenance-app-beta/commit/3a45a37f06ac7892987d0aae095fd16a46cf0556))
+
+## [0.144.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.144.1...v0.144.2) (2026-03-12)
+
+
+### Bug Fixes
+
+* **color-icon-picker:** improve empty state, add labels, improve accessibility ([2ca8958](https://github.com/dhis2/maintenance-app-beta/commit/2ca8958c9a748e6f7bef7730afbf3b6f1fdff59b))
+* **common:** change feature type to location type, use radio buttons ([2208fd0](https://github.com/dhis2/maintenance-app-beta/commit/2208fd04a0e11d23332ddec8ba5424f277e7c99f))
+* **forms:** labels, helptext, defaults, transfer functionality, component use across all object forms ([6cf6d8a](https://github.com/dhis2/maintenance-app-beta/commit/6cf6d8a3a9e98db3364efe5a55e6e195d90ea200))
+* **message-fields:** add pendingCursorRef.current to useEffect dependency array ([f9728de](https://github.com/dhis2/maintenance-app-beta/commit/f9728de057eb4944487d3da741684cfbd828da18))
+* **message-fields:** keep cursor position on variable insert, styles, helptext ([f94ed73](https://github.com/dhis2/maintenance-app-beta/commit/f94ed73f660850a3969a26476a8ef079f522891a))
+* **ModelTransfer:** destructure height and width props to allow overrides ([57bea9d](https://github.com/dhis2/maintenance-app-beta/commit/57bea9db6006ae0c99f92cba5450bb96578ec26f))
+
 ## [0.144.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.144.0...v0.144.1) (2026-03-12)
 
 

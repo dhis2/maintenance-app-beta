@@ -35,9 +35,7 @@ export const TabbedFormTypePicker = React.memo(function FormFormContents({
     const androidFormType =
         sectionsLength > 0 ? i18n.t('Section form') : i18n.t('Basic form')
 
-    const basicFormHelpText = i18n.t(
-        'Basic forms display an auto-generated list.'
-    )
+    const basicFormHelpText = i18n.t('Show data items in a simple list.')
 
     const webFormType = hasDataEntryForm
         ? i18n.t('Custom form')
@@ -47,16 +45,15 @@ export const TabbedFormTypePicker = React.memo(function FormFormContents({
         <>
             {!isCreatingNew && hasDataToDisplay && (
                 <NoticeBox
-                    title={i18n.t('Form type based on your current setup')}
+                    title={i18n.t('Form type based on current setup')}
                     className={classes.formTypeInfo}
                 >
-                    {i18n.t(
-                        'Web will display {{webFormType}}  |  Android will display {{androidFormType}}',
-                        {
-                            webFormType,
+                    <div>{i18n.t('Web: {{webFormType}}', { webFormType })}</div>
+                    <div>
+                        {i18n.t('Android: {{androidFormType}}', {
                             androidFormType,
-                        }
-                    )}
+                        })}
+                    </div>
                 </NoticeBox>
             )}
             <div
@@ -80,7 +77,7 @@ export const TabbedFormTypePicker = React.memo(function FormFormContents({
                                 className={classes.infoTooltipWrapper}
                                 content={i18n.t(
                                     `${basicFormHelpText} \n` +
-                                        'They will be displayed only if no Section or Custom form is created.'
+                                        'Used if no Section or Custom form is available.'
                                 )}
                             >
                                 <IconInfo16 />
@@ -105,7 +102,7 @@ export const TabbedFormTypePicker = React.memo(function FormFormContents({
                                     condition={!isCreatingNew}
                                     className={classes.infoTooltipWrapper}
                                     content={i18n.t(
-                                        'Section forms let you create sections to organize data items for easier entry. If a Section form is created, it will be shown instead of the Basic form.'
+                                        'Organise data items into sections for easier entry. Section forms are used when no custom form is available.'
                                     )}
                                 >
                                     <IconInfo16 />
@@ -137,11 +134,7 @@ export const TabbedFormTypePicker = React.memo(function FormFormContents({
                                     condition={!isCreatingNew}
                                     className={classes.infoTooltipWrapper}
                                     content={i18n.t(
-                                        'Custom forms let you design a fully customized layout for data entry. \n' +
-                                            '\n' +
-                                            'On Web, Custom forms (if created) will always be shown.\n' +
-                                            'Android does not support Custom forms; \n' +
-                                            'instead, the Section form will be shown (if created), else the Basic form.'
+                                        'Design a custom layout for data entry. On web, custom forms are used when available. On Android, section forms are used instead, or the basic form if no section form exists.'
                                     )}
                                 >
                                     <IconInfo16 />

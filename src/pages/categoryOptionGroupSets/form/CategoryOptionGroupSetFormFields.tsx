@@ -29,16 +29,12 @@ function CategoryOptionGroupSetFormFields() {
                     )}
                 </StandardFormSectionDescription>
                 <DefaultIdentifiableFields />
-                <DescriptionField
-                    helpText={i18n.t(
-                        'Explain the purpose of this category option group set.'
-                    )}
-                />
+                <DescriptionField />
             </StandardFormSection>
 
             <StandardFormSection>
                 <StandardFormSectionTitle>
-                    {i18n.t('Data configuration')}
+                    {i18n.t('Category option group set usage')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
@@ -47,7 +43,9 @@ function CategoryOptionGroupSetFormFields() {
                 </StandardFormSectionDescription>
                 <StandardFormField>
                     <HorizontalFieldGroup
-                        label={'Data dimension type (required)'}
+                        label={'Type'}
+                        required
+                        dataTest="formfields-dataDimensionType"
                     >
                         <Field<string | undefined>
                             name="dataDimensionType"
@@ -70,9 +68,8 @@ function CategoryOptionGroupSetFormFields() {
                         name="dataDimension"
                         type="checkbox"
                         component={CheckboxFieldFF}
-                        label={i18n.t('Use as data dimension')}
-                        helpText={i18n.t(
-                            'Make available to analytics apps as a selectable dimension.'
+                        label={i18n.t(
+                            'Show as data dimension in analytics apps'
                         )}
                     />
                 </StandardFormField>
@@ -108,6 +105,8 @@ function CategoryOptionGroupSetFormFields() {
                             filterPlaceholderPicked={i18n.t(
                                 'Filter selected category option groups'
                             )}
+                            enableOrderChange={true}
+                            maxSelections={Infinity}
                         />
                     </StandardFormField>
                 </StandardFormField>

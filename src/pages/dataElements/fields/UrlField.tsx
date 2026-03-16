@@ -17,8 +17,8 @@ export function UrlField() {
             dataTest="formfields-url"
             inputWidth="400px"
             name="url"
-            label={i18n.t('Url')}
-            helpText={i18n.t('A web link that provides extra information.')}
+            label={i18n.t('URL')}
+            helpText={i18n.t('Shown with description when collecting data.')}
             validateFields={[]}
             validate={validate}
         />

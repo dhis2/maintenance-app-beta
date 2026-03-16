@@ -453,6 +453,7 @@ export const modelListViewsConfig = {
                 'displayInForm',
                 'analyticsType',
                 'categoryCombo',
+                'attributeCombo',
                 { label: i18n.t('Description'), path: 'displayDescription' },
                 DESCRIPTORS.formName,
                 DESCRIPTORS.shortName,

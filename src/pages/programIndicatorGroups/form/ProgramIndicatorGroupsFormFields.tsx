@@ -60,6 +60,7 @@ export const ProgramIndicatorGroupsFormFields = () => {
                             'Filter selected program indicators'
                         )}
                         dataTest="program-indicators-transfer"
+                        maxSelections={Infinity}
                     />
                 </StandardFormField>
             </StandardFormSection>

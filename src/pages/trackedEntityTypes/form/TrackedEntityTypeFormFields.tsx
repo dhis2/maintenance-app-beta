@@ -62,11 +62,7 @@ export function TrackedEntityTypeFormFields() {
                 </StandardFormField>
 
                 <StandardFormField>
-                    <DescriptionField
-                        helpText={i18n.t(
-                            'Explain the purpose of this tracked entity type.'
-                        )}
-                    />
+                    <DescriptionField />
                 </StandardFormField>
 
                 <StandardFormField>
@@ -95,7 +91,7 @@ export function TrackedEntityTypeFormFields() {
 
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Choose and configure what data can be collected for this tracked entity type'
+                        'Choose and configure what data can be collected for this tracked entity type.'
                     )}
                 </StandardFormSectionDescription>
 

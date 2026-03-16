@@ -5,10 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-03-11T13:07:57.819Z\n"
-"PO-Revision-Date: 2026-03-11T13:07:57.819Z\n"
-"POT-Creation-Date: 2026-03-10T15:21:15.088Z\n"
-"PO-Revision-Date: 2026-03-10T15:21:15.088Z\n"
+"POT-Creation-Date: 2026-03-11T09:55:17.194Z\n"
+"PO-Revision-Date: 2026-03-11T09:55:17.194Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -71,8 +69,17 @@ msgstr "Overview"
 msgid "Search menu items"
 msgstr "Search menu items"
 
+msgid "Color and icon"
+msgstr "Color and icon"
+
+msgid "Color"
+msgstr "Color"
+
 msgid "Remove color"
 msgstr "Remove color"
+
+msgid "Icon"
+msgstr "Icon"
 
 msgid "Choose an icon"
 msgstr "Choose an icon"
@@ -91,6 +98,9 @@ msgstr "Outline"
 
 msgid "Search icons"
 msgstr "Search icons"
+
+msgid "Available icons"
+msgstr "Available icons"
 
 msgid "No icons found"
 msgstr "No icons found"
@@ -135,11 +145,11 @@ msgstr ""
 msgid "Apply"
 msgstr "Apply"
 
-msgid "(No Value)"
-msgstr "(No Value)"
-
 msgid "Clear expression"
 msgstr "Clear expression"
+
+msgid "(No Value)"
+msgstr "(No Value)"
 
 msgid "Filter list"
 msgstr "Filter list"
@@ -387,18 +397,6 @@ msgstr "Value count"
 msgid "Zero or positive value count"
 msgstr "Zero or positive value count"
 
-msgid "Enrollment count"
-msgstr "Enrollment count"
-
-msgid "Event count"
-msgstr "Event count"
-
-msgid "Organisation unit count"
-msgstr "Organisation unit count"
-
-msgid "Tracked entity instance count"
-msgstr "Tracked entity instance count"
-
 msgid "Variables"
 msgstr "Variables"
 
@@ -420,17 +418,11 @@ msgstr "Could not validate expression"
 msgid "Message subject"
 msgstr "Message subject"
 
-msgid "Used as the template for the subject field."
-msgstr "Used as the template for the subject field."
-
-msgid "Message body (required) *"
-msgstr "Message body (required) *"
+msgid "Message body *"
+msgstr "Message body *"
 
 msgid "Message body"
 msgstr "Message body"
-
-msgid "Used as the template for the message field."
-msgstr "Used as the template for the message field."
 
 msgid "Insert a variable:"
 msgstr "Insert a variable:"
@@ -447,8 +439,8 @@ msgstr "Change this field"
 msgid "Are you sure you want to change this?"
 msgstr "Are you sure you want to change this?"
 
-msgid "Yes, change"
-msgstr "Yes, change"
+msgid "Change"
+msgstr "Change"
 
 msgid "Custom form saved"
 msgstr "Custom form saved"
@@ -489,11 +481,15 @@ msgstr "New custom form"
 msgid "Edit custom form"
 msgstr "Edit custom form"
 
-msgid "A custom form must be added for it to be used for data entry (web)."
-msgstr "A custom form must be added for it to be used for data entry (web)."
+msgid ""
+"No custom form has been added yet. Create a custom form to use it for web "
+"data entry."
+msgstr ""
+"No custom form has been added yet. Create a custom form to use it for web "
+"data entry."
 
-msgid "This data set uses a custom form for data entry (web)."
-msgstr "This data set uses a custom form for data entry (web)."
+msgid "This data set uses a custom form for web data entry."
+msgstr "This data set uses a custom form for web data entry."
 
 msgid "Custom form will be removed on save"
 msgstr "Custom form will be removed on save"
@@ -501,11 +497,11 @@ msgstr "Custom form will be removed on save"
 msgid "Restore custom form"
 msgstr "Restore custom form"
 
-msgid "Delete custom form"
-msgstr "Delete custom form"
-
 msgid "Create custom form"
 msgstr "Create custom form"
+
+msgid "Delete custom form"
+msgstr "Delete custom form"
 
 msgid "Select elements"
 msgstr "Select elements"
@@ -583,8 +579,8 @@ msgstr "Disabled for the selected value type."
 msgid "Aggregation type"
 msgstr "Aggregation type"
 
-msgid "Code (required)"
-msgstr "Code (required)"
+msgid "An optional unique identifier."
+msgstr "An optional unique identifier."
 
 msgid "Code"
 msgstr "Code"
@@ -592,18 +588,20 @@ msgstr "Code"
 msgid "Visual configuration"
 msgstr "Visual configuration"
 
-msgid ""
-"A color and icon are helpful for identifying data elements in "
-"information-dense screens."
-msgstr ""
-"A color and icon are helpful for identifying data elements in "
-"information-dense screens."
-
 msgid "Description"
 msgstr "Description"
 
-msgid "Feature type"
-msgstr "Feature type"
+msgid "Location type"
+msgstr "Location type"
+
+msgid "Point"
+msgstr "Point"
+
+msgid "Polygon/Area"
+msgstr "Polygon/Area"
+
+msgid "Do not collect location data"
+msgstr "Do not collect location data"
 
 msgid ""
 "This name is already in use. Consider updating the name to avoid a "
@@ -612,11 +610,8 @@ msgstr ""
 "This name is already in use. Consider updating the name to avoid a "
 "duplication."
 
-msgid "A name should be concise and easy to recognize."
-msgstr "A name should be concise and easy to recognize."
-
-msgid "{{fieldLabel}} (required)"
-msgstr "{{fieldLabel}} (required)"
+msgid "{{fieldLabel}}"
+msgstr "{{fieldLabel}}"
 
 msgid "Name"
 msgstr "Name"
@@ -672,56 +667,49 @@ msgstr ""
 "duplication."
 
 msgid ""
-"A short, unique name. Displayed in analysis apps where space is limited, "
+"A short, unique name. Displayed in analytics apps where space is limited, "
 "depending on user or system settings."
 msgstr ""
-"A short, unique name. Displayed in analysis apps where space is limited, "
+"A short, unique name. Displayed in analytics apps where space is limited, "
 "depending on user or system settings."
 
 msgid "Short name"
 msgstr "Short name"
 
+msgid "Choose the kind of data to collect."
+msgstr "Choose the kind of data to collect."
+
+msgid ""
+"Disabled as the value type must match the value type of the selected option "
+"set."
+msgstr ""
+"Disabled as the value type must match the value type of the selected option "
+"set."
+
+msgid "Value type"
+msgstr "Value type"
+
 msgid "variable"
 msgstr "variable"
 
-msgid "If you have chosen an Option set, this will be set automatically."
-msgstr "If you have chosen an Option set, this will be set automatically."
-
-msgid "Select the kind of data this {{objectType}} collects.{{optionSetSuffix}}"
-msgstr "Select the kind of data this {{objectType}} collects.{{optionSetSuffix}}"
+msgid "Change value type?"
+msgstr "Change value type?"
 
 msgid ""
-"Disabled as the value type must match the value type of the selected option "
-"set."
+"If this {{objectType}} already has data, changing its type can make "
+"existing values incompatible and affect analytics tables."
 msgstr ""
-"Disabled as the value type must match the value type of the selected option "
-"set."
+"If this {{objectType}} already has data, changing its type can make "
+"existing values incompatible and affect analytics tables."
 
-msgid "Value type (required)"
-msgstr "Value type (required)"
-
-msgid "Change value type"
-msgstr "Change value type"
-
-msgid ""
-"Changing the value type may cause issues when generating analytics tables "
-"if data already exists."
-msgstr ""
-"Changing the value type may cause issues when generating analytics tables "
-"if data already exists."
-
-msgid ""
-"Are you sure you want to change the {{objectType}} to "
-"{{newObjectTypeValue}}?"
-msgstr ""
-"Are you sure you want to change the {{objectType}} to "
-"{{newObjectTypeValue}}?"
-
-msgid "value type"
-msgstr "value type"
+msgid "Change value type from {{currentSelection}} to {{newObjectTypeValue}}?"
+msgstr "Change value type from {{currentSelection}} to {{newObjectTypeValue}}?"
 
 msgid "undefined"
 msgstr "undefined"
+
+msgid "Change to {{newValue}}"
+msgstr "Change to {{newValue}}"
 
 msgid "New section"
 msgstr "New section"
@@ -780,27 +768,27 @@ msgstr "Section form"
 msgid "Basic form"
 msgstr "Basic form"
 
-msgid "Basic forms display an auto-generated list."
-msgstr "Basic forms display an auto-generated list."
+msgid "Show data items in a simple list."
+msgstr "Show data items in a simple list."
 
-msgid "Form type based on your current setup"
-msgstr "Form type based on your current setup"
-
-msgid ""
-"Web will display {{webFormType}}  |  Android will display "
-"{{androidFormType}}"
-msgstr ""
-"Web will display {{webFormType}}  |  Android will display "
-"{{androidFormType}}"
+msgid "Form type based on current setup"
+msgstr "Form type based on current setup"
 
 msgid ""
-"Section forms let you create sections to organize data items for easier "
-"entry. If a Section form is created, it will be shown instead of the Basic "
-"form."
+"Organise data items into sections for easier entry. Section forms are used "
+"when no custom form is available."
 msgstr ""
-"Section forms let you create sections to organize data items for easier "
-"entry. If a Section form is created, it will be shown instead of the Basic "
-"form."
+"Organise data items into sections for easier entry. Section forms are used "
+"when no custom form is available."
+
+msgid ""
+"Design a custom layout for data entry. On web, custom forms are used when "
+"available. On Android, section forms are used instead, or the basic form if "
+"no section form exists."
+msgstr ""
+"Design a custom layout for data entry. On web, custom forms are used when "
+"available. On Android, section forms are used instead, or the basic form if "
+"no section form exists."
 
 msgid "Failed to load {{label}}"
 msgstr "Failed to load {{label}}"
@@ -1405,9 +1393,6 @@ msgstr "Analytics table hook"
 msgid "Analytics table hooks"
 msgstr "Analytics table hooks"
 
-msgid "Icon"
-msgstr "Icon"
-
 msgid "Icons"
 msgstr "Icons"
 
@@ -1603,9 +1588,6 @@ msgstr "GeoJSON"
 msgid "Disaggregation"
 msgstr "Disaggregation"
 
-msgid "Point"
-msgstr "Point"
-
 msgid "MultiPoint"
 msgstr "MultiPoint"
 
@@ -1630,35 +1612,26 @@ msgstr "Section"
 msgid "Section Multi-org"
 msgstr "Section Multi-org"
 
-msgid "Bi-monthly"
-msgstr "Bi-monthly"
+msgid "BiMonthly"
+msgstr "BiMonthly"
 
-msgid "Bi-weekly"
-msgstr "Bi-weekly"
+msgid "BiWeekly"
+msgstr "BiWeekly"
 
 msgid "Daily"
 msgstr "Daily"
 
-msgid "Financial Year February"
-msgstr "Financial Year February"
+msgid "FinancialApril"
+msgstr "FinancialApril"
 
-msgid "Financial Year April"
-msgstr "Financial Year April"
+msgid "FinancialJuly"
+msgstr "FinancialJuly"
 
-msgid "Financial Year July"
-msgstr "Financial Year July"
+msgid "FinancialNov"
+msgstr "FinancialNov"
 
-msgid "Financial Year August"
-msgstr "Financial Year August"
-
-msgid "Financial Year September"
-msgstr "Financial Year September"
-
-msgid "Financial Year November"
-msgstr "Financial Year November"
-
-msgid "Financial Year Octobter"
-msgstr "Financial Year Octobter"
+msgid "FinancialOct"
+msgstr "FinancialOct"
 
 msgid "Monthly"
 msgstr "Monthly"
@@ -1666,38 +1639,35 @@ msgstr "Monthly"
 msgid "Quarterly"
 msgstr "Quarterly"
 
-msgid "Quarterly November"
-msgstr "Quarterly November"
+msgid "QuarterlyNov"
+msgstr "QuarterlyNov"
 
-msgid "Six-Monthly April"
-msgstr "Six-Monthly April"
+msgid "SixMonthlyApril"
+msgstr "SixMonthlyApril"
 
-msgid "Six-Monthly November"
-msgstr "Six-Monthly November"
+msgid "SixMonthlyNov"
+msgstr "SixMonthlyNov"
 
-msgid "Six-Monthly"
-msgstr "Six-Monthly"
+msgid "SixMonthly"
+msgstr "SixMonthly"
 
-msgid "Two-Yearly"
-msgstr "Two-Yearly"
+msgid "TwoYearly"
+msgstr "TwoYearly"
 
 msgid "Weekly"
 msgstr "Weekly"
 
-msgid "Weekly Friday"
-msgstr "Weekly Friday"
+msgid "WeeklySaturday"
+msgstr "WeeklySaturday"
 
-msgid "Weekly Saturday"
-msgstr "Weekly Saturday"
+msgid "WeeklySunday"
+msgstr "WeeklySunday"
 
-msgid "Weekly Sunday"
-msgstr "Weekly Sunday"
+msgid "WeeklyThursday"
+msgstr "WeeklyThursday"
 
-msgid "Weekly Thursday"
-msgstr "Weekly Thursday"
-
-msgid "Weekly Wednesday"
-msgstr "Weekly Wednesday"
+msgid "WeeklyWednesday"
+msgstr "WeeklyWednesday"
 
 msgid "Yearly"
 msgstr "Yearly"
@@ -1954,14 +1924,14 @@ msgstr "Use code for option set"
 msgid "Owner"
 msgstr "Owner"
 
-msgid "Value type"
-msgstr "Value type"
-
 msgid "Zero is significant"
 msgstr "Zero is significant"
 
 msgid "Enable tracked entity instance audit log"
 msgstr "Enable tracked entity instance audit log"
+
+msgid "Feature type"
+msgstr "Feature type"
 
 msgid "Program type"
 msgstr "Program type"
@@ -2302,54 +2272,48 @@ msgstr "User"
 msgid "Visualization"
 msgstr "Visualization"
 
-msgid "Objects to which this attribute can be applied"
-msgstr "Objects to which this attribute can be applied"
+msgid "Applies to"
+msgstr "Applies to"
+
+msgid "Choose objects"
+msgstr "Choose objects"
 
 msgid ""
-"Choose from a predefined list of option sets. The option set will "
-"automatically define the value type."
+"Limit input to a set of predefined options. An option set will "
+"automatically set the value type."
 msgstr ""
-"Choose from a predefined list of option sets. The option set will "
-"automatically define the value type."
+"Limit input to a set of predefined options. An option set will "
+"automatically set the value type."
 
 msgid "Remove option set"
 msgstr "Remove option set"
 
-msgid "Enter a number to decide where this attribute appears in list and forms"
-msgstr "Enter a number to decide where this attribute appears in list and forms"
+msgid "Display order"
+msgstr "Display order"
+
+msgid "Enter a number to set this attribute’s position in lists and forms."
+msgstr "Enter a number to set this attribute’s position in lists and forms."
 
 msgid "Set up the basic information for this attribute."
 msgstr "Set up the basic information for this attribute."
 
-msgid "Explain the purpose of this attribute."
-msgstr "Explain the purpose of this attribute."
-
 msgid "Configure how this attribute wil be collected, analyzed, and stored."
 msgstr "Configure how this attribute wil be collected, analyzed, and stored."
 
-msgid "Make this a mandatory attribute"
-msgstr "Make this a mandatory attribute"
-
-msgid "No duplicate values allowed"
-msgstr "No duplicate values allowed"
+msgid "Unique values only"
+msgstr "Unique values only"
 
 msgid "Set up the basic information for this category."
 msgstr "Set up the basic information for this category."
 
-msgid "Explain the purpose of this category."
-msgstr "Explain the purpose of this category."
-
-msgid "Data configuration"
-msgstr "Data configuration"
+msgid "Category usage"
+msgstr "Category usage"
 
 msgid "Choose how this category will be used to capture and analyze data."
 msgstr "Choose how this category will be used to capture and analyze data."
 
-msgid "Use as data dimension"
-msgstr "Use as data dimension"
-
-msgid "Make available to analytics apps as a selectable dimension."
-msgstr "Make available to analytics apps as a selectable dimension."
+msgid "Show as data dimension in analytics apps"
+msgstr "Show as data dimension in analytics apps"
 
 msgid "Choose the options to include in this category."
 msgstr "Choose the options to include in this category."
@@ -2401,6 +2365,9 @@ msgstr ""
 msgid "Set up the basic information for this category combination."
 msgstr "Set up the basic information for this category combination."
 
+msgid "Category combination usage"
+msgstr "Category combination usage"
+
 msgid ""
 "Choose how this category combination will be used to capture and analyze "
 "data."
@@ -2430,8 +2397,8 @@ msgstr "Set up the basic information for this category option combination."
 msgid "Set up the basic information for this category option group set."
 msgstr "Set up the basic information for this category option group set."
 
-msgid "Explain the purpose of this category option group set."
-msgstr "Explain the purpose of this category option group set."
+msgid "Category option group set usage"
+msgstr "Category option group set usage"
 
 msgid ""
 "Choose how this category option group set will be used to capture and "
@@ -2462,11 +2429,15 @@ msgstr "Filter selected category option groups"
 msgid "Set up the basic information for this category option group."
 msgstr "Set up the basic information for this category option group."
 
-msgid "Explain the purpose of this category option group."
-msgstr "Explain the purpose of this category option group."
+msgid "Category option group usage"
+msgstr "Category option group usage"
 
-msgid "Choose how this category option  will be used to capture and analyze data."
-msgstr "Choose how this category option  will be used to capture and analyze data."
+msgid ""
+"Choose how this category option group will be used to capture and analyze "
+"data."
+msgstr ""
+"Choose how this category option group will be used to capture and analyze "
+"data."
 
 msgid "Choose the options to include in this category option group."
 msgstr "Choose the options to include in this category option group."
@@ -2483,8 +2454,8 @@ msgstr "All selected category options were merged successfully."
 msgid "Set up the basic information for this category option."
 msgstr "Set up the basic information for this category option."
 
-msgid "An alternative name used in section or automatic data entry forms."
-msgstr "An alternative name used in section or automatic data entry forms."
+msgid "An alternative name used in data entry forms."
+msgstr "An alternative name used in data entry forms."
 
 msgid "Availability configuration"
 msgstr "Availability configuration"
@@ -2552,14 +2523,8 @@ msgstr ""
 msgid "Set up the basic information for this constant."
 msgstr "Set up the basic information for this constant."
 
-msgid "Explain the purpose of this constant."
-msgstr "Explain the purpose of this constant."
-
-msgid "Value (required)"
-msgstr "Value (required)"
-
-msgid "Enter the numeric value to be used as the constant."
-msgstr "Enter the numeric value to be used as the constant."
+msgid "The numeric value to be used as the constant."
+msgstr "The numeric value to be used as the constant."
 
 msgid "Please enter a number"
 msgstr "Please enter a number"
@@ -2573,14 +2538,14 @@ msgstr "Selected data element groups"
 msgid "Filter available data element groups"
 msgstr "Filter available data element groups"
 
-msgid "Filter selected element groups"
-msgstr "Filter selected element groups"
+msgid "Filter selected data element groups"
+msgstr "Filter selected data element groups"
 
 msgid "Set up the information for this data element group set."
 msgstr "Set up the information for this data element group set."
 
-msgid "Explain the purpose of this data element group set."
-msgstr "Explain the purpose of this data element group set."
+msgid "Choose the data element groups to include in this data element group set."
+msgstr "Choose the data element groups to include in this data element group set."
 
 msgid "Available data elements"
 msgstr "Available data elements"
@@ -2597,8 +2562,8 @@ msgstr "Filter selected elements"
 msgid "Set up the information for this data element group."
 msgstr "Set up the information for this data element group."
 
-msgid "Explain the purpose of this data element group."
-msgstr "Explain the purpose of this data element group."
+msgid "Choose the data elements to include in this data element group."
+msgstr "Choose the data elements to include in this data element group."
 
 msgid "Aggregation level(s)"
 msgstr "Aggregation level(s)"
@@ -2609,17 +2574,15 @@ msgstr "Choose how this data element is disaggregated."
 msgid "Domain"
 msgstr "Domain"
 
-msgid "A data element can either be aggregated or tracked data."
-msgstr "A data element can either be aggregated or tracked data."
-
 msgid "Field mask"
 msgstr "Field mask"
 
-msgid "Use a pattern to limit what information can be entered."
-msgstr "Use a pattern to limit what information can be entered."
-
-msgid "e.g. 999-000-0000"
-msgstr "e.g. 999-000-0000"
+msgid ""
+"Use a pattern to limit what information can be entered. See documentation "
+"for details."
+msgstr ""
+"Use a pattern to limit what information can be entered. See documentation "
+"for details."
 
 msgid "Available legends"
 msgstr "Available legends"
@@ -2639,36 +2602,40 @@ msgstr "Option set comment"
 msgid "Choose a set of predefined comments for data entry."
 msgstr "Choose a set of predefined comments for data entry."
 
-msgid "Choose a set of predefined options for data entry."
-msgstr "Choose a set of predefined options for data entry."
+msgid ""
+"Limit data entry to a predefined list of options. Overrides value type "
+"selection to match the option set."
+msgstr ""
+"Limit data entry to a predefined list of options. Overrides value type "
+"selection to match the option set."
 
-msgid "Option set update will change value type"
-msgstr "Option set update will change value type"
+msgid "Change option set and value type?"
+msgstr "Change option set and value type?"
 
 msgid ""
-"Updating the option set will change the value type which may cause problems "
-"when generating analytics tables if there is existing data for this data "
-"element."
+"Current option set {{currentOptionSet}} uses value type "
+"{{currentValueType}}, but {{newOptionSet}} uses value type "
+"{{newValueType}}. If this data element already has data, making this change "
+"can make existing values incompatible and affect analytics tables. Continue "
+"anyway?"
 msgstr ""
-"Updating the option set will change the value type which may cause problems "
-"when generating analytics tables if there is existing data for this data "
-"element."
+"Current option set {{currentOptionSet}} uses value type "
+"{{currentValueType}}, but {{newOptionSet}} uses value type "
+"{{newValueType}}. If this data element already has data, making this change "
+"can make existing values incompatible and affect analytics tables. Continue "
+"anyway?"
 
-msgid ""
-"Are you sure you want to change the option set to {{optionSet}} which will "
-"change the value type from {{currentValueType}} to {{newValueType}}?"
-msgstr ""
-"Are you sure you want to change the option set to {{optionSet}} which will "
-"change the value type from {{currentValueType}} to {{newValueType}}?"
+msgid "current option set"
+msgstr "current option set"
 
-msgid "this option set"
-msgstr "this option set"
+msgid "new option set"
+msgstr "new option set"
 
-msgid "Url"
-msgstr "Url"
+msgid "Change option set"
+msgstr "Change option set"
 
-msgid "A web link that provides extra information."
-msgstr "A web link that provides extra information."
+msgid "Shown with description when collecting data."
+msgstr "Shown with description when collecting data."
 
 msgid "Store zero data values"
 msgstr "Store zero data values"
@@ -2676,8 +2643,14 @@ msgstr "Store zero data values"
 msgid "Set up the information for this data element."
 msgstr "Set up the information for this data element."
 
-msgid "Explain the purpose of this data element."
-msgstr "Explain the purpose of this data element."
+msgid "Used to provide more information when collecting data."
+msgstr "Used to provide more information when collecting data."
+
+msgid "Data collection"
+msgstr "Data collection"
+
+msgid "Configure how this data element is collected."
+msgstr "Configure how this data element is collected."
 
 msgid "Disaggregation and Option sets"
 msgstr "Disaggregation and Option sets"
@@ -2748,14 +2721,14 @@ msgstr "Complete registration time"
 msgid "Complete registration att opt combo"
 msgstr "Complete registration att opt combo"
 
-msgid "Set up the basic information for the notification template."
-msgstr "Set up the basic information for the notification template."
+msgid "Set up the basic information for this notification."
+msgstr "Set up the basic information for this notification."
 
 msgid "Message content"
 msgstr "Message content"
 
-msgid "Configure the templates for the notification content and subject."
-msgstr "Configure the templates for the notification content and subject."
+msgid "Configure templates for the notification message."
+msgstr "Configure templates for the notification message."
 
 msgid "Notification timing"
 msgstr "Notification timing"
@@ -2769,8 +2742,11 @@ msgstr "Recipient"
 msgid "Choose who receives the notification."
 msgstr "Choose who receives the notification."
 
-msgid "SMS"
-msgstr "SMS"
+msgid "Send as SMS"
+msgstr "Send as SMS"
+
+msgid "Send as Email"
+msgstr "Send as Email"
 
 msgid "When to send notification"
 msgstr "When to send notification"
@@ -2799,11 +2775,17 @@ msgstr "Recipient type"
 msgid "User Group Recipient"
 msgstr "User Group Recipient"
 
+msgid "Used as the template for the subject field."
+msgstr "Used as the template for the subject field."
+
 msgid "Subject"
 msgstr "Subject"
 
 msgid "Used as template for the message field."
 msgstr "Used as template for the message field."
+
+msgid "{{fieldLabel}} (required)"
+msgstr "{{fieldLabel}} (required)"
 
 msgid "Message"
 msgstr "Message"
@@ -2835,38 +2817,40 @@ msgstr "Send notification to completing user"
 msgid "Advanced options"
 msgstr "Advanced options"
 
-msgid "These options are used for advanced data set configurations."
-msgstr "These options are used for advanced data set configurations."
+msgid "Used for advanced data set configurations."
+msgstr "Used for advanced data set configurations."
 
-msgid "Don't save this data to offline storage (skip offline)"
-msgstr "Don't save this data to offline storage (skip offline)"
+msgid "Do not save this data set to offline storage"
+msgstr "Do not save this data set to offline storage"
 
-msgid ""
-"Include data element descriptions in offline storage (data element "
-"decoration)"
-msgstr ""
-"Include data element descriptions in offline storage (data element "
-"decoration)"
+msgid "Include data element descriptions in offline storage"
+msgstr "Include data element descriptions in offline storage"
 
-msgid "Use this data set with Java mobile client"
-msgstr "Use this data set with Java mobile client"
+msgid "Use this data set with the Java mobile client"
+msgstr "Use this data set with the Java mobile client"
 
-msgid "Notifications"
-msgstr "Notifications"
+msgid "Completion notifcations"
+msgstr "Completion notifcations"
 
 msgid ""
-"Send notifications when data sets are marked complete, using the DHIS2 "
+"Send notifications when this data set is marked complete using the DHIS2 "
 "Messages app."
 msgstr ""
-"Send notifications when data sets are marked complete, using the DHIS2 "
+"Send notifications when this data set is marked complete using the DHIS2 "
 "Messages app."
 
 msgid ""
-"Select legends to visually categorize values for this data set in Data "
-"entry and Analytics apps."
+"Choose legends to visually categorize values in Data entry and Analytics "
+"apps."
 msgstr ""
-"Select legends to visually categorize values for this data set in Data "
-"entry and Analytics apps."
+"Choose legends to visually categorize values in Data entry and Analytics "
+"apps."
+
+msgid "Search available legends"
+msgstr "Search available legends"
+
+msgid "Search selected legends"
+msgstr "Search selected legends"
 
 msgid "Compulsory data elements"
 msgstr "Compulsory data elements"
@@ -2926,8 +2910,8 @@ msgstr "Close"
 msgid "Should not exceed {{maxLength}} characters"
 msgstr "Should not exceed {{maxLength}} characters"
 
-msgid "Display title / subtitle"
-msgstr "Display title / subtitle"
+msgid "Show title / subtitle"
+msgstr "Show title / subtitle"
 
 msgid "Title"
 msgstr "Title"
@@ -2947,14 +2931,14 @@ msgstr "Center"
 msgid "Line end"
 msgstr "Line end"
 
-msgid "Section display mode"
-msgstr "Section display mode"
+msgid "Section layout"
+msgstr "Section layout"
 
-msgid "Single page: all sections shown consecutively in one form"
-msgstr "Single page: all sections shown consecutively in one form"
+msgid "Single page: Show all sections on one page"
+msgstr "Single page: Show all sections on one page"
 
-msgid "Tabs: show a tab for each section"
-msgstr "Tabs: show a tab for each section"
+msgid "Tabs: Show one tab for each section"
+msgstr "Tabs: Show one tab for each section"
 
 msgid "Horizontal tabs"
 msgstr "Horizontal tabs"
@@ -2962,14 +2946,14 @@ msgstr "Horizontal tabs"
 msgid "Vertical tabs"
 msgstr "Vertical tabs"
 
-msgid "Render multi-organisation unit forms vertically"
-msgstr "Render multi-organisation unit forms vertically"
+msgid "Use a vertical layout for multi-organisation unit forms"
+msgstr "Use a vertical layout for multi-organisation unit forms"
 
-msgid "Only applied to section forms using multiple organisation units"
-msgstr "Only applied to section forms using multiple organisation units"
+msgid "Only applies to section forms with multiple organisation units"
+msgstr "Only applies to section forms with multiple organisation units"
 
-msgid "Configure which organisation units can collect data for this data set."
-msgstr "Configure which organisation units can collect data for this data set."
+msgid "Choose which organisation units can collect data."
+msgstr "Choose which organisation units can collect data."
 
 msgid "Change period type"
 msgstr "Change period type"
@@ -2981,20 +2965,33 @@ msgstr ""
 "Changing the period type will make previously entered data for this data "
 "set not appear in the data entry app. This can lead to duplicate data entry."
 
+msgid ""
+"Are you sure you want to change the {{objectType}} to "
+"{{newObjectTypeValue}}?"
+msgstr ""
+"Are you sure you want to change the {{objectType}} to "
+"{{newObjectTypeValue}}?"
+
 msgid "period type"
 msgstr "period type"
 
-msgid "Configure data entry periods"
-msgstr "Configure data entry periods"
+msgid "Data entry periods"
+msgstr "Data entry periods"
 
-msgid "Choose for what time periods data can be entered for this data set"
-msgstr "Choose for what time periods data can be entered for this data set"
+msgid "Choose available time periods for data entry."
+msgstr "Choose available time periods for data entry."
 
-msgid "Allow data entry for future periods"
-msgstr "Allow data entry for future periods"
+msgid "Allow data entry in future periods"
+msgstr "Allow data entry in future periods"
+
+msgid "Number of future periods"
+msgstr "Number of future periods"
 
 msgid "Close data entry a certain number of days after period end (expiry days)"
 msgstr "Close data entry a certain number of days after period end (expiry days)"
+
+msgid "Number of days"
+msgstr "Number of days"
 
 msgid ""
 "Close data entry after \"{{categoryComboName}}\" category option end date "
@@ -3016,11 +3013,11 @@ msgid "Number of days after period to qualify for on time submission"
 msgstr "Number of days after period to qualify for on time submission"
 
 msgid ""
-"\"On time\" submission rate can be using reporting dates in the Report app. "
-"Enter 0 to ignore timely submission."
+"Submissions made within this many days after the period end qualify as \"on "
+"time\" in reporting rates. Enter 0 to ignore."
 msgstr ""
-"\"On time\" submission rate can be using reporting dates in the Report app. "
-"Enter 0 to ignore timely submission."
+"Submissions made within this many days after the period end qualify as \"on "
+"time\" in reporting rates. Enter 0 to ignore."
 
 msgid "Value should be bigger than 0"
 msgstr "Value should be bigger than 0"
@@ -3028,54 +3025,40 @@ msgstr "Value should be bigger than 0"
 msgid "Validation and limitations"
 msgstr "Validation and limitations"
 
-msgid "Configure how data can and must be entered for this data"
-msgstr "Configure how data can and must be entered for this data"
+msgid "Configure data entry rules and requirements."
+msgstr "Configure data entry rules and requirements."
 
-msgid "Completing a data set requires passing validation"
-msgstr "Completing a data set requires passing validation"
+msgid "Completing requires passing validation"
+msgstr "Completing requires passing validation"
 
-msgid "Completing a data set requires all empty values to have a comment"
-msgstr "Completing a data set requires all empty values to have a comment"
+msgid "Completing requires all empty values to have a comment"
+msgstr "Completing requires all empty values to have a comment"
 
-msgid "Completing a data set requires compulsory field to have a value"
-msgstr "Completing a data set requires compulsory field to have a value"
-
-msgid ""
-"Data elements with category combinations require all fields to have a value "
-"if one has a value"
-msgstr ""
-"Data elements with category combinations require all fields to have a value "
-"if one has a value"
-
-msgid "Compulsory data entry"
-msgstr "Compulsory data entry"
+msgid "Completing requires compulsory fields to have a value"
+msgstr "Completing requires compulsory fields to have a value"
 
 msgid ""
-"Optionally configure which data elements must have a value to complete this "
-"data set."
+"If one category combination field has a value, require all for that "
+"category combination to have a value"
 msgstr ""
-"Optionally configure which data elements must have a value to complete this "
-"data set."
+"If one category combination field has a value, require all for that "
+"category combination to have a value"
 
 msgid "Data entry form"
 msgstr "Data entry form"
 
-msgid ""
-"Choose and configure how the data entry form looks and works for this data "
-"set."
-msgstr ""
-"Choose and configure how the data entry form looks and works for this data "
-"set."
+msgid "Choose and configure how the data entry form looks and works."
+msgstr "Choose and configure how the data entry form looks and works."
 
 msgid ""
-"This form displays an auto-generated list of the data elements defined for "
-"this data set."
+"Displays a form with the data elements in the order they were added to this "
+"data set."
 msgstr ""
-"This form displays an auto-generated list of the data elements defined for "
-"this data set."
+"Displays a form with the data elements in the order they were added to this "
+"data set."
 
-msgid "Edit the data elements"
-msgstr "Edit the data elements"
+msgid "Manage data elements"
+msgstr "Manage data elements"
 
 msgid "Display options"
 msgstr "Display options"
@@ -3089,6 +3072,13 @@ msgstr "<No filter>"
 msgid "Manage enabled/disabled fields"
 msgstr "Manage enabled/disabled fields"
 
+msgid ""
+"No data elements available. Add data elements to this data set to use them "
+"in sections."
+msgstr ""
+"No data elements available. Add data elements to this data set to use them "
+"in sections."
+
 msgid "Data set section form saved"
 msgstr "Data set section form saved"
 
@@ -3098,12 +3088,8 @@ msgstr "Section setup"
 msgid "Setup the basic information for this section."
 msgstr "Setup the basic information for this section."
 
-msgid ""
-"Explain the purpose of this section, which will be shown in the data entry "
-"form."
-msgstr ""
-"Explain the purpose of this section, which will be shown in the data entry "
-"form."
+msgid "Shown in the data entry form with the section title."
+msgstr "Shown in the data entry form with the section title."
 
 msgid "Section data elements"
 msgstr "Section data elements"
@@ -3116,6 +3102,13 @@ msgstr "Section indicators"
 
 msgid "Choose what indicators are shown in this section."
 msgstr "Choose what indicators are shown in this section."
+
+msgid ""
+"No indicators available. Add indicators to this data set to use them in "
+"sections."
+msgstr ""
+"No indicators available. Add indicators to this data set to use them in "
+"sections."
 
 msgid "Customize how this section looks in the form."
 msgstr "Customize how this section looks in the form."
@@ -3222,6 +3215,9 @@ msgstr "Data Elements"
 msgid "Periods"
 msgstr "Periods"
 
+msgid "Allow data entry for future periods"
+msgstr "Allow data entry for future periods"
+
 msgid "Close data entry a certain number of days after period end"
 msgstr "Close data entry a certain number of days after period end"
 
@@ -3243,9 +3239,6 @@ msgstr "Advanced"
 msgid "Set up the basic information for this indicator group set."
 msgstr "Set up the basic information for this indicator group set."
 
-msgid "Explain the purpose of this indicator group set."
-msgstr "Explain the purpose of this indicator group set."
-
 msgid "Choose the indicators to include in this indicator group."
 msgstr "Choose the indicators to include in this indicator group."
 
@@ -3264,8 +3257,11 @@ msgstr "Filter selected indicator groups"
 msgid "Set up the basic information for this indicator group."
 msgstr "Set up the basic information for this indicator group."
 
-msgid "Explain the purpose of this indicator group."
-msgstr "Explain the purpose of this indicator group."
+msgid "Filter available indicators"
+msgstr "Filter available indicators"
+
+msgid "Filter selected indicators"
+msgstr "Filter selected indicators"
 
 msgid "Configure indicator type merge"
 msgstr "Configure indicator type merge"
@@ -3342,18 +3338,11 @@ msgstr "All selected indicators were merged successfully."
 msgid "Set up the basic information for this indicator."
 msgstr "Set up the basic information for this indicator."
 
-msgid "Explain the purpose of this indicator."
-msgstr "Explain the purpose of this indicator."
-
 msgid "Calculation details"
 msgstr "Calculation details"
 
-msgid ""
-"Define how the indicator is calculated and how it's result will be "
-"displayed."
-msgstr ""
-"Define how the indicator is calculated and how it's result will be "
-"displayed."
+msgid "Define how the indicator is calculated and how the result is displayed."
+msgstr "Define how the indicator is calculated and how the result is displayed."
 
 msgid "Numerator"
 msgstr "Numerator"
@@ -3361,55 +3350,37 @@ msgstr "Numerator"
 msgid "Denominator"
 msgstr "Denominator"
 
-msgid ""
-"Select how the indicator result should be expressed (per cent, per "
-"thousand, etc.)"
-msgstr ""
-"Select how the indicator result should be expressed (per cent, per "
-"thousand, etc.)"
+msgid "Choose how the indicator result should be shown."
+msgstr "Choose how the indicator result should be shown."
 
 msgid "Use annualized calculation"
 msgstr "Use annualized calculation"
 
-msgid "Select how many decimal places to display in outputs for this indicator"
-msgstr "Select how many decimal places to display in outputs for this indicator"
-
-msgid "Number of decimal places to show"
-msgstr "Number of decimal places to show"
-
-msgid "Select number of decimals"
-msgstr "Select number of decimals"
+msgid "Decimal places in output"
+msgstr "Decimal places in output"
 
 msgid ""
-"Select legends to visually categorize values for this indicator in data "
-"entry and analytics apps."
+"Choose legends to visually categorize values in data entry and analytics "
+"apps."
 msgstr ""
-"Select legends to visually categorize values for this indicator in data "
-"entry and analytics apps."
+"Choose legends to visually categorize values in data entry and analytics "
+"apps."
 
-msgid "Mapping Settings"
-msgstr "Mapping Settings"
-
-msgid ""
-"Configure how this indicator links to specific category and attribute "
-"combinations for data export."
-msgstr ""
-"Configure how this indicator links to specific category and attribute "
-"combinations for data export."
+msgid "Aggregate data export mapping"
+msgstr "Aggregate data export mapping"
 
 msgid ""
-"Map this indicator to a specific category option combinations when "
+"Map this indicator to category and attribute option combinations used when "
 "exporting aggregate data."
 msgstr ""
-"Map this indicator to a specific category option combinations when "
+"Map this indicator to category and attribute option combinations used when "
 "exporting aggregate data."
 
-msgid ""
-"Map this indicator to a specific attribute option combinations when "
-"exporting aggregate data."
-msgstr ""
-"Map this indicator to a specific attribute option combinations when "
-"exporting aggregate data."
+msgid "Enter a category option combination ID."
+msgstr "Enter a category option combination ID."
+
+msgid "Enter an attribute option combination ID."
+msgstr "Enter an attribute option combination ID."
 
 msgid "Edit {{objectName}} expression"
 msgstr "Edit {{objectName}} expression"
@@ -3510,9 +3481,6 @@ msgstr "Locale will not be editable after it has been created."
 msgid "Set up the basic information for this option group set."
 msgstr "Set up the basic information for this option group set."
 
-msgid "Explain the purpose of this option group set."
-msgstr "Explain the purpose of this option group set."
-
 msgid "Choose the option groups to include in this option group set."
 msgstr "Choose the option groups to include in this option group set."
 
@@ -3528,20 +3496,17 @@ msgstr "Filter available option groups"
 msgid "Filter selected option groups"
 msgstr "Filter selected option groups"
 
-msgid "You must select an option set before you can select options."
-msgstr "You must select an option set before you can select options."
+msgid "Choose an option set to start adding option groups."
+msgstr "Choose an option set to start adding option groups."
 
 msgid "Set up the basic information for this option group."
 msgstr "Set up the basic information for this option group."
 
-msgid "Explain the purpose of this option group."
-msgstr "Explain the purpose of this option group."
-
 msgid "Options"
 msgstr "Options"
 
-msgid "Select the options that belong to this group."
-msgstr "Select the options that belong to this group."
+msgid "Choose the options to include in this option group."
+msgstr "Choose the options to include in this option group."
 
 msgid "Available options"
 msgstr "Available options"
@@ -3554,6 +3519,9 @@ msgstr "Filter available options"
 
 msgid "Filter selected options"
 msgstr "Filter selected options"
+
+msgid "Choose an option set to start adding options."
+msgstr "Choose an option set to start adding options."
 
 msgid "Basic Information"
 msgstr "Basic Information"
@@ -3570,9 +3538,6 @@ msgstr "Option Set"
 msgid "Set up the information for this option."
 msgstr "Set up the information for this option."
 
-msgid "Explain the purpose of this option."
-msgstr "Explain the purpose of this option."
-
 msgid "Save option"
 msgstr "Save option"
 
@@ -3585,8 +3550,8 @@ msgstr "Option created"
 msgid "Option updated"
 msgstr "Option updated"
 
-msgid "Option set must be saved before options can be added"
-msgstr "Option set must be saved before options can be added"
+msgid "Save this option set to add options."
+msgstr "Save this option set to add options."
 
 msgid "New option"
 msgstr "New option"
@@ -3594,8 +3559,8 @@ msgstr "New option"
 msgid "Edit option"
 msgstr "Edit option"
 
-msgid "Define options for this option set"
-msgstr "Define options for this option set"
+msgid "Create and manage options in this option set."
+msgstr "Create and manage options in this option set."
 
 msgid "Search by name or code"
 msgstr "Search by name or code"
@@ -3641,11 +3606,18 @@ msgstr "No options have been added yet"
 msgid "There was an error deleting options: {{optionIds}}"
 msgstr "There was an error deleting options: {{optionIds}}"
 
-msgid "Set up the basic information for this organisational unit group set."
-msgstr "Set up the basic information for this organisational unit group set."
+msgid "Set up the basic information for this organisation unit group set."
+msgstr "Set up the basic information for this organisation unit group set."
 
-msgid "Include subhierarchy in analytics"
-msgstr "Include subhierarchy in analytics"
+msgid "Inherit parent organisation unit groups"
+msgstr "Inherit parent organisation unit groups"
+
+msgid ""
+"Use the closest parent’s group when an organisation unit has no group "
+"assigned."
+msgstr ""
+"Use the closest parent’s group when an organisation unit has no group "
+"assigned."
 
 msgid "Choose the groups to include in this organisation unit group set."
 msgstr "Choose the groups to include in this organisation unit group set."
@@ -3662,8 +3634,11 @@ msgstr "Filter available organisation unit groups"
 msgid "Filter selected organisation unit groups"
 msgstr "Filter selected organisation unit groups"
 
-msgid "Set up the basic information for this organisational unit group."
-msgstr "Set up the basic information for this organisational unit group."
+msgid "Set up the basic information for this organisation unit group."
+msgstr "Set up the basic information for this organisation unit group."
+
+msgid "Choose the organisation units to include in this group."
+msgstr "Choose the organisation units to include in this group."
 
 msgid "Error saving organisation unit levels"
 msgstr "Error saving organisation unit levels"
@@ -3677,24 +3652,20 @@ msgstr "{{type}} coordinates are not editable"
 msgid "Upload an image"
 msgstr "Upload an image"
 
-msgid "Max size 10MB. Supported file size are .jpg, .png, and .gif."
-msgstr "Max size 10MB. Supported file size are .jpg, .png, and .gif."
+msgid "JPG, PNG or GIF · max 10 MB"
+msgstr "JPG, PNG or GIF · max 10 MB"
 
-msgid "Preview of current icon"
-msgstr "Preview of current icon"
+msgid "Preview of current image"
+msgstr "Preview of current image"
 
 msgid "Placement in hierarchy"
 msgstr "Placement in hierarchy"
 
-msgid ""
-"Choose where this new organisation unit should be placed in the existing "
-"hierarchy"
-msgstr ""
-"Choose where this new organisation unit should be placed in the existing "
-"hierarchy"
+msgid "Choose where this organisation unit is positioned in the hierarchy."
+msgstr "Choose where this organisation unit is positioned in the hierarchy."
 
-msgid "Set up the basic information for this organisation unit"
-msgstr "Set up the basic information for this organisation unit"
+msgid "Set up the basic information for this organisation unit."
+msgstr "Set up the basic information for this organisation unit."
 
 msgid "Closed date"
 msgstr "Closed date"
@@ -4189,14 +4160,14 @@ msgstr "End date"
 msgid "Run now"
 msgstr "Run now"
 
-msgid "Output data element (required)"
-msgstr "Output data element (required)"
+msgid "Output data element"
+msgstr "Output data element"
 
-msgid "Predict according to input category option combo"
-msgstr "Predict according to input category option combo"
+msgid "Predict using input category option combination"
+msgstr "Predict using input category option combination"
 
-msgid "Output category option combo"
-msgstr "Output category option combo"
+msgid "Output category option combination"
+msgstr "Output category option combination"
 
 msgid "Set up the basic information for this predictor."
 msgstr "Set up the basic information for this predictor."
@@ -4204,8 +4175,8 @@ msgstr "Set up the basic information for this predictor."
 msgid "Predictor logic"
 msgstr "Predictor logic"
 
-msgid "Define how predictions will be calculated"
-msgstr "Define how predictions will be calculated"
+msgid "Configure how this predictor is calculated."
+msgstr "Configure how this predictor is calculated."
 
 msgid "Organisation units providing data"
 msgstr "Organisation units providing data"
@@ -4222,11 +4193,8 @@ msgstr "generator"
 msgid "sample skip test"
 msgstr "sample skip test"
 
-msgid "Output definition"
-msgstr "Output definition"
-
-msgid "Define where predictions will be output"
-msgstr "Define where predictions will be output"
+msgid "Configure where and how this predictor outputs data."
+msgstr "Configure where and how this predictor outputs data."
 
 msgid "Predictor Form"
 msgstr "Predictor Form"
@@ -4242,9 +4210,6 @@ msgstr "Generator description"
 
 msgid "Generator missing value strategy"
 msgstr "Generator missing value strategy"
-
-msgid "Output data element"
-msgstr "Output data element"
 
 msgid "Output category combo"
 msgstr "Output category combo"
@@ -4470,11 +4435,11 @@ msgstr "Enrollment organisation unit default"
 msgid "Enrollment organisation unit"
 msgstr "Enrollment organisation unit"
 
-msgid "Owning organisation unit - start of reporting period"
-msgstr "Owning organisation unit - start of reporting period"
+msgid "Owner at start organisation unit"
+msgstr "Owner at start organisation unit"
 
-msgid "Owning organisation unit - end of reporting period"
-msgstr "Owning organisation unit - end of reporting period"
+msgid "Owner at end organisation unit"
+msgstr "Owner at end organisation unit"
 
 msgid "Registration organisation unit"
 msgstr "Registration organisation unit"
@@ -4485,17 +4450,20 @@ msgstr "Organisation unit field"
 msgid "Set up the basic information for this program indicator."
 msgstr "Set up the basic information for this program indicator."
 
-msgid "Explain the purpose of this program indicator."
-msgstr "Explain the purpose of this program indicator."
-
 msgid "Configuration"
 msgstr "Configuration"
 
-msgid "Choose which program and which data types this program indicator applies to."
-msgstr "Choose which program and which data types this program indicator applies to."
+msgid "Choose the program and data types this program indicator applies to."
+msgstr "Choose the program and data types this program indicator applies to."
 
-msgid "Program (required)"
-msgstr "Program (required)"
+msgid "Data source"
+msgstr "Data source"
+
+msgid "Uses data from all events within a program stage"
+msgstr "Uses data from all events within a program stage"
+
+msgid "Uses data combined from the latest events across the enrollment"
+msgstr "Uses data combined from the latest events across the enrollment"
 
 msgid "Configure the program indicator expression."
 msgstr "Configure the program indicator expression."
@@ -4507,29 +4475,35 @@ msgid "Set up expression"
 msgstr "Set up expression"
 
 msgid ""
-"Configure the program indicator filter that controls what data will be "
-"evaluated bt the main expression."
+"Configure a filter to control which data is evaulated by the main "
+"expression."
 msgstr ""
-"Configure the program indicator filter that controls what data will be "
-"evaluated bt the main expression."
+"Configure a filter to control which data is evaulated by the main "
+"expression."
+
+msgid "Clear filter"
+msgstr "Clear filter"
 
 msgid "Period boundaries"
 msgstr "Period boundaries"
 
-msgid "Set up time constraints, which determine what data will be evaluated."
-msgstr "Set up time constraints, which determine what data will be evaluated."
+msgid "Add time constraints to control which data is evaulated."
+msgstr "Add time constraints to control which data is evaulated."
 
-msgid "Set up advanced properties for this program indicator."
-msgstr "Set up advanced properties for this program indicator."
+msgid "Additional settings for this program indicator."
+msgstr "Additional settings for this program indicator."
 
-msgid "Show program indicators in data entry forms"
-msgstr "Show program indicators in data entry forms"
+msgid "Show in data entry forms"
+msgstr "Show in data entry forms"
 
-msgid "Set up the program indicator legends."
-msgstr "Set up the program indicator legends."
+msgid "Enter a data element ID."
+msgstr "Enter a data element ID."
 
 msgid "Program Indicators Form"
 msgstr "Program Indicators Form"
+
+msgid "Show program indicators in data entry forms"
+msgstr "Show program indicators in data entry forms"
 
 msgid "Name can only contain letters, numbers, space, dash, dot and underscore"
 msgstr "Name can only contain letters, numbers, space, dash, dot and underscore"
@@ -4548,6 +4522,9 @@ msgstr "Set up the basic information for this program rule variable."
 
 msgid "Configure how this variable works."
 msgstr "Configure how this variable works."
+
+msgid "Program (required)"
+msgstr "Program (required)"
 
 msgid "Program cannot be changed after creation"
 msgstr "Program cannot be changed after creation"
@@ -4883,6 +4860,63 @@ msgstr ""
 msgid "There was an error deleting stages: {{stagesNames}}"
 msgstr "There was an error deleting stages: {{stagesNames}}"
 
+msgid "Organisation unit access"
+msgstr "Organisation unit access"
+
+msgid "Set up which organisation units can collect data using this program."
+msgstr "Set up which organisation units can collect data using this program."
+
+msgid "Role access"
+msgstr "Role access"
+
+msgid "Set up which user roles can access this program and program stages."
+msgstr "Set up which user roles can access this program and program stages."
+
+msgid "Enrollment: Data"
+msgstr "Enrollment: Data"
+
+msgid "Choose the information to collect during enrollment."
+msgstr "Choose the information to collect during enrollment."
+
+msgid "Available attributes"
+msgstr "Available attributes"
+
+msgid "Selected attributes"
+msgstr "Selected attributes"
+
+msgid "Filter available attributes"
+msgstr "Filter available attributes"
+
+msgid "Filter selected attributes"
+msgstr "Filter selected attributes"
+
+msgid "Configure attributes"
+msgstr "Configure attributes"
+
+msgid "Attributes can be collected in different ways with different options."
+msgstr "Attributes can be collected in different ways with different options."
+
+msgid "Allow future dates"
+msgstr "Allow future dates"
+
+msgid "Searchable"
+msgstr "Searchable"
+
+msgid "Desktop Display"
+msgstr "Desktop Display"
+
+msgid "Mobile Display"
+msgstr "Mobile Display"
+
+msgid "This attribute is defined at the tracked entity type level"
+msgstr "This attribute is defined at the tracked entity type level"
+
+msgid "This attribute is marked as required at the tracked entity type level"
+msgstr "This attribute is marked as required at the tracked entity type level"
+
+msgid "Unique attributes are always searchable"
+msgstr "Unique attributes are always searchable"
+
 msgid "Enrollment: Form"
 msgstr "Enrollment: Form"
 
@@ -5014,6 +5048,36 @@ msgstr ""
 msgid "Display enrolled TEs in the front page list"
 msgstr "Display enrolled TEs in the front page list"
 
+msgid "Notifications"
+msgstr "Notifications"
+
+msgid "Set up notifications for this program."
+msgstr "Set up notifications for this program."
+
+msgid "Notification {{- notificationName}} will be removed on save"
+msgstr "Notification {{- notificationName}} will be removed on save"
+
+msgid "Restore notification"
+msgstr "Restore notification"
+
+msgid "Notification type: Stage | Stage: {{stageDisplayName}}"
+msgstr "Notification type: Stage | Stage: {{stageDisplayName}}"
+
+msgid "Program must be saved before notifications can be added"
+msgstr "Program must be saved before notifications can be added"
+
+msgid "New notification"
+msgstr "New notification"
+
+msgid "Edit notification"
+msgstr "Edit notification"
+
+msgid "No notifications have been added yet"
+msgstr "No notifications have been added yet"
+
+msgid "Add a notification"
+msgstr "Add a notification"
+
 msgid "Program Stages"
 msgstr "Program Stages"
 
@@ -5040,6 +5104,9 @@ msgstr "Restore stage"
 
 msgid "Add a program stage"
 msgstr "Add a program stage"
+
+msgid "Only integers are allowed"
+msgstr "Only integers are allowed"
 
 msgid "Access updated successfully"
 msgstr "Access updated successfully"
@@ -5095,42 +5162,6 @@ msgstr "External"
 msgid "Group"
 msgstr "Group"
 
-msgid "Organisation unit access"
-msgstr "Organisation unit access"
-
-msgid "Set up which organisation units can collect data using this program."
-msgstr "Set up which organisation units can collect data using this program."
-
-msgid "Role access"
-msgstr "Role access"
-
-msgid "Set up notifications for this program."
-msgstr "Set up notifications for this program."
-
-msgid "Notification {{- notificationName}} will be removed on save"
-msgstr "Notification {{- notificationName}} will be removed on save"
-
-msgid "Restore notification"
-msgstr "Restore notification"
-
-msgid "Notification type: Stage | Stage: {{stageDisplayName}}"
-msgstr "Notification type: Stage | Stage: {{stageDisplayName}}"
-
-msgid "Program must be saved before notifications can be added"
-msgstr "Program must be saved before notifications can be added"
-
-msgid "New notification"
-msgstr "New notification"
-
-msgid "Edit notification"
-msgstr "Edit notification"
-
-msgid "No notifications have been added yet"
-msgstr "No notifications have been added yet"
-
-msgid "Add a notification"
-msgstr "Add a notification"
-
 msgid "Program Details"
 msgstr "Program Details"
 
@@ -5155,38 +5186,14 @@ msgstr "Maximum number of search results to display"
 msgid "Entering 0 shows all search results"
 msgstr "Entering 0 shows all search results"
 
-msgid "Program customization"
-msgstr "Program customization"
-
-msgid "Custom label for \"Report date\""
-msgstr "Custom label for \"Report date\""
-
-msgid "Used as the default registration date for events"
-msgstr "Used as the default registration date for events"
-
-msgid "Only integers are allowed"
-msgstr "Only integers are allowed"
-
-msgid "Program Settings"
-msgstr "Program Settings"
-
-msgid "Set up advanced options for this program."
-msgstr "Set up advanced options for this program."
-
-msgid "Allow user assignment of events"
-msgstr "Allow user assignment of events"
-
-msgid "Block entry form after completed"
-msgstr "Block entry form after completed"
-
-msgid "Pre-generate event UID"
-msgstr "Pre-generate event UID"
+msgid "Lock completed events after a number of days"
+msgstr "Lock completed events after a number of days"
 
 msgid "Close data entry a number of days after the end of a period"
 msgstr "Close data entry a number of days after the end of a period"
 
-msgid "Lock completed events after a number of days"
-msgstr "Lock completed events after a number of days"
+msgid "Expiry period type"
+msgstr "Expiry period type"
 
 msgid "Close data entry a number of days after \"Implementing partner\" end date"
 msgstr "Close data entry a number of days after \"Implementing partner\" end date"
@@ -5199,12 +5206,6 @@ msgstr "Validation strategy"
 
 msgid "Access and Sharing"
 msgstr "Access and Sharing"
-
-msgid "Number of days"
-msgstr "Number of days"
-
-msgid "Expiry period type"
-msgstr "Expiry period type"
 
 msgid "Notification type"
 msgstr "Notification type"
@@ -5244,6 +5245,12 @@ msgstr "Days since due date"
 
 msgid "Days until due date"
 msgstr "Days until due date"
+
+msgid "Set up the basic information for the notification template."
+msgstr "Set up the basic information for the notification template."
+
+msgid "Configure the templates for the notification content and subject."
+msgstr "Configure the templates for the notification content and subject."
 
 msgid "Recipient type (required)"
 msgstr "Recipient type (required)"
@@ -5293,9 +5300,6 @@ msgstr "Decide what should happen after a user completes this event."
 msgid "Configure data collection for events in this program stage."
 msgstr "Configure data collection for events in this program stage."
 
-msgid "Configure data collection for events in this program."
-msgstr "Configure data collection for events in this program."
-
 msgid "Filter selected data elements"
 msgstr "Filter selected data elements"
 
@@ -5304,9 +5308,6 @@ msgstr "Configure data items"
 
 msgid "Data elements can be collected in different ways with different options."
 msgstr "Data elements can be collected in different ways with different options."
-
-msgid "Allow provided elsewhere"
-msgstr "Allow provided elsewhere"
 
 msgid "Display in reports"
 msgstr "Display in reports"
@@ -5319,12 +5320,6 @@ msgstr "Skip in analytics"
 
 msgid "Skip sync"
 msgstr "Skip sync"
-
-msgid "Desktop Display"
-msgstr "Desktop Display"
-
-msgid "Mobile Display"
-msgstr "Mobile Display"
 
 msgid "Stage"
 msgstr "Stage"
@@ -5490,14 +5485,8 @@ msgstr "Stage: Data"
 msgid "Stage: Form"
 msgstr "Stage: Form"
 
-msgid "Section tracked entity attributes"
-msgstr "Section tracked entity attributes"
-
-msgid "Available tracked entity attributes"
-msgstr "Available tracked entity attributes"
-
-msgid "Selected tracked entity attributes"
-msgstr "Selected tracked entity attributes"
+msgid "Section attributes"
+msgstr "Section attributes"
 
 msgid "Filter available tracked entity attributes"
 msgstr "Filter available tracked entity attributes"
@@ -5510,37 +5499,6 @@ msgstr "Saving a section does not save other changes to the program"
 
 msgid "Enrollment section form saved"
 msgstr "Enrollment section form saved"
-
-msgid "Enrollment: Data"
-msgstr "Enrollment: Data"
-
-msgid "Choose the information to collect during enrollment."
-msgstr "Choose the information to collect during enrollment."
-
-msgid "Configure tracked entity attributes"
-msgstr "Configure tracked entity attributes"
-
-msgid ""
-"Tracked entity attributes can be collected in different ways with different "
-"options."
-msgstr ""
-"Tracked entity attributes can be collected in different ways with different "
-"options."
-
-msgid "Allow future dates"
-msgstr "Allow future dates"
-
-msgid "Searchable"
-msgstr "Searchable"
-
-msgid "This attribute is defined at the tracked entity type level"
-msgstr "This attribute is defined at the tracked entity type level"
-
-msgid "This attribute is marked as required at the tracked entity type level"
-msgstr "This attribute is marked as required at the tracked entity type level"
-
-msgid "Unique attributes are always searchable"
-msgstr "Unique attributes are always searchable"
 
 msgid "Relationship entity constraint"
 msgstr "Relationship entity constraint"
@@ -5558,30 +5516,26 @@ msgstr ""
 msgid "Set up the basic information for this relationship type."
 msgstr "Set up the basic information for this relationship type."
 
-msgid "Will be shown everywhere a user sees a relationship type."
-msgstr "Will be shown everywhere a user sees a relationship type."
-
-msgid "Provide a helpful description of what this relationship is used for."
-msgstr "Provide a helpful description of what this relationship is used for."
-
 msgid "Bidirectional: relationship can be created from both sides"
 msgstr "Bidirectional: relationship can be created from both sides"
 
-msgid "Relationship name seen from initiating entity (required)"
-msgstr "Relationship name seen from initiating entity (required)"
+msgid "Name shown for initiating entity"
+msgstr "Name shown for initiating entity"
 
-msgid "Relationship name seen from receiving entity (required)"
-msgstr "Relationship name seen from receiving entity (required)"
+msgid "e.g. Mother of"
+msgstr "e.g. Mother of"
+
+msgid "Name shown for receiving entity"
+msgstr "Name shown for receiving entity"
+
+msgid "e.g. Child of"
+msgstr "e.g. Child of"
 
 msgid "Relationship sides"
 msgstr "Relationship sides"
 
-msgid ""
-"Choose and configure which objects can be used as the initiating and "
-"receiving sides of the relationship."
-msgstr ""
-"Choose and configure which objects can be used as the initiating and "
-"receiving sides of the relationship."
+msgid "Choose and configure the objects used on each side of the relationship."
+msgstr "Choose and configure the objects used on each side of the relationship."
 
 msgid "Initiating side constraint"
 msgstr "Initiating side constraint"
@@ -5618,59 +5572,43 @@ msgid "Blocked search operators"
 msgstr "Blocked search operators"
 
 msgid ""
-"Searches with blocked search operators will return no results. This "
-"prevents inefficient searches."
+"Searches using these operators return no results. Use this to prevent "
+"inefficient searches."
 msgstr ""
-"Searches with blocked search operators will return no results. This "
-"prevents inefficient searches."
+"Searches using these operators return no results. Use this to prevent "
+"inefficient searches."
 
-msgid "Make this attribute confidential"
-msgstr "Make this attribute confidential"
+msgid "Confidential"
+msgstr "Confidential"
 
 msgid ""
-"Confidential tracker entity attributes are hidden from search and only "
-"supported when system encryption is enabled."
+"Prevent searching or viewing in analytics. Available only when system "
+"encryption is enabled."
 msgstr ""
-"Confidential tracker entity attributes are hidden from search and only "
-"supported when system encryption is enabled."
+"Prevent searching or viewing in analytics. Available only when system "
+"encryption is enabled."
 
-msgid "Format for data entry"
-msgstr "Format for data entry"
+msgid "Inherit values from tracked entities linked by a relationship"
+msgstr "Inherit values from tracked entities linked by a relationship"
+
+msgid "Minimum characters required to search"
+msgstr "Minimum characters required to search"
 
 msgid ""
-"Provide a formatting hint or example. This will only be shown in Android "
-"Capture app."
+"Users must enter at least this many characters to search. Enter 0 for no "
+"minimum."
 msgstr ""
-"Provide a formatting hint or example. This will only be shown in Android "
-"Capture app."
+"Users must enter at least this many characters to search. Enter 0 for no "
+"minimum."
 
-msgid "Will be shown everywhere a user sees a tracked entity attribute."
-msgstr "Will be shown everywhere a user sees a tracked entity attribute."
-
-msgid "Inherit data values from other tracked entities"
-msgstr "Inherit data values from other tracked entities"
-
-msgid "Data values are inherited from tracked entities linked by a relationship."
-msgstr "Data values are inherited from tracked entities linked by a relationship."
-
-msgid "Minimum characters to search"
-msgstr "Minimum characters to search"
-
-msgid "Set the minimum characters required to start a search."
-msgstr "Set the minimum characters required to start a search."
-
-msgid ""
-"Choose from a predefined list of Option sets. The Option set will "
-"automatically define the Value type."
-msgstr ""
-"Choose from a predefined list of Option sets. The Option set will "
-"automatically define the Value type."
+msgid "Clear"
+msgstr "Clear"
 
 msgid "Pattern for automatically generated values"
 msgstr "Pattern for automatically generated values"
 
-msgid "Pattern must use the DHIS2 TextPattern syntax."
-msgstr "Pattern must use the DHIS2 TextPattern syntax."
+msgid "Use DHIS2 TextPattern syntax to define how values are generated."
+msgstr "Use DHIS2 TextPattern syntax to define how values are generated."
 
 msgid "EQ | Equals"
 msgstr "EQ | Equals"
@@ -5681,18 +5619,14 @@ msgstr "{{optionLabel}} (blocked operator)"
 msgid "Preferred search operator"
 msgstr "Preferred search operator"
 
-msgid ""
-"Apps will try to use this recommended operator to improve performance, but "
-"can still use others if needed."
-msgstr ""
-"Apps will try to use this recommended operator to improve performance, but "
-"can still use others if needed."
+msgid "Apps try to use this operator first, but may use others when needed."
+msgstr "Apps try to use this operator first, but may use others when needed."
 
-msgid "This attribute is currently trigram indexed in the database"
-msgstr "This attribute is currently trigram indexed in the database"
+msgid "This attribute is trigram indexed in the database"
+msgstr "This attribute is trigram indexed in the database"
 
-msgid "This attribute is currently not trigram indexed in the database"
-msgstr "This attribute is currently not trigram indexed in the database"
+msgid "This attribute is not yet trigram indexed in the database"
+msgstr "This attribute is not yet trigram indexed in the database"
 
 msgid "Not available when both EW and LIKE are blocked"
 msgstr "Not available when both EW and LIKE are blocked"
@@ -5712,21 +5646,8 @@ msgstr "Per organisation unit"
 msgid "Set up the basic information for this tracked entity attribute."
 msgstr "Set up the basic information for this tracked entity attribute."
 
-msgid ""
-"Shown as help text when collecting data, use to provide more context and "
-"information"
-msgstr ""
-"Shown as help text when collecting data, use to provide more context and "
-"information"
-
-msgid "Data collection"
-msgstr "Data collection"
-
 msgid "Configure how this tracked entity attribute's data is collected."
 msgstr "Configure how this tracked entity attribute's data is collected."
-
-msgid "Data value must be unique"
-msgstr "Data value must be unique"
 
 msgid "Automatically generate values"
 msgstr "Automatically generate values"
@@ -5734,28 +5655,14 @@ msgstr "Automatically generate values"
 msgid "Data handling"
 msgstr "Data handling"
 
-msgid ""
-"Configure how this tracked entity attribute's values are displayed, "
-"inherited, or synchronized across the system."
-msgstr ""
-"Configure how this tracked entity attribute's values are displayed, "
-"inherited, or synchronized across the system."
+msgid "Configure how values are displayed, inherited, and synchronized."
+msgstr "Configure how values are displayed, inherited, and synchronized."
 
-msgid "Show in lists and search results even when a program is not selected"
-msgstr "Show in lists and search results even when a program is not selected"
+msgid "Show in lists and search results when no program is selected"
+msgstr "Show in lists and search results when no program is selected"
 
-msgid "Do not synchronize this attribute and it's values"
-msgstr "Do not synchronize this attribute and it's values"
-
-msgid "Do not expose this attribute in analytics"
-msgstr "Do not expose this attribute in analytics"
-
-msgid ""
-"When enabled, this tracked entity attribute is excluded from all analytics "
-"processing, including analytics tables and analytics apps."
-msgstr ""
-"When enabled, this tracked entity attribute is excluded from all analytics "
-"processing, including analytics tables and analytics apps."
+msgid "Skip synchronization for this attribute and its values"
+msgstr "Skip synchronization for this attribute and its values"
 
 msgid "Search performance"
 msgstr "Search performance"
@@ -5763,12 +5670,8 @@ msgstr "Search performance"
 msgid "Adjust how this attribute is searched to balance performance and accuracy."
 msgstr "Adjust how this attribute is searched to balance performance and accuracy."
 
-msgid ""
-"Legends assigned to this tracker entity attribute are used in data analysis "
-"apps."
-msgstr ""
-"Legends assigned to this tracker entity attribute are used in data analysis "
-"apps."
+msgid "Choose legends to visually categorize values in analytics apps."
+msgstr "Choose legends to visually categorize values in analytics apps."
 
 msgid "Tracked Entity Attribute"
 msgstr "Tracked Entity Attribute"
@@ -5782,24 +5685,23 @@ msgstr "Generated"
 msgid "Pattern"
 msgstr "Pattern"
 
-msgid "Confidential"
-msgstr "Confidential"
-
 msgid "Inherit"
 msgstr "Inherit"
 
 msgid "Skip synchronization"
 msgstr "Skip synchronization"
 
-msgid "No attributes selected. Please select attributes in the transfer above."
-msgstr "No attributes selected. Please select attributes in the transfer above."
+msgid "Minimum characters to search"
+msgstr "Minimum characters to search"
 
-msgid ""
-"Choose which attributes to display, which are required, and which are "
-"searchable"
-msgstr ""
-"Choose which attributes to display, which are required, and which are "
-"searchable"
+msgid "Manage attributes"
+msgstr "Manage attributes"
+
+msgid "Choose which attributes to show, require, and make searchable."
+msgstr "Choose which attributes to show, require, and make searchable."
+
+msgid "No attributes selected yet. Choose attributes above to configure them."
+msgstr "No attributes selected yet. Choose attributes above to configure them."
 
 msgid "Image and File type attributes are not searchable"
 msgstr "Image and File type attributes are not searchable"
@@ -5810,14 +5712,12 @@ msgstr "Maximum number of tracked entity instances to return when searching"
 msgid "Set up the basic information for this tracked entity type."
 msgstr "Set up the basic information for this tracked entity type."
 
-msgid "Explain the purpose of this tracked entity type."
-msgstr "Explain the purpose of this tracked entity type."
-
-msgid "Choose and configure what data can be collected for this tracked entity type"
-msgstr "Choose and configure what data can be collected for this tracked entity type"
-
-msgid "Color and icon"
-msgstr "Color and icon"
+msgid ""
+"Choose and configure what data can be collected for this tracked entity "
+"type."
+msgstr ""
+"Choose and configure what data can be collected for this tracked entity "
+"type."
 
 msgid "Notification details"
 msgstr "Notification details"
@@ -5858,8 +5758,8 @@ msgstr "User group recipients"
 msgid "Set up the basic information for this validation notification."
 msgstr "Set up the basic information for this validation notification."
 
-msgid "Select validation rules to trigger this notification."
-msgstr "Select validation rules to trigger this notification."
+msgid "Choose which validation rules trigger this notification."
+msgstr "Choose which validation rules trigger this notification."
 
 msgid "Available validation rules"
 msgstr "Available validation rules"
@@ -5879,14 +5779,8 @@ msgstr "Configure the templates for the notification message content."
 msgid "Choose who recieves the notification."
 msgstr "Choose who recieves the notification."
 
-msgid "Choose notification"
-msgstr "Choose notification"
-
 msgid "Set up the basic information for this validation rule group."
 msgstr "Set up the basic information for this validation rule group."
-
-msgid "Explain the purpose of this validation rule group."
-msgstr "Explain the purpose of this validation rule group."
 
 msgid "Validation Rules"
 msgstr "Validation Rules"
@@ -5899,9 +5793,6 @@ msgstr "Organisation unit levels to run validation for"
 
 msgid "Set up the basic information for this validation rule."
 msgstr "Set up the basic information for this validation rule."
-
-msgid "Explain the purpose of this validation rule."
-msgstr "Explain the purpose of this validation rule."
 
 msgid "Expressions and output"
 msgstr "Expressions and output"
@@ -5936,8 +5827,8 @@ msgstr "Set up denominator expression"
 msgid "Instruction to show"
 msgstr "Instruction to show"
 
-msgid "Instructions are shown when validating data in Data Entry and Android apps."
-msgstr "Instructions are shown when validating data in Data Entry and Android apps."
+msgid "Shown when validating data in Data Entry and Android apps."
+msgstr "Shown when validating data in Data Entry and Android apps."
 
 msgid "Changes the appearance of the validation rule output during Data Entry."
 msgstr "Changes the appearance of the validation rule output during Data Entry."

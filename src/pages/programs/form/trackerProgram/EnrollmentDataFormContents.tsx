@@ -36,7 +36,9 @@ const defaultRenderType = {
 export const EnrollmentDataFormContents = React.memo(
     function SetupFormContents({ name }: { name: string }) {
         const { input, meta } = useField<
-            ProgramsFromFilters['programTrackedEntityAttributes']
+            (ProgramsFromFilters['programTrackedEntityAttributes'][0] & {
+                optionSet?: { id: string }
+            })[]
         >('programTrackedEntityAttributes', {
             multiple: true,
             validateFields: [],
@@ -203,6 +205,7 @@ export const EnrollmentDataFormContents = React.memo(
                                             displayName: s.displayName,
                                         },
                                         valueType: s.valueType,
+                                        optionSet: s.optionSet,
                                         unique: s.unique,
                                         allowFutureDate: false,
                                         mandatory: false,
@@ -227,7 +230,6 @@ export const EnrollmentDataFormContents = React.memo(
                             filterPlaceholderPicked={i18n.t(
                                 'Filter selected tracked entity attributes'
                             )}
-                            maxSelections={1}
                             query={{
                                 resource: 'trackedEntityAttributes',
                                 params: {
@@ -235,6 +237,7 @@ export const EnrollmentDataFormContents = React.memo(
                                         'id',
                                         'displayName',
                                         'valueType',
+                                        'optionSet',
                                         'unique',
                                     ],
                                     filter: tetaIdsString
@@ -389,6 +392,12 @@ export const EnrollmentDataFormContents = React.memo(
                                                 index={index}
                                                 device="DESKTOP"
                                                 valueType={attribute.valueType}
+                                                hasOptionSet={
+                                                    !!attribute.optionSet?.id ||
+                                                    !!attribute
+                                                        .trackedEntityAttribute
+                                                        .optionSet?.id
+                                                }
                                             />
                                         </TableCell>
                                         <TableCell>
@@ -397,6 +406,12 @@ export const EnrollmentDataFormContents = React.memo(
                                                 index={index}
                                                 device="MOBILE"
                                                 valueType={attribute.valueType}
+                                                hasOptionSet={
+                                                    !!attribute.optionSet?.id ||
+                                                    !!attribute
+                                                        .trackedEntityAttribute
+                                                        .optionSet?.id
+                                                }
                                             />
                                         </TableCell>
                                     </TableRow>

@@ -23,12 +23,10 @@ const dataElementBaseSchema = z.object({
             icon: z.string().optional(),
         })
         .default({}),
-    domainType: z
-        .nativeEnum(DataElement.domainType)
-        .default(DataElement.domainType.AGGREGATE),
+    domainType: z.nativeEnum(DataElement.domainType),
     valueType: z
         .nativeEnum(DataElement.valueType)
-        .default(DataElement.valueType.TEXT),
+        .default(DataElement.valueType.NUMBER),
     aggregationType: z
         .nativeEnum(DataElement.aggregationType)
         .default(DataElement.aggregationType.NONE),

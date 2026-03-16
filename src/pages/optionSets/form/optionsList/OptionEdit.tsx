@@ -77,11 +77,7 @@ export const OptionFormContents = ({
                         />
                     </StandardFormField>
                     <StandardFormField>
-                        <DescriptionField
-                            helpText={i18n.t(
-                                'Explain the purpose of this option.'
-                            )}
-                        />
+                        <DescriptionField />
                     </StandardFormField>
                     <StandardFormField>
                         <ColorAndIconField />

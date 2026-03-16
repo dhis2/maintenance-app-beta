@@ -9,12 +9,18 @@ export function ShortNameField({
     helpText,
     schemaSection,
     isRequired = true,
+    caseSensitiveUniqueness = false,
 }: {
     helpText?: string
     schemaSection: SchemaSection
     isRequired?: boolean
+    caseSensitiveUniqueness?: boolean
 }) {
-    const validator = useValidator({ schemaSection, property: 'shortName' })
+    const validator = useValidator({
+        schemaSection,
+        property: 'shortName',
+        caseSensitive: caseSensitiveUniqueness,
+    })
     const schema = useSchema(schemaSection.name)
     const propertyDetails = schema.properties['shortName']
     const [warning, setWarning] = useState<string | undefined>()
@@ -25,6 +31,7 @@ export function ShortNameField({
         message: i18n.t(
             'This short name is already in use. Consider updating the name to avoid a duplication.'
         ),
+        caseSensitive: caseSensitiveUniqueness,
     })
     const uniquenessWarner = propertyDetails.unique
         ? undefined
@@ -33,7 +40,7 @@ export function ShortNameField({
     const helpString =
         helpText ||
         i18n.t(
-            'A short, unique name. Displayed in analysis apps where space is limited, depending on user or system settings.'
+            'A short, unique name. Displayed in analytics apps where space is limited, depending on user or system settings.'
         )
 
     return (
@@ -56,13 +63,7 @@ export function ShortNameField({
                     dataTest="formfields-shortName"
                     required={isRequired}
                     inputWidth="400px"
-                    label={
-                        isRequired
-                            ? i18n.t('{{fieldLabel}} (required)', {
-                                  fieldLabel: i18n.t('Short name'),
-                              })
-                            : i18n.t('Short name')
-                    }
+                    label={i18n.t('Short name')}
                     helpText={helpString}
                     validationText={warning}
                     warning={!!warning}

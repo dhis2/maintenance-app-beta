@@ -55,11 +55,7 @@ export const AttributeFormFields = ({
                     <CodeField schemaSection={schemaSection} />
                 </StandardFormField>
                 <StandardFormField>
-                    <DescriptionField
-                        helpText={i18n.t(
-                            'Explain the purpose of this attribute.'
-                        )}
-                    />
+                    <DescriptionField />
                 </StandardFormField>
             </SectionedFormSection>
 
@@ -85,7 +81,9 @@ export const AttributeFormFields = ({
                     <FieldRFF
                         component={CheckboxFieldFF}
                         name="mandatory"
-                        label={i18n.t('Make this a mandatory attribute')}
+                        label={i18n.t(
+                            'Mandatory: all objects must have a value for this attribute'
+                        )}
                         type="checkbox"
                         dataTest="formfields-mandatory"
                     />
@@ -94,7 +92,7 @@ export const AttributeFormFields = ({
                     <FieldRFF
                         component={CheckboxFieldFF}
                         name="unique"
-                        label={i18n.t('No duplicate values allowed')}
+                        label={i18n.t('Unique values only')}
                         type="checkbox"
                         dataTest="formfields-unique"
                     />

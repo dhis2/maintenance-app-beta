@@ -19,9 +19,8 @@ export function FieldMaskField() {
             name="fieldMask"
             label={i18n.t('Field mask')}
             helpText={i18n.t(
-                'Use a pattern to limit what information can be entered.'
+                'Use a pattern to limit what information can be entered. See documentation for details.'
             )}
-            placeholder={i18n.t('e.g. 999-000-0000')}
             validateFields={[]}
             validate={validate}
         />

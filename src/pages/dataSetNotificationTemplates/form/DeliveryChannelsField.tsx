@@ -31,14 +31,14 @@ export const DeliveryChannelsField = () => {
             <CheckboxField
                 name="sendSms"
                 dataTest="formfields-sendSms"
-                label={i18n.t('SMS')}
+                label={i18n.t('Send as SMS')}
                 checked={isSms}
                 onChange={createHandleOnChange('SMS')}
             />
             <CheckboxField
                 name="sendEmail"
                 dataTest="formfields-sendEmail"
-                label={i18n.t('Email')}
+                label={i18n.t('Send as Email')}
                 checked={isEmail}
                 onChange={createHandleOnChange('EMAIL')}
             />
