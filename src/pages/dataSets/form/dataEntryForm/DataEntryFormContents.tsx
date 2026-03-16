@@ -46,7 +46,7 @@ export const DataEntryFromContents = React.memo(function FormFormContents({
     const toDataSearchParam = useMemo(
         () =>
             createSearchParams({
-                ...searchParams,
+                ...Object.fromEntries(searchParams),
                 [FORM_SECTION_PARAM_KEY]: 'data',
             }).toString(),
         [searchParams]

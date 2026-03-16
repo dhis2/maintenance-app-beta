@@ -50,7 +50,7 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
     const toEnrollmentDataSearchParam = useMemo(
         () =>
             createSearchParams({
-                ...searchParams,
+                ...Object.fromEntries(searchParams),
                 [FORM_SECTION_PARAM_KEY]: 'enrollmentData',
             }).toString(),
         [searchParams]
