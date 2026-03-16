@@ -10,6 +10,10 @@
 
 .errorNoticeWrapper {
     margin: var(--spacers-dp16);
+    margin-top: auto;
+    position: sticky;
+    inset-block-end: 0;
+    z-index: 1;
 }
 
 .actionsInfo {
@@ -103,7 +107,7 @@
 }
 
 .description {
-    color: var(--colors-grey600);
+    color: var(--colors-grey700);
     padding: 0;
     margin: 0;
 }

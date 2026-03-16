@@ -9,6 +9,7 @@ cypress.env.json
 .env.test.local
 .env.production.local
 cypress/screenshots/*
+src/App.tsx
 
 src/types/generated
 .prettierrc.js

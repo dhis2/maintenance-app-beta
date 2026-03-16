@@ -25,7 +25,7 @@ export const TrackedEntityAttributeFormContents = () => {
                     descriptor.getSection('dataHandling').name
                 }
                 searchPerformanceSectionName={
-                    descriptor.getSection('searchPerformance').name
+                    descriptor.getSection('searchPerformance')?.name
                 }
                 legendsSectionName={descriptor.getSection('legends').name}
             />

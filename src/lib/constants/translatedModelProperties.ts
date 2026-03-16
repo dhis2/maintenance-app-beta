@@ -11,6 +11,7 @@ const TRANSLATED_PROPERTY: Record<string, string> = {
     aggregateExportDataElement: i18n.t(
         'Data element for aggregate data export'
     ),
+    attributeCombo: i18n.t('Attribute category combination'),
     analyticsType: i18n.t('Analytics type'),
     bidirectional: i18n.t('Bidirectional'),
     category: i18n.t('Category'),
@@ -79,6 +80,20 @@ const TRANSLATED_PROPERTY: Record<string, string> = {
     minAttributesRequiredToSearch: i18n.t(
         'Minimum number of attributes required to search'
     ),
+    subjectTemplate: i18n.t('Subject template'),
+    messageTemplate: i18n.t('Message template'),
+    programStageLabel: i18n.t('Program stage label'),
+    dueDateLabel: i18n.t('Due date label'),
+    executionDateLabel: i18n.t('Execution date label'),
+    eventLabel: i18n.t('Event label'),
+    trackedEntityAttributeLabel: i18n.t('Tracked entity attribute label'),
+    enrollmentDateLabel: i18n.t('Enrollment date label'),
+    incidentDateLabel: i18n.t('Incident date label'),
+    noteLabel: i18n.t('Note label'),
+    enrollmentLabel: i18n.t('Enrollment label'),
+    followUpLabel: i18n.t('Follow up label'),
+    orgUnitLabel: i18n.t('Organisation unit label'),
+    relationshipLabel: i18n.t('Relationship label'),
 }
 
 const camelCaseToSentenceCase = (camelCase: string) =>

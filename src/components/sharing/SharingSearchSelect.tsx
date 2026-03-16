@@ -30,6 +30,7 @@ export type SharingSearchResult =
     | (SharingUserGroupResult & {
           entity: 'userGroups'
       })
+    | { displayName: 'public'; id: 'public'; entity: 'public' }
 
 type SharingSearchResponse = {
     result: {

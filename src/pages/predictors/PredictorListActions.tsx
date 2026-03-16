@@ -23,7 +23,7 @@ import {
 import React, { useRef, useState } from 'react'
 import { useHref, useLinkClickHandler } from 'react-router-dom'
 import {
-    ActionEdit,
+    ActionShowDetails,
     ListActions,
 } from '../../components/sectionList/listActions'
 import { DeleteAction } from '../../components/sectionList/listActions/DeleteAction'
@@ -49,9 +49,11 @@ type PredictorListActionsProps = {
 }
 
 const RunNowModal = ({
+    schemaPlural,
     predictorId,
     onClose,
 }: {
+    schemaPlural: string
     predictorId: string
     onClose: () => void
 }) => {
@@ -75,7 +77,7 @@ const RunNowModal = ({
         setIsLoading(true)
         try {
             const response = await engine.mutate({
-                resource: `predictors/${predictorId}/run`,
+                resource: `${schemaPlural}/${predictorId}/run`,
                 type: 'create',
                 data: {},
                 params: {
@@ -184,13 +186,7 @@ export const PredictorListActions = ({
     return (
         <>
             <ListActions>
-                <TooltipWrapper
-                    condition={!editable}
-                    content={TOOLTIPS.noEditAccess}
-                    dataTest="no-editable-tooltip"
-                >
-                    <ActionEdit disabled={!editable} modelId={model.id} />
-                </TooltipWrapper>
+                <ActionShowDetails onClick={() => onShowDetailsClick(model)} />
                 <div ref={ref}>
                     <Button
                         small
@@ -299,6 +295,7 @@ export const PredictorListActions = ({
                 <RunNowModal
                     predictorId={model.id}
                     onClose={() => setShowRunNowModal(false)}
+                    schemaPlural={schema.plural}
                 />
             )}
         </>

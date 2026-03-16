@@ -1,7 +1,9 @@
 import { IconChevronDown16, IconChevronRight16 } from '@dhis2/ui'
 import React, { useCallback, useState, RefObject } from 'react'
+import { useField } from 'react-final-form'
 import styles from './ExpressionBuilder.module.css'
-import { ElementType, defaultElementTypes } from './ValidationRuleVariables'
+import { ExpressionBuilderType } from './types'
+import { ElementType, getElementTypes } from './ValidationRuleVariables'
 
 const insertElementNonClosure = ({
     elementText,
@@ -32,11 +34,22 @@ const insertElementNonClosure = ({
 export const VariableSelectionBox = ({
     elementRef,
     clearValidationState,
+    programId,
+    type,
 }: {
     elementRef: RefObject<HTMLInputElement | HTMLTextAreaElement>
     clearValidationState: () => void
+    programId?: string
+    type: ExpressionBuilderType
 }) => {
-    const elementTypes = defaultElementTypes // to update with logic based on the ExpressionBuilder context
+    const { input: aggregationTypeInput } = useField<string>(
+        'aggregationType',
+        { subscription: { value: true } }
+    )
+
+    const elementTypes = getElementTypes(type, {
+        aggregationType: aggregationTypeInput?.value,
+    })
     const [selectedElementType, setSelectedElementType] = useState<
         string | undefined
     >()
@@ -94,6 +107,10 @@ export const VariableSelectionBox = ({
                                 <ElementListContainer
                                     elements={elementType.elements ?? []}
                                     insertElement={insertElementClosure}
+                                    programId={programId}
+                                    isProgramIndicator={
+                                        type === 'programIndicator'
+                                    }
                                 />
                             </div>
                         </details>

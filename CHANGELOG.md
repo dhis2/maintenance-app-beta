@@ -1,3 +1,418 @@
+## [0.146.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.146.0...v0.146.1) (2026-03-13)
+
+
+### Bug Fixes
+
+* import translation files ([#810](https://github.com/dhis2/maintenance-app-beta/issues/810)) ([44ff70f](https://github.com/dhis2/maintenance-app-beta/commit/44ff70f676cff7ae06421fb2e2923370e85e1e7d))
+* skip flaky tests ([#811](https://github.com/dhis2/maintenance-app-beta/issues/811)) ([4c317b4](https://github.com/dhis2/maintenance-app-beta/commit/4c317b4dcbe17bc59bf4a9a343679ab8a69fe708))
+
+# [0.146.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.145.1...v0.146.0) (2026-03-13)
+
+
+### Bug Fixes
+
+* **section-list:** change default row action to edit ([#791](https://github.com/dhis2/maintenance-app-beta/issues/791)) ([2ac86b6](https://github.com/dhis2/maintenance-app-beta/commit/2ac86b61f6d17a51ef5ed0a39eeb3ade2fc385f9))
+
+
+### Features
+
+* add attribute category combo ([#803](https://github.com/dhis2/maintenance-app-beta/issues/803)) ([7eeda61](https://github.com/dhis2/maintenance-app-beta/commit/7eeda619536cc0cfcf200c828d69fd4065de1303))
+
+## [0.145.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.145.0...v0.145.1) (2026-03-13)
+
+
+### Bug Fixes
+
+* **translations:** sync translations from transifex (master) ([#808](https://github.com/dhis2/maintenance-app-beta/issues/808)) ([e75f59c](https://github.com/dhis2/maintenance-app-beta/commit/e75f59c49de505c6a66ab4c9eb3a803fdc4834b1))
+
+# [0.145.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.144.3...v0.145.0) (2026-03-12)
+
+
+### Features
+
+* filter out unsupported value types ([#805](https://github.com/dhis2/maintenance-app-beta/issues/805)) ([21d5e26](https://github.com/dhis2/maintenance-app-beta/commit/21d5e26c4d0b88915a47e336febcec42c178e873))
+
+## [0.144.3](https://github.com/dhis2/maintenance-app-beta/compare/v0.144.2...v0.144.3) (2026-03-12)
+
+
+### Bug Fixes
+
+* add case sensitivity option for name and short name uniqueness validation ([#806](https://github.com/dhis2/maintenance-app-beta/issues/806)) ([3a45a37](https://github.com/dhis2/maintenance-app-beta/commit/3a45a37f06ac7892987d0aae095fd16a46cf0556))
+
+## [0.144.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.144.1...v0.144.2) (2026-03-12)
+
+
+### Bug Fixes
+
+* **color-icon-picker:** improve empty state, add labels, improve accessibility ([2ca8958](https://github.com/dhis2/maintenance-app-beta/commit/2ca8958c9a748e6f7bef7730afbf3b6f1fdff59b))
+* **common:** change feature type to location type, use radio buttons ([2208fd0](https://github.com/dhis2/maintenance-app-beta/commit/2208fd04a0e11d23332ddec8ba5424f277e7c99f))
+* **forms:** labels, helptext, defaults, transfer functionality, component use across all object forms ([6cf6d8a](https://github.com/dhis2/maintenance-app-beta/commit/6cf6d8a3a9e98db3364efe5a55e6e195d90ea200))
+* **message-fields:** add pendingCursorRef.current to useEffect dependency array ([f9728de](https://github.com/dhis2/maintenance-app-beta/commit/f9728de057eb4944487d3da741684cfbd828da18))
+* **message-fields:** keep cursor position on variable insert, styles, helptext ([f94ed73](https://github.com/dhis2/maintenance-app-beta/commit/f94ed73f660850a3969a26476a8ef079f522891a))
+* **ModelTransfer:** destructure height and width props to allow overrides ([57bea9d](https://github.com/dhis2/maintenance-app-beta/commit/57bea9db6006ae0c99f92cba5450bb96578ec26f))
+
+## [0.144.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.144.0...v0.144.1) (2026-03-12)
+
+
+### Bug Fixes
+
+* change allow date in future positioning ([#800](https://github.com/dhis2/maintenance-app-beta/issues/800)) ([4397f5e](https://github.com/dhis2/maintenance-app-beta/commit/4397f5eb39c28be23fe87fd9edc53e762e61e34b))
+
+# [0.144.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.143.1...v0.144.0) (2026-03-12)
+
+
+### Features
+
+* change section ordering, add links ([#799](https://github.com/dhis2/maintenance-app-beta/issues/799)) ([b9df28e](https://github.com/dhis2/maintenance-app-beta/commit/b9df28ebff1ee68d0c5c37785fdc441d5de48e4d))
+
+## [0.143.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.143.0...v0.143.1) (2026-03-12)
+
+
+### Bug Fixes
+
+* [DHIS2-21002][DHIS2-21023] Bug clean up for new maintenance app ([#788](https://github.com/dhis2/maintenance-app-beta/issues/788)) ([9f8b584](https://github.com/dhis2/maintenance-app-beta/commit/9f8b5846e60b40cf22ded61c88b8588523b798bb))
+* cleanup event programs ([9b82bf8](https://github.com/dhis2/maintenance-app-beta/commit/9b82bf83df52bf95c748065a55ba9f50c9a07234))
+
+# [0.143.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.142.0...v0.143.0) (2026-03-11)
+
+
+### Features
+
+* new event program ([#796](https://github.com/dhis2/maintenance-app-beta/issues/796)) ([be07be4](https://github.com/dhis2/maintenance-app-beta/commit/be07be4d9b5001aee4d120e3d7beb27b0d057555))
+
+# [0.142.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.141.0...v0.142.0) (2026-03-10)
+
+
+### Bug Fixes
+
+* change attributes to tracked entity attributes where necessary ([#797](https://github.com/dhis2/maintenance-app-beta/issues/797)) ([e8f32fd](https://github.com/dhis2/maintenance-app-beta/commit/e8f32fd8952250e77a192b96fd49df220a014d88))
+
+
+### Features
+
+* [DHIS2-16455] Flag for non analyzable tracked entity attributes ([#793](https://github.com/dhis2/maintenance-app-beta/issues/793)) ([c68630d](https://github.com/dhis2/maintenance-app-beta/commit/c68630de97624e6ba5c83fd4920dd768772b37b8))
+
+# [0.141.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.140.0...v0.141.0) (2026-03-10)
+
+
+### Bug Fixes
+
+* validation strategy props ([d23a568](https://github.com/dhis2/maintenance-app-beta/commit/d23a568924ee28e3a4f6fade68608698b24b464c))
+
+
+### Features
+
+* add program settings content ([7629d7c](https://github.com/dhis2/maintenance-app-beta/commit/7629d7c64ce82ea4ffe96a53c691e41bee0a4b76))
+* add program settings form ([baed58d](https://github.com/dhis2/maintenance-app-beta/commit/baed58d2a3235f353e1323e0c2c36f954c8ff159))
+* add validation strategy default value ([73a0ac3](https://github.com/dhis2/maintenance-app-beta/commit/73a0ac353454817f006a96d7bec572a1719f00e8))
+
+# [0.140.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.139.0...v0.140.0) (2026-03-10)
+
+
+### Features
+
+* event notifications [DHISs-21049] ([#790](https://github.com/dhis2/maintenance-app-beta/issues/790)) ([c915085](https://github.com/dhis2/maintenance-app-beta/commit/c915085ddd4d275b3511e260622d68d990f3789e))
+
+# [0.139.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.138.0...v0.139.0) (2026-03-10)
+
+
+### Features
+
+* add event program customization section ([#792](https://github.com/dhis2/maintenance-app-beta/issues/792)) ([2fe5087](https://github.com/dhis2/maintenance-app-beta/commit/2fe5087bee0db8eca7a6e503ddb38f186c2d119a))
+
+# [0.138.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.137.0...v0.138.0) (2026-03-09)
+
+
+### Features
+
+* [DHIS2-21050] Event program access and sharing ([#789](https://github.com/dhis2/maintenance-app-beta/issues/789)) ([89442bd](https://github.com/dhis2/maintenance-app-beta/commit/89442bd1aa5724c7f075c0a3f9b40aa059f31623))
+
+# [0.137.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.136.2...v0.137.0) (2026-03-09)
+
+
+### Features
+
+* program events data and form ([#794](https://github.com/dhis2/maintenance-app-beta/issues/794)) ([af8b932](https://github.com/dhis2/maintenance-app-beta/commit/af8b9325ec61a01e9766a4c89bd8843fc7058286))
+
+## [0.136.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.136.1...v0.136.2) (2026-03-05)
+
+
+### Bug Fixes
+
+* program indicator updates [DHIS2-20957] [DHIS2-20974] ([#781](https://github.com/dhis2/maintenance-app-beta/issues/781)) ([10e6955](https://github.com/dhis2/maintenance-app-beta/commit/10e69559820291fe4bb88d49de28b9644fcd80dc))
+
+## [0.136.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.136.0...v0.136.1) (2026-03-04)
+
+
+### Bug Fixes
+
+* double expression ([b1134f0](https://github.com/dhis2/maintenance-app-beta/commit/b1134f01d7f017e44437d48362c3246a89cb8810))
+* save button without closing page ([a46a554](https://github.com/dhis2/maintenance-app-beta/commit/a46a5542244bc37a4e54edbe3867d86c30ab8c2b))
+* success alert when saving ([9d56487](https://github.com/dhis2/maintenance-app-beta/commit/9d5648778f791d1b6fbc05c4e69d83fb6f9ec378))
+* wrap form footer for program disaggregations ([55b93b7](https://github.com/dhis2/maintenance-app-beta/commit/55b93b7fe8f9c093c20ce4ee87b64d0c46b70f98))
+
+
+### Features
+
+* event programs setup ([#787](https://github.com/dhis2/maintenance-app-beta/issues/787)) [skip release] ([499bafa](https://github.com/dhis2/maintenance-app-beta/commit/499bafacb0ae0ab5cc3aa80c944932764bc008e9))
+
+# [0.136.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.135.0...v0.136.0) (2026-03-03)
+
+
+### Bug Fixes
+
+* tooltip with conditional text ([6fa2cea](https://github.com/dhis2/maintenance-app-beta/commit/6fa2cead5d554fe802a1307f6f02f790e0df6601))
+
+
+### Features
+
+* get tea value type for edit form ([5357e02](https://github.com/dhis2/maintenance-app-beta/commit/5357e029812d3521be72ba5b5703f7d93e832f06))
+
+# [0.135.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.134.0...v0.135.0) (2026-03-03)
+
+
+### Bug Fixes
+
+* add span with tab index back into drawer ([#784](https://github.com/dhis2/maintenance-app-beta/issues/784)) ([097b982](https://github.com/dhis2/maintenance-app-beta/commit/097b9822dd9dd887face0133e8b1214c75d4dde0))
+* make required labels clear ([#785](https://github.com/dhis2/maintenance-app-beta/issues/785)) ([bcdadc6](https://github.com/dhis2/maintenance-app-beta/commit/bcdadc6812d4ebdac6460ce380d5f535ef6f4019))
+
+
+### Features
+
+* [DHIS2-20784] Program rule form ([#752](https://github.com/dhis2/maintenance-app-beta/issues/752)) ([7a9c577](https://github.com/dhis2/maintenance-app-beta/commit/7a9c5770a5063c4f0ec131d56ec525503324dffe))
+
+# [0.134.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.133.1...v0.134.0) (2026-03-02)
+
+
+### Features
+
+* move programsWip to programs ([#782](https://github.com/dhis2/maintenance-app-beta/issues/782)) ([f3d7e80](https://github.com/dhis2/maintenance-app-beta/commit/f3d7e805dd2f29b2dc2bab6f9900683042a574fd))
+
+## [0.133.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.133.0...v0.133.1) (2026-03-02)
+
+
+### Bug Fixes
+
+* reapply non editing of event programs ([f6f6fed](https://github.com/dhis2/maintenance-app-beta/commit/f6f6fed47c8100c09ba3df0efc2570fe6a213682))
+
+# [0.133.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.132.0...v0.133.0) (2026-03-02)
+
+
+### Features
+
+* **drawer:** header/footer, globalShell conditional height, cleanup ([#773](https://github.com/dhis2/maintenance-app-beta/issues/773)) ([7528300](https://github.com/dhis2/maintenance-app-beta/commit/7528300336966dc5dd0d446212a39d6a747a3b3f))
+
+# [0.132.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.131.0...v0.132.0) (2026-02-26)
+
+
+### Features
+
+* add details fields ([#769](https://github.com/dhis2/maintenance-app-beta/issues/769)) ([31aa2e4](https://github.com/dhis2/maintenance-app-beta/commit/31aa2e4bdcccbc7ed4d4f300659c040366c9e2b7))
+
+# [0.131.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.130.1...v0.131.0) (2026-02-26)
+
+
+### Bug Fixes
+
+* value type logic [DHIS2-20962] ([#777](https://github.com/dhis2/maintenance-app-beta/issues/777)) ([475648e](https://github.com/dhis2/maintenance-app-beta/commit/475648e4415334fd42e3eadd062a4179043deeb7))
+
+
+### Features
+
+* add missing translations props [DHIS2-20971] ([db783cf](https://github.com/dhis2/maintenance-app-beta/commit/db783cf07499773bfd2cdeab01adb496590de7af))
+
+## [0.130.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.130.0...v0.130.1) (2026-02-26)
+
+
+### Bug Fixes
+
+* allow org unit group and level deselection in data set forms ([51f2734](https://github.com/dhis2/maintenance-app-beta/commit/51f273438c2acb147d17ae6739c1987048174b9a))
+* preserve spaces in list elements ([#774](https://github.com/dhis2/maintenance-app-beta/issues/774)) ([20eb148](https://github.com/dhis2/maintenance-app-beta/commit/20eb148a86cea901f51d996adc9606aa8d95d8ab))
+
+# [0.130.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.129.0...v0.130.0) (2026-02-25)
+
+
+### Features
+
+* better distinction between program and program stages notification  ([edfd5d9](https://github.com/dhis2/maintenance-app-beta/commit/edfd5d9caa2782f36283ed3b57e7ff9d0778e786))
+
+# [0.129.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.128.0...v0.129.0) (2026-02-25)
+
+
+### Features
+
+* add missing field and hide edit of event programs ([#778](https://github.com/dhis2/maintenance-app-beta/issues/778)) ([7a9ad5b](https://github.com/dhis2/maintenance-app-beta/commit/7a9ad5b8153f2fff78ba3ac10dc952eb713fb19a))
+
+# [0.128.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.127.0...v0.128.0) (2026-02-23)
+
+
+### Features
+
+* implement program stage notifications form ([#771](https://github.com/dhis2/maintenance-app-beta/issues/771)) ([95770e3](https://github.com/dhis2/maintenance-app-beta/commit/95770e39ac4637fea00f29a5a79d8ae31e9246b3))
+
+# [0.127.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.126.1...v0.127.0) (2026-02-19)
+
+
+### Features
+
+* program notifications for stages scaffolding ([#770](https://github.com/dhis2/maintenance-app-beta/issues/770)) ([711554f](https://github.com/dhis2/maintenance-app-beta/commit/711554f04226721dddf73f097edae8d70d258178))
+* program notifications list [DHIS2-20782] ([#772](https://github.com/dhis2/maintenance-app-beta/issues/772)) ([5a0a05e](https://github.com/dhis2/maintenance-app-beta/commit/5a0a05e243332d1987428b98dd36937db614b283))
+
+## [0.126.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.126.0...v0.126.1) (2026-02-16)
+
+
+### Bug Fixes
+
+* show MULTI_TEXT value type when creating new option sets  ([#758](https://github.com/dhis2/maintenance-app-beta/issues/758)) ([e51606f](https://github.com/dhis2/maintenance-app-beta/commit/e51606f76b6af5cd9fb90baf25ada69bac61eb7e))
+
+# [0.126.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.125.1...v0.126.0) (2026-02-11)
+
+
+### Features
+
+* program notifications form ([#766](https://github.com/dhis2/maintenance-app-beta/issues/766)) ([8006849](https://github.com/dhis2/maintenance-app-beta/commit/8006849fc34393d8f92d4565f29b71edc12ab03a))
+
+## [0.125.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.125.0...v0.125.1) (2026-02-11)
+
+
+### Bug Fixes
+
+* clear toggled display options [DHIS2-20506] ([#762](https://github.com/dhis2/maintenance-app-beta/issues/762)) ([c6827a5](https://github.com/dhis2/maintenance-app-beta/commit/c6827a5db5784ff224de7de09b350e84ce5bf187))
+* feature toggle display options [DHIS2-20853] ([#761](https://github.com/dhis2/maintenance-app-beta/issues/761)) ([cc6725c](https://github.com/dhis2/maintenance-app-beta/commit/cc6725c4d29b60f8619431a8e3a3f8790a6ded3d))
+
+# [0.125.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.124.1...v0.125.0) (2026-02-11)
+
+
+### Features
+
+* predictor groups [DHIS2-20780] DHIS2-20779] ([#741](https://github.com/dhis2/maintenance-app-beta/issues/741)) ([8c4cd12](https://github.com/dhis2/maintenance-app-beta/commit/8c4cd12e5d569fcc578ac0e5ba919180720d012b))
+
+## [0.124.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.124.0...v0.124.1) (2026-02-11)
+
+
+### Bug Fixes
+
+* set data rw on categoryOptions [DHIS2-20254] ([#759](https://github.com/dhis2/maintenance-app-beta/issues/759)) ([5608c7c](https://github.com/dhis2/maintenance-app-beta/commit/5608c7c69014b5b091d994caf2741a64364f7a17))
+
+# [0.124.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.123.0...v0.124.0) (2026-02-10)
+
+
+### Bug Fixes
+
+* add description for option [DHIS2-14581] ([#765](https://github.com/dhis2/maintenance-app-beta/issues/765)) ([5f28f5f](https://github.com/dhis2/maintenance-app-beta/commit/5f28f5f9c6e6f0e477179e0d1ba2ae9658965e83))
+
+
+### Features
+
+* add public sharing ([#760](https://github.com/dhis2/maintenance-app-beta/issues/760)) ([f8eeb2e](https://github.com/dhis2/maintenance-app-beta/commit/f8eeb2e48afe572c8916deee96287729636ecdba))
+
+# [0.123.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.122.2...v0.123.0) (2026-02-09)
+
+
+### Bug Fixes
+
+* **IconPicker:** replace tabs with segmented control, adjust styles ([a51f8a5](https://github.com/dhis2/maintenance-app-beta/commit/a51f8a5958a6359d56deee00c192bd38f4cf110b))
+* **ListViewFilter:** conditionally show clear filters button when filters are applied ([408e065](https://github.com/dhis2/maintenance-app-beta/commit/408e0652ad9725b0e626c92001539bbfb02fa4bc))
+* **searchableSelect:** adjust field styling of searcable single and multi selects ([b711ba1](https://github.com/dhis2/maintenance-app-beta/commit/b711ba1bed3dcc2bd1bc6092e14751229c5da505))
+* **sectionForm:** adjust padding and spacing ([0d8cd34](https://github.com/dhis2/maintenance-app-beta/commit/0d8cd341af4f560960a880dd8b60d6b7d76d8970))
+* **sectionFormSidebar:** adjust sidebar item styling ([681d840](https://github.com/dhis2/maintenance-app-beta/commit/681d84010fac0a5ccc9ff6977ed2876b2a2a6eeb))
+* **sectionList:** adjust action button icons ([05c08ad](https://github.com/dhis2/maintenance-app-beta/commit/05c08adc4eb0442639b118311b2aa1984fe681a9))
+* **sectionList:** adjust row and checkbox spacing ([627145d](https://github.com/dhis2/maintenance-app-beta/commit/627145daba872c402e35af035c6c29086cb3dc73))
+* **SectionList:** adjust manage list view transfer headers ([1f42468](https://github.com/dhis2/maintenance-app-beta/commit/1f42468f734b29e04da57964a4833eebdfafe976))
+* **sectionListToolbar:** adjust batch toolbar styles ([b06dff1](https://github.com/dhis2/maintenance-app-beta/commit/b06dff1851691b1db39941725f7c9628d211a8ba))
+* **sectionListToolbar:** avoid LinkButton offset alignment issue ([31ecec8](https://github.com/dhis2/maintenance-app-beta/commit/31ecec8b53245adada5966bcf903407e998a33b5))
+* **standardFormActions:** use UI Button loading states ([dd18fde](https://github.com/dhis2/maintenance-app-beta/commit/dd18fde50e608296492f9ea73b3fdf8e2b14d50a))
+
+
+### Features
+
+* **colorPicker:** add ability to remove color, use compact picker ([a740f18](https://github.com/dhis2/maintenance-app-beta/commit/a740f18d72e832d57806b0d2df1086a5f40a6c65))
+
+## [0.122.2](https://github.com/dhis2/maintenance-app-beta/compare/v0.122.1...v0.122.2) (2026-02-04)
+
+
+### Bug Fixes
+
+* data element aggregation level in ou hierarchy ([6cbcce1](https://github.com/dhis2/maintenance-app-beta/commit/6cbcce15287599394618e7f95882d9cb262738b2))
+
+## [0.122.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.122.0...v0.122.1) (2026-02-03)
+
+
+### Bug Fixes
+
+* no quotes in css ([#756](https://github.com/dhis2/maintenance-app-beta/issues/756)) ([8e77f83](https://github.com/dhis2/maintenance-app-beta/commit/8e77f8397fefd29a583d60fa5008c9ff3969e824))
+
+# [0.122.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.121.0...v0.122.0) (2026-02-02)
+
+
+### Features
+
+* [DHIS2-20539] Program stage creation and scheduling ([#732](https://github.com/dhis2/maintenance-app-beta/issues/732)) ([8aea8eb](https://github.com/dhis2/maintenance-app-beta/commit/8aea8ebcc33ecee02dd2c6e26ce1fe5a799e62d8))
+
+# [0.121.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.120.1...v0.121.0) (2026-02-02)
+
+
+### Features
+
+* disable when configuring non supported TEAs as searchable ([1ad16d2](https://github.com/dhis2/maintenance-app-beta/commit/1ad16d217dbdcd63b4528fa953200e8c5848f29a))
+
+## [0.120.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.120.0...v0.120.1) (2026-02-02)
+
+
+### Bug Fixes
+
+* dataElements typo ([#754](https://github.com/dhis2/maintenance-app-beta/issues/754)) ([958f28c](https://github.com/dhis2/maintenance-app-beta/commit/958f28c1571ac6db81da0f4af71de06e821b203f))
+* impose sort order for attributes [DHIS2-13398] ([#737](https://github.com/dhis2/maintenance-app-beta/issues/737)) ([ad52174](https://github.com/dhis2/maintenance-app-beta/commit/ad52174a44f573cad9cd27cd0d2ce8b5d5bc66c4))
+
+# [0.120.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.119.0...v0.120.0) (2026-01-29)
+
+
+### Features
+
+* show initiating and receiving entity type in relationship type list ([ec317fc](https://github.com/dhis2/maintenance-app-beta/commit/ec317fc7bfba074781dba0fd1d94e74db4685790))
+
+# [0.119.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.118.0...v0.119.0) (2026-01-28)
+
+
+### Features
+
+* [DHIS2-20617] program rule variable form ([#729](https://github.com/dhis2/maintenance-app-beta/issues/729)) ([c11566a](https://github.com/dhis2/maintenance-app-beta/commit/c11566ac9e366f2e4efe05ae034a03afeabebf96))
+
+# [0.118.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.117.1...v0.118.0) (2026-01-28)
+
+
+### Features
+
+* reuse expression builder [DHIS2-20737] ([#735](https://github.com/dhis2/maintenance-app-beta/issues/735)) ([31fa406](https://github.com/dhis2/maintenance-app-beta/commit/31fa406b2fd44d5b12502c6776299e1fcfd470e0))
+
+## [0.117.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.117.0...v0.117.1) (2026-01-28)
+
+
+### Bug Fixes
+
+* program add new stage bug ([69f1294](https://github.com/dhis2/maintenance-app-beta/commit/69f1294c456fb42ede2cee328893f813068edea3))
+
+# [0.117.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.116.0...v0.117.0) (2026-01-28)
+
+
+### Features
+
+* program stage forms ([d3c2ecf](https://github.com/dhis2/maintenance-app-beta/commit/d3c2ecfc4eab82ca59a0eef24cc7349c496956b4))
+
+# [0.116.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.115.0...v0.116.0) (2026-01-28)
+
+
+### Features
+
+* [DHIS2-20537] Program stage data ([#733](https://github.com/dhis2/maintenance-app-beta/issues/733)) ([ff5212b](https://github.com/dhis2/maintenance-app-beta/commit/ff5212b6ffdde64b867b115f4826cd435c7b0a77))
+
+# [0.115.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.114.0...v0.115.0) (2026-01-28)
+
+
+### Features
+
+* adjust program stage list ([8141f52](https://github.com/dhis2/maintenance-app-beta/commit/8141f52206c5113921d7b970bb61705633ea266d))
+
 # [0.114.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.113.2...v0.114.0) (2026-01-27)
 
 

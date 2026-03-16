@@ -1,2 +1,2 @@
 export { segmentsToPath } from './segmentsToPath'
-export { getDefaults } from './getDefaults'
+export { getDefaultsOld } from './getDefaults'

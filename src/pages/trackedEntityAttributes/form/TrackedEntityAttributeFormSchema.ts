@@ -1,5 +1,9 @@
 import { z } from 'zod'
-import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
+import {
+    createFormValidate,
+    getDefaultsOld,
+    modelFormSchemas,
+} from '../../../lib'
 import {
     PickWithFieldFilters,
     TrackedEntityAttribute,
@@ -32,6 +36,7 @@ const trackedEntityAttributeBaseSchema = z.object({
     inherit: z.boolean().default(false),
     displayInListNoProgram: z.boolean().default(false),
     skipSynchronization: z.boolean().default(false),
+    skipAnalytics: z.boolean().default(false),
     trigramIndexable: z.boolean().default(false),
     trigramIndexed: z.boolean().optional(),
     preferredSearchOperator: z.enum(['EQ', 'SW', 'EW', 'LIKE']).optional(),
@@ -58,7 +63,7 @@ export const trackedEntityAttributeFormSchema = trackedEntityAttributeBaseSchema
     })
     .merge(withAttributeValues)
 
-export const initialValues = getDefaults(trackedEntityAttributeFormSchema)
+export const initialValues = getDefaultsOld(trackedEntityAttributeFormSchema)
 
 export type TrackedEntityAttributeFormValues = PickWithFieldFilters<
     TrackedEntityAttribute,

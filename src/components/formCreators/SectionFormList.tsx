@@ -3,11 +3,12 @@ import { Button, ButtonStrip, IconAdd16 } from '@dhis2/ui'
 import React, { useState } from 'react'
 import { useFieldArray } from 'react-final-form-arrays'
 import {
+    DrawerHeader,
+    DrawerPortal,
     StandardFormSectionTitle,
     MoreDropdownButton,
     MoreDropdownItem,
     MoreDropdownDivider,
-    DrawerPortal,
 } from '../../components'
 import { TranslationDialog } from '../../components/sectionList/translation'
 import { BaseListModel, SchemaName } from '../../lib'
@@ -37,12 +38,16 @@ type SectionFormComponent<
 export function SectionFormSectionsList<TValues extends Section, TExtraProps>({
     sectionsFieldName,
     schemaName,
+    level,
     SectionFormComponent,
+    withReordering,
     otherProps,
 }: Readonly<{
     sectionsFieldName: string
     schemaName: SchemaName
+    level: 'primary' | 'secondary'
     SectionFormComponent: SectionFormComponent<TValues, TExtraProps>
+    withReordering: boolean
     otherProps?: TExtraProps
 }>) {
     const [sectionFormOpen, setSectionFormOpen] = useState<
@@ -87,7 +92,15 @@ export function SectionFormSectionsList<TValues extends Section, TExtraProps>({
         <div className={css.sectionsList}>
             <DrawerPortal
                 isOpen={isSectionFormOpen}
+                level={level}
                 onClose={() => setSectionFormOpen(undefined)}
+                header={
+                    <DrawerHeader onClose={() => setSectionFormOpen(undefined)}>
+                        {sectionFormOpen === null
+                            ? i18n.t('New section')
+                            : i18n.t('Edit section')}
+                    </DrawerHeader>
+                }
             >
                 {sectionFormOpen !== undefined && (
                     <SectionFormComponent
@@ -118,7 +131,7 @@ export function SectionFormSectionsList<TValues extends Section, TExtraProps>({
             </div>
 
             <div className={css.sectionItems}>
-                {sectionFieldArray.value.map((section, index) => {
+                {sectionFieldArray.value?.map((section, index) => {
                     if (section.deleted) {
                         return (
                             <div
@@ -166,14 +179,16 @@ export function SectionFormSectionsList<TValues extends Section, TExtraProps>({
                     >
                         {i18n.t('Add section')}
                     </Button>
-                    <Button
-                        secondary
-                        small
-                        onClick={() => setOrderSectionsFormOpen(true)}
-                        disabled={sectionFieldArray.value.length <= 1}
-                    >
-                        {i18n.t('Reorder sections')}
-                    </Button>
+                    {withReordering && (
+                        <Button
+                            secondary
+                            small
+                            onClick={() => setOrderSectionsFormOpen(true)}
+                            disabled={sectionFieldArray.value?.length <= 1}
+                        >
+                            {i18n.t('Reorder sections')}
+                        </Button>
+                    )}
                 </ButtonStrip>
             </div>
         </div>
@@ -193,11 +208,13 @@ export const ListInFormItem = ({
     schemaName,
     onClick,
     onDelete,
+    translatable = true,
 }: {
     item: ListItem
     schemaName: SchemaName
     onClick?: () => void
     onDelete?: () => void
+    translatable?: boolean
 }) => {
     const [translationDialogModel, setTranslationDialogModel] = useState<
         BaseListModel | undefined
@@ -237,7 +254,7 @@ export const ListInFormItem = ({
                             label={i18n.t('Edit')}
                             onClick={onClick}
                         />
-                        {item.access !== undefined && (
+                        {item.access !== undefined && translatable && (
                             <MoreDropdownItem
                                 label={i18n.t('Translate')}
                                 onClick={openTranslationDialog}

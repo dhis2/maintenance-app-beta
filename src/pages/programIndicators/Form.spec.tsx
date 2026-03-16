@@ -20,6 +20,7 @@ import { uiAssertions } from '../../testUtils/uiAssertions'
 import { Program, ProgramTrackedEntityAttribute } from '../../types/generated'
 import { Component as Edit } from './Edit'
 import { staticOptions } from './form/OrgUnitField'
+import { PROGRAM_INDICATOR_SPECIFIC_TRANSLATIONS } from './form/ProgramIndicatorFormFields'
 import { Component as New } from './New'
 import resetAllMocks = jest.resetAllMocks
 
@@ -265,13 +266,9 @@ describe('Program indicator form tests', () => {
                 screen
             )
 
-            const analyticsOptions = await uiActions.openSingleSelect(
-                screen.getByTestId('analytics-type-field'),
-                screen
-            )
-            await userEvent.click(analyticsOptions[0])
-            await uiActions.closeSingleSelectIfOpen(
-                screen.getByTestId('analytics-type-field'),
+            await uiActions.pickRadioField(
+                'analyticsType',
+                'Event: Uses data from all events within a program stage',
                 screen
             )
 
@@ -360,13 +357,9 @@ describe('Program indicator form tests', () => {
                 screen
             )
 
-            const analyticsOptions = await uiActions.openSingleSelect(
-                screen.getByTestId('analytics-type-field'),
-                screen
-            )
-            await userEvent.click(analyticsOptions[1])
-            await uiActions.closeSingleSelectIfOpen(
-                screen.getByTestId('analytics-type-field'),
+            await uiActions.pickRadioField(
+                'analyticsType',
+                'Enrollment: Uses data combined from the latest events across the enrollment',
                 screen
             )
 
@@ -574,7 +567,11 @@ describe('Program indicator form tests', () => {
             const editModal = await screen.findByTestId(
                 `expression-builder-modal`
             )
-            await uiActions.enterExpressionInModal(editModal, anExpression)
+            await uiActions.enterExpressionInModal(
+                editModal,
+                anExpression,
+                screen
+            )
 
             const error = within(editModal).getByTestId(
                 `expression-builder-modal-input-validation`
@@ -601,7 +598,11 @@ describe('Program indicator form tests', () => {
             const editModal = await screen.findByTestId(
                 `expression-builder-modal`
             )
-            await uiActions.enterExpressionInModal(editModal, anExpression)
+            await uiActions.enterExpressionInModal(
+                editModal,
+                anExpression,
+                screen
+            )
 
             const error = within(editModal).getByTestId(
                 `expression-builder-modal-input-validation`
@@ -721,15 +722,19 @@ describe('Program indicator form tests', () => {
                 },
                 screen
             )
-            await uiAssertions.expectSelectToExistWithOptions(
-                screen.getByTestId('analytics-type-field'),
-                {
-                    options: mockSchema.properties.analyticsType.constants.map(
-                        (o) => ({
-                            displayName: getConstantTranslation(o),
-                        })
-                    ),
-                },
+
+            uiAssertions.expectRadioFieldToExist(
+                'analyticsType',
+                [
+                    {
+                        label: PROGRAM_INDICATOR_SPECIFIC_TRANSLATIONS.EVENT,
+                        checked: false,
+                    },
+                    {
+                        label: PROGRAM_INDICATOR_SPECIFIC_TRANSLATIONS.ENROLLMENT,
+                        checked: false,
+                    },
+                ],
                 screen
             )
 
@@ -839,13 +844,9 @@ describe('Program indicator form tests', () => {
                 screen
             )
 
-            const analyticsOptions = await uiActions.openSingleSelect(
-                screen.getByTestId('analytics-type-field'),
-                screen
-            )
-            await userEvent.click(analyticsOptions[0])
-            await uiActions.closeSingleSelectIfOpen(
-                screen.getByTestId('analytics-type-field'),
+            await uiActions.pickRadioField(
+                'analyticsType',
+                'Event: Uses data from all events within a program stage',
                 screen
             )
 
@@ -947,15 +948,12 @@ describe('Program indicator form tests', () => {
                 screen
             )
 
-            const analyticsOptions = await uiActions.openSingleSelect(
-                screen.getByTestId('analytics-type-field'),
+            await uiActions.pickRadioField(
+                'analyticsType',
+                'Event: Uses data from all events within a program stage',
                 screen
             )
-            await userEvent.click(analyticsOptions[0])
-            await uiActions.closeSingleSelectIfOpen(
-                screen.getByTestId('analytics-type-field'),
-                screen
-            )
+
             await uiActions.applyNewExpressionWithinModal(
                 'expression',
                 anExpression,
@@ -991,7 +989,7 @@ describe('Program indicator form tests', () => {
                         expression: anExpression,
                         filter: aFilter,
                         analyticsPeriodBoundaries: [],
-                        orgUnitField: undefined,
+                        orgUnitField: staticOptions.eventDefault.value,
                     }),
                 })
             )
@@ -1041,13 +1039,9 @@ describe('Program indicator form tests', () => {
                 screen
             )
 
-            const analyticsOptions = await uiActions.openSingleSelect(
-                screen.getByTestId('analytics-type-field'),
-                screen
-            )
-            await userEvent.click(analyticsOptions[0])
-            await uiActions.closeSingleSelectIfOpen(
-                screen.getByTestId('analytics-type-field'),
+            await uiActions.pickRadioField(
+                'analyticsType',
+                'Event: Uses data from all events within a program stage',
                 screen
             )
 
@@ -1089,7 +1083,7 @@ describe('Program indicator form tests', () => {
                                 offsetPeriods: 5,
                             },
                         ],
-                        orgUnitField: undefined,
+                        orgUnitField: staticOptions.eventDefault.value,
                     }),
                 })
             )
@@ -1142,13 +1136,9 @@ describe('Program indicator form tests', () => {
                 screen
             )
 
-            const analyticsOptions = await uiActions.openSingleSelect(
-                screen.getByTestId('analytics-type-field'),
-                screen
-            )
-            await userEvent.click(analyticsOptions[0])
-            await uiActions.closeSingleSelectIfOpen(
-                screen.getByTestId('analytics-type-field'),
+            await uiActions.pickRadioField(
+                'analyticsType',
+                'Event: Uses data from all events within a program stage',
                 screen
             )
 
@@ -1193,7 +1183,7 @@ describe('Program indicator form tests', () => {
                         expression: undefined,
                         filter: undefined,
                         analyticsPeriodBoundaries: [],
-                        orgUnitField: undefined,
+                        orgUnitField: staticOptions.eventDefault.value,
                     }),
                 })
             )
@@ -1243,15 +1233,12 @@ describe('Program indicator form tests', () => {
                 screen
             )
 
-            const analyticsOptions = await uiActions.openSingleSelect(
-                screen.getByTestId('analytics-type-field'),
+            await uiActions.pickRadioField(
+                'analyticsType',
+                'Event: Uses data from all events within a program stage',
                 screen
             )
-            await userEvent.click(analyticsOptions[0])
-            await uiActions.closeSingleSelectIfOpen(
-                screen.getByTestId('analytics-type-field'),
-                screen
-            )
+
             await uiActions.pickOptionInTransfer(
                 'legendSets-field',
                 legendSets[0].displayName,
@@ -1283,7 +1270,7 @@ describe('Program indicator form tests', () => {
                         expression: undefined,
                         filter: undefined,
                         analyticsPeriodBoundaries: [],
-                        orgUnitField: undefined,
+                        orgUnitField: staticOptions.eventDefault.value,
                     }),
                 })
             )
@@ -1334,13 +1321,9 @@ describe('Program indicator form tests', () => {
                 screen
             )
 
-            const analyticsOptions = await uiActions.openSingleSelect(
-                screen.getByTestId('analytics-type-field'),
-                screen
-            )
-            await userEvent.click(analyticsOptions[0])
-            await uiActions.closeSingleSelectIfOpen(
-                screen.getByTestId('analytics-type-field'),
+            await uiActions.pickRadioField(
+                'analyticsType',
+                'Event: Uses data from all events within a program stage',
                 screen
             )
 
@@ -1379,7 +1362,7 @@ describe('Program indicator form tests', () => {
                         expression: undefined,
                         filter: undefined,
                         analyticsPeriodBoundaries: [],
-                        orgUnitField: undefined,
+                        orgUnitField: staticOptions.eventDefault.value,
                     }),
                 })
             )
@@ -1395,12 +1378,13 @@ describe('Program indicator form tests', () => {
                     programIndicatorOverwrites = {},
                     matchingExistingElementFilter = undefined,
                     id = randomDhis2Id(),
+                    overridePrograms,
                 } = {}
             ) => {
                 const programWithoutRegistration = testProgram({
                     programType: 'WITHOUT_REGISTRATION' as Program.programType,
                 })
-                const programs = [
+                const programs = overridePrograms ?? [
                     programWithoutRegistration,
                     testProgram(),
                     testProgram(),
@@ -1408,6 +1392,7 @@ describe('Program indicator form tests', () => {
                 const attributes = [testCustomAttribute()]
                 const legendSets = [testLegendSet(), testLegendSet()]
                 const periodTypes = ['Daily', 'Monthly', 'Yearly']
+
                 const programIndicator = testProgramIndicator({
                     id,
                     program: programWithoutRegistration,
@@ -1529,6 +1514,7 @@ describe('Program indicator form tests', () => {
         })
         it('contain all the configuration field', async () => {
             const { screen, programs, programIndicator } = await renderForm()
+
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('programs-field'),
                 {
@@ -1554,20 +1540,22 @@ describe('Program indicator form tests', () => {
                 screen
             )
 
-            await uiAssertions.expectSelectToExistWithOptions(
-                screen.getByTestId('analytics-type-field'),
-                {
-                    selected: getConstantTranslation(
-                        programIndicator.analyticsType
-                    ),
-                    options: mockSchema.properties.analyticsType.constants.map(
-                        (o) => ({
-                            displayName: getConstantTranslation(o),
-                        })
-                    ),
-                },
+            uiAssertions.expectRadioFieldToExist(
+                'analyticsType',
+                [
+                    {
+                        label: PROGRAM_INDICATOR_SPECIFIC_TRANSLATIONS.EVENT,
+                        checked: programIndicator.analyticsType === 'EVENT',
+                    },
+                    {
+                        label: PROGRAM_INDICATOR_SPECIFIC_TRANSLATIONS.ENROLLMENT,
+                        checked:
+                            programIndicator.analyticsType === 'ENROLLMENT',
+                    },
+                ],
                 screen
             )
+
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('org-unit-field'),
                 {
@@ -1595,6 +1583,132 @@ describe('Program indicator form tests', () => {
                 {
                     selected: programIndicator.decimals,
                     options: expectedDecimalsOptions,
+                },
+                screen
+            )
+        })
+        it('shows the selected org-unit-field value (tracker program)', async () => {
+            const programTrackedEntityAttributes = [
+                {
+                    trackedEntityAttribute: {
+                        valueType: 'ORGANISATION_UNIT',
+                        displayName: 'entity attribute org unit',
+                        id: randomDhis2Id(),
+                    },
+                },
+                {
+                    trackedEntityAttribute: {
+                        valueType: 'TEXT',
+                        displayName: 'other entity attribute',
+                        id: randomDhis2Id(),
+                    },
+                },
+            ] as unknown as ProgramTrackedEntityAttribute[]
+            const programWithRegistration = testProgram({
+                programType: 'WITH_REGISTRATION' as Program.programType,
+                programTrackedEntityAttributes,
+            })
+            const orgUnitOptions = [
+                { displayName: staticOptions.eventDefault.label },
+                programTrackedEntityAttributes[0].trackedEntityAttribute,
+                { displayName: staticOptions.registration.label },
+                { displayName: staticOptions.enrollment.label },
+                { displayName: staticOptions.ownerAtStart.label },
+                { displayName: staticOptions.ownerAtEnd.label },
+            ]
+            const orgUnitOption = staticOptions.ownerAtStart
+            const overridePrograms = [
+                programWithRegistration,
+                testProgram(),
+                testProgram(),
+                testProgram(),
+            ]
+            const { screen, programs, programIndicator } = await renderForm({
+                programIndicatorOverwrites: {
+                    orgUnitField: orgUnitOption.value,
+                    program: programWithRegistration,
+                    analyticsType: 'EVENT',
+                },
+                overridePrograms,
+            })
+
+            await uiAssertions.expectSelectToExistWithOptions(
+                screen.getByTestId('programs-field'),
+                {
+                    selected: programIndicator.program.displayName,
+                    options: programs,
+                },
+                screen
+            )
+
+            await uiAssertions.expectSelectToExistWithOptions(
+                screen.getByTestId('org-unit-field'),
+                {
+                    selected: orgUnitOption.label,
+                    options: orgUnitOptions,
+                },
+                screen
+            )
+        })
+        it('shows default org unit field if none is selected (tracker program)', async () => {
+            const programTrackedEntityAttributes = [
+                {
+                    trackedEntityAttribute: {
+                        valueType: 'ORGANISATION_UNIT',
+                        displayName: 'entity attribute org unit',
+                        id: randomDhis2Id(),
+                    },
+                },
+                {
+                    trackedEntityAttribute: {
+                        valueType: 'TEXT',
+                        displayName: 'other entity attribute',
+                        id: randomDhis2Id(),
+                    },
+                },
+            ] as unknown as ProgramTrackedEntityAttribute[]
+            const programWithRegistration = testProgram({
+                programType: 'WITH_REGISTRATION' as Program.programType,
+                programTrackedEntityAttributes,
+            })
+            const orgUnitOptions = [
+                { displayName: staticOptions.eventDefault.label },
+                programTrackedEntityAttributes[0].trackedEntityAttribute,
+                { displayName: staticOptions.registration.label },
+                { displayName: staticOptions.enrollment.label },
+                { displayName: staticOptions.ownerAtStart.label },
+                { displayName: staticOptions.ownerAtEnd.label },
+            ]
+            const orgUnitOption = staticOptions.eventDefault
+            const overridePrograms = [
+                programWithRegistration,
+                testProgram(),
+                testProgram(),
+                testProgram(),
+            ]
+            const { screen, programs, programIndicator } = await renderForm({
+                programIndicatorOverwrites: {
+                    orgUnitField: undefined,
+                    program: programWithRegistration,
+                    analyticsType: 'EVENT',
+                },
+                overridePrograms,
+            })
+
+            await uiAssertions.expectSelectToExistWithOptions(
+                screen.getByTestId('programs-field'),
+                {
+                    selected: programIndicator.program.displayName,
+                    options: programs,
+                },
+                screen
+            )
+
+            await uiAssertions.expectSelectToExistWithOptions(
+                screen.getByTestId('org-unit-field'),
+                {
+                    selected: orgUnitOption.label,
+                    options: orgUnitOptions,
                 },
                 screen
             )

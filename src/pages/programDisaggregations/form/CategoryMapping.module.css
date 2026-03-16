@@ -34,3 +34,8 @@
     margin-block: 16px;
     margin-inline-start: 8px;
 }
+
+.categorySubtitle {
+    font-size: 14px;
+    font-weight: 500;
+}

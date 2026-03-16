@@ -196,7 +196,7 @@ export const AttributeTypeComponent = ({
         <MultiSelectField
             filterable={true}
             dataTest="formfields-objecttypes"
-            label={i18n.t('Objects to which this attribute can be applied')}
+            label={i18n.t('Applies to')}
             selected={selections}
             onChange={(s) => {
                 const values = form.getState().values
@@ -210,6 +210,7 @@ export const AttributeTypeComponent = ({
                 }
                 setSelections(s.selected)
             }}
+            placeholder={i18n.t('Choose objects')}
         >
             {ATTRIBUTE_BOOLEANS.map((attribute) => (
                 <MultiSelectOption

@@ -19,10 +19,9 @@ import {
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
 } from '../../../lib'
-import DenominatorFields from './DenominatorFields'
 import { IndicatorFormDescriptor } from './formDescriptor'
 import { IndicatorTypeField } from './IndicatorTypeField'
-import NumeratorFields from './NumeratorFields'
+import { NumeratorDenominatorFields } from './NumeratorDenominatorFields'
 
 const section = SECTIONS_MAP.indicator
 
@@ -50,11 +49,7 @@ export const IndicatorFormFields = () => {
                 <DefaultIdentifiableFields />
 
                 <StandardFormField>
-                    <DescriptionField
-                        helpText={i18n.t(
-                            'Explain the purpose of this indicator.'
-                        )}
-                    />
+                    <DescriptionField />
                 </StandardFormField>
 
                 <StandardFormField>
@@ -64,10 +59,7 @@ export const IndicatorFormFields = () => {
                         name="url"
                         dataTest="formfields-url"
                         type="url"
-                        label={i18n.t('Url')}
-                        helpText={i18n.t(
-                            'A web link that provides extra information.'
-                        )}
+                        label={i18n.t('URL')}
                     />
                 </StandardFormField>
 
@@ -84,21 +76,29 @@ export const IndicatorFormFields = () => {
 
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        "Define how the indicator is calculated and how it's result will be displayed."
+                        'Define how the indicator is calculated and how the result is displayed.'
                     )}
                 </StandardFormSectionDescription>
 
                 <StandardFormField>
-                    <NumeratorFields />
+                    <NumeratorDenominatorFields
+                        fieldName="numerator"
+                        objectName={i18n.t('Numerator')}
+                        validationResource={'indicators/expression/description'}
+                    />
                 </StandardFormField>
                 <StandardFormField>
-                    <DenominatorFields />
+                    <NumeratorDenominatorFields
+                        fieldName="denominator"
+                        objectName={i18n.t('Denominator')}
+                        validationResource={'indicators/expression/description'}
+                    />
                 </StandardFormField>
 
                 <StandardFormField>
                     <IndicatorTypeField
                         helpText={i18n.t(
-                            'Select how the indicator result should be expressed (per cent, per thousand, etc.)'
+                            'Choose how the indicator result should be shown.'
                         )}
                     />
                 </StandardFormField>
@@ -117,11 +117,8 @@ export const IndicatorFormFields = () => {
                     <SingleSelectFieldFF
                         input={decimalsInput}
                         meta={decimalsMeta}
-                        helpText={i18n.t(
-                            'Select how many decimal places to display in outputs for this indicator'
-                        )}
                         dataTest="decimals-field"
-                        label={i18n.t('Number of decimal places to show')}
+                        label={i18n.t('Decimal places in output')}
                         inputWidth="400px"
                         options={[
                             { label: i18n.t('<No value>'), value: '' },
@@ -130,7 +127,6 @@ export const IndicatorFormFields = () => {
                                 value: d.toString(),
                             })),
                         ]}
-                        placeholder={i18n.t('Select number of decimals')}
                     />
                 </StandardFormField>
             </SectionedFormSection>
@@ -140,7 +136,7 @@ export const IndicatorFormFields = () => {
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Select legends to visually categorize values for this indicator in data entry and analytics apps.'
+                        'Choose legends to visually categorize values in data entry and analytics apps.'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
@@ -170,12 +166,12 @@ export const IndicatorFormFields = () => {
                 name={descriptor.getSection('mappingSettings').name}
             >
                 <StandardFormSectionTitle>
-                    {i18n.t('Mapping Settings')}
+                    {i18n.t('Aggregate data export mapping')}
                 </StandardFormSectionTitle>
 
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Configure how this indicator links to specific category and attribute combinations for data export.'
+                        'Map this indicator to category and attribute option combinations used when exporting aggregate data.'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
@@ -187,7 +183,7 @@ export const IndicatorFormFields = () => {
                             'Category option combination for aggregate data export'
                         )}
                         helpText={i18n.t(
-                            'Map this indicator to a specific category option combinations when exporting aggregate data.'
+                            'Enter a category option combination ID.'
                         )}
                         component={InputFieldFF}
                     />
@@ -203,7 +199,7 @@ export const IndicatorFormFields = () => {
                             'Attribute option combination for aggregate data export'
                         )}
                         helpText={i18n.t(
-                            'Map this indicator to a specific attribute option combinations when exporting aggregate data.'
+                            'Enter an attribute option combination ID.'
                         )}
                     />
                 </StandardFormField>

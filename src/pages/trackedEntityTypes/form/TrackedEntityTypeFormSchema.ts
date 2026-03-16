@@ -1,5 +1,9 @@
 import { z } from 'zod'
-import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
+import {
+    createFormValidate,
+    getDefaultsOld,
+    modelFormSchemas,
+} from '../../../lib'
 
 const {
     identifiable,
@@ -27,10 +31,10 @@ const trackedEntityTypeBaseSchema = z.object({
     minAttributesRequiredToSearch: z
         .number()
         .min(
-            0,
-            'Minimum number of attributes required to search must be 0 or greater'
+            1,
+            'Minimum number of attributes required to search must be 1 or greater'
         )
-        .default(0),
+        .default(1),
     maxTeiCountToReturn: z
         .number()
         .min(
@@ -65,7 +69,7 @@ export const trackedEntityTypeListSchema = trackedEntityTypeBaseSchema
         displayShortName: z.string(),
     })
 
-export const initialTrackedEntityTypeValues = getDefaults(
+export const initialTrackedEntityTypeValues = getDefaultsOld(
     trackedEntityTypeFormSchema
 )
 export const validateTrackedEntityType = createFormValidate(

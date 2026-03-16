@@ -1,6 +1,12 @@
 import { useConfig } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { CheckboxFieldFF, InputFieldFF, SingleSelectFieldFF } from '@dhis2/ui'
+import {
+    CheckboxFieldFF,
+    FieldGroup,
+    InputFieldFF,
+    RadioFieldFF,
+    SingleSelectFieldFF,
+} from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
 import {
@@ -14,11 +20,13 @@ import {
     StandardFormField,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
+    ExpressionBuilderEntry,
 } from '../../../components'
-import { ExpressionBuilderWithModalField } from '../../../components/metadataFormControls/ExpressionBuilder/ExpressionBuilderWithModalField'
-import { PaddedContainer } from '../../../components/metadataFormControls/ExpressionBuilder/PaddedContainer'
+import { PaddedContainer } from '../../../components/ExpressionBuilder/PaddedContainer'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
 import {
+    // Used directly to avoid key collision with PROGRAM_NOTIFICATION_TRIGGER.ENROLLMENT in allConstantTranslations
+    ANALYTICS_TYPE,
     getConstantTranslation,
     SECTIONS_MAP,
     useSchema,
@@ -31,10 +39,24 @@ import { OrgUnitField } from './OrgUnitField'
 
 const section = SECTIONS_MAP.programIndicator
 
+export const PROGRAM_INDICATOR_SPECIFIC_TRANSLATIONS: Record<string, string> = {
+    EVENT: i18n.t('Event'),
+    ENROLLMENT: i18n.t('Enrollment'),
+}
+
 export const ProgramIndicatorsFormFields = () => {
     const { input: decimalsInput, meta: decimalsMeta } = useField('decimals', {
         format: (v) => v?.toString(),
         parse: (v) => (v !== undefined && v !== '' ? parseInt(v) : v),
+    })
+    const { input: programInput } = useField('program')
+    const eventField = useField('analyticsType', {
+        type: 'radio',
+        value: 'EVENT',
+    })
+    const enrollmentField = useField('analyticsType', {
+        type: 'radio',
+        value: 'ENROLLMENT',
     })
     useSyncSelectedSectionWithScroll()
     const programFilters = [
@@ -46,6 +68,7 @@ export const ProgramIndicatorsFormFields = () => {
     const { apiVersion } = useConfig()
     const hasPiDisaggregation = apiVersion >= 42
     const schema = useSchema(SECTIONS_MAP.programIndicator.name)
+
     return (
         <SectionedFormSections>
             <SectionedFormSection
@@ -61,11 +84,7 @@ export const ProgramIndicatorsFormFields = () => {
                 </StandardFormSectionDescription>
                 <DefaultIdentifiableFields />
                 <StandardFormField>
-                    <DescriptionField
-                        helpText={i18n.t(
-                            'Explain the purpose of this program indicator.'
-                        )}
-                    />
+                    <DescriptionField />
                 </StandardFormField>
                 <StandardFormField>
                     <ColorAndIconField />
@@ -79,7 +98,7 @@ export const ProgramIndicatorsFormFields = () => {
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Choose which program and which data types this program indicator applies to.'
+                        'Choose the program and data types this program indicator applies to.'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
@@ -88,7 +107,7 @@ export const ProgramIndicatorsFormFields = () => {
                         inputWidth="400px"
                         dataTest="programs-field"
                         name="program"
-                        label={i18n.t('Program (required)')}
+                        label={i18n.t('Program')}
                         query={{
                             resource: 'programs',
                             params: {
@@ -114,20 +133,26 @@ export const ProgramIndicatorsFormFields = () => {
                     />
                 </StandardFormField>
                 <StandardFormField dataTest="analytics-type-field">
-                    <FieldRFF
-                        component={SingleSelectFieldFF}
-                        inputWidth="400px"
-                        label={i18n.t('Analytics type')}
-                        name="analyticsType"
-                        options={
-                            schema.properties.analyticsType.constants?.map(
-                                (option) => ({
-                                    value: option,
-                                    label: getConstantTranslation(option),
-                                })
-                            ) ?? []
-                        }
-                    />
+                    <FieldGroup
+                        label={i18n.t('Data source')}
+                        required
+                        dataTest="formfields-analyticsType"
+                    >
+                        <RadioFieldFF
+                            label={`${ANALYTICS_TYPE.EVENT}: ${i18n.t(
+                                'Uses data from all events within a program stage'
+                            )}`}
+                            input={eventField.input}
+                            meta={eventField.meta}
+                        />
+                        <RadioFieldFF
+                            label={`${ANALYTICS_TYPE.ENROLLMENT}: ${i18n.t(
+                                'Uses data combined from the latest events across the enrollment'
+                            )}`}
+                            input={enrollmentField.input}
+                            meta={enrollmentField.meta}
+                        />
+                    </FieldGroup>
                 </StandardFormField>
                 <StandardFormField>
                     <OrgUnitField />
@@ -136,7 +161,7 @@ export const ProgramIndicatorsFormFields = () => {
                     <SingleSelectFieldFF
                         input={decimalsInput}
                         meta={decimalsMeta}
-                        label={i18n.t('Decimals in data output')}
+                        label={i18n.t('Decimal places in output')}
                         inputWidth="400px"
                         options={[
                             { label: i18n.t('<No value>'), value: '' },
@@ -145,7 +170,6 @@ export const ProgramIndicatorsFormFields = () => {
                                 value: d.toString(),
                             })),
                         ]}
-                        placeholder={i18n.t('Select number of decimals')}
                     />
                 </StandardFormField>
             </SectionedFormSection>
@@ -160,11 +184,15 @@ export const ProgramIndicatorsFormFields = () => {
                 </StandardFormSectionDescription>
                 <StandardFormField>
                     <PaddedContainer>
-                        <ExpressionBuilderWithModalField
-                            validationResource="programIndicators/expression/description"
+                        <ExpressionBuilderEntry
                             fieldName="expression"
-                            modalTitle={i18n.t('Expression')}
+                            title={i18n.t('Edit expression')}
                             editButtonText={i18n.t('Edit expression')}
+                            setUpButtonText={i18n.t('Set up expression')}
+                            validationResource="programIndicators/expression/description"
+                            clearable={true}
+                            programId={programInput?.value?.id}
+                            type="programIndicator"
                         />
                     </PaddedContainer>
                 </StandardFormField>
@@ -175,16 +203,21 @@ export const ProgramIndicatorsFormFields = () => {
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Configure the program indicator filter that controls what data will be evaluated bt the main expression.'
+                        'Configure a filter to control which data is evaulated by the main expression.'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
                     <PaddedContainer>
-                        <ExpressionBuilderWithModalField
-                            validationResource="programIndicators/filter/description"
+                        <ExpressionBuilderEntry
                             fieldName="filter"
-                            modalTitle={i18n.t('Filter')}
+                            title={i18n.t('Edit filter')}
                             editButtonText={i18n.t('Edit filter')}
+                            setUpButtonText={i18n.t('Set up filter')}
+                            clearButtonText={i18n.t('Clear filter')}
+                            validationResource="programIndicators/filter/description"
+                            clearable={true}
+                            programId={programInput?.value?.id}
+                            type="programIndicator"
                         />
                     </PaddedContainer>
                 </StandardFormField>
@@ -197,7 +230,7 @@ export const ProgramIndicatorsFormFields = () => {
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Set up time constraints, which determine what data will be evaluated.'
+                        'Add time constraints to control which data is evaulated.'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
@@ -211,9 +244,7 @@ export const ProgramIndicatorsFormFields = () => {
                     {i18n.t('Advanced options')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
-                    {i18n.t(
-                        'Set up advanced properties for this program indicator.'
-                    )}
+                    {i18n.t('Additional settings for this program indicator.')}
                 </StandardFormSectionDescription>
                 <StandardFormField>
                     <FieldRFF
@@ -222,9 +253,7 @@ export const ProgramIndicatorsFormFields = () => {
                         type="checkbox"
                         dataTest="formfields-displayInForm"
                         component={CheckboxFieldFF}
-                        label={i18n.t(
-                            'Show program indicators in data entry forms'
-                        )}
+                        label={i18n.t('Show in data entry forms')}
                     />
                 </StandardFormField>
                 <StandardFormField>
@@ -236,6 +265,9 @@ export const ProgramIndicatorsFormFields = () => {
                         label={i18n.t(
                             'Category option combination for aggregate data export'
                         )}
+                        helpText={i18n.t(
+                            'Enter a category option combination ID.'
+                        )}
                     />
                 </StandardFormField>
                 <StandardFormField>
@@ -246,6 +278,9 @@ export const ProgramIndicatorsFormFields = () => {
                         name="aggregateExportAttributeOptionCombo"
                         label={i18n.t(
                             'Attribute option combination for aggregate data export'
+                        )}
+                        helpText={i18n.t(
+                            'Enter an attribute option combination ID.'
                         )}
                     />
                 </StandardFormField>
@@ -259,6 +294,7 @@ export const ProgramIndicatorsFormFields = () => {
                             label={i18n.t(
                                 'Data element for aggregate data export'
                             )}
+                            helpText={i18n.t('Enter a data element ID.')}
                         />
                     </StandardFormField>
                 )}
@@ -268,7 +304,9 @@ export const ProgramIndicatorsFormFields = () => {
                     {i18n.t('Legends')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
-                    {i18n.t('Set up the program indicator legends.')}
+                    {i18n.t(
+                        'Choose legends to visually categorize values in data entry and analytics apps.'
+                    )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
                     <ModelTransferField

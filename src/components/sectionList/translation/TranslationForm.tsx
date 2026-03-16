@@ -26,7 +26,7 @@ type TranslationValues = Record<string, string>
 type Locale = string
 export type TranslationFormValues = Record<Locale, TranslationValues>
 
-const availableTranslateableFields = [
+const standardTranslatableFields = [
     'name',
     'shortName',
     'formName',
@@ -34,16 +34,20 @@ const availableTranslateableFields = [
 ]
 
 /**
- *  Get the translateable fields for schemaa.
- * Not every models has all the availableTranslateable fields,
- * so we need to filter based on the schema.
- * This also controls the order of the rendered fields */
+ * Get the translateable fields for schemaa.
+ * Merge with standardTranslatableFields fields for order and
+ * then filter based on the schema. */
 
-export const getTranslateableFieldsForSchema = (schema: Schema) => {
-    return availableTranslateableFields.filter(
-        (field) => schema.properties[field]?.translatable
-    )
-}
+export const getTranslateableFieldsForSchema = (schema: Schema) =>
+    [
+        ...new Set([
+            ...standardTranslatableFields,
+            ...Object.keys(schema.properties),
+        ]),
+    ]
+        .filter((field) => schema.properties[field]?.translatable)
+        .map((field) => schema.properties[field]?.fieldName)
+        .filter((f) => f !== undefined)
 
 export const TranslationForm = ({
     model,

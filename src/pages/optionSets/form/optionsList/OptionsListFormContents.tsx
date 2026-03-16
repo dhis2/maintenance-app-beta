@@ -5,10 +5,11 @@ import React, { useState } from 'react'
 import { useField } from 'react-final-form'
 import { useParams } from 'react-router-dom'
 import {
+    DrawerHeader,
+    DrawerPortal,
     SectionedFormSection,
     StandardFormSectionTitle,
     StandardFormSectionDescription,
-    DrawerPortal,
 } from '../../../../components'
 import { useSchemaSectionHandleOrThrow } from '../../../../lib'
 import { EditOrNewOptionForm, SubmittedOptionFormValues } from './OptionEdit'
@@ -45,7 +46,7 @@ const OptionListNewOrEdit = () => {
     if (!modelId) {
         return (
             <NoticeBox>
-                {i18n.t('Option set must be saved before options can be added')}
+                {i18n.t('Save this option set to add options.')}
             </NoticeBox>
         )
     }
@@ -56,6 +57,20 @@ const OptionListNewOrEdit = () => {
                 onClose={() => {
                     setOptionsDrawerState({ open: false, id: undefined })
                 }}
+                header={
+                    <DrawerHeader
+                        onClose={() =>
+                            setOptionsDrawerState({
+                                open: false,
+                                id: undefined,
+                            })
+                        }
+                    >
+                        {optionsDrawerState.id === undefined
+                            ? i18n.t('New option')
+                            : i18n.t('Edit option')}
+                    </DrawerHeader>
+                }
             >
                 <EditOrNewOptionForm
                     onSubmitted={onSubmitted}
@@ -83,7 +98,7 @@ export const OptionsListFormContents = React.memo(
                     {i18n.t('Options')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
-                    {i18n.t('Define options for this option set')}
+                    {i18n.t('Create and manage options in this option set.')}
                 </StandardFormSectionDescription>
                 <OptionListNewOrEdit />
             </SectionedFormSection>

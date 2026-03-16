@@ -53,7 +53,7 @@ export const ExpressionListInner = ({
 
     const postQueryFilter = postQuerySearch
         ? (o: { id: string; displayName: string }) =>
-              o.displayName.includes(filter)
+              o.displayName.toLowerCase().includes(filter.toLowerCase())
         : () => true
 
     useEffect(() => {
@@ -104,7 +104,7 @@ export const ExpressionListInner = ({
                         value={filter}
                         onChange={({ value }) => setFilterValue(value ?? '')}
                         placeholder={i18n.t('Filter list')}
-                        type="search"
+                        clearable
                     />
                 </div>
             </div>
@@ -166,6 +166,7 @@ export type ExpressionListProps<TModel> = {
     transform?: (value: TModel[]) => TModel[]
     insertElement?: (s: string) => void
     postQuerySearch?: boolean
+    overrideSearchFilter?: string
 }
 
 export const ExpressionList = <TModel extends PartialLoadedDisplayableModel>({
@@ -173,12 +174,15 @@ export const ExpressionList = <TModel extends PartialLoadedDisplayableModel>({
     transform,
     insertElement,
     postQuerySearch = false,
+    overrideSearchFilter,
 }: ExpressionListProps<TModel>) => {
     const queryFn = useBoundResourceQueryFn()
     const [searchTerm, setSearchTerm] = useState('')
     const [iterationsCount, setIterationsCount] = useState(0)
 
-    const searchFilter = `identifiable:token:${searchTerm}`
+    const searchFilter = overrideSearchFilter
+        ? `${overrideSearchFilter}${searchTerm}`
+        : `identifiable:token:${searchTerm}`
     const filter: string[] = searchTerm ? [searchFilter] : []
     const params = query.params
 
@@ -187,7 +191,7 @@ export const ExpressionList = <TModel extends PartialLoadedDisplayableModel>({
         params: {
             ...defaultQuery.params,
             ...params,
-            filter: filter.concat(params?.filter || []),
+            filters: filter.concat(params?.filters || []),
         },
     }
     const modelName = query.resource

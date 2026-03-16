@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { getDefaults, modelFormSchemas } from '../../../lib'
+import { getDefaultsOld, modelFormSchemas } from '../../../lib'
 import { UserSchema } from '../../../lib/form/modelFormSchemas'
 import { createFormValidate } from '../../../lib/form/validate'
 import { ProgramIndicator } from '../../../types/generated'
@@ -16,9 +16,7 @@ const {
 const programIndicatorsBaseSchema = z.object({
     program: modelReference,
     aggregationType: z.nativeEnum(ProgramIndicator.aggregationType).optional(),
-    analyticsType: z
-        .nativeEnum(ProgramIndicator.analyticsType)
-        .default(ProgramIndicator.analyticsType.EVENT),
+    analyticsType: z.nativeEnum(ProgramIndicator.analyticsType),
     displayInForm: z.boolean().default(false),
     description: z.string().optional(),
     legendSets: referenceCollection.default([]),
@@ -65,7 +63,7 @@ export const programIndicatorFormSchema = programIndicatorsBaseSchema
             .default([]),
     })
 
-export const initialValues = getDefaults(programIndicatorFormSchema)
+export const initialValues = getDefaultsOld(programIndicatorFormSchema)
 
 export type ProgramIndicatorFormValues = typeof initialValues
 

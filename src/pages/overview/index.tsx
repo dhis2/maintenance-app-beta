@@ -15,3 +15,7 @@ export { Component as Validations } from './Validations'
 export { Component as Other } from './Other'
 
 export { Component as ProgramsAndTracker } from './ProgramsAndTracker'
+
+export { Component as OptionSets } from './OptionSets'
+
+export { Component as DataApproval } from './DataApproval'

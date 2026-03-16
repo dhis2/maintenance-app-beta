@@ -1,11 +1,15 @@
 export const FEATURES = Object.freeze({
     searchPerformance: 'searchPerformance',
     validationStrategy: 'validationStrategy',
+    programRuleActionPriority: 'programRuleActionPriority',
+    skipAnalytics: 'skipAnalytics',
 } as const)
 
 const MINOR_VERSION_SUPPORT = Object.freeze({
     [FEATURES.searchPerformance]: 43,
     [FEATURES.validationStrategy]: 42,
+    [FEATURES.programRuleActionPriority]: 43,
+    [FEATURES.skipAnalytics]: 43,
 } as Record<string, number>)
 
 export const hasAPISupportForFeature = (

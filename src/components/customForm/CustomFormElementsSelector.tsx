@@ -10,14 +10,6 @@ import {
 import React, { useState } from 'react'
 import { useSectionHandle } from '../../lib'
 import styles from './CustomFormContents.module.css'
-import {
-    useDataSetCustomFormElements,
-    useProgramsCustomFormElements,
-} from './useGetCustomFormElements'
-
-export type CustomFormProps = {
-    closeCustomFormEdit?: () => void
-}
 
 type ElementSelectorFunction = ({
     id,
@@ -75,45 +67,23 @@ const ElementList = ({
     )
 }
 
-type ElementTypes = {
+export type ElementTypes = {
     name: string
     elements: { id: string; displayName: string; key?: string }[]
     type: string
 }[]
 
-export const CustomFormElementsSelectorJunction = ({
+export const LoadingCustomFormElementsSelector = ({
     insertElement,
     previewMode,
+    loading,
+    elementTypes,
 }: {
     insertElement: ElementSelectorFunction
     previewMode: boolean
+    loading: boolean
+    elementTypes: ElementTypes
 }) => {
-    const section = useSectionHandle()
-    const isProgramCustomForm = section?.name !== 'dataSet'
-    if (isProgramCustomForm) {
-        return (
-            <CustomFormElementsSelectorPrograms
-                insertElement={insertElement}
-                previewMode={previewMode}
-            />
-        )
-    }
-    return (
-        <CustomFormElementsSelectorDataSet
-            insertElement={insertElement}
-            previewMode={previewMode}
-        />
-    )
-}
-
-const CustomFormElementsSelectorDataSet = ({
-    insertElement,
-    previewMode,
-}: {
-    insertElement: ElementSelectorFunction
-    previewMode: boolean
-}) => {
-    const { loading, elementTypes } = useDataSetCustomFormElements()
     if (loading) {
         return <CircularLoader />
     }
@@ -122,26 +92,6 @@ const CustomFormElementsSelectorDataSet = ({
             insertElement={insertElement}
             previewMode={previewMode}
             elementTypes={elementTypes}
-        />
-    )
-}
-
-const CustomFormElementsSelectorPrograms = ({
-    insertElement,
-    previewMode,
-}: {
-    insertElement: ElementSelectorFunction
-    previewMode: boolean
-}) => {
-    const { loading, elementTypes } = useProgramsCustomFormElements()
-    if (loading) {
-        return <CircularLoader />
-    }
-    return (
-        <CustomFormElementsSelector
-            insertElement={insertElement}
-            previewMode={previewMode}
-            elementTypes={elementTypes as ElementTypes}
         />
     )
 }

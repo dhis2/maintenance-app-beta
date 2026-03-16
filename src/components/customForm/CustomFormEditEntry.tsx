@@ -2,15 +2,37 @@ import i18n from '@dhis2/d2-i18n'
 import { Button, ButtonStrip } from '@dhis2/ui'
 import React from 'react'
 import { useField } from 'react-final-form'
-import { StandardFormSectionTitle, DrawerPortal } from '..'
+import { DrawerHeader, StandardFormSectionTitle, DrawerPortal } from '..'
 import css from './CustomFormContents.module.css'
-import { CustomFormEdit } from './CustomFormEdit'
+import { CustomFormDataPayload, CustomFormEdit } from './CustomFormEdit'
+import { ElementTypes } from './CustomFormElementsSelector'
 
-export const CustomFormEditEntry = () => {
+export const CustomFormEditEntry = ({
+    level,
+    loading,
+    refetch,
+    elementTypes,
+    updateCustomForm,
+    customFormTarget,
+    fieldName = 'dataEntryForm',
+}: {
+    level: 'primary' | 'secondary'
+    loading: boolean
+    refetch: () => void
+    elementTypes: ElementTypes
+    updateCustomForm: (
+        data: CustomFormDataPayload,
+        onSuccess: (data: CustomFormDataPayload) => void,
+        onError: (e: Error) => void,
+        existingFormId: string | undefined
+    ) => Promise<unknown>
+    customFormTarget: string
+    fieldName?: string
+}) => {
     const [customFormEditOpen, setCustomFormEditOpen] =
         React.useState<boolean>(false)
 
-    const { input: formInput } = useField('dataEntryForm')
+    const { input: formInput } = useField(fieldName)
     const addMode = !formInput?.value?.id // if there is no formId, you need to add a form
     const formDeleted = formInput?.value?.deleted
     const setCustomFormDeletedState = (deleted: boolean) => {
@@ -22,10 +44,24 @@ export const CustomFormEditEntry = () => {
             <DrawerPortal
                 isOpen={customFormEditOpen}
                 onClose={() => setCustomFormEditOpen(false)}
+                level={level}
+                header={
+                    <DrawerHeader onClose={() => setCustomFormEditOpen(false)}>
+                        {addMode
+                            ? i18n.t('New custom form')
+                            : i18n.t('Edit custom form')}
+                    </DrawerHeader>
+                }
             >
                 {customFormEditOpen && (
                     <CustomFormEdit
                         closeCustomFormEdit={() => setCustomFormEditOpen(false)}
+                        loading={loading}
+                        refetch={refetch}
+                        elementTypes={elementTypes}
+                        updateCustomForm={updateCustomForm}
+                        customFormTarget={customFormTarget}
+                        fieldName={fieldName}
                     />
                 )}
             </DrawerPortal>
@@ -36,10 +72,10 @@ export const CustomFormEditEntry = () => {
                 <div className={css.description}>
                     {addMode
                         ? i18n.t(
-                              'A custom form must be added for it to be used for data entry (web).'
+                              'No custom form has been added yet. Create a custom form to use it for web data entry.'
                           )
                         : i18n.t(
-                              'This data set uses a custom form for data entry (web).'
+                              'This data set uses a custom form for web data entry.'
                           )}
                 </div>
             </div>
@@ -59,6 +95,15 @@ export const CustomFormEditEntry = () => {
                     </div>
                 ) : (
                     <ButtonStrip>
+                        <Button
+                            secondary
+                            small
+                            onClick={() => setCustomFormEditOpen(true)}
+                        >
+                            {addMode
+                                ? i18n.t('Create custom form')
+                                : i18n.t('Edit custom form')}
+                        </Button>
                         {!addMode && (
                             <Button
                                 secondary
@@ -70,15 +115,6 @@ export const CustomFormEditEntry = () => {
                                 {i18n.t('Delete custom form')}
                             </Button>
                         )}
-                        <Button
-                            secondary
-                            small
-                            onClick={() => setCustomFormEditOpen(true)}
-                        >
-                            {addMode
-                                ? i18n.t('Create custom form')
-                                : i18n.t('Edit custom form')}
-                        </Button>
                     </ButtonStrip>
                 )}
             </div>

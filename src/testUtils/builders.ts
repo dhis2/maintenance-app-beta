@@ -54,12 +54,16 @@ import { optionSetListSchema } from '../pages/optionSets/form/optionSetSchema'
 import { organisationUnitGroupListSchema } from '../pages/organisationUnitGroups/form/organisationUnitGroupSchema'
 import { organisationUnitGroupSetListSchema } from '../pages/organisationUnitGroupSets/form/organisationUnitGroupSetSchema'
 import { organisationUnitListSchema } from '../pages/organisationUnits/form/organisationUnitSchema'
+import { predictorGroupListSchema } from '../pages/predictorGroups/form/predictorGroupSchema'
 import { predictorListSchema } from '../pages/predictors/form/predictorSchema'
 import { programIndicatorGroupListSchema } from '../pages/programIndicatorGroups/form'
 import { programIndicatorsListSchema } from '../pages/programIndicators/form/programIndicatorsFormSchema'
 import { programRuleListSchema } from '../pages/programRules/form/programRuleSchema'
 import { programRuleVariableListSchema } from '../pages/programRuleVariables/form/programRuleVariableSchema'
-import { programListSchema } from '../pages/programsWip/form'
+import {
+    trackerProgramListSchema,
+    stageListSchema,
+} from '../pages/programs/form'
 import { relationshipTypeListSchema } from '../pages/relationshipTypes/form/RelationshipTypeFormSchema'
 import { trackedEntityAttributeListSchema } from '../pages/trackedEntityAttributes/form/TrackedEntityAttributeFormSchema'
 import { trackedEntityTypeListSchema } from '../pages/trackedEntityTypes/form'
@@ -89,6 +93,13 @@ export const randomDhis2Id = () =>
 export function randomValueIn<T>(list: T[]) {
     return list[faker.number.int({ min: 0, max: list.length - 1 })]
 }
+const mockIsoDateTime = () => {
+    const start = new Date(2018, 0, 1).getTime() // Jan 1, 2018
+    const end = new Date().getTime() // now
+    const randomTime = start + Math.random() * (end - start)
+    const randomDate = new Date(randomTime)
+    return randomDate.toISOString().replace('Z', '')
+}
 
 export const randomLongString = (length: number) => {
     const base = faker.lorem.paragraph() // Or .sentence(), .text()
@@ -99,123 +110,115 @@ export const randomLongString = (length: number) => {
     return result.slice(0, length) // Trim to exact length
 }
 
-const mockeryMapper = (keyName: string) => {
-    if (keyName === 'code') {
-        return () => faker.string.alphanumeric(6)
-    }
-    if (keyName === 'id') {
-        return () => randomDhis2Id()
-    }
-    return undefined
+const stringMap = {
+    lastUpdated: () => mockIsoDateTime(),
 }
 
-const { withAttributeValues } = modelFormSchemas
-
 export const testAccess = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(AccessSchema, { mockeryMapper }),
+    ...generateMock(AccessSchema, { stringMap }),
     ...overwrites,
 })
 
 export const testUser = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(UserSchema, { mockeryMapper }),
+    ...generateMock(UserSchema, { stringMap }),
     ...overwrites,
 })
 
 export const testUserGroup = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(UserGroupSchema, { mockeryMapper }),
+    ...generateMock(UserGroupSchema, { stringMap }),
     ...overwrites,
 })
 
 export const testIndicatorType = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(indicatorTypeListSchema, { mockeryMapper }),
+    ...generateMock(indicatorTypeListSchema, { stringMap }),
     ...overwrites,
 })
 
 export const testOptionGroup = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(OptionGroupListSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
 
 export const testConstant = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(ConstantsListSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
 
 export const testIndicator = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(indicatorListSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
 
 export const testLegendSets = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(legendSetListSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
 
 export const testIndicatorGroup = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(indicatorGroupListSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
 
 export const testIndicatorGroupSet = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(indicatorGroupSetListSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
 
 export const testCategoryOption = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(categoryOptionListSchema, { mockeryMapper }),
+    ...generateMock(categoryOptionListSchema, { stringMap }),
     ...overwrites,
 })
 
 export const testCategory = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(categoryListSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
 
 export const testCategoryForm = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(categoryFormSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
 
 export const testCategoryCombo = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(categoryComboListSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
 
 export const testCategoryComboForm = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(categoryComboFormSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
 
 export const testCategoryOptionCombo = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(categoryOptionComboListSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
 
 export const testCategoryOptionGroup = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(categoryOptionGroupListSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
@@ -224,7 +227,7 @@ export const testCategoryOptionGroupForm = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(categoryOptionGroupFormSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
@@ -232,7 +235,7 @@ export const testCategoryOptionGroupForm = (
 export const testCategoryOptionGroupSet = (
     overwrites: Record<any, any> = {}
 ) => ({
-    ...generateMock(categoryOptionGroupSetListSchema, { mockeryMapper }),
+    ...generateMock(categoryOptionGroupSetListSchema, { stringMap }),
     ...overwrites,
 })
 
@@ -240,35 +243,35 @@ export const testCategoryOptionGroupSetForm = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(categoryOptionGroupSetFormSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
 
 export const testDataElementGroup = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(dataElementGroupListSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
 
 export const testDataElementGroupSet = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(dataElementGroupSetSchema.merge(withDefaultListColumns), {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
 
 export const testDataElement = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(dataElementListSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
 
 export const testDataSet = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(dataSetListSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
@@ -277,7 +280,7 @@ export const testDataSetNotificationTemplate = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(dataSetNotificationTemplateListSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
@@ -286,35 +289,35 @@ export const testDataSetNotificationTemplateForm = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(dataSetNotificationTemplateFormSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
 
 export const testPrograms = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(programListSchema, {
-        mockeryMapper,
+    ...generateMock(trackerProgramListSchema, {
+        stringMap,
     }),
     ...overwrites,
 })
 
 export const testOptionGroupSet = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(optionGroupSetFormSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
 
 export const testOptionSets = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(optionSetListSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
 
 export const testOptionGroupSetList = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(optionGroupSetListSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
@@ -323,14 +326,14 @@ export const testOrganisationUnitGroup = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(organisationUnitGroupListSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
 
 export const testLocales = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(localeListSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
@@ -338,46 +341,46 @@ export const testLocales = (overwrites: Record<any, any> = {}) => ({
 export const testOrganisationUnitGroupSet = (
     overwrites: Record<any, any> = {}
 ) => ({
-    ...generateMock(organisationUnitGroupSetListSchema, { mockeryMapper }),
+    ...generateMock(organisationUnitGroupSetListSchema, { stringMap }),
     ...overwrites,
 })
 
 export const testProgramIndicator = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(programIndicatorsListSchema, { mockeryMapper }),
+    ...generateMock(programIndicatorsListSchema, { stringMap }),
     ...overwrites,
 })
 
 export const testProgramRuleVariable = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(programRuleVariableListSchema, { mockeryMapper }),
+    ...generateMock(programRuleVariableListSchema, { stringMap }),
     ...overwrites,
 })
 
 export const testProgramRule = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(programRuleListSchema, { mockeryMapper }),
+    ...generateMock(programRuleListSchema, { stringMap }),
     ...overwrites,
 })
 
 export const testAttributeList = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(attributeListSchema, { mockeryMapper }),
+    ...generateMock(attributeListSchema, { stringMap }),
     ...overwrites,
 })
 
 export const testdataApprovalLevelList = (
     overwrites: Record<any, any> = {}
 ) => ({
-    ...generateMock(dataApprovalLevelListSchema, { mockeryMapper }),
+    ...generateMock(dataApprovalLevelListSchema, { stringMap }),
     ...overwrites,
 })
 
 export const testDataApprovalWorkflowList = (
     overwrites: Record<any, any> = {}
 ) => ({
-    ...generateMock(dataApprovalWorkflowListSchema, { mockeryMapper }),
+    ...generateMock(dataApprovalWorkflowListSchema, { stringMap }),
     ...overwrites,
 })
 
 export const testAttributeForm = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(attributeFormSchema, { mockeryMapper }),
+    ...generateMock(attributeFormSchema, { stringMap }),
     ...overwrites,
 })
 
@@ -405,31 +408,31 @@ export const testCategoryMapping = ({
 export const testProgramIndicatorGroup = (
     overwrites: Record<any, any> = {}
 ) => ({
-    ...generateMock(programIndicatorGroupListSchema, { mockeryMapper }),
+    ...generateMock(programIndicatorGroupListSchema, { stringMap }),
     ...overwrites,
 })
 
 export const testFormProgramIndicatorGroup = (
     overwrites: Record<any, any> = {}
 ) => ({
-    ...generateMock(programIndicatorGroupListSchema, { mockeryMapper }),
+    ...generateMock(programIndicatorGroupListSchema, { stringMap }),
     ...overwrites,
 })
 
 export const testRelationshipType = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(relationshipTypeListSchema, { mockeryMapper }),
+    ...generateMock(relationshipTypeListSchema, { stringMap }),
     ...overwrites,
 })
 
 export const testTrackedEntityType = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(trackedEntityTypeListSchema, { mockeryMapper }),
+    ...generateMock(trackedEntityTypeListSchema, { stringMap }),
     ...overwrites,
 })
 
 export const testTrackedEntityAttribute = (
     overwrites: Record<any, any> = {}
 ) => ({
-    ...generateMock(trackedEntityAttributeListSchema, { mockeryMapper }),
+    ...generateMock(trackedEntityAttributeListSchema, { stringMap }),
     ...overwrites,
 })
 
@@ -437,7 +440,7 @@ export const testValidationNotificationTemplate = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(validationNotificationTemplateListSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
@@ -446,7 +449,7 @@ export const testValidationNotificationTemplateForm = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(validationNotificationTemplateFormSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
@@ -489,6 +492,13 @@ export const testLegendSet = ({
     displayName,
 })
 
+export const testProgramStage = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(stageListSchema, {
+        stringMap,
+    }),
+    ...overwrites,
+})
+
 export const testOrgUnitLevel = ({
     id = randomDhis2Id(),
     name = faker.person.fullName(),
@@ -508,7 +518,7 @@ export const testOrgUnitLevel = ({
 })
 
 export const testOrgUnit = (overwrites: Record<any, any> | undefined = {}) => {
-    const mock = generateMock(organisationUnitListSchema, { mockeryMapper })
+    const mock = generateMock(organisationUnitListSchema, { stringMap })
     return {
         ...mock,
         parent: {
@@ -523,7 +533,7 @@ export const testOrgUnit = (overwrites: Record<any, any> | undefined = {}) => {
 }
 
 export const testValidationRuleGroup = (overwrites: Record<any, any> = {}) => ({
-    ...generateMock(validationRuleGroupsListSchema, { mockeryMapper }),
+    ...generateMock(validationRuleGroupsListSchema, { stringMap }),
     ...overwrites,
 })
 
@@ -531,21 +541,28 @@ export const testValidationRuleGroupsForm = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(validationRuleGroupsFormSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
 
 export const testValidationRule = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(validationRuleListSchema, {
-        mockeryMapper,
+        stringMap,
     }),
     ...overwrites,
 })
 
 export const testPredictorList = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(predictorListSchema, {
-        mockeryMapper,
+        stringMap,
+    }),
+    ...overwrites,
+})
+
+export const testPredictorGroup = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(predictorGroupListSchema, {
+        stringMap,
     }),
     ...overwrites,
 })

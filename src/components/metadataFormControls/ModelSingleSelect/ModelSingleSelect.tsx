@@ -72,7 +72,7 @@ export const ModelSingleSelect = <
             lastPage.pager?.nextPage ? lastPage.pager.page + 1 : undefined,
         getPreviousPageParam: (firstPage) =>
             firstPage.pager?.prevPage ? firstPage.pager.page - 1 : undefined,
-        staleTime: 60 * 1000,
+        staleTime: 30 * 1000,
     })
 
     const fetchNextPage = queryResult?.fetchNextPage

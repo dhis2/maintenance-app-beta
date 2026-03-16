@@ -453,6 +453,7 @@ export const modelListViewsConfig = {
                 'displayInForm',
                 'analyticsType',
                 'categoryCombo',
+                'attributeCombo',
                 { label: i18n.t('Description'), path: 'displayDescription' },
                 DESCRIPTORS.formName,
                 DESCRIPTORS.shortName,
@@ -534,6 +535,14 @@ export const modelListViewsConfig = {
                 'fromToName',
                 'toFromName',
                 'referral',
+                {
+                    label: i18n.t('Initiating entity type'),
+                    path: 'fromConstraint.relationshipEntity',
+                },
+                {
+                    label: i18n.t('Receiving entity type'),
+                    path: 'toConstraint.relationshipEntity',
+                },
             ],
         },
         filters: {
@@ -741,6 +750,7 @@ export const modelListViewsConfig = {
                 { label: i18n.t('Option set'), path: 'optionSet.displayName' },
             ],
             available: [
+                { label: i18n.t('Sort order'), path: 'sortOrder' },
                 {
                     label: i18n.t('Category attribute'),
                     path: 'categoryAttribute',
@@ -979,5 +989,16 @@ export const modelListViewsConfig = {
             available: [],
             overrideDefaultAvailable: true,
         },
+    },
+    predictorGroup: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                DESCRIPTORS.publicAccess,
+                'lastUpdated',
+            ],
+            available: ['description'],
+        },
+        filters: {},
     },
 } satisfies SectionListViewConfig<SectionName>

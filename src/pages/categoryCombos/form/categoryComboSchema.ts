@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
-import { getDefaults, modelFormSchemas } from '../../../lib'
+import { getDefaultsOld, modelFormSchemas } from '../../../lib'
 import { createFormValidate } from '../../../lib/form/validate'
 import { CategoryCombo } from './../../../types/generated/models'
 
@@ -15,9 +15,7 @@ const GENERATED_COC_LIMIT = 50000
 
 export const categoryComboBaseSchema = z.object({
     code: z.string().trim().optional(),
-    dataDimensionType: z
-        .nativeEnum(CategoryCombo.dataDimensionType)
-        .default(CategoryCombo.dataDimensionType.DISAGGREGATION),
+    dataDimensionType: z.nativeEnum(CategoryCombo.dataDimensionType),
 })
 
 export const categoryComboFormSchema = identifiable
@@ -55,7 +53,7 @@ export const categoryComboListSchema = categoryComboBaseSchema.merge(
     withDefaultListColumns
 )
 
-export const initialValues = getDefaults(categoryComboFormSchema)
+export const initialValues = getDefaultsOld(categoryComboFormSchema)
 
 export type CategoryComboFormValues = typeof initialValues
 

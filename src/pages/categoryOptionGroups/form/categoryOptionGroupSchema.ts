@@ -1,5 +1,9 @@
 import { z } from 'zod'
-import { getDefaults, createFormValidate, modelFormSchemas } from '../../../lib'
+import {
+    getDefaultsOld,
+    createFormValidate,
+    modelFormSchemas,
+} from '../../../lib'
 import { CategoryOptionGroup } from '../../../types/generated'
 
 /*  Note that this describes what we send to the server,
@@ -13,9 +17,7 @@ const {
 
 const categoryOptionGroupBaseSchema = z.object({
     code: z.string().trim().optional(),
-    dataDimensionType: z
-        .nativeEnum(CategoryOptionGroup.dataDimensionType)
-        .default(CategoryOptionGroup.dataDimensionType.DISAGGREGATION),
+    dataDimensionType: z.nativeEnum(CategoryOptionGroup.dataDimensionType),
 })
 
 export const categoryOptionGroupFormSchema = identifiable
@@ -35,6 +37,6 @@ export const categoryOptionGroupListSchema = categoryOptionGroupBaseSchema
         displayShortName: z.string(),
     })
 
-export const initialValues = getDefaults(categoryOptionGroupFormSchema)
+export const initialValues = getDefaultsOld(categoryOptionGroupFormSchema)
 
 export const validate = createFormValidate(categoryOptionGroupFormSchema)

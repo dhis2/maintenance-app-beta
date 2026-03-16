@@ -71,8 +71,8 @@ export const PredictorFormDescriptor = {
             ],
         },
         {
-            name: 'outputDefinition',
-            label: i18n.t('Output definition'),
+            name: 'output',
+            label: i18n.t('Output'),
             fields: [
                 {
                     name: 'output',

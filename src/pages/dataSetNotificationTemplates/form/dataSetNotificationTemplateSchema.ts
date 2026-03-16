@@ -1,6 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
-import { createFormValidate, getDefaults, modelFormSchemas } from '../../../lib'
+import {
+    createFormValidate,
+    getDefaultsOld,
+    modelFormSchemas,
+} from '../../../lib'
 import { DataSetNotificationTemplate } from '../../../types/generated'
 
 const { identifiable, withDefaultListColumns, referenceCollection } =
@@ -8,7 +12,6 @@ const { identifiable, withDefaultListColumns, referenceCollection } =
 
 const dataSetNotificationTemplateBaseSchema = z.object({
     code: z.string().optional(),
-    description: z.string().optional(),
     dataSetNotificationTrigger: z
         .nativeEnum(DataSetNotificationTemplate.dataSetNotificationTrigger)
         .optional(),
@@ -43,23 +46,20 @@ const dataSetNotificationTemplateBaseSchema = z.object({
 
 export const dataSetNotificationTemplateFormSchema =
     dataSetNotificationTemplateBaseSchema.merge(identifiable).extend({
-        dataSetNotificationTrigger: z
-            .nativeEnum(DataSetNotificationTemplate.dataSetNotificationTrigger)
-            .default(
-                DataSetNotificationTemplate.dataSetNotificationTrigger
-                    .SCHEDULED_DAYS
-            ),
-        notificationRecipient: z
-            .nativeEnum(DataSetNotificationTemplate.notificationRecipient)
-            .default(
-                DataSetNotificationTemplate.notificationRecipient.USER_GROUP
-            ),
+        dataSetNotificationTrigger: z.nativeEnum(
+            DataSetNotificationTemplate.dataSetNotificationTrigger
+        ),
+        notificationRecipient: z.nativeEnum(
+            DataSetNotificationTemplate.notificationRecipient
+        ),
     })
 
 export const dataSetNotificationTemplateListSchema =
     dataSetNotificationTemplateBaseSchema.merge(withDefaultListColumns)
 
-export const initialValues = getDefaults(dataSetNotificationTemplateFormSchema)
+export const initialValues = getDefaultsOld(
+    dataSetNotificationTemplateFormSchema
+)
 
 export type DataSetNotificationFormValues = z.infer<
     typeof dataSetNotificationTemplateFormSchema

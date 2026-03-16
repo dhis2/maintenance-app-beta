@@ -103,8 +103,7 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
                 error={meta.invalid}
                 validationText={(meta.touched && meta.error?.toString()) || ''}
                 name={trackerDataViewPath}
-                label={i18n.t('Data elements')}
-                helpText={i18n.t(
+                label={i18n.t(
                     'Choose which data elements are shown when viewing the relationship'
                 )}
             >
@@ -131,9 +130,9 @@ export const DataElementsField = ({ prefix }: RelationshipSideFieldsProps) => {
                             newLink={newDataElementLink}
                         />
                     }
-                    filterPlaceholder={i18n.t('Search available data elements')}
+                    filterPlaceholder={i18n.t('Filter available data elements')}
                     filterPlaceholderPicked={i18n.t(
-                        'Search selected data elements'
+                        'Filter selected data elements'
                     )}
                     filterable
                     filterablePicked

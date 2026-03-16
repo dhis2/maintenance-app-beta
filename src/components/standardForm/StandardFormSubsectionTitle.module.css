@@ -1,5 +1,5 @@
 .standardFormSubsectionTitle {
-    margin: 0 0 var(--spacers-dp16);
+    margin: var(--spacers-dp24) 0 var(--spacers-dp4);
     font-size: 16px;
     font-weight: 500;
     color: var(--colors-grey800);

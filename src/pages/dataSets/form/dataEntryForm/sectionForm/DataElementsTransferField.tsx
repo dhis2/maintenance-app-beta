@@ -149,9 +149,9 @@ export const DataElementsTransferField = ({
                             </Button>
                         </div>
                     }
-                    filterPlaceholder={i18n.t('Search available data elements')}
+                    filterPlaceholder={i18n.t('Filter available data elements')}
                     filterPlaceholderPicked={i18n.t(
-                        'Search selected data elements'
+                        'Filter selected data elements'
                     )}
                     enableOrderChange
                     height={'350px'}
@@ -161,6 +161,13 @@ export const DataElementsTransferField = ({
                     filterablePicked
                     available={[...availableDataElements, ...input.value]}
                     maxSelections={Infinity}
+                    sourceEmptyPlaceholder={
+                        <p className={styles.emptyPlaceholder}>
+                            {i18n.t(
+                                'No data elements available. Add data elements to this data set to use them in sections.'
+                            )}
+                        </p>
+                    }
                 />
             </Field>
             {greyFieldModalOpen && (

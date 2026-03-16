@@ -115,12 +115,9 @@ describe('Locales form tests', () => {
             const { screen } = await renderForm()
             const cancelButton = screen.getByTestId('form-cancel-link')
             expect(cancelButton).toBeVisible()
-            expect(cancelButton).toHaveAttribute(
-                'href',
-                `/${section.namePlural}`
-            )
+            expect(cancelButton).toHaveAttribute('href', `/locales`)
         })
-        it.only('should submit the data', async () => {
+        it('should submit the data', async () => {
             const { screen, languages, countries } = await renderForm()
 
             await uiActions.pickOptionFromSelect(

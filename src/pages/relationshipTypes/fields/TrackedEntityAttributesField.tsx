@@ -113,8 +113,7 @@ export const TrackedEntityAttributesField = ({
                 error={meta.invalid}
                 validationText={(meta.touched && meta.error?.toString()) || ''}
                 name={trackerDataViewPath}
-                label={i18n.t('Tracked entity attributes')}
-                helpText={i18n.t(
+                label={i18n.t(
                     'Choose which tracked entity attributes are shown when viewing the relationship'
                 )}
             >
@@ -153,9 +152,11 @@ export const TrackedEntityAttributesField = ({
                             newLink={newTrackedEntityAttributeLink}
                         />
                     }
-                    filterPlaceholder={i18n.t('Search available attributes')}
+                    filterPlaceholder={i18n.t(
+                        'Filter available tracked entity attributes'
+                    )}
                     filterPlaceholderPicked={i18n.t(
-                        'Search selected attributes'
+                        'Filter selected tracked entity attributes'
                     )}
                     filterable
                     filterablePicked

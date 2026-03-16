@@ -15,7 +15,7 @@ export const formDescriptor = {
             fields: [
                 { name: 'name', label: i18n.t('Name') },
                 { name: 'code', label: i18n.t('Code') },
-                { name: 'description', label: i18n.t('Description') },
+                { name: 'dataSets', label: i18n.t('Data sets') },
             ],
         },
         {

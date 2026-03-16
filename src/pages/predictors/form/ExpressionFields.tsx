@@ -7,7 +7,7 @@ import {
     ExpressionBuilderEntry,
     MissingValueStrategyField,
 } from '../../../components'
-import { PaddedContainer } from '../../../components/metadataFormControls/ExpressionBuilder/PaddedContainer'
+import { PaddedContainer } from '../../../components/ExpressionBuilder/PaddedContainer'
 import { SchemaName, SchemaSection } from '../../../lib'
 import css from './PredictorFormFields.module.css'
 
@@ -31,15 +31,12 @@ export const ExpressionFields = ({
     clearable?: boolean
     required?: boolean
 }) => {
+    const title = objectName
+        ? objectName.charAt(0).toUpperCase() + objectName.slice(1)
+        : undefined
     return (
         <div className={css.expressionContainer}>
-            <PaddedContainer>
-                <div className={css.subtitle}>
-                    {objectName
-                        ? objectName.charAt(0).toUpperCase() +
-                          objectName.slice(1)
-                        : ''}
-                </div>
+            <PaddedContainer title={title}>
                 <StandardFormField>
                     <ExpressionBuilderEntry
                         fieldName={`${fieldName}.expression`}
@@ -58,6 +55,7 @@ export const ExpressionFields = ({
                         validateSchemaSection={expressionSchemaSection}
                         validateProperty="expression"
                         clearable={clearable}
+                        type="predictor"
                     />
                 </StandardFormField>
                 <StandardFormField>

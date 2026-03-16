@@ -7,6 +7,7 @@ import {
     TableCellHead,
     TableHead,
     TableRow,
+    colors,
 } from '@dhis2/ui'
 import React from 'react'
 import { useField } from 'react-final-form'
@@ -24,8 +25,15 @@ type TrackedEntityTypeAttribute = {
         id: string
         displayName: string
         unique: boolean
+        valueType: string
     }
 }
+
+type UpdateAttributeFn = (
+    index: number,
+    field: 'mandatory' | 'searchable' | 'displayInList',
+    value: boolean
+) => void
 
 export function AttributesConfigurationField() {
     const { input } = useField<TrackedEntityTypeAttribute[]>(
@@ -34,21 +42,7 @@ export function AttributesConfigurationField() {
 
     const attributes = input.value || []
 
-    if (attributes.length === 0) {
-        return (
-            <div style={{ padding: '16px', textAlign: 'center' }}>
-                {i18n.t(
-                    'No attributes selected. Please select attributes in the transfer above.'
-                )}
-            </div>
-        )
-    }
-
-    const updateAttribute = (
-        index: number,
-        field: 'mandatory' | 'searchable' | 'displayInList',
-        value: boolean
-    ) => {
+    const updateAttribute: UpdateAttributeFn = (index, field, value) => {
         const updatedAttributes = [...attributes]
         updatedAttributes[index] = {
             ...updatedAttributes[index],
@@ -59,18 +53,21 @@ export function AttributesConfigurationField() {
     }
 
     return (
-        <>
+        <div style={{ paddingTop: '24px' }}>
             <StandardFormSectionTitle>
-                {i18n.t('Configure attributes')}
+                {i18n.t('Manage attributes')}
             </StandardFormSectionTitle>
 
             <StandardFormSectionDescription>
                 {i18n.t(
-                    'Choose which attributes to display, which are required, and which are searchable'
+                    'Choose which attributes to show, require, and make searchable.'
                 )}
             </StandardFormSectionDescription>
 
-            <Table data-test="formfields-attributes-configuration">
+            <Table
+                data-test="formfields-attributes-configuration"
+                suppressZebraStriping
+            >
                 <TableHead>
                     <TableRow>
                         <TableCellHead>{i18n.t('Name')}</TableCellHead>
@@ -82,6 +79,17 @@ export function AttributesConfigurationField() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
+                    {attributes.length === 0 && (
+                        <TableRow>
+                            <TableCell colSpan="4">
+                                <span style={{ color: colors.grey600 }}>
+                                    {i18n.t(
+                                        'No attributes selected yet. Choose attributes above to configure them.'
+                                    )}
+                                </span>
+                            </TableCell>
+                        </TableRow>
+                    )}
                     {attributes.map((attr, index) => (
                         <TableRow key={attr.trackedEntityAttribute.id}>
                             <TableCell>
@@ -100,31 +108,18 @@ export function AttributesConfigurationField() {
                                 />
                             </TableCell>
                             <TableCell>
-                                <TooltipWrapper
-                                    condition={
+                                <SearchableCheckbox
+                                    index={index}
+                                    unique={attr.trackedEntityAttribute.unique}
+                                    valueType={
+                                        attr.trackedEntityAttribute.valueType
+                                    }
+                                    isChecked={
+                                        attr.searchable ||
                                         attr.trackedEntityAttribute.unique
                                     }
-                                    content={i18n.t(
-                                        'Unique attributes are always searchable'
-                                    )}
-                                >
-                                    <Checkbox
-                                        checked={
-                                            attr.searchable ||
-                                            attr.trackedEntityAttribute.unique
-                                        }
-                                        onChange={({ checked }) =>
-                                            updateAttribute(
-                                                index,
-                                                'searchable',
-                                                checked
-                                            )
-                                        }
-                                        disabled={
-                                            attr.trackedEntityAttribute.unique
-                                        }
-                                    />
-                                </TooltipWrapper>
+                                    handleCheck={updateAttribute}
+                                />
                             </TableCell>
                             <TableCell>
                                 <Checkbox
@@ -142,6 +137,50 @@ export function AttributesConfigurationField() {
                     ))}
                 </TableBody>
             </Table>
-        </>
+        </div>
+    )
+}
+
+const SearchableCheckbox = ({
+    index,
+    unique,
+    valueType,
+    isChecked,
+    handleCheck,
+}: {
+    index: number
+    unique: boolean
+    valueType: string
+    isChecked: boolean
+    handleCheck: UpdateAttributeFn
+}) => {
+    const isFileType = ['IMAGE', 'FILE_RESOURCE'].includes(valueType)
+
+    // Tooltip logic
+    let tooltipContent = ''
+    let showTooltip = false
+
+    if (unique) {
+        tooltipContent = i18n.t('Unique attributes are always searchable')
+        showTooltip = true
+    } else if (isFileType) {
+        tooltipContent = i18n.t(
+            'Image and File type attributes are not searchable'
+        )
+        showTooltip = true
+    }
+
+    const isDisabled = unique || isFileType
+
+    return (
+        <TooltipWrapper condition={showTooltip} content={tooltipContent}>
+            <Checkbox
+                checked={isChecked}
+                onChange={({ checked }) => {
+                    handleCheck(index, 'searchable', checked)
+                }}
+                disabled={isDisabled}
+            />
+        </TooltipWrapper>
     )
 }

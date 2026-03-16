@@ -44,6 +44,9 @@ export const ModelTransfer = <
     filterPlaceholderPicked,
     transform,
     filterUnassignedTo,
+    height = '360px',
+    optionsWidth = '480px',
+    selectedWidth = '480px',
     ...baseModelTransferProps
 }: ModelTranferProps<TModel, TModelData>) => {
     const queryFn = useBoundResourceQueryFn()
@@ -102,9 +105,9 @@ export const ModelTransfer = <
 
     return (
         <BaseModelTransfer
-            height={'350px'}
-            optionsWidth={'500px'}
-            selectedWidth={'500px'}
+            height={height}
+            optionsWidth={optionsWidth}
+            selectedWidth={selectedWidth}
             enableOrderChange
             filterable
             filterablePicked

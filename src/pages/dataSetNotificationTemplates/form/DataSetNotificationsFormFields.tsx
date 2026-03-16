@@ -6,6 +6,7 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
     MessageFields,
+    MessageVariables,
 } from '../../../components'
 import { SECTIONS_MAP, useSyncSelectedSectionWithScroll } from '../../../lib'
 import { BasicInformationSection } from './BasicInformationSection'
@@ -13,15 +14,33 @@ import { NotificationTimingSection } from './NotificationTimingSection'
 import { RecipientSection } from './RecipientSection'
 
 export const DATA_SET_VARIABLES = {
-    data_set_name: i18n.t('Data set name'),
-    current_date: i18n.t('Current date'),
-    data_description: i18n.t('Data set description'),
-    registration_ou: i18n.t('Complete registration organisation unit'),
-    registration_period: i18n.t('Complete registration period'),
-    registration_user: i18n.t('Complete registration user'),
-    registration_time: i18n.t('Complete registration time'),
-    att_opt_combo: i18n.t('Complete registration att opt combo'),
-} as Record<string, string>
+    data_set_name: { label: i18n.t('Data set name'), type: 'VARIABLE' },
+    current_date: { label: i18n.t('Current date'), type: 'VARIABLE' },
+    data_description: {
+        label: i18n.t('Data set description'),
+        type: 'VARIABLE',
+    },
+    registration_ou: {
+        label: i18n.t('Complete registration organisation unit'),
+        type: 'VARIABLE',
+    },
+    registration_period: {
+        label: i18n.t('Complete registration period'),
+        type: 'VARIABLE',
+    },
+    registration_user: {
+        label: i18n.t('Complete registration user'),
+        type: 'VARIABLE',
+    },
+    registration_time: {
+        label: i18n.t('Complete registration time'),
+        type: 'VARIABLE',
+    },
+    att_opt_combo: {
+        label: i18n.t('Complete registration att opt combo'),
+        type: 'VARIABLE',
+    },
+} as MessageVariables
 
 export const DataSetNotificationsFormFields = () => {
     const section = SECTIONS_MAP.dataSetNotificationTemplate
@@ -36,7 +55,7 @@ export const DataSetNotificationsFormFields = () => {
                     </StandardFormSectionTitle>
                     <StandardFormSectionDescription>
                         {i18n.t(
-                            'Set up the basic information for the notification template.'
+                            'Set up the basic information for this notification.'
                         )}
                     </StandardFormSectionDescription>
                     <BasicInformationSection section={section} />
@@ -48,7 +67,7 @@ export const DataSetNotificationsFormFields = () => {
                     </StandardFormSectionTitle>
                     <StandardFormSectionDescription>
                         {i18n.t(
-                            'Configure the templates for the notification content and subject.'
+                            'Configure templates for the notification message.'
                         )}
                     </StandardFormSectionDescription>
                     <MessageFields
@@ -74,7 +93,7 @@ export const DataSetNotificationsFormFields = () => {
                         {i18n.t('Recipient')}
                     </StandardFormSectionTitle>
                     <StandardFormSectionDescription>
-                        {i18n.t('Choose who recieves the notification.')}
+                        {i18n.t('Choose who receives the notification.')}
                     </StandardFormSectionDescription>
                     <RecipientSection />
                 </SectionedFormSection>

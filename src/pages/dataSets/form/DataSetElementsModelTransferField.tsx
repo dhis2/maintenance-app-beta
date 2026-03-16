@@ -67,6 +67,7 @@ export function DataSetElementsModelTransferField() {
                     input.onBlur()
                 }}
                 enableOrderChange={false}
+                maxSelections={Infinity}
                 transform={(dataElements) => {
                     return dataElements.map((de) => ({
                         dataElement: {
@@ -79,9 +80,9 @@ export function DataSetElementsModelTransferField() {
                 }}
                 leftHeader={i18n.t('Available data elements')}
                 rightHeader={i18n.t('Selected data elements')}
-                filterPlaceholder={i18n.t('Search available data elements')}
+                filterPlaceholder={i18n.t('Filter available data elements')}
                 filterPlaceholderPicked={i18n.t(
-                    'Search selected data elements'
+                    'Filter selected data elements'
                 )}
                 filterUnassignedTo={'dataSetElements'}
                 query={{

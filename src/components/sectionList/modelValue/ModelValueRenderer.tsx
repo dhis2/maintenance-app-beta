@@ -29,14 +29,41 @@ export const ModelValueRenderer = ({
     }
 
     if (path === 'programType') {
-        let label: string
-
         if (value === 'WITH_REGISTRATION') {
-            label = i18n.t('Tracker program')
+            return <TextValue value={i18n.t('Tracker program')} />
         } else if (value === 'WITHOUT_REGISTRATION') {
-            label = i18n.t('Event program')
+            return <TextValue value={i18n.t('Event program')} />
         } else {
-            label = i18n.t('No value')
+            return <TextValue value={i18n.t('No value')} />
+        }
+    }
+
+    if (
+        path === 'fromConstraint.relationshipEntity' ||
+        path === 'toConstraint.relationshipEntity'
+    ) {
+        if (value === 'PROGRAM_STAGE_INSTANCE') {
+            return <TextValue value={i18n.t('Event')} />
+        } else if (value === 'PROGRAM_INSTANCE') {
+            return <TextValue value={i18n.t('Enrollment')} />
+        } else if (value === 'TRACKED_ENTITY_INSTANCE') {
+            return <TextValue value={i18n.t('Tracked entity')} />
+        }
+        return <TextValue value={(value as string).toString()} />
+    }
+
+    if (
+        path === 'fromConstraint.relationshipEntity' ||
+        path === 'toConstraint.relationshipEntity'
+    ) {
+        let label = (value as string).toString()
+
+        if (value === 'PROGRAM_STAGE_INSTANCE') {
+            label = i18n.t('Event')
+        } else if (value === 'PROGRAM_INSTANCE') {
+            label = i18n.t('Enrollment')
+        } else if (value === 'TRACKED_ENTITY_INSTANCE') {
+            label = i18n.t('Tracked entity')
         }
 
         return <TextValue value={label} />

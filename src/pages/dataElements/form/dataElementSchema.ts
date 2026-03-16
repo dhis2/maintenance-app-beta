@@ -2,7 +2,7 @@ import { z } from 'zod'
 import {
     createFormValidate,
     DEFAULT_CATEGORY_COMBO,
-    getDefaults,
+    getDefaultsOld,
     modelFormSchemas,
 } from '../../../lib'
 import { DataElement } from '../../../types/generated'
@@ -23,12 +23,10 @@ const dataElementBaseSchema = z.object({
             icon: z.string().optional(),
         })
         .default({}),
-    domainType: z
-        .nativeEnum(DataElement.domainType)
-        .default(DataElement.domainType.AGGREGATE),
+    domainType: z.nativeEnum(DataElement.domainType),
     valueType: z
         .nativeEnum(DataElement.valueType)
-        .default(DataElement.valueType.TEXT),
+        .default(DataElement.valueType.NUMBER),
     aggregationType: z
         .nativeEnum(DataElement.aggregationType)
         .default(DataElement.aggregationType.NONE),
@@ -58,7 +56,7 @@ export const dataElementFormSchema = dataElementBaseSchema
     .merge(identifiable)
     .merge(withAttributeValues)
 
-export const initialValues = getDefaults(dataElementFormSchema)
+export const initialValues = getDefaultsOld(dataElementFormSchema)
 
 export type DataElementFormValues = typeof initialValues
 

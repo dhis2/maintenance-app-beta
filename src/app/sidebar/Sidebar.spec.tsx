@@ -1,3 +1,4 @@
+import { useConfig } from '@dhis2/app-runtime'
 import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
@@ -6,6 +7,8 @@ import { BrowserRouter } from 'react-router-dom'
 import {
     useIsSectionAuthorizedPredicate,
     useIsSectionFeatureToggle,
+    useSystemSettingsStore,
+    useCurrentUserAuthorities,
 } from '../../lib'
 import { Section } from '../../types'
 import { Sidebar } from './Sidebar'
@@ -15,6 +18,9 @@ const mockedUseIsSectionAuthorizedPredicate = jest.mocked(
 )
 
 const mockedUseIsSectionFeatureToggle = jest.mocked(useIsSectionFeatureToggle)
+const mockedUseSystemSettingsStore = jest.mocked(useSystemSettingsStore)
+const mockedUseConfig = jest.mocked(useConfig)
+const mockedUseCurrentUserAuthorities = jest.mocked(useCurrentUserAuthorities)
 
 jest.mock('../../lib', () => {
     const originalModule = jest.requireActual('../../lib')
@@ -23,6 +29,16 @@ jest.mock('../../lib', () => {
         useIsSectionAuthorizedPredicate: jest.fn(),
         useIsSectionFeatureToggle: jest.fn(),
         useCanCreateModelInSection: jest.fn(() => true),
+        useSystemSettingsStore: jest.fn(() => undefined),
+        useCurrentUserAuthorities: jest.fn(),
+    }
+})
+
+jest.mock('@dhis2/app-runtime', () => {
+    const originalModule = jest.requireActual('@dhis2/app-runtime')
+    return {
+        ...originalModule,
+        useConfig: jest.fn(),
     }
 })
 
@@ -40,23 +56,65 @@ describe('Sidebar', () => {
             () => () => true
         )
         mockedUseIsSectionFeatureToggle.mockImplementation(() => () => true)
+        mockedUseConfig.mockImplementation(
+            () =>
+                ({
+                    systemInfo: {
+                        contextPath: 'www.test.com/path/somewhere',
+                    },
+                } as any)
+        )
+        mockedUseCurrentUserAuthorities.mockReturnValue(new Set(['ALL']))
     })
     it('should display the list of top-level categories', () => {
-        const { getByText } = renderSideBar()
+        const { queryByText } = renderSideBar()
 
         const topLevelCategories = [
             'Metadata Overview',
             'Categories',
             'Data elements',
             'Data sets',
-            'Indicators',
+            'Indicators and Predictors',
             'Organisation units',
             'Programs and Tracker',
+            'Option sets',
             'Validations',
+            'Data Approval',
+            'Other',
+            'Metadata Integrity Checks',
+            'Import Metadata',
+            'Export Metadata',
         ]
 
         topLevelCategories.forEach((title) =>
-            expect(getByText(title)).toBeDefined()
+            expect(queryByText(title)).toBeDefined()
+        )
+    })
+    it('should open external app link with legacy url if global shell is enabled', async () => {
+        mockedUseSystemSettingsStore.mockReturnValueOnce(true)
+        const { getByRole } = renderSideBar()
+        const integrityButton = getByRole('link', {
+            name: /Metadata Integrity Checks/i,
+        })
+
+        expect(integrityButton).toBeInTheDocument()
+        expect(integrityButton).toHaveAttribute(
+            'href',
+            'www.test.com/path/somewhere/apps/data-administration#/data-integrity'
+        )
+    })
+    it('should open external app link with apps url if global shell is NOT enabled', async () => {
+        mockedUseSystemSettingsStore.mockReturnValueOnce(false)
+        const { getByRole } = renderSideBar()
+
+        const integrityButton = getByRole('link', {
+            name: /Metadata Integrity Checks/i,
+        })
+
+        expect(integrityButton).toBeInTheDocument()
+        expect(integrityButton).toHaveAttribute(
+            'href',
+            'www.test.com/path/somewhere/dhis-web-data-administration/index.html#/data-integrity'
         )
     })
     it('should display the list of links inside a category when clicked', async () => {

@@ -37,16 +37,20 @@ export const SectionListRow = React.memo(function SectionListRow<
     const editAccess = canEditModel(modelData)
     return (
         <DataTableRow
-            className={cx(css.listRow, { [css.active]: active })}
+            className={cx(css.listRow, {
+                [css.active]: active,
+                [css.clickable]: editAccess,
+            })}
             dataTest={`section-list-row`}
             selected={selected}
         >
-            <DataTableCell width="48px">
+            <DataTableCell className={css.listRowCheckbox} width="32px">
                 <TooltipWrapper
                     condition={!editAccess}
                     content={TOOLTIPS.noEditAccess}
                 >
                     <Checkbox
+                        dense
                         disabled={!editAccess}
                         dataTest="section-list-row-checkbox"
                         checked={selected}
@@ -61,7 +65,7 @@ export const SectionListRow = React.memo(function SectionListRow<
                     key={selectedColumn.path}
                     onClick={() => onClick?.(modelData)}
                 >
-                    {renderColumnValue(selectedColumn, modelData)}
+                    <pre>{renderColumnValue(selectedColumn, modelData)}</pre>
                 </DataTableCell>
             ))}
             <DataTableCell>{renderActions(modelData)}</DataTableCell>

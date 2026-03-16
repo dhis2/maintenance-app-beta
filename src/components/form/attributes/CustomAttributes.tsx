@@ -117,6 +117,10 @@ export function CustomAttributesSection({
         return null
     }
 
+    const sortedAttributes = [...customAttributes]
+        .map((custAtt, index) => ({ ...custAtt, originalIndex: index }))
+        .sort((a, b) => (a?.sortOrder ?? Infinity) - (b?.sortOrder ?? Infinity))
+
     const Wrapper = sectionedLayout ? SectionedFormSection : StandardFormSection
 
     return (
@@ -131,12 +135,12 @@ export function CustomAttributesSection({
                     { modelName: schemaSection.titlePlural.toLowerCase() }
                 )}
             </StandardFormSectionDescription>
-            {customAttributes?.map((customAttribute, index) => {
+            {sortedAttributes?.map((customAttribute) => {
                 return (
                     <CustomAttribute
                         key={customAttribute.id}
                         attribute={customAttribute}
-                        index={index}
+                        index={customAttribute.originalIndex}
                     />
                 )
             })}

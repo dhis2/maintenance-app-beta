@@ -1,8 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
-import { CheckboxFieldFF, SingleSelectFieldFF } from '@dhis2/ui'
+import { CheckboxFieldFF, RadioFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
 import {
+    HorizontalFieldGroup,
     SectionedFormSection,
     SectionedFormSections,
     StandardFormField,
@@ -13,6 +14,7 @@ import {
     ModelTransferField,
     ModelMultiSelectField,
     MessageFields,
+    MessageVariables,
 } from '../../../components'
 import {
     useSchemaSectionHandleOrThrow,
@@ -21,30 +23,28 @@ import {
 } from '../../../lib'
 import styles from './ValidationNotificationTemplateFormFields.module.css'
 
-const notificationTypeOptions = [
-    {
-        label: getConstantTranslation('COLLECTIVE_SUMMARY'),
-        value: 'COLLECTIVE_SUMMARY',
-    },
-    {
-        label: getConstantTranslation('SINGLE_NOTIFICATION'),
-        value: 'SINGLE_NOTIFICATION',
-    },
-]
-
 export const VALIDATION_RULE_VARIABLES = {
-    rule_name: i18n.t('Rule name'),
-    rule_description: i18n.t('Rule description'),
-    operator: i18n.t('Operator'),
-    importance: i18n.t('Importance'),
-    left_side_description: i18n.t('Left side description'),
-    right_side_description: i18n.t('Right side description'),
-    left_side_value: i18n.t('Left side value'),
-    right_side_value: i18n.t('Right side value'),
-    org_unit_name: i18n.t('Organisation unit name'),
-    period: i18n.t('Period'),
-    current_date: i18n.t('Current date'),
-} as Record<string, string>
+    rule_name: { label: i18n.t('Rule name'), type: 'VARIABLE' },
+    rule_description: { label: i18n.t('Rule description'), type: 'VARIABLE' },
+    operator: { label: i18n.t('Operator'), type: 'VARIABLE' },
+    importance: { label: i18n.t('Importance'), type: 'VARIABLE' },
+    left_side_description: {
+        label: i18n.t('Left side description'),
+        type: 'VARIABLE',
+    },
+    right_side_description: {
+        label: i18n.t('Right side description'),
+        type: 'VARIABLE',
+    },
+    left_side_value: { label: i18n.t('Left side value'), type: 'VARIABLE' },
+    right_side_value: { label: i18n.t('Right side value'), type: 'VARIABLE' },
+    org_unit_name: {
+        label: i18n.t('Organisation unit name'),
+        type: 'VARIABLE',
+    },
+    period: { label: i18n.t('Period'), type: 'VARIABLE' },
+    current_date: { label: i18n.t('Current date'), type: 'VARIABLE' },
+} as MessageVariables
 
 const UserGroupSelect = () => {
     const USER_GROUPS_QUERY = {
@@ -70,13 +70,17 @@ const UserGroupSelect = () => {
     )
 }
 
-export const ValidationNotificationTemplateFormFields = ({
-    initialValues,
-}: {
-    initialValues?: Record<string, any>
-}) => {
+export const ValidationNotificationTemplateFormFields = () => {
     const schemaSection = useSchemaSectionHandleOrThrow()
     useSyncSelectedSectionWithScroll()
+    const collectiveSummaryField = useField('sendStrategy', {
+        type: 'radio',
+        value: 'COLLECTIVE_SUMMARY',
+    })
+    const singleNotificationField = useField('sendStrategy', {
+        type: 'radio',
+        value: 'SINGLE_NOTIFICATION',
+    })
 
     return (
         <SectionedFormSections>
@@ -100,7 +104,7 @@ export const ValidationNotificationTemplateFormFields = ({
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Select validation rules to trigger this notification.'
+                        'Choose which validation rules trigger this notification.'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
@@ -146,20 +150,23 @@ export const ValidationNotificationTemplateFormFields = ({
                     <UserGroupSelect />
                 </StandardFormField>
                 <StandardFormField>
-                    <FieldRFF<string | undefined>
-                        inputWidth="500px"
+                    <HorizontalFieldGroup
+                        label={i18n.t('Send notification as')}
                         dataTest="formfields-notificationType"
-                        name="sendStrategy"
-                        placeholder={i18n.t('Choose notification')}
-                        render={(props) => (
-                            <SingleSelectFieldFF
-                                {...props}
-                                clearable
-                                label={i18n.t('Send notification as')}
-                                options={notificationTypeOptions}
-                            />
-                        )}
-                    />
+                    >
+                        <RadioFieldFF
+                            label={getConstantTranslation('COLLECTIVE_SUMMARY')}
+                            input={collectiveSummaryField.input}
+                            meta={collectiveSummaryField.meta}
+                        />
+                        <RadioFieldFF
+                            label={getConstantTranslation(
+                                'SINGLE_NOTIFICATION'
+                            )}
+                            input={singleNotificationField.input}
+                            meta={singleNotificationField.meta}
+                        />
+                    </HorizontalFieldGroup>
                 </StandardFormField>
                 <StandardFormField>
                     <FieldRFF

@@ -29,7 +29,7 @@ export const OptionSetField = () => {
                     },
                 }}
                 helpText={i18n.t(
-                    'Choose from a predefined list of option sets. The option set will automatically define the value type.'
+                    'Limit input to a set of predefined options. An option set will automatically set the value type.'
                 )}
                 clearable={true}
                 clearText={i18n.t('Remove option set')}

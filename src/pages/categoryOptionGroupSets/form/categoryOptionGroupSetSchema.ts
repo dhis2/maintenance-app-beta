@@ -1,5 +1,9 @@
 import { z } from 'zod'
-import { getDefaults, createFormValidate, modelFormSchemas } from '../../../lib'
+import {
+    getDefaultsOld,
+    createFormValidate,
+    modelFormSchemas,
+} from '../../../lib'
 import { CategoryOptionGroupSet } from '../../../types/generated'
 
 const {
@@ -11,9 +15,7 @@ const {
 
 const categoryOptionGroupSetBaseSchema = z.object({
     code: z.string().trim().optional(),
-    dataDimensionType: z
-        .nativeEnum(CategoryOptionGroupSet.dataDimensionType)
-        .default(CategoryOptionGroupSet.dataDimensionType.DISAGGREGATION),
+    dataDimensionType: z.nativeEnum(CategoryOptionGroupSet.dataDimensionType),
 })
 
 export const categoryOptionGroupSetFormSchema = identifiable
@@ -34,6 +36,6 @@ export const categoryOptionGroupSetListSchema = categoryOptionGroupSetBaseSchema
         displayShortName: z.string(),
     })
 
-export const initialValues = getDefaults(categoryOptionGroupSetFormSchema)
+export const initialValues = getDefaultsOld(categoryOptionGroupSetFormSchema)
 
 export const validate = createFormValidate(categoryOptionGroupSetFormSchema)

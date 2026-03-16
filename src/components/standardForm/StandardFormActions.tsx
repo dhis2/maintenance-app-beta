@@ -1,20 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
-import { Button, ButtonStrip, CircularLoader } from '@dhis2/ui'
+import { Button, ButtonStrip } from '@dhis2/ui'
 import React from 'react'
 import { To } from 'react-router-dom'
 import { LinkButton } from '../LinkButton'
-import classes from './StandardFormActions.module.css'
-
-function LoadingIcon() {
-    return (
-        <span
-            className={classes.submitButtonLoadingIcon}
-            data-test="loading-icon"
-        >
-            <CircularLoader small />
-        </span>
-    )
-}
 
 export function StandardFormActions({
     cancelLabel,
@@ -41,11 +29,11 @@ export function StandardFormActions({
                 primary
                 small
                 disabled={submitting}
+                loading={submitting}
                 type="submit"
                 onClick={onSubmitClick}
                 dataTest="form-submit-button"
             >
-                {submitting && <LoadingIcon />}
                 {submitLabel}
             </Button>
             {onSaveClick && (
@@ -53,11 +41,11 @@ export function StandardFormActions({
                     primary
                     small
                     disabled={submitting}
+                    loading={submitting}
                     type="button"
                     onClick={onSaveClick}
                     dataTest="form-save-button"
                 >
-                    {submitting && <LoadingIcon />}
                     {saveLabel}
                 </Button>
             )}

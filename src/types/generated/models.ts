@@ -7438,6 +7438,7 @@ export namespace ProgramRuleAction {
         SETMANDATORYFIELD = 'SETMANDATORYFIELD',
         SENDMESSAGE = 'SENDMESSAGE',
         SCHEDULEMESSAGE = 'SCHEDULEMESSAGE',
+        SCHEDULEEVENT = 'SCHEDULEEVENT',
         HIDEOPTION = 'HIDEOPTION',
         SHOWOPTIONGROUP = 'SHOWOPTIONGROUP',
         HIDEOPTIONGROUP = 'HIDEOPTIONGROUP',
@@ -9092,6 +9093,7 @@ export type TrackedEntityAttribute = {
     queryMods: QueryModifiers
     sharing: Sharing
     shortName: string
+    skipAnalytics: boolean
     skipSynchronization: boolean
     sortOrderInListNoProgram: number
     sortOrderInVisitSchedule: number

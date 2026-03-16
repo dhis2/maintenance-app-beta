@@ -278,6 +278,7 @@ describe('Data elements form tests', () => {
                 aShortName,
                 screen
             )
+            await uiActions.pickRadioField('domainType', 'Aggregate', screen)
             await uiActions.pickOptionFromSelect(
                 screen.getByTestId('formfields-categorycombo'),
                 2,
@@ -334,6 +335,7 @@ describe('Data elements form tests', () => {
                 aShortName,
                 screen
             )
+            await uiActions.pickRadioField('domainType', 'Aggregate', screen)
 
             await uiActions.pickOptionFromSelect(
                 screen.getByTestId('formfields-valueType'),
@@ -455,7 +457,7 @@ describe('Data elements form tests', () => {
             uiAssertions.expectRadioFieldToExist(
                 'domainType',
                 [
-                    { label: 'Aggregate', checked: true },
+                    { label: 'Aggregate', checked: false },
                     {
                         label: 'Tracker',
                         checked: false,
@@ -466,7 +468,7 @@ describe('Data elements form tests', () => {
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('formfields-valueType'),
                 {
-                    selected: 'Text',
+                    selected: 'Number',
                     options: mockSchema.properties.valueType.constants
                         .filter((o) => o !== 'MULTI_TEXT')
                         .map((o) => ({
@@ -623,6 +625,8 @@ describe('Data elements form tests', () => {
                 aShortName,
                 screen
             )
+            await uiActions.pickRadioField('domainType', 'Aggregate', screen)
+
             await uiActions.pickOptionFromSelect(
                 screen.getByTestId('formfields-categorycombo'),
                 1,
@@ -652,7 +656,7 @@ describe('Data elements form tests', () => {
                         fieldMask: undefined,
                         zeroIsSignificant: false,
                         domainType: 'AGGREGATE',
-                        valueType: 'TEXT',
+                        valueType: 'NUMBER',
                         categoryCombo: expect.objectContaining({
                             id: categoryCombos[0].id,
                         }),
@@ -679,6 +683,8 @@ describe('Data elements form tests', () => {
                 aShortName,
                 screen
             )
+            await uiActions.pickRadioField('domainType', 'Aggregate', screen)
+
             await uiActions.pickOptionInTransfer(
                 'legendset-transfer',
                 legendSets[1].displayName,
@@ -704,7 +710,7 @@ describe('Data elements form tests', () => {
                         fieldMask: undefined,
                         zeroIsSignificant: false,
                         domainType: 'AGGREGATE',
-                        valueType: 'TEXT',
+                        valueType: 'NUMBER',
                         categoryCombo: expect.objectContaining({
                             id: DEFAULT_CATEGORY_COMBO.id,
                         }),
@@ -734,6 +740,7 @@ describe('Data elements form tests', () => {
                 aShortName,
                 screen
             )
+            await uiActions.pickRadioField('domainType', 'Aggregate', screen)
             const attributeInput = within(
                 screen.getByTestId(`attribute-${attributes[0].id}`)
             ).getByRole('textbox') as HTMLInputElement
@@ -752,7 +759,7 @@ describe('Data elements form tests', () => {
                         fieldMask: undefined,
                         zeroIsSignificant: false,
                         domainType: 'AGGREGATE',
-                        valueType: 'TEXT',
+                        valueType: 'NUMBER',
                         categoryCombo: expect.objectContaining({
                             id: DEFAULT_CATEGORY_COMBO.id,
                         }),
@@ -775,8 +782,7 @@ describe('Data elements form tests', () => {
         it('should let user select value type without showing warning modal', async () => {
             const { screen } = await renderForm()
 
-            const warningText =
-                'Changing the value type may cause issues when generating analytics tables if data already exists.'
+            const warningText = 'Change value type?'
 
             expect(screen.queryByText(warningText)).toBeNull()
 
@@ -785,7 +791,7 @@ describe('Data elements form tests', () => {
                 screen.getByTestId('formfields-valueType')
             ).getByTestId('dhis2-uicore-select-input')
             expect(valueType).toBeVisible()
-            expect(valueType).toHaveTextContent(VALUE_TYPE.TEXT)
+            expect(valueType).toHaveTextContent(VALUE_TYPE.NUMBER)
 
             // Click a new value type
             const aValueType = 'COORDINATE'
@@ -1057,11 +1063,11 @@ describe('Data elements form tests', () => {
             await uiActions.submitForm(screen)
             expect(updateMock).not.toHaveBeenCalled()
         })
-        it('should have multi text as a value type if data set has that value type', async () => {
+        it('should have multi text as a value type if data element has option set with that value type', async () => {
             const { screen } = await renderForm({
                 dataElementOverwrites: {
                     valueType: 'MULTI_TEXT',
-                    optionSet: null,
+                    optionSet: { ...testOptionSet(), valueType: 'MULTI_TEXT' },
                 },
             })
 
@@ -1078,8 +1084,7 @@ describe('Data elements form tests', () => {
                     optionSet: null,
                 },
             })
-            const warningText =
-                'Changing the value type may cause issues when generating analytics tables if data already exists.'
+            const warningText = 'Change value type?'
 
             expect(screen.queryByText(warningText)).toBeNull()
 
@@ -1125,8 +1130,7 @@ describe('Data elements form tests', () => {
                     optionSet: null,
                 },
             })
-            const warningText =
-                'Changing the value type may cause issues when generating analytics tables if data already exists.'
+            const warningText = 'Change value type?'
 
             expect(screen.queryByText(warningText)).toBeNull()
 
@@ -1234,8 +1238,7 @@ describe('Data elements form tests', () => {
                     optionSets,
                 },
             })
-            const warningText =
-                'Updating the option set will change the value type which may cause problems when generating analytics tables if there is existing data for this data element.'
+            const warningText = 'Change option set and value type?'
 
             expect(screen.queryByText(warningText)).toBeNull()
 

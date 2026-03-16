@@ -22,7 +22,7 @@ import {
     StandardFormSectionTitle,
     MissingValueStrategyField,
 } from '../../../components'
-import { PaddedContainer } from '../../../components/metadataFormControls/ExpressionBuilder/PaddedContainer'
+import { PaddedContainer } from '../../../components/ExpressionBuilder/PaddedContainer'
 import {
     getConstantTranslation,
     SchemaName,
@@ -98,11 +98,7 @@ const ValidationRuleFormFields = () => {
                     <CodeField schemaSection={schemaSection} />
                 </StandardFormField>
                 <StandardFormField>
-                    <DescriptionField
-                        helpText={i18n.t(
-                            'Explain the purpose of this validation rule.'
-                        )}
-                    />
+                    <DescriptionField />
                 </StandardFormField>
             </SectionedFormSection>
 
@@ -119,10 +115,7 @@ const ValidationRuleFormFields = () => {
                 </StandardFormSectionDescription>
 
                 <div className={css.expressionContainer}>
-                    <PaddedContainer>
-                        <div className={css.subtitle}>
-                            {i18n.t('Left side expression')}
-                        </div>
+                    <PaddedContainer title={i18n.t('Left side expression')}>
                         <StandardFormField>
                             <ExpressionBuilderEntry
                                 fieldName="leftSide.expression"
@@ -170,10 +163,7 @@ const ValidationRuleFormFields = () => {
                 </StandardFormField>
 
                 <div className={css.expressionContainer}>
-                    <PaddedContainer>
-                        <div className={css.subtitle}>
-                            {i18n.t('Right side expression')}
-                        </div>
+                    <PaddedContainer title={i18n.t('Right side expression')}>
                         <StandardFormField>
                             <ExpressionBuilderEntry
                                 fieldName="rightSide.expression"
@@ -216,7 +206,7 @@ const ValidationRuleFormFields = () => {
                         component={TextAreaFieldFF}
                         label={i18n.t('Instruction to show')}
                         helpText={i18n.t(
-                            'Instructions are shown when validating data in Data Entry and Android apps.'
+                            'Shown when validating data in Data Entry and Android apps.'
                         )}
                         dataTest="formfields-instruction"
                     />

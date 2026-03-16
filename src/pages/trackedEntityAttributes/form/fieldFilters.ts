@@ -23,6 +23,7 @@ export const fieldFilters = [
     'inherit',
     'displayInListNoProgram',
     'skipSynchronization',
+    'skipAnalytics',
     'trigramIndexable',
     'trigramIndexed',
     'preferredSearchOperator',

@@ -19,9 +19,9 @@ export const SortOrderField = () => {
             input={input}
             meta={meta as unknown as FieldMetaState<string | undefined>}
             inputWidth="250px"
-            label={i18n.t('Sort order')}
+            label={i18n.t('Display order')}
             helpText={i18n.t(
-                'Enter a number to decide where this attribute appears in list and forms'
+                'Enter a number to set this attribute’s position in lists and forms.'
             )}
         />
     )

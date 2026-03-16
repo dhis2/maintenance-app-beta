@@ -10,9 +10,8 @@ import {
 } from '../../../lib'
 import { ConfirmationModalWrapper } from '../../confirmationModal'
 
-const valueTypeHelpText = i18n.t(
-    'Select the kind of data this attribute collects. If you have chosen an Option set, this will be set automatically.'
-)
+const valueTypeHelpText = i18n.t('Choose the kind of data to collect.')
+
 const valueTypeDisabledHelpText = i18n.t(
     'Disabled as the value type must match the value type of the selected option set.'
 )
@@ -20,28 +19,52 @@ const valueTypeDisabledHelpText = i18n.t(
 export function ValueTypeField({
     disabled: externallyDisabled = false,
     disabledText,
+    required = false,
 }: Readonly<{
     disabled?: boolean
     disabledText?: string
+    required?: boolean
 }>) {
     const { values } = useFormState({ subscription: { values: true } })
     const disabled = !!values.optionSet?.id || externallyDisabled
     const schemaSection = useSchemaSectionHandleOrThrow()
     const schema = useSchema(schemaSection.name)
+
     const isEdit = !!useParams().id
 
     const { input } = useField('valueType')
 
-    useEffect(() => {
-        if (values.optionSet?.valueType) {
-            input.onChange(values.optionSet.valueType)
-            input.onBlur()
-        }
-    }, [values.optionSet, input])
-
     const optionSetHasMultiTextValueType =
         values.valueType === 'MULTI_TEXT' ||
         (values.optionSet?.id && values.optionSet?.valueType === 'MULTI_TEXT')
+
+    const isOptionSetForm = schemaSection.name === 'optionSet'
+    const isProgramRuleVariableForm =
+        schemaSection.name === 'programRuleVariable'
+    const formTypeAllowsMultiTextOptionSelection =
+        isOptionSetForm || isProgramRuleVariableForm
+    const showMultiTextOption =
+        formTypeAllowsMultiTextOptionSelection || optionSetHasMultiTextValueType
+
+    const optionSetValueType = values.optionSet?.valueType
+
+    useEffect(() => {
+        // set value type to match selected option set's value type (if value type does not already match)
+        if (optionSetValueType && optionSetValueType !== input.value) {
+            input.onChange(optionSetValueType)
+            input.onBlur()
+        }
+        // set VALUE_TYPE back to TEXT default if MULTI_TEXT option set is unselected
+        // except if form generally allows MULTI_TEXT value type without option set selection
+        if (
+            !formTypeAllowsMultiTextOptionSelection &&
+            !optionSetValueType &&
+            input.value === 'MULTI_TEXT'
+        ) {
+            input.onChange('TEXT')
+            input.onBlur()
+        }
+    }, [optionSetValueType, input, formTypeAllowsMultiTextOptionSelection])
 
     const options =
         schema.properties.valueType.constants
@@ -50,7 +73,7 @@ export function ValueTypeField({
                 label: getConstantTranslation(constant),
             }))
             .filter(({ value }: { value: string }) => {
-                return optionSetHasMultiTextValueType || value !== 'MULTI_TEXT'
+                return showMultiTextOption || value !== 'MULTI_TEXT'
             }) || []
 
     const combinedHelpText = disabled
@@ -68,6 +91,7 @@ export function ValueTypeField({
             selected={input.value}
             onChange={onChange}
             label={i18n.t('Value type')}
+            required={required}
             disabled={disabled}
             helpText={combinedHelpText}
         >
@@ -86,25 +110,40 @@ export function ValueTypeField({
         input.onBlur()
     }
 
+    const objectType =
+        schemaSection.name === 'programRuleVariable'
+            ? i18n.t('variable')
+            : schemaSection.title.toLowerCase()
+
     if (isEdit && !externallyDisabled) {
         return (
             <ConfirmationModalWrapper
                 onChange={handleChange}
                 renderComponent={renderComponent}
-                modalTitle={i18n.t('Change value type')}
+                modalTitle={i18n.t('Change value type?')}
                 modalMessage={i18n.t(
-                    'Changing the value type may cause issues when generating analytics tables if data already exists.'
+                    'If this {{objectType}} already has data, changing its type can make existing values incompatible and affect analytics tables.',
+                    { objectType }
                 )}
                 modalMessageSelectionSpecificConfirmation={(selection) =>
                     i18n.t(
-                        'Are you sure you want to change the {{objectType}} to {{newObjectTypeValue}}?',
+                        'Change value type from {{currentSelection}} to {{newObjectTypeValue}}?',
                         {
-                            objectType: i18n.t('value type'),
+                            currentSelection: getConstantTranslation(
+                                input.value
+                            ),
                             newObjectTypeValue: selection?.selected
                                 ? getConstantTranslation(selection.selected)
                                 : i18n.t('undefined'),
                         }
                     )
+                }
+                confirmButtonLabel={(selection) =>
+                    i18n.t('Change to {{newValue}}', {
+                        newValue: selection?.selected
+                            ? getConstantTranslation(selection.selected)
+                            : i18n.t('undefined'),
+                    })
                 }
             />
         )

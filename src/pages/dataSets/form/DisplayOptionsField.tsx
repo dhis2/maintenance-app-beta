@@ -71,12 +71,14 @@ export function DisplayOptionsField({
 
     const onTitlesCheckboxChange = () => {
         setIsTitlesChecked(!isTitlesChecked)
+        titleField.input.onChange(undefined)
+        subtitleField.input.onChange(undefined)
     }
 
     return (
         <>
             <Checkbox
-                label={i18n.t('Display title / subtitle')}
+                label={i18n.t('Show title / subtitle')}
                 onChange={onTitlesCheckboxChange}
                 checked={isTitlesChecked}
             />
@@ -120,7 +122,7 @@ export function DisplayOptionsField({
             )}
             {withSectionsDisplayOptions && (
                 <div className={classes.displayMode}>
-                    <p>{i18n.t('Section display mode')}</p>
+                    <p>{i18n.t('Section layout')}</p>
                     <Radio
                         checked={!renderAsTabs.input.value}
                         onChange={({ checked }) => {
@@ -128,8 +130,10 @@ export function DisplayOptionsField({
                         }}
                         onBlur={renderAsTabs.onBlur}
                         label={i18n.t(
-                            'Single page: all sections shown consecutively in one form',
-                            { nsSeparator: '~:~' }
+                            'Single page: Show all sections on one page',
+                            {
+                                nsSeparator: '~:~',
+                            }
                         )}
                     />
                     <Radio
@@ -138,7 +142,7 @@ export function DisplayOptionsField({
                             renderAsTabs.input.onChange(checked)
                         }}
                         onBlur={renderAsTabs.onBlur}
-                        label={i18n.t('Tabs: show a tab for each section', {
+                        label={i18n.t('Tabs: Show one tab for each section', {
                             nsSeparator: '~:~',
                         })}
                     />
@@ -163,12 +167,12 @@ export function DisplayOptionsField({
                                 type="checkbox"
                                 component={CheckboxFieldFF}
                                 label={i18n.t(
-                                    'Render multi-organisation unit forms vertically'
+                                    'Use a vertical layout for multi-organisation unit forms'
                                 )}
                             />
                             <p>
                                 {i18n.t(
-                                    'Only applied to section forms using multiple organisation units'
+                                    'Only applies to section forms with multiple organisation units'
                                 )}
                             </p>
                         </div>

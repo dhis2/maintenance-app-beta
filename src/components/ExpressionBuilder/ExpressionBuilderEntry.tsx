@@ -1,12 +1,13 @@
 import i18n from '@dhis2/d2-i18n'
 import { Button, ButtonStrip, TextAreaFieldFF } from '@dhis2/ui'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useField } from 'react-final-form'
 import { useParams } from 'react-router-dom'
-import { SchemaSection, useSchemaSectionHandleOrThrow } from '../../lib'
+import { SchemaSection, useSectionHandle } from '../../lib'
 import { useValidator } from '../../lib/models/useFieldValidators'
 import { ExpressionBuilder } from './ExpressionBuilder'
 import styles from './ExpressionBuilder.module.css'
+import { ExpressionBuilderType } from './types'
 import { useExpressionValidator } from './useExpressionValidator'
 
 type ExpressionBuilderEntryProps = Readonly<{
@@ -14,12 +15,16 @@ type ExpressionBuilderEntryProps = Readonly<{
     title: string
     editButtonText: string
     setUpButtonText: string
+    clearButtonText?: string
     validationResource: string
     descriptionFieldName?: string
     helpText?: string
-    validateSchemaSection: SchemaSection
+    validateSchemaSection?: SchemaSection
     validateProperty?: string
     clearable?: boolean
+    programId?: string
+    type?: ExpressionBuilderType
+    disabled?: boolean
 }>
 
 export const ExpressionBuilderEntry = ({
@@ -27,20 +32,26 @@ export const ExpressionBuilderEntry = ({
     title,
     editButtonText,
     setUpButtonText,
+    clearButtonText = i18n.t('Clear expression'),
     validationResource,
     validateSchemaSection,
     validateProperty,
     clearable = false,
+    programId,
+    type = 'default',
+    disabled = false,
 }: ExpressionBuilderEntryProps) => {
     const [showExpressionBuilder, setShowExpressionBuilder] = useState(false)
 
-    const [initialExpressionValidation] =
-        useExpressionValidator(validationResource)
+    const [initialExpressionValidation] = useExpressionValidator(
+        validationResource,
+        programId
+    )
     const [expressionDescription, setExpressionDescription] = useState<
         string | undefined
     >(undefined)
     const descriptionToShow = expressionDescription
-    const schema = useSchemaSectionHandleOrThrow()
+    const schema = useSectionHandle() as SchemaSection
 
     const schemaValidate = useValidator({
         schemaSection: validateSchemaSection ?? schema,
@@ -52,6 +63,12 @@ export const ExpressionBuilderEntry = ({
     const { input, meta } = useField<string>(fieldName, {
         validate: schemaValidate,
     })
+
+    const clearExpression = useCallback(() => {
+        input.onChange('')
+        setExpressionDescription(undefined)
+        input?.onBlur()
+    }, [setExpressionDescription, input])
 
     useEffect(() => {
         const performInitialValidation = async () => {
@@ -98,21 +115,15 @@ export const ExpressionBuilderEntry = ({
                             setShowExpressionBuilder(true)
                         }}
                         dataTest={`edit-${fieldName}-expression-button`}
+                        disabled={disabled}
                     >
                         {isEdit || descriptionToShow
                             ? editButtonText
                             : setUpButtonText}
                     </Button>
-                    {clearable && descriptionToShow && (
-                        <Button
-                            small
-                            secondary
-                            onClick={() => {
-                                input.onChange('')
-                                setExpressionDescription(undefined)
-                            }}
-                        >
-                            {i18n.t('Clear expression')}
+                    {clearable && descriptionToShow && !disabled && (
+                        <Button small secondary onClick={clearExpression}>
+                            {clearButtonText}
                         </Button>
                     )}
                 </ButtonStrip>
@@ -125,6 +136,10 @@ export const ExpressionBuilderEntry = ({
                     initialValue={input.value}
                     fieldName={fieldName}
                     validationResource={validationResource}
+                    programId={programId}
+                    type={type}
+                    clearable={clearable}
+                    clearExpression={clearExpression}
                 />
             )}
         </div>

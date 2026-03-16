@@ -9,7 +9,9 @@ export function CompulsoryField() {
             component={CheckboxFieldFF}
             dataTest="formfields-compulsory"
             name="compulsory"
-            label={i18n.t('Compulsory')}
+            label={i18n.t(
+                'Compulsory: all data elements must belong to at least one group in this group set.'
+            )}
             type="checkbox"
             validateFields={[]}
         />

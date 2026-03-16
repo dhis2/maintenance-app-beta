@@ -53,9 +53,7 @@ export const Component = () => {
             validate={validate}
             cancelTo={`/${getSectionPath(section)}`}
         >
-            <ValidationNotificationTemplateFormFields
-                initialValues={validationNotificationTemplatesQuery.data ?? {}}
-            />
+            <ValidationNotificationTemplateFormFields />
         </SectionedFormWrapper>
     )
 }

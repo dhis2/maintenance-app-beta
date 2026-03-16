@@ -52,7 +52,6 @@ export function AttributesTransferField() {
             error={meta.invalid}
             validationText={(meta.touched && meta.error?.toString()) || ''}
             name={name}
-            label={i18n.t('Tracked entity attributes')}
             className={css.moduleTransferField}
         >
             <ModelTransfer<
@@ -76,8 +75,12 @@ export function AttributesTransferField() {
                 }}
                 leftHeader={i18n.t('Available tracked entity attributes')}
                 rightHeader={i18n.t('Selected tracked entity attributes')}
-                filterPlaceholder={i18n.t('Search available attributes')}
-                filterPlaceholderPicked={i18n.t('Search selected attributes')}
+                filterPlaceholder={i18n.t(
+                    'Filter available tracked entity attributes'
+                )}
+                filterPlaceholderPicked={i18n.t(
+                    'Filter selected tracked entity attributes'
+                )}
                 query={{
                     resource: 'trackedEntityAttributes',
                     params: {
