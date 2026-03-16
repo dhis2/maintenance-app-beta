@@ -70,7 +70,7 @@ export const TrackerProgramFormDescriptor = {
                 { name: 'featureType', label: i18n.t('Feature type') },
                 {
                     name: 'onlyEnrollOnce',
-                    label: i18n.t('Only allow one enrollment'),
+                    label: i18n.t('Limit to one lifetime enrollment'),
                 },
                 {
                     name: 'selectEnrollmentDatesInFuture',
@@ -86,9 +86,7 @@ export const TrackerProgramFormDescriptor = {
                 },
                 {
                     name: 'useFirstStageDuringRegistration',
-                    label: i18n.t(
-                        'Collect data for the first stage during enrollment'
-                    ),
+                    label: i18n.t('Show first program stage during enrollment'),
                 },
                 {
                     name: 'ignoreOverdueEvents',
