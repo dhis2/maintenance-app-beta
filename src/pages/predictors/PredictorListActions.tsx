@@ -205,16 +205,6 @@ export const PredictorListActions = ({
                             dataTest="row-actions-menu"
                         >
                             <FlyoutMenu>
-                                <MenuItem
-                                    dense
-                                    label={i18n.t('Show details')}
-                                    icon={<IconMore16 />}
-                                    onClick={() => {
-                                        onShowDetailsClick(model)
-                                        setOpen(false)
-                                    }}
-                                />
-
                                 <TooltipWrapper
                                     condition={!editable}
                                     content={TOOLTIPS.noEditAccess}
@@ -232,7 +222,15 @@ export const PredictorListActions = ({
                                         href={href}
                                     />
                                 </TooltipWrapper>
-
+                                <MenuItem
+                                    dense
+                                    label={i18n.t('Show details')}
+                                    icon={<IconMore16 />}
+                                    onClick={() => {
+                                        onShowDetailsClick(model)
+                                        setOpen(false)
+                                    }}
+                                />
                                 <MenuItem
                                     dense
                                     label={i18n.t('Run now')}
