@@ -92,6 +92,7 @@ const NotificationFormDrawerFooter = ({
     })
     return (
         <DrawerLayout
+            nestedSectionForm
             footer={
                 <DrawerFormFooter
                     submitLabel={i18n.t('Save notification and close')}

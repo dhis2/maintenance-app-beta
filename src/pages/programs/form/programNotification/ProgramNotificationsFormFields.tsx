@@ -153,7 +153,7 @@ export const ProgramNotificationsFormFields = ({
     ])
 
     return (
-        <div>
+        <div style={{ padding: 'var(--spacers-dp16) 0 0 0' }}>
             <SectionedFormSections>
                 <SectionedFormSection
                     name={descriptor.getSection('basicInformation').name}
