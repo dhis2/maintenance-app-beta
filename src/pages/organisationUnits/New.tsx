@@ -1,10 +1,12 @@
-import { useQueryClient } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import React, { useMemo } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { FormBase } from '../../components'
 import { DefaultNewFormContents } from '../../components/form/DefaultFormContents'
 import {
     getSectionPath,
     SECTIONS_MAP,
+    useBoundResourceQueryFn,
     useNavigateWithSearchState,
 } from '../../lib'
 import { createFormError } from '../../lib/form/createFormError'
@@ -12,6 +14,7 @@ import { useCreateModel } from '../../lib/form/useCreateModel'
 import { initialValues, OrganisationUnitFormField, validate } from './form'
 import { OrganisationUnitFormValues } from './form/organisationUnitSchema'
 import { useOnSaveDataSetsAndPrograms } from './form/useOnSaveDataSetsAndPrograms'
+import { ORG_UNIT_PARENT_SEARCH_PARAM } from './list/OrganisationUnitListActions'
 
 const section = SECTIONS_MAP.organisationUnit
 
@@ -44,11 +47,37 @@ export const useOnSaveOrgUnits = () => {
 
 export const Component = () => {
     const onSubmit = useOnSaveOrgUnits()
+    const queryFn = useBoundResourceQueryFn()
+    const [searchParams] = useSearchParams()
+    const parentId = searchParams.get(ORG_UNIT_PARENT_SEARCH_PARAM)
 
+    const parentOrgUnit = useQuery({
+        queryKey: [
+            {
+                resource: 'organisationUnits',
+                id: parentId ?? '',
+                params: {
+                    fields: 'id,path',
+                },
+            },
+        ],
+        queryFn: queryFn<{ id: string; path: string }>,
+        enabled: !!parentId,
+    })
+
+    const initialValuesWithMaybeParent = useMemo(() => {
+        if (parentId && parentOrgUnit.data) {
+            return {
+                ...initialValues,
+                parent: { id: parentId, path: parentOrgUnit.data?.path },
+            }
+        }
+        return initialValues
+    }, [parentId, parentOrgUnit.data])
     return (
         <FormBase
             onSubmit={onSubmit}
-            initialValues={initialValues}
+            initialValues={initialValuesWithMaybeParent}
             validate={validate}
         >
             <DefaultNewFormContents section={section}>
