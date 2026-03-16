@@ -1,3 +1,15 @@
+# [0.147.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.146.1...v0.147.0) (2026-03-16)
+
+
+### Bug Fixes
+
+* mantain search params when creating links ([#812](https://github.com/dhis2/maintenance-app-beta/issues/812)) ([1dda82b](https://github.com/dhis2/maintenance-app-beta/commit/1dda82b812e0f4e52eb35470362de1279d7b6673))
+
+
+### Features
+
+* rename app [DHIS2-21090] ([#804](https://github.com/dhis2/maintenance-app-beta/issues/804)) ([77821e6](https://github.com/dhis2/maintenance-app-beta/commit/77821e6184167416fed93c727a8904dbc9c368b3))
+
 ## [0.146.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.146.0...v0.146.1) (2026-03-13)
 
 
