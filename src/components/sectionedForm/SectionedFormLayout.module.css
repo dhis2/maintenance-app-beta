@@ -13,7 +13,9 @@
     grid-template-areas: 'sidebar' 'main';
     overflow: auto;
     column-gap: var(--spacers-dp16);
+    background-color: var(--colors-grey200);
 }
+
 .main {
     grid-area: main;
     width: 100%;

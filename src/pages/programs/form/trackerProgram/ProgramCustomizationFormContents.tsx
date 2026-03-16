@@ -1,9 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
-import { CheckboxFieldFF, InputFieldFF } from '@dhis2/ui'
+import { InputFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field } from 'react-final-form'
 import {
-    ColorAndIconField,
     SectionedFormSection,
     StandardFormField,
     StandardFormSectionDescription,
@@ -54,17 +53,13 @@ export const ProgramCustomizationFormContents = React.memo(
         return (
             <SectionedFormSection name={name}>
                 <StandardFormSectionTitle>
-                    {i18n.t('Program Customization')}
+                    {i18n.t('Customization')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        "Customize the program's visuals, labels, and display settings."
+                        'Override default labels with program-specific terms.'
                     )}
                 </StandardFormSectionDescription>
-
-                <StandardFormField>
-                    <ColorAndIconField />
-                </StandardFormField>
 
                 <StandardFormField>
                     <Field
@@ -191,18 +186,6 @@ export const ProgramCustomizationFormContents = React.memo(
                         )}
                         dataTest="formfields-noteLabel"
                         validate={noteLabelValidator}
-                    />
-                </StandardFormField>
-
-                <StandardFormField>
-                    <Field
-                        name="displayFrontPageList"
-                        type="checkbox"
-                        component={CheckboxFieldFF}
-                        label={i18n.t(
-                            'Display enrolled TEs in the front page list'
-                        )}
-                        dataTest="formfields-displayFrontPageList"
                     />
                 </StandardFormField>
             </SectionedFormSection>

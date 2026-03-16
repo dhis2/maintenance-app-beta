@@ -112,7 +112,7 @@ export const NotificationTimingSection = ({
                 <SingleSelectFieldFF
                     name="notificationTrigger"
                     dataTest="formfields-notificationTrigger"
-                    label={i18n.t('When to send notification (required)')}
+                    label={i18n.t('When to send notification')}
                     inputWidth="500px"
                     options={triggerOptions}
                     input={triggerInput}

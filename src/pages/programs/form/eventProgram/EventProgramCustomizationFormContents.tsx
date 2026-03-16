@@ -3,7 +3,6 @@ import { InputFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field } from 'react-final-form'
 import {
-    ColorAndIconField,
     SectionedFormSection,
     StandardFormField,
     StandardFormSectionDescription,
@@ -22,17 +21,13 @@ export const EventProgramCustomizationFormContents = React.memo(
         return (
             <SectionedFormSection name={name}>
                 <StandardFormSectionTitle>
-                    {i18n.t('Program customization')}
+                    {i18n.t('Customization')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        "Customize the program's visuals, labels, and display settings."
+                        'Override default labels with program-specific terms.'
                     )}
                 </StandardFormSectionDescription>
-
-                <StandardFormField>
-                    <ColorAndIconField />
-                </StandardFormField>
 
                 <StandardFormField>
                     <Field

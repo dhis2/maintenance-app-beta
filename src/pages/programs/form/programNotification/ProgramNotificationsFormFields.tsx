@@ -153,7 +153,7 @@ export const ProgramNotificationsFormFields = ({
     ])
 
     return (
-        <div>
+        <div style={{ padding: 'var(--spacers-dp16) 0 0 0' }}>
             <SectionedFormSections>
                 <SectionedFormSection
                     name={descriptor.getSection('basicInformation').name}
@@ -163,7 +163,7 @@ export const ProgramNotificationsFormFields = ({
                     </StandardFormSectionTitle>
                     <StandardFormSectionDescription>
                         {i18n.t(
-                            'Set up the basic information for the notification template.'
+                            'Set up the basic information for this program notification.'
                         )}
                     </StandardFormSectionDescription>
                     <BasicInformationSection
@@ -181,7 +181,7 @@ export const ProgramNotificationsFormFields = ({
                     </StandardFormSectionTitle>
                     <StandardFormSectionDescription>
                         {i18n.t(
-                            'Configure the templates for the notification content and subject.'
+                            'Configure templates for the notification message.'
                         )}
                     </StandardFormSectionDescription>
                     <MessageFields
