@@ -174,9 +174,16 @@ export const SetupFormContents = React.memo(function SetupFormContents({
             <StandardFormField>
                 <CompleteEventsExpiryDaysField />
             </StandardFormField>
-            <StandardFormField>
-                <OpenDaysAfterCoEndDateField />
-            </StandardFormField>
+            {values.categoryCombo?.id !==
+                DEFAULT_CATEGORYCOMBO_SELECT_OPTION.id && (
+                <StandardFormField>
+                    <OpenDaysAfterCoEndDateField
+                        categoryCombinationDisplayName={
+                            values.categoryCombo?.displayName ?? ''
+                        }
+                    />
+                </StandardFormField>
+            )}
             {isTrackerProgram && (
                 <StandardFormField>
                     <FieldRFF

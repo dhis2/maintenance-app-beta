@@ -38,7 +38,7 @@ export const TrackerProgramFormDescriptor = {
                 {
                     name: 'openDaysAfterCoEndDate',
                     label: i18n.t(
-                        'Close data entry a number of days after "Implementing partner" end date'
+                        'Close data entry a number of days after event category combination end date'
                     ),
                 },
                 {
