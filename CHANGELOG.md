@@ -1,3 +1,10 @@
+# [0.149.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.148.1...v0.149.0) (2026-03-16)
+
+
+### Features
+
+* add add child action to org unit list ([#814](https://github.com/dhis2/maintenance-app-beta/issues/814)) ([1a881a6](https://github.com/dhis2/maintenance-app-beta/commit/1a881a64b5170017c0668e47b8c13089437312cd))
+
 ## [0.148.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.148.0...v0.148.1) (2026-03-16)
 
 
