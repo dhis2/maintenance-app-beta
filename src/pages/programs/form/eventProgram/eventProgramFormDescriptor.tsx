@@ -14,6 +14,10 @@ export const EventProgramFormDescriptor = {
                 { name: 'shortName', label: i18n.t('Short name') },
                 { name: 'code', label: i18n.t('Code') },
                 { name: 'description', label: i18n.t('Description') },
+                {
+                    name: 'style',
+                    label: i18n.t('Visual configuration'),
+                },
                 { name: 'version', label: i18n.t('Version') },
                 { name: 'featureType', label: i18n.t('Feature type') },
                 { name: 'relatedProgram', label: i18n.t('Related program') },
@@ -50,20 +54,6 @@ export const EventProgramFormDescriptor = {
                     label: i18n.t(
                         'Maximum number of search results to display'
                     ),
-                },
-            ],
-        },
-        {
-            name: 'programCustomization',
-            label: i18n.t('Program customization'),
-            fields: [
-                {
-                    name: 'style',
-                    label: i18n.t('Visual configuration'),
-                },
-                {
-                    name: 'incidentDateLabel',
-                    label: i18n.t('Custom label for "Report date"'),
                 },
             ],
         },
@@ -129,6 +119,16 @@ export const EventProgramFormDescriptor = {
                 {
                     name: 'sharing',
                     label: i18n.t('Role access'),
+                },
+            ],
+        },
+        {
+            name: 'programCustomization',
+            label: i18n.t('Customization'),
+            fields: [
+                {
+                    name: 'incidentDateLabel',
+                    label: i18n.t('Custom label for "Report date"'),
                 },
             ],
         },

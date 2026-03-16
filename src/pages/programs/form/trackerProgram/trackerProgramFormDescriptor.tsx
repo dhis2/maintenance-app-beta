@@ -14,6 +14,10 @@ export const TrackerProgramFormDescriptor = {
                 { name: 'shortName', label: i18n.t('Short name') },
                 { name: 'code', label: i18n.t('Code') },
                 { name: 'description', label: i18n.t('Description') },
+                {
+                    name: 'style',
+                    label: i18n.t('Visual configuration'),
+                },
                 { name: 'version', label: i18n.t('Version') },
                 { name: 'featureType', label: i18n.t('Feature type') },
                 { name: 'relatedProgram', label: i18n.t('Related program') },
@@ -55,49 +59,6 @@ export const TrackerProgramFormDescriptor = {
                     name: 'displayFrontPageList',
                     label: i18n.t('Start page in web Capture app'),
                 },
-            ],
-        },
-        {
-            name: 'programCustomization',
-            label: i18n.t('Program Customization'),
-            fields: [
-                {
-                    name: 'style',
-                    label: i18n.t('Visual configuration'),
-                },
-                {
-                    name: 'incidentDateLabel',
-                    label: i18n.t('Custom label for "Incident date"'),
-                },
-                {
-                    name: 'enrollmentDateLabel',
-                    label: i18n.t('Custom label for "Enrollment date"'),
-                },
-                {
-                    name: 'enrollmentLabel',
-                    label: i18n.t('Custom label for "Enrollment"'),
-                },
-                {
-                    name: 'eventLabel',
-                    label: i18n.t('Custom label for "Event"'),
-                },
-                {
-                    name: 'programStageLabel',
-                    label: i18n.t('Custom label for "Program stage"'),
-                },
-                {
-                    name: 'followUpLabel',
-                    label: i18n.t('Custom label for "Follow-up"'),
-                },
-                {
-                    name: 'orgUnitLabel',
-                    label: i18n.t('Custom label for "Registering unit"'),
-                },
-                {
-                    name: 'relationshipLabel',
-                    label: i18n.t('Custom label for "Relationship"'),
-                },
-                { name: 'noteLabel', label: i18n.t('Custom label for "Note"') },
             ],
         },
         {
@@ -175,6 +136,45 @@ export const TrackerProgramFormDescriptor = {
                     name: 'sharing',
                     label: i18n.t('Role access'),
                 },
+            ],
+        },
+        {
+            name: 'programCustomization',
+            label: i18n.t('Customization'),
+            fields: [
+                {
+                    name: 'incidentDateLabel',
+                    label: i18n.t('Custom label for "Incident date"'),
+                },
+                {
+                    name: 'enrollmentDateLabel',
+                    label: i18n.t('Custom label for "Enrollment date"'),
+                },
+                {
+                    name: 'enrollmentLabel',
+                    label: i18n.t('Custom label for "Enrollment"'),
+                },
+                {
+                    name: 'eventLabel',
+                    label: i18n.t('Custom label for "Event"'),
+                },
+                {
+                    name: 'programStageLabel',
+                    label: i18n.t('Custom label for "Program stage"'),
+                },
+                {
+                    name: 'followUpLabel',
+                    label: i18n.t('Custom label for "Follow-up"'),
+                },
+                {
+                    name: 'orgUnitLabel',
+                    label: i18n.t('Custom label for "Registering unit"'),
+                },
+                {
+                    name: 'relationshipLabel',
+                    label: i18n.t('Custom label for "Relationship"'),
+                },
+                { name: 'noteLabel', label: i18n.t('Custom label for "Note"') },
             ],
         },
     ],

@@ -6,6 +6,7 @@ import { Field as FieldRFF, useField, useFormState } from 'react-final-form'
 import { useHref } from 'react-router'
 import {
     CodeField,
+    ColorAndIconField,
     DescriptionField,
     EditableFieldWrapper,
     FeatureTypeField,
@@ -86,6 +87,9 @@ export const SetupFormContents = React.memo(function SetupFormContents({
             </StandardFormField>
             <StandardFormField>
                 <DescriptionField />
+            </StandardFormField>
+            <StandardFormField>
+                <ColorAndIconField />
             </StandardFormField>
             <StandardFormField>
                 <Field
