@@ -3,6 +3,7 @@ import { CheckboxFieldFF, Radio } from '@dhis2/ui'
 import React, { useEffect } from 'react'
 import { Field, useField, useFormState } from 'react-final-form'
 import {
+    FeatureTypeField,
     SectionedFormSection,
     StandardFormField,
     StandardFormSectionDescription,
@@ -67,6 +68,9 @@ export const EnrollmentSettingsFormContents = React.memo(
                             },
                         }}
                     />
+                </StandardFormField>
+                <StandardFormField>
+                    <FeatureTypeField />
                 </StandardFormField>
 
                 <StandardFormField>

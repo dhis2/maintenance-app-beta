@@ -145,9 +145,11 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                     </div>
                 </Field>
             </StandardFormField>
-            <StandardFormField>
-                <FeatureTypeField />
-            </StandardFormField>
+            {!isTrackerProgram && (
+                <StandardFormField>
+                    <FeatureTypeField />
+                </StandardFormField>
+            )}
             {isTrackerProgram && (
                 <StandardFormField>
                     <ModelSingleSelectFormField

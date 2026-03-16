@@ -19,7 +19,6 @@ export const TrackerProgramFormDescriptor = {
                     label: i18n.t('Visual configuration'),
                 },
                 { name: 'version', label: i18n.t('Version') },
-                { name: 'featureType', label: i18n.t('Feature type') },
                 { name: 'relatedProgram', label: i18n.t('Related program') },
                 {
                     name: 'categoryCombo',
@@ -69,6 +68,7 @@ export const TrackerProgramFormDescriptor = {
                     name: 'trackedEntityType',
                     label: i18n.t('Tracked entity type'),
                 },
+                { name: 'featureType', label: i18n.t('Feature type') },
                 {
                     name: 'onlyEnrollOnce',
                     label: i18n.t('Only allow one enrollment'),
