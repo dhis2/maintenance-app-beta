@@ -452,8 +452,14 @@ export const modelListViewsConfig = {
                 'expression',
                 'displayInForm',
                 'analyticsType',
-                'categoryCombo',
-                'attributeCombo',
+                {
+                    label: i18n.t('Category Combination (PI Disaggregation)'),
+                    path: 'categoryCombo',
+                },
+                {
+                    label: i18n.t('Attribute Combination (PI Disaggregation)'),
+                    path: 'attributeCombo',
+                },
                 { label: i18n.t('Description'), path: 'displayDescription' },
                 DESCRIPTORS.formName,
                 DESCRIPTORS.shortName,
