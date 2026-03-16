@@ -7,6 +7,7 @@ const config = {
         app: './src/App.tsx',
     },
     minDHIS2Version: '2.41',
+    coreApp: true,
     shortcuts: [
         {
             name: 'Categories',
