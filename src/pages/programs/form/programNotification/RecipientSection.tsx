@@ -121,7 +121,7 @@ export const RecipientSection = ({
                     inputWidth="400px"
                     name="notificationRecipient"
                     dataTest="formfields-notification-recipient"
-                    label={i18n.t('Recipient type (required)')}
+                    label={i18n.t('Recipient type')}
                     options={recipientOptions}
                     input={recipientInput}
                     meta={recipientMeta}
@@ -263,10 +263,11 @@ export const RecipientSection = ({
             {recipientInput.value === 'WEB_HOOK' && (
                 <FieldRFF
                     component={TextAreaFieldFF}
+                    required
                     dataTest="formfields-messageTemplate"
                     inputWidth="400px"
                     name="messageTemplate"
-                    label={i18n.t('Web hook message URL (required)')}
+                    label={i18n.t('Web hook message URL')}
                 />
             )}
 
