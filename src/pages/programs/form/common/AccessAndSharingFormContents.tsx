@@ -15,28 +15,34 @@ import { AccessLevelContent } from './AccessLevelContent'
 type AccessAndSharingFormContentsProps = {
     name: string
     showStageAccess?: boolean
+    isTrackerProgram?: boolean
 }
 
 export const AccessAndSharingFormContents = React.memo(
     function AccessAndSharingFormContents({
         name,
         showStageAccess = true,
+        isTrackerProgram = true,
     }: AccessAndSharingFormContentsProps) {
         const { values } = useFormState({ subscription: { values: true } })
 
         return (
             <SectionedFormSection name={name}>
-                <StandardFormSectionTitle>
-                    {i18n.t('Access level')}
-                </StandardFormSectionTitle>
-                <StandardFormSectionDescription>
-                    {i18n.t(
-                        'Set up how users can access program data outside their capture scope.'
-                    )}
-                </StandardFormSectionDescription>
-                <StandardFormField>
-                    <AccessLevelContent />
-                </StandardFormField>
+                {isTrackerProgram && (
+                    <>
+                        <StandardFormSectionTitle>
+                            {i18n.t('Access level')}
+                        </StandardFormSectionTitle>
+                        <StandardFormSectionDescription>
+                            {i18n.t(
+                                'Set up how users can access program data outside their capture scope.'
+                            )}
+                        </StandardFormSectionDescription>
+                        <StandardFormField>
+                            <AccessLevelContent />
+                        </StandardFormField>
+                    </>
+                )}
 
                 <StandardFormSectionTitle>
                     {i18n.t('Organisation unit access')}

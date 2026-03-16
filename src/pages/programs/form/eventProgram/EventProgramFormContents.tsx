@@ -52,6 +52,7 @@ export const EventProgramFormContents = () => {
             <AccessAndSharingFormContents
                 name={descriptor.getSection('accessAndSharing').name}
                 showStageAccess={false}
+                isTrackerProgram={false}
             />
             <CustomAttributesSection
                 schemaSection={SCHEMA_SECTIONS.program}
