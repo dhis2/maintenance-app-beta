@@ -81,6 +81,9 @@ const trackerProgramBaseSchema = z.object({
     openDaysAfterCoEndDate: z.coerce.number().min(0).default(0),
     minAttributesRequiredToSearch: z.coerce.number().int().min(0).default(1),
     maxTeiCountToReturn: z.coerce.number().int().min(0).default(0),
+    accessLevel: z
+        .enum(['OPEN', 'AUDITED', 'PROTECTED', 'CLOSED'])
+        .default('OPEN'),
 })
 
 export const trackerProgramFormSchema = identifiable

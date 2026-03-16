@@ -79,6 +79,7 @@ const fieldFilters = [
     'openDaysAfterCoEndDate',
     'minAttributesRequiredToSearch',
     'maxTeiCountToReturn',
+    'accessLevel',
 ] as const
 
 export type ProgramsFromFilters = PickWithFieldFilters<
