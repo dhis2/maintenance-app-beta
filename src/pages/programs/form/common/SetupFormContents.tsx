@@ -1,8 +1,13 @@
 import { useTimeZoneConversion } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button, Field, IconAdd16, Input, InputFieldFF } from '@dhis2/ui'
-import React from 'react'
-import { Field as FieldRFF, useField, useFormState } from 'react-final-form'
+import React, { useEffect } from 'react'
+import {
+    Field as FieldRFF,
+    useField,
+    useForm,
+    useFormState,
+} from 'react-final-form'
 import { useHref } from 'react-router'
 import {
     CodeField,
@@ -59,12 +64,22 @@ export const SetupFormContents = React.memo(function SetupFormContents({
     const version = Number(versionInput.value) || 0
 
     const { values } = useFormState({ subscription: { values: true } })
+    const form = useForm()
+
     const refreshCategoryCombos = useRefreshModelSingleSelect({
         resource: 'categoryCombos',
     })
     const newCategoryComboLink = useHref('/categoryCombos/new')
     const { fromServerDate } = useTimeZoneConversion()
     const schemaSection = useSchemaSectionHandleOrThrow()
+
+    useEffect(() => {
+        if (
+            values.categoryCombo?.id === DEFAULT_CATEGORYCOMBO_SELECT_OPTION.id
+        ) {
+            form.change('openDaysAfterCoEndDate', 0)
+        }
+    }, [values.categoryCombo, form])
 
     return (
         <SectionedFormSection name={name}>

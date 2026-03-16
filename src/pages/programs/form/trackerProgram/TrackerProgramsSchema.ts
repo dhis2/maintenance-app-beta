@@ -19,7 +19,6 @@ const trackerProgramBaseSchema = z.object({
         .int(i18n.t('Only integers are allowed'))
         .optional(),
     featureType: z.enum(['NONE', 'POINT', 'POLYGON']).optional(),
-    relatedProgram: modelReference.optional(),
     categoryCombo: modelReference.default({ ...DEFAULT_CATEGORY_COMBO }),
     trackedEntityType: object({
         id: z.string(),

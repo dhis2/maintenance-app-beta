@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { CheckboxFieldFF } from '@dhis2/ui'
 import React, { useEffect } from 'react'
-import { Field, useField, useFormState } from 'react-final-form'
+import { Field, useField } from 'react-final-form'
 import {
     FeatureTypeField,
     SectionedFormSection,
@@ -14,13 +14,10 @@ import styles from './EnrollmentSettingsFormContents.module.css'
 
 export const EnrollmentSettingsFormContents = React.memo(
     function EnrollmentSettingsFormContents({ name }: { name: string }) {
-        const { values } = useFormState()
-
         const {
             input: displayIncidentDateInput,
             meta: displayIncidentDateMate,
         } = useField('displayIncidentDate', {
-            subscription: { value: true },
             type: 'checkbox',
         })
 
@@ -28,18 +25,17 @@ export const EnrollmentSettingsFormContents = React.memo(
             input: selectIncidentDatesInput,
             meta: selectIncidentDatesMeta,
         } = useField('selectIncidentDatesInFuture', {
-            subscription: { value: true },
             type: 'checkbox',
         })
 
         useEffect(() => {
             if (
-                !displayIncidentDateInput.value &&
-                selectIncidentDatesInput.value
+                !displayIncidentDateInput.checked &&
+                selectIncidentDatesInput.checked
             ) {
                 selectIncidentDatesInput.onChange(false)
             }
-        }, [displayIncidentDateInput.value, selectIncidentDatesInput])
+        }, [displayIncidentDateInput.checked, selectIncidentDatesInput])
 
         return (
             <SectionedFormSection name={name}>
@@ -93,13 +89,13 @@ export const EnrollmentSettingsFormContents = React.memo(
                         label={i18n.t('Collect an incident date')}
                     />
                 </StandardFormField>
-                {values.displayIncidentDate && (
+                {displayIncidentDateInput.checked && (
                     <StandardFormField>
                         <div className={styles.selectIncidentDatesInFuture}>
                             <CheckboxFieldFF
                                 input={selectIncidentDatesInput}
                                 meta={selectIncidentDatesMeta}
-                                disabled={!values.displayIncidentDate}
+                                disabled={!displayIncidentDateInput.checked}
                                 label={i18n.t(
                                     'Allow incident dates in the future'
                                 )}
