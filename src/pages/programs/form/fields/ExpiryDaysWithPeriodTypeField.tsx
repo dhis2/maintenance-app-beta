@@ -48,7 +48,7 @@ export function ExpiryDaysWithPeriodTypeField() {
         <div className={setupClasses.setupCheckboxBlock}>
             <Checkbox
                 label={i18n.t(
-                    'Close data entry a number of days after the end of a period'
+                    'Close data entry a number of days after a period ends'
                 )}
                 onChange={({ checked: isChecked }) => onToggle(isChecked)}
                 checked={checked}

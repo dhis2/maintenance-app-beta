@@ -21,18 +21,18 @@ export const TrackerProgramFormDescriptor = {
                 { name: 'version', label: i18n.t('Version') },
                 {
                     name: 'categoryCombo',
-                    label: i18n.t('Category combination'),
+                    label: i18n.t('Event category combination'),
                 },
                 {
                     name: 'expiryDays',
                     label: i18n.t(
-                        'Close data entry a number of days after the end of a period'
+                        'Close data entry a number of days after a period ends'
                     ),
                 },
                 {
                     name: 'completeEventsExpiryDays',
                     label: i18n.t(
-                        'Lock completed events after a number of days'
+                        'Lock events a number of days after completion'
                     ),
                 },
                 {

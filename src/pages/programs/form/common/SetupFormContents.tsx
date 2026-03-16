@@ -160,10 +160,7 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                             inputWidth={'400px'}
                             name="categoryCombo"
                             dataTest="formfields-categorycombo"
-                            label={i18n.t('Category combination')}
-                            helpText={i18n.t(
-                                'Choose how this program is disaggregated.'
-                            )}
+                            label={i18n.t('Event category combination')}
                             query={CATEGORY_COMBOS_QUERY}
                             transform={addDefaultCategoryComboTransform}
                         />
