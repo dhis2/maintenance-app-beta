@@ -51,6 +51,10 @@ export const TrackerProgramFormDescriptor = {
                         'Maximum number of search results to display'
                     ),
                 },
+                {
+                    name: 'displayFrontPageList',
+                    label: i18n.t('Start page in web Capture app'),
+                },
             ],
         },
         {
@@ -94,12 +98,6 @@ export const TrackerProgramFormDescriptor = {
                     label: i18n.t('Custom label for "Relationship"'),
                 },
                 { name: 'noteLabel', label: i18n.t('Custom label for "Note"') },
-                {
-                    name: 'displayFrontPageList',
-                    label: i18n.t(
-                        'Display enrolled TEs in the front page list'
-                    ),
-                },
             ],
         },
         {

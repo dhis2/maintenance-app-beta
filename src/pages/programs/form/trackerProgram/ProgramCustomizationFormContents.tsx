@@ -193,18 +193,6 @@ export const ProgramCustomizationFormContents = React.memo(
                         validate={noteLabelValidator}
                     />
                 </StandardFormField>
-
-                <StandardFormField>
-                    <Field
-                        name="displayFrontPageList"
-                        type="checkbox"
-                        component={CheckboxFieldFF}
-                        label={i18n.t(
-                            'Display enrolled TEs in the front page list'
-                        )}
-                        dataTest="formfields-displayFrontPageList"
-                    />
-                </StandardFormField>
             </SectionedFormSection>
         )
     }
