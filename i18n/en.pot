@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-03-11T09:55:17.194Z\n"
-"PO-Revision-Date: 2026-03-11T09:55:17.194Z\n"
+"POT-Creation-Date: 2026-03-13T12:01:11.951Z\n"
+"PO-Revision-Date: 2026-03-13T12:01:11.951Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -2846,12 +2846,6 @@ msgstr ""
 "Choose legends to visually categorize values in Data entry and Analytics "
 "apps."
 
-msgid "Search available legends"
-msgstr "Search available legends"
-
-msgid "Search selected legends"
-msgstr "Search selected legends"
-
 msgid "Compulsory data elements"
 msgstr "Compulsory data elements"
 
@@ -3256,6 +3250,9 @@ msgstr "Filter selected indicator groups"
 
 msgid "Set up the basic information for this indicator group."
 msgstr "Set up the basic information for this indicator group."
+
+msgid "Explain the purpose of this indicator group."
+msgstr "Explain the purpose of this indicator group."
 
 msgid "Filter available indicators"
 msgstr "Filter available indicators"
@@ -3997,8 +3994,8 @@ msgstr ""
 msgid "Placeholder for other"
 msgstr "Placeholder for other"
 
-msgid "Configure hooks in SQL that run during the analytics process."
-msgstr "Configure hooks in SQL that run during the analytics process."
+msgid "Upload, modify and view icons which can be assigned to other metadata."
+msgstr "Upload, modify and view icons which can be assigned to other metadata."
 
 msgid "Create, modify and view attributes."
 msgstr "Create, modify and view attributes."
@@ -4013,9 +4010,6 @@ msgstr ""
 msgid "Configure external map layers for use in GIS."
 msgstr "Configure external map layers for use in GIS."
 
-msgid "Upload, modify and view icons which can be assigned to other metadata."
-msgstr "Upload, modify and view icons which can be assigned to other metadata."
-
 msgid ""
 "Create, modify and view predefined legends for maps and other "
 "visualisations."
@@ -4036,6 +4030,9 @@ msgid ""
 msgstr ""
 "Manage analytics to be emailed to specific user groups on a daily, weekly "
 "or monthly basis."
+
+msgid "Configure hooks in SQL that run during the analytics process."
+msgstr "Configure hooks in SQL that run during the analytics process."
 
 msgid ""
 "Create SQL database views, typically based on resource tables, to provide "
@@ -4860,6 +4857,24 @@ msgstr ""
 msgid "There was an error deleting stages: {{stagesNames}}"
 msgstr "There was an error deleting stages: {{stagesNames}}"
 
+msgid "Choose program type"
+msgstr "Choose program type"
+
+msgid "Choose how this program collects data. This cannot be changed later."
+msgstr "Choose how this program collects data. This cannot be changed later."
+
+msgid "Single event"
+msgstr "Single event"
+
+msgid "Collect standalone events with no person or entity attached."
+msgstr "Collect standalone events with no person or entity attached."
+
+msgid "Collect events for a person or other entity over time."
+msgstr "Collect events for a person or other entity over time."
+
+msgid "Continue"
+msgstr "Continue"
+
 msgid "Organisation unit access"
 msgstr "Organisation unit access"
 
@@ -5162,6 +5177,45 @@ msgstr "External"
 msgid "Group"
 msgstr "Group"
 
+msgid "Organisation unit access"
+msgstr "Organisation unit access"
+
+msgid "Set up which organisation units can collect data using this program."
+msgstr "Set up which organisation units can collect data using this program."
+
+msgid "Role access"
+msgstr "Role access"
+
+msgid "Program must be saved to access sharing settings."
+msgstr "Program must be saved to access sharing settings."
+
+msgid "Set up notifications for this program."
+msgstr "Set up notifications for this program."
+
+msgid "Notification {{- notificationName}} will be removed on save"
+msgstr "Notification {{- notificationName}} will be removed on save"
+
+msgid "Restore notification"
+msgstr "Restore notification"
+
+msgid "Notification type: Stage | Stage: {{stageDisplayName}}"
+msgstr "Notification type: Stage | Stage: {{stageDisplayName}}"
+
+msgid "Program must be saved before notifications can be added"
+msgstr "Program must be saved before notifications can be added"
+
+msgid "New notification"
+msgstr "New notification"
+
+msgid "Edit notification"
+msgstr "Edit notification"
+
+msgid "No notifications have been added yet"
+msgstr "No notifications have been added yet"
+
+msgid "Add a notification"
+msgstr "Add a notification"
+
 msgid "Program Details"
 msgstr "Program Details"
 
@@ -5188,6 +5242,21 @@ msgstr "Entering 0 shows all search results"
 
 msgid "Lock completed events after a number of days"
 msgstr "Lock completed events after a number of days"
+
+msgid "Program Settings"
+msgstr "Program Settings"
+
+msgid "Set up advanced options for this program."
+msgstr "Set up advanced options for this program."
+
+msgid "Allow user assignment of events"
+msgstr "Allow user assignment of events"
+
+msgid "Block entry form after completed"
+msgstr "Block entry form after completed"
+
+msgid "Pre-generate event UID"
+msgstr "Pre-generate event UID"
 
 msgid "Close data entry a number of days after the end of a period"
 msgstr "Close data entry a number of days after the end of a period"
@@ -5300,6 +5369,9 @@ msgstr "Decide what should happen after a user completes this event."
 msgid "Configure data collection for events in this program stage."
 msgstr "Configure data collection for events in this program stage."
 
+msgid "Configure data collection for events in this program."
+msgstr "Configure data collection for events in this program."
+
 msgid "Filter selected data elements"
 msgstr "Filter selected data elements"
 
@@ -5312,8 +5384,8 @@ msgstr "Data elements can be collected in different ways with different options.
 msgid "Display in reports"
 msgstr "Display in reports"
 
-msgid "Future date"
-msgstr "Future date"
+msgid "Allow future dates"
+msgstr "Allow future dates"
 
 msgid "Skip in analytics"
 msgstr "Skip in analytics"
@@ -5485,8 +5557,14 @@ msgstr "Stage: Data"
 msgid "Stage: Form"
 msgstr "Stage: Form"
 
-msgid "Section attributes"
-msgstr "Section attributes"
+msgid "Section tracked entity attributes"
+msgstr "Section tracked entity attributes"
+
+msgid "Available tracked entity attributes"
+msgstr "Available tracked entity attributes"
+
+msgid "Selected tracked entity attributes"
+msgstr "Selected tracked entity attributes"
 
 msgid "Filter available tracked entity attributes"
 msgstr "Filter available tracked entity attributes"
@@ -5499,6 +5577,34 @@ msgstr "Saving a section does not save other changes to the program"
 
 msgid "Enrollment section form saved"
 msgstr "Enrollment section form saved"
+
+msgid "Enrollment: Data"
+msgstr "Enrollment: Data"
+
+msgid "Choose the information to collect during enrollment."
+msgstr "Choose the information to collect during enrollment."
+
+msgid "Configure tracked entity attributes"
+msgstr "Configure tracked entity attributes"
+
+msgid ""
+"Tracked entity attributes can be collected in different ways with different "
+"options."
+msgstr ""
+"Tracked entity attributes can be collected in different ways with different "
+"options."
+
+msgid "Searchable"
+msgstr "Searchable"
+
+msgid "This attribute is defined at the tracked entity type level"
+msgstr "This attribute is defined at the tracked entity type level"
+
+msgid "This attribute is marked as required at the tracked entity type level"
+msgstr "This attribute is marked as required at the tracked entity type level"
+
+msgid "Unique attributes are always searchable"
+msgstr "Unique attributes are always searchable"
 
 msgid "Relationship entity constraint"
 msgstr "Relationship entity constraint"
@@ -5655,6 +5761,13 @@ msgstr "Automatically generate values"
 msgid "Data handling"
 msgstr "Data handling"
 
+msgid ""
+"Configure how this tracked entity attribute's values are displayed, "
+"inherited, or synchronized across the system."
+msgstr ""
+"Configure how this tracked entity attribute's values are displayed, "
+"inherited, or synchronized across the system."
+
 msgid "Configure how values are displayed, inherited, and synchronized."
 msgstr "Configure how values are displayed, inherited, and synchronized."
 
@@ -5663,6 +5776,16 @@ msgstr "Show in lists and search results when no program is selected"
 
 msgid "Skip synchronization for this attribute and its values"
 msgstr "Skip synchronization for this attribute and its values"
+
+msgid "Do not expose this attribute in analytics"
+msgstr "Do not expose this attribute in analytics"
+
+msgid ""
+"When enabled, this tracked entity attribute is excluded from all analytics "
+"processing, including analytics tables and analytics apps."
+msgstr ""
+"When enabled, this tracked entity attribute is excluded from all analytics "
+"processing, including analytics tables and analytics apps."
 
 msgid "Search performance"
 msgstr "Search performance"
@@ -5856,11 +5979,3 @@ msgstr "Right side sliding window"
 
 msgid "Skip form validation"
 msgstr "Skip form validation"
-
-msgctxt "Application title"
-msgid "__MANIFEST_APP_TITLE"
-msgstr "Maintenance (Preview)"
-
-msgctxt "Application description"
-msgid "__MANIFEST_APP_DESCRIPTION"
-msgstr ""
