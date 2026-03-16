@@ -27,10 +27,11 @@ export const SectionedFormSidebarItem = ({
     // we want to use a link in the list (due to semantic html and accessbility reasons)
     // thus we need to create new SearchParams with the section parameter
     // in case we want to preserve other search-params
+
     const toWithSectionParam = useMemo(
         () =>
             createSearchParams({
-                ...searchParams,
+                ...Object.fromEntries(searchParams),
                 [FORM_SECTION_PARAM_KEY]: sectionName,
             }).toString(),
         [searchParams, sectionName]
