@@ -1,3 +1,10 @@
+## [0.149.1](https://github.com/dhis2/metadata-management-app/compare/v0.149.0...v0.149.1) (2026-03-16)
+
+
+### Bug Fixes
+
+* make core app ([#817](https://github.com/dhis2/metadata-management-app/issues/817)) ([de09150](https://github.com/dhis2/metadata-management-app/commit/de09150403c0dcbdaca88947e3998ddaf25d10b0))
+
 # [0.149.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.148.1...v0.149.0) (2026-03-16)
 
 
