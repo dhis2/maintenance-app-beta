@@ -466,7 +466,7 @@ describe('Organisation unit list', () => {
         ).toHaveAttribute('href', `/organisationUnits/${child1.id}`)
     })
 
-    it('has a link to an org unit edit page outside the action menu', async () => {
+    it('has a button to open details panel', async () => {
         const rootOrg = testOrgUnit({
             level: 1,
             childCount: 2,
@@ -501,11 +501,22 @@ describe('Organisation unit list', () => {
 
         expect(tableRows[2]).toHaveTextContent(child1.displayName!)
         const actionCell = within(tableRows[2]).getByTestId('row-actions')
-        const links = within(actionCell).getAllByRole('link')
-        expect(links[0]).toHaveAttribute(
-            'href',
-            `/organisationUnits/${child1.id}`
+        const infoButton = within(actionCell).getAllByRole('button')[0]
+
+        await userEvent.click(infoButton)
+
+        const detailsPanel = await screen.findByTestId('details-panel')
+        expect(detailsPanel).toBeVisible()
+        expect(detailsPanel).toHaveTextContent(child1.displayName!)
+        expect(detailsPanel).toHaveTextContent(child1.code!)
+        expect(detailsPanel).toHaveTextContent(child1.id!)
+        expect(detailsPanel).toHaveTextContent(child1.createdBy!.displayName!)
+        expect(detailsPanel).toHaveTextContent(
+            child1.lastUpdatedBy!.displayName!
         )
+        expect(
+            within(detailsPanel).getByText('API URL link').closest('a')
+        ).toHaveAttribute('href', child1.href)
     })
 
     it('has show a detail panel', async () => {

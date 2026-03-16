@@ -33,7 +33,6 @@ export const categoryListSchema = categoryBaseSchema
     })
 
 export const initialValues = getDefaults(categoryFormSchema, {
-    dataDimensionType: Category.dataDimensionType.DISAGGREGATION,
     dataDimension: true,
 })
 

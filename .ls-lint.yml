@@ -25,7 +25,10 @@ ignore:
     - .d2
     - build
     - .d.ts
+    - src/locales/uz_UZ_Cyrl
     - src/types/generated
     - src/app/__snapshots__
     - src/__mocks__
     - src/pages/dataElements/__mocks__
+    - i18n
+    - src/locales

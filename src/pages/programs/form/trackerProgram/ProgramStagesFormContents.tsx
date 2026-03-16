@@ -9,14 +9,14 @@ import {
     SectionedFormSection,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
-} from '../../../components'
-import { ListInFormItem } from '../../../components/formCreators/SectionFormList'
-import { SchemaName } from '../../../types'
-import { Access, DisplayableModel } from '../../../types/models'
+} from '../../../../components'
+import { ListInFormItem } from '../../../../components/formCreators/SectionFormList'
+import { SchemaName } from '../../../../types'
+import { Access, DisplayableModel } from '../../../../types/models'
 import {
     EditOrNewStageForm,
     SubmittedStageFormValues,
-} from './programStage/StageForm'
+} from '../programStage/StageForm'
 import css from './ProgramStagesForm.module.css'
 
 export type StageNotificationTemplate = {

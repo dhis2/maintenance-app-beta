@@ -17,8 +17,8 @@ import {
     EditOrNewNotificationForm,
     SubmittedNotificationFormValues,
 } from '../programNotification/NotificationForm'
-import css from '../ProgramStagesForm.module.css'
-import { ProgramStageListItem } from '../ProgramStagesFormContents'
+import css from '../trackerProgram/ProgramStagesForm.module.css'
+import { ProgramStageListItem } from '../trackerProgram/ProgramStagesFormContents'
 
 export type ProgramNotificationListItem = {
     id: string

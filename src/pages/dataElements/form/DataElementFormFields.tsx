@@ -48,7 +48,7 @@ export function DataElementFormFields() {
                 <StandardFormField>
                     <DescriptionField
                         helpText={i18n.t(
-                            'Explain the purpose of this data element.'
+                            'Used to provide more information when collecting data.'
                         )}
                     />
                 </StandardFormField>
@@ -60,14 +60,15 @@ export function DataElementFormFields() {
                 <StandardFormField>
                     <ColorAndIconField />
                 </StandardFormField>
+            </StandardFormSection>
+            <StandardFormSection>
+                <StandardFormSectionTitle>
+                    {i18n.t('Data collection')}
+                </StandardFormSectionTitle>
 
-                <StandardFormField>
-                    <FieldMaskField />
-                </StandardFormField>
-
-                <StandardFormField>
-                    <ZeroIsSignificantField />
-                </StandardFormField>
+                <StandardFormSectionDescription>
+                    {i18n.t('Configure how this data element is collected.')}
+                </StandardFormSectionDescription>
 
                 <StandardFormField>
                     <DomainField />
@@ -79,6 +80,14 @@ export function DataElementFormFields() {
 
                 <StandardFormField>
                     <AggregationTypeFieldByValueType />
+                </StandardFormField>
+
+                <StandardFormField>
+                    <ZeroIsSignificantField />
+                </StandardFormField>
+
+                <StandardFormField>
+                    <FieldMaskField />
                 </StandardFormField>
             </StandardFormSection>
 

@@ -28,14 +28,12 @@ export const CategoryFormFields = () => {
                     {i18n.t('Set up the basic information for this category.')}
                 </StandardFormSectionDescription>
                 <DefaultIdentifiableFields />
-                <DescriptionField
-                    helpText={i18n.t('Explain the purpose of this category.')}
-                />
+                <DescriptionField />
             </StandardFormSection>
 
             <StandardFormSection>
                 <StandardFormSectionTitle>
-                    {i18n.t('Data configuration')}
+                    {i18n.t('Category usage')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
@@ -44,7 +42,9 @@ export const CategoryFormFields = () => {
                 </StandardFormSectionDescription>
                 <StandardFormField>
                     <HorizontalFieldGroup
-                        label={'Data dimension type (required)'}
+                        label={'Type'}
+                        required
+                        dataTest="formfields-dataDimensionType"
                     >
                         <Field<string | undefined>
                             name="dataDimensionType"
@@ -67,9 +67,8 @@ export const CategoryFormFields = () => {
                         name="dataDimension"
                         type="checkbox"
                         component={CheckboxFieldFF}
-                        label={i18n.t('Use as data dimension')}
-                        helpText={i18n.t(
-                            'Make available to analytics apps as a selectable dimension.'
+                        label={i18n.t(
+                            'Show as data dimension in analytics apps'
                         )}
                     />
                 </StandardFormField>
@@ -102,6 +101,8 @@ export const CategoryFormFields = () => {
                             filterPlaceholderPicked={i18n.t(
                                 'Filter selected category options'
                             )}
+                            enableOrderChange={true}
+                            maxSelections={Infinity}
                         />
                     </StandardFormField>
                 </StandardFormField>

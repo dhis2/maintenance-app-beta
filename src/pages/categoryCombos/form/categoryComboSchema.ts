@@ -15,9 +15,7 @@ const GENERATED_COC_LIMIT = 50000
 
 export const categoryComboBaseSchema = z.object({
     code: z.string().trim().optional(),
-    dataDimensionType: z
-        .nativeEnum(CategoryCombo.dataDimensionType)
-        .default(CategoryCombo.dataDimensionType.DISAGGREGATION),
+    dataDimensionType: z.nativeEnum(CategoryCombo.dataDimensionType),
 })
 
 export const categoryComboFormSchema = identifiable

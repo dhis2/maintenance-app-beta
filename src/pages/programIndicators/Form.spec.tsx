@@ -266,13 +266,9 @@ describe('Program indicator form tests', () => {
                 screen
             )
 
-            const analyticsOptions = await uiActions.openSingleSelect(
-                screen.getByTestId('analytics-type-field'),
-                screen
-            )
-            await userEvent.click(analyticsOptions[0])
-            await uiActions.closeSingleSelectIfOpen(
-                screen.getByTestId('analytics-type-field'),
+            await uiActions.pickRadioField(
+                'analyticsType',
+                'Event: Uses data from all events within a program stage',
                 screen
             )
 
@@ -361,13 +357,9 @@ describe('Program indicator form tests', () => {
                 screen
             )
 
-            const analyticsOptions = await uiActions.openSingleSelect(
-                screen.getByTestId('analytics-type-field'),
-                screen
-            )
-            await userEvent.click(analyticsOptions[1])
-            await uiActions.closeSingleSelectIfOpen(
-                screen.getByTestId('analytics-type-field'),
+            await uiActions.pickRadioField(
+                'analyticsType',
+                'Enrollment: Uses data combined from the latest events across the enrollment',
                 screen
             )
 
@@ -730,17 +722,19 @@ describe('Program indicator form tests', () => {
                 },
                 screen
             )
-            await uiAssertions.expectSelectToExistWithOptions(
-                screen.getByTestId('analytics-type-field'),
-                {
-                    options: mockSchema.properties.analyticsType.constants.map(
-                        (o) => ({
-                            displayName:
-                                PROGRAM_INDICATOR_SPECIFIC_TRANSLATIONS[o] ??
-                                getConstantTranslation(o),
-                        })
-                    ),
-                },
+
+            uiAssertions.expectRadioFieldToExist(
+                'analyticsType',
+                [
+                    {
+                        label: PROGRAM_INDICATOR_SPECIFIC_TRANSLATIONS.EVENT,
+                        checked: false,
+                    },
+                    {
+                        label: PROGRAM_INDICATOR_SPECIFIC_TRANSLATIONS.ENROLLMENT,
+                        checked: false,
+                    },
+                ],
                 screen
             )
 
@@ -850,13 +844,9 @@ describe('Program indicator form tests', () => {
                 screen
             )
 
-            const analyticsOptions = await uiActions.openSingleSelect(
-                screen.getByTestId('analytics-type-field'),
-                screen
-            )
-            await userEvent.click(analyticsOptions[0])
-            await uiActions.closeSingleSelectIfOpen(
-                screen.getByTestId('analytics-type-field'),
+            await uiActions.pickRadioField(
+                'analyticsType',
+                'Event: Uses data from all events within a program stage',
                 screen
             )
 
@@ -958,15 +948,12 @@ describe('Program indicator form tests', () => {
                 screen
             )
 
-            const analyticsOptions = await uiActions.openSingleSelect(
-                screen.getByTestId('analytics-type-field'),
+            await uiActions.pickRadioField(
+                'analyticsType',
+                'Event: Uses data from all events within a program stage',
                 screen
             )
-            await userEvent.click(analyticsOptions[0])
-            await uiActions.closeSingleSelectIfOpen(
-                screen.getByTestId('analytics-type-field'),
-                screen
-            )
+
             await uiActions.applyNewExpressionWithinModal(
                 'expression',
                 anExpression,
@@ -1052,13 +1039,9 @@ describe('Program indicator form tests', () => {
                 screen
             )
 
-            const analyticsOptions = await uiActions.openSingleSelect(
-                screen.getByTestId('analytics-type-field'),
-                screen
-            )
-            await userEvent.click(analyticsOptions[0])
-            await uiActions.closeSingleSelectIfOpen(
-                screen.getByTestId('analytics-type-field'),
+            await uiActions.pickRadioField(
+                'analyticsType',
+                'Event: Uses data from all events within a program stage',
                 screen
             )
 
@@ -1153,13 +1136,9 @@ describe('Program indicator form tests', () => {
                 screen
             )
 
-            const analyticsOptions = await uiActions.openSingleSelect(
-                screen.getByTestId('analytics-type-field'),
-                screen
-            )
-            await userEvent.click(analyticsOptions[0])
-            await uiActions.closeSingleSelectIfOpen(
-                screen.getByTestId('analytics-type-field'),
+            await uiActions.pickRadioField(
+                'analyticsType',
+                'Event: Uses data from all events within a program stage',
                 screen
             )
 
@@ -1254,15 +1233,12 @@ describe('Program indicator form tests', () => {
                 screen
             )
 
-            const analyticsOptions = await uiActions.openSingleSelect(
-                screen.getByTestId('analytics-type-field'),
+            await uiActions.pickRadioField(
+                'analyticsType',
+                'Event: Uses data from all events within a program stage',
                 screen
             )
-            await userEvent.click(analyticsOptions[0])
-            await uiActions.closeSingleSelectIfOpen(
-                screen.getByTestId('analytics-type-field'),
-                screen
-            )
+
             await uiActions.pickOptionInTransfer(
                 'legendSets-field',
                 legendSets[0].displayName,
@@ -1345,13 +1321,9 @@ describe('Program indicator form tests', () => {
                 screen
             )
 
-            const analyticsOptions = await uiActions.openSingleSelect(
-                screen.getByTestId('analytics-type-field'),
-                screen
-            )
-            await userEvent.click(analyticsOptions[0])
-            await uiActions.closeSingleSelectIfOpen(
-                screen.getByTestId('analytics-type-field'),
+            await uiActions.pickRadioField(
+                'analyticsType',
+                'Event: Uses data from all events within a program stage',
                 screen
             )
 
@@ -1568,23 +1540,22 @@ describe('Program indicator form tests', () => {
                 screen
             )
 
-            await uiAssertions.expectSelectToExistWithOptions(
-                screen.getByTestId('analytics-type-field'),
-                {
-                    selected:
-                        PROGRAM_INDICATOR_SPECIFIC_TRANSLATIONS[
-                            programIndicator.analyticsType
-                        ],
-                    options: mockSchema.properties.analyticsType.constants.map(
-                        (o) => ({
-                            displayName:
-                                PROGRAM_INDICATOR_SPECIFIC_TRANSLATIONS[o] ??
-                                getConstantTranslation(o),
-                        })
-                    ),
-                },
+            uiAssertions.expectRadioFieldToExist(
+                'analyticsType',
+                [
+                    {
+                        label: PROGRAM_INDICATOR_SPECIFIC_TRANSLATIONS.EVENT,
+                        checked: programIndicator.analyticsType === 'EVENT',
+                    },
+                    {
+                        label: PROGRAM_INDICATOR_SPECIFIC_TRANSLATIONS.ENROLLMENT,
+                        checked:
+                            programIndicator.analyticsType === 'ENROLLMENT',
+                    },
+                ],
                 screen
             )
+
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('org-unit-field'),
                 {

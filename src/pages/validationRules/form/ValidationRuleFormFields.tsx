@@ -98,11 +98,7 @@ const ValidationRuleFormFields = () => {
                     <CodeField schemaSection={schemaSection} />
                 </StandardFormField>
                 <StandardFormField>
-                    <DescriptionField
-                        helpText={i18n.t(
-                            'Explain the purpose of this validation rule.'
-                        )}
-                    />
+                    <DescriptionField />
                 </StandardFormField>
             </SectionedFormSection>
 
@@ -210,7 +206,7 @@ const ValidationRuleFormFields = () => {
                         component={TextAreaFieldFF}
                         label={i18n.t('Instruction to show')}
                         helpText={i18n.t(
-                            'Instructions are shown when validating data in Data Entry and Android apps.'
+                            'Shown when validating data in Data Entry and Android apps.'
                         )}
                         dataTest="formfields-instruction"
                     />

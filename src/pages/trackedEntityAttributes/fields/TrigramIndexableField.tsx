@@ -39,12 +39,10 @@ export function TrigramIndexableField() {
         }
 
         if (trigramIndexedInput.value === true) {
-            return i18n.t(
-                'This attribute is currently trigram indexed in the database'
-            )
+            return i18n.t('This attribute is trigram indexed in the database')
         } else {
             return i18n.t(
-                'This attribute is currently not trigram indexed in the database'
+                'This attribute is not yet trigram indexed in the database'
             )
         }
     }, [trigramIndexableInput.value, trigramIndexedInput.value])

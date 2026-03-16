@@ -43,3 +43,10 @@
     margin: var(--spacers-dp8) 0;
     width: fit-content;
 }
+
+.emptyPlaceholder {
+    text-align: center;
+    padding: var(--spacers-dp4) 0;
+    color: var(--colors-grey700);
+    font-size: 13px;
+}

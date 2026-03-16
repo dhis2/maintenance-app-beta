@@ -9,11 +9,10 @@ export function InheritField() {
             component={CheckboxFieldFF}
             dataTest="formfields-inherit"
             name="inherit"
-            label={i18n.t('Inherit data values from other tracked entities')}
-            type="checkbox"
-            helpText={i18n.t(
-                'Data values are inherited from tracked entities linked by a relationship.'
+            label={i18n.t(
+                'Inherit values from tracked entities linked by a relationship'
             )}
+            type="checkbox"
             validateFields={[]}
         />
     )

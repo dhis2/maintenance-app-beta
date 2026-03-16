@@ -1,0 +1,3365 @@
+#
+# Translators:
+# Sharaf Yuldashev, 2024
+# Philip Larsen Donnelly, 2025
+# Khurshid Ibatov <x.ibatov@dtsj.uz>, 2025
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"POT-Creation-Date: 2025-10-17T06:49:56.170Z\n"
+"PO-Revision-Date: 2025-09-23 13:28+0000\n"
+"Last-Translator: Khurshid Ibatov <x.ibatov@dtsj.uz>, 2025\n"
+"Language-Team: Uzbek (Cyrillic) (https://app.transifex.com/hisp-uio/teams/100509/uz@Cyrl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: uz@Cyrl\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "schemas"
+msgstr ""
+
+msgid "This page is not enabled for for the software version you are using"
+msgstr ""
+
+msgid "You do not have the authority to view this page."
+msgstr ""
+
+msgid ""
+"You are missing the required authority ({{authority}}) to view this page."
+msgstr ""
+
+msgid "Section is not implemented yet"
+msgstr ""
+
+msgid ""
+"This section has not been implemented yet. Click the button below to go to "
+"the corresponding page in the legacy app."
+msgstr ""
+
+msgid "Go to legacy app"
+msgstr ""
+
+msgid "Not found"
+msgstr ""
+
+msgid "The page you are looking for does not exist."
+msgstr ""
+
+msgid "New {{modelName}}"
+msgstr "Янги {{modelName}}"
+
+msgid "Merge {{modelName}}"
+msgstr ""
+
+msgid "Edit {{modelName}}"
+msgstr ""
+
+msgid "Metadata Overview"
+msgstr "Метамаълумотлар шарҳи"
+
+msgid "No menu items found for"
+msgstr ""
+
+msgid "Overview"
+msgstr "Қисқача кўздан кечириш"
+
+msgid "Search menu items"
+msgstr ""
+
+msgid "All"
+msgstr "Барчаси"
+
+msgid "Positive"
+msgstr "Мусбат"
+
+msgid "Negative"
+msgstr "Манфий"
+
+msgid "Outline"
+msgstr "Контур"
+
+msgid "Search icons"
+msgstr ""
+
+msgid "No icons match the search."
+msgstr ""
+
+msgid "Select"
+msgstr "Танланг"
+
+msgid "Remove icon"
+msgstr "Белгини олиб ташлаш"
+
+msgid "Cancel"
+msgstr "Рад этиш"
+
+msgid "Message subject"
+msgstr ""
+
+msgid "Message body (required) *"
+msgstr ""
+
+msgid "Message body"
+msgstr ""
+
+msgid "Insert a variable:"
+msgstr ""
+
+msgid "Clear all"
+msgstr "Барчасини тозалаш"
+
+msgid "Filter options"
+msgstr "Фильтр вариантлари"
+
+msgid "Retry"
+msgstr ""
+
+msgid "Required"
+msgstr "Мажбурий"
+
+msgid "Please enter a GeoJSON value"
+msgstr ""
+
+msgid "Exit without saving"
+msgstr "Сақламасдан чиқиш"
+
+msgid "Create {{modelName}} "
+msgstr ""
+
+msgid "Validation errors"
+msgstr "Тасдиқлашда хатоликлар"
+
+msgid "Some fields have validation errors. Please fix them before saving."
+msgstr ""
+
+msgid "Something went wrong when submitting the form"
+msgstr ""
+
+msgid "Hide error details"
+msgstr ""
+
+msgid "Show error details"
+msgstr ""
+
+msgid "Save and close"
+msgstr "Сақлаш ва ёпиш"
+
+msgid "<No value>"
+msgstr "<No value>"
+
+msgid "Attributes"
+msgstr "Аттрибутлар"
+
+msgid "Set up information for the attributes assigned to {{modelName}}."
+msgstr ""
+
+msgid "Code"
+msgstr "Код"
+
+msgid "Description"
+msgstr "Тавсиф"
+
+msgid "A name should be concise and easy to recognize."
+msgstr ""
+
+msgid "{{fieldLabel}} (required)"
+msgstr ""
+
+msgid "Name"
+msgstr "Исми"
+
+msgid "Level"
+msgstr "Поғона"
+
+msgid "Group"
+msgstr "Гуруҳ"
+
+msgid "Deselect all"
+msgstr "Барча танланганни бекор қилиш"
+
+msgid "Select units by group or level..."
+msgstr ""
+
+msgid "Search"
+msgstr "Излаш"
+
+msgid "No selected units"
+msgstr ""
+
+msgid "{{numberOfUnits}} selected units"
+msgstr ""
+
+msgid "No organisation units match your search."
+msgstr ""
+
+msgid ""
+"There are too many results to display. Please narrow\n"
+"                        down the search."
+msgstr ""
+
+msgid "Search for organisation units"
+msgstr ""
+
+msgid "Select organisation units"
+msgstr "Ташкилий бўлимларни танланг"
+
+msgid ""
+"A short, unique name (max 50 characters). Displayed in analysis apps where "
+"space is limited, depending on user or system settings."
+msgstr ""
+
+msgid "Short name"
+msgstr "Қисқача номи"
+
+msgid "Failed to load {{label}}"
+msgstr ""
+
+msgid "Failed to load"
+msgstr ""
+
+msgid "Merging cannot be undone"
+msgstr ""
+
+msgid "Confirmation code does not match"
+msgstr ""
+
+msgid "Target must be specified to merge"
+msgstr ""
+
+msgid "Correct confirmation code must be entered to merge"
+msgstr ""
+
+msgid "Merge"
+msgstr "Бирлаштириш"
+
+msgid "Merging..."
+msgstr ""
+
+msgid "Merge complete"
+msgstr ""
+
+msgid "Back to list"
+msgstr "Рўйхатга қайтиш"
+
+msgid "Sources"
+msgstr ""
+
+msgid "Select models to merge"
+msgstr ""
+
+msgid "Target"
+msgstr "Нишон"
+
+msgid "Select the model to merge into"
+msgstr ""
+
+msgid "No potential targets available. Remove an item from sources."
+msgstr ""
+
+msgid "At least one source is required"
+msgstr ""
+
+msgid "Valid expression"
+msgstr ""
+
+msgid "Add operators, variables, functions, and constants from right sidebar"
+msgstr ""
+
+msgid "Apply"
+msgstr "Мурожаат қилиш"
+
+msgid "(No Value)"
+msgstr ""
+
+msgid "Description (required)"
+msgstr ""
+
+msgid "Invalid expression"
+msgstr ""
+
+msgid "Could not validate expression"
+msgstr ""
+
+msgid "Loading..."
+msgstr "Юкланмоқда..."
+
+msgid "Filter available items"
+msgstr ""
+
+msgid "Filter selected items"
+msgstr ""
+
+msgid "Show only unassigned items"
+msgstr ""
+
+msgid "Refresh list"
+msgstr ""
+
+msgid "Add new"
+msgstr "Янгисини қўшиш"
+
+msgid "Something went wrong"
+msgstr "Нимадир нотўғри бажарилди"
+
+msgid "Actions"
+msgstr "Амаллар"
+
+msgid "There aren't any items that match your filter."
+msgstr ""
+
+msgid "An error occurred"
+msgstr ""
+
+msgid "An error occurred while loading the items."
+msgstr ""
+
+msgid "{{modelName}} management"
+msgstr ""
+
+msgid "Metadata access"
+msgstr ""
+
+msgid "Metadata view and edit"
+msgstr ""
+
+msgid "Metadata view only"
+msgstr ""
+
+msgid "Data access"
+msgstr ""
+
+msgid "Data view and capture"
+msgstr ""
+
+msgid "Data view only"
+msgstr ""
+
+msgid "Successfully updated sharing for {{number}} items"
+msgstr ""
+
+msgid "An unknown error occurred"
+msgstr "Номаълум хатолик юз берди"
+
+msgid "Failed to update sharing"
+msgstr ""
+
+msgid "Update sharing for users and groups"
+msgstr ""
+
+msgid "User or group"
+msgstr "Фойдаланувчи ёки гуруҳ"
+
+msgid "Add to actions"
+msgstr ""
+
+msgid "Access to be updated for {{number}} items"
+msgstr ""
+
+msgid "Update sharing for {{number}} items"
+msgstr ""
+
+msgid "Update sharing"
+msgstr ""
+
+msgid "Created by"
+msgstr "Томонидан яратилган"
+
+msgid "Created"
+msgstr "Яратилган"
+
+msgid "Last updated by"
+msgstr "Фойдаланувчи томонидан охирги янгилангани"
+
+msgid "Last updated"
+msgstr "Охирги янгиланган"
+
+msgid "Id"
+msgstr "Id"
+
+msgid "API URL"
+msgstr ""
+
+msgid "API URL link"
+msgstr ""
+
+msgid "Copy"
+msgstr ""
+
+msgid "Edit"
+msgstr "Таҳрирлаш"
+
+msgid "Details"
+msgstr "Тафсилотлари"
+
+msgid "Failed to load details"
+msgstr ""
+
+msgid "Download"
+msgstr "Юклаш"
+
+msgid "Download {{section}}"
+msgstr ""
+
+msgid "Uncompressed"
+msgstr "Сиқилмаган архив"
+
+msgid "{{model}} to include"
+msgstr ""
+
+msgid "All ({{number}})"
+msgstr ""
+
+msgid "No items selected"
+msgstr "Элемент танланмаган"
+
+msgid "Only selected ({{number}})"
+msgstr ""
+
+msgid "Only selected"
+msgstr ""
+
+msgid "No filters applied"
+msgstr "Ҳеч қандай фильтр қўлланилмаган"
+
+msgid "Only items that match selected filters ({{number}})"
+msgstr ""
+
+msgid "Only items that match selected filters"
+msgstr ""
+
+msgid "Include user sharing settings"
+msgstr ""
+
+msgid "Clear all filters"
+msgstr ""
+
+msgid "Category combo"
+msgstr "Категория комбинацияси"
+
+msgid "Category"
+msgstr "Категория"
+
+msgid "Category option"
+msgstr "Категория вариантлари"
+
+msgid "Category option group"
+msgstr "Категория варианти гуруҳи"
+
+msgid "Type to filter options"
+msgstr ""
+
+msgid "No matches"
+msgstr ""
+
+msgid "Data element"
+msgstr "Маълумотлар элементи"
+
+msgid "Data element group"
+msgstr "Маълумотлар элементи гуруҳи"
+
+msgid "Data element group set"
+msgstr "Маълумотлар элементи гуруҳ тўплами"
+
+msgid "Data set"
+msgstr "Маълумотлар тўплами"
+
+msgid "Search by form name"
+msgstr ""
+
+msgid "Search by name, code or ID"
+msgstr ""
+
+msgid "Indicator"
+msgstr "Индикатор"
+
+msgid "Indicator group"
+msgstr "Индикатор гуруҳи"
+
+msgid "Indicator group set"
+msgstr "Индикаторлар гуруҳлари тўплами"
+
+msgid "Indicator Type"
+msgstr "Индикатор Тури"
+
+msgid "Program"
+msgstr "Дастур"
+
+msgid "Program indicator"
+msgstr "Дастур индикатори"
+
+msgid "Program indicator group"
+msgstr "Дастур индикаторлари гуруҳи"
+
+msgid "Public access"
+msgstr "Оммавий фойдаланиш"
+
+msgid "Delete"
+msgstr "Ўчириб ташлаш"
+
+msgid "Successfully deleted {{modelType}} \"{{displayName}}\""
+msgstr ""
+
+msgid "Are you sure that you want to delete this {{modelType}}?"
+msgstr ""
+
+msgid "Something went wrong deleting the {{modelType}}"
+msgstr ""
+
+msgid "Failed to delete {{modelType}} \"{{displayName}}\"! {{messages}}"
+msgstr ""
+
+msgid "Try again"
+msgstr "Қайта уриниб кўринг"
+
+msgid "Confirm deletion"
+msgstr "Ўчиришни тасдиқлаш"
+
+msgid "Show details"
+msgstr "Тафсилотларни кўрсатинг"
+
+msgid "Sharing settings"
+msgstr "Созламаларни улашиш"
+
+msgid "Translate"
+msgstr "Таржима қилинг"
+
+msgid "At least one column must be selected"
+msgstr ""
+
+msgid "Columns"
+msgstr "Устунлар"
+
+msgid "Filters"
+msgstr "Фильрлар"
+
+msgid "Available columns"
+msgstr "Мавжуд устунлар"
+
+msgid "Selected columns"
+msgstr "Танланган устунлар"
+
+msgid "Available filters"
+msgstr ""
+
+msgid "Selected filters"
+msgstr ""
+
+msgid "Failed to save"
+msgstr "Сақлаш амалга ошмади"
+
+msgid "Reset to default"
+msgstr "Стандарт ҳолатга қайтиш"
+
+msgid "Manage {{section}} view"
+msgstr ""
+
+msgid "Update view"
+msgstr "Янгиланган кўриниш"
+
+msgid "None"
+msgstr "Йўқ"
+
+msgid "Public can edit"
+msgstr "Оммавий таҳрирлаш мумкин"
+
+msgid "Public can view"
+msgstr "Оммавий кўриш мумкин"
+
+msgid "Public cannot access"
+msgstr ""
+
+msgid "New"
+msgstr "Янги"
+
+msgid "Manage View"
+msgstr ""
+
+msgid "{{number}} selected"
+msgstr ""
+
+msgid "Merge..."
+msgstr ""
+
+msgid "Choose a Locale to translate from the menu above"
+msgstr ""
+
+msgid "Translate: {{modelName}}"
+msgstr ""
+
+msgid "Base locale reference"
+msgstr ""
+
+msgid "Translation updated successfully"
+msgstr ""
+
+msgid "Save translations"
+msgstr ""
+
+msgid "Can edit and capture"
+msgstr ""
+
+msgid "View only"
+msgstr "Фақат кўриш учун"
+
+msgid "No access"
+msgstr "Кириш ҳуқуқи мавжуд эмас"
+
+msgid "Edit and view"
+msgstr ""
+
+msgid "Search for a user or group"
+msgstr ""
+
+msgid "Save"
+msgstr "Сақлаш"
+
+msgid "Categories"
+msgstr "Категориялар"
+
+msgid "Category options"
+msgstr "Категория варианти"
+
+msgid "Category combination"
+msgstr "Категориялар комбинацияси"
+
+msgid "Category combinations"
+msgstr "Категория комбинациялари"
+
+msgid "Category option combination"
+msgstr "Категория вариантлари комбинацияси"
+
+msgid "Category option combinations"
+msgstr "Категория вариантлари комбинациялари"
+
+msgid "Category option groups"
+msgstr ""
+
+msgid "Category option group set"
+msgstr "Категория вариантлари гуруҳ тўплами"
+
+msgid "Category option group sets"
+msgstr "Категория вариантлари гуруҳи тўпламлари"
+
+msgid "Data elements"
+msgstr "Маълумот элементлари"
+
+msgid "Data element groups"
+msgstr "Маълумотлар элементи гуруҳлари"
+
+msgid "Data element group sets"
+msgstr "Маълумотлар элементи гуруҳи тўпламлари"
+
+msgid "Data sets"
+msgstr "Маълумотлар тўплами"
+
+msgid "Data set notification"
+msgstr ""
+
+msgid "Data set notifications"
+msgstr "Маълумотлар тўплами билдиришномалари"
+
+msgid "Indicators"
+msgstr "Кўрсатгичлар"
+
+msgid "Indicator type"
+msgstr "Индикатор тури"
+
+msgid "Indicator types"
+msgstr "Индикатор турлари"
+
+msgid "Indicator groups"
+msgstr "Индикатор гуруҳлари"
+
+msgid "Indicator group sets"
+msgstr "Индикаторлар гуруҳи тўпламлари"
+
+msgid "Organisation unit"
+msgstr "Ташкилий бўлим"
+
+msgid "Organisation units"
+msgstr "Ташкилий бўлимлар"
+
+msgid "Organisation unit group"
+msgstr "Ташкилий бўлим гуруҳи"
+
+msgid "Organisation unit groups"
+msgstr "Ташкилий бўлим гуруҳлари"
+
+msgid "Organisation unit group set"
+msgstr "Ташкилий бўлим гуруҳи тўплами"
+
+msgid "Organisation unit group sets"
+msgstr "Ташкилий бўлим гуруҳи тўпламлари"
+
+msgid "Organisation unit level"
+msgstr "Ташкилий бўлим поғонаси"
+
+msgid "Organisation unit levels"
+msgstr "Ташкилий бўлим босқичлари"
+
+msgid "Tracked entity attribute"
+msgstr "Кузатув объекти атрибути"
+
+msgid "Tracked entity attributes"
+msgstr ""
+
+msgid "Tracked entity type"
+msgstr "Кузатувдаги объект тури"
+
+msgid "Tracked entity types"
+msgstr "Кузатувдаги объект турлари"
+
+msgid "Programs"
+msgstr "Дастурлар"
+
+msgid "Program indicators"
+msgstr "Дастур индикаторлари"
+
+msgid "Program indicator groups"
+msgstr "Дастур индикаторлари гуруҳлари"
+
+msgid "Program rule"
+msgstr "Дастур қоидаси"
+
+msgid "Program rules"
+msgstr "Дастур қоидалари"
+
+msgid "Program rule variable"
+msgstr "Дастур қоидалари ўзгарувчи қиймати"
+
+msgid "Program rule variables"
+msgstr "Дастур қоидаларидаги ўзгарувчи қисмлар"
+
+msgid "Program stage"
+msgstr "Дастур босқичи"
+
+msgid "Program stages"
+msgstr "Дастур босқичлари"
+
+msgid "Relationship type"
+msgstr "Ўзаро алоқалар тури"
+
+msgid "Relationship types"
+msgstr "Ўзаро муносабатлар турлари"
+
+msgid "Validation rule"
+msgstr "Тасдиқлаш қоидаси"
+
+msgid "Validation rules"
+msgstr "Тасдиқлаш қоидалари"
+
+msgid "Validation rule group"
+msgstr "Текшириш гуруҳи қоидалари"
+
+msgid "Validation rule groups"
+msgstr "Тасдиқлаш қоидалари гуруҳлари"
+
+msgid "Validation notification"
+msgstr "Текшириш ҳақида билдиришнома"
+
+msgid "Constant"
+msgstr "Доимий (константа)"
+
+msgid "Constants"
+msgstr "Доимийлар (константалар)"
+
+msgid "Option group"
+msgstr "Вариант гуруҳи"
+
+msgid "Option groups"
+msgstr "Вариант гуруҳлари"
+
+msgid "Attribute"
+msgstr "Атрибут"
+
+msgid "Option set"
+msgstr "Вариантлар тўплами"
+
+msgid "Option sets"
+msgstr "Вариантлар тўплами"
+
+msgid "Option group set"
+msgstr "Вариант гуруҳи тўплами"
+
+msgid "Option group sets"
+msgstr "Вариантлар гуруҳлари тўпламлари"
+
+msgid "Predictor"
+msgstr "Башоратчи"
+
+msgid "Predictors"
+msgstr "Башоратчилар"
+
+msgid "Push analysis"
+msgstr "Push-таҳлил"
+
+msgid "Push analyses"
+msgstr ""
+
+msgid "External map layer"
+msgstr "Хаританинг ташқи қатлами"
+
+msgid "External map layers"
+msgstr "Ташқи харита қавати"
+
+msgid "Data approval level"
+msgstr "Маълумотларни тасдиқлаш поғонаси"
+
+msgid "Data approval levels"
+msgstr "Маълумотларни тасдиқлаш поғонаси"
+
+msgid "Data approval workflow"
+msgstr "Маълумотларни тасдиқлаш ишчи жараёни"
+
+msgid "Data approval workflows"
+msgstr "Маълумотларни тасдиқлаш бўйича иш жараёни"
+
+msgid "SQL view"
+msgstr "SQL кўриниши"
+
+msgid "SQL views"
+msgstr "SQL кўринишлари"
+
+msgid "Legend"
+msgstr "Таъриф"
+
+msgid "Legends"
+msgstr "Таърифлар"
+
+msgid "Programs and Tracker"
+msgstr ""
+
+msgid "Validation"
+msgstr "Тасдиқлаш"
+
+msgid "Validations"
+msgstr ""
+
+msgid "Other"
+msgstr "Бошқа"
+
+msgid "Locale"
+msgstr "Манзил"
+
+msgid "Locales"
+msgstr "Локал"
+
+msgid "Program disaggregation"
+msgstr ""
+
+msgid "Program disaggregations"
+msgstr ""
+
+msgid "You do not have access to edit this item."
+msgstr ""
+
+msgid "You do not have access to delete this item."
+msgstr ""
+
+msgid "Sum"
+msgstr "Жамлаш"
+
+msgid "Average"
+msgstr "Ўртача"
+
+msgid "Average (sum in org unit)"
+msgstr ""
+
+msgid "Last value (sum in org unit hierarchy)"
+msgstr "Охирги қиймат (ташкилий бўлим иерархияси йиғиндиси)"
+
+msgid "Last value (average in org unit)"
+msgstr ""
+
+msgid "Last value (last in org unit hierarchy)"
+msgstr ""
+
+msgid "Last value in period (sum in org unit hierarchy)"
+msgstr "Даврдаги охирги қиймат (ташкилий бўлим иерархияси йиғиндиси)"
+
+msgid "Lastinperiodaverageorgunit"
+msgstr ""
+
+msgid "First value (sum in org unit hierarchy)"
+msgstr "Дастлабки қиймат (ташкилий бўлим иерархияси йиғиндиси)"
+
+msgid "First value (average in org unit hierarchy)"
+msgstr "Дастлабки қиймат (ташкилий бўлим иерархияси ўртачаси)"
+
+msgid "First value (first in org unit hierarchy)"
+msgstr ""
+
+msgid "Count"
+msgstr "Ҳисоблаш"
+
+msgid "Standard deviation"
+msgstr "Стандарт оғиш"
+
+msgid "Variance"
+msgstr "Номувофиқлик"
+
+msgid "Min"
+msgstr "Минимум"
+
+msgid "Max"
+msgstr "Максимум"
+
+msgid "Min (sum in org unit)"
+msgstr ""
+
+msgid "Max (sum in org unit)"
+msgstr ""
+
+msgid "Custom"
+msgstr "Одатий"
+
+msgid "Default"
+msgstr "Стандарт"
+
+msgid "Aggregate"
+msgstr "Бирлаштириш"
+
+msgid "Tracker"
+msgstr "Кузатувчи"
+
+msgid "Text"
+msgstr "Матн"
+
+msgid "Long text"
+msgstr "Узун матн"
+
+msgid "Text with multiple values"
+msgstr "Кўп қийматли матн билан"
+
+msgid "Letter"
+msgstr "Хат"
+
+msgid "Phone number"
+msgstr "Телефон рақами"
+
+msgid "Email"
+msgstr "е-Почта"
+
+msgid "Yes/No"
+msgstr "Ҳа/Йўқ"
+
+msgid "Yes only"
+msgstr ""
+
+msgid "Date"
+msgstr "Сана"
+
+msgid "Date and time"
+msgstr ""
+
+msgid "Time"
+msgstr "Вақт"
+
+msgid "Number"
+msgstr "Тартиб рақами"
+
+msgid "Unit interval"
+msgstr "Бирлик оралиғи"
+
+msgid "Percentage"
+msgstr "Фоиз"
+
+msgid "Integer"
+msgstr "Бутун сон"
+
+msgid "Positive integer"
+msgstr "Мусбат бутун сон"
+
+msgid "Negative integer"
+msgstr "Манфий бутун сон"
+
+msgid "Positive or Zero integer"
+msgstr ""
+
+msgid "Tracker associate"
+msgstr "Кузатув ассоциацияси"
+
+msgid "Username"
+msgstr "Фойдаланувчи исми"
+
+msgid "Coordinate"
+msgstr "Мувофиқлаштириш"
+
+msgid "Reference"
+msgstr "Маълумот"
+
+msgid "Age"
+msgstr "Ёш"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "File"
+msgstr "Файл"
+
+msgid "Image"
+msgstr "Расм"
+
+msgid "GeoJSON"
+msgstr "GeoJSON"
+
+msgid "Disaggregation"
+msgstr "Ажратиш"
+
+msgid "Point"
+msgstr "Нуқта"
+
+msgid "MultiPoint"
+msgstr ""
+
+msgid "LineString"
+msgstr ""
+
+msgid "MultiLineString"
+msgstr ""
+
+msgid "Polygon"
+msgstr "Полигон"
+
+msgid "MultiPolygon"
+msgstr ""
+
+msgid "GeometryCollection"
+msgstr ""
+
+msgid "Section"
+msgstr "Бўлим"
+
+msgid "Section Multi-org"
+msgstr "Мульти ташкилий бўлим секцияси"
+
+msgid "Event"
+msgstr "Ҳодиса/Тадбир"
+
+msgid "Enrollment"
+msgstr "Рўйхатга олиш"
+
+msgid "BiMonthly"
+msgstr ""
+
+msgid "BiWeekly"
+msgstr ""
+
+msgid "Daily"
+msgstr "Кунлик"
+
+msgid "FinancialApril"
+msgstr ""
+
+msgid "FinancialJuly"
+msgstr ""
+
+msgid "FinancialNov"
+msgstr ""
+
+msgid "FinancialOct"
+msgstr ""
+
+msgid "Monthly"
+msgstr "Ойлик"
+
+msgid "Quarterly"
+msgstr "Ҳар квартал"
+
+msgid "QuarterlyNov"
+msgstr ""
+
+msgid "SixMonthlyApril"
+msgstr ""
+
+msgid "SixMonthlyNov"
+msgstr ""
+
+msgid "SixMonthly"
+msgstr ""
+
+msgid "TwoYearly"
+msgstr ""
+
+msgid "Weekly"
+msgstr "Ҳафталик"
+
+msgid "WeeklySaturday"
+msgstr ""
+
+msgid "WeeklySunday"
+msgstr ""
+
+msgid "WeeklyThursday"
+msgstr ""
+
+msgid "WeeklyWednesday"
+msgstr ""
+
+msgid "Yearly"
+msgstr "Йиллик"
+
+msgid "Collective summary"
+msgstr "Коллектив хулоса"
+
+msgid "Single notification"
+msgstr "Бир хил билдиришнома"
+
+msgid "Scheduled days"
+msgstr ""
+
+msgid "Data set completion"
+msgstr ""
+
+msgid "Organisation unit contact"
+msgstr "Ташкилий бўлимнинг алоқадаги ходими"
+
+msgid "User group"
+msgstr "Фойдаланувчи гуруҳи"
+
+msgid "Aggregation type"
+msgstr "Бирлаштириш тури"
+
+msgid "Category option combination for aggregate data export"
+msgstr ""
+"Категория варианти комбинациясини бирлаштирилган маълумотлар экспорти учун"
+
+msgid "Attribute option combination for aggregate data export"
+msgstr "Маълумотларнинг умумий экспорти учун атрибут вариантлари комбинацияси"
+
+msgid "Analytics type"
+msgstr "Таҳлиллар турлари"
+
+msgid "Compulsory"
+msgstr "Мажбурий"
+
+msgid "Data dimension"
+msgstr "Маълумот ҳажми"
+
+msgid "Data dimension type"
+msgstr "Маълумотлар ҳажми тури"
+
+msgid "Display in form"
+msgstr "Шаклни экранда кўрсатиш"
+
+msgid "Domain type"
+msgstr "Домен тури"
+
+msgid "Expression"
+msgstr "Ифода"
+
+msgid "Favorite"
+msgstr "Танланган"
+
+msgid "Filter"
+msgstr "Фильтр"
+
+msgid "Form name"
+msgstr "Шакл номи"
+
+msgid "Form type"
+msgstr "Шакл тури"
+
+msgid "Ignore data approval"
+msgstr "Маълумот тасдиғини эътиборсиз қолдириш"
+
+msgid "Sharing"
+msgstr "Улашиш"
+
+msgid "Owner"
+msgstr "Эгаси, тегишлилик"
+
+msgid "Value type"
+msgstr "Қиймат тури"
+
+msgid "Zero is significant"
+msgstr ""
+
+msgid "Enable tracked entity instance audit log"
+msgstr "Кузатувдаги объъект намуналарини текшириш учун аудит журналини ёқиш"
+
+msgid "Feature type"
+msgstr "Хусусият тури"
+
+msgid "Maximum number of tracked entity instances to return in search"
+msgstr "Қидирувга қайтиш учун кузатувдаги объект намуналарини максимал сони"
+
+msgid "Minimum number of attributes required to search"
+msgstr "Қидирув учун зарур бўлган атрибутларнинг минимал сони"
+
+msgid "This field requires a unique value, please choose another one"
+msgstr ""
+
+msgid "Unknown error"
+msgstr "Аниқланмаган хатолик"
+
+msgid "Unknown"
+msgstr "Номаълум"
+
+msgid "{{label}} (required)"
+msgstr ""
+
+msgid "Saved successfully"
+msgstr "ффақиятли сақланди"
+
+msgid "No changes to be saved"
+msgstr "Сақлаш учун ўзгартиришлар йўқ"
+
+msgid "Cannot save empty object"
+msgstr ""
+
+msgid "Created successfully"
+msgstr ""
+
+msgid "Please provide a positive integer"
+msgstr "Илтимос, бутун мусбат сонни кўрсатинг"
+
+msgid "Please provide a negative integer"
+msgstr "Илтимос, бутун манфий сонни кўрсатинг"
+
+msgid "Please provide a 0 or positive integer"
+msgstr ""
+
+msgid "Please provide valid percantage (0-100)."
+msgstr ""
+
+msgid "Please provide valid unit interval (0-1)."
+msgstr ""
+
+msgid "Must be checked"
+msgstr ""
+
+msgid "Please provide a time."
+msgstr ""
+
+msgid "Please provide a date."
+msgstr ""
+
+msgid "Period type"
+msgstr "Давр тури"
+
+msgid "Message template"
+msgstr "Хабар шаблони"
+
+msgid "Favourite"
+msgstr ""
+
+msgid "Data set notification trigger"
+msgstr "Маълумотлар тўплами ҳақида бирдиришнома"
+
+msgid "Notification recipient"
+msgstr "Билдиришномани олувчи"
+
+msgid "Notify parent organisation unit only"
+msgstr "Фақат аждод ташкилотларга хабар бериш"
+
+msgid "Notify users in hierarchy only"
+msgstr "Фақат иерархиядаги фойдаланувчиларга хабар бериш"
+
+msgid "Relative scheduled days"
+msgstr ""
+
+msgid "Send notification as"
+msgstr "Билдиришномани қуйидаги сифатида юбориш"
+
+msgid "Subject template"
+msgstr "Мавзу шаблони"
+
+msgid "Offline levels"
+msgstr "Оффлайн босқичлар"
+
+msgid "Factor"
+msgstr "Омил"
+
+msgid "Program name"
+msgstr "Дастур номи"
+
+msgid "Decimals in data output"
+msgstr "Маълумот чиқаришда ўнлик касрлар"
+
+msgid "Value"
+msgstr "Қиймат"
+
+msgid "Mandatory"
+msgstr "Мажбурий"
+
+msgid "Unique"
+msgstr "Ноёб"
+
+msgid "Category attribute"
+msgstr "Категория атрибути"
+
+msgid "Category option attribute"
+msgstr ""
+
+msgid "Category option combo attribute"
+msgstr ""
+
+msgid "Category option group attribute"
+msgstr ""
+
+msgid "Category option group set attribute"
+msgstr "Категория вариантлари гуруҳи тўпламининг атрибулари"
+
+msgid "Constant attribute"
+msgstr ""
+
+msgid "Data element attribute"
+msgstr ""
+
+msgid "Data element group attribute"
+msgstr ""
+
+msgid "Data element group set attribute"
+msgstr "Маълумотлар элементи гуруҳи тўплами атрибути"
+
+msgid "Data set attribute"
+msgstr ""
+
+msgid "Document attribute"
+msgstr ""
+
+msgid "Event chart attribute"
+msgstr "Ҳолат диаграммаси атрибути"
+
+msgid "Event report attribute"
+msgstr "Ҳолат ҳисоботи атрибути"
+
+msgid "Indicator attribute"
+msgstr ""
+
+msgid "Indicator group attribute"
+msgstr ""
+
+msgid "Legend set attribute"
+msgstr ""
+
+msgid "Map attribute"
+msgstr "Харита атрибути"
+
+msgid "Option attribute"
+msgstr ""
+
+msgid "Option set attribute"
+msgstr ""
+
+msgid "Organisation unit attribute"
+msgstr ""
+
+msgid "Organisation unit group attribute"
+msgstr ""
+
+msgid "Organisation unit group set attribute"
+msgstr ""
+
+msgid "Program attribute"
+msgstr "Дастур атрибути"
+
+msgid "Program indicator attribute"
+msgstr ""
+
+msgid "Program stage attribute"
+msgstr ""
+
+msgid "Relationship type attribute"
+msgstr "Ўзаро алоқа тури атрибути"
+
+msgid "Section attribute"
+msgstr "Секция атрибути"
+
+msgid "SQL view attribute"
+msgstr "SQL кўриш атрибути"
+
+msgid "Tracked entity attribute attribute"
+msgstr "Кузатувдаги шахс атрибути"
+
+msgid "Tracked entity type attribute"
+msgstr "Кузатув объекти тури атрибути"
+
+msgid "User attribute"
+msgstr ""
+
+msgid "User group attribute"
+msgstr ""
+
+msgid "Validation rule attribute"
+msgstr "Текшириш қоидаси атрибути"
+
+msgid "Validation rule group attribute"
+msgstr "Текшириш қоидаси гуруҳ атрибути"
+
+msgid "Visualization attribute"
+msgstr "Визуализация атрибути"
+
+msgid "Basic information"
+msgstr ""
+
+msgid "Data and options"
+msgstr ""
+
+msgid "Sort order"
+msgstr "Саралаш тартиби"
+
+msgid "Category option combo"
+msgstr "Категория варианти комбинацияси"
+
+msgid "Document"
+msgstr "Ҳужжат"
+
+msgid "Event chart"
+msgstr "Ҳодиса/Тадбир диаграммаси"
+
+msgid "Event report"
+msgstr "Ҳодиса/Тадбир ҳисоботи"
+
+msgid "Legend set"
+msgstr "Таърифлар тўплами"
+
+msgid "Map"
+msgstr "Харита"
+
+msgid "Option"
+msgstr "Вариант"
+
+msgid "User"
+msgstr "Фойдаланувчи"
+
+msgid "Visualization"
+msgstr "Визуализация"
+
+msgid "Objects to which this attribute can be applied"
+msgstr ""
+
+msgid ""
+"Choose from a predefined list of option sets. The option set will "
+"automatically define the value type."
+msgstr ""
+
+msgid "Remove option set"
+msgstr ""
+
+msgid ""
+"Enter a number to decide where this attribute appears in list and forms"
+msgstr ""
+
+msgid ""
+"Select the kind of data this attribute collects. If you have chosen an "
+"option set, this will be set automatically."
+msgstr ""
+
+msgid ""
+"Disabled as the value type must match the value type of the selected option "
+"set"
+msgstr ""
+
+msgid "Set up the basic information for this attribute."
+msgstr ""
+
+msgid "Explain the purpose of this attribute."
+msgstr ""
+
+msgid "Configure how this attribute wil be collected, analyzed, and stored."
+msgstr ""
+
+msgid "Make this a mandatory attribute"
+msgstr ""
+
+msgid "No duplicate values allowed"
+msgstr ""
+
+msgid "Set up the basic information for this category."
+msgstr ""
+
+msgid "Explain the purpose of this category."
+msgstr ""
+
+msgid "Data configuration"
+msgstr ""
+
+msgid "Choose how this category will be used to capture and analyze data."
+msgstr ""
+
+msgid "Use as data dimension"
+msgstr "Маълумотлар ҳажми сифатида фойдаланиш"
+
+msgid "Make available to analytics apps as a selectable dimension."
+msgstr ""
+
+msgid "Choose the options to include in this category."
+msgstr ""
+
+msgid "Available category options"
+msgstr "Мавжуд категория вариантлари"
+
+msgid "Selected category options"
+msgstr "Танланган категория вариантлари "
+
+msgid "Filter available category options"
+msgstr ""
+
+msgid "Filter selected category options"
+msgstr ""
+
+msgid "Available categories"
+msgstr "Мавжуд категориялар"
+
+msgid "Selected categories"
+msgstr "Танланган категориялар"
+
+msgid "Filter available categories"
+msgstr ""
+
+msgid "Filter selected categories"
+msgstr ""
+
+msgid "More than 4 Categories"
+msgstr ""
+
+msgid "A Category combination with more than 4 categories is not recommended."
+msgstr ""
+
+msgid "Identical Category Combination"
+msgstr ""
+
+msgid ""
+"One or more Category combinations with the same categories already exist in the system. \n"
+"        It is strongly discouraged to have more than one Category combination with the same categories."
+msgstr ""
+
+msgid "Set up the basic information for this category combination."
+msgstr ""
+
+msgid ""
+"Choose how this category combination will be used to capture and analyze "
+"data."
+msgstr ""
+
+msgid "Skip category total in reports"
+msgstr "Ҳисоботдаги жами категорияни ўтказиб юбориш"
+
+msgid "Choose the categories to include in this category combination."
+msgstr ""
+
+msgid "At least one category is required"
+msgstr ""
+
+msgid ""
+"The number of generated category option combinations exceeds the limit of "
+"{{limit}}"
+msgstr ""
+
+msgid "Set up the basic information for this category option combination."
+msgstr ""
+
+msgid "Set up the basic information for this category option group set."
+msgstr ""
+
+msgid "Explain the purpose of this category option group set."
+msgstr ""
+
+msgid ""
+"Choose how this category option group set will be used to capture and "
+"analyze data."
+msgstr ""
+
+msgid ""
+"Choose the category option groups to include in this category option group "
+"set."
+msgstr ""
+
+msgid "Available category option groups"
+msgstr "Мавжуд категория вариантлари гуруҳлари"
+
+msgid "Selected category option groups"
+msgstr "Танланган категория вариантлари гуруҳлари"
+
+msgid "Filter available category option groups"
+msgstr ""
+
+msgid "Filter selected category option groups"
+msgstr ""
+
+msgid "Set up the basic information for this category option group."
+msgstr ""
+
+msgid "Explain the purpose of this category option group."
+msgstr ""
+
+msgid ""
+"Choose how this category option  will be used to capture and analyze data."
+msgstr ""
+
+msgid "Choose the options to include in this category option group."
+msgstr ""
+
+msgid "Configure category options merge"
+msgstr ""
+
+msgid "The category options merge operation is complete."
+msgstr ""
+
+msgid "All selected category options were merged successfully."
+msgstr ""
+
+msgid "Set up the basic information for this category option."
+msgstr ""
+
+msgid "An alternative name used in section or automatic data entry forms."
+msgstr ""
+
+msgid "Availability configuration"
+msgstr ""
+
+msgid ""
+"Choose when, and for which organisation units, this category option will be "
+"available."
+msgstr ""
+
+msgid "Form name should not exceed 230 characters"
+msgstr ""
+
+msgid "End date should be after start date"
+msgstr ""
+
+msgid ""
+"The merge operation will merge the source category options into\n"
+"                the target category option. One or many source category options\n"
+"                can be specified"
+msgstr ""
+
+msgid ""
+"Only one target should be specified. The merge operation will\n"
+"                transfer all of the category options metadata associations to the\n"
+"                source category options over to the target category option."
+msgstr ""
+
+msgid "Category options to be merged (source)"
+msgstr ""
+
+msgid "Select category options to merge"
+msgstr ""
+
+msgid "Category option to merge into (target)"
+msgstr ""
+
+msgid "Select category option to merge into"
+msgstr ""
+
+msgid "No category options available. Remove one from source."
+msgstr ""
+
+msgid "Merge settings"
+msgstr ""
+
+msgid ""
+"What should happen to the source category options after the merge is "
+"complete?"
+msgstr ""
+
+msgid "Set up the basic information for this constant."
+msgstr ""
+
+msgid "Explain the purpose of this constant."
+msgstr ""
+
+msgid "Value (required)"
+msgstr ""
+
+msgid "Enter the numeric value to be used as the constant."
+msgstr ""
+
+msgid "Available data element groups"
+msgstr ""
+
+msgid "Selected data element groups"
+msgstr ""
+
+msgid "Filter available data element groups"
+msgstr ""
+
+msgid "Filter selected element groups"
+msgstr ""
+
+msgid "Set up the information for this data element group set."
+msgstr ""
+
+msgid "Explain the purpose of this data element group set."
+msgstr ""
+
+msgid "Available data elements"
+msgstr "Мавжуд маълумотлар элементи"
+
+msgid "Selected data elements"
+msgstr "Танланган маълумотлар элементи"
+
+msgid "Filter available data elements"
+msgstr ""
+
+msgid "Filter selected elements"
+msgstr ""
+
+msgid "Set up the information for this data element group."
+msgstr ""
+
+msgid "Explain the purpose of this data element group."
+msgstr ""
+
+msgid "Aggregation level(s)"
+msgstr ""
+
+msgid "The default way to aggregate this data element in analytics."
+msgstr ""
+
+msgid "Disabled for the selected value type."
+msgstr ""
+
+msgid "Choose how this data element is disaggregated."
+msgstr ""
+
+msgid "Color and icon"
+msgstr ""
+
+msgid ""
+"A color and icon are helpful for identifying data elements in information-"
+"dense screens."
+msgstr ""
+
+msgid "Domain"
+msgstr ""
+
+msgid "A data element can either be aggregated or tracked data."
+msgstr ""
+
+msgid "Field mask"
+msgstr "Майдон ниқоби"
+
+msgid "Use a pattern to limit what information can be entered."
+msgstr ""
+
+msgid "e.g. 999-000-0000"
+msgstr ""
+
+msgid "Available legends"
+msgstr ""
+
+msgid "Selected legends"
+msgstr ""
+
+msgid "Filter available legends"
+msgstr ""
+
+msgid "Filter selected legends"
+msgstr ""
+
+msgid "Option set comment"
+msgstr ""
+
+msgid "Choose a set of predefined comments for data entry."
+msgstr ""
+
+msgid "Choose a set of predefined options for data entry."
+msgstr ""
+
+msgid "Url"
+msgstr ""
+
+msgid "A web link that provides extra information."
+msgstr ""
+
+msgid "The type of data that will be recorded."
+msgstr ""
+
+msgid "Store zero data values"
+msgstr "Маълумотларнинг ноль қийматини сақлаш"
+
+msgid "Set up the information for this data element."
+msgstr ""
+
+msgid "Explain the purpose of this data element."
+msgstr ""
+
+msgid "Disaggregation and Option sets"
+msgstr ""
+
+msgid "Set up disaggregation and predefined options."
+msgstr ""
+
+msgid ""
+"Visualize values for this data element in Analytics app. Multiple legends "
+"can be applied."
+msgstr ""
+
+msgid "Aggregation levels"
+msgstr "Бирлаштириш даражалари"
+
+msgid ""
+"By default, aggregation starts at the lowest assigned organisation unit. You"
+" can override this by choosing a different level. Choosing a higher level "
+"means that data from lower levels will not be included in the aggregation."
+msgstr ""
+
+msgid "Error"
+msgstr "Хатолик"
+
+msgid "Error loading notification template"
+msgstr ""
+
+msgid "Choose which data sets to send this notification for"
+msgstr ""
+
+msgid "Available Data Sets"
+msgstr ""
+
+msgid "Selected Data Sets"
+msgstr ""
+
+msgid "Search data sets..."
+msgstr ""
+
+msgid "Filter selected data sets..."
+msgstr ""
+
+msgid "Data set name"
+msgstr "Маълумотлар тўплами номи"
+
+msgid "Current date"
+msgstr "Ҳозирги сана"
+
+msgid "Data set description"
+msgstr "Маълумотлар тўпламининг тавсифи"
+
+msgid "Complete registration organisation unit"
+msgstr "Ташкилий бўлимни рўйхатдан ўтказишни якунлаш"
+
+msgid "Complete registration period"
+msgstr "Рўйхатга олишнинг тўлиқ даври"
+
+msgid "Complete registration user"
+msgstr "Фойдаланувчини рўйхатга олинишини якунлаш"
+
+msgid "Complete registration time"
+msgstr "Рўйхатга олишнинг тўлиқ вақти"
+
+msgid "Complete registration att opt combo"
+msgstr "Атрибутларни вариантларни комбинацияларни рўйхатга олишни якунлаш "
+
+msgid "Set up the basic information for the notification template."
+msgstr ""
+
+msgid "Message content"
+msgstr ""
+
+msgid "Configure the templates for the notification content and subject."
+msgstr ""
+
+msgid "Notification timing"
+msgstr ""
+
+msgid "Choose what triggers the notification and when it should be sent."
+msgstr ""
+
+msgid "Recipient"
+msgstr "Қабул қилувчи"
+
+msgid "Choose who recieves the notification."
+msgstr ""
+
+msgid "SMS"
+msgstr "СМС"
+
+msgid "When to send notification"
+msgstr ""
+
+msgid "Send notification"
+msgstr "Билдиришномани юбориш"
+
+msgid "days"
+msgstr "кунлар"
+
+msgid "Before"
+msgstr ""
+
+msgid "After"
+msgstr ""
+
+msgid "scheduled date"
+msgstr "режалаштирилган сана"
+
+msgid "Recipient type"
+msgstr ""
+
+msgid "User Group Recipients"
+msgstr ""
+
+msgid "Used as the template for the subject field."
+msgstr ""
+
+msgid "Subject"
+msgstr "Мавзу"
+
+msgid "Used as template for the message field."
+msgstr ""
+
+msgid "Message"
+msgstr "Хабар"
+
+msgid "Please enter a maximum of {{upperBound}} characters"
+msgstr ""
+
+msgid "Edit Data Set Notification"
+msgstr ""
+
+msgid "Trigger"
+msgstr ""
+
+msgid "Send strategy"
+msgstr ""
+
+msgid "Recipient user group"
+msgstr ""
+
+msgid "Delivery channels"
+msgstr ""
+
+msgid "Send complete notifications"
+msgstr ""
+
+msgid "Send notification to completing user"
+msgstr "Тугатаётган фойдаланувчига билдиришнома юбориш"
+
+msgid "Advanced options"
+msgstr "Мураккаб вариантлар"
+
+msgid "These options are used for advanced data set configurations."
+msgstr ""
+
+msgid "Don't save this data to offline storage (skip offline)"
+msgstr ""
+
+msgid ""
+"Include data element descriptions in offline storage (data element "
+"decoration)"
+msgstr ""
+
+msgid "Use this data set with Java mobile client"
+msgstr ""
+
+msgid "Notifications"
+msgstr "Билдиришномалар"
+
+msgid ""
+"Send notifications when data sets are marked complete, using the DHIS2 "
+"Messages app."
+msgstr ""
+
+msgid "Choose legends that will do something (?????????)"
+msgstr ""
+
+msgid "Search available legends"
+msgstr ""
+
+msgid "Search selected legends"
+msgstr ""
+
+msgid "Compulsory data elements"
+msgstr ""
+
+msgid "Search available data elements"
+msgstr "Мавжуд маълумотлар элементини қидириш"
+
+msgid "Search compulsory data elements"
+msgstr ""
+
+msgid "Approval workflow"
+msgstr ""
+
+msgid "Configure data elements"
+msgstr ""
+
+msgid "Choose what data is collected for this data set."
+msgstr ""
+
+msgid "Data set disaggregation"
+msgstr ""
+
+msgid ""
+"Choose an optional category combination to disaggregate the entire data set."
+msgstr ""
+
+msgid "Choose indicators to calculate and show in the data entry form."
+msgstr ""
+
+msgid "Available indicators"
+msgstr "Мавжуд кўрсатгичлар"
+
+msgid "Selected indicators"
+msgstr "Танланган кўрсатгичлар"
+
+msgid "Search available indicators"
+msgstr ""
+
+msgid "Search selected indicators"
+msgstr ""
+
+msgid "Search selected data elements"
+msgstr ""
+
+msgid "Custom disaggregation"
+msgstr ""
+
+msgid "Override data element category combination"
+msgstr ""
+
+msgid "No data elements selected"
+msgstr "Маълумот элементлари танланмаган"
+
+msgid "Close"
+msgstr "Ёпмоқ"
+
+msgid "Should not exceed {{maxLength}} characters"
+msgstr ""
+
+msgid "Display title / subtitle"
+msgstr ""
+
+msgid "Title"
+msgstr "Сарлавҳа"
+
+msgid "Subtitle"
+msgstr "Субтитр"
+
+msgid "Position"
+msgstr "Лавозими"
+
+msgid "Line start"
+msgstr "Стар боши"
+
+msgid "Center"
+msgstr "Марказ"
+
+msgid "Line end"
+msgstr "Сатр охири"
+
+msgid "Section display mode"
+msgstr ""
+
+msgid "Single page: all sections shown consecutively in one form"
+msgstr ""
+
+msgid "Tabs: show a tab for each section"
+msgstr ""
+
+msgid "Horizontal tabs"
+msgstr ""
+
+msgid "Vertical tabs"
+msgstr ""
+
+msgid "Render multi-organisation unit forms vertically"
+msgstr ""
+
+msgid "Only applied to section forms using multiple organisation units"
+msgstr ""
+
+msgid "Configure which organisation units can collect data for this data set."
+msgstr ""
+
+msgid "Change period type"
+msgstr ""
+
+msgid ""
+"Changing the period type will make previously entered data for this data set"
+" not appear in the data entry app. This can lead to duplicate data entry."
+msgstr ""
+
+msgid ""
+"Are you sure you want to change the period type to "
+"{{preselectedPeriodType}}?"
+msgstr ""
+
+msgid "Yes, change"
+msgstr ""
+
+msgid "Configure data entry periods"
+msgstr ""
+
+msgid "Choose for what time periods data can be entered for this data set"
+msgstr ""
+
+msgid "Allow data entry for future periods"
+msgstr ""
+
+msgid ""
+"Close data entry a certain number of days after period end (expiry days)"
+msgstr ""
+
+msgid "Limit data entry by period"
+msgstr ""
+
+msgid "Optionally configure when data can be entered for certain periods"
+msgstr ""
+
+msgid "A data set with this name already exists"
+msgstr ""
+
+msgid "Set up the basic information for this data set."
+msgstr ""
+
+msgid "Number of days after period to qualify for on time submission"
+msgstr ""
+
+msgid ""
+"\"On time\" submission rate can be using reporting dates in the Report app. "
+"Enter 0 to ignore timely submission."
+msgstr ""
+
+msgid "Value should be bigger than 0"
+msgstr ""
+
+msgid "Validation and limitations"
+msgstr ""
+
+msgid "Configure how data can and must be entered for this data"
+msgstr ""
+
+msgid "Completing a data set requires passing validation"
+msgstr ""
+
+msgid "Completing a data set requires all empty values to have a comment"
+msgstr ""
+
+msgid "Completing a data set requires compulsory field to have a value"
+msgstr ""
+
+msgid ""
+"Data elements with category combinations require all fields to have a value "
+"if one has a value"
+msgstr ""
+
+msgid "Compulsory data entry"
+msgstr ""
+
+msgid ""
+"Optionally configure which data elements must have a value to complete this "
+"data set."
+msgstr ""
+
+msgid "Data set must be saved before form type can be configured."
+msgstr ""
+
+msgid "Data entry form"
+msgstr "Маълумотни киритиш шакли"
+
+msgid ""
+"Choose and configure how the data entry form looks and works for this data "
+"set."
+msgstr ""
+
+msgid "Default form"
+msgstr "Стандарт шакл"
+
+msgid "Data elements are displayed in a standard list"
+msgstr ""
+
+msgid "Section form"
+msgstr ""
+
+msgid "Group data into sections with additional options"
+msgstr ""
+
+msgid "Custom form"
+msgstr "Махсус шакл"
+
+msgid "Build and style a custom form layout"
+msgstr ""
+
+msgid "Display options"
+msgstr ""
+
+msgid "Sections"
+msgstr ""
+
+msgid "Configure data and options for form sections."
+msgstr ""
+
+msgid "Section {{sectionName}} will be removed on save"
+msgstr ""
+
+msgid "Restore section"
+msgstr ""
+
+msgid "Add section"
+msgstr "Секция қўшинг"
+
+msgid "Reorder sections"
+msgstr ""
+
+msgid "Copy ID"
+msgstr ""
+
+msgid "New sections order saved successfully"
+msgstr ""
+
+msgid "Error saving new sections order."
+msgstr ""
+
+msgid "Reorder form sections"
+msgstr ""
+
+msgid "(marked for deletion)"
+msgstr ""
+
+msgid "Save section ordering"
+msgstr ""
+
+msgid "Custom form saved"
+msgstr ""
+
+msgid "Custom form (preview)"
+msgstr ""
+
+msgid "Define a custom form for this data set by editing HTML below."
+msgstr ""
+
+msgid "Preview"
+msgstr "Олдиндан кўриш"
+
+msgid "Nothing to preview"
+msgstr ""
+
+msgid "Preview of custom form"
+msgstr ""
+
+msgid "Save custom form"
+msgstr ""
+
+msgid "Saving a custom form does not save other changes to the data set"
+msgstr ""
+
+msgid "A custom form must be added for it to be used for data entry (web)."
+msgstr ""
+
+msgid "This data set uses a custom form for data entry (web)."
+msgstr ""
+
+msgid "Custom form will be removed on save"
+msgstr ""
+
+msgid "Restore custom form"
+msgstr ""
+
+msgid "Delete custom form"
+msgstr ""
+
+msgid "Create custom form"
+msgstr ""
+
+msgid "Edit custom form"
+msgstr ""
+
+msgid "Select elements"
+msgstr ""
+
+msgid "Elements cannot be added while previewing the form"
+msgstr ""
+
+msgid "Filter elements"
+msgstr "Элементларни фильтрлаш"
+
+msgid "Insert grey (disabled) fields"
+msgstr "Кулранг майдонларни (ўчирилган) киритинг"
+
+msgid "Totals"
+msgstr "Жами"
+
+msgid "Flags"
+msgstr "Байроқлар"
+
+msgid "Filter by category combination"
+msgstr ""
+
+msgid "<No filter>"
+msgstr "1"
+
+msgid "Manage enabled/disabled fields"
+msgstr ""
+
+msgid "Section setup"
+msgstr ""
+
+msgid "Setup the basic information for this section."
+msgstr ""
+
+msgid ""
+"Explain the purpose of this section, which will be shown in the data entry "
+"form."
+msgstr ""
+
+msgid "Section data elements"
+msgstr ""
+
+msgid "Choose what data is collected for this section."
+msgstr ""
+
+msgid "Section indicators"
+msgstr ""
+
+msgid "Choose what indicators are shown in this section."
+msgstr ""
+
+msgid "Customize how this section looks in the form."
+msgstr ""
+
+msgid "Row totals"
+msgstr "Қатор йиғиндиси"
+
+msgid "Column totals"
+msgstr ""
+
+msgid "Disable automatic grouping of data elements"
+msgstr "Элементлар базасини автоматик гуруҳлашни ўчириш"
+
+msgid "Display mode"
+msgstr "Экранда кўрсатиш режими"
+
+msgid "Default: data elements as rows, categories as columns"
+msgstr ""
+"Стандарт: қаторлар, категориялар ва устунларда маълумотлар элементлари"
+
+msgid "Pivot: categories as rows, data elements as columns"
+msgstr ""
+"Йиғма жадвал: қаторлар, категориялар ва устунларда маълумотлар элементлари"
+
+msgid "Move a category to rows: default mode with one category moved to rows"
+msgstr ""
+"Категорияни сатрларга ўтказиш: бир тоифа қаторлар кўчирилганда стандарт "
+"режим"
+
+msgid "Category to move to rows"
+msgstr ""
+
+msgid "Content to display before a section"
+msgstr ""
+
+msgid "HTML links and basic styling can be included"
+msgstr ""
+
+msgid "Content to display after a section"
+msgstr ""
+
+msgid "Save section"
+msgstr ""
+
+msgid "Saving a section does not save other changes to the data set"
+msgstr ""
+
+msgid "Disabled"
+msgstr "Ўчириб қўйилган"
+
+msgid "Enabled"
+msgstr "Ёқилган"
+
+msgid "Update"
+msgstr "Янгилаш"
+
+msgid "Add period entry rule"
+msgstr ""
+
+msgid "Year"
+msgstr "Йил"
+
+msgid "Period"
+msgstr "Давр"
+
+msgid "Opening date"
+msgstr "Очилиш санаси"
+
+msgid "Closing date"
+msgstr "Ёпилиш санаси"
+
+msgid "Closing date must be after start date"
+msgstr ""
+
+msgid "Update period entry rule"
+msgstr ""
+
+msgid "Opening date: {{openingDate}}"
+msgstr ""
+
+msgid "No opening date"
+msgstr ""
+
+msgid "Closing date: {{closingDate}}"
+msgstr ""
+
+msgid "No closing date"
+msgstr ""
+
+msgid "Remove"
+msgstr "Олиб ташлаш"
+
+msgid "Add a period entry rule"
+msgstr ""
+
+msgid "The number should not have decimals"
+msgstr "Рақамда ўнлик каср бўлмаслиги керак"
+
+msgid "Setup"
+msgstr ""
+
+msgid "Data"
+msgstr "Маълумот"
+
+msgid "Data Elements"
+msgstr "Маълумот элементлари"
+
+msgid "Periods"
+msgstr "Даврлар"
+
+msgid "Close data entry a certain number of days after period end"
+msgstr ""
+
+msgid "Close data entry after category option end date"
+msgstr ""
+
+msgid "Organisation Units"
+msgstr "Ташкилий Бўлимлар"
+
+msgid "Form"
+msgstr ""
+
+msgid "Display Options"
+msgstr ""
+
+msgid "Advanced"
+msgstr "Илғор"
+
+msgid "Set up the basic information for this indicator group set."
+msgstr ""
+
+msgid "Explain the purpose of this indicator group set."
+msgstr ""
+
+msgid "Choose the indicators to include in this indicator group."
+msgstr ""
+
+msgid "Available indicator groups"
+msgstr ""
+
+msgid "Selected indicator groups"
+msgstr ""
+
+msgid "Filter available indicator groups"
+msgstr ""
+
+msgid "Filter selected indicator groups"
+msgstr ""
+
+msgid "Set up the basic information for this indicator group."
+msgstr ""
+
+msgid "Explain the purpose of this indicator group."
+msgstr ""
+
+msgid "Filter available indicators"
+msgstr ""
+
+msgid "Filter selected indicators"
+msgstr ""
+
+msgid "Configure indicator type merge"
+msgstr ""
+
+msgid "The indicator types merge operation is complete."
+msgstr ""
+
+msgid "All selected indicator types were merged successfully."
+msgstr ""
+
+msgid "Set up the basic information for this Indicator Type."
+msgstr ""
+
+msgid ""
+"The merge operation will merge the source indicator types into\n"
+"                the target indicator type. One or many source indicator types\n"
+"                can be specified"
+msgstr ""
+
+msgid ""
+"Only one target should be specified. The merge operation will\n"
+"                transfer all of the indicator metadata associations to the\n"
+"                source indicator types over to the target indicator type."
+msgstr ""
+
+msgid "Indicator types to be merged (source)"
+msgstr ""
+
+msgid "Select indicator types to merge"
+msgstr ""
+
+msgid "Indicator type to merge into (target)"
+msgstr ""
+
+msgid "Select indicator type to merge into"
+msgstr ""
+
+msgid "No indicator types available. Remove one from source."
+msgstr ""
+
+msgid ""
+"What should happen to the source indicator types after the merge is "
+"complete?"
+msgstr ""
+
+msgid "Conflicting factors"
+msgstr ""
+
+msgid "It is not recommended to merge indicator types with different factors."
+msgstr ""
+
+msgid "Configure indicator merge"
+msgstr ""
+
+msgid "The indicator merge operation is complete."
+msgstr ""
+
+msgid "All selected indicators were merged successfully."
+msgstr ""
+
+msgid "Denominator Expression"
+msgstr ""
+
+msgid "Edit denominator expression"
+msgstr ""
+
+msgid "Summarise what this denominator expression measures."
+msgstr ""
+
+msgid "Set up the basic information for this indicator."
+msgstr ""
+
+msgid "Explain the purpose of this indicator."
+msgstr ""
+
+msgid "Calculation details"
+msgstr ""
+
+msgid ""
+"Define how the indicator is calculated and how it's result will be "
+"displayed."
+msgstr ""
+
+msgid ""
+"Select how the indicator result should be expressed (per cent, per thousand,"
+" etc.)"
+msgstr ""
+
+msgid "Use annualized calculation"
+msgstr ""
+
+msgid ""
+"Select how many decimal places to display in outputs for this indicator"
+msgstr ""
+
+msgid "Number of decimal places to show"
+msgstr ""
+
+msgid "Select number of decimals"
+msgstr ""
+
+msgid ""
+"Select legends to visually categorize values for this indicator in data "
+"entry and analytics apps."
+msgstr ""
+
+msgid "Mapping Settings"
+msgstr ""
+
+msgid ""
+"Configure how this indicator links to specific category and attribute "
+"combinations for data export."
+msgstr ""
+
+msgid ""
+"Map this indicator to a specific category option combinations when exporting"
+" aggregate data."
+msgstr ""
+
+msgid ""
+"Map this indicator to a specific attribute option combinations when "
+"exporting aggregate data."
+msgstr ""
+
+msgid "Numerator Expression"
+msgstr ""
+
+msgid "Edit numerator expression"
+msgstr ""
+
+msgid "Summarise what this numerator expression measures."
+msgstr ""
+
+msgid "Indicators Form"
+msgstr ""
+
+msgid "Numerator description"
+msgstr "Нумератор тавсифи"
+
+msgid "Numerator"
+msgstr "Рақамловчи"
+
+msgid "Denominator description"
+msgstr "Номзод тавсифи"
+
+msgid "Denominator"
+msgstr "Махраж"
+
+msgid "Annualized"
+msgstr "Йиллик"
+
+msgid "Legend sets"
+msgstr "Таъриф тўпламлари"
+
+msgid "Mapping settings"
+msgstr ""
+
+msgid "Numerator is required"
+msgstr ""
+
+msgid "Denominator is required"
+msgstr ""
+
+msgid ""
+"The merge operation will merge the source indicators into\n"
+"                the target indicator. One or many source indicators\n"
+"                can be specified"
+msgstr ""
+
+msgid ""
+"Only one target should be specified. The merge operation will\n"
+"                transfer all of the indicator metadata associations to the\n"
+"                source indicators over to the target indicator."
+msgstr ""
+
+msgid "Indicators to be merged (source)"
+msgstr ""
+
+msgid "Select indicators to merge"
+msgstr ""
+
+msgid "Indicator to merge into (target)"
+msgstr ""
+
+msgid "Select indicator to merge into"
+msgstr ""
+
+msgid "No indicators available. Remove one from source."
+msgstr ""
+
+msgid ""
+"What should happen to the source indicators after the merge is complete?"
+msgstr ""
+
+msgid "Set up the basic information for this option group set."
+msgstr ""
+
+msgid "Explain the purpose of this option group set."
+msgstr ""
+
+msgid "Choose the option groups to include in this option group set."
+msgstr ""
+
+msgid "Available option groups"
+msgstr ""
+
+msgid "Selected option groups"
+msgstr ""
+
+msgid "Filter available option groups"
+msgstr ""
+
+msgid "Filter selected option groups"
+msgstr ""
+
+msgid "You must select an option set before you can select options."
+msgstr ""
+
+msgid "Set up the basic information for this option group."
+msgstr ""
+
+msgid "Explain the purpose of this option group."
+msgstr ""
+
+msgid "Options"
+msgstr "Вариант"
+
+msgid "Select the options that belong to this group."
+msgstr ""
+
+msgid "Available options"
+msgstr "Мавжуд вариантлар"
+
+msgid "Selected options"
+msgstr ""
+
+msgid "Filter available options"
+msgstr ""
+
+msgid "Filter selected options"
+msgstr ""
+
+msgid "Set up the basic information for this organisational unit group set."
+msgstr ""
+
+msgid "Include subhierarchy in analytics"
+msgstr "Аналитикага субиерархияни қўшиб қўйиш"
+
+msgid "Choose the groups to include in this organisation unit group set."
+msgstr ""
+
+msgid "Available organisation unit groups"
+msgstr "Ташкилий бўлим гуруҳлари мавжуд"
+
+msgid "Selected organisation unit groups"
+msgstr "Ташкилий бўлим гуруҳларини танланг"
+
+msgid "Filter available organisation unit groups"
+msgstr ""
+
+msgid "Filter selected organisation unit groups"
+msgstr ""
+
+msgid "Set up the basic information for this organisational unit group."
+msgstr ""
+
+msgid "Error saving organisation unit levels"
+msgstr ""
+
+msgid "Longitude"
+msgstr "Узунлик"
+
+msgid "{{type}} coordinates are not editable"
+msgstr ""
+
+msgid "Upload an image"
+msgstr ""
+
+msgid "Max size 10MB. Supported file size are .jpg, .png, and .gif."
+msgstr ""
+
+msgid "Preview of current icon"
+msgstr ""
+
+msgid "Placement in hierarchy"
+msgstr ""
+
+msgid ""
+"Choose where this new organisation unit should be placed in the existing "
+"hierarchy"
+msgstr ""
+
+msgid "Set up the basic information for this organisation unit"
+msgstr ""
+
+msgid "Closed date"
+msgstr "Ёпилган сана"
+
+msgid "Comment"
+msgstr "Изоҳ"
+
+msgid "Contact person"
+msgstr "Боғланиш учун шахс"
+
+msgid "Address"
+msgstr "Манзил"
+
+msgid "Location"
+msgstr "Локация"
+
+msgid "Set up the organisation unit location."
+msgstr ""
+
+msgid "Reference assignment"
+msgstr ""
+
+msgid "Assign the organisation unit to related objects."
+msgstr ""
+
+msgid "Available data sets"
+msgstr "Мавжуд маълумотлар тўпламлари"
+
+msgid "Selected data sets"
+msgstr "Танланган маълумотлар тўпламлари"
+
+msgid "Filter available data sets"
+msgstr ""
+
+msgid "Filter selected data sets"
+msgstr ""
+
+msgid "Available programs"
+msgstr "Мавжуд дастурлар"
+
+msgid "Selected programs"
+msgstr "Танланган дастурлар"
+
+msgid "Filter available programs"
+msgstr ""
+
+msgid "Filter selected programs"
+msgstr ""
+
+msgid "Organisation unit will be positioned inside {{displayName}}"
+msgstr ""
+
+msgid "Creating first organisation unit"
+msgstr ""
+
+msgid ""
+"This is the first organisation unit and will be created as the root of the "
+"hierarchy."
+msgstr ""
+
+msgid "Must be a valid mobile number"
+msgstr ""
+
+msgid "Must be a valid url"
+msgstr ""
+
+msgid ""
+"Longitude should be between -90 and 90. Latitude should be between -180 and "
+"180"
+msgstr ""
+
+msgid "Parent organisation unit cannot be itself or a descendant of itself."
+msgstr ""
+
+msgid ""
+"The organisation unit was saved successfully but there was a problem saving ${fieldToSaveSeparatelyErrors.join(\n"
+"                            ' and '\n"
+"                        )}"
+msgstr ""
+
+msgid "No organisation units available"
+msgstr ""
+
+msgid "Load more for {{orgUnitName}}"
+msgstr ""
+
+msgid "Metadata management"
+msgstr ""
+
+msgid ""
+"Categories are typically a concept, for example \"Gender\", \"Age\" or "
+"\"Disease Status\". Use categories to disaggregate data elements into "
+"individual components. You can also use category combinations to assign "
+"metadata attributes to all data recorded in a specific dataset."
+msgstr ""
+
+msgid "Individual values or options that can be selected within a category."
+msgstr ""
+
+msgid "Disaggregate data elements into individual components."
+msgstr ""
+
+msgid ""
+"Combine multiple categories into a related set that can be assigned to data "
+"elements for dissagregation. Can also be used to to assign metadata "
+"attributes to data sets or programs."
+msgstr ""
+
+msgid ""
+"Specify code and attributes to enable easier data exchange with other "
+"systems."
+msgstr ""
+
+msgid ""
+"Group category options and improve analysis with category option group sets."
+msgstr ""
+
+msgid ""
+"Classify category options groups to add more dimensionality to captured data"
+" for analysis."
+msgstr ""
+
+msgid ""
+"Data elements are fundamental units for data collection in DHIS2, "
+"representing individual data points for both tracker and aggregate data. "
+"They serve as the building blocks for capturing, analysing, and reporting "
+"information."
+msgstr ""
+
+msgid ""
+"Create, update, view and delete data elements: the foundation of data "
+"collection and analysis."
+msgstr ""
+
+msgid ""
+"Improve analysis of single data elements by combining them into data element"
+" groups."
+msgstr ""
+
+msgid ""
+"Add another level of organisation by grouping data element groups into group"
+" sets."
+msgstr ""
+
+msgid ""
+"Data sets are collections of data elements grouped for aggregate data entry,"
+" validation, access, collection frequency and reporting. Data entry forms "
+"are defined and configured by data sets. They help streamline the management"
+" of data collection routines and ensure consistency across different stages "
+"of data handling within DHIS2."
+msgstr ""
+
+msgid ""
+"Create, update, view and delete data sets, specify the related data "
+"elements, period type organisation units, sharing settings and workflow "
+"approval here."
+msgstr ""
+
+msgid "Create, update, view and delete data set notification templates."
+msgstr ""
+
+msgid ""
+"Indicators are used to calculate and analyze data based on data elements and"
+" other indicators."
+msgstr ""
+
+msgid ""
+"Create, update, view and delete indicators, specify the numerator and "
+"denominator, and set the indicator type."
+msgstr ""
+
+msgid ""
+"Create, modify, view and delete indicator types. An indicator type is a "
+"factor for an indicator, like percentage."
+msgstr ""
+"Индикаторларни яратиш, ўзгартириш, кўриш ва ўчириш. Индикатор тури - бу "
+"кўрсатгич учун омил, масалан фоиз."
+
+msgid ""
+"Create, modify, view and delete indicator groups. Groups are used for "
+"improved analysis."
+msgstr ""
+"Индикаторлар гуруҳларини яратиш, ўзгартириш, кўриш ва ўчириш. Гуруҳлар "
+"таҳлил жараёнини яхшилаш учун ишлатилади."
+
+msgid ""
+"Create, modify, view and delete indicator group sets. Group sets are used "
+"for improved analysis."
+msgstr ""
+"Индикаторлар гуруҳлари тўпламини яратиш, ўзгартириш, кўриш ва ўчириш. Гуруҳ "
+"тўпламлари таҳлил жараёнини яхшилаш учун ишлатилади."
+
+msgid ""
+"Create, update, view and delete program indicators, define expressions and "
+"filters, and configure analytics settings."
+msgstr ""
+
+msgid "Group program indicators for easier analysis."
+msgstr ""
+
+msgid ""
+"Organisation units are the structural entities within DHIS2 that define "
+"locations or points of service where data is collected. Examples include "
+"regions, hospitals, clinics, or departments. They help establish the "
+"hierarchy and scope for data access, collection, reporting, and analysis. "
+"Organisation units can be organised into groups and group sets."
+msgstr ""
+
+msgid "Create, update, view and delete individual organisation units."
+msgstr ""
+
+msgid ""
+"Categorise similar organisation units into groups, like hospitals or "
+"clinics, enabling efficient data aggregation and analysis across diverse "
+"locations in DHIS2."
+msgstr ""
+
+msgid ""
+"Organise multiple groups with shared characteristics into sets, allowing for"
+" another level of data analysis and comparison across the organisation "
+"structure."
+msgstr ""
+
+msgid ""
+"Organisation unit levels define hierarchical layers within the organisation "
+"structure, such as national or regional tiers, and specify the names used "
+"for each level."
+msgstr ""
+
+msgid "Placeholder for other"
+msgstr ""
+
+msgid "Create, modify and view attributes."
+msgstr "Атрибутларни яратиш, ўзгартириш ва кўриш"
+
+msgid ""
+"Create a group of options from option sets that has a similar functional "
+"area or meaning."
+msgstr ""
+"Вариантлар тўпламидан ўхшаш функционал майдонга ёки маънога эга вариантлар "
+"гуруҳини яратинг."
+
+msgid "Create, modify and view sets of option groups."
+msgstr "Вариантлар гуруҳи тўпламини яратиш, ўзгартириш ва кўриш"
+
+msgid "Set disaggregation mappings for program indicators."
+msgstr ""
+
+msgid ""
+"Validations are used to provide important feedback during data entry to "
+"enhance data quality. Validation rules define expected criteria for specific"
+" data elements and display warnings at three levels of importance if these "
+"criteria are not met."
+msgstr ""
+
+msgid "Sends a notification when a validation rule failed."
+msgstr ""
+
+msgid "Manage"
+msgstr "Бошқариш"
+
+msgid "Program Disaggregation Form"
+msgstr ""
+
+msgid "Program indicator mappings"
+msgstr ""
+
+msgid "Disaggregation categories"
+msgstr ""
+
+msgid "Attribute categories"
+msgstr ""
+
+msgid "Could not load programs or indicators data."
+msgstr ""
+
+msgid "Add a category"
+msgstr ""
+
+msgid "Add categories from a category combo"
+msgstr ""
+
+msgid "Rename category mapping"
+msgstr ""
+
+msgid "{{- categoryMappingName}} mapping will be removed on save"
+msgstr ""
+
+msgid "Restore mapping"
+msgstr ""
+
+msgid "Category mapping: "
+msgstr ""
+
+msgid "No new categories to add"
+msgstr ""
+
+msgid "{{newlyAddedCount}} categories added"
+msgstr ""
+
+msgid ""
+"{{newlyAddedCount}} categories added ({{alreadyAddedCount}} already in the "
+"list)"
+msgstr ""
+
+msgid "Category:"
+msgstr ""
+
+msgid "Suggested based on Program Indicator selections"
+msgstr ""
+
+msgid "Add category"
+msgstr ""
+
+msgid "All mappings for {{- categoryName}} will be removed on save"
+msgstr ""
+
+msgid "Restore mappings"
+msgstr ""
+
+msgid "Remove category mappings"
+msgstr ""
+
+msgid "Add mapping"
+msgstr ""
+
+msgid "Disaggregation category mappings"
+msgstr ""
+
+msgid "Define expressions to map individual data to category options."
+msgstr ""
+
+msgid "Attribute category mappings"
+msgstr ""
+
+msgid "Program indicator selection"
+msgstr ""
+
+msgid ""
+"Choose program indicators and assign category combinations and category "
+"mappings to be used for disaggregation."
+msgstr ""
+
+msgid "Add a program indicator"
+msgstr ""
+
+msgid "All mappings for {{- programIndicator}} will be removed on save"
+msgstr ""
+
+msgid "Program Indicator:"
+msgstr ""
+
+msgid "Remove program indicator mapping"
+msgstr ""
+
+msgid "Attribute category combination"
+msgstr ""
+
+msgid "Data element for aggregate data export"
+msgstr ""
+
+msgid "There are some invalid expressions"
+msgstr ""
+
+msgid "No changes to save"
+msgstr ""
+
+msgid "Error while saving disaggregation categories"
+msgstr ""
+
+msgid ""
+"Error while updating mappings for program indicators with ids: ${errors\n"
+"                            .map((r) => r.id)\n"
+"                            .join(' - ')}"
+msgstr ""
+
+msgid "Could not delete program mappings"
+msgstr ""
+
+msgid "Select a Program"
+msgstr ""
+
+msgid "Programs with existing mappings"
+msgstr ""
+
+msgid "Could not load programs."
+msgstr ""
+
+msgid "No programs with existing mappings found."
+msgstr ""
+
+msgid "Delete Mapping"
+msgstr ""
+
+msgid "This action cannot be undone."
+msgstr ""
+
+msgid "Are you sure you want to delete this program mapping configuration?"
+msgstr ""
+
+msgid "Set up the basic information for this program indicator group."
+msgstr ""
+
+msgid ""
+"Choose the program indicators to include in this program indicator group."
+msgstr ""
+
+msgid "Available program indicators"
+msgstr ""
+
+msgid "Selected program indicators"
+msgstr ""
+
+msgid "Search available program indicators"
+msgstr ""
+
+msgid "Search selected program indicators"
+msgstr ""
+
+msgid "Incident date"
+msgstr "Ҳодиса санаси"
+
+msgid "Event date"
+msgstr "Ҳодиса/Тадбир санаси"
+
+msgid "Enrollment date"
+msgstr "Қайд этилган сана"
+
+msgid "Before start of reporting period"
+msgstr "Ҳисобот даври бошланишидан олдин"
+
+msgid "Before end of reporting period"
+msgstr "Ҳисобот даври тугашидан олдин"
+
+msgid "After start of reporting period"
+msgstr "Ҳисобот даври бошланишидан сўнг"
+
+msgid "After end of reporting period"
+msgstr "Ҳосибот даври тугагандан сўнг"
+
+msgid "Offset"
+msgstr ""
+
+msgid "Type"
+msgstr "Тури"
+
+msgid "Boundary target"
+msgstr "Мақсадли чегара"
+
+msgid "Custom boundary text"
+msgstr "Матн махсус чегараси"
+
+msgid "Analytics period boundary type"
+msgstr "Аналитика давр чегараси тури"
+
+msgid "Offset period by amount"
+msgstr "Ҳисобот давридаги силжиш"
+
+msgid "Edit analytics period boundary"
+msgstr ""
+
+msgid "Add analytics period boundary"
+msgstr ""
+
+msgid "Update analytics period boundary"
+msgstr ""
+
+msgid "Add a period boundary"
+msgstr ""
+
+msgid "Event organisation unit default"
+msgstr ""
+
+msgid "Enrollment organisation unit default"
+msgstr ""
+
+msgid "Enrollment organisation unit"
+msgstr "Рўйхатга олишда ташкилий бўлим "
+
+msgid "Owner at start organisation unit"
+msgstr "Киритилаётган ташкилий бўлим эгаси"
+
+msgid "Owner at end organisation unit"
+msgstr "Киритилган ташкилий бўлим эгаси"
+
+msgid "Registration organisation unit"
+msgstr "Танланган бўлимни рўйхатдан ўтказиш"
+
+msgid "Organisation unit field"
+msgstr "Ташкилий бирлик қатори"
+
+msgid "Set up the basic information for this program indicator."
+msgstr ""
+
+msgid "Explain the purpose of this program indicator."
+msgstr ""
+
+msgid "Configuration"
+msgstr "Конфигурация"
+
+msgid ""
+"Choose which program and which data types this program indicator applies to."
+msgstr ""
+
+msgid "Program (required)"
+msgstr ""
+
+msgid "Analytics type (required)"
+msgstr ""
+
+msgid "Configure the program indicator expression."
+msgstr ""
+
+msgid ""
+"Configure the program indicator filter that controls what data will be "
+"evaluated bt the main expression."
+msgstr ""
+
+msgid "Period boundaries"
+msgstr ""
+
+msgid "Set up time constraints, which determine what data will be evaluated."
+msgstr ""
+
+msgid "Set up advanced properties for this program indicator."
+msgstr ""
+
+msgid "Show program indicators in data entry forms"
+msgstr ""
+
+msgid "Set up the program indicator legends."
+msgstr ""
+
+msgid "Program Indicators Form"
+msgstr ""
+
+msgid "Recipients"
+msgstr "Қабул қилувчилар"
+
+msgid "Recipient user groups"
+msgstr "Қабул қилувчи фойдаланувчи гуруҳлари"
+
+msgid "Notify users in hiearchy only"
+msgstr ""
+
+msgid "Rule name"
+msgstr "Қоида номи"
+
+msgid "Rule description"
+msgstr "Қоиданинг тавсифи"
+
+msgid "Operator"
+msgstr "Оператор"
+
+msgid "Importance"
+msgstr "Аҳамиятли"
+
+msgid "Left side description"
+msgstr "Чап томоннинг тавсифи"
+
+msgid "Right side description"
+msgstr "Ўнг томоннинг тавсифи"
+
+msgid "Left side value"
+msgstr "Чап томоннинг қиймати"
+
+msgid "Right side value"
+msgstr "Ўнг томоннинг қиймати"
+
+msgid "Organisation unit name"
+msgstr "Ташкилий бўлим номи"
+
+msgid "Set up the basic information for this validation notification."
+msgstr ""
+
+msgid "Available validation rules"
+msgstr "Мавжуд тасдиқлаш қоидалари"
+
+msgid "Selected validation rules"
+msgstr ""
+
+msgid "Filter available validation rules"
+msgstr ""
+
+msgid "Filter selected validation rules"
+msgstr ""
+
+msgid "What should this notification send?"
+msgstr ""
+
+msgid "Available user groups"
+msgstr "Мавжуд фойдаланувчи гуруҳлари"
+
+msgid "Selected user groups"
+msgstr "Танланган фойдаланувчилар гуруҳлари"
+
+msgid "Filter available user groups"
+msgstr ""
+
+msgid "Filter selected user groups"
+msgstr ""

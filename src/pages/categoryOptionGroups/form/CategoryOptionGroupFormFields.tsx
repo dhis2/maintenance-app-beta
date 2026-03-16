@@ -29,25 +29,23 @@ function CategoryOptionGroupFormFields() {
                     )}
                 </StandardFormSectionDescription>
                 <DefaultIdentifiableFields />
-                <DescriptionField
-                    helpText={i18n.t(
-                        'Explain the purpose of this category option group.'
-                    )}
-                />
+                <DescriptionField />
             </StandardFormSection>
 
             <StandardFormSection>
                 <StandardFormSectionTitle>
-                    {i18n.t('Data configuration')}
+                    {i18n.t('Category option group usage')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Choose how this category option  will be used to capture and analyze data.'
+                        'Choose how this category option group will be used to capture and analyze data.'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
                     <HorizontalFieldGroup
-                        label={'Data dimension type (required)'}
+                        label={'Type'}
+                        required
+                        dataTest="formfields-dataDimensionType"
                     >
                         <Field<string | undefined>
                             name="dataDimensionType"
@@ -96,6 +94,7 @@ function CategoryOptionGroupFormFields() {
                             filterPlaceholderPicked={i18n.t(
                                 'Filter selected category options'
                             )}
+                            maxSelections={Infinity}
                         />
                     </StandardFormField>
                 </StandardFormField>

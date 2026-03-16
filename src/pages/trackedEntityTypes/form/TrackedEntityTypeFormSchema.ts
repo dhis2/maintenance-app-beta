@@ -31,10 +31,10 @@ const trackedEntityTypeBaseSchema = z.object({
     minAttributesRequiredToSearch: z
         .number()
         .min(
-            0,
-            'Minimum number of attributes required to search must be 0 or greater'
+            1,
+            'Minimum number of attributes required to search must be 1 or greater'
         )
-        .default(0),
+        .default(1),
     maxTeiCountToReturn: z
         .number()
         .min(

@@ -1,5 +1,7 @@
 import React from 'react'
+import './locales'
 import { AppWrapper, ConfiguredRouter } from './app/index'
+import './locales/index.js'
 
 // @TODO: Find a solution for these!
 const consoleWarnOrig = console.warn

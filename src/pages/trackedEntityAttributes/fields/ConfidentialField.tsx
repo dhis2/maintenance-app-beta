@@ -13,11 +13,11 @@ export function ConfidentialField({
             component={CheckboxFieldFF}
             dataTest="formfields-confidential"
             name="confidential"
-            label={i18n.t('Make this attribute confidential')}
+            label={i18n.t('Confidential')}
             type="checkbox"
             disabled={!encryptionEnabled}
             helpText={i18n.t(
-                'Confidential tracker entity attributes are hidden from search and only supported when system encryption is enabled.'
+                'Prevent searching or viewing in analytics. Available only when system encryption is enabled.'
             )}
             validateFields={[]}
         />

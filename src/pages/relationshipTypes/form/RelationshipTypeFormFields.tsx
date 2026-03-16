@@ -56,12 +56,7 @@ export function RelationshipTypeFormFields() {
                 </StandardFormSectionDescription>
 
                 <StandardFormField>
-                    <NameField
-                        schemaSection={schemaSection}
-                        helpText={i18n.t(
-                            'Will be shown everywhere a user sees a relationship type.'
-                        )}
-                    />
+                    <NameField schemaSection={schemaSection} />
                 </StandardFormField>
 
                 <StandardFormField>
@@ -69,11 +64,7 @@ export function RelationshipTypeFormFields() {
                 </StandardFormField>
 
                 <StandardFormField>
-                    <DescriptionField
-                        helpText={i18n.t(
-                            'Provide a helpful description of what this relationship is used for.'
-                        )}
-                    />
+                    <DescriptionField />
                 </StandardFormField>
 
                 <StandardFormField>
@@ -95,12 +86,11 @@ export function RelationshipTypeFormFields() {
                         component={InputFieldFF}
                         dataTest="formfields-fromToName"
                         name="fromToName"
-                        label={i18n.t(
-                            'Relationship name seen from initiating entity (required)'
-                        )}
+                        label={i18n.t('Name shown for initiating entity')}
                         required
                         inputWidth="400px"
                         validateFields={[]}
+                        placeholder={i18n.t('e.g. Mother of')}
                     />
                 </StandardFormField>
 
@@ -110,12 +100,11 @@ export function RelationshipTypeFormFields() {
                             component={InputFieldFF}
                             dataTest="formfields-toFromName"
                             name="toFromName"
-                            label={i18n.t(
-                                'Relationship name seen from receiving entity (required)'
-                            )}
+                            label={i18n.t('Name shown for receiving entity')}
                             required={bidirectional}
                             inputWidth="400px"
                             validateFields={[]}
+                            placeholder={i18n.t('e.g. Child of')}
                         />
                     </StandardFormField>
                 </div>
@@ -129,7 +118,7 @@ export function RelationshipTypeFormFields() {
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Choose and configure which objects can be used as the initiating and receiving sides of the relationship.'
+                        'Choose and configure the objects used on each side of the relationship.'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>

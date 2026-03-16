@@ -8,8 +8,11 @@ import {
     IconChevronRight16,
 } from '@dhis2/ui'
 import { flexRender, Row } from '@tanstack/react-table'
-import React from 'react'
-import { BaseListModel } from '../../../lib'
+import cx from 'classnames'
+import React, { useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { BaseListModel, useLocationSearchState } from '../../../lib'
+import { canEditModel } from '../../../lib/models/access'
 import type { OrganisationUnitListItem } from './OrganisationUnitList'
 import css from './OrganisationUnitList.module.css'
 import { OrganisationUnitListActions } from './OrganisationUnitListActions'
@@ -30,10 +33,31 @@ export const OrganisationUnitRow = ({
     onOpenTranslationClick: (model: BaseListModel) => void
 }) => {
     const parentRow = row.getParentRow()
+    const navigate = useNavigate()
+    const preservedSearchState = useLocationSearchState()
+    const editAccess = canEditModel(row.original)
+
+    const handleRowClick = useCallback(
+        (model: BaseListModel) => {
+            if (!canEditModel(model)) {
+                return
+            }
+            navigate(model.id, {
+                relative: 'path',
+                state: preservedSearchState,
+            })
+        },
+        [navigate, preservedSearchState]
+    )
 
     return (
         <>
-            <DataTableRow className={css.orgUnitRow} key={row.id}>
+            <DataTableRow
+                className={cx(css.orgUnitRow, {
+                    [css.clickable]: editAccess,
+                })}
+                key={row.id}
+            >
                 <DataTableCell>
                     <span
                         style={{
@@ -77,7 +101,10 @@ export const OrganisationUnitRow = ({
                 </DataTableCell>
                 {row.getVisibleCells().map((cell) => {
                     return (
-                        <DataTableCell key={cell.id}>
+                        <DataTableCell
+                            key={cell.id}
+                            onClick={() => handleRowClick(row.original)}
+                        >
                             {flexRender(
                                 cell.column.columnDef.cell,
                                 cell.getContext()

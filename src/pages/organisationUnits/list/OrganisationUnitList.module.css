@@ -21,6 +21,10 @@
     padding-block-end: var(--spacers-dp8);
 }
 
+.orgUnitRow.clickable:hover td:nth-child(2) span {
+    text-decoration: underline;
+}
+
 @media (max-width: 1200px) {
     .listDetailsWrapper {
         display: grid;
