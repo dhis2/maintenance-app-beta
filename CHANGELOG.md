@@ -1,3 +1,10 @@
+## [0.149.2](https://github.com/dhis2/metadata-management-app/compare/v0.149.1...v0.149.2) (2026-03-16)
+
+
+### Bug Fixes
+
+* programs form improvements ([#816](https://github.com/dhis2/metadata-management-app/issues/816)) ([029e34a](https://github.com/dhis2/metadata-management-app/commit/029e34aefad5256e374e98fdf0ff3e6f540e0cbf))
+
 ## [0.149.1](https://github.com/dhis2/metadata-management-app/compare/v0.149.0...v0.149.1) (2026-03-16)
 
 
