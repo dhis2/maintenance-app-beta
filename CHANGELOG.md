@@ -1,3 +1,12 @@
+# [0.148.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.147.1...v0.148.0) (2026-03-16)
+
+
+### Features
+
+* add access level content ([0d62c7a](https://github.com/dhis2/maintenance-app-beta/commit/0d62c7aa6dbcb46c191960623ab44598b4d35c66))
+* add access level only for tracker ([013d66f](https://github.com/dhis2/maintenance-app-beta/commit/013d66f9c5088bdc7d98c64d78a43c49580464fd))
+* add access level to form descriptor ([e80f074](https://github.com/dhis2/maintenance-app-beta/commit/e80f0742204b7cab070fb05a8cc9fb2be39037e3))
+
 ## [0.147.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.147.0...v0.147.1) (2026-03-16)
 
 
