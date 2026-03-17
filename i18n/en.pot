@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-03-16T14:20:12.259Z\n"
-"PO-Revision-Date: 2026-03-16T14:20:12.259Z\n"
+"POT-Creation-Date: 2026-03-16T18:45:52.560Z\n"
+"PO-Revision-Date: 2026-03-16T18:45:52.560Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -4956,14 +4956,14 @@ msgstr "Set up how users can access program data outside their capture scope."
 msgid "Organisation unit access"
 msgstr "Organisation unit access"
 
-msgid "Set up which organisation units can collect data using this program."
-msgstr "Set up which organisation units can collect data using this program."
-
 msgid "Role access"
 msgstr "Role access"
 
-msgid "Program must be saved to access sharing settings."
-msgstr "Program must be saved to access sharing settings."
+msgid "Save the program first to set up sharing."
+msgstr "Save the program first to set up sharing."
+
+msgid "Notifications"
+msgstr "Notifications"
 
 msgid "Open"
 msgstr "Open"
@@ -5035,17 +5035,17 @@ msgstr "Program Details"
 msgid "Set up the basic information for this program."
 msgstr "Set up the basic information for this program."
 
-msgid "Last updated:  {{date}}"
-msgstr "Last updated:  {{date}}"
+msgid "Updated to version {{version}} on {{date}}"
+msgstr "Updated to version {{version}} on {{date}}"
 
-msgid "Increase version"
-msgstr "Increase version"
+msgid "New version"
+msgstr "New version"
 
-msgid "Related program"
-msgstr "Related program"
+msgid "Reset version"
+msgstr "Reset version"
 
-msgid "Choose how this program is disaggregated."
-msgstr "Choose how this program is disaggregated."
+msgid "Event category combination"
+msgstr "Event category combination"
 
 msgid "Maximum number of search results to display"
 msgstr "Maximum number of search results to display"
@@ -5058,6 +5058,12 @@ msgstr "Program customization"
 
 msgid "Customize the program's visuals, labels, and display settings."
 msgstr "Customize the program's visuals, labels, and display settings."
+
+msgid "Customization"
+msgstr "Customization"
+
+msgid "Override default labels with program-specific terms."
+msgstr "Override default labels with program-specific terms."
 
 msgid "Custom label for \"Report date\""
 msgstr "Custom label for \"Report date\""
@@ -5083,14 +5089,20 @@ msgstr "Block entry form after completed"
 msgid "Pre-generate event UID"
 msgstr "Pre-generate event UID"
 
-msgid "Close data entry a number of days after the end of a period"
-msgstr "Close data entry a number of days after the end of a period"
+msgid "Related program"
+msgstr "Related program"
 
 msgid "Lock completed events after a number of days"
 msgstr "Lock completed events after a number of days"
 
-msgid "Close data entry a number of days after \"Implementing partner\" end date"
-msgstr "Close data entry a number of days after \"Implementing partner\" end date"
+msgid "Close data entry a number of days after a period ends"
+msgstr "Close data entry a number of days after a period ends"
+
+msgid "Lock events a number of days after completion"
+msgstr "Lock events a number of days after completion"
+
+msgid "Close data entry a number of days after event category combination end date"
+msgstr "Close data entry a number of days after event category combination end date"
 
 msgid "Settings"
 msgstr "Settings"
@@ -5101,9 +5113,24 @@ msgstr "Validation strategy"
 msgid "Access and Sharing"
 msgstr "Access and Sharing"
 
+msgid "Start page in web Capture app"
+msgstr "Start page in web Capture app"
+
+msgid "Search form"
+msgstr "Search form"
+
+msgid "List of enrolled tracked entities"
+msgstr "List of enrolled tracked entities"
+
 msgid "Expiry period type"
 msgstr "Expiry period type"
 
+msgid ""
+"Close data entry a number of days after end date of "
+"{{categoryCombinationDisplayName}}"
+msgstr ""
+"Close data entry a number of days after end date of "
+"{{categoryCombinationDisplayName}}"
 msgid "Notification type"
 msgstr "Notification type"
 
@@ -5131,9 +5158,6 @@ msgstr "Notification form saved"
 msgid "Program stage completion"
 msgstr "Program stage completion"
 
-msgid "When to send notification (required)"
-msgstr "When to send notification (required)"
-
 msgid "Allow notification to be sent multiple times"
 msgstr "Allow notification to be sent multiple times"
 
@@ -5143,14 +5167,8 @@ msgstr "Days since due date"
 msgid "Days until due date"
 msgstr "Days until due date"
 
-msgid "Set up the basic information for the notification template."
-msgstr "Set up the basic information for the notification template."
-
-msgid "Configure the templates for the notification content and subject."
-msgstr "Configure the templates for the notification content and subject."
-
-msgid "Recipient type (required)"
-msgstr "Recipient type (required)"
+msgid "Set up the basic information for this program notification."
+msgstr "Set up the basic information for this program notification."
 
 msgid "Program attribute recipient"
 msgstr "Program attribute recipient"
@@ -5164,8 +5182,8 @@ msgstr "Data element recipient"
 msgid "No data elements of type email or phone number found."
 msgstr "No data elements of type email or phone number found."
 
-msgid "Web hook message URL (required)"
-msgstr "Web hook message URL (required)"
+msgid "Web hook message URL"
+msgstr "Web hook message URL"
 
 msgid "Edit Program Notification"
 msgstr "Edit Program Notification"
@@ -5418,15 +5436,11 @@ msgstr "Enrollment: Data"
 msgid "Choose the information to collect during enrollment."
 msgstr "Choose the information to collect during enrollment."
 
-msgid "Configure tracked entity attributes"
-msgstr "Configure tracked entity attributes"
+msgid "Manage attributes"
+msgstr "Manage attributes"
 
-msgid ""
-"Tracked entity attributes can be collected in different ways with different "
-"options."
-msgstr ""
-"Tracked entity attributes can be collected in different ways with different "
-"options."
+msgid "Manage how the chosen attributes are collected and displayed."
+msgstr "Manage how the chosen attributes are collected and displayed."
 
 msgid "Searchable"
 msgstr "Searchable"
@@ -5460,6 +5474,13 @@ msgstr ""
 msgid "Edit or rearrange the tracked entity attributes"
 msgstr "Edit or rearrange the tracked entity attributes"
 
+msgid ""
+"Displays a form with attributes in the order they were added to the "
+"enrollment"
+msgstr ""
+"Displays a form with attributes in the order they were added to the "
+"enrollment"
+
 msgid "Enrollment: Settings"
 msgstr "Enrollment: Settings"
 
@@ -5481,6 +5502,12 @@ msgstr "Allow multiple enrollments"
 msgid "Applies to the entire lifetime of a tracked entity."
 msgstr "Applies to the entire lifetime of a tracked entity."
 
+msgid "Configure enrollment options for this program."
+msgstr "Configure enrollment options for this program."
+
+msgid "Limit to one lifetime enrollment"
+msgstr "Limit to one lifetime enrollment"
+
 msgid "Allow enrollment dates in the future"
 msgstr "Allow enrollment dates in the future"
 
@@ -5493,6 +5520,9 @@ msgstr "Allow incident dates in the future"
 msgid "Collect data for the first stage during enrollment"
 msgstr "Collect data for the first stage during enrollment"
 
+msgid "Show first program stage during enrollment"
+msgstr "Show first program stage during enrollment"
+
 msgid ""
 "Do not create overdue events when automatically creating program stage "
 "events"
@@ -5502,7 +5532,6 @@ msgstr ""
 
 msgid "Program Customization"
 msgstr "Program Customization"
-
 msgid "Custom label for \"Incident date\""
 msgstr "Custom label for \"Incident date\""
 
@@ -5567,7 +5596,6 @@ msgstr ""
 
 msgid "Display enrolled TEs in the front page list"
 msgstr "Display enrolled TEs in the front page list"
-
 msgid "Program Stages"
 msgstr "Program Stages"
 
@@ -5597,7 +5625,6 @@ msgstr "Add a program stage"
 
 msgid "Access Level"
 msgstr "Access Level"
-
 msgid "Relationship entity constraint"
 msgstr "Relationship entity constraint"
 
@@ -5801,9 +5828,6 @@ msgstr "Skip synchronization"
 
 msgid "Minimum characters to search"
 msgstr "Minimum characters to search"
-
-msgid "Manage attributes"
-msgstr "Manage attributes"
 
 msgid "Choose which attributes to show, require, and make searchable."
 msgstr "Choose which attributes to show, require, and make searchable."

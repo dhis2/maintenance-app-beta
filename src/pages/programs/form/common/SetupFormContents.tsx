@@ -1,11 +1,17 @@
 import { useTimeZoneConversion } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button, Field, IconAdd16, Input, InputFieldFF } from '@dhis2/ui'
-import React from 'react'
-import { Field as FieldRFF, useField, useFormState } from 'react-final-form'
+import React, { useEffect } from 'react'
+import {
+    Field as FieldRFF,
+    useField,
+    useForm,
+    useFormState,
+} from 'react-final-form'
 import { useHref } from 'react-router'
 import {
     CodeField,
+    ColorAndIconField,
     DescriptionField,
     EditableFieldWrapper,
     FeatureTypeField,
@@ -16,19 +22,20 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../../components'
-import { defaultDateTimeFormatter } from '../../../../components/date'
 import {
     ModelSingleSelectFormField,
     useRefreshModelSingleSelect,
 } from '../../../../components/metadataFormControls/ModelSingleSelect'
 import {
     DEFAULT_CATEGORYCOMBO_SELECT_OPTION,
+    selectedLocale,
     useSchemaSectionHandleOrThrow,
 } from '../../../../lib'
 import { DisplayableModel } from '../../../../types/models'
 import classes from '../../../dataElements/fields/CategoryComboField.module.css'
 import {
     CompleteEventsExpiryDaysField,
+    DisplayFrontPageListField,
     ExpiryDaysWithPeriodTypeField,
     OpenDaysAfterCoEndDateField,
 } from '../fields'
@@ -53,16 +60,26 @@ export const SetupFormContents = React.memo(function SetupFormContents({
     name: string
     isTrackerProgram?: boolean
 }) {
-    const { input: versionInput } = useField('version')
+    const { input: versionInput, meta: versionMeta } = useField('version')
     const version = Number(versionInput.value) || 0
 
     const { values } = useFormState({ subscription: { values: true } })
+    const form = useForm()
+
     const refreshCategoryCombos = useRefreshModelSingleSelect({
         resource: 'categoryCombos',
     })
     const newCategoryComboLink = useHref('/categoryCombos/new')
     const { fromServerDate } = useTimeZoneConversion()
     const schemaSection = useSchemaSectionHandleOrThrow()
+
+    useEffect(() => {
+        if (
+            values.categoryCombo?.id === DEFAULT_CATEGORYCOMBO_SELECT_OPTION.id
+        ) {
+            form.change('openDaysAfterCoEndDate', 0)
+        }
+    }, [values.categoryCombo, form])
 
     return (
         <SectionedFormSection name={name}>
@@ -87,56 +104,65 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                 <DescriptionField />
             </StandardFormField>
             <StandardFormField>
+                <ColorAndIconField />
+            </StandardFormField>
+            <StandardFormField>
                 <Field
                     label={i18n.t('Version')}
                     helpText={
                         values.lastUpdated
-                            ? i18n.t('Last updated:  {{date}}', {
-                                  date: defaultDateTimeFormatter.format(
-                                      fromServerDate(values.lastUpdated)
-                                  ),
-                                  nsSeparator: '~:~',
-                              })
+                            ? i18n.t(
+                                  'Updated to version {{version}} on {{date}}',
+                                  {
+                                      version: versionMeta.initial ?? version,
+                                      date: new Intl.DateTimeFormat(
+                                          selectedLocale,
+                                          { dateStyle: 'medium' }
+                                      ).format(
+                                          fromServerDate(values.lastUpdated)
+                                      ),
+                                  }
+                              )
                             : undefined
                     }
                 >
                     <div className={setupClasses.versionFieldRow}>
                         <Input
                             value={String(version)}
-                            disabled
-                            width="100px"
+                            readOnly
+                            dense
+                            width="80px"
                             dataTest="formfields-version"
                         />
                         <Button
                             small
+                            secondary
                             icon={<IconAdd16 />}
                             onClick={() => versionInput.onChange(version + 1)}
                             dataTest="formfields-version-increment"
-                            title={i18n.t('Increase version')}
-                        />
+                            title={i18n.t('New version')}
+                        >
+                            {i18n.t('New version')}
+                        </Button>
+                        {versionMeta.dirty && (
+                            <Button
+                                small
+                                secondary
+                                onClick={() =>
+                                    versionInput.onChange(versionMeta.initial)
+                                }
+                                dataTest="formfields-version-reset"
+                                title={i18n.t('Reset version')}
+                            >
+                                {i18n.t('Reset version')}
+                            </Button>
+                        )}
                     </div>
                 </Field>
             </StandardFormField>
-            <StandardFormField>
-                <FeatureTypeField />
-            </StandardFormField>
-            {isTrackerProgram && (
+            {!isTrackerProgram && (
                 <StandardFormField>
-                    <ModelSingleSelectFormField
-                        showNoValueOption
-                        inputWidth="400px"
-                        dataTest="formfields-relatedProgram"
-                        name="relatedProgram"
-                        label={i18n.t('Related program')}
-                        query={{
-                            resource: 'programs',
-                            params: {
-                                fields: ['id', 'displayName'],
-                                order: ['displayName'],
-                                filter: ['id:ne:' + values.id],
-                            },
-                        }}
-                    />
+                    <FeatureTypeField />
                 </StandardFormField>
             )}
             <StandardFormField>
@@ -149,10 +175,7 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                             inputWidth={'400px'}
                             name="categoryCombo"
                             dataTest="formfields-categorycombo"
-                            label={i18n.t('Category combination')}
-                            helpText={i18n.t(
-                                'Choose how this program is disaggregated.'
-                            )}
+                            label={i18n.t('Event category combination')}
                             query={CATEGORY_COMBOS_QUERY}
                             transform={addDefaultCategoryComboTransform}
                         />
@@ -166,9 +189,16 @@ export const SetupFormContents = React.memo(function SetupFormContents({
             <StandardFormField>
                 <CompleteEventsExpiryDaysField />
             </StandardFormField>
-            <StandardFormField>
-                <OpenDaysAfterCoEndDateField />
-            </StandardFormField>
+            {values.categoryCombo?.id !==
+                DEFAULT_CATEGORYCOMBO_SELECT_OPTION.id && (
+                <StandardFormField>
+                    <OpenDaysAfterCoEndDateField
+                        categoryCombinationDisplayName={
+                            values.categoryCombo?.displayName ?? ''
+                        }
+                    />
+                </StandardFormField>
+            )}
             {isTrackerProgram && (
                 <StandardFormField>
                     <FieldRFF
@@ -234,6 +264,11 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                             return Number.parseInt(value as string, 10)
                         }}
                     />
+                </StandardFormField>
+            )}
+            {isTrackerProgram && (
+                <StandardFormField>
+                    <DisplayFrontPageListField />
                 </StandardFormField>
             )}
         </SectionedFormSection>

@@ -85,144 +85,151 @@ export const StageFormContents = ({
     })
 
     return (
-        <SectionedFormSections>
-            <SectionedFormSection
-                name={descriptor.getSection('stageSetup').name}
-            >
-                <StandardFormSectionTitle>
-                    {i18n.t('Basic information')}
-                </StandardFormSectionTitle>
-                <StandardFormSectionDescription>
-                    {i18n.t(
-                        'Configure the basic information for this program stage.'
-                    )}
-                </StandardFormSectionDescription>
-                <StandardFormField>
-                    <Field
-                        name="name"
-                        component={InputFieldFF}
-                        validate={nameValidator}
-                        validateFields={[]}
-                        dataTest="formfields-name"
-                        required
-                        inputWidth="400px"
-                        label={i18n.t('Name')}
-                    />
-                </StandardFormField>
-                <StandardFormField>
-                    <DescriptionField />
-                </StandardFormField>
-                <StandardFormField>
-                    <ColorAndIconField />
-                </StandardFormField>
-            </SectionedFormSection>
-            <SectionedFormSection
-                name={descriptor.getSection('stageConfiguration').name}
-            >
-                <StandardFormSectionTitle>
-                    {i18n.t('Configuration options')}
-                </StandardFormSectionTitle>
-                <StandardFormSectionDescription>
-                    {i18n.t(
-                        'Set up more advanced options for this program stage.'
-                    )}
-                </StandardFormSectionDescription>
-                <StandardFormField>
-                    <Field
-                        name="enableUserAssignment"
-                        type="checkbox"
-                        component={CheckboxFieldFF}
-                        label={i18n.t('Allow user assignment of events')}
-                        dataTest="formfields-enableUserAssignment"
-                    />
-                </StandardFormField>
-                <StandardFormField>
-                    <FeatureTypeField />
-                </StandardFormField>
-                {showValidationStrategy && (
+        <div style={{ padding: 'var(--spacers-dp16) 0 0 0' }}>
+            <SectionedFormSections>
+                <SectionedFormSection
+                    name={descriptor.getSection('stageSetup').name}
+                >
+                    <StandardFormSectionTitle>
+                        {i18n.t('Basic information')}
+                    </StandardFormSectionTitle>
+                    <StandardFormSectionDescription>
+                        {i18n.t(
+                            'Configure the basic information for this program stage.'
+                        )}
+                    </StandardFormSectionDescription>
                     <StandardFormField>
-                        <ValidationStrategyField />
+                        <Field
+                            name="name"
+                            component={InputFieldFF}
+                            validate={nameValidator}
+                            validateFields={[]}
+                            dataTest="formfields-name"
+                            required
+                            inputWidth="400px"
+                            label={i18n.t('Name')}
+                        />
                     </StandardFormField>
-                )}
-                <StandardFormField>
-                    <Field
-                        name="preGenerateUID"
-                        type="checkbox"
-                        component={CheckboxFieldFF}
-                        label={i18n.t('Pre-generate event UID')}
-                        dataTest="formfields-preGenerateUID"
-                    />
-                </StandardFormField>
-            </SectionedFormSection>
-            <SectionedFormSection
-                name={descriptor.getSection('stageTerminology').name}
-            >
-                <StandardFormSectionTitle>
-                    {i18n.t('Custom terminology')}
-                </StandardFormSectionTitle>
-                <StandardFormSectionDescription>
-                    {i18n.t('Customise the wording of labels for this stage.')}
-                </StandardFormSectionDescription>
-                <StandardFormField>
-                    <Field
-                        component={InputFieldFF}
-                        name="executionDateLabel"
-                        inputWidth="400px"
-                        label={i18n.t('Custom label for report date')}
-                        dataTest="formfields-executionDateLabel"
-                        validate={executionDateLabelValidator}
-                    />
-                </StandardFormField>
-                <StandardFormField>
-                    <Field
-                        component={InputFieldFF}
-                        name="dueDateLabel"
-                        inputWidth="400px"
-                        label={i18n.t('Custom label for due date')}
-                        dataTest="formfields-dueDateLabel"
-                        validate={dueDateLabelValidator}
-                    />
-                </StandardFormField>
-                <StandardFormField>
-                    <Field
-                        component={InputFieldFF}
-                        name="programStageLabel"
-                        inputWidth="400px"
-                        label={i18n.t('Custom label for program stage')}
-                        dataTest="formfields-programStageLabel"
-                        validate={programStageLabelValidator}
-                    />
-                </StandardFormField>
-                <StandardFormField>
-                    <Field
-                        component={InputFieldFF}
-                        name="eventLabel"
-                        inputWidth="400px"
-                        label={i18n.t('Custom label for event')}
-                        dataTest="formfields-eventLabel"
-                        validate={eventLabelValidator}
-                    />
-                </StandardFormField>
-            </SectionedFormSection>
-            <StageCreationAndSchedulingFormContents
-                name={descriptor.getSection('stageCreationAndScheduling').name}
-                sectionLabel={
-                    descriptor.getSection('stageCreationAndScheduling').label
-                }
-            />
-            <StageDataFormContents
-                name={descriptor.getSection('stageData').name}
-                sectionLabel={descriptor.getSection('stageData').label}
-            />
-            <StageFormFormContents
-                isSubsection={isSubsection}
-                name={descriptor.getSection('stageForm').name}
-                sectionLabel={i18n.t('Program stage form')}
-            />
-            <CustomAttributesSection
-                schemaSection={SCHEMA_SECTIONS.programStage}
-                sectionedLayout
-            />
-        </SectionedFormSections>
+                    <StandardFormField>
+                        <DescriptionField />
+                    </StandardFormField>
+                    <StandardFormField>
+                        <ColorAndIconField />
+                    </StandardFormField>
+                </SectionedFormSection>
+                <SectionedFormSection
+                    name={descriptor.getSection('stageConfiguration').name}
+                >
+                    <StandardFormSectionTitle>
+                        {i18n.t('Configuration options')}
+                    </StandardFormSectionTitle>
+                    <StandardFormSectionDescription>
+                        {i18n.t(
+                            'Set up more advanced options for this program stage.'
+                        )}
+                    </StandardFormSectionDescription>
+                    <StandardFormField>
+                        <Field
+                            name="enableUserAssignment"
+                            type="checkbox"
+                            component={CheckboxFieldFF}
+                            label={i18n.t('Allow user assignment of events')}
+                            dataTest="formfields-enableUserAssignment"
+                        />
+                    </StandardFormField>
+                    <StandardFormField>
+                        <FeatureTypeField />
+                    </StandardFormField>
+                    {showValidationStrategy && (
+                        <StandardFormField>
+                            <ValidationStrategyField />
+                        </StandardFormField>
+                    )}
+                    <StandardFormField>
+                        <Field
+                            name="preGenerateUID"
+                            type="checkbox"
+                            component={CheckboxFieldFF}
+                            label={i18n.t('Pre-generate event UID')}
+                            dataTest="formfields-preGenerateUID"
+                        />
+                    </StandardFormField>
+                </SectionedFormSection>
+                <SectionedFormSection
+                    name={descriptor.getSection('stageTerminology').name}
+                >
+                    <StandardFormSectionTitle>
+                        {i18n.t('Custom terminology')}
+                    </StandardFormSectionTitle>
+                    <StandardFormSectionDescription>
+                        {i18n.t(
+                            'Customise the wording of labels for this stage.'
+                        )}
+                    </StandardFormSectionDescription>
+                    <StandardFormField>
+                        <Field
+                            component={InputFieldFF}
+                            name="executionDateLabel"
+                            inputWidth="400px"
+                            label={i18n.t('Custom label for report date')}
+                            dataTest="formfields-executionDateLabel"
+                            validate={executionDateLabelValidator}
+                        />
+                    </StandardFormField>
+                    <StandardFormField>
+                        <Field
+                            component={InputFieldFF}
+                            name="dueDateLabel"
+                            inputWidth="400px"
+                            label={i18n.t('Custom label for due date')}
+                            dataTest="formfields-dueDateLabel"
+                            validate={dueDateLabelValidator}
+                        />
+                    </StandardFormField>
+                    <StandardFormField>
+                        <Field
+                            component={InputFieldFF}
+                            name="programStageLabel"
+                            inputWidth="400px"
+                            label={i18n.t('Custom label for program stage')}
+                            dataTest="formfields-programStageLabel"
+                            validate={programStageLabelValidator}
+                        />
+                    </StandardFormField>
+                    <StandardFormField>
+                        <Field
+                            component={InputFieldFF}
+                            name="eventLabel"
+                            inputWidth="400px"
+                            label={i18n.t('Custom label for event')}
+                            dataTest="formfields-eventLabel"
+                            validate={eventLabelValidator}
+                        />
+                    </StandardFormField>
+                </SectionedFormSection>
+                <StageCreationAndSchedulingFormContents
+                    name={
+                        descriptor.getSection('stageCreationAndScheduling').name
+                    }
+                    sectionLabel={
+                        descriptor.getSection('stageCreationAndScheduling')
+                            .label
+                    }
+                />
+                <StageDataFormContents
+                    name={descriptor.getSection('stageData').name}
+                    sectionLabel={descriptor.getSection('stageData').label}
+                />
+                <StageFormFormContents
+                    isSubsection={isSubsection}
+                    name={descriptor.getSection('stageForm').name}
+                    sectionLabel={i18n.t('Program stage form')}
+                />
+                <CustomAttributesSection
+                    schemaSection={SCHEMA_SECTIONS.programStage}
+                    sectionedLayout
+                />
+            </SectionedFormSections>
+        </div>
     )
 }

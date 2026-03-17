@@ -49,7 +49,7 @@ export const AccessAndSharingFormContents = React.memo(
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Set up which organisation units can collect data using this program.'
+                        'Choose which organisation units can collect data.'
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
@@ -62,8 +62,8 @@ export const AccessAndSharingFormContents = React.memo(
                 <StandardFormSectionDescription>
                     {i18n.t(
                         showStageAccess
-                            ? 'Set up which user roles can access this program and program stages.'
-                            : 'Set up which user roles can access this program.'
+                            ? 'Choose which user roles can access this program and program stages.'
+                            : 'Choose which user roles can access this program.'
                     )}
                 </StandardFormSectionDescription>
                 {values.id ? (
@@ -72,9 +72,7 @@ export const AccessAndSharingFormContents = React.memo(
                     </StandardFormField>
                 ) : (
                     <NoticeBox>
-                        {i18n.t(
-                            'Program must be saved to access sharing settings.'
-                        )}
+                        {i18n.t('Save the program first to set up sharing.')}
                     </NoticeBox>
                 )}
             </SectionedFormSection>

@@ -28,9 +28,6 @@ export const EventProgramFormContents = () => {
                 name={descriptor.getSection('programDetails').name}
                 isTrackerProgram={false}
             />
-            <EventProgramCustomizationFormContents
-                name={descriptor.getSection('programCustomization').name}
-            />
             <ProgramSettingsFormContents
                 name={descriptor.getSection('programSettings').name}
             />
@@ -53,6 +50,9 @@ export const EventProgramFormContents = () => {
                 name={descriptor.getSection('accessAndSharing').name}
                 showStageAccess={false}
                 isTrackerProgram={false}
+            />
+            <EventProgramCustomizationFormContents
+                name={descriptor.getSection('programCustomization').name}
             />
             <CustomAttributesSection
                 schemaSection={SCHEMA_SECTIONS.program}

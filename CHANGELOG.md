@@ -1,3 +1,24 @@
+## [0.149.2](https://github.com/dhis2/metadata-management-app/compare/v0.149.1...v0.149.2) (2026-03-16)
+
+
+### Bug Fixes
+
+* programs form improvements ([#816](https://github.com/dhis2/metadata-management-app/issues/816)) ([029e34a](https://github.com/dhis2/metadata-management-app/commit/029e34aefad5256e374e98fdf0ff3e6f540e0cbf))
+
+## [0.149.1](https://github.com/dhis2/metadata-management-app/compare/v0.149.0...v0.149.1) (2026-03-16)
+
+
+### Bug Fixes
+
+* make core app ([#817](https://github.com/dhis2/metadata-management-app/issues/817)) ([de09150](https://github.com/dhis2/metadata-management-app/commit/de09150403c0dcbdaca88947e3998ddaf25d10b0))
+
+# [0.149.0](https://github.com/dhis2/maintenance-app-beta/compare/v0.148.1...v0.149.0) (2026-03-16)
+
+
+### Features
+
+* add add child action to org unit list ([#814](https://github.com/dhis2/maintenance-app-beta/issues/814)) ([1a881a6](https://github.com/dhis2/maintenance-app-beta/commit/1a881a64b5170017c0668e47b8c13089437312cd))
+
 ## [0.148.1](https://github.com/dhis2/maintenance-app-beta/compare/v0.148.0...v0.148.1) (2026-03-16)
 
 

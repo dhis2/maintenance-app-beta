@@ -183,7 +183,7 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
                         </StandardFormSectionTitle>
                         <div className={styles.basicFormDescription}>
                             {i18n.t(
-                                'This form displays an auto-generated list of the tracked entity attributes defined for this program.'
+                                'Displays a form with attributes in the order they were added to the enrollment'
                             )}
                         </div>
                         <Link
@@ -194,9 +194,7 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
                             }}
                         >
                             <Button secondary small>
-                                {i18n.t(
-                                    'Edit or rearrange the tracked entity attributes'
-                                )}
+                                {i18n.t('Manage attributes')}
                             </Button>
                         </Link>
                     </div>

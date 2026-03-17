@@ -27,9 +27,6 @@ export const TrackerProgramFormContents = () => {
             <SetupFormContents
                 name={descriptor.getSection('programDetails').name}
             ></SetupFormContents>
-            <ProgramCustomizationFormContents
-                name={descriptor.getSection('programCustomization').name}
-            />
             <EnrollmentSettingsFormContents
                 name={descriptor.getSection('enrollmentSettings').name}
             />
@@ -47,6 +44,9 @@ export const TrackerProgramFormContents = () => {
             />
             <AccessAndSharingFormContents
                 name={descriptor.getSection('accessAndSharing').name}
+            />
+            <ProgramCustomizationFormContents
+                name={descriptor.getSection('programCustomization').name}
             />
             <CustomAttributesSection
                 schemaSection={SCHEMA_SECTIONS.program}
