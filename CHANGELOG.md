@@ -1,3 +1,10 @@
+## [0.149.4](https://github.com/dhis2/metadata-management-app/compare/v0.149.3...v0.149.4) (2026-03-17)
+
+
+### Bug Fixes
+
+* disabled editing code of saved option ([#821](https://github.com/dhis2/metadata-management-app/issues/821)) ([258b19c](https://github.com/dhis2/metadata-management-app/commit/258b19c9c8594726ef1820710b3ec7ceb7b5adc6))
+
 ## [0.149.3](https://github.com/dhis2/metadata-management-app/compare/v0.149.2...v0.149.3) (2026-03-17)
 
 
