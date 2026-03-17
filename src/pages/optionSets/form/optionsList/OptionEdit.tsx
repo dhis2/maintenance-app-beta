@@ -40,8 +40,10 @@ import { initialOptionValues } from './optionSchema'
 import { DrawerState } from './OptionsListTable'
 
 export const OptionFormContents = ({
+    editCodeDisabled,
     onCancel,
 }: {
+    editCodeDisabled: boolean
     onCancel?: (s: DrawerState) => void
 }) => {
     const form = useForm()
@@ -74,6 +76,7 @@ export const OptionFormContents = ({
                             schemaSection={optionSchemaSection}
                             modelId={values.id}
                             required={true}
+                            disabled={editCodeDisabled}
                         />
                     </StandardFormField>
                     <StandardFormField>
@@ -170,7 +173,10 @@ export const OptionForm = ({ option, onSubmit, onCancel }: OptionFormProps) => {
             includeAttributes={true}
             mutators={{ ...arrayMutators }}
         >
-            <OptionFormContents onCancel={onCancel} />
+            <OptionFormContents
+                onCancel={onCancel}
+                editCodeDisabled={!!option}
+            />
         </FormBase>
     )
 }
