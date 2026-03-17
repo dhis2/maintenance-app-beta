@@ -1,3 +1,10 @@
+## [0.149.3](https://github.com/dhis2/metadata-management-app/compare/v0.149.2...v0.149.3) (2026-03-17)
+
+
+### Bug Fixes
+
+* add a maintenance shortcut ([#819](https://github.com/dhis2/metadata-management-app/issues/819)) ([5363d57](https://github.com/dhis2/metadata-management-app/commit/5363d57f97ebf7e7db13c57057e4defa0e9f7ec7))
+
 ## [0.149.2](https://github.com/dhis2/metadata-management-app/compare/v0.149.1...v0.149.2) (2026-03-16)
 
 
