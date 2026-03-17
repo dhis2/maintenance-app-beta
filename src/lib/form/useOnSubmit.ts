@@ -232,11 +232,7 @@ export const useOnSubmitNew = <TFormValues extends ModelWithAttributeValues>({
                 })
                 return
             }
-            const payload =
-                section.namePlural === 'trackedEntityAttributes'
-                    ? { ...values, confidential: false }
-                    : values
-            const response = await createModel(payload)
+            const response = await createModel(values)
             if (response.error) {
                 return createFormError(response.error)
             }
