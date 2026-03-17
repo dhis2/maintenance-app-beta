@@ -1,4 +1,3 @@
-import { useConfig } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { CheckboxFieldFF } from '@dhis2/ui'
 import React from 'react'
@@ -20,7 +19,6 @@ import { FEATURES, SECTIONS_MAP, useFeatureAvailable } from '../../../lib'
 import { TrackedEntityAttribute } from '../../../types/generated'
 import {
     BlockedSearchOperatorsField,
-    ConfidentialField,
     FieldMaskField,
     FormNameField,
     InheritField,
@@ -52,13 +50,11 @@ export const TrackedEntityAttributeFormFields = ({
     const { input: orgunitScopeInput } = useField('orgunitScope')
     const { input: generatedInput } = useField('generated')
 
-    const { systemInfo } = useConfig()
     const valueType = valueTypeInput.value
     const isSkipAnalyticsAvailable = useFeatureAvailable(FEATURES.skipAnalytics)
     const isUnique = uniqueInput.value
     const isOrgunitScope = orgunitScopeInput.value
     const isGenerated = generatedInput.value
-    const encryptionEnabled = (systemInfo as any)?.encryption
     const showTrackedEntityType =
         valueType === TrackedEntityAttribute.valueType.TRACKER_ASSOCIATE
 
@@ -192,10 +188,6 @@ export const TrackedEntityAttributeFormFields = ({
                         'Configure how values are displayed, inherited, and synchronized.'
                     )}
                 </StandardFormSectionDescription>
-
-                <StandardFormField>
-                    <ConfidentialField encryptionEnabled={encryptionEnabled} />
-                </StandardFormField>
 
                 <StandardFormField>
                     <InheritField />
