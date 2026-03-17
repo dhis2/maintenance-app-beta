@@ -1,3 +1,10 @@
+# [0.150.0](https://github.com/dhis2/metadata-management-app/compare/v0.149.4...v0.150.0) (2026-03-17)
+
+
+### Features
+
+* [DHIS2-20803] Remove “confidential” flag ([#820](https://github.com/dhis2/metadata-management-app/issues/820)) ([f16d528](https://github.com/dhis2/metadata-management-app/commit/f16d5283292b2934898c13740a9ab31f50eb586d))
+
 ## [0.149.4](https://github.com/dhis2/metadata-management-app/compare/v0.149.3...v0.149.4) (2026-03-17)
 
 
