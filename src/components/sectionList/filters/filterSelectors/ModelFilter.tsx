@@ -87,7 +87,9 @@ export const ModelFilterSelect = ({
 
     const initialSelectedOption = initialOptionResult.data?.result
 
-    const optionsQueryResult = useInfiniteDataQuery<OptionResult>(query)
+    const optionsQueryResult = useInfiniteDataQuery<OptionResult>(query, {
+        lazy: true,
+    })
     const { refetch, data, incrementPage } = optionsQueryResult
 
     const pager = data?.result.pager
@@ -104,6 +106,15 @@ export const ModelFilterSelect = ({
         },
         [refetch]
     )
+
+    const hasFetchedOptionsRef = useRef(false)
+    const ensureOptionsFetched = useCallback(() => {
+        if (hasFetchedOptionsRef.current) {
+            return
+        }
+        hasFetchedOptionsRef.current = true
+        refetch({ page: 1 })
+    }, [refetch])
 
     const loading =
         optionsQueryResult.fetching ||
@@ -140,6 +151,7 @@ export const ModelFilterSelect = ({
                 selected={selected}
                 showEndLoader={!loading && page < pageCount}
                 onFilterChange={refetchWithFilter}
+                onFocus={ensureOptionsFetched}
                 loading={loading}
                 error={error}
                 onRetryClick={() => {

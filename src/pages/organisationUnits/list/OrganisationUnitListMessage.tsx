@@ -2,7 +2,6 @@ import i18n from '@dhis2/d2-i18n'
 import { Center } from '@dhis2/ui'
 import { UseQueryResult } from '@tanstack/react-query'
 import React from 'react'
-import { SectionListLoader } from '../../../components/sectionList/SectionListLoader'
 import {
     SectionListEmpty,
     SectionListError,
@@ -25,15 +24,6 @@ export const OrganisationUnitListMessage = ({
     if (firstError) {
         console.error(firstError.error)
         return <SectionListError />
-    }
-
-    // we only show loading indicator when we don't have any data to show
-    // and some query is loading
-    const showLoading =
-        orgUnitCount < 1 && queries.some((query) => query.isLoading)
-
-    if (showLoading) {
-        return <SectionListLoader />
     }
 
     if (isFiltering && orgUnitCount < 1) {

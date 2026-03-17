@@ -294,10 +294,9 @@ export const OrganisationUnitList = () => {
         enableSubRowSelection: false,
     })
 
-    const allQueries = queries.concat(orgUnitFiltered)
-    const isFetching = allQueries.some(
-        (query) => query.isLoading || query.isFetching
-    )
+    const isFetching = isFiltering
+        ? orgUnitFiltered.isLoading || orgUnitFiltered.isFetching
+        : table.getRowCount() < 1 && queries.some((q) => q.isLoading)
 
     return (
         <div>
@@ -329,7 +328,7 @@ export const OrganisationUnitList = () => {
                 >
                     <OrganisationUnitListMessage
                         isFiltering={isFiltering}
-                        queries={allQueries}
+                        queries={queries.concat(orgUnitFiltered)}
                         orgUnitCount={table.getRowCount()}
                     />
                     {isFetching ? (

@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-03-16T18:45:52.560Z\n"
-"PO-Revision-Date: 2026-03-16T18:45:52.560Z\n"
+"POT-Creation-Date: 2026-03-17T10:15:43.480Z\n"
+"PO-Revision-Date: 2026-03-17T10:15:43.480Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -3776,6 +3776,9 @@ msgstr ""
 "                            ' and '\n"
 "                        )}"
 
+msgid "Add a unit inside"
+msgstr "Add a unit inside"
+
 msgid "No organisation units available"
 msgstr "No organisation units available"
 
@@ -4962,9 +4965,6 @@ msgstr "Role access"
 msgid "Save the program first to set up sharing."
 msgstr "Save the program first to set up sharing."
 
-msgid "Notifications"
-msgstr "Notifications"
-
 msgid "Open"
 msgstr "Open"
 
@@ -5053,12 +5053,6 @@ msgstr "Maximum number of search results to display"
 msgid "Entering 0 shows all search results"
 msgstr "Entering 0 shows all search results"
 
-msgid "Program customization"
-msgstr "Program customization"
-
-msgid "Customize the program's visuals, labels, and display settings."
-msgstr "Customize the program's visuals, labels, and display settings."
-
 msgid "Customization"
 msgstr "Customization"
 
@@ -5091,9 +5085,6 @@ msgstr "Pre-generate event UID"
 
 msgid "Related program"
 msgstr "Related program"
-
-msgid "Lock completed events after a number of days"
-msgstr "Lock completed events after a number of days"
 
 msgid "Close data entry a number of days after a period ends"
 msgstr "Close data entry a number of days after a period ends"
@@ -5131,6 +5122,7 @@ msgid ""
 msgstr ""
 "Close data entry a number of days after end date of "
 "{{categoryCombinationDisplayName}}"
+
 msgid "Notification type"
 msgstr "Notification type"
 
@@ -5465,16 +5457,6 @@ msgstr ""
 "information during enrollment."
 
 msgid ""
-"This form displays an auto-generated list of the tracked entity attributes "
-"defined for this program."
-msgstr ""
-"This form displays an auto-generated list of the tracked entity attributes "
-"defined for this program."
-
-msgid "Edit or rearrange the tracked entity attributes"
-msgstr "Edit or rearrange the tracked entity attributes"
-
-msgid ""
 "Displays a form with attributes in the order they were added to the "
 "enrollment"
 msgstr ""
@@ -5483,24 +5465,6 @@ msgstr ""
 
 msgid "Enrollment: Settings"
 msgstr "Enrollment: Settings"
-
-msgid "Configure settings related to enrollment in this program."
-msgstr "Configure settings related to enrollment in this program."
-
-msgid "Choose what this program will be tracking"
-msgstr "Choose what this program will be tracking"
-
-msgid "Multiple enrollments"
-msgstr "Multiple enrollments"
-
-msgid "Only allow one enrollment"
-msgstr "Only allow one enrollment"
-
-msgid "Allow multiple enrollments"
-msgstr "Allow multiple enrollments"
-
-msgid "Applies to the entire lifetime of a tracked entity."
-msgstr "Applies to the entire lifetime of a tracked entity."
 
 msgid "Configure enrollment options for this program."
 msgstr "Configure enrollment options for this program."
@@ -5517,9 +5481,6 @@ msgstr "Collect an incident date"
 msgid "Allow incident dates in the future"
 msgstr "Allow incident dates in the future"
 
-msgid "Collect data for the first stage during enrollment"
-msgstr "Collect data for the first stage during enrollment"
-
 msgid "Show first program stage during enrollment"
 msgstr "Show first program stage during enrollment"
 
@@ -5530,8 +5491,6 @@ msgstr ""
 "Do not create overdue events when automatically creating program stage "
 "events"
 
-msgid "Program Customization"
-msgstr "Program Customization"
 msgid "Custom label for \"Incident date\""
 msgstr "Custom label for \"Incident date\""
 
@@ -5594,8 +5553,6 @@ msgstr ""
 "Used to customize the label for notes or comments added to enrollments or "
 "events"
 
-msgid "Display enrolled TEs in the front page list"
-msgstr "Display enrolled TEs in the front page list"
 msgid "Program Stages"
 msgstr "Program Stages"
 
@@ -5625,6 +5582,7 @@ msgstr "Add a program stage"
 
 msgid "Access Level"
 msgstr "Access Level"
+
 msgid "Relationship entity constraint"
 msgstr "Relationship entity constraint"
 
