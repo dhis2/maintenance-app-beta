@@ -10,6 +10,10 @@ const config = {
     coreApp: true,
     shortcuts: [
         {
+            name: 'Maintenance',
+            url: '#/overview',
+        },
+        {
             name: 'Categories',
             url: '#/categories',
         },
