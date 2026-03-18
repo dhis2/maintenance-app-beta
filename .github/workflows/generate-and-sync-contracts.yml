@@ -62,8 +62,8 @@ jobs:
                     git checkout -b "$BRANCH_NAME"
                   fi
 
-                  mkdir -p ./contracts/maintenance-app
-                  cp -r ../contracts/* ./contracts/maintenance-app/
+                  mkdir -p ./contracts/metadata-managment-app
+                  cp -r ../contracts/* ./contracts/metadata-managment-app/
 
                   git add .
                   if git diff --cached --quiet; then
@@ -71,7 +71,7 @@ jobs:
                     exit 0
                   fi
 
-                  git commit -m "Auto-update contracts from Maintenance app PR #${{ github.event.pull_request.number }}"
+                  git commit -m "Auto-update contracts from metadata managment app PR #${{ github.event.pull_request.number }}"
                   git push origin $BRANCH_NAME
 
             - name: Create Pull Request in contract repo
@@ -89,8 +89,8 @@ jobs:
                     gh pr create \
                       --base main \
                       --head "$BRANCH_NAME" \
-                      --title "Auto PR: Contracts from maintenance app PR #${{ github.event.pull_request.number }}" \
-                      --body "This PR was automatically created from a pull request in maintenance app." \
+                      --title "Auto PR: Contracts from metadata managment app PR #${{ github.event.pull_request.number }}" \
+                      --body "This PR was automatically created from a pull request in metadata managment app." \
                       --reviewer dhis2/platform-backend
                   fi
 
@@ -115,7 +115,7 @@ jobs:
                   # Get the branch name from the previous job output
                   BRANCH_NAME="${{ needs.generate-and-sync.outputs.pr_branch_name }}"
                   DEP_PR=$(echo "$BRANCH_NAME" | grep -oE '[0-9]+$')
-                  DEP_REPO="org/maintenance-app"
+                  DEP_REPO="org/metadata-management-app"
 
                   echo "Checking dependency: $DEP_REPO PR #$DEP_PR"
                   STATUS=$(gh pr view $DEP_PR --repo $DEP_REPO --json state --jq .state)
