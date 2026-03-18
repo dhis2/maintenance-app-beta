@@ -2,6 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { Center } from '@dhis2/ui'
 import { UseQueryResult } from '@tanstack/react-query'
 import React from 'react'
+import { SectionListLoader } from '../../../components/sectionList/SectionListLoader'
 import {
     SectionListEmpty,
     SectionListError,
@@ -24,6 +25,16 @@ export const OrganisationUnitListMessage = ({
     if (firstError) {
         console.error(firstError.error)
         return <SectionListError />
+    }
+
+    // Show loading indicator when there is nothing to display yet and we're fetching.
+    // This prevents briefly showing "no matches" while a new filter/search is loading.
+    const showLoading =
+        orgUnitCount < 1 &&
+        queries.some((query) => query.isLoading || query.isFetching)
+
+    if (showLoading) {
+        return <SectionListLoader />
     }
 
     if (isFiltering && orgUnitCount < 1) {

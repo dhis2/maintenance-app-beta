@@ -1,3 +1,5 @@
+import i18n from '@dhis2/d2-i18n'
+import { Button } from '@dhis2/ui'
 import {
     ColumnDef,
     ExpandedState,
@@ -159,7 +161,7 @@ const transformToOrgUnitListItems = (
 export const OrganisationUnitList = () => {
     const columnDefinitions = useColumns()
     const [identifiableFilter] = useSectionListFilter('identifiable')
-    const [filters] = useSectionListFilters()
+    const [filters, setFilters] = useSectionListFilters()
     const userRootOrgUnits = useCurrentUserRootOrgUnits()
 
     const initialExpandedState = useMemo(() => {
@@ -180,6 +182,9 @@ export const OrganisationUnitList = () => {
     >(undefined)
     const organisationUnitGroupId = filters.organisationUnitGroup?.[0]
     const isFiltering = !!identifiableFilter || !!organisationUnitGroupId
+    const hasActiveFilters =
+        identifiableFilter !== undefined ||
+        (filters.organisationUnitGroup?.length ?? 0) > 0
 
     const handleDetailsClick = useCallback(
         ({ id }: BaseListModel) => {
@@ -294,9 +299,12 @@ export const OrganisationUnitList = () => {
         enableSubRowSelection: false,
     })
 
-    const isFetching = isFiltering
-        ? orgUnitFiltered.isLoading || orgUnitFiltered.isFetching
-        : table.getRowCount() < 1 && queries.some((q) => q.isLoading)
+    // Only replace rows with a loader when we already have rows rendered.
+    // For the "no data yet" case, `OrganisationUnitListMessage` handles loader/empty states.
+    const isFetching =
+        table.getRowCount() > 0 && isFiltering
+            ? orgUnitFiltered.isLoading || orgUnitFiltered.isFetching
+            : false
 
     return (
         <div>
@@ -304,6 +312,15 @@ export const OrganisationUnitList = () => {
             <div className={css.filterRow}>
                 <IdentifiableFilter />
                 <OrganisationUnitGroupFilter />
+                {hasActiveFilters && (
+                    <Button
+                        small
+                        onClick={() => setFilters(undefined)}
+                        dataTest="clear-all-filters-button"
+                    >
+                        {i18n.t('Clear all filters')}
+                    </Button>
+                )}
             </div>
             <div className={css.listDetailsWrapper}>
                 <DefaultToolbar
