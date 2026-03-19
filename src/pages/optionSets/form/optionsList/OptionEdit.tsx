@@ -20,7 +20,6 @@ import {
 } from '../../../../components'
 import {
     NameField,
-    CodeField,
     DescriptionField,
     ColorAndIconField,
 } from '../../../../components/form/fields'
@@ -34,7 +33,6 @@ import {
     createJsonPatchOperations,
     useCreateModel,
     ATTRIBUTE_VALUES_FIELD_FILTERS,
-    BaseListModel,
 } from '../../../../lib'
 import { Option } from '../../../../types/generated'
 import { PickWithFieldFilters } from '../../../../types/models'
