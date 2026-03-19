@@ -10,11 +10,13 @@ export function CodeField({
     helpText,
     modelId,
     required = false,
+    disabled = false,
 }: {
     schemaSection: SchemaSection
     helpText?: string
     modelId?: string
     required?: boolean
+    disabled?: boolean
 }) {
     const validator = useValidator({ schemaSection, property: 'code', modelId })
 
@@ -31,6 +33,7 @@ export function CodeField({
             validateFields={[]}
             validate={(code?: string) => validator(code)}
             required={required}
+            disabled={disabled}
         />
     )
 }

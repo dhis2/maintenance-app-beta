@@ -75,10 +75,6 @@ export const TrackedEntityAttributeFormDescriptor = {
             label: i18n.t('Data handling'),
             fields: [
                 {
-                    name: 'confidential',
-                    label: i18n.t('Confidential'),
-                },
-                {
                     name: 'inherit',
                     label: i18n.t('Inherit'),
                 },

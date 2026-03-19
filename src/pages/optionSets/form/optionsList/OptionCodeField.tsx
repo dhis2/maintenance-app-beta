@@ -10,12 +10,14 @@ export function OptionCodeField({
     helpText,
     modelId,
     required = false,
+    disabled = false,
     validateOptionCode,
 }: {
     schemaSection: SchemaSection
     helpText?: string
     modelId?: string
     required?: boolean
+    disabled?: boolean
     validateOptionCode: Validator
 }) {
     const validator = useValidator({
@@ -38,6 +40,7 @@ export function OptionCodeField({
             validateFields={[]}
             validate={(code?: string) => validator(code)}
             required={required}
+            disabled={disabled}
         />
     )
 }

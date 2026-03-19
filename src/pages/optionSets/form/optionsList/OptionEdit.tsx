@@ -43,9 +43,11 @@ import { initialOptionValues } from './optionSchema'
 import { DrawerState } from './OptionsListTable'
 
 export const OptionFormContents = ({
+    editCodeDisabled,
     onCancel,
     validateOptionCode,
 }: {
+    editCodeDisabled: boolean
     onCancel?: (s: DrawerState) => void
     validateOptionCode: Validator
 }) => {
@@ -80,6 +82,7 @@ export const OptionFormContents = ({
                             modelId={values.id}
                             validateOptionCode={validateOptionCode}
                             required={true}
+                            disabled={editCodeDisabled}
                         />
                     </StandardFormField>
 
@@ -197,6 +200,7 @@ export const OptionForm = ({ option, onSubmit, onCancel }: OptionFormProps) => {
         >
             <OptionFormContents
                 onCancel={onCancel}
+                editCodeDisabled={!!option}
                 validateOptionCode={validateOptionCode}
             />
         </FormBase>
