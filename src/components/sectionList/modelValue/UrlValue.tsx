@@ -4,7 +4,7 @@ export const UrlValue = ({ value }: { value?: string }) => (
     <a
         href={value}
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
         onClick={(e) => e.stopPropagation()}
     >
         {value}
