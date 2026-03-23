@@ -9,9 +9,7 @@ export function RepeatableField() {
             name="repeatable"
             type="checkbox"
             component={CheckboxFieldFF}
-            label={i18n.t(
-                'Allow multiple events in this stage (repeatable stage)'
-            )}
+            label={i18n.t('Allow multiple events in this stage')}
             dataTest="formfields-repeatable"
         />
     )
