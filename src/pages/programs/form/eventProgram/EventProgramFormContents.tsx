@@ -54,6 +54,9 @@ export const EventProgramFormContents = () => {
             <EventProgramCustomizationFormContents
                 name={descriptor.getSection('programCustomization').name}
             />
+            <EventProgramCustomizationFormContents
+                name={descriptor.getSection('programCustomization').name}
+            />
             <CustomAttributesSection
                 schemaSection={SCHEMA_SECTIONS.program}
                 sectionedLayout

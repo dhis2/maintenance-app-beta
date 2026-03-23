@@ -98,9 +98,16 @@ const DrawerContents = ({
 export const DrawerLayout: React.FC<{
     children: React.ReactNode
     footer: React.ReactNode
-}> = ({ children, footer }) => (
+    nestedSectionForm?: boolean
+}> = ({ children, footer, nestedSectionForm }) => (
     <div className={css.drawerBodyLayout}>
-        <div className={css.drawerBodyScrollable}>{children}</div>
+        <div
+            className={cx(css.drawerBodyScrollable, {
+                [css.drawerBodyScrollableNestedSectionForm]: nestedSectionForm,
+            })}
+        >
+            {children}
+        </div>
         {footer}
     </div>
 )
