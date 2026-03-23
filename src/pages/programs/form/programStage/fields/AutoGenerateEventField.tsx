@@ -9,7 +9,7 @@ export function AutoGenerateEventField() {
             name="autoGenerateEvent"
             type="checkbox"
             component={CheckboxFieldFF}
-            label={i18n.t('Auto-generate an event in this stage')}
+            label={i18n.t('Create an event in this stage on enrollment')}
             dataTest="formfields-autoGenerateEvent"
         />
     )

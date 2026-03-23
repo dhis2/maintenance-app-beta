@@ -12,6 +12,9 @@ export function PeriodTypeField() {
                 <UIField
                     name="periodType"
                     label={i18n.t('Period type')}
+                    helpText={i18n.t(
+                        'If set, only one event per period is allowed. Report date will be a period instead of a date. Not supported by web Capture.'
+                    )}
                     error={meta.touched && !!meta.error}
                     validationText={meta.touched ? meta.error : undefined}
                 >

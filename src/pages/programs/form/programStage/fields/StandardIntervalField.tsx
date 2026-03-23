@@ -24,9 +24,7 @@ export function StandardIntervalField() {
                 const num = Number(value)
                 return Number.isNaN(num) ? undefined : num
             }}
-            helpText={i18n.t(
-                'Enter the number of days between repeated events.'
-            )}
+            helpText={i18n.t('The number of days between repeated events.')}
         />
     )
 }
