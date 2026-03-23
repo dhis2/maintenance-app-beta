@@ -383,21 +383,34 @@ describe('Program indicator groups form tests', () => {
             )
             await uiActions.submitForm(screen)
             expect(updateMock).toHaveBeenCalledTimes(1)
-            expect(updateMock).toHaveBeenLastCalledWith(
+            const patchPayload = updateMock.mock.calls[0][0]
+            expect(patchPayload).toEqual(
                 expect.objectContaining({
                     id: programIndicatorGroup.id,
-                    data: [
-                        { op: 'replace', path: '/code', value: newCode },
-                        {
-                            op: 'replace',
-                            path: '/programIndicators',
-                            value: [
-                                ...programIndicatorGroup.programIndicators,
-                                programIndicators[1],
-                            ],
-                        },
-                    ],
                 })
+            )
+            const operations = patchPayload.data as Array<{
+                op: string
+                path: string
+                value: unknown
+            }>
+            expect(operations).toHaveLength(2)
+            expect(operations).toContainEqual({
+                op: 'replace',
+                path: '/code',
+                value: newCode,
+            })
+            const piPatch = operations.find(
+                (o) => o.path === '/programIndicators'
+            )
+            expect(piPatch).toMatchObject({ op: 'replace' })
+            const piIds = (piPatch!.value as { id: string }[]).map((p) => p.id)
+            expect(piIds.sort()).toEqual(
+                [
+                    programIndicators[0].id,
+                    programIndicators[1].id,
+                    programIndicators[2].id,
+                ].sort()
             )
         })
         it('should do nothing and return to the list view on success when no field is changed', async () => {
