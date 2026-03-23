@@ -36,6 +36,7 @@ export const stageSchema = identifiable.merge(withAttributeValues).extend({
     hideDueDate: z.boolean().optional(),
     periodType: z.nativeEnum(ProgramStage.periodType).optional(),
     nextScheduleDate: modelReference.optional(),
+    blockEntryForm: z.boolean().optional(),
     allowGenerateNextVisit: z.boolean().optional(),
     remindCompleted: z.boolean().optional(),
 })
