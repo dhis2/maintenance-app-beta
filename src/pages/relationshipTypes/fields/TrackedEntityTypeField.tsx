@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import React, { useCallback, useMemo } from 'react'
 import { useField, useForm } from 'react-final-form'
 import { useHref } from 'react-router'
-import { StandardFormField, EditableFieldWrapper } from '../../../components'
+import { StandardFormField, EditableInputWrapper } from '../../../components'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
 import { useRefreshModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/useRefreshSingleSelect'
 import { required } from '../../../lib'
@@ -67,21 +67,27 @@ export const TrackedEntityTypeField = ({
 
     return (
         <StandardFormField>
-            <EditableFieldWrapper
-                onRefresh={() => refresh()}
-                onAddNew={() => window.open(newTrackedEntityTypeLink, '_blank')}
-            >
-                <ModelSingleSelectFormField<TrackedEntityType>
-                    name={trackedEntityTypeName}
-                    label={i18n.t('Tracked entity type')}
-                    query={trackedEntityTypeQuery}
-                    required
-                    validate={required}
-                    inputWidth="330px"
-                    onChange={clearDependentFields}
-                    dataTest={`${prefix}-tracked-entity-type-selector`}
-                />
-            </EditableFieldWrapper>
+            <ModelSingleSelectFormField<TrackedEntityType>
+                name={trackedEntityTypeName}
+                label={i18n.t('Tracked entity type')}
+                query={trackedEntityTypeQuery}
+                required
+                validate={required}
+                inputWidth="330px"
+                onChange={clearDependentFields}
+                dataTest={`${prefix}-tracked-entity-type-selector`}
+                inputWrapper={(select) => (
+                    <EditableInputWrapper
+                        inputWidth="330px"
+                        onRefresh={() => refresh()}
+                        onAddNew={() =>
+                            window.open(newTrackedEntityTypeLink, '_blank')
+                        }
+                    >
+                        {select}
+                    </EditableInputWrapper>
+                )}
+            />
         </StandardFormField>
     )
 }

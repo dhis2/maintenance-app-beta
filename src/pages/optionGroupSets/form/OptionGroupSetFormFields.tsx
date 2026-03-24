@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom'
 import {
     CodeField,
     DescriptionField,
-    EditableFieldWrapper,
+    EditableInputWrapper,
     ModelTransferField,
     NameField,
     ShortNameField,
@@ -88,28 +88,32 @@ function OptionGroupSetFormFields() {
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
-                    <EditableFieldWrapper
-                        onRefresh={() => refreshOptionSet()}
-                        onAddNew={() => window.open(newOptionSetLink, '_blank')}
-                    >
-                        <ModelSingleSelectFormField
-                            disabled={isEdit}
-                            inputWidth="400px"
-                            name="optionSet"
-                            label={i18n.t('Option set')}
-                            query={{
-                                resource: 'optionSets',
-                                params: {
-                                    fields: 'id,displayName',
-                                },
-                            }}
-                            onChange={() => {
-                                optionGroupsInput.onChange([])
-                                // option groups are cleared when option set is changed
-                            }}
-                            dataTest="formfields-optionSet"
-                        />
-                    </EditableFieldWrapper>
+                    <ModelSingleSelectFormField
+                        disabled={isEdit}
+                        inputWidth="400px"
+                        name="optionSet"
+                        label={i18n.t('Option set')}
+                        query={{
+                            resource: 'optionSets',
+                            params: {
+                                fields: 'id,displayName',
+                            },
+                        }}
+                        onChange={() => {
+                            optionGroupsInput.onChange([])
+                        }}
+                        dataTest="formfields-optionSet"
+                        inputWrapper={(select) => (
+                            <EditableInputWrapper
+                                onRefresh={() => refreshOptionSet()}
+                                onAddNew={() =>
+                                    window.open(newOptionSetLink, '_blank')
+                                }
+                            >
+                                {select}
+                            </EditableInputWrapper>
+                        )}
+                    />
                 </StandardFormField>
 
                 {optionSetId ? (

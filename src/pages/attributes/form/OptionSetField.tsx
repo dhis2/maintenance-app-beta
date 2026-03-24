@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import { useHref } from 'react-router'
-import { EditableFieldWrapper } from '../../../components'
+import { EditableInputWrapper } from '../../../components'
 import {
     ModelSingleSelectFormField,
     useRefreshModelSingleSelect,
@@ -13,28 +13,31 @@ export const OptionSetField = () => {
         resource: 'optionSets',
     })
     return (
-        <EditableFieldWrapper
-            onRefresh={() => refreshOptionSet()}
-            onAddNew={() => window.open(newOptionSetLink, '_blank')}
-        >
-            <ModelSingleSelectFormField
-                inputWidth="400px"
-                name="optionSet"
-                label={i18n.t('Option set')}
-                query={{
-                    resource: 'optionSets',
-                    params: {
-                        fields: 'id,displayName,valueType',
-                        order: 'displayName:iasc',
-                    },
-                }}
-                helpText={i18n.t(
-                    'Limit input to a set of predefined options. An option set will automatically set the value type.'
-                )}
-                clearable={true}
-                clearText={i18n.t('Remove option set')}
-                dataTest="formfields-optionSet"
-            />
-        </EditableFieldWrapper>
+        <ModelSingleSelectFormField
+            inputWidth="400px"
+            name="optionSet"
+            label={i18n.t('Option set')}
+            query={{
+                resource: 'optionSets',
+                params: {
+                    fields: 'id,displayName,valueType',
+                    order: 'displayName:iasc',
+                },
+            }}
+            helpText={i18n.t(
+                'Limit input to a set of predefined options. An option set will automatically set the value type.'
+            )}
+            clearable={true}
+            clearText={i18n.t('Remove option set')}
+            dataTest="formfields-optionSet"
+            inputWrapper={(select) => (
+                <EditableInputWrapper
+                    onRefresh={() => refreshOptionSet()}
+                    onAddNew={() => window.open(newOptionSetLink, '_blank')}
+                >
+                    {select}
+                </EditableInputWrapper>
+            )}
+        />
     )
 }

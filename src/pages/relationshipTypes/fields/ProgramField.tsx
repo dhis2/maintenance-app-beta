@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import React, { useCallback, useMemo } from 'react'
 import { useField, useForm } from 'react-final-form'
 import { useHref } from 'react-router'
-import { StandardFormField, EditableFieldWrapper } from '../../../components'
+import { StandardFormField, EditableInputWrapper } from '../../../components'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
 import { useRefreshModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/useRefreshSingleSelect'
 import { required } from '../../../lib'
@@ -132,22 +132,26 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
 
     return (
         <StandardFormField>
-            <EditableFieldWrapper
-                onRefresh={() => refresh()}
-                onAddNew={() => window.open(newProgramLink, '_blank')}
-            >
-                <ModelSingleSelectFormField<Program>
-                    name={programName}
-                    label={i18n.t('Program')}
-                    query={programQuery}
-                    required={isRequired}
-                    validate={isRequired ? required : undefined}
-                    inputWidth="330px"
-                    onChange={clearDependentFields}
-                    showNoValueOption={!isRequired}
-                    dataTest={`${prefix}-program-selector`}
-                />
-            </EditableFieldWrapper>
+            <ModelSingleSelectFormField<Program>
+                name={programName}
+                label={i18n.t('Program')}
+                query={programQuery}
+                required={isRequired}
+                validate={isRequired ? required : undefined}
+                inputWidth="330px"
+                onChange={clearDependentFields}
+                showNoValueOption={!isRequired}
+                dataTest={`${prefix}-program-selector`}
+                inputWrapper={(select) => (
+                    <EditableInputWrapper
+                        inputWidth="330px"
+                        onRefresh={() => refresh()}
+                        onAddNew={() => window.open(newProgramLink, '_blank')}
+                    >
+                        {select}
+                    </EditableInputWrapper>
+                )}
+            />
         </StandardFormField>
     )
 }

@@ -13,7 +13,7 @@ import {
     CodeField,
     ColorAndIconField,
     DescriptionField,
-    EditableFieldWrapper,
+    EditableInputWrapper,
     FeatureTypeField,
     NameField,
     SectionedFormSection,
@@ -32,7 +32,6 @@ import {
     useSchemaSectionHandleOrThrow,
 } from '../../../../lib'
 import { DisplayableModel } from '../../../../types/models'
-import classes from '../../../dataElements/fields/CategoryComboField.module.css'
 import {
     CompleteEventsExpiryDaysField,
     DisplayFrontPageListField,
@@ -166,21 +165,24 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                 </StandardFormField>
             )}
             <StandardFormField>
-                <EditableFieldWrapper
-                    onRefresh={() => refreshCategoryCombos()}
-                    onAddNew={() => window.open(newCategoryComboLink, '_blank')}
-                >
-                    <div className={classes.categoryComboSelect}>
-                        <ModelSingleSelectFormField
-                            inputWidth={'400px'}
-                            name="categoryCombo"
-                            dataTest="formfields-categorycombo"
-                            label={i18n.t('Event category combination')}
-                            query={CATEGORY_COMBOS_QUERY}
-                            transform={addDefaultCategoryComboTransform}
-                        />
-                    </div>
-                </EditableFieldWrapper>
+                <ModelSingleSelectFormField
+                    inputWidth={'400px'}
+                    name="categoryCombo"
+                    dataTest="formfields-categorycombo"
+                    label={i18n.t('Event category combination')}
+                    query={CATEGORY_COMBOS_QUERY}
+                    transform={addDefaultCategoryComboTransform}
+                    inputWrapper={(select) => (
+                        <EditableInputWrapper
+                            onRefresh={() => refreshCategoryCombos()}
+                            onAddNew={() =>
+                                window.open(newCategoryComboLink, '_blank')
+                            }
+                        >
+                            {select}
+                        </EditableInputWrapper>
+                    )}
+                />
             </StandardFormField>
 
             <StandardFormField>
