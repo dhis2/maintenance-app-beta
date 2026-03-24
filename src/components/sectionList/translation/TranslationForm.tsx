@@ -31,9 +31,24 @@ const orderedTranslatableFields = [
     'shortName',
     'formName',
     'description',
+    'executionDateLabel',
+    'dueDateLabel',
+    'enrollmentDateLabel',
+    'incidentDateLabel',
+    'enrollmentLabel',
+    'enrollmentsLabel',
+    'programStageLabel',
+    'programStagesLabel',
+    'eventLabel',
+    'eventsLabel',
+    'orgUnitLabel',
+    'trackedEntityAttributeLabel',
+    'relationshipLabel',
+    'followUpLabel',
+    'noteLabel',
 ]
 
-const excludedEventFields: string[] = ['name']
+const validEventFields: string[] = ['name', 'shortName', 'description']
 
 /**
  * Get the translateable fields for schemaa.
@@ -55,7 +70,7 @@ export const getTranslateableFieldsForSchema = (
             (model as { programType?: string })?.programType !==
             'WITHOUT_REGISTRATION'
                 ? true
-                : !excludedEventFields.includes(field)
+                : validEventFields.includes(field)
         )
         .map((field) => schema.properties[field]?.fieldName)
         .filter((f) => f !== undefined)
