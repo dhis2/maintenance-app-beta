@@ -8,12 +8,12 @@ export function EditableInputWrapper({
     onRefresh,
     onAddNew,
     inputWidth = '400px',
-}: {
+}: Readonly<{
     children: React.ReactNode
     onRefresh: () => void
     onAddNew: () => void
     inputWidth?: string
-}) {
+}>) {
     return (
         <div className={classes.wrapper}>
             <Box width={inputWidth} minWidth="100px">
