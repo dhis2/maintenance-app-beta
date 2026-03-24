@@ -3,14 +3,14 @@ import { CheckboxFieldFF } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
 
-export function RemindCompletedField() {
+export function BlockEntryFormField() {
     return (
         <FieldRFF
-            name="remindCompleted"
+            name="blockEntryForm"
             type="checkbox"
             component={CheckboxFieldFF}
-            label={i18n.t('Ask user to complete enrollment after completion')}
-            dataTest="formfields-remindCompleted"
+            label={i18n.t('Block data entry after completion')}
+            dataTest="formfields-blockEntryForm"
             validateFields={[]}
         />
     )

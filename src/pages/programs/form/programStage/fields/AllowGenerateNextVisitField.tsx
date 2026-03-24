@@ -9,9 +9,7 @@ export function AllowGenerateNextVisitField() {
             name="allowGenerateNextVisit"
             type="checkbox"
             component={CheckboxFieldFF}
-            label={i18n.t(
-                'On event completion, show a prompt to create a new event'
-            )}
+            label={i18n.t('Ask user to create a new event after completion')}
             dataTest="formfields-allowGenerateNextVisit"
         />
     )

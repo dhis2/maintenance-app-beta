@@ -69,6 +69,7 @@ export const fieldFilters = [
     'hideDueDate',
     'periodType',
     'nextScheduleDate[id,displayName,valueType]',
+    'blockEntryForm',
     'allowGenerateNextVisit',
     'remindCompleted',
 ] as const
