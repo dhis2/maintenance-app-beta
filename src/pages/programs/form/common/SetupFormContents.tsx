@@ -1,7 +1,7 @@
 import { useTimeZoneConversion } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button, Field, IconAdd16, Input, InputFieldFF } from '@dhis2/ui'
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import {
     Field as FieldRFF,
     useField,
@@ -79,6 +79,18 @@ export const SetupFormContents = React.memo(function SetupFormContents({
             form.change('openDaysAfterCoEndDate', 0)
         }
     }, [values.categoryCombo, form])
+
+    const categoryComboInputWrapper = useCallback(
+        (select: React.ReactElement) => (
+            <EditableInputWrapper
+                onRefresh={() => refreshCategoryCombos()}
+                onAddNew={() => window.open(newCategoryComboLink, '_blank')}
+            >
+                {select}
+            </EditableInputWrapper>
+        ),
+        [refreshCategoryCombos, newCategoryComboLink]
+    )
 
     return (
         <SectionedFormSection name={name}>
@@ -172,16 +184,7 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                     label={i18n.t('Event category combination')}
                     query={CATEGORY_COMBOS_QUERY}
                     transform={addDefaultCategoryComboTransform}
-                    inputWrapper={(select) => (
-                        <EditableInputWrapper
-                            onRefresh={() => refreshCategoryCombos()}
-                            onAddNew={() =>
-                                window.open(newCategoryComboLink, '_blank')
-                            }
-                        >
-                            {select}
-                        </EditableInputWrapper>
-                    )}
+                    inputWrapper={categoryComboInputWrapper}
                 />
             </StandardFormField>
 

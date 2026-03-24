@@ -61,6 +61,19 @@ export const TrackedEntityTypeField = ({
         })
     }, [form, prefix])
 
+    const inputWrapper = useCallback(
+        (select: React.ReactElement) => (
+            <EditableInputWrapper
+                inputWidth="330px"
+                onRefresh={() => refresh()}
+                onAddNew={() => window.open(newTrackedEntityTypeLink, '_blank')}
+            >
+                {select}
+            </EditableInputWrapper>
+        ),
+        [refresh, newTrackedEntityTypeLink]
+    )
+
     if (!visible || !trackedEntityTypeQuery) {
         return null
     }
@@ -76,17 +89,7 @@ export const TrackedEntityTypeField = ({
                 inputWidth="330px"
                 onChange={clearDependentFields}
                 dataTest={`${prefix}-tracked-entity-type-selector`}
-                inputWrapper={(select) => (
-                    <EditableInputWrapper
-                        inputWidth="330px"
-                        onRefresh={() => refresh()}
-                        onAddNew={() =>
-                            window.open(newTrackedEntityTypeLink, '_blank')
-                        }
-                    >
-                        {select}
-                    </EditableInputWrapper>
-                )}
+                inputWrapper={inputWrapper}
             />
         </StandardFormField>
     )

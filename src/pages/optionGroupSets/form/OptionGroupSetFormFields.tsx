@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { CheckboxFieldFF, NoticeBox } from '@dhis2/ui'
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
 import { useHref } from 'react-router'
 import { useParams } from 'react-router-dom'
@@ -34,6 +34,18 @@ function OptionGroupSetFormFields() {
         resource: 'optionSets',
     })
     const schemaSection = useSchemaSectionHandleOrThrow()
+
+    const inputWrapper = useCallback(
+        (select: React.ReactElement) => (
+            <EditableInputWrapper
+                onRefresh={() => refreshOptionSet()}
+                onAddNew={() => window.open(newOptionSetLink, '_blank')}
+            >
+                {select}
+            </EditableInputWrapper>
+        ),
+        [refreshOptionSet, newOptionSetLink]
+    )
 
     return (
         <>
@@ -103,16 +115,7 @@ function OptionGroupSetFormFields() {
                             optionGroupsInput.onChange([])
                         }}
                         dataTest="formfields-optionSet"
-                        inputWrapper={(select) => (
-                            <EditableInputWrapper
-                                onRefresh={() => refreshOptionSet()}
-                                onAddNew={() =>
-                                    window.open(newOptionSetLink, '_blank')
-                                }
-                            >
-                                {select}
-                            </EditableInputWrapper>
-                        )}
+                        inputWrapper={inputWrapper}
                     />
                 </StandardFormField>
 

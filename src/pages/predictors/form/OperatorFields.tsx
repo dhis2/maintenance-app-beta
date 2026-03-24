@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useField } from 'react-final-form'
 import { useHref } from 'react-router'
 import { EditableInputWrapper, StandardFormField } from '../../../components'
@@ -25,6 +25,18 @@ export const OperatorFields = () => {
     })
     const { input: outputInput } = useField('output')
     const { input: outputComboInput } = useField('outputCombo')
+
+    const inputWrapper = useCallback(
+        (select: React.ReactElement) => (
+            <EditableInputWrapper
+                onRefresh={() => refreshDataElements()}
+                onAddNew={() => window.open(newDataElement, '_blank')}
+            >
+                {select}
+            </EditableInputWrapper>
+        ),
+        [refreshDataElements, newDataElement]
+    )
 
     return (
         <>
@@ -53,16 +65,7 @@ export const OperatorFields = () => {
                             outputComboInput.onChange(undefined)
                         }
                     }}
-                    inputWrapper={(select) => (
-                        <EditableInputWrapper
-                            onRefresh={() => refreshDataElements()}
-                            onAddNew={() =>
-                                window.open(newDataElement, '_blank')
-                            }
-                        >
-                            {select}
-                        </EditableInputWrapper>
-                    )}
+                    inputWrapper={inputWrapper}
                 />
             </StandardFormField>
             {outputInput?.value?.categoryCombo &&

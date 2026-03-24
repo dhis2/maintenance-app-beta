@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useHref } from 'react-router'
 import { EditableInputWrapper } from '../../../components'
 import {
@@ -12,6 +12,18 @@ export const OptionSetField = () => {
     const refreshOptionSet = useRefreshModelSingleSelect({
         resource: 'optionSets',
     })
+    const inputWrapper = useCallback(
+        (select: React.ReactElement) => (
+            <EditableInputWrapper
+                onRefresh={() => refreshOptionSet()}
+                onAddNew={() => window.open(newOptionSetLink, '_blank')}
+            >
+                {select}
+            </EditableInputWrapper>
+        ),
+        [refreshOptionSet, newOptionSetLink]
+    )
+
     return (
         <ModelSingleSelectFormField
             inputWidth="400px"
@@ -30,14 +42,7 @@ export const OptionSetField = () => {
             clearable={true}
             clearText={i18n.t('Remove option set')}
             dataTest="formfields-optionSet"
-            inputWrapper={(select) => (
-                <EditableInputWrapper
-                    onRefresh={() => refreshOptionSet()}
-                    onAddNew={() => window.open(newOptionSetLink, '_blank')}
-                >
-                    {select}
-                </EditableInputWrapper>
-            )}
+            inputWrapper={inputWrapper}
         />
     )
 }

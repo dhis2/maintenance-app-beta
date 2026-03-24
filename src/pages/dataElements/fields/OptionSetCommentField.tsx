@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useHref } from 'react-router'
 import { EditableInputWrapper } from '../../../components'
 import {
@@ -10,6 +10,18 @@ import {
 export function OptionSetCommentField() {
     const newOptionSetLink = useHref('/optionSets/new')
     const refresh = useRefreshModelSingleSelect({ resource: 'optionSets' })
+
+    const inputWrapper = useCallback(
+        (select: React.ReactElement) => (
+            <EditableInputWrapper
+                onRefresh={() => refresh()}
+                onAddNew={() => window.open(newOptionSetLink, '_blank')}
+            >
+                {select}
+            </EditableInputWrapper>
+        ),
+        [refresh, newOptionSetLink]
+    )
 
     return (
         <ModelSingleSelectFormField
@@ -28,14 +40,7 @@ export function OptionSetCommentField() {
             helpText={i18n.t(
                 'Choose a set of predefined comments for data entry.'
             )}
-            inputWrapper={(select) => (
-                <EditableInputWrapper
-                    onRefresh={() => refresh()}
-                    onAddNew={() => window.open(newOptionSetLink, '_blank')}
-                >
-                    {select}
-                </EditableInputWrapper>
-            )}
+            inputWrapper={inputWrapper}
         />
     )
 }

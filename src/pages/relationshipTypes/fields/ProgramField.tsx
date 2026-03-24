@@ -126,6 +126,19 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
         [form, prefix, programStagePath, constraint]
     )
 
+    const inputWrapper = useCallback(
+        (select: React.ReactElement) => (
+            <EditableInputWrapper
+                inputWidth="330px"
+                onRefresh={() => refresh()}
+                onAddNew={() => window.open(newProgramLink, '_blank')}
+            >
+                {select}
+            </EditableInputWrapper>
+        ),
+        [refresh, newProgramLink]
+    )
+
     if (!visible || !programQuery) {
         return null
     }
@@ -142,15 +155,7 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
                 onChange={clearDependentFields}
                 showNoValueOption={!isRequired}
                 dataTest={`${prefix}-program-selector`}
-                inputWrapper={(select) => (
-                    <EditableInputWrapper
-                        inputWidth="330px"
-                        onRefresh={() => refresh()}
-                        onAddNew={() => window.open(newProgramLink, '_blank')}
-                    >
-                        {select}
-                    </EditableInputWrapper>
-                )}
+                inputWrapper={inputWrapper}
             />
         </StandardFormField>
     )

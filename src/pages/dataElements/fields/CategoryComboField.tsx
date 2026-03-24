@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useForm, useFormState } from 'react-final-form'
 import { useHref } from 'react-router'
 import { EditableInputWrapper } from '../../../components'
@@ -37,6 +37,18 @@ export function CategoryComboField() {
         }
     }, [change, domainTypeIsTracker])
 
+    const inputWrapper = useCallback(
+        (select: React.ReactElement) => (
+            <EditableInputWrapper
+                onRefresh={() => refresh()}
+                onAddNew={() => window.open(newCategoryComboLink, '_blank')}
+            >
+                {select}
+            </EditableInputWrapper>
+        ),
+        [refresh, newCategoryComboLink]
+    )
+
     return (
         <ModelSingleSelectFormField
             required
@@ -47,14 +59,7 @@ export function CategoryComboField() {
             disabled={disabled}
             query={CATEGORY_COMBOS_QUERY}
             transform={addDefaultCategoryComboTransform}
-            inputWrapper={(select) => (
-                <EditableInputWrapper
-                    onRefresh={() => refresh()}
-                    onAddNew={() => window.open(newCategoryComboLink, '_blank')}
-                >
-                    {select}
-                </EditableInputWrapper>
-            )}
+            inputWrapper={inputWrapper}
         />
     )
 }

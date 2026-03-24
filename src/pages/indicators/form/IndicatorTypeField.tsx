@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useHref } from 'react-router'
 import { EditableInputWrapper } from '../../../components'
 import {
@@ -16,6 +16,18 @@ export const IndicatorTypeField = ({ helpText }: IndicatorTypeFieldsProps) => {
     const newIndicatorTypeLink = useHref('/indicatorTypes/new')
     const refresh = useRefreshModelSingleSelect({ resource: 'indicatorTypes' })
 
+    const inputWrapper = useCallback(
+        (select: React.ReactElement) => (
+            <EditableInputWrapper
+                onRefresh={() => refresh()}
+                onAddNew={() => window.open(newIndicatorTypeLink, '_blank')}
+            >
+                {select}
+            </EditableInputWrapper>
+        ),
+        [refresh, newIndicatorTypeLink]
+    )
+
     return (
         <ModelSingleSelectFormField
             required
@@ -31,14 +43,7 @@ export const IndicatorTypeField = ({ helpText }: IndicatorTypeFieldsProps) => {
                     order: 'displayName:iasc',
                 },
             }}
-            inputWrapper={(select) => (
-                <EditableInputWrapper
-                    onRefresh={() => refresh()}
-                    onAddNew={() => window.open(newIndicatorTypeLink, '_blank')}
-                >
-                    {select}
-                </EditableInputWrapper>
-            )}
+            inputWrapper={inputWrapper}
         />
     )
 }
