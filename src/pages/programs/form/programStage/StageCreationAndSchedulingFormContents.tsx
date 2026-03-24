@@ -11,6 +11,7 @@ import {
 import {
     AllowGenerateNextVisitField,
     AutoGenerateEventField,
+    BlockEntryFormField,
     GeneratedByEnrollmentDateField,
     HideDueDateField,
     MinDaysFromStartField,
@@ -127,6 +128,9 @@ export const StageCreationAndSchedulingFormContents = React.memo(
                 </StandardFormField>
                 <StandardFormField>
                     <RemindCompletedField />
+                </StandardFormField>
+                <StandardFormField>
+                    <BlockEntryFormField />
                 </StandardFormField>
             </SectionedFormSection>
         )

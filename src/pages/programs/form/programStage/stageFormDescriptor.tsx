@@ -116,6 +116,10 @@ export const StageFormDescriptor = {
                         'On event completion, ask user to complete enrollment'
                     ),
                 },
+                {
+                    name: 'blockEntryForm',
+                    label: i18n.t('Block data entry after completion'),
+                },
             ],
         },
         {

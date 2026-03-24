@@ -1,3 +1,4 @@
+export { BlockEntryFormField } from './BlockEntryFormField'
 export { ValidationStrategyField } from './ValidationStrategyField'
 export { RepeatableField } from './RepeatableField'
 export { GeneratedByEnrollmentDateField } from './GeneratedByEnrollmentDateField'
