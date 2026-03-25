@@ -1,4 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
+import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 import {
     createHashRouter,
@@ -23,6 +24,7 @@ import {
     routePaths,
     getOverviewPath,
     isMergableSection,
+    useBoundResourceQueryFn,
 } from '../../lib'
 import { OverviewSection } from '../../types'
 import { Layout, BreadcrumbItem } from '../layout'
@@ -108,6 +110,35 @@ const VerifyModelId = () => {
         throw new Error('Invalid model id.')
     }
     return <Outlet />
+}
+
+const EditBreadcrumbItem = ({
+    section,
+    pathname,
+    id,
+}: {
+    section: Section
+    pathname: string
+    id: string
+}) => {
+    const queryFn = useBoundResourceQueryFn()
+
+    const { data } = useQuery({
+        queryKey: [
+            {
+                resource: section.namePlural,
+                id,
+                params: { fields: ['displayName'] },
+            },
+        ],
+        queryFn: queryFn<{ displayName: string }>,
+    })
+
+    const label = data?.displayName
+        ? i18n.t('Edit: {{objectName}}', { objectName: data.displayName })
+        : i18n.t('Edit')
+
+    return <BreadcrumbItem label={label} to={pathname} />
 }
 
 const sectionsNoNewRoute = new Set<SchemaSection | NonSchemaSection>([
@@ -209,11 +240,10 @@ const schemaSectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
                     handle={
                         {
                             crumb: (matchInfo) => (
-                                <BreadcrumbItem
-                                    label={i18n.t('Edit {{modelName}}', {
-                                        modelName: section.title,
-                                    })}
-                                    to={matchInfo.pathname}
+                                <EditBreadcrumbItem
+                                    section={section}
+                                    id={matchInfo.params.id!}
+                                    pathname={matchInfo.pathname}
                                 />
                             ),
                         } satisfies RouteHandle
