@@ -239,13 +239,19 @@ const schemaSectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
                     index
                     handle={
                         {
-                            crumb: (matchInfo) => (
-                                <EditBreadcrumbItem
-                                    section={section}
-                                    id={matchInfo.params.id!}
-                                    pathname={matchInfo.pathname}
-                                />
-                            ),
+                            crumb: (matchInfo) => {
+                                const id = matchInfo.params.id
+                                if (id === undefined) {
+                                    return null
+                                }
+                                return (
+                                    <EditBreadcrumbItem
+                                        section={section}
+                                        id={id}
+                                        pathname={matchInfo.pathname}
+                                    />
+                                )
+                            },
                         } satisfies RouteHandle
                     }
                     lazy={createSectionLazyRouteFunction(section, 'Edit')}
