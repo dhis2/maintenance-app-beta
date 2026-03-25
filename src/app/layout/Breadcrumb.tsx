@@ -43,6 +43,11 @@ export const Breadcrumbs = () => {
     const matches = useMatches() as MatchRouteHandle[]
 
     const filtered = matches.filter((match) => match.handle?.crumb)
+
+    if (filtered.length === 0) {
+        return null
+    }
+
     const crumbs = filtered.map((match, index) => (
         <span key={match.id}>
             {match.handle?.crumb?.({

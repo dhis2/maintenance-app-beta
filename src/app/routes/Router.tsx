@@ -25,7 +25,7 @@ import {
     isMergableSection,
 } from '../../lib'
 import { OverviewSection } from '../../types'
-import { Layout, Breadcrumbs, BreadcrumbItem } from '../layout'
+import { Layout, BreadcrumbItem } from '../layout'
 import {
     SectionAuthorizedGuard,
     SectionCanMergeGuard,
@@ -136,12 +136,7 @@ const schemaSectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
                 },
             } satisfies RouteHandle
         }
-        element={
-            <>
-                <Breadcrumbs />
-                <Outlet />
-            </>
-        }
+        element={<Outlet />}
     >
         <Route
             index
