@@ -122,17 +122,18 @@ const schemaSectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
         handle={
             {
                 section,
-                crumb: () => (
-                    <BreadcrumbItem
-                        label={
-                            OVERVIEW_SECTIONS[section.parentSectionKey]
-                                .titlePlural
-                        }
-                        to={`/${getOverviewPath(
-                            OVERVIEW_SECTIONS[section.parentSectionKey]
-                        )}`}
-                    />
-                ),
+                crumb: () => {
+                    const overview: OverviewSection =
+                        OVERVIEW_SECTIONS[section.parentSectionKey]
+                    return (
+                        <BreadcrumbItem
+                            label={
+                                overview.breadcrumbLabel ?? overview.titlePlural
+                            }
+                            to={`/${getOverviewPath(overview)}`}
+                        />
+                    )
+                },
             } satisfies RouteHandle
         }
         element={
@@ -162,7 +163,7 @@ const schemaSectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
                     hideSidebar: true,
                     crumb: (matchInfo) => (
                         <BreadcrumbItem
-                            label={section.title}
+                            label={section.titlePlural}
                             to={matchInfo.pathname}
                         />
                     ),

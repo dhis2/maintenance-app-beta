@@ -354,6 +354,7 @@ export const OVERVIEW_SECTIONS = {
         namePlural: 'categories',
         title: i18n.t('Category'),
         titlePlural: i18n.t('Categories'),
+        breadcrumbLabel: i18n.t('Categories overview'),
         componentName: 'Categories',
     },
     dataElement: {
@@ -361,6 +362,7 @@ export const OVERVIEW_SECTIONS = {
         namePlural: 'dataElements',
         title: i18n.t('Data element'),
         titlePlural: i18n.t('Data elements'),
+        breadcrumbLabel: i18n.t('Data elements overview'),
         componentName: 'DataElements',
     },
     dataSet: {
@@ -368,6 +370,7 @@ export const OVERVIEW_SECTIONS = {
         namePlural: 'dataSets',
         title: i18n.t('Data set'),
         titlePlural: i18n.t('Data sets'),
+        breadcrumbLabel: i18n.t('Data sets overview'),
         componentName: 'DataSets',
     },
     indicator: {
@@ -382,6 +385,7 @@ export const OVERVIEW_SECTIONS = {
         namePlural: 'organisationUnits',
         title: i18n.t('Organisation unit'),
         titlePlural: i18n.t('Organisation units'),
+        breadcrumbLabel: i18n.t('Organisation units overview'),
         componentName: 'OrganisationUnits',
     },
     programsAndTracker: {
@@ -396,6 +400,7 @@ export const OVERVIEW_SECTIONS = {
         namePlural: 'optionSets',
         title: i18n.t('Option set'),
         titlePlural: i18n.t('Option sets'),
+        breadcrumbLabel: i18n.t('Option sets overview'),
         componentName: 'OptionSets',
     },
     validation: {
