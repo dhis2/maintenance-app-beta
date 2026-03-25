@@ -19,6 +19,7 @@ export const DefaultFormFooter = ({ cancelTo }: { cancelTo?: To }) => {
     >(null)
 
     const handleSubmit = (type: SubmitAction) => {
+        setActiveAction(type)
         setSubmitAction(type)
         submit()
     }
