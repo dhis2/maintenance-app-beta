@@ -30,7 +30,7 @@ const getOverviewLinkItem = (section: Section): LinkItem => ({
 })
 
 const getSectionLinkItem = (section: Section): LinkItem => ({
-    label: i18n.t(section.title),
+    label: i18n.t(section.titlePlural),
     to: getSectionPath(section),
     section,
 })
