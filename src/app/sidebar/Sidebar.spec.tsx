@@ -148,14 +148,16 @@ describe('Sidebar', () => {
     describe('searching', () => {
         it('should filter the list when a search string is entered', async () => {
             const user = userEvent.setup()
-            const { getByPlaceholderText, getByText, queryByText } =
+            const { getByPlaceholderText, getByText, queryByText, getByRole } =
                 renderSideBar()
 
             expect(queryByText('Data element groups')).toBeNull()
 
             await user.type(getByPlaceholderText(/Search/), 'elements')
 
-            expect(getByText('Data elements')).toBeDefined()
+            expect(
+                getByRole('link', { name: 'Data elements' })
+            ).toBeInTheDocument()
             expect(getByText('Overview')).toBeDefined()
             expect(getByText('Data element groups')).toBeDefined()
             expect(getByText('Data element group sets')).toBeDefined()
