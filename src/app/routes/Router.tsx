@@ -142,7 +142,20 @@ const schemaSectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
             </>
         }
     >
-        <Route index lazy={createSectionLazyRouteFunction(section, 'List')} />
+        <Route
+            index
+            lazy={createSectionLazyRouteFunction(section, 'List')}
+            handle={
+                {
+                    crumb: (matchInfo) => (
+                        <BreadcrumbItem
+                            label={section.titlePlural}
+                            to={matchInfo.pathname}
+                        />
+                    ),
+                } satisfies RouteHandle
+            }
+        />
         <Route
             handle={
                 {
