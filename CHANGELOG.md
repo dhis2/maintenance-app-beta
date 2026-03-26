@@ -1,3 +1,10 @@
+## [0.150.2](https://github.com/dhis2/metadata-management-app/compare/v0.150.1...v0.150.2) (2026-03-24)
+
+
+### Bug Fixes
+
+* program rule action location value ([ccdd529](https://github.com/dhis2/metadata-management-app/commit/ccdd52932d2c0416a9cee2cf49b8a79b18a0d049))
+
 ## [0.150.1](https://github.com/dhis2/metadata-management-app/compare/v0.150.0...v0.150.1) (2026-03-19)
 
 
