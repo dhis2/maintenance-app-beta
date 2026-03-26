@@ -62,7 +62,7 @@ describe('Sidebar', () => {
                     systemInfo: {
                         contextPath: 'www.test.com/path/somewhere',
                     },
-                } as any)
+                } as ReturnType<typeof useConfig>)
         )
         mockedUseCurrentUserAuthorities.mockReturnValue(new Set(['ALL']))
     })
@@ -76,7 +76,7 @@ describe('Sidebar', () => {
             'Data sets',
             'Indicators and Predictors',
             'Organisation units',
-            'Programs and Tracker',
+            'Programs',
             'Option sets',
             'Validations',
             'Data Approval',
