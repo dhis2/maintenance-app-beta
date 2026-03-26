@@ -135,7 +135,10 @@ const EditBreadcrumbItem = ({
     })
 
     const label = data?.displayName
-        ? i18n.t('Edit: {{objectName}}', { objectName: data.displayName })
+        ? i18n.t('Edit: {{objectName}}', {
+              objectName: data.displayName,
+              interpolation: { escapeValue: false },
+          })
         : i18n.t('Edit')
 
     return <BreadcrumbItem label={label} to={pathname} />
