@@ -7,18 +7,21 @@ import {
     DataTableColumnHeader,
     DataTableRow,
     IconChevronDown16,
-    IconChevronRight16,
     IconDelete16,
     Input,
     InputField,
     Layer,
+    Modal,
+    ModalActions,
+    ModalContent,
+    ModalTitle,
     NoticeBox,
     Popper,
     TableBody,
     TableFoot,
     TableHead,
 } from '@dhis2/ui'
-import React, { useCallback, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { SketchPicker } from 'react-color'
 import { useField } from 'react-final-form'
 import { generateDhis2Id } from '../../../../lib/models/uid'
@@ -98,12 +101,145 @@ function shiftColor(hex: string): string {
     return hslToHex(h, s, newL)
 }
 
+function LegendGeneratorWrenchIcon() {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            className={classes.legendGeneratorWrench}
+            role="presentation"
+        >
+            <path
+                fillRule="evenodd"
+                d="M11.28 2.013 10 3.293V6h2.707l1.28-1.28a3 3 0 1 1-2.707-2.707Zm1.165-.744a4 4 0 0 0-5.31 4.767l-5.55 5.55a2 2 0 1 0 2.83 2.828l5.549-5.55A4.005 4.005 0 0 0 15 5c0-.509-.095-.996-.27-1.445a.5.5 0 0 0-.819-.173L12.293 5H11V3.707l1.618-1.618a.5.5 0 0 0-.173-.82ZM8.968 8.446l-5.26 5.261a1 1 0 0 1-1.415-1.414l5.26-5.261c.345.582.833 1.07 1.415 1.414Z"
+                clipRule="evenodd"
+            />
+        </svg>
+    )
+}
+
+type LegendGeneratorInputsProps = {
+    startValue: string
+    setStartValue: (v: string) => void
+    endValue: string
+    setEndValue: (v: string) => void
+    numClasses: number
+    setNumClasses: (n: number) => void
+    setSelectedScaleIndex: (i: number) => void
+    selectedScale: (typeof COLOR_SCALES)[number]
+    scalePickerOpen: boolean
+    setScalePickerOpen: (o: boolean) => void
+    scaleButtonRef: React.RefObject<HTMLButtonElement>
+}
+
+function LegendGeneratorInputs({
+    startValue,
+    setStartValue,
+    endValue,
+    setEndValue,
+    numClasses,
+    setNumClasses,
+    setSelectedScaleIndex,
+    selectedScale,
+    scalePickerOpen,
+    setScalePickerOpen,
+    scaleButtonRef,
+}: LegendGeneratorInputsProps) {
+    return (
+        <div className={classes.generateInputs}>
+            <InputField
+                label={i18n.t('Start value')}
+                value={startValue}
+                type="number"
+                onChange={(e: { value?: string }) =>
+                    setStartValue(e.value ?? '')
+                }
+                inputWidth="120px"
+            />
+            <InputField
+                label={i18n.t('End value')}
+                value={endValue}
+                type="number"
+                onChange={(e: { value?: string }) => setEndValue(e.value ?? '')}
+                inputWidth="120px"
+            />
+            <InputField
+                label={i18n.t('Items')}
+                value={String(numClasses)}
+                type="number"
+                min={String(MIN_CLASSES)}
+                max={String(MAX_CLASSES)}
+                step="1"
+                onChange={(e: { value?: string }) => {
+                    const raw = e.value ?? ''
+                    if (raw === '') {
+                        return
+                    }
+                    const n = Number.parseInt(raw, 10)
+                    if (Number.isNaN(n)) {
+                        return
+                    }
+                    setNumClasses(
+                        Math.min(MAX_CLASSES, Math.max(MIN_CLASSES, n))
+                    )
+                }}
+                inputWidth="80px"
+            />
+            <div className={classes.colorScaleSelector}>
+                <span className={classes.colorScaleLabel}>
+                    {i18n.t('Color scale')}
+                </span>
+                <button
+                    type="button"
+                    ref={scaleButtonRef}
+                    className={classes.colorScaleButton}
+                    onClick={() => setScalePickerOpen(!scalePickerOpen)}
+                >
+                    <ColorScalePreview
+                        colors={selectedScale.scale[numClasses] || []}
+                    />
+                    <IconChevronDown16 />
+                </button>
+                {scalePickerOpen && (
+                    <Layer onBackdropClick={() => setScalePickerOpen(false)}>
+                        <Popper
+                            placement="bottom-start"
+                            reference={scaleButtonRef}
+                        >
+                            <div className={classes.colorScalePopover}>
+                                {COLOR_SCALES.map((scaleDef, index) => (
+                                    <button
+                                        key={scaleDef.name}
+                                        type="button"
+                                        className={classes.colorScaleOption}
+                                        onClick={() => {
+                                            setSelectedScaleIndex(index)
+                                            setScalePickerOpen(false)
+                                        }}
+                                    >
+                                        <ColorScalePreview
+                                            colors={
+                                                scaleDef.scale[numClasses] || []
+                                            }
+                                        />
+                                    </button>
+                                ))}
+                            </div>
+                        </Popper>
+                    </Layer>
+                )}
+            </div>
+        </div>
+    )
+}
+
 export function LegendsField() {
     const { input, meta } = useField<LegendItem[]>('legends')
     const legends: LegendItem[] = input.value || []
 
-    const [confirmOpen, setConfirmOpen] = useState(false)
-    const [generatorOpen, setGeneratorOpen] = useState(legends.length === 0)
+    const [modalOpen, setModalOpen] = useState(false)
 
     const [startValue, setStartValue] = useState('0')
     const [endValue, setEndValue] = useState('100')
@@ -118,6 +254,12 @@ export function LegendsField() {
         () => [...legends].sort((a, b) => a.startValue - b.startValue),
         [legends]
     )
+
+    useEffect(() => {
+        if (legends.length === 0) {
+            setModalOpen(false)
+        }
+    }, [legends.length])
 
     const overlappingIds = useMemo(() => {
         const ids = new Set<string>()
@@ -186,16 +328,8 @@ export function LegendsField() {
         const items = generateLegendItems(start, end, colors)
         input.onChange(items)
         input.onBlur()
-        setConfirmOpen(false)
+        setModalOpen(false)
     }, [startValue, endValue, selectedScale, numClasses, input])
-
-    const handleGenerate = useCallback(() => {
-        if (legends.length > 0) {
-            setConfirmOpen(true)
-        } else {
-            doGenerate()
-        }
-    }, [legends.length, doGenerate])
 
     const startNum = parseFloat(startValue)
     const endNum = parseFloat(endValue)
@@ -206,208 +340,140 @@ export function LegendsField() {
         isNaN(endNum) ||
         endNum <= startNum
 
+    const generatorInputsProps: LegendGeneratorInputsProps = {
+        startValue,
+        setStartValue,
+        endValue,
+        setEndValue,
+        numClasses,
+        setNumClasses,
+        setSelectedScaleIndex,
+        selectedScale,
+        scalePickerOpen,
+        setScalePickerOpen,
+        scaleButtonRef,
+    }
+
     const fieldError =
         meta.touched && meta.error && typeof meta.error === 'string'
             ? meta.error
             : undefined
 
+    const hasItems = sortedLegends.length > 0
+
     return (
         <div>
-            <div className={classes.generateSection}>
-                <button
-                    type="button"
-                    className={classes.generateToggle}
-                    onClick={() => setGeneratorOpen((o) => !o)}
-                >
-                    <span className={classes.generateToggleIcon}>
-                        {generatorOpen ? (
-                            <IconChevronDown16 />
-                        ) : (
-                            <IconChevronRight16 />
-                        )}
-                    </span>
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        className="euiIcon eui-alignMiddle website-css-1t0rgrv-euiIcon-m-isLoaded"
-                        role="presentation"
-                        data-icon-type="wrench"
-                        data-is-loaded="true"
-                    >
-                        <path
-                            fillRule="evenodd"
-                            d="M11.28 2.013 10 3.293V6h2.707l1.28-1.28a3 3 0 1 1-2.707-2.707Zm1.165-.744a4 4 0 0 0-5.31 4.767l-5.55 5.55a2 2 0 1 0 2.83 2.828l5.549-5.55A4.005 4.005 0 0 0 15 5c0-.509-.095-.996-.27-1.445a.5.5 0 0 0-.819-.173L12.293 5H11V3.707l1.618-1.618a.5.5 0 0 0-.173-.82ZM8.968 8.446l-5.26 5.261a1 1 0 0 1-1.415-1.414l5.26-5.261c.345.582.833 1.07 1.415 1.414Z"
-                            clipRule="evenodd"
-                        />
-                    </svg>
-                    {i18n.t('Legend generator')}
-                </button>
-                {generatorOpen && (
-                    <div className={classes.generateBody}>
-                        <div className={classes.generateInputs}>
-                            <InputField
-                                label={i18n.t('Start value')}
-                                value={startValue}
-                                type="number"
-                                onChange={(e: { value?: string }) =>
-                                    setStartValue(e.value ?? '')
-                                }
-                                inputWidth="120px"
-                            />
-                            <InputField
-                                label={i18n.t('End value')}
-                                value={endValue}
-                                type="number"
-                                onChange={(e: { value?: string }) =>
-                                    setEndValue(e.value ?? '')
-                                }
-                                inputWidth="120px"
-                            />
-                            <InputField
-                                label={i18n.t('Items')}
-                                value={String(numClasses)}
-                                type="number"
-                                min={String(MIN_CLASSES)}
-                                max={String(MAX_CLASSES)}
-                                step="1"
-                                onChange={(e: { value?: string }) => {
-                                    const raw = e.value ?? ''
-                                    if (raw === '') {
-                                        return
-                                    }
-                                    const n = Number.parseInt(raw, 10)
-                                    if (Number.isNaN(n)) {
-                                        return
-                                    }
-                                    setNumClasses(
-                                        Math.min(
-                                            MAX_CLASSES,
-                                            Math.max(MIN_CLASSES, n)
-                                        )
-                                    )
-                                }}
-                                inputWidth="80px"
-                            />
-                            <div className={classes.colorScaleSelector}>
-                                <span className={classes.colorScaleLabel}>
-                                    {i18n.t('Color scale')}
-                                </span>
-                                <button
-                                    type="button"
-                                    ref={scaleButtonRef}
-                                    className={classes.colorScaleButton}
-                                    onClick={() =>
-                                        setScalePickerOpen(!scalePickerOpen)
-                                    }
-                                >
-                                    <ColorScalePreview
-                                        colors={
-                                            selectedScale.scale[numClasses] ||
-                                            []
-                                        }
-                                    />
-                                    <IconChevronDown16 />
-                                </button>
-                                {scalePickerOpen && (
-                                    <Layer
-                                        onBackdropClick={() =>
-                                            setScalePickerOpen(false)
-                                        }
-                                    >
-                                        <Popper
-                                            placement="bottom-start"
-                                            reference={scaleButtonRef}
-                                        >
-                                            <div
-                                                className={
-                                                    classes.colorScalePopover
-                                                }
-                                            >
-                                                {COLOR_SCALES.map(
-                                                    (scaleDef, index) => (
-                                                        <button
-                                                            key={scaleDef.name}
-                                                            type="button"
-                                                            className={
-                                                                classes.colorScaleOption
-                                                            }
-                                                            onClick={() => {
-                                                                setSelectedScaleIndex(
-                                                                    index
-                                                                )
-                                                                setScalePickerOpen(
-                                                                    false
-                                                                )
-                                                            }}
-                                                        >
-                                                            <ColorScalePreview
-                                                                colors={
-                                                                    scaleDef
-                                                                        .scale[
-                                                                        numClasses
-                                                                    ] || []
-                                                                }
-                                                            />
-                                                        </button>
-                                                    )
-                                                )}
-                                            </div>
-                                        </Popper>
-                                    </Layer>
-                                )}
-                            </div>
-                        </div>
-                        <Button
-                            onClick={handleGenerate}
-                            disabled={generateDisabled}
-                        >
-                            {i18n.t('Create legend items')}
-                        </Button>
-                    </div>
-                )}
-            </div>
+            {hasItems && (
+                <div className={classes.openGeneratorWrap}>
+                    <Button secondary onClick={() => setModalOpen(true)}>
+                        {i18n.t('Generate a new legend...')}
+                    </Button>
+                </div>
+            )}
 
-            {confirmOpen && (
-                <NoticeBox warning title={i18n.t('Replace existing items?')}>
-                    <p>
-                        {i18n.t('This will replace all existing legend items.')}
-                    </p>
-                    <ButtonStrip>
-                        <Button small onClick={() => setConfirmOpen(false)}>
-                            {i18n.t('Cancel')}
-                        </Button>
-                        <Button small destructive onClick={doGenerate}>
-                            {i18n.t('Proceed')}
-                        </Button>
-                    </ButtonStrip>
-                </NoticeBox>
+            {modalOpen && (
+                <Modal
+                    large
+                    onClose={() => setModalOpen(false)}
+                    dataTest="legend-generator-modal"
+                >
+                    <ModalTitle>{i18n.t('Legend generator')}</ModalTitle>
+                    <ModalContent>
+                        <NoticeBox
+                            warning
+                            title={i18n.t('Replace existing legend items')}
+                        >
+                            {i18n.t(
+                                'Generating new legend items will replace all legend items in the table.'
+                            )}
+                        </NoticeBox>
+                        <div className={classes.modalGeneratorBody}>
+                            <LegendGeneratorInputs {...generatorInputsProps} />
+                        </div>
+                    </ModalContent>
+                    <ModalActions>
+                        <ButtonStrip end>
+                            <Button
+                                secondary
+                                onClick={() => setModalOpen(false)}
+                            >
+                                {i18n.t('Cancel')}
+                            </Button>
+                            <Button
+                                primary
+                                onClick={doGenerate}
+                                disabled={generateDisabled}
+                            >
+                                {i18n.t('Create legend items')}
+                            </Button>
+                        </ButtonStrip>
+                    </ModalActions>
+                </Modal>
             )}
 
             <DataTable>
-                <TableHead>
-                    <DataTableRow>
-                        <DataTableColumnHeader />
-                        <DataTableColumnHeader>
-                            {i18n.t('Name')}
-                        </DataTableColumnHeader>
-                        <DataTableColumnHeader>
-                            {i18n.t('Start value')}
-                        </DataTableColumnHeader>
-                        <DataTableColumnHeader>
-                            {i18n.t('End value')}
-                        </DataTableColumnHeader>
-                        <DataTableColumnHeader />
-                    </DataTableRow>
-                </TableHead>
+                {hasItems && (
+                    <TableHead>
+                        <DataTableRow>
+                            <DataTableColumnHeader />
+                            <DataTableColumnHeader>
+                                {i18n.t('Name')}
+                            </DataTableColumnHeader>
+                            <DataTableColumnHeader>
+                                {i18n.t('Start value')}
+                            </DataTableColumnHeader>
+                            <DataTableColumnHeader>
+                                {i18n.t('End value')}
+                            </DataTableColumnHeader>
+                            <DataTableColumnHeader />
+                        </DataTableRow>
+                    </TableHead>
+                )}
                 <TableBody>
                     {sortedLegends.length === 0 && (
                         <DataTableRow>
-                            <DataTableCell colSpan="5">
-                                {i18n.t(
-                                    'No legend items yet. Add items manually or use the generator above.'
-                                )}
+                            <DataTableCell staticStyle colSpan="5">
+                                <div className={classes.emptyStateCell}>
+                                    <div
+                                        className={classes.emptyStateGenerator}
+                                    >
+                                        <div
+                                            className={classes.emptyStateTitle}
+                                        >
+                                            {i18n.t('Generate a legend')}
+                                        </div>
+                                        <div className={classes.generateBody}>
+                                            <LegendGeneratorInputs
+                                                {...generatorInputsProps}
+                                            />
+                                            <Button
+                                                onClick={doGenerate}
+                                                disabled={generateDisabled}
+                                            >
+                                                {i18n.t(
+                                                    'Generate legend items'
+                                                )}
+                                            </Button>
+                                        </div>
+                                    </div>
+                                    <div className={classes.manualAddRow}>
+                                        <div
+                                            className={classes.emptyStateTitle}
+                                        >
+                                            {i18n.t(
+                                                'Manually add legend items'
+                                            )}
+                                        </div>
+                                        <div className={classes.manualAddBody}>
+                                            <Button
+                                                small
+                                                onClick={handleAddItem}
+                                            >
+                                                {i18n.t('Add legend item')}
+                                            </Button>
+                                        </div>
+                                    </div>
+                                </div>
                             </DataTableCell>
                         </DataTableRow>
                     )}
@@ -421,15 +487,17 @@ export function LegendsField() {
                         />
                     ))}
                 </TableBody>
-                <TableFoot>
-                    <DataTableRow>
-                        <DataTableCell colSpan="5">
-                            <Button small onClick={handleAddItem}>
-                                {i18n.t('Add legend item')}
-                            </Button>
-                        </DataTableCell>
-                    </DataTableRow>
-                </TableFoot>
+                {hasItems && (
+                    <TableFoot>
+                        <DataTableRow>
+                            <DataTableCell staticStyle colSpan="5">
+                                <Button small onClick={handleAddItem}>
+                                    {i18n.t('Add legend item')}
+                                </Button>
+                            </DataTableCell>
+                        </DataTableRow>
+                    </TableFoot>
+                )}
             </DataTable>
 
             {fieldError && (
@@ -457,7 +525,7 @@ function InlineLegendItemRow({
         <DataTableRow
             className={isOverlapping ? classes.legendItemRowOverlap : ''}
         >
-            <DataTableCell>
+            <DataTableCell width="52px" staticStyle>
                 <button
                     type="button"
                     ref={colorRef}
@@ -486,7 +554,7 @@ function InlineLegendItemRow({
                     </Layer>
                 )}
             </DataTableCell>
-            <DataTableCell>
+            <DataTableCell staticStyle>
                 <Input
                     value={item.name}
                     onChange={(e: { value?: string }) =>
@@ -495,7 +563,7 @@ function InlineLegendItemRow({
                     dense
                 />
             </DataTableCell>
-            <DataTableCell>
+            <DataTableCell staticStyle>
                 <Input
                     value={String(item.startValue)}
                     type="number"
@@ -508,7 +576,7 @@ function InlineLegendItemRow({
                     dense
                 />
             </DataTableCell>
-            <DataTableCell>
+            <DataTableCell staticStyle>
                 <Input
                     value={String(item.endValue)}
                     type="number"
@@ -521,7 +589,7 @@ function InlineLegendItemRow({
                     dense
                 />
             </DataTableCell>
-            <DataTableCell>
+            <DataTableCell width="52px" staticStyle>
                 <Button
                     small
                     secondary
