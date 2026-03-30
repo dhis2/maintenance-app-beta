@@ -3,6 +3,7 @@ import { z, ZodObject, ZodRawShape } from 'zod'
 import { zodToJsonSchema } from 'zod-to-json-schema'
 import { categoryFormSchema } from '../pages/categories/form'
 import { indicatorGroupFormSchema } from '../pages/indicatorGroups/form/indicatorGroupSchema'
+import { indicatorFormSchema } from '../pages/indicators/form/indicatorSchema'
 
 const generateContract = <T extends ZodRawShape>({
     method,
@@ -64,6 +65,15 @@ describe('contracts', () => {
             name: 'indicator-group',
             expectedSchema: indicatorGroupFormSchema,
             usage: 'used to populate edit indicator group form',
+        })
+    })
+    it('should generate get indicator group contracts', () => {
+        generateContract({
+            method: 'GET',
+            path: '/indicators/{id}',
+            name: 'indicator',
+            expectedSchema: indicatorFormSchema,
+            usage: 'used to populate edit indicator form',
         })
     })
 })
