@@ -405,13 +405,13 @@ describe('Program indicator groups form tests', () => {
             )
             expect(piPatch).toMatchObject({ op: 'replace' })
             const piIds = (piPatch!.value as { id: string }[]).map((p) => p.id)
-            expect(piIds.sort()).toEqual(
-                [
-                    programIndicators[0].id,
-                    programIndicators[1].id,
-                    programIndicators[2].id,
-                ].sort()
-            )
+            const sortedPiIds = [...piIds].sort((a, b) => a.localeCompare(b))
+            const expectedSortedIds = [
+                programIndicators[0].id,
+                programIndicators[1].id,
+                programIndicators[2].id,
+            ].sort((a, b) => a.localeCompare(b))
+            expect(sortedPiIds).toEqual(expectedSortedIds)
         })
         it('should do nothing and return to the list view on success when no field is changed', async () => {
             const { screen } = await renderForm()
