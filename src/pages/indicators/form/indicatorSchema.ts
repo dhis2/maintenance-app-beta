@@ -1,13 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
-import {
-    createFormValidate,
-    getDefaultsOld,
-    modelFormSchemas,
-} from '../../../lib'
+import { createFormValidate, modelFormSchemas } from '../../../lib'
 import { getDefaults } from '../../../lib/zod/getDefaults'
 import { Indicator, PickWithFieldFilters } from '../../../types/generated'
-import { categoryFormSchema } from '../../categories/form'
 import { fieldFilters } from '../../programIndicators/form/fieldFilters'
 
 const { identifiable, withAttributeValues, style, withDefaultListColumns } =

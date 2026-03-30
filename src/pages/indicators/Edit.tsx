@@ -23,7 +23,6 @@ import { IndicatorFormValues, validate } from './form/indicatorSchema'
 const fieldFilters = [
     ...DEFAULT_IDENTIFIABLE,
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
-    'name',
     'shortName',
     'code',
     'description',
