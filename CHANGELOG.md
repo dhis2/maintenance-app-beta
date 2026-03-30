@@ -1,3 +1,11 @@
+## [0.150.3](https://github.com/dhis2/metadata-management-app/compare/v0.150.2...v0.150.3) (2026-03-24)
+
+
+### Bug Fixes
+
+* trigger release ([#841](https://github.com/dhis2/metadata-management-app/issues/841)) ([537b37a](https://github.com/dhis2/metadata-management-app/commit/537b37a2635189920deb1003fb7fd99eeb624933))
+* **program-stage:** program stage form improvements ([#831](https://github.com/dhis2/metadata-management-app/issues/831)) ([a43c0c2](https://github.com/dhis2/metadata-management-app/commit/a43c0c299c3d4d38caa015a511cb8c0e114d916f))
+
 ## [0.150.2](https://github.com/dhis2/metadata-management-app/compare/v0.150.1...v0.150.2) (2026-03-24)
 
 
