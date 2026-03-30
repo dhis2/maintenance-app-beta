@@ -23,7 +23,7 @@ const generateContract = <T extends ZodRawShape>({
         httpMethod: method,
         requestUrl: path,
         responseStatus: 200,
-        jsonSchema: `contracts/maintenance-app/${name}/json-schema.json`,
+        jsonSchema: `contracts/metadata-management-app/${name}/json-schema.json`,
     }
     const schema = zodToJsonSchema(expectedSchema.extend({ id: z.string() }), {
         name,

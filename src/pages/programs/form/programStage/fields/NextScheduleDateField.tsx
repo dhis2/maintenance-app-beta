@@ -17,7 +17,7 @@ export function NextScheduleDateField() {
                 ) || []
 
         return [
-            { label: i18n.t('<No value>'), value: '' },
+            { label: i18n.t('None'), value: '' },
             ...dataElements.map((de) => ({
                 value: de.id,
                 label: de.displayName,
@@ -37,6 +37,9 @@ export function NextScheduleDateField() {
                     input={input}
                     meta={meta}
                     label={i18n.t('Default next scheduled date')}
+                    helpText={i18n.t(
+                        'If set, this date sets the next scheduled date. Standard interval days is used if the date is empty.'
+                    )}
                     dataTest="formfields-nextScheduleDate"
                     inputWidth="400px"
                     options={options}
