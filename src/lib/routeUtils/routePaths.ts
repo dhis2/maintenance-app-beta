@@ -4,7 +4,7 @@ export const routePaths = {
     overviewRoot: 'overview',
     sectionNew: 'new',
     merge: 'merge',
-    clone: 'clone',
+    duplicate: 'duplicate',
 } as const
 
 export const getOverviewPath = (section: Section) => {

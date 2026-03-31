@@ -6,6 +6,7 @@ import { StandardFormSection } from '../standardForm'
 import classes from './DefaultFormContents.module.css'
 import { DefaultFormErrorNotice } from './DefaultFormErrorNotice'
 import { DefaultFormFooter } from './DefaultFormFooter'
+import { DuplicationNoticeBox } from './DuplicationNoticeBox'
 import { TranslatedFieldsNoticeBox } from './TranslatedFieldsNoticeBox'
 
 type DefaultFormContentsProps = {
@@ -17,10 +18,10 @@ function DefaultFormContents({
     children,
     section,
     showTranslatedFieldsNotice = false,
-    description = undefined,
+    showDuplicationNotice = false,
 }: DefaultFormContentsProps & {
     readonly showTranslatedFieldsNotice?: boolean
-    description?: string
+    readonly showDuplicationNotice?: boolean
 }) {
     const listPath = `/${getSectionPath(section)}`
 
@@ -28,7 +29,9 @@ function DefaultFormContents({
         <>
             <div className={classes.form}>
                 {showTranslatedFieldsNotice && <TranslatedFieldsNoticeBox />}
-                {description && <h2>{description}</h2>}
+                {showDuplicationNotice && (
+                    <DuplicationNoticeBox section={section} />
+                )}
                 {children}
                 <StandardFormSection>
                     <DefaultFormErrorNotice />
@@ -51,11 +54,8 @@ export function DefaultNewFormContents(
     return <DefaultFormContents {...props} showTranslatedFieldsNotice={false} />
 }
 
-export function DefaultCloneFormContents(
-    props: Readonly<DefaultFormContentsProps> & {
-        modelId: string
-        name?: string
-    }
+export function DefaultDuplicateFormContents(
+    props: Readonly<DefaultFormContentsProps>
 ) {
     const form = useForm()
     useEffect(() => {
@@ -70,7 +70,7 @@ export function DefaultCloneFormContents(
             <DefaultFormContents
                 {...props}
                 showTranslatedFieldsNotice={false}
-                description={`Cloning ${props.name} (id: ${props.modelId})`}
+                showDuplicationNotice={true}
             />
         </div>
     )

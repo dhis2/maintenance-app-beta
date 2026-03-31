@@ -74,7 +74,7 @@ function createOverviewLazyRouteFunction(
 
 function createSectionLazyRouteFunction(
     section: Section,
-    componentFileName: 'New' | 'Edit' | 'List' | 'Merge' | 'Clone'
+    componentFileName: 'New' | 'Edit' | 'List' | 'Merge' | 'Duplicate'
 ) {
     return async () => {
         try {
@@ -196,13 +196,13 @@ const schemaSectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
             )}
             {
                 <Route
-                    path={`${routePaths.clone}`}
-                    lazy={createSectionLazyRouteFunction(section, 'Clone')}
+                    path={`${routePaths.duplicate}`}
+                    lazy={createSectionLazyRouteFunction(section, 'Duplicate')}
                     handle={
                         {
                             crumb: (matchInfo) => (
                                 <BreadcrumbItem
-                                    label={i18n.t('Clone {{modelName}}', {
+                                    label={i18n.t('Duplicate {{modelName}}', {
                                         modelName: section.title,
                                     })}
                                     to={matchInfo.pathname}

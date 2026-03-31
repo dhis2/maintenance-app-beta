@@ -3,7 +3,7 @@ import { omit } from 'lodash'
 import React from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { FormBase } from '../../components'
-import { DefaultCloneFormContents } from '../../components/form/DefaultFormContents'
+import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormContents'
 import {
     ATTRIBUTE_VALUES_FIELD_FILTERS,
     SECTIONS_MAP,
@@ -17,6 +17,7 @@ import { transformFormValues } from './form/categoryOptionSchema'
 const fieldFilters = [
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
+    'displayName',
     'formName',
     'code',
     'shortName',
@@ -31,11 +32,11 @@ const section = SECTIONS_MAP.categoryOption
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const clonedModelId = searchParams.get('clonedId') as string
+    const duplicatedModelId = searchParams.get('duplicatedId') as string
 
     const query = {
         resource: 'categoryOptions',
-        id: clonedModelId,
+        id: duplicatedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
@@ -52,13 +53,9 @@ export const Component = () => {
             validate={validate}
             valueFormatter={transformFormValues}
         >
-            <DefaultCloneFormContents
-                section={section}
-                modelId={clonedModelId}
-                name={categoryOptionCombo.data?.name}
-            >
+            <DefaultDuplicateFormContents section={section}>
                 <CategoryOptionFormFields />
-            </DefaultCloneFormContents>
+            </DefaultDuplicateFormContents>
         </FormBase>
     )
 }

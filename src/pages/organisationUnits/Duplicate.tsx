@@ -3,7 +3,7 @@ import { omit } from 'lodash'
 import React from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { FormBase } from '../../components'
-import { DefaultCloneFormContents } from '../../components/form/DefaultFormContents'
+import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormContents'
 import { ATTRIBUTE_VALUES_FIELD_FILTERS, SECTIONS_MAP } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { OrgUnitFormValues } from './Edit'
@@ -13,6 +13,7 @@ import { useOnSaveOrgUnits } from './New'
 const fieldFilters = [
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
+    'displayName',
     'code',
     'shortName',
     'openingDate',
@@ -38,12 +39,12 @@ const section = SECTIONS_MAP.organisationUnit
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const clonedModelId = searchParams.get('clonedId') as string
+    const duplicatedModelId = searchParams.get('duplicatedId') as string
     const onSubmit = useOnSaveOrgUnits()
 
     const query = {
         resource: 'organisationUnits',
-        id: clonedModelId,
+        id: duplicatedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
@@ -58,13 +59,9 @@ export const Component = () => {
             initialValues={omit(orgUnit.data, 'id')}
             validate={validate}
         >
-            <DefaultCloneFormContents
-                section={section}
-                modelId={clonedModelId}
-                name={orgUnit.data?.name}
-            >
+            <DefaultDuplicateFormContents section={section}>
                 <OrganisationUnitFormField />
-            </DefaultCloneFormContents>
+            </DefaultDuplicateFormContents>
         </FormBase>
     )
 }

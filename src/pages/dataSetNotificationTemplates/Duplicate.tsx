@@ -9,6 +9,7 @@ import {
     SectionedFormErrorNotice,
     SectionedFormLayout,
 } from '../../components'
+import { DuplicationNoticeBox } from '../../components/form/DuplicationNoticeBox'
 import {
     getSectionPath,
     SectionedFormProvider,
@@ -41,7 +42,7 @@ const fieldFilters = [
 
 export const Component = () => {
     const [searchParams] = useSearchParams()
-    const clonedModelId = searchParams.get('clonedId') as string
+    const duplicatedModelId = searchParams.get('duplicatedId') as string
 
     const queryFn = useBoundResourceQueryFn()
     const section = SECTIONS_MAP.dataSetNotificationTemplate
@@ -49,14 +50,14 @@ export const Component = () => {
         queryKey: [
             {
                 resource: 'dataSetNotificationTemplates',
-                id: clonedModelId,
+                id: duplicatedModelId,
                 params: {
                     fields: fieldFilters.join(','),
                 },
             },
         ],
         queryFn: queryFn<DataSetNotificationResult>,
-        enabled: !!clonedModelId,
+        enabled: !!duplicatedModelId,
     })
 
     const initialValues: Partial<DataSetNotificationResult> | undefined =
@@ -77,9 +78,7 @@ export const Component = () => {
                     <SectionedFormLayout
                         sidebar={<DefaultSectionedFormSidebar />}
                     >
-                        <h2>
-                            `Cloning ${template?.name} (id: ${clonedModelId})`
-                        </h2>
+                        <DuplicationNoticeBox section={section} />
                         <form onSubmit={handleSubmit}>
                             <DataSetNotificationsFormFields />
                             <SectionedFormErrorNotice />

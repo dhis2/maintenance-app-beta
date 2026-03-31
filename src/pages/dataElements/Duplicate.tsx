@@ -3,7 +3,7 @@ import { omit } from 'lodash'
 import React from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { FormBase } from '../../components'
-import { DefaultCloneFormContents } from '../../components/form/DefaultFormContents'
+import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormContents'
 import {
     ATTRIBUTE_VALUES_FIELD_FILTERS,
     SECTIONS_MAP,
@@ -16,6 +16,7 @@ import { DataElementFormFields, validate } from './form'
 const fieldFilters = [
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
+    'displayName',
     'shortName',
     'code',
     'formName',
@@ -43,11 +44,11 @@ export const Component = () => {
     const section = SECTIONS_MAP.dataElement
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const clonedModelId = searchParams.get('clonedId') as string
+    const duplicatedModelId = searchParams.get('duplicatedId') as string
 
     const query = {
         resource: 'dataElements',
-        id: clonedModelId,
+        id: duplicatedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
@@ -62,13 +63,9 @@ export const Component = () => {
             initialValues={omit(dataElement.data, 'id')}
             validate={validate}
         >
-            <DefaultCloneFormContents
-                section={section}
-                modelId={clonedModelId}
-                name={dataElement.data?.name}
-            >
+            <DefaultDuplicateFormContents section={section}>
                 <DataElementFormFields />
-            </DefaultCloneFormContents>
+            </DefaultDuplicateFormContents>
         </FormBase>
     )
 }
