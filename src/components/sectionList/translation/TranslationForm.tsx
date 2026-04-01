@@ -48,7 +48,11 @@ const orderedTranslatableFields = [
     'noteLabel',
 ]
 
-const validEventFields: string[] = ['name', 'shortName', 'description']
+const validEventFields: Set<string> = new Set([
+    'name',
+    'shortName',
+    'description',
+])
 
 /**
  * Get the translateable fields for schemaa.
@@ -67,10 +71,10 @@ export const getTranslateableFieldsForSchema = (
     ]
         .filter((field) => schema.properties[field]?.translatable)
         .filter((field) =>
-            (model as { programType?: string })?.programType !==
+            (model as { programType?: string })?.programType ===
             'WITHOUT_REGISTRATION'
-                ? true
-                : validEventFields.includes(field)
+                ? validEventFields.has(field)
+                : true
         )
         .map((field) => schema.properties[field]?.fieldName)
         .filter((f) => f !== undefined)
