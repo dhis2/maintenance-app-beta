@@ -7,6 +7,7 @@ import { DateValue } from './DateValue'
 import { ModelReference, isModelReference } from './ModelReference'
 import { PublicAccessValue } from './PublicAccess'
 import { TextValue } from './TextValue'
+import { UrlValue } from './UrlValue'
 
 export type ValueDetails = {
     propertyType: SchemaFieldProperty['propertyType']
@@ -71,6 +72,10 @@ export const ModelValueRenderer = ({
 
     if (propertyType === 'CONSTANT') {
         return <ConstantValue value={value as string} />
+    }
+
+    if (propertyType === 'URL') {
+        return <UrlValue value={value as string} />
     }
 
     if (propertyType === 'DATE') {

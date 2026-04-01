@@ -1,24 +1,31 @@
 import i18n from '@dhis2/d2-i18n'
-import { InputFieldFF } from '@dhis2/ui'
+import { InputFieldFF, Validator } from '@dhis2/ui'
 import React from 'react'
 import { Field as FieldRFF } from 'react-final-form'
-import { SchemaSection } from '../../../lib'
-import { useValidator } from '../../../lib/models/useFieldValidators'
+import { SchemaSection } from '../../../../lib'
+import { useValidator } from '../../../../lib/models/useFieldValidators'
 
-export function CodeField({
+export function OptionCodeField({
     schemaSection,
     helpText,
     modelId,
     required = false,
     disabled = false,
+    validateOptionCode,
 }: {
     schemaSection: SchemaSection
     helpText?: string
     modelId?: string
     required?: boolean
     disabled?: boolean
+    validateOptionCode: Validator
 }) {
-    const validator = useValidator({ schemaSection, property: 'code', modelId })
+    const validator = useValidator({
+        schemaSection,
+        property: 'code',
+        modelId,
+        customValidator: validateOptionCode,
+    })
 
     const helpString = helpText || i18n.t('An optional unique identifier.')
 

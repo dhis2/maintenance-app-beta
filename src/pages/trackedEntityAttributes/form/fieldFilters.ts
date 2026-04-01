@@ -19,7 +19,6 @@ export const fieldFilters = [
     'generated',
     'pattern',
     'fieldMask',
-    'confidential',
     'inherit',
     'displayInListNoProgram',
     'skipSynchronization',

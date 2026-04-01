@@ -12,9 +12,9 @@ export function MinDaysFromStartField() {
             dataTest="formfields-minDaysFromStart"
             type="number"
             required
-            label={i18n.t('Scheduled days from start (required)')}
+            label={i18n.t('Scheduled days from reference date')}
             helpText={i18n.t(
-                'Days to add to the enrollment or incident date. 0 means same day. '
+                'Days to add to the enrollment or incident date when scheduling events. 0 means same day. '
             )}
             format={(value: unknown) => {
                 if (value === null || value === undefined) {

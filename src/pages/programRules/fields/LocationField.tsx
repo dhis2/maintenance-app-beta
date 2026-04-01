@@ -17,8 +17,10 @@ export function LocationField({ required }: Readonly<{ required?: boolean }>) {
     return (
         <Field
             name="location"
-            format={(value: string | undefined) => value ?? ''}
-            parse={(value: string) => value || undefined}
+            format={(value: string | undefined) =>
+                value ? value.toUpperCase() : ''
+            }
+            parse={(value: string) => (value ? value.toLowerCase() : undefined)}
         >
             {({ input, meta }) => {
                 const selected = available.find((o) => o.id === input.value)

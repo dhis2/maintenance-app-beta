@@ -1,5 +1,4 @@
 export { BlockedSearchOperatorsField } from './BlockedSearchOperatorsField'
-export { ConfidentialField } from './ConfidentialField'
 export { FieldMaskField } from './FieldMaskField'
 export { FormNameField } from './FormNameField'
 export { InheritField } from './InheritField'
