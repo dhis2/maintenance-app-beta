@@ -22,7 +22,7 @@ import {
     DescriptionField,
     DrawerFormFooter,
     DrawerLayout,
-    NameField,
+    NameFieldWithAdditionalUniquenessConstraint,
     SectionedFormErrorNotice,
     SectionedFormSection,
     SectionedFormSections,
@@ -149,10 +149,10 @@ export const DataSetSectionFormContents = ({
                         )}
                     </StandardFormSectionDescription>
                     <StandardFormField>
-                        <NameField
+                        <NameFieldWithAdditionalUniquenessConstraint
                             schemaSection={dataSetSectionSchemaSection}
                             modelId={values.id}
-                            customFilterNameUniqueness={
+                            additionalNameUniquenessConstraint={
                                 dataSetId
                                     ? `dataSet.id:eq:${dataSetId}`
                                     : undefined

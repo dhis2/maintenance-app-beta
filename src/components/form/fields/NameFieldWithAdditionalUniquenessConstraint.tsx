@@ -5,22 +5,25 @@ import { Field as FieldRFF } from 'react-final-form'
 import { SchemaSection, useIsFieldValueUnique, useSchema } from '../../../lib'
 import { useValidator } from '../../../lib/models/useFieldValidators'
 
-export function NameField({
+export function NameFieldWithAdditionalUniquenessConstraint({
     schemaSection,
     helpText,
     modelId,
     caseSensitiveUniqueness = false,
+    additionalNameUniquenessConstraint,
 }: {
     helpText?: string
     schemaSection: SchemaSection
     modelId?: string
     caseSensitiveUniqueness?: boolean
+    additionalNameUniquenessConstraint?: string
 }) {
     const validator = useValidator({
         schemaSection,
         property: 'name',
         modelId,
         caseSensitive: caseSensitiveUniqueness,
+        customFilterUniqueness: additionalNameUniquenessConstraint,
     })
     const schema = useSchema(schemaSection.name)
     const propertyDetails = schema.properties['name']
@@ -34,9 +37,11 @@ export function NameField({
         ),
         caseSensitive: caseSensitiveUniqueness,
     })
-    const uniquenessWarner = propertyDetails.unique
-        ? undefined
-        : checkNameDuplicate
+
+    const uniquenessWarner =
+        propertyDetails.unique || additionalNameUniquenessConstraint
+            ? undefined
+            : checkNameDuplicate
 
     return (
         <FieldRFF name="name" validate={validator}>
