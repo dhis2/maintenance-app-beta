@@ -72,6 +72,7 @@ export const Component = () => {
             validate={validate}
             valueFormatter={transformFormValues}
             includeAttributes={false}
+            fetchError={!!template}
         >
             {({ handleSubmit }) => (
                 <SectionedFormProvider formDescriptor={formDescriptor}>

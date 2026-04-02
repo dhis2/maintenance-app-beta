@@ -55,6 +55,7 @@ export const Component = () => {
             onSubmit={useOnSubmitNew({ section })}
             initialValues={omit(categoryQuery.data, 'id')}
             validate={validate}
+            fetchError={!!categoryQuery.error}
         >
             <DefaultDuplicateFormContents section={section}>
                 <CategoryFormFields />

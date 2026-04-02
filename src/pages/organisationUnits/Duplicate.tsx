@@ -58,6 +58,7 @@ export const Component = () => {
             onSubmit={onSubmit}
             initialValues={omit(orgUnit.data, 'id')}
             validate={validate}
+            fetchError={!!orgUnit.error}
         >
             <DefaultDuplicateFormContents section={section}>
                 <OrganisationUnitFormField />

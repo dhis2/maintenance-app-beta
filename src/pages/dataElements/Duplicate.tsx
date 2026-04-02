@@ -62,6 +62,7 @@ export const Component = () => {
             onSubmit={useOnSubmitNew({ section })}
             initialValues={omit(dataElement.data, 'id')}
             validate={validate}
+            fetchError={!!dataElement.error}
         >
             <DefaultDuplicateFormContents section={section}>
                 <DataElementFormFields />

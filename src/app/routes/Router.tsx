@@ -1,4 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
+import { NoticeBox } from '@dhis2/ui'
 import React from 'react'
 import {
     createHashRouter,
@@ -88,11 +89,22 @@ function createSectionLazyRouteFunction(
             // fallback to redirect to legacy
             if (isModuleNotFoundError(e)) {
                 return {
-                    element: (
+                    element: section.duplicable ? (
                         <LegacyAppRedirect
                             section={section}
                             isNew={componentFileName === 'New'}
                         />
+                    ) : (
+                        <NoticeBox
+                            title={i18n.t('Duplication not available yet.')}
+                        >
+                            <p>
+                                {i18n.t(
+                                    '{{-sectionName}} can not be duplicated.',
+                                    { sectionName: section.titlePlural }
+                                )}
+                            </p>
+                        </NoticeBox>
                     ),
                 }
             }

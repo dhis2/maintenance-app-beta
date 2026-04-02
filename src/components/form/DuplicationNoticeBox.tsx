@@ -21,7 +21,7 @@ export function DuplicationNoticeBox({
             className={css.noticeBox}
         >
             {i18n.t(
-                'All values from the original {{sectionName}} are included. Values that must be unique need to be updated.',
+                'All values from the original {{-sectionName}} are included. Values that must be unique need to be updated.',
                 { sectionName: section.title }
             )}
         </NoticeBox>

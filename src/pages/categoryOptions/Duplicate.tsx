@@ -52,6 +52,7 @@ export const Component = () => {
             initialValues={omit(categoryOptionCombo.data, 'id')}
             validate={validate}
             valueFormatter={transformFormValues}
+            fetchError={!!categoryOptionCombo.error}
         >
             <DefaultDuplicateFormContents section={section}>
                 <CategoryOptionFormFields />
