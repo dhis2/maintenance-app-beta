@@ -17,16 +17,19 @@ export function useValidator({
     property,
     modelId,
     caseSensitive = false,
+    customFilterUniqueness,
     customValidator,
 }: {
     schemaSection: SchemaSection
     property: string
     modelId?: string
     caseSensitive?: boolean
+    customFilterUniqueness?: string
     customValidator?: Validator
 }) {
     const schema = useSchema(schemaSection.name)
     const propertyDetails = schema.properties[property]
+
     const params = useParams()
     const resolvedModelId = modelId ?? params.id
     const checkIsValueTaken = useIsFieldValueUnique({
@@ -34,6 +37,7 @@ export function useValidator({
         field: property,
         id: resolvedModelId,
         caseSensitive,
+        customFilter: customFilterUniqueness,
     }) as Validator
 
     const validators = useMemo(() => {
@@ -55,9 +59,10 @@ export function useValidator({
                 validatorsList.push(checkMinValueFromProperty(propertyDetails))
             }
         }
-        if (propertyDetails.unique) {
+        if (propertyDetails.unique || customFilterUniqueness) {
             validatorsList.push(checkIsValueTaken)
         }
+
         if (propertyDetails.required) {
             validatorsList.push(required)
         }
