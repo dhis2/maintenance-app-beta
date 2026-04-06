@@ -100,7 +100,7 @@ function createSectionLazyRouteFunction(
                         >
                             <p>
                                 {i18n.t(
-                                    '{{-sectionName}} can not be duplicated.',
+                                    '{{-sectionName}} cannot be duplicated.',
                                     { sectionName: section.titlePlural }
                                 )}
                             </p>
