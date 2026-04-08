@@ -23,7 +23,6 @@ import {
 import { useModelListView } from '../../../components/sectionList/listView'
 import { ModelValue } from '../../../components/sectionList/modelValue/ModelValue'
 import { SectionListLoader } from '../../../components/sectionList/SectionListLoader'
-import { SectionListTitle } from '../../../components/sectionList/SectionListTitle'
 import { DefaultToolbar } from '../../../components/sectionList/toolbar'
 import { TranslationDialog } from '../../../components/sectionList/translation'
 import {
@@ -308,7 +307,6 @@ export const OrganisationUnitList = () => {
 
     return (
         <div>
-            <SectionListTitle />
             <div className={css.filterRow}>
                 <IdentifiableFilter />
                 <OrganisationUnitGroupFilter />
