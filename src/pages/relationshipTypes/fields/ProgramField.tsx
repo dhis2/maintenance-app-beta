@@ -1,10 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
 import React, { useCallback, useMemo } from 'react'
 import { useField, useForm } from 'react-final-form'
-import { useHref } from 'react-router'
-import { StandardFormField, EditableFieldWrapper } from '../../../components'
-import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
-import { useRefreshModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/useRefreshSingleSelect'
+import { StandardFormField } from '../../../components'
+import { ModelSingleSelectRefreshableFormField } from '../../../components/metadataFormControls/ModelSingleSelect/ModelSingleSelectRefreshableField'
 import { required } from '../../../lib'
 import { Program, TrackedEntityType } from '../../../types/generated'
 import { ConstraintValue, RelationshipSideFieldsProps } from './types'
@@ -27,9 +25,6 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
     })
 
     const form = useForm()
-    const newProgramLink = useHref('/programs/new')
-    const refresh = useRefreshModelSingleSelect({ resource: 'programs' })
-
     const visible =
         !!constraint &&
         (constraint === 'PROGRAM_INSTANCE' ||
@@ -132,22 +127,18 @@ export const ProgramField = ({ prefix }: RelationshipSideFieldsProps) => {
 
     return (
         <StandardFormField>
-            <EditableFieldWrapper
-                onRefresh={() => refresh()}
-                onAddNew={() => window.open(newProgramLink, '_blank')}
-            >
-                <ModelSingleSelectFormField<Program>
-                    name={programName}
-                    label={i18n.t('Program')}
-                    query={programQuery}
-                    required={isRequired}
-                    validate={isRequired ? required : undefined}
-                    inputWidth="330px"
-                    onChange={clearDependentFields}
-                    showNoValueOption={!isRequired}
-                    dataTest={`${prefix}-program-selector`}
-                />
-            </EditableFieldWrapper>
+            <ModelSingleSelectRefreshableFormField<Program>
+                name={programName}
+                label={i18n.t('Program')}
+                query={programQuery}
+                required={isRequired}
+                validate={isRequired ? required : undefined}
+                inputWidth="400px"
+                onChange={clearDependentFields}
+                showNoValueOption={!isRequired}
+                dataTest={`${prefix}-program-selector`}
+                refreshResource="programs"
+            />
         </StandardFormField>
     )
 }
