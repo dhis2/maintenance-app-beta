@@ -20,7 +20,7 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../../components'
-import { ModelSingleSelectRefreshableFormField } from '../../../../components/metadataFormControls/ModelSingleSelect/ModelSingleSelectRefrashebleField'
+import { ModelSingleSelectRefreshableFormField } from '../../../../components/metadataFormControls/ModelSingleSelect/ModelSingleSelectRefreshableField'
 import {
     DEFAULT_CATEGORYCOMBO_SELECT_OPTION,
     selectedLocale,

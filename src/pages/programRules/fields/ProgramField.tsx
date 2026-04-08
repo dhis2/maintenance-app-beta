@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
-import { ModelSingleSelectRefreshableFormField } from '../../../components/metadataFormControls/ModelSingleSelect/ModelSingleSelectRefrashebleField'
+import { ModelSingleSelectRefreshableFormField } from '../../../components/metadataFormControls/ModelSingleSelect/ModelSingleSelectRefreshableField'
 
 const PROGRAM_QUERY = {
     resource: 'programs',

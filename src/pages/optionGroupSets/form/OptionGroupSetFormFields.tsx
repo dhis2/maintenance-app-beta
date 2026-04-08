@@ -14,7 +14,7 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
-import { ModelSingleSelectRefreshableFormField } from '../../../components/metadataFormControls/ModelSingleSelect/ModelSingleSelectRefrashebleField'
+import { ModelSingleSelectRefreshableFormField } from '../../../components/metadataFormControls/ModelSingleSelect/ModelSingleSelectRefreshableField'
 import { useSchemaSectionHandleOrThrow } from '../../../lib'
 import styles from './OptionGroupSetFormFields.module.css'
 

@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
-import { ModelSingleSelectRefreshableFormField } from '../../../components/metadataFormControls/ModelSingleSelect/ModelSingleSelectRefrashebleField'
+import { ModelSingleSelectRefreshableFormField } from '../../../components/metadataFormControls/ModelSingleSelect/ModelSingleSelectRefreshableField'
 import { required } from '../../../lib'
 
 type IndicatorTypeFieldsProps = {

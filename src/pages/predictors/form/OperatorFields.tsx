@@ -3,7 +3,7 @@ import React from 'react'
 import { useField } from 'react-final-form'
 import { StandardFormField } from '../../../components'
 import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
-import { ModelSingleSelectRefreshableFormField } from '../../../components/metadataFormControls/ModelSingleSelect/ModelSingleSelectRefrashebleField'
+import { ModelSingleSelectRefreshableFormField } from '../../../components/metadataFormControls/ModelSingleSelect/ModelSingleSelectRefreshableField'
 import { DEFAULT_CATEGORY_OPTION_COMBO } from '../../../lib'
 
 type OutputResponse = {

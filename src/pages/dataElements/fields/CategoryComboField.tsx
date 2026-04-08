@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import React, { useEffect } from 'react'
 import { useForm, useFormState } from 'react-final-form'
-import { ModelSingleSelectRefreshableFormField } from '../../../components/metadataFormControls/ModelSingleSelect/ModelSingleSelectRefrashebleField'
+import { ModelSingleSelectRefreshableFormField } from '../../../components/metadataFormControls/ModelSingleSelect/ModelSingleSelectRefreshableField'
 import { DEFAULT_CATEGORYCOMBO_SELECT_OPTION } from '../../../lib'
 import { DisplayableModel } from '../../../types/models'
 
