@@ -1,11 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
-import React, { useCallback } from 'react'
-import { useHref } from 'react-router'
-import { EditableInputWrapper } from '../../../components'
-import {
-    ModelSingleSelectFormField,
-    useRefreshModelSingleSelect,
-} from '../../../components/metadataFormControls/ModelSingleSelect'
+import React from 'react'
+import { ModelSingleSelectRefreshableFormField } from '../../../components/metadataFormControls/ModelSingleSelect/ModelSingleSelectRefrashebleField'
 import { required } from '../../../lib'
 
 type IndicatorTypeFieldsProps = {
@@ -13,23 +8,8 @@ type IndicatorTypeFieldsProps = {
 }
 
 export const IndicatorTypeField = ({ helpText }: IndicatorTypeFieldsProps) => {
-    const newIndicatorTypeLink = useHref('/indicatorTypes/new')
-    const refresh = useRefreshModelSingleSelect({ resource: 'indicatorTypes' })
-
-    const inputWrapper = useCallback(
-        (select: React.ReactElement) => (
-            <EditableInputWrapper
-                onRefresh={() => refresh()}
-                onAddNew={() => window.open(newIndicatorTypeLink, '_blank')}
-            >
-                {select}
-            </EditableInputWrapper>
-        ),
-        [refresh, newIndicatorTypeLink]
-    )
-
     return (
-        <ModelSingleSelectFormField
+        <ModelSingleSelectRefreshableFormField
             required
             dataTest="formfields-indicatortype"
             name="indicatorType"
@@ -43,7 +23,7 @@ export const IndicatorTypeField = ({ helpText }: IndicatorTypeFieldsProps) => {
                     order: 'displayName:iasc',
                 },
             }}
-            inputWrapper={inputWrapper}
+            refreshResource="indicatorTypes"
         />
     )
 }

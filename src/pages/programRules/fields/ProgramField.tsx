@@ -1,11 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
-import React, { useCallback } from 'react'
-import { useHref } from 'react-router'
-import { EditableInputWrapper } from '../../../components'
-import {
-    ModelSingleSelectFormField,
-    useRefreshModelSingleSelect,
-} from '../../../components/metadataFormControls/ModelSingleSelect'
+import React from 'react'
+import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
+import { ModelSingleSelectRefreshableFormField } from '../../../components/metadataFormControls/ModelSingleSelect/ModelSingleSelectRefrashebleField'
 
 const PROGRAM_QUERY = {
     resource: 'programs',
@@ -20,22 +16,7 @@ type ProgramFieldProps = Readonly<{
 }>
 
 export function ProgramField({ disabled = false }: ProgramFieldProps) {
-    const programNewHref = useHref('/programs/new')
-    const refreshPrograms = useRefreshModelSingleSelect(PROGRAM_QUERY)
-
-    const inputWrapper = useCallback(
-        (select: React.ReactElement) => (
-            <EditableInputWrapper
-                onRefresh={() => refreshPrograms()}
-                onAddNew={() => window.open(programNewHref, '_blank')}
-            >
-                {select}
-            </EditableInputWrapper>
-        ),
-        [refreshPrograms, programNewHref]
-    )
-
-    return (
+    return disabled ? (
         <ModelSingleSelectFormField
             required
             inputWidth="400px"
@@ -44,7 +25,17 @@ export function ProgramField({ disabled = false }: ProgramFieldProps) {
             label={i18n.t('Program (required)')}
             query={PROGRAM_QUERY}
             disabled={disabled}
-            inputWrapper={disabled ? undefined : inputWrapper}
+        />
+    ) : (
+        <ModelSingleSelectRefreshableFormField
+            required
+            inputWidth="400px"
+            dataTest="program-field"
+            name="program"
+            label={i18n.t('Program (required)')}
+            query={PROGRAM_QUERY}
+            disabled={disabled}
+            refreshResource="programs"
         />
     )
 }

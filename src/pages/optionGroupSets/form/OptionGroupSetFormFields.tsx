@@ -1,13 +1,11 @@
 import i18n from '@dhis2/d2-i18n'
 import { CheckboxFieldFF, NoticeBox } from '@dhis2/ui'
-import React, { useCallback } from 'react'
+import React from 'react'
 import { Field as FieldRFF, useField } from 'react-final-form'
-import { useHref } from 'react-router'
 import { useParams } from 'react-router-dom'
 import {
     CodeField,
     DescriptionField,
-    EditableInputWrapper,
     ModelTransferField,
     NameField,
     ShortNameField,
@@ -16,10 +14,7 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../components'
-import {
-    ModelSingleSelectFormField,
-    useRefreshModelSingleSelect,
-} from '../../../components/metadataFormControls/ModelSingleSelect'
+import { ModelSingleSelectRefreshableFormField } from '../../../components/metadataFormControls/ModelSingleSelect/ModelSingleSelectRefrashebleField'
 import { useSchemaSectionHandleOrThrow } from '../../../lib'
 import styles from './OptionGroupSetFormFields.module.css'
 
@@ -29,23 +24,7 @@ function OptionGroupSetFormFields() {
     const { input: optionGroupsInput } = useField('optionGroups')
     const optionGroupSetId = useParams().id
     const isEdit = !!optionGroupSetId
-    const newOptionSetLink = useHref('/optionSets/new')
-    const refreshOptionSet = useRefreshModelSingleSelect({
-        resource: 'optionSets',
-    })
     const schemaSection = useSchemaSectionHandleOrThrow()
-
-    const inputWrapper = useCallback(
-        (select: React.ReactElement) => (
-            <EditableInputWrapper
-                onRefresh={() => refreshOptionSet()}
-                onAddNew={() => window.open(newOptionSetLink, '_blank')}
-            >
-                {select}
-            </EditableInputWrapper>
-        ),
-        [refreshOptionSet, newOptionSetLink]
-    )
 
     return (
         <>
@@ -100,7 +79,7 @@ function OptionGroupSetFormFields() {
                     )}
                 </StandardFormSectionDescription>
                 <StandardFormField>
-                    <ModelSingleSelectFormField
+                    <ModelSingleSelectRefreshableFormField
                         disabled={isEdit}
                         inputWidth="400px"
                         name="optionSet"
@@ -115,7 +94,7 @@ function OptionGroupSetFormFields() {
                             optionGroupsInput.onChange([])
                         }}
                         dataTest="formfields-optionSet"
-                        inputWrapper={inputWrapper}
+                        refreshResource="optionSets"
                     />
                 </StandardFormField>
 

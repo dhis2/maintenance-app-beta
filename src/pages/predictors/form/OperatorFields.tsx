@@ -1,12 +1,9 @@
 import i18n from '@dhis2/d2-i18n'
-import React, { useCallback } from 'react'
+import React from 'react'
 import { useField } from 'react-final-form'
-import { useHref } from 'react-router'
-import { EditableInputWrapper, StandardFormField } from '../../../components'
-import {
-    ModelSingleSelectFormField,
-    useRefreshModelSingleSelect,
-} from '../../../components/metadataFormControls/ModelSingleSelect'
+import { StandardFormField } from '../../../components'
+import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
+import { ModelSingleSelectRefreshableFormField } from '../../../components/metadataFormControls/ModelSingleSelect/ModelSingleSelectRefrashebleField'
 import { DEFAULT_CATEGORY_OPTION_COMBO } from '../../../lib'
 
 type OutputResponse = {
@@ -19,29 +16,13 @@ type OutputResponse = {
 }
 
 export const OperatorFields = () => {
-    const newDataElement = useHref('/dataElements/new')
-    const refreshDataElements = useRefreshModelSingleSelect({
-        resource: 'dataElements',
-    })
     const { input: outputInput } = useField('output')
     const { input: outputComboInput } = useField('outputCombo')
-
-    const inputWrapper = useCallback(
-        (select: React.ReactElement) => (
-            <EditableInputWrapper
-                onRefresh={() => refreshDataElements()}
-                onAddNew={() => window.open(newDataElement, '_blank')}
-            >
-                {select}
-            </EditableInputWrapper>
-        ),
-        [refreshDataElements, newDataElement]
-    )
 
     return (
         <>
             <StandardFormField>
-                <ModelSingleSelectFormField
+                <ModelSingleSelectRefreshableFormField
                     inputWidth="400px"
                     name="output"
                     label={i18n.t('Output data element')}
@@ -65,7 +46,7 @@ export const OperatorFields = () => {
                             outputComboInput.onChange(undefined)
                         }
                     }}
-                    inputWrapper={inputWrapper}
+                    refreshResource="dataElements"
                 />
             </StandardFormField>
             {outputInput?.value?.categoryCombo &&

@@ -15,20 +15,22 @@ type OwnProps<TModel extends PartialLoadedDisplayableModel> = {
     onChange?: ModelSingleSelectProps<TModel>['onChange']
     inputWidth?: string
     fullyOverrideOnChange?: boolean
-    inputWrapper?: (input: React.ReactElement) => React.ReactElement
 }
 
-type RelevantRenderProps<TModel extends PartialLoadedDisplayableModel> = {
-    input: Pick<
-        FieldRenderProps<TModel | undefined>['input'],
-        'value' | 'onChange' | 'onBlur' | 'name'
-    >
-    meta: Pick<
-        FieldRenderProps<TModel | undefined>['meta'],
-        'invalid' | 'touched' | 'error'
-    >
-}
-type RelevantUseFieldProps<TModel extends PartialLoadedDisplayableModel> = Pick<
+export type RelevantRenderProps<TModel extends PartialLoadedDisplayableModel> =
+    {
+        input: Pick<
+            FieldRenderProps<TModel | undefined>['input'],
+            'value' | 'onChange' | 'onBlur' | 'name'
+        >
+        meta: Pick<
+            FieldRenderProps<TModel | undefined>['meta'],
+            'invalid' | 'touched' | 'error'
+        >
+    }
+export type RelevantUseFieldProps<
+    TModel extends PartialLoadedDisplayableModel
+> = Pick<
     UseFieldConfig<TModel | undefined>,
     'validate' | 'validateFields' | 'initialValue' | 'format' | 'parse' | 'data'
 > & {
@@ -39,29 +41,18 @@ export type ModelSingleSelectFieldProps<
     TModel extends PartialLoadedDisplayableModel = DisplayableModel
 > = Omit<ModelSingleSelectProps<TModel>, 'selected' | 'onChange'> &
     OwnProps<TModel>
-export function ModelSingleSelectField<
+
+export function ModelSingleSelectFF<
     TModel extends PartialLoadedDisplayableModel
 >({
-    label,
-    helpText,
-    required,
     onChange,
-    // react-final-form props
-    // validate,
-    // validateFields,
-    // initialValue,
-    // format,
-    // parse,
-    // data,
     input,
     meta,
-    dataTest,
     inputWidth = '400px',
     fullyOverrideOnChange = false,
-    inputWrapper,
     ...modelSingleSelectProps
 }: ModelSingleSelectFieldProps<TModel> & RelevantRenderProps<TModel>) {
-    const selectElement = (
+    return (
         <Box width={inputWidth} minWidth="100px">
             <ModelSingleSelect<TModel>
                 {...modelSingleSelectProps}
@@ -77,7 +68,20 @@ export function ModelSingleSelectField<
             />
         </Box>
     )
+}
 
+export function ModelSingleSelectField<
+    TModel extends PartialLoadedDisplayableModel
+>({
+    label,
+    helpText,
+    required,
+    onChange,
+    input,
+    meta,
+    dataTest,
+    ...modelSingleSelectProps
+}: ModelSingleSelectFieldProps<TModel> & RelevantRenderProps<TModel>) {
     return (
         <Field
             dataTest={dataTest ?? `formfields-modelsingleselect-${input.name}`}
@@ -88,7 +92,12 @@ export function ModelSingleSelectField<
             helpText={helpText}
             required={required}
         >
-            {inputWrapper ? inputWrapper(selectElement) : selectElement}
+            <ModelSingleSelectFF
+                onChange={onChange}
+                input={input}
+                meta={meta}
+                {...modelSingleSelectProps}
+            />
         </Field>
     )
 }

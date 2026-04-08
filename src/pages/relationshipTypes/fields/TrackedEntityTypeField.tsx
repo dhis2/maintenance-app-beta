@@ -1,10 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
 import React, { useCallback, useMemo } from 'react'
 import { useField, useForm } from 'react-final-form'
-import { useHref } from 'react-router'
-import { StandardFormField, EditableInputWrapper } from '../../../components'
-import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
-import { useRefreshModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/useRefreshSingleSelect'
+import { StandardFormField } from '../../../components'
+import { ModelSingleSelectRefreshableFormField } from '../../../components/metadataFormControls/ModelSingleSelect/ModelSingleSelectRefrashebleField'
 import { required } from '../../../lib'
 import type { TrackedEntityType } from '../../../types/generated'
 import { ConstraintValue, RelationshipSideFieldsProps } from './types'
@@ -21,11 +19,6 @@ export const TrackedEntityTypeField = ({
     })
 
     const form = useForm()
-    const newTrackedEntityTypeLink = useHref('/trackedEntityTypes/new')
-    const refresh = useRefreshModelSingleSelect({
-        resource: 'trackedEntityTypes',
-    })
-
     const visible = constraint === 'TRACKED_ENTITY_INSTANCE'
 
     const trackedEntityTypeQuery = useMemo(() => {
@@ -61,35 +54,22 @@ export const TrackedEntityTypeField = ({
         })
     }, [form, prefix])
 
-    const inputWrapper = useCallback(
-        (select: React.ReactElement) => (
-            <EditableInputWrapper
-                inputWidth="330px"
-                onRefresh={() => refresh()}
-                onAddNew={() => window.open(newTrackedEntityTypeLink, '_blank')}
-            >
-                {select}
-            </EditableInputWrapper>
-        ),
-        [refresh, newTrackedEntityTypeLink]
-    )
-
     if (!visible || !trackedEntityTypeQuery) {
         return null
     }
 
     return (
         <StandardFormField>
-            <ModelSingleSelectFormField<TrackedEntityType>
+            <ModelSingleSelectRefreshableFormField<TrackedEntityType>
                 name={trackedEntityTypeName}
                 label={i18n.t('Tracked entity type')}
                 query={trackedEntityTypeQuery}
                 required
                 validate={required}
-                inputWidth="330px"
+                inputWidth="400px"
                 onChange={clearDependentFields}
                 dataTest={`${prefix}-tracked-entity-type-selector`}
-                inputWrapper={inputWrapper}
+                refreshResource="trackedEntityTypes"
             />
         </StandardFormField>
     )

@@ -1,19 +1,17 @@
 import { useTimeZoneConversion } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button, Field, IconAdd16, Input, InputFieldFF } from '@dhis2/ui'
-import React, { useCallback, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import {
     Field as FieldRFF,
     useField,
     useForm,
     useFormState,
 } from 'react-final-form'
-import { useHref } from 'react-router'
 import {
     CodeField,
     ColorAndIconField,
     DescriptionField,
-    EditableInputWrapper,
     FeatureTypeField,
     NameField,
     SectionedFormSection,
@@ -22,10 +20,7 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../../components'
-import {
-    ModelSingleSelectFormField,
-    useRefreshModelSingleSelect,
-} from '../../../../components/metadataFormControls/ModelSingleSelect'
+import { ModelSingleSelectRefreshableFormField } from '../../../../components/metadataFormControls/ModelSingleSelect/ModelSingleSelectRefrashebleField'
 import {
     DEFAULT_CATEGORYCOMBO_SELECT_OPTION,
     selectedLocale,
@@ -64,11 +59,6 @@ export const SetupFormContents = React.memo(function SetupFormContents({
 
     const { values } = useFormState({ subscription: { values: true } })
     const form = useForm()
-
-    const refreshCategoryCombos = useRefreshModelSingleSelect({
-        resource: 'categoryCombos',
-    })
-    const newCategoryComboLink = useHref('/categoryCombos/new')
     const { fromServerDate } = useTimeZoneConversion()
     const schemaSection = useSchemaSectionHandleOrThrow()
 
@@ -79,18 +69,6 @@ export const SetupFormContents = React.memo(function SetupFormContents({
             form.change('openDaysAfterCoEndDate', 0)
         }
     }, [values.categoryCombo, form])
-
-    const categoryComboInputWrapper = useCallback(
-        (select: React.ReactElement) => (
-            <EditableInputWrapper
-                onRefresh={() => refreshCategoryCombos()}
-                onAddNew={() => window.open(newCategoryComboLink, '_blank')}
-            >
-                {select}
-            </EditableInputWrapper>
-        ),
-        [refreshCategoryCombos, newCategoryComboLink]
-    )
 
     return (
         <SectionedFormSection name={name}>
@@ -177,14 +155,14 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                 </StandardFormField>
             )}
             <StandardFormField>
-                <ModelSingleSelectFormField
+                <ModelSingleSelectRefreshableFormField
                     inputWidth={'400px'}
                     name="categoryCombo"
                     dataTest="formfields-categorycombo"
                     label={i18n.t('Event category combination')}
                     query={CATEGORY_COMBOS_QUERY}
                     transform={addDefaultCategoryComboTransform}
-                    inputWrapper={categoryComboInputWrapper}
+                    refreshResource="categoryCombos"
                 />
             </StandardFormField>
 

@@ -1,12 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
-import React, { useCallback, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useForm, useFormState } from 'react-final-form'
-import { useHref } from 'react-router'
-import { EditableInputWrapper } from '../../../components'
-import {
-    ModelSingleSelectFormField,
-    useRefreshModelSingleSelect,
-} from '../../../components/metadataFormControls/ModelSingleSelect'
+import { ModelSingleSelectRefreshableFormField } from '../../../components/metadataFormControls/ModelSingleSelect/ModelSingleSelectRefrashebleField'
 import { DEFAULT_CATEGORYCOMBO_SELECT_OPTION } from '../../../lib'
 import { DisplayableModel } from '../../../types/models'
 
@@ -28,8 +23,6 @@ export function CategoryComboField() {
     const { values } = useFormState({ subscription: { values: true } })
     const domainTypeIsTracker = values.domainType === 'TRACKER'
     const disabled = domainTypeIsTracker
-    const newCategoryComboLink = useHref('/categoryCombos/new')
-    const refresh = useRefreshModelSingleSelect({ resource: 'categoryCombos' })
 
     useEffect(() => {
         if (domainTypeIsTracker) {
@@ -37,20 +30,8 @@ export function CategoryComboField() {
         }
     }, [change, domainTypeIsTracker])
 
-    const inputWrapper = useCallback(
-        (select: React.ReactElement) => (
-            <EditableInputWrapper
-                onRefresh={() => refresh()}
-                onAddNew={() => window.open(newCategoryComboLink, '_blank')}
-            >
-                {select}
-            </EditableInputWrapper>
-        ),
-        [refresh, newCategoryComboLink]
-    )
-
     return (
-        <ModelSingleSelectFormField
+        <ModelSingleSelectRefreshableFormField
             required
             name="categoryCombo"
             dataTest="formfields-categorycombo"
@@ -59,7 +40,7 @@ export function CategoryComboField() {
             disabled={disabled}
             query={CATEGORY_COMBOS_QUERY}
             transform={addDefaultCategoryComboTransform}
-            inputWrapper={inputWrapper}
+            refreshResource="categoryCombos"
         />
     )
 }
