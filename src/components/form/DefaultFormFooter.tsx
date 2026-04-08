@@ -41,7 +41,7 @@ export const DefaultFormFooter = ({ cancelTo }: { cancelTo?: To }) => {
                 activeAction={activeAction}
                 onSubmitClick={handleSubmit.bind(null, 'saveAndExit')}
                 onSaveClick={handleSubmit.bind(null, 'save')}
-                cancelTo={`${cancelTo ?? '../'}${location.state?.search}`}
+                cancelTo={`${cancelTo ?? '../'}${location.state?.search ?? ''}`}
             />
         </FormFooterWrapper>
     )
