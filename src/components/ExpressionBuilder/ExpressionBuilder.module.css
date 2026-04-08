@@ -161,6 +161,7 @@ textarea::placeholder {
     text-decoration: none;
     margin-block-end: var(--spacers-dp8);
     font-size: 13px;
+    cursor: default;
 }
 
 /* expression list */
