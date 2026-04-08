@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-03-26T12:53:54.437Z\n"
-"PO-Revision-Date: 2026-03-26T12:53:54.437Z\n"
+"POT-Creation-Date: 2026-04-01T13:52:40.474Z\n"
+"PO-Revision-Date: 2026-04-01T13:52:40.474Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -39,14 +39,14 @@ msgstr "Not found"
 msgid "The page you are looking for does not exist."
 msgstr "The page you are looking for does not exist."
 
-msgid "Edit"
-msgstr "Edit"
-
 msgid "New {{modelName}}"
 msgstr "New {{modelName}}"
 
 msgid "Merge {{modelName}}"
 msgstr "Merge {{modelName}}"
+
+msgid "Edit {{modelName}}"
+msgstr "Edit {{modelName}}"
 
 msgid "Metadata Integrity Checks"
 msgstr "Metadata Integrity Checks"
@@ -466,6 +466,9 @@ msgstr "Custom form"
 msgid "Define a custom form for this {{customFormTarget}} by editing HTML below."
 msgstr "Define a custom form for this {{customFormTarget}} by editing HTML below."
 
+msgid "Edit"
+msgstr "Edit"
+
 msgid "Preview"
 msgstr "Preview"
 
@@ -876,6 +879,9 @@ msgstr "An error occurred"
 
 msgid "An error occurred while loading the items."
 msgstr "An error occurred while loading the items."
+
+msgid "{{modelName}} management"
+msgstr "{{modelName}} management"
 
 msgid "Metadata access"
 msgstr "Metadata access"
@@ -1408,26 +1414,11 @@ msgstr "Predictor group"
 msgid "Predictor groups"
 msgstr "Predictor groups"
 
-msgid "Categories overview"
-msgstr "Categories overview"
-
-msgid "Data elements overview"
-msgstr "Data elements overview"
-
-msgid "Data sets overview"
-msgstr "Data sets overview"
-
 msgid "Indicators and Predictors"
 msgstr "Indicators and Predictors"
 
-msgid "Organisation units overview"
-msgstr "Organisation units overview"
-
-msgid "Programs overview"
-msgstr "Programs overview"
-
-msgid "Option sets overview"
-msgstr "Option sets overview"
+msgid "Programs and Tracker"
+msgstr "Programs and Tracker"
 
 msgid "Validation"
 msgstr "Validation"
@@ -1987,11 +1978,11 @@ msgstr "Message template"
 msgid "Program stage label"
 msgstr "Program stage label"
 
-msgid "Due date label"
-msgstr "Due date label"
+msgid "Scheduled date label"
+msgstr "Scheduled date label"
 
-msgid "Execution date label"
-msgstr "Execution date label"
+msgid "Report date label"
+msgstr "Report date label"
 
 msgid "Event label"
 msgstr "Event label"
@@ -2019,6 +2010,18 @@ msgstr "Organisation unit label"
 
 msgid "Relationship label"
 msgstr "Relationship label"
+
+msgid "Enrollment label (Plural)"
+msgstr "Enrollment label (Plural)"
+
+msgid "Event label (Plural)"
+msgstr "Event label (Plural)"
+
+msgid "Program stage label (Plural)"
+msgstr "Program stage label (Plural)"
+
+msgid "Names"
+msgstr "Names"
 
 msgid "Unknown error"
 msgstr "Unknown error"
@@ -5195,8 +5198,23 @@ msgstr "Recipient program attribute"
 msgid "Recipient data element"
 msgstr "Recipient data element"
 
-msgid "Set up automatic event creation and scheduling in this program stage."
-msgstr "Set up automatic event creation and scheduling in this program stage."
+msgid "Event repetition"
+msgstr "Event repetition"
+
+msgid "Define the frequency of events within this stage."
+msgstr "Define the frequency of events within this stage."
+
+msgid "Event scheduling"
+msgstr "Event scheduling"
+
+msgid "Configure how and when events in this stage are scheduled."
+msgstr "Configure how and when events in this stage are scheduled."
+
+msgid "Completion options"
+msgstr "Completion options"
+
+msgid "Decide what should happen after a user completes this event."
+msgstr "Decide what should happen after a user completes this event."
 
 msgid "Configure data collection for events in this program stage."
 msgstr "Configure data collection for events in this program stage."
@@ -5255,26 +5273,17 @@ msgstr "A stage with this name already exists. Please choose another name."
 msgid "Configure the basic information for this program stage."
 msgstr "Configure the basic information for this program stage."
 
-msgid "Data entry options"
-msgstr "Data entry options"
+msgid "Configuration options"
+msgstr "Configuration options"
 
-msgid "Set up how data is collected for events in this program stage."
-msgstr "Set up how data is collected for events in this program stage."
+msgid "Set up more advanced options for this program stage."
+msgstr "Set up more advanced options for this program stage."
 
-msgid "Allow events to be assigned to users"
-msgstr "Allow events to be assigned to users"
+msgid "Custom terminology"
+msgstr "Custom terminology"
 
-msgid "Generate offline event IDs"
-msgstr "Generate offline event IDs"
-
-msgid "Completion options"
-msgstr "Completion options"
-
-msgid "Decide what should happen after a user completes this event."
-msgstr "Decide what should happen after a user completes this event."
-
-msgid "Override default labels with program stage-specific terms."
-msgstr "Override default labels with program stage-specific terms."
+msgid "Customise the wording of labels for this stage."
+msgstr "Customise the wording of labels for this stage."
 
 msgid "Custom label for report date"
 msgstr "Custom label for report date"
@@ -5287,6 +5296,9 @@ msgstr "Custom label for program stage"
 
 msgid "Custom label for event"
 msgstr "Custom label for event"
+
+msgid "Program stage form"
+msgstr "Program stage form"
 
 msgid "Configure the form for data collection for events in this program stage."
 msgstr "Configure the form for data collection for events in this program stage."
@@ -5311,75 +5323,44 @@ msgstr ""
 msgid "Edit or rearrange the data elements"
 msgstr "Edit or rearrange the data elements"
 
-msgid "Ask user to create a new event after completion"
-msgstr "Ask user to create a new event after completion"
+msgid "On event completion, show a prompt to create a new event"
+msgstr "On event completion, show a prompt to create a new event"
 
-msgid "Create an event in this stage on enrollment"
-msgstr "Create an event in this stage on enrollment"
+msgid "Auto-generate an event in this stage"
+msgstr "Auto-generate an event in this stage"
 
-msgid "Block data entry after completion"
-msgstr "Block data entry after completion"
+msgid "Generate events based on enrollment date"
+msgstr "Generate events based on enrollment date"
 
-msgid "Reference date for scheduling"
-msgstr "Reference date for scheduling"
+msgid "Show scheduled date"
+msgstr "Show scheduled date"
 
-msgid "Hide scheduled date"
-msgstr "Hide scheduled date"
+msgid "Scheduled days from start (required)"
+msgstr "Scheduled days from start (required)"
 
-msgid ""
-"Android Capture will disable all scheduling. Web Capture will allow manual "
-"scheduling, but scheduled dates will not be editable."
-msgstr ""
-"Android Capture will disable all scheduling. Web Capture will allow manual "
-"scheduling, but scheduled dates will not be editable."
-
-msgid "Scheduled days from reference date"
-msgstr "Scheduled days from reference date"
-
-msgid ""
-"Days to add to the enrollment or incident date when scheduling events. 0 "
-"means same day. "
-msgstr ""
-"Days to add to the enrollment or incident date when scheduling events. 0 "
-"means same day. "
+msgid "Days to add to the enrollment or incident date. 0 means same day. "
+msgstr "Days to add to the enrollment or incident date. 0 means same day. "
 
 msgid "Default next scheduled date"
 msgstr "Default next scheduled date"
 
-msgid ""
-"If set, this date sets the next scheduled date. Standard interval days is "
-"used if the date is empty."
-msgstr ""
-"If set, this date sets the next scheduled date. Standard interval days is "
-"used if the date is empty."
-
 msgid "Open data entry form after enrollment"
 msgstr "Open data entry form after enrollment"
 
-msgid ""
-"If set, only one event per period is allowed. Report date will be a period "
-"instead of a date. Not supported by web Capture."
-msgstr ""
-"If set, only one event per period is allowed. Report date will be a period "
-"instead of a date. Not supported by web Capture."
+msgid "On event completion, ask user to complete enrollment"
+msgstr "On event completion, ask user to complete enrollment"
 
-msgid "Ask user to complete enrollment after completion"
-msgstr "Ask user to complete enrollment after completion"
+msgid "Allow multiple events in this stage (repeatable stage)"
+msgstr "Allow multiple events in this stage (repeatable stage)"
 
-msgid "Allow multiple events in this stage"
-msgstr "Allow multiple events in this stage"
-
-msgid "None (report date will be empty)"
-msgstr "None (report date will be empty)"
-
-msgid "Date to use for created event report date"
-msgstr "Date to use for created event report date"
+msgid "Report date to use"
+msgstr "Report date to use"
 
 msgid "Standard interval days"
 msgstr "Standard interval days"
 
-msgid "The number of days between repeated events."
-msgstr "The number of days between repeated events."
+msgid "Enter the number of days between repeated events."
+msgstr "Enter the number of days between repeated events."
 
 msgid "Stage section"
 msgstr "Stage section"
@@ -5411,11 +5392,26 @@ msgstr "Desktop display"
 msgid "Mobile display"
 msgstr "Mobile display"
 
-msgid "Creation and scheduling"
-msgstr "Creation and scheduling"
+msgid "Stage: Setup"
+msgstr "Stage: Setup"
 
-msgid "Program stage form"
-msgstr "Program stage form"
+msgid "Stage: Configuration"
+msgstr "Stage: Configuration"
+
+msgid "Stage: Terminology"
+msgstr "Stage: Terminology"
+
+msgid "Stage: Creation and Scheduling"
+msgstr "Stage: Creation and Scheduling"
+
+msgid "Scheduled days from start"
+msgstr "Scheduled days from start"
+
+msgid "Stage: Data"
+msgstr "Stage: Data"
+
+msgid "Stage: Form"
+msgstr "Stage: Form"
 
 msgid "Section tracked entity attributes"
 msgstr "Section tracked entity attributes"
@@ -5676,6 +5672,16 @@ msgid ""
 msgstr ""
 "Searches using these operators return no results. Use this to prevent "
 "inefficient searches."
+
+msgid "Confidential"
+msgstr "Confidential"
+
+msgid ""
+"Prevent searching or viewing in analytics. Available only when system "
+"encryption is enabled."
+msgstr ""
+"Prevent searching or viewing in analytics. Available only when system "
+"encryption is enabled."
 
 msgid "Inherit values from tracked entities linked by a relationship"
 msgstr "Inherit values from tracked entities linked by a relationship"
