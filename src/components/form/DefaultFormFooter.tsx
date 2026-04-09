@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useForm, useFormState } from 'react-final-form'
 import { To } from 'react-router-dom'
 import { createPortalToFooter } from '../../app/layout'
+import { useLocationWithSearchState } from '../../lib'
 import { SubmitAction } from '../../lib/form/useOnSubmit'
 import { StandardFormActions } from '../standardForm'
 import css from './DefaultFormContents.module.css'
@@ -17,6 +18,7 @@ export const DefaultFormFooter = ({ cancelTo }: { cancelTo?: To }) => {
     const [activeAction, setActiveAction] = useState<
         'saveAndExit' | 'save' | null
     >(null)
+    const location = useLocationWithSearchState()
 
     const handleSubmit = (type: SubmitAction) => {
         setActiveAction(type)
@@ -39,7 +41,7 @@ export const DefaultFormFooter = ({ cancelTo }: { cancelTo?: To }) => {
                 activeAction={activeAction}
                 onSubmitClick={handleSubmit.bind(null, 'saveAndExit')}
                 onSaveClick={handleSubmit.bind(null, 'save')}
-                cancelTo={cancelTo ?? '../'}
+                cancelTo={`${cancelTo ?? '../'}${location.state?.search ?? ''}`}
             />
         </FormFooterWrapper>
     )
