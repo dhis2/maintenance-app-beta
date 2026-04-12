@@ -21,8 +21,9 @@ export function PriorityField() {
             dataTest="priority-field"
             inputWidth="120px"
             label={i18n.t('Priority')}
+            min="0"
             helpText={i18n.t(
-                'Can be 0 or negative. Leave empty if not needed.'
+                'Must be 0 or greater. Leave empty if not needed.'
             )}
         />
     )

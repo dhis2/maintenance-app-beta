@@ -17,7 +17,7 @@ const programRuleActionReference = z.object({
 const programRuleBaseSchema = z.object({
     name: z.string().trim().min(1),
     description: z.string().optional(),
-    priority: z.number().optional(),
+    priority: z.number().min(0).optional(),
     condition: z.string().optional(),
     program: z.object({
         id: z.string(),
