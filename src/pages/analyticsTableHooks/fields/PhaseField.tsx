@@ -2,10 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { RadioFieldFF, SingleSelectFieldFF } from '@dhis2/ui'
 import React, { useEffect } from 'react'
 import { Field, useField, useForm } from 'react-final-form'
-import {
-    HorizontalFieldGroup,
-    StandardFormField,
-} from '../../../components'
+import { HorizontalFieldGroup, StandardFormField } from '../../../components'
 import { getConstantTranslation, SECTIONS_MAP, useSchema } from '../../../lib'
 import { AnalyticsTableHook } from '../../../types/generated'
 
