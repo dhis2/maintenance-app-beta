@@ -15,7 +15,6 @@ const { withDefaultListColumns, identifiable } = modelFormSchemas
 
 const analyticsTableHookBaseSchema = z.object({
     name: z.string().trim().min(1),
-    code: z.string().optional(),
     sql: z.string().min(1),
     analyticsTableType: z
         .nativeEnum(AnalyticsTableHook.analyticsTableType)

@@ -5,7 +5,6 @@ import { Field, useField, useForm } from 'react-final-form'
 import {
     HorizontalFieldGroup,
     NameField,
-    CodeField,
     StandardFormField,
     StandardFormSection,
     StandardFormSectionDescription,
@@ -73,9 +72,6 @@ export const AnalyticsTableHookFormFields = () => {
                 </StandardFormSectionDescription>
                 <StandardFormField>
                     <NameField schemaSection={section} />
-                </StandardFormField>
-                <StandardFormField>
-                    <CodeField schemaSection={section} />
                 </StandardFormField>
                 <StandardFormField>
                     <HorizontalFieldGroup
