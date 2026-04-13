@@ -1,11 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
-import { useHref } from 'react-router'
-import { EditableFieldWrapper } from '../../../components'
-import {
-    ModelSingleSelectFormField,
-    useRefreshModelSingleSelect,
-} from '../../../components/metadataFormControls/ModelSingleSelect'
+import { ModelSingleSelectFormField } from '../../../components/metadataFormControls/ModelSingleSelect'
+import { ModelSingleSelectRefreshableFormField } from '../../../components/metadataFormControls/ModelSingleSelect/ModelSingleSelectRefreshableField'
 
 const PROGRAM_QUERY = {
     resource: 'programs',
@@ -20,10 +16,7 @@ type ProgramFieldProps = Readonly<{
 }>
 
 export function ProgramField({ disabled = false }: ProgramFieldProps) {
-    const programNewHref = useHref('/programs/new')
-    const refreshPrograms = useRefreshModelSingleSelect(PROGRAM_QUERY)
-
-    const select = (
+    return disabled ? (
         <ModelSingleSelectFormField
             required
             inputWidth="400px"
@@ -33,18 +26,16 @@ export function ProgramField({ disabled = false }: ProgramFieldProps) {
             query={PROGRAM_QUERY}
             disabled={disabled}
         />
-    )
-
-    if (disabled) {
-        return select
-    }
-
-    return (
-        <EditableFieldWrapper
-            onRefresh={() => refreshPrograms()}
-            onAddNew={() => window.open(programNewHref, '_blank')}
-        >
-            {select}
-        </EditableFieldWrapper>
+    ) : (
+        <ModelSingleSelectRefreshableFormField
+            required
+            inputWidth="400px"
+            dataTest="program-field"
+            name="program"
+            label={i18n.t('Program (required)')}
+            query={PROGRAM_QUERY}
+            disabled={disabled}
+            refreshResource="programs"
+        />
     )
 }

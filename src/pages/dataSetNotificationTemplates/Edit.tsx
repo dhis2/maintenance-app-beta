@@ -45,7 +45,7 @@ const fieldFilters = [
     'notifyUsersInHierarchyOnly',
 ] as const
 
-type DataSetNotificationResult = PickWithFieldFilters<
+export type DataSetNotificationResult = PickWithFieldFilters<
     DataSetNotificationTemplate,
     typeof fieldFilters
 >

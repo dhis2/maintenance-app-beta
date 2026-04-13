@@ -21,7 +21,6 @@ import { SectionListLoader } from './SectionListLoader'
 import { SectionListEmpty, SectionListError } from './SectionListMessages'
 import { SectionListPagination } from './SectionListPagination'
 import { SectionListRow } from './SectionListRow'
-import { SectionListTitle } from './SectionListTitle'
 import { DefaultToolbar } from './toolbar'
 import { DefaultToolbarProps } from './toolbar/DefaultToolbar'
 import { TranslationDialog } from './translation'
@@ -177,7 +176,6 @@ export const SectionListWrapper = ({
 
     return (
         <div>
-            <SectionListTitle />
             <FilterWrapper />
             <div className={css.listDetailsWrapper}>
                 {RenderedToolbarComponent}
@@ -213,16 +211,18 @@ export const SectionListWrapper = ({
                 )}
             </div>
             {sharingDialogId && (
-                <SharingDialog
-                    id={sharingDialogId}
-                    /* @TODO: Sharing dialog does not support metadata
-                    but it works if you pass the correct type*/
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    type={schema.singular as any}
-                    onClose={() => onSharingDialogClose()}
-                    dataSharing={schema.dataShareable}
-                    preventUsersFromRemovingMetadataWriteAccess={true}
-                />
+                <div onSubmit={(e) => e.stopPropagation()}>
+                    <SharingDialog
+                        id={sharingDialogId}
+                        /* @TODO: Sharing dialog does not support metadata
+                        but it works if you pass the correct type*/
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        type={schema.singular as any}
+                        onClose={() => onSharingDialogClose()}
+                        dataSharing={schema.dataShareable}
+                        preventUsersFromRemovingMetadataWriteAccess={true}
+                    />
+                </div>
             )}
             {translationDialogModel && (
                 <TranslationDialog

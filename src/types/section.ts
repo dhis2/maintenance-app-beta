@@ -9,6 +9,7 @@ export interface SectionBase {
     routeName?: string
     minApiVersion?: number
     maxApiVersion?: number
+    duplicable?: boolean
 }
 
 // SchemaSection is a section that can be mapped directly to a schema by the name
@@ -25,6 +26,7 @@ export type NonSchemaSection = SectionBase & {
 
 export type OverviewSection = SectionBase & {
     componentName: string
+    breadcrumbLabel?: string
 }
 
 export type ModelSection = SchemaSection | NonSchemaSection
