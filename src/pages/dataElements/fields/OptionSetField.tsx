@@ -1,52 +1,39 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import { useField } from 'react-final-form'
-import { useHref } from 'react-router'
-import {
-    EditableFieldWrapper,
-    ConfirmationModalWrapper,
-} from '../../../components'
-import {
-    ModelSingleSelectFormField,
-    useRefreshModelSingleSelect,
-} from '../../../components/metadataFormControls/ModelSingleSelect'
+import { ConfirmationModalWrapper } from '../../../components'
+import { ModelSingleSelectRefreshableFormField } from '../../../components/metadataFormControls/ModelSingleSelect/ModelSingleSelectRefreshableField'
 import { getConstantTranslation } from '../../../lib'
 
 export function OptionSetField() {
-    const newOptionSetLink = useHref('/optionSets/new')
-    const refresh = useRefreshModelSingleSelect({ resource: 'optionSets' })
     const { input } = useField('optionSet')
     const { input: valueTypeInput } = useField('valueType')
 
     const renderComponent = ({
         onChange,
     }: {
-        onChange: (event: any) => void
+        onChange: (event: unknown) => void
     }) => (
-        <EditableFieldWrapper
-            onRefresh={() => refresh()}
-            onAddNew={() => window.open(newOptionSetLink, '_blank')}
-        >
-            <ModelSingleSelectFormField
-                fullyOverrideOnChange={true}
-                onChange={onChange}
-                showNoValueOption
-                inputWidth="400px"
-                dataTest="formfields-optionset"
-                name="optionSet"
-                label={i18n.t('Option set')}
-                query={{
-                    resource: 'optionSets',
-                    params: {
-                        fields: ['id', 'displayName', 'valueType'],
-                        order: ['displayName'],
-                    },
-                }}
-                helpText={i18n.t(
-                    'Limit data entry to a predefined list of options. Overrides value type selection to match the option set.'
-                )}
-            />
-        </EditableFieldWrapper>
+        <ModelSingleSelectRefreshableFormField
+            fullyOverrideOnChange={true}
+            onChange={onChange}
+            showNoValueOption
+            inputWidth="400px"
+            dataTest="formfields-optionset"
+            name="optionSet"
+            label={i18n.t('Option set')}
+            query={{
+                resource: 'optionSets',
+                params: {
+                    fields: ['id', 'displayName', 'valueType'],
+                    order: ['displayName'],
+                },
+            }}
+            helpText={i18n.t(
+                'Limit data entry to a predefined list of options. Overrides value type selection to match the option set.'
+            )}
+            refreshResource={'optionSets'}
+        />
     )
 
     return (
