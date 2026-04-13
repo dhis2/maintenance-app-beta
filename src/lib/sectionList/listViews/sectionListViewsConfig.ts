@@ -1009,11 +1009,7 @@ export const modelListViewsConfig = {
     },
     analyticsTableHook: {
         columns: {
-            default: [
-                DESCRIPTORS.name,
-                DESCRIPTORS.publicAccess,
-                'lastUpdated',
-            ],
+            default: [DESCRIPTORS.name, 'lastUpdated'],
             available: [
                 'phase',
                 'resourceTableType',

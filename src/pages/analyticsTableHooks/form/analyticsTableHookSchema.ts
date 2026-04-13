@@ -13,12 +13,10 @@ import { fieldFilters } from './fieldFilters'
 const { withDefaultListColumns, identifiable } = modelFormSchemas
 
 const analyticsTableHookBaseSchema = z.object({
-    name: z.string().trim().min(1),
-    code: z.string().trim().optional(),
-    sql: z.string().trim().min(1),
-    analyticsTableType: z
-        .nativeEnum(AnalyticsTableHook.analyticsTableType)
-        .optional(),
+    name: z.string(),
+    code: z.string().optional(),
+    sql: z.string(),
+    analyticsTableType: z.nativeEnum(AnalyticsTableHook.analyticsTableType),
     phase: z.nativeEnum(AnalyticsTableHook.phase),
     resourceTableType: z
         .nativeEnum(AnalyticsTableHook.resourceTableType)
