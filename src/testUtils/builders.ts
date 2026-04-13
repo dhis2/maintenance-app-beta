@@ -6,7 +6,10 @@ import {
     UserGroupSchema,
     UserSchema,
 } from '../lib/form/modelFormSchemas'
-import { analyticsTableHookListSchema } from '../pages/analyticsTableHooks/form'
+import {
+    analyticsTableHookListSchema,
+    analyticsTableHookFormSchema,
+} from '../pages/analyticsTableHooks/form'
 import {
     attributeListSchema,
     attributeFormSchema,
@@ -363,6 +366,13 @@ export const testProgramRule = (overwrites: Record<any, any> = {}) => ({
 
 export const testAnalyticsTableHook = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(analyticsTableHookListSchema, { stringMap }),
+    ...overwrites,
+})
+
+export const testAnalyticsTableHookForm = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(analyticsTableHookFormSchema, { stringMap }),
     ...overwrites,
 })
 
