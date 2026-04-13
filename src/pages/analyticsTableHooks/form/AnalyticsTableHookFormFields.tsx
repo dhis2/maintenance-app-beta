@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { RadioFieldFF, SingleSelectFieldFF, TextAreaFieldFF } from '@dhis2/ui'
-import React from 'react'
-import { Field, useField } from 'react-final-form'
+import React, { useEffect } from 'react'
+import { Field, useField, useForm } from 'react-final-form'
 import {
     HorizontalFieldGroup,
     NameField,
@@ -28,11 +28,25 @@ const phaseOptions = [
 ]
 
 export const AnalyticsTableHookFormFields = () => {
+    const form = useForm()
     const schema = useSchema(section.name)
     const { input: phaseInput } = useField<string | undefined>('phase', {
         subscription: { value: true },
     })
     const selectedPhase = phaseInput.value
+
+    useEffect(() => {
+        if (
+            selectedPhase === AnalyticsTableHook.phase.RESOURCE_TABLE_POPULATED
+        ) {
+            form.change('analyticsTableType', undefined)
+        }
+        if (
+            selectedPhase === AnalyticsTableHook.phase.ANALYTICS_TABLE_POPULATED
+        ) {
+            form.change('resourceTableType', undefined)
+        }
+    }, [selectedPhase, form])
 
     const resourceTableOptions =
         schema?.properties.resourceTableType?.constants?.map((constant) => ({
