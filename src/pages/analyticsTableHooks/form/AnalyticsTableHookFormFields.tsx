@@ -16,17 +16,6 @@ import { AnalyticsTableHook } from '../../../types/generated'
 
 const section = SECTIONS_MAP.analyticsTableHook
 
-const phaseOptions = [
-    {
-        value: AnalyticsTableHook.phase.RESOURCE_TABLE_POPULATED,
-        label: i18n.t('Resource tables'),
-    },
-    {
-        value: AnalyticsTableHook.phase.ANALYTICS_TABLE_POPULATED,
-        label: i18n.t('Analytics tables'),
-    },
-]
-
 export const AnalyticsTableHookFormFields = () => {
     const form = useForm()
     const schema = useSchema(section.name)
@@ -47,6 +36,12 @@ export const AnalyticsTableHookFormFields = () => {
             form.change('resourceTableType', undefined)
         }
     }, [selectedPhase, form])
+
+    const phaseOptions =
+        schema?.properties.phase?.constants?.map((constant) => ({
+            value: constant,
+            label: getConstantTranslation(constant),
+        })) ?? []
 
     const resourceTableOptions =
         schema?.properties.resourceTableType?.constants?.map((constant) => ({

@@ -14,9 +14,9 @@ import { fieldFilters } from './fieldFilters'
 const { withDefaultListColumns, identifiable } = modelFormSchemas
 
 const analyticsTableHookBaseSchema = z.object({
-    name: z.string(),
+    name: z.string().trim().min(1),
     code: z.string().optional(),
-    sql: z.string(),
+    sql: z.string().min(1),
     analyticsTableType: z
         .nativeEnum(AnalyticsTableHook.analyticsTableType)
         .optional(),
@@ -30,19 +30,21 @@ export const analyticsTableHookFormSchema = identifiable
     .merge(analyticsTableHookBaseSchema)
     .refine(
         (data) =>
-            (data.phase === AnalyticsTableHook.phase.RESOURCE_TABLE_POPULATED &&
-                !!data.resourceTableType) ||
-            (data.phase ===
-                AnalyticsTableHook.phase.ANALYTICS_TABLE_POPULATED &&
-                !!data.analyticsTableType),
-        (data) => ({
+            data.phase !== AnalyticsTableHook.phase.RESOURCE_TABLE_POPULATED ||
+            !!data.resourceTableType,
+        {
             message: i18n.t('Required'),
-            path: [
-                data.phase === AnalyticsTableHook.phase.RESOURCE_TABLE_POPULATED
-                    ? 'resourceTableType'
-                    : 'analyticsTableType',
-            ],
-        })
+            path: ['resourceTableType'],
+        }
+    )
+    .refine(
+        (data) =>
+            data.phase !== AnalyticsTableHook.phase.ANALYTICS_TABLE_POPULATED ||
+            !!data.analyticsTableType,
+        {
+            message: i18n.t('Required'),
+            path: ['analyticsTableType'],
+        }
     )
 
 export const analyticsTableHookListSchema = analyticsTableHookBaseSchema
