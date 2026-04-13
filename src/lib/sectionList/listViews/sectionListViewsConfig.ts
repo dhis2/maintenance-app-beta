@@ -1016,6 +1016,7 @@ export const modelListViewsConfig = {
                 'analyticsTableType',
                 'sql',
             ],
+            overrideDefaultAvailable: true,
         },
         filters: {
             default: [],
