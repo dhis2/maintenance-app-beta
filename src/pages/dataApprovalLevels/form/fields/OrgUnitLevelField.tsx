@@ -9,9 +9,9 @@ export function OrgUnitLevelField() {
         validateFields: [],
         validate: requiredValidator,
         format: (level) =>
-            level != null
-                ? { id: level.toString(), displayName: '' }
-                : undefined,
+            level == null
+                ? undefined
+                : { id: level.toString(), displayName: '' },
         parse: (selected) =>
             selected ? Number.parseInt(selected.id, 10) : undefined,
     })
