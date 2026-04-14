@@ -1,6 +1,12 @@
 import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Box, Button, NoticeBox, SingleSelectFieldFF } from '@dhis2/ui'
+import {
+    Box,
+    Button,
+    NoticeBox,
+    SingleSelectFieldFF,
+    Field as UIField,
+} from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useEffect, useRef } from 'react'
 import { Field, useForm, useFormState } from 'react-final-form'
@@ -15,6 +21,7 @@ import {
     StandardFormSectionTitle,
 } from '../../../../components'
 import { LoadingSpinner } from '../../../../components/loading/LoadingSpinner'
+import { BaseModelSingleSelect } from '../../../../components/metadataFormControls/ModelSingleSelect/BaseModelSingleSelect'
 import {
     createFormError,
     createJsonPatchOperations,
@@ -36,8 +43,8 @@ import { ACTION_FIELDS_TO_CLEAR, ACTION_TYPE_OPTIONS } from './constants'
 import styles from './ProgramRuleActionForm.module.css'
 import { toProgramRuleActionApiPayload } from './transformers'
 import type {
-    ProgramRuleActionListItem,
     ProgramRuleActionFormValues,
+    ProgramRuleActionListItem,
 } from './types'
 import { validateProgramRuleAction } from './validation'
 
@@ -332,14 +339,16 @@ function ProgramRuleActionFormBody({
                     <Field name="programRuleActionType">
                         {({ input, meta }) => (
                             <Box width="400px" minWidth="100px">
-                                <SingleSelectFieldFF
-                                    input={input}
-                                    meta={meta}
-                                    label={i18n.t('Action type (required)')}
-                                    options={filteredActionTypeOptions}
-                                    required
-                                    filterable
-                                />
+                                <span id="single-select-search-input">
+                                    <SingleSelectFieldFF
+                                        input={input}
+                                        meta={meta}
+                                        label={i18n.t('Action type')}
+                                        options={filteredActionTypeOptions}
+                                        required
+                                        filterable
+                                    />
+                                </span>
                             </Box>
                         )}
                     </Field>
