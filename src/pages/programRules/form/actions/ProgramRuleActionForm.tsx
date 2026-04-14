@@ -1,12 +1,6 @@
 import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import {
-    Box,
-    Button,
-    NoticeBox,
-    SingleSelectFieldFF,
-    Field as UIField,
-} from '@dhis2/ui'
+import { Box, Button, NoticeBox, SingleSelectFieldFF } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useEffect, useRef } from 'react'
 import { Field, useForm, useFormState } from 'react-final-form'
@@ -21,7 +15,6 @@ import {
     StandardFormSectionTitle,
 } from '../../../../components'
 import { LoadingSpinner } from '../../../../components/loading/LoadingSpinner'
-import { BaseModelSingleSelect } from '../../../../components/metadataFormControls/ModelSingleSelect/BaseModelSingleSelect'
 import {
     createFormError,
     createJsonPatchOperations,
