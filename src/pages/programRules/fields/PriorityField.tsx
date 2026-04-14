@@ -23,7 +23,7 @@ export function PriorityField() {
             label={i18n.t('Priority')}
             min="0"
             helpText={i18n.t(
-                'Must be 0 or greater. Leave empty if not needed.'
+                'Enter a number to set run order. Lower numbers run first. Leave empty to use the default order.'
             )}
         />
     )
