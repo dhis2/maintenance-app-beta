@@ -29,15 +29,6 @@ export const AnalyticsTableHookFormFields = () => {
                     <NameField schemaSection={section} />
                 </StandardFormField>
                 <PhaseField />
-            </StandardFormSection>
-
-            <StandardFormSection>
-                <StandardFormSectionTitle>
-                    {i18n.t('Advanced')}
-                </StandardFormSectionTitle>
-                <StandardFormSectionDescription>
-                    {i18n.t('Configure the SQL that should run for this hook.')}
-                </StandardFormSectionDescription>
                 <StandardFormField>
                     <SqlField />
                 </StandardFormField>
