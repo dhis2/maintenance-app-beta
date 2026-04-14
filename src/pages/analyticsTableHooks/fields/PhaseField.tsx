@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { RadioFieldFF, SingleSelectFieldFF } from '@dhis2/ui'
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Field, useField, useForm } from 'react-final-form'
 import { HorizontalFieldGroup, StandardFormField } from '../../../components'
 import { getConstantTranslation, SECTIONS_MAP, useSchema } from '../../../lib'
@@ -16,18 +16,48 @@ export function PhaseField() {
     })
     const selectedPhase = phaseInput.value
 
+    const { input: analyticsTableInput } = useField('analyticsTableType', {
+        subscription: { value: true },
+    })
+    const { input: resourceTableInput } = useField('resourceTableType', {
+        subscription: { value: true },
+    })
+
+    const prevPhaseRef = useRef<string | undefined>(undefined)
     useEffect(() => {
+        const prevPhase = prevPhaseRef.current
+        prevPhaseRef.current = selectedPhase
+        if (prevPhase === undefined) {
+            return
+        }
         if (
             selectedPhase === AnalyticsTableHook.phase.RESOURCE_TABLE_POPULATED
         ) {
             form.change('analyticsTableType', undefined)
-        }
-        if (
+        } else if (
             selectedPhase === AnalyticsTableHook.phase.ANALYTICS_TABLE_POPULATED
         ) {
             form.change('resourceTableType', undefined)
         }
     }, [selectedPhase, form])
+
+    const isFirstAnalyticsRender = useRef(true)
+    useEffect(() => {
+        if (isFirstAnalyticsRender.current) {
+            isFirstAnalyticsRender.current = false
+            return
+        }
+        form.blur('analyticsTableType')
+    }, [analyticsTableInput.value, form])
+
+    const isFirstResourceRender = useRef(true)
+    useEffect(() => {
+        if (isFirstResourceRender.current) {
+            isFirstResourceRender.current = false
+            return
+        }
+        form.blur('resourceTableType')
+    }, [resourceTableInput.value, form])
 
     const phaseOptions =
         schema?.properties.phase?.constants?.map((constant) => ({
