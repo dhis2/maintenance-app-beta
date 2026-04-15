@@ -1,10 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
-import {
-    createFormValidate,
-    getDefaultsOld,
-    modelFormSchemas,
-} from '../../../lib'
+import { createFormValidate, modelFormSchemas } from '../../../lib'
+import { getDefaults } from '../../../lib/zod/getDefaults'
 import {
     AnalyticsTableHook,
     PickWithFieldFilters,
@@ -14,8 +11,7 @@ import { fieldFilters } from './fieldFilters'
 const { withDefaultListColumns, identifiable } = modelFormSchemas
 
 const analyticsTableHookBaseSchema = z.object({
-    name: z.string().trim().min(1),
-    sql: z.string().min(1),
+    sql: z.string(),
     analyticsTableType: z
         .nativeEnum(AnalyticsTableHook.analyticsTableType)
         .optional(),
@@ -25,8 +21,24 @@ const analyticsTableHookBaseSchema = z.object({
         .optional(),
 })
 
-export const analyticsTableHookFormSchema = identifiable
-    .merge(analyticsTableHookBaseSchema)
+export const analyticsTableHookFormSchema = identifiable.merge(
+    analyticsTableHookBaseSchema
+)
+
+export const analyticsTableHookListSchema = analyticsTableHookBaseSchema
+    .partial({
+        sql: true,
+        phase: true,
+        analyticsTableType: true,
+        resourceTableType: true,
+    })
+    .merge(withDefaultListColumns)
+
+const validatingAnalyticsTableHookFormSchema = analyticsTableHookFormSchema
+    .extend({
+        name: z.string().trim().min(1),
+        sql: z.string().min(1),
+    })
     .refine(
         (data) =>
             data.phase !== AnalyticsTableHook.phase.RESOURCE_TABLE_POPULATED ||
@@ -46,16 +58,10 @@ export const analyticsTableHookFormSchema = identifiable
         }
     )
 
-export const analyticsTableHookListSchema = analyticsTableHookBaseSchema
-    .partial({
-        sql: true,
-        analyticsTableType: true,
-        resourceTableType: true,
-    })
-    .merge(withDefaultListColumns)
-
-export const initialValues = getDefaultsOld(analyticsTableHookFormSchema)
-export const validate = createFormValidate(analyticsTableHookFormSchema)
+export const initialValues = getDefaults(analyticsTableHookFormSchema)
+export const validate = createFormValidate(
+    validatingAnalyticsTableHookFormSchema
+)
 
 export type AnalyticsTableHookFormValues = PickWithFieldFilters<
     AnalyticsTableHook,

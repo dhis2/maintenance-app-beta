@@ -1,8 +1,7 @@
-import { DEFAULT_FIELD_FILTERS } from '../../../lib'
+import { DEFAULT_IDENTIFIABLE } from '../../../lib'
 
 export const fieldFilters = [
-    ...DEFAULT_FIELD_FILTERS,
-    'name',
+    ...DEFAULT_IDENTIFIABLE,
     'phase',
     'resourceTableType',
     'analyticsTableType',
