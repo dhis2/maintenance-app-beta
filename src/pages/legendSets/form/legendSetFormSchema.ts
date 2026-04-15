@@ -1,6 +1,10 @@
 import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
-import { createFormValidate, getDefaultsOld, modelFormSchemas } from '../../../lib'
+import {
+    createFormValidate,
+    getDefaultsOld,
+    modelFormSchemas,
+} from '../../../lib'
 
 const { identifiable, withAttributeValues } = modelFormSchemas
 
@@ -32,15 +36,15 @@ export const legendSetFormSchema = identifiable
             if (legends[i].endValue <= legends[i].startValue) {
                 ctx.addIssue({
                     code: z.ZodIssueCode.custom,
-                    message: i18n.t('End value must be greater than start value'),
+                    message: i18n.t(
+                        'End value must be greater than start value'
+                    ),
                     path: ['legends', i, 'endValue'],
                 })
             }
         }
 
-        const sorted = [...legends].sort(
-            (a, b) => a.startValue - b.startValue
-        )
+        const sorted = [...legends].sort((a, b) => a.startValue - b.startValue)
         for (let i = 0; i < sorted.length - 1; i++) {
             const current = sorted[i]
             const next = sorted[i + 1]

@@ -22,9 +22,7 @@ export function LegendSetFormFields() {
                     {i18n.t('Basic information')}
                 </StandardFormSectionTitle>
                 <StandardFormSectionDescription>
-                    {i18n.t(
-                        'Set up the basic information for this legend.'
-                    )}
+                    {i18n.t('Set up the basic information for this legend.')}
                 </StandardFormSectionDescription>
 
                 <StandardFormField>

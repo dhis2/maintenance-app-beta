@@ -5,6 +5,7 @@ import { FormApi, SubmissionErrors } from 'final-form'
 import { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { SECTIONS_MAP, useNavigateWithSearchState } from '../../../lib'
+import { parseErrorResponse } from '../../../lib/errors'
 import { createFormError } from '../../../lib/form/createFormError'
 import {
     createJsonPatchOperations,
@@ -15,7 +16,6 @@ import {
     SubmitAction,
     useOnEditCompletedSuccessfully,
 } from '../../../lib/form/useOnSubmit'
-import { parseErrorResponse } from '../../../lib/errors'
 import { LegendItem } from './legendSetFormSchema'
 
 const section = SECTIONS_MAP.legendSet
@@ -84,9 +84,7 @@ export const useOnSubmitNewLegendSet = () => {
 
                     const status = response?.status as string
                     if (status !== 'OK') {
-                        return createFormError(
-                            parseErrorResponse(response)
-                        )
+                        return createFormError(parseErrorResponse(response))
                     }
 
                     saveAlert.show({
@@ -130,10 +128,52 @@ export const useOnSubmitNewLegendSet = () => {
     )
 }
 
+async function applyMetadataUpdate(
+    dataEngine: ReturnType<typeof useDataEngine>,
+    legendSetPayload: object
+): Promise<SubmissionErrors | undefined> {
+    try {
+        const response = (await dataEngine.mutate({
+            resource: 'metadata',
+            type: 'create',
+            data: { legendSets: [legendSetPayload] },
+            params: {
+                importStrategy: 'UPDATE',
+                mergeMode: 'REPLACE',
+                atomicMode: 'ALL',
+            },
+        })) as Record<string, unknown>
+        if ((response?.status as string) !== 'OK') {
+            return createFormError(parseErrorResponse(response))
+        }
+    } catch (error) {
+        return createFormError(parseErrorResponse(error))
+    }
+}
+
+async function applyJsonPatch(
+    dataEngine: ReturnType<typeof useDataEngine>,
+    modelId: string,
+    operations: object[]
+): Promise<SubmissionErrors | undefined> {
+    try {
+        await dataEngine.mutate(
+            {
+                resource: section.namePlural,
+                id: modelId,
+                type: 'json-patch',
+                data: ({ operations: ops }: Record<string, unknown>) => ops,
+            },
+            { variables: { operations } }
+        )
+    } catch (error) {
+        return createFormError(parseErrorResponse(error))
+    }
+}
+
 export const useOnSubmitEditLegendSet = (modelId: string) => {
     const dataEngine = useDataEngine()
-    const onEditCompletedSuccessfully =
-        useOnEditCompletedSuccessfully(section)
+    const onEditCompletedSuccessfully = useOnEditCompletedSuccessfully(section)
 
     return useMemo(
         () =>
@@ -158,91 +198,7 @@ export const useOnSubmitEditLegendSet = (modelId: string) => {
                         ? defaultNavigateTo
                         : options.navigateTo
 
-                if (legendsDirty) {
-                    const fullValues = form.getState().values
-                    const payload = {
-                        id: modelId,
-                        name: fullValues.name,
-                        legends: sanitizeLegends(
-                            fullValues.legends || []
-                        ),
-                    }
-
-                    try {
-                        const response = (await dataEngine.mutate({
-                            resource: 'metadata',
-                            type: 'create',
-                            data: { legendSets: [payload] },
-                            params: {
-                                importStrategy: 'UPDATE',
-                                mergeMode: 'REPLACE',
-                                atomicMode: 'ALL',
-                            },
-                        })) as Record<string, unknown>
-
-                        const status = response?.status as string
-                        if (status !== 'OK') {
-                            return createFormError(
-                                parseErrorResponse(response)
-                            )
-                        }
-                    } catch (error) {
-                        return createFormError(parseErrorResponse(error))
-                    }
-
-                    const nonLegendDirtyKeys = dirtyKeys.filter(
-                        (k) => !k.startsWith('legends')
-                    )
-                    if (nonLegendDirtyKeys.length === 0) {
-                        onEditCompletedSuccessfully({
-                            withChanges: true,
-                            response: null,
-                            navigateTo,
-                            submitAction: options?.submitAction,
-                        })
-                        return
-                    }
-
-                    const nonLegendDirtyFields = Object.fromEntries(
-                        nonLegendDirtyKeys.map((k) => [k, true])
-                    )
-                    const jsonPatchOperations = createJsonPatchOperations({
-                        values: values as ModelWithAttributeValues,
-                        dirtyFields: nonLegendDirtyFields,
-                        originalValue: form.getState().initialValues,
-                    })
-
-                    if (jsonPatchOperations.length > 0) {
-                        try {
-                            await dataEngine.mutate(
-                                {
-                                    resource: section.namePlural,
-                                    id: modelId,
-                                    type: 'json-patch',
-                                    data: ({
-                                        operations,
-                                    }: Record<string, string>) => operations,
-                                },
-                                {
-                                    variables: {
-                                        operations: jsonPatchOperations,
-                                    },
-                                }
-                            )
-                        } catch (error) {
-                            return createFormError(
-                                parseErrorResponse(error)
-                            )
-                        }
-                    }
-
-                    onEditCompletedSuccessfully({
-                        withChanges: true,
-                        response: null,
-                        navigateTo,
-                        submitAction: options?.submitAction,
-                    })
-                } else {
+                if (!legendsDirty) {
                     const jsonPatchOperations = createJsonPatchOperations({
                         values: values as ModelWithAttributeValues,
                         dirtyFields,
@@ -259,24 +215,13 @@ export const useOnSubmitEditLegendSet = (modelId: string) => {
                         return
                     }
 
-                    try {
-                        await dataEngine.mutate(
-                            {
-                                resource: section.namePlural,
-                                id: modelId,
-                                type: 'json-patch',
-                                data: ({
-                                    operations,
-                                }: Record<string, string>) => operations,
-                            },
-                            {
-                                variables: {
-                                    operations: jsonPatchOperations,
-                                },
-                            }
-                        )
-                    } catch (error) {
-                        return createFormError(parseErrorResponse(error))
+                    const patchError = await applyJsonPatch(
+                        dataEngine,
+                        modelId,
+                        jsonPatchOperations
+                    )
+                    if (patchError) {
+                        return patchError
                     }
 
                     onEditCompletedSuccessfully({
@@ -285,7 +230,63 @@ export const useOnSubmitEditLegendSet = (modelId: string) => {
                         navigateTo,
                         submitAction: options?.submitAction,
                     })
+                    return
                 }
+
+                const fullValues = form.getState().values
+                const payload = {
+                    id: modelId,
+                    name: fullValues.name,
+                    legends: sanitizeLegends(fullValues.legends || []),
+                }
+
+                const metadataError = await applyMetadataUpdate(
+                    dataEngine,
+                    payload
+                )
+                if (metadataError) {
+                    return metadataError
+                }
+
+                const nonLegendDirtyKeys = dirtyKeys.filter(
+                    (k) => !k.startsWith('legends')
+                )
+                if (nonLegendDirtyKeys.length === 0) {
+                    onEditCompletedSuccessfully({
+                        withChanges: true,
+                        response: null,
+                        navigateTo,
+                        submitAction: options?.submitAction,
+                    })
+                    return
+                }
+
+                const nonLegendDirtyFields = Object.fromEntries(
+                    nonLegendDirtyKeys.map((k) => [k, true])
+                )
+                const jsonPatchOperations = createJsonPatchOperations({
+                    values: values as ModelWithAttributeValues,
+                    dirtyFields: nonLegendDirtyFields,
+                    originalValue: form.getState().initialValues,
+                })
+
+                if (jsonPatchOperations.length > 0) {
+                    const patchError = await applyJsonPatch(
+                        dataEngine,
+                        modelId,
+                        jsonPatchOperations
+                    )
+                    if (patchError) {
+                        return patchError
+                    }
+                }
+
+                onEditCompletedSuccessfully({
+                    withChanges: true,
+                    response: null,
+                    navigateTo,
+                    submitAction: options?.submitAction,
+                })
             },
         [dataEngine, modelId, onEditCompletedSuccessfully]
     )

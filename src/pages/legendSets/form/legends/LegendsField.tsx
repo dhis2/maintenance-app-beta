@@ -39,9 +39,9 @@ const DEFAULT_STEP = 10
 const LIGHTNESS_SHIFT = -0.08
 
 function hexToHsl(hex: string): [number, number, number] {
-    const r = parseInt(hex.slice(1, 3), 16) / 255
-    const g = parseInt(hex.slice(3, 5), 16) / 255
-    const b = parseInt(hex.slice(5, 7), 16) / 255
+    const r = Number.parseInt(hex.slice(1, 3), 16) / 255
+    const g = Number.parseInt(hex.slice(3, 5), 16) / 255
+    const b = Number.parseInt(hex.slice(5, 7), 16) / 255
     const max = Math.max(r, g, b)
     const min = Math.min(r, g, b)
     const l = (max + min) / 2
@@ -109,7 +109,7 @@ function LegendGeneratorWrenchIcon() {
             height="16"
             viewBox="0 0 16 16"
             className={classes.legendGeneratorWrench}
-            role="presentation"
+            aria-hidden="true"
         >
             <path
                 fillRule="evenodd"
@@ -146,7 +146,7 @@ function LegendGeneratorInputs({
     scalePickerOpen,
     setScalePickerOpen,
     scaleButtonRef,
-}: LegendGeneratorInputsProps) {
+}: Readonly<LegendGeneratorInputsProps>) {
     return (
         <div className={classes.generateInputs}>
             <InputField
@@ -295,7 +295,7 @@ export function LegendsField() {
 
     const handleAddItem = useCallback(() => {
         const sorted = [...legends].sort((a, b) => a.startValue - b.startValue)
-        const last = sorted[sorted.length - 1]
+        const last = sorted.at(-1)
 
         const newStart = last ? last.endValue : 0
         const newEnd = newStart + DEFAULT_STEP
@@ -316,9 +316,9 @@ export function LegendsField() {
     }, [legends, input])
 
     const doGenerate = useCallback(() => {
-        const start = parseFloat(startValue)
-        const end = parseFloat(endValue)
-        if (isNaN(start) || isNaN(end) || end <= start) {
+        const start = Number.parseFloat(startValue)
+        const end = Number.parseFloat(endValue)
+        if (Number.isNaN(start) || Number.isNaN(end) || end <= start) {
             return
         }
         const colors = selectedScale.scale[numClasses]
@@ -331,13 +331,13 @@ export function LegendsField() {
         setModalOpen(false)
     }, [startValue, endValue, selectedScale, numClasses, input])
 
-    const startNum = parseFloat(startValue)
-    const endNum = parseFloat(endValue)
+    const startNum = Number.parseFloat(startValue)
+    const endNum = Number.parseFloat(endValue)
     const generateDisabled =
         startValue === '' ||
         endValue === '' ||
-        isNaN(startNum) ||
-        isNaN(endNum) ||
+        Number.isNaN(startNum) ||
+        Number.isNaN(endNum) ||
         endNum <= startNum
 
     const generatorInputsProps: LegendGeneratorInputsProps = {
@@ -512,12 +512,12 @@ function InlineLegendItemRow({
     isOverlapping,
     onUpdate,
     onDelete,
-}: {
+}: Readonly<{
     item: LegendItem
     isOverlapping: boolean
     onUpdate: (id: string, patch: Partial<LegendItem>) => void
     onDelete: (id: string) => void
-}) {
+}>) {
     const [colorPickerOpen, setColorPickerOpen] = useState(false)
     const colorRef = useRef<HTMLButtonElement>(null)
 
@@ -568,8 +568,8 @@ function InlineLegendItemRow({
                     value={String(item.startValue)}
                     type="number"
                     onChange={(e: { value?: string }) => {
-                        const num = parseFloat(e.value ?? '')
-                        if (!isNaN(num)) {
+                        const num = Number.parseFloat(e.value ?? '')
+                        if (!Number.isNaN(num)) {
                             onUpdate(item.id, { startValue: num })
                         }
                     }}
@@ -581,8 +581,8 @@ function InlineLegendItemRow({
                     value={String(item.endValue)}
                     type="number"
                     onChange={(e: { value?: string }) => {
-                        const num = parseFloat(e.value ?? '')
-                        if (!isNaN(num)) {
+                        const num = Number.parseFloat(e.value ?? '')
+                        if (!Number.isNaN(num)) {
                             onUpdate(item.id, { endValue: num })
                         }
                     }}
@@ -603,12 +603,12 @@ function InlineLegendItemRow({
     )
 }
 
-function ColorScalePreview({ colors }: { colors: string[] }) {
+function ColorScalePreview({ colors }: Readonly<{ colors: string[] }>) {
     return (
         <div className={classes.colorScalePreview}>
-            {colors.map((color, i) => (
+            {colors.map((color) => (
                 <span
-                    key={i}
+                    key={color}
                     className={classes.colorScalePreviewCell}
                     style={{ background: color }}
                 />
