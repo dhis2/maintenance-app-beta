@@ -15,24 +15,22 @@ const section = SECTIONS_MAP.analyticsTableHook
 
 export const AnalyticsTableHookFormFields = () => {
     return (
-        <>
-            <StandardFormSection>
-                <StandardFormSectionTitle>
-                    {i18n.t('Basic information')}
-                </StandardFormSectionTitle>
-                <StandardFormSectionDescription>
-                    {i18n.t(
-                        'Set up the basic information for this analytics table hook.'
-                    )}
-                </StandardFormSectionDescription>
-                <StandardFormField>
-                    <NameField schemaSection={section} />
-                </StandardFormField>
-                <PhaseField />
-                <StandardFormField>
-                    <SqlField />
-                </StandardFormField>
-            </StandardFormSection>
-        </>
+        <StandardFormSection>
+            <StandardFormSectionTitle>
+                {i18n.t('Basic information')}
+            </StandardFormSectionTitle>
+            <StandardFormSectionDescription>
+                {i18n.t(
+                    'Set up the basic information for this analytics table hook.'
+                )}
+            </StandardFormSectionDescription>
+            <StandardFormField>
+                <NameField schemaSection={section} />
+            </StandardFormField>
+            <PhaseField />
+            <StandardFormField>
+                <SqlField />
+            </StandardFormField>
+        </StandardFormSection>
     )
 }
