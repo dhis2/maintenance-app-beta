@@ -116,11 +116,11 @@
     background: var(--colors-grey200);
 }
 
-.legendItemRowOverlap td {
+.legendItemRowValidationViolation td {
     background-color: var(--colors-red050) !important;
 }
 
-.legendItemRowOverlap td:first-child {
+.legendItemRowValidationViolation td:first-child {
     box-shadow: inset 3px 0 0 var(--colors-red600);
 }
 

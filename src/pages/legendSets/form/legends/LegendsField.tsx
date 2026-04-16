@@ -24,7 +24,6 @@ import {
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { SketchPicker } from 'react-color'
 import { useField } from 'react-final-form'
-import { useParams } from 'react-router-dom'
 import { generateDhis2Id } from '../../../../lib/models/uid'
 import { LegendItem } from '../legendSetSchema'
 import {
@@ -241,23 +240,30 @@ export function LegendsField() {
         if (!value || value.length === 0) {
             return undefined
         }
-        for (const item of value) {
-            if (item.endValue <= item.startValue) {
-                return i18n.t('End value must be greater than start value')
-            }
+        const errors: string[] = []
+        if (value.some((item) => item.endValue <= item.startValue)) {
+            errors.push(i18n.t('End value must be greater than start value.'))
         }
         const sorted = [...value].sort((a, b) => a.startValue - b.startValue)
+        let hasOverlap = false
+        let hasGap = false
         for (let i = 0; i < sorted.length - 1; i++) {
             const current = sorted[i]
             const next = sorted[i + 1]
             if (current.endValue > next.startValue) {
-                return i18n.t('Legend items must not overlap')
+                hasOverlap = true
             }
             if (current.endValue < next.startValue) {
-                return i18n.t('Legend items must not have gaps')
+                hasGap = true
             }
         }
-        return undefined
+        if (hasOverlap) {
+            errors.push(i18n.t('Legend items must not overlap.'))
+        }
+        if (hasGap) {
+            errors.push(i18n.t('Legend items must not have gaps.'))
+        }
+        return errors.length > 0 ? errors.join(' ') : undefined
     }
     const { input, meta } = useField<LegendItem[]>('legends', {
         validate: validator,
@@ -306,14 +312,24 @@ export function LegendsField() {
         }
     }, [legends.length])
 
-    const overlappingIds = useMemo(() => {
+    const validationIssueIds = useMemo(() => {
         const ids = new Set<string>()
-        for (let i = 0; i < sortedLegends.length - 1; i++) {
+        for (let i = 0; i < sortedLegends.length; i++) {
             const current = sortedLegends[i]
-            const next = sortedLegends[i + 1]
-            if (current.endValue > next.startValue) {
+            console.log(current)
+            const next =
+                i === sortedLegends.length ? undefined : sortedLegends[i + 1]
+            if (current.endValue < current.startValue) {
+                console.log('you not triggered?')
                 ids.add(current.id)
-                ids.add(next.id)
+            }
+            if (
+                next &&
+                (current.endValue > next?.startValue ||
+                    next?.startValue > current.endValue)
+            ) {
+                ids.add(current.id)
+                ids.add(next?.id)
             }
         }
         return ids
@@ -526,7 +542,9 @@ export function LegendsField() {
                         <InlineLegendItemRow
                             key={item.id}
                             item={item}
-                            isOverlapping={overlappingIds.has(item.id)}
+                            isValidationViolation={validationIssueIds.has(
+                                item.id
+                            )}
                             onUpdate={updateItem}
                             onDelete={handleDeleteItem}
                             onBlur={handleItemBlur}
@@ -555,13 +573,13 @@ export function LegendsField() {
 
 function InlineLegendItemRow({
     item,
-    isOverlapping,
+    isValidationViolation,
     onUpdate,
     onDelete,
     onBlur,
 }: Readonly<{
     item: LegendItem
-    isOverlapping: boolean
+    isValidationViolation: boolean
     onUpdate: (id: string, patch: Partial<LegendItem>) => void
     onDelete: (id: string) => void
     onBlur: () => void
@@ -571,7 +589,11 @@ function InlineLegendItemRow({
 
     return (
         <DataTableRow
-            className={isOverlapping ? classes.legendItemRowOverlap : ''}
+            className={
+                isValidationViolation
+                    ? classes.legendItemRowValidationViolation
+                    : ''
+            }
         >
             <DataTableCell width="52px" staticStyle>
                 <button
