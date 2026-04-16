@@ -1,7 +1,6 @@
 import { mkdirSync, writeFileSync } from 'node:fs'
 import { z, ZodObject, ZodRawShape } from 'zod'
 import { zodToJsonSchema } from 'zod-to-json-schema'
-import { analyticsTableHookFormSchema } from '../pages/analyticsTableHooks/form'
 import { categoryFormSchema } from '../pages/categories/form'
 
 const generateContract = <T extends ZodRawShape>({
@@ -54,15 +53,6 @@ describe('contracts', () => {
             name: 'category',
             expectedSchema: categoryFormSchema,
             usage: 'used to populate edit category form',
-        })
-    })
-    it('should generate get analytics table hooks contracts', () => {
-        generateContract({
-            method: 'GET',
-            path: '/analyticsTableHooks/{id}',
-            name: 'analyticsTableHooks',
-            expectedSchema: analyticsTableHookFormSchema,
-            usage: 'used to populate analytics table hooks form',
         })
     })
 })

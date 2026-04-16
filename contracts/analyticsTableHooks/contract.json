@@ -1,7 +1,0 @@
-{
-    "name": "analyticsTableHooks",
-    "httpMethod": "GET",
-    "requestUrl": "/analyticsTableHooks/{id}",
-    "responseStatus": 200,
-    "jsonSchema": "contracts/metadata-management-app/analyticsTableHooks/json-schema.json"
-}
