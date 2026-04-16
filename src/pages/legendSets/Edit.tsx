@@ -2,13 +2,24 @@ import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { DefaultEditFormContents, FormBase } from '../../components'
-import { SECTIONS_MAP } from '../../lib'
+import {
+    DEFAULT_FIELD_FILTERS,
+    ATTRIBUTE_VALUES_FIELD_FILTERS,
+    SECTIONS_MAP,
+    useOnSubmitEdit,
+} from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { LegendSet, PickWithFieldFilters } from '../../types/generated'
-import { fieldFilters } from './form/fieldFilters'
 import { LegendSetFormFields } from './form/LegendSetFormFields'
-import { validate } from './form/legendSetFormSchema'
-import { useOnSubmitEditLegendSet } from './form/useOnSubmitLegendSet'
+import { validate } from './form/legendSetSchema'
+
+export const fieldFilters = [
+    ...DEFAULT_FIELD_FILTERS,
+    ...ATTRIBUTE_VALUES_FIELD_FILTERS,
+    'name',
+    'code',
+    'legends[id,name,startValue,endValue,color,legendSet[id]]',
+] as const
 
 type LegendSetEditFormValues = PickWithFieldFilters<
     LegendSet,
@@ -36,7 +47,7 @@ export const Component = () => {
 
     return (
         <FormBase
-            onSubmit={useOnSubmitEditLegendSet(modelId)}
+            onSubmit={useOnSubmitEdit({ section, modelId })}
             initialValues={legendSetQuery.data}
             validate={validate}
         >

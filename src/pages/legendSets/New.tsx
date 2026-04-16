@@ -1,17 +1,16 @@
 import React from 'react'
 import { FormBase } from '../../components'
 import { DefaultNewFormContents } from '../../components/form/DefaultFormContents'
-import { SECTIONS_MAP } from '../../lib'
+import { SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { LegendSetFormFields } from './form/LegendSetFormFields'
-import { initialValues, validate } from './form/legendSetFormSchema'
-import { useOnSubmitNewLegendSet } from './form/useOnSubmitLegendSet'
+import { initialValues, validate } from './form/legendSetSchema'
 
 const section = SECTIONS_MAP.legendSet
 
 export const Component = () => {
     return (
         <FormBase
-            onSubmit={useOnSubmitNewLegendSet()}
+            onSubmit={useOnSubmitNew({ section })}
             initialValues={initialValues}
             validate={validate}
         >

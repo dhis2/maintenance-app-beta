@@ -1,5 +1,5 @@
 import { generateDhis2Id } from '../../../../lib/models/uid'
-import { LegendItem } from '../legendSetFormSchema'
+import { LegendItem } from '../legendSetSchema'
 
 type ColorScale = Record<number, string[]>
 

@@ -24,8 +24,9 @@ import {
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { SketchPicker } from 'react-color'
 import { useField } from 'react-final-form'
+import { useParams } from 'react-router-dom'
 import { generateDhis2Id } from '../../../../lib/models/uid'
-import { LegendItem } from '../legendSetFormSchema'
+import { LegendItem } from '../legendSetSchema'
 import {
     COLOR_SCALES,
     MIN_CLASSES,
@@ -236,8 +237,35 @@ function LegendGeneratorInputs({
 }
 
 export function LegendsField() {
-    const { input, meta } = useField<LegendItem[]>('legends')
-    const legends: LegendItem[] = input.value || []
+    const validator = (value: LegendItem[]) => {
+        if (!value || value.length === 0) {
+            return undefined
+        }
+        for (const item of value) {
+            if (item.endValue <= item.startValue) {
+                return i18n.t('End value must be greater than start value')
+            }
+        }
+        const sorted = [...value].sort((a, b) => a.startValue - b.startValue)
+        for (let i = 0; i < sorted.length - 1; i++) {
+            const current = sorted[i]
+            const next = sorted[i + 1]
+            if (current.endValue > next.startValue) {
+                return i18n.t('Legend items must not overlap')
+            }
+            if (current.endValue < next.startValue) {
+                return i18n.t('Legend items must not have gaps')
+            }
+        }
+        return undefined
+    }
+    const { input, meta } = useField<LegendItem[]>('legends', {
+        validate: validator,
+    })
+    const legends: LegendItem[] = useMemo(
+        () => input.value || [],
+        [input.value]
+    )
 
     const [modalOpen, setModalOpen] = useState(false)
 
@@ -250,10 +278,27 @@ export function LegendsField() {
 
     const selectedScale = COLOR_SCALES[selectedScaleIndex]
 
-    const sortedLegends = useMemo(
-        () => [...legends].sort((a, b) => a.startValue - b.startValue),
-        [legends]
-    )
+    const [sortedLegends, setSortedLegends] = useState<LegendItem[]>([])
+
+    useEffect(() => {
+        setSortedLegends((prev) => {
+            const prevIds = new Set(prev.map((l) => l.id))
+            const idsChanged =
+                prev.length !== legends.length ||
+                legends.some((l) => !prevIds.has(l.id))
+            if (idsChanged) {
+                return [...legends].sort((a, b) => a.startValue - b.startValue)
+            }
+            const legendMap = new Map(legends.map((l) => [l.id, l]))
+            return prev.map((l) => legendMap.get(l.id) ?? l)
+        })
+    }, [legends])
+
+    const handleItemBlur = useCallback(() => {
+        setSortedLegends((prev) =>
+            [...prev].sort((a, b) => a.startValue - b.startValue)
+        )
+    }, [])
 
     useEffect(() => {
         if (legends.length === 0) {
@@ -484,6 +529,7 @@ export function LegendsField() {
                             isOverlapping={overlappingIds.has(item.id)}
                             onUpdate={updateItem}
                             onDelete={handleDeleteItem}
+                            onBlur={handleItemBlur}
                         />
                     ))}
                 </TableBody>
@@ -512,11 +558,13 @@ function InlineLegendItemRow({
     isOverlapping,
     onUpdate,
     onDelete,
+    onBlur,
 }: Readonly<{
     item: LegendItem
     isOverlapping: boolean
     onUpdate: (id: string, patch: Partial<LegendItem>) => void
     onDelete: (id: string) => void
+    onBlur: () => void
 }>) {
     const [colorPickerOpen, setColorPickerOpen] = useState(false)
     const colorRef = useRef<HTMLButtonElement>(null)
@@ -560,6 +608,7 @@ function InlineLegendItemRow({
                     onChange={(e: { value?: string }) =>
                         onUpdate(item.id, { name: e.value ?? '' })
                     }
+                    onBlur={onBlur}
                     dense
                 />
             </DataTableCell>
@@ -573,6 +622,7 @@ function InlineLegendItemRow({
                             onUpdate(item.id, { startValue: num })
                         }
                     }}
+                    onBlur={onBlur}
                     dense
                 />
             </DataTableCell>
@@ -586,6 +636,7 @@ function InlineLegendItemRow({
                             onUpdate(item.id, { endValue: num })
                         }
                     }}
+                    onBlur={onBlur}
                     dense
                 />
             </DataTableCell>
