@@ -156,7 +156,6 @@ describe('Data approval workflows form tests', () => {
             await uiActions.submitForm(screen)
             expect(createMock).not.toHaveBeenCalled()
         })
-
     })
 
     describe('New', () => {
