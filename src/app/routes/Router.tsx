@@ -1,4 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
+import { NoticeBox } from '@dhis2/ui'
+import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 import {
     createHashRouter,
@@ -23,9 +25,10 @@ import {
     routePaths,
     getOverviewPath,
     isMergableSection,
+    useBoundResourceQueryFn,
 } from '../../lib'
 import { OverviewSection } from '../../types'
-import { Layout, Breadcrumbs, BreadcrumbItem } from '../layout'
+import { Layout, BreadcrumbItem } from '../layout'
 import {
     SectionAuthorizedGuard,
     SectionCanMergeGuard,
@@ -74,7 +77,7 @@ function createOverviewLazyRouteFunction(
 
 function createSectionLazyRouteFunction(
     section: Section,
-    componentFileName: 'New' | 'Edit' | 'List' | 'Merge'
+    componentFileName: 'New' | 'Edit' | 'List' | 'Merge' | 'Duplicate'
 ) {
     return async () => {
         try {
@@ -88,11 +91,22 @@ function createSectionLazyRouteFunction(
             // fallback to redirect to legacy
             if (isModuleNotFoundError(e)) {
                 return {
-                    element: (
+                    element: section.duplicable ? (
                         <LegacyAppRedirect
                             section={section}
                             isNew={componentFileName === 'New'}
                         />
+                    ) : (
+                        <NoticeBox
+                            title={i18n.t('Duplication not available yet.')}
+                        >
+                            <p>
+                                {i18n.t(
+                                    '{{-sectionName}} cannot be duplicated.',
+                                    { sectionName: section.titlePlural }
+                                )}
+                            </p>
+                        </NoticeBox>
                     ),
                 }
             }
@@ -110,6 +124,38 @@ const VerifyModelId = () => {
     return <Outlet />
 }
 
+const EditBreadcrumbItem = ({
+    section,
+    pathname,
+    id,
+}: {
+    section: Section
+    pathname: string
+    id: string
+}) => {
+    const queryFn = useBoundResourceQueryFn()
+
+    const { data } = useQuery({
+        queryKey: [
+            {
+                resource: section.namePlural,
+                id,
+                params: { fields: ['displayName'] },
+            },
+        ],
+        queryFn: queryFn<{ displayName: string }>,
+    })
+
+    const label = data?.displayName
+        ? i18n.t('Edit: {{objectName}}', {
+              objectName: data.displayName,
+              interpolation: { escapeValue: false },
+          })
+        : i18n.t('Edit')
+
+    return <BreadcrumbItem label={label} to={pathname} />
+}
+
 const sectionsNoNewRoute = new Set<SchemaSection | NonSchemaSection>([
     SECTIONS_MAP.categoryOptionCombo,
     SECTIONS_MAP.organisationUnitLevel,
@@ -122,34 +168,43 @@ const schemaSectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
         handle={
             {
                 section,
-                crumb: () => (
-                    <BreadcrumbItem
-                        label={
-                            OVERVIEW_SECTIONS[section.parentSectionKey]
-                                .titlePlural
-                        }
-                        to={`/${getOverviewPath(
-                            OVERVIEW_SECTIONS[section.parentSectionKey]
-                        )}`}
-                    />
-                ),
+                crumb: () => {
+                    const overview: OverviewSection =
+                        OVERVIEW_SECTIONS[section.parentSectionKey]
+                    return (
+                        <BreadcrumbItem
+                            label={
+                                overview.breadcrumbLabel ?? overview.titlePlural
+                            }
+                            to={`/${getOverviewPath(overview)}`}
+                        />
+                    )
+                },
             } satisfies RouteHandle
         }
-        element={
-            <>
-                <Breadcrumbs />
-                <Outlet />
-            </>
-        }
+        element={<Outlet />}
     >
-        <Route index lazy={createSectionLazyRouteFunction(section, 'List')} />
+        <Route
+            index
+            lazy={createSectionLazyRouteFunction(section, 'List')}
+            handle={
+                {
+                    crumb: (matchInfo) => (
+                        <BreadcrumbItem
+                            label={section.titlePlural}
+                            to={matchInfo.pathname}
+                        />
+                    ),
+                } satisfies RouteHandle
+            }
+        />
         <Route
             handle={
                 {
                     hideSidebar: true,
                     crumb: (matchInfo) => (
                         <BreadcrumbItem
-                            label={section.title}
+                            label={section.titlePlural}
                             to={matchInfo.pathname}
                         />
                     ),
@@ -194,19 +249,42 @@ const schemaSectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
                     />
                 </Route>
             )}
-            <Route path=":id" element={<VerifyModelId />}>
+            {
                 <Route
-                    index
+                    path={`${routePaths.duplicate}`}
+                    lazy={createSectionLazyRouteFunction(section, 'Duplicate')}
                     handle={
                         {
                             crumb: (matchInfo) => (
                                 <BreadcrumbItem
-                                    label={i18n.t('Edit {{modelName}}', {
+                                    label={i18n.t('Duplicate {{modelName}}', {
                                         modelName: section.title,
                                     })}
                                     to={matchInfo.pathname}
                                 />
                             ),
+                        } satisfies RouteHandle
+                    }
+                />
+            }
+            <Route path=":id" element={<VerifyModelId />}>
+                <Route
+                    index
+                    handle={
+                        {
+                            crumb: (matchInfo) => {
+                                const id = matchInfo.params.id
+                                if (id === undefined) {
+                                    return null
+                                }
+                                return (
+                                    <EditBreadcrumbItem
+                                        section={section}
+                                        id={id}
+                                        pathname={matchInfo.pathname}
+                                    />
+                                )
+                            },
                         } satisfies RouteHandle
                     }
                     lazy={createSectionLazyRouteFunction(section, 'Edit')}

@@ -9,9 +9,7 @@ export function RemindCompletedField() {
             name="remindCompleted"
             type="checkbox"
             component={CheckboxFieldFF}
-            label={i18n.t(
-                'On event completion, ask user to complete enrollment'
-            )}
+            label={i18n.t('Ask user to complete enrollment after completion')}
             dataTest="formfields-remindCompleted"
             validateFields={[]}
         />

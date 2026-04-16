@@ -17,17 +17,20 @@ type OwnProps<TModel extends PartialLoadedDisplayableModel> = {
     fullyOverrideOnChange?: boolean
 }
 
-type RelevantRenderProps<TModel extends PartialLoadedDisplayableModel> = {
-    input: Pick<
-        FieldRenderProps<TModel | undefined>['input'],
-        'value' | 'onChange' | 'onBlur' | 'name'
-    >
-    meta: Pick<
-        FieldRenderProps<TModel | undefined>['meta'],
-        'invalid' | 'touched' | 'error'
-    >
-}
-type RelevantUseFieldProps<TModel extends PartialLoadedDisplayableModel> = Pick<
+export type RelevantRenderProps<TModel extends PartialLoadedDisplayableModel> =
+    {
+        input: Pick<
+            FieldRenderProps<TModel | undefined>['input'],
+            'value' | 'onChange' | 'onBlur' | 'name'
+        >
+        meta: Pick<
+            FieldRenderProps<TModel | undefined>['meta'],
+            'invalid' | 'touched' | 'error'
+        >
+    }
+export type RelevantUseFieldProps<
+    TModel extends PartialLoadedDisplayableModel
+> = Pick<
     UseFieldConfig<TModel | undefined>,
     'validate' | 'validateFields' | 'initialValue' | 'format' | 'parse' | 'data'
 > & {
@@ -38,6 +41,35 @@ export type ModelSingleSelectFieldProps<
     TModel extends PartialLoadedDisplayableModel = DisplayableModel
 > = Omit<ModelSingleSelectProps<TModel>, 'selected' | 'onChange'> &
     OwnProps<TModel>
+
+export function ModelSingleSelectFF<
+    TModel extends PartialLoadedDisplayableModel
+>({
+    onChange,
+    input,
+    meta,
+    inputWidth = '400px',
+    fullyOverrideOnChange = false,
+    ...modelSingleSelectProps
+}: ModelSingleSelectFieldProps<TModel> & RelevantRenderProps<TModel>) {
+    return (
+        <Box width={inputWidth} minWidth="100px">
+            <ModelSingleSelect<TModel>
+                {...modelSingleSelectProps}
+                selected={input.value}
+                onChange={(selected) => {
+                    if (!fullyOverrideOnChange) {
+                        input.onChange(selected)
+                    }
+                    input.onBlur()
+                    onChange?.(selected)
+                }}
+                invalid={meta.touched && !!meta.error}
+            />
+        </Box>
+    )
+}
+
 export function ModelSingleSelectField<
     TModel extends PartialLoadedDisplayableModel
 >({
@@ -45,18 +77,9 @@ export function ModelSingleSelectField<
     helpText,
     required,
     onChange,
-    // react-final-form props
-    // validate,
-    // validateFields,
-    // initialValue,
-    // format,
-    // parse,
-    // data,
     input,
     meta,
     dataTest,
-    inputWidth = '400px',
-    fullyOverrideOnChange = false,
     ...modelSingleSelectProps
 }: ModelSingleSelectFieldProps<TModel> & RelevantRenderProps<TModel>) {
     return (
@@ -69,20 +92,12 @@ export function ModelSingleSelectField<
             helpText={helpText}
             required={required}
         >
-            <Box width={inputWidth} minWidth="100px">
-                <ModelSingleSelect<TModel>
-                    {...modelSingleSelectProps}
-                    selected={input.value}
-                    onChange={(selected) => {
-                        if (!fullyOverrideOnChange) {
-                            input.onChange(selected)
-                        }
-                        input.onBlur()
-                        onChange?.(selected)
-                    }}
-                    invalid={meta.touched && !!meta.error}
-                />
-            </Box>
+            <ModelSingleSelectFF
+                onChange={onChange}
+                input={input}
+                meta={meta}
+                {...modelSingleSelectProps}
+            />
         </Field>
     )
 }

@@ -8,12 +8,10 @@ import {
     useForm,
     useFormState,
 } from 'react-final-form'
-import { useHref } from 'react-router'
 import {
     CodeField,
     ColorAndIconField,
     DescriptionField,
-    EditableFieldWrapper,
     FeatureTypeField,
     NameField,
     SectionedFormSection,
@@ -22,17 +20,13 @@ import {
     StandardFormSectionDescription,
     StandardFormSectionTitle,
 } from '../../../../components'
-import {
-    ModelSingleSelectFormField,
-    useRefreshModelSingleSelect,
-} from '../../../../components/metadataFormControls/ModelSingleSelect'
+import { ModelSingleSelectRefreshableFormField } from '../../../../components/metadataFormControls/ModelSingleSelect/ModelSingleSelectRefreshableField'
 import {
     DEFAULT_CATEGORYCOMBO_SELECT_OPTION,
     selectedLocale,
     useSchemaSectionHandleOrThrow,
 } from '../../../../lib'
 import { DisplayableModel } from '../../../../types/models'
-import classes from '../../../dataElements/fields/CategoryComboField.module.css'
 import {
     CompleteEventsExpiryDaysField,
     DisplayFrontPageListField,
@@ -65,11 +59,6 @@ export const SetupFormContents = React.memo(function SetupFormContents({
 
     const { values } = useFormState({ subscription: { values: true } })
     const form = useForm()
-
-    const refreshCategoryCombos = useRefreshModelSingleSelect({
-        resource: 'categoryCombos',
-    })
-    const newCategoryComboLink = useHref('/categoryCombos/new')
     const { fromServerDate } = useTimeZoneConversion()
     const schemaSection = useSchemaSectionHandleOrThrow()
 
@@ -166,21 +155,15 @@ export const SetupFormContents = React.memo(function SetupFormContents({
                 </StandardFormField>
             )}
             <StandardFormField>
-                <EditableFieldWrapper
-                    onRefresh={() => refreshCategoryCombos()}
-                    onAddNew={() => window.open(newCategoryComboLink, '_blank')}
-                >
-                    <div className={classes.categoryComboSelect}>
-                        <ModelSingleSelectFormField
-                            inputWidth={'400px'}
-                            name="categoryCombo"
-                            dataTest="formfields-categorycombo"
-                            label={i18n.t('Event category combination')}
-                            query={CATEGORY_COMBOS_QUERY}
-                            transform={addDefaultCategoryComboTransform}
-                        />
-                    </div>
-                </EditableFieldWrapper>
+                <ModelSingleSelectRefreshableFormField
+                    inputWidth={'400px'}
+                    name="categoryCombo"
+                    dataTest="formfields-categorycombo"
+                    label={i18n.t('Event category combination')}
+                    query={CATEGORY_COMBOS_QUERY}
+                    transform={addDefaultCategoryComboTransform}
+                    refreshResource="categoryCombos"
+                />
             </StandardFormField>
 
             <StandardFormField>

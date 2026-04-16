@@ -12,6 +12,7 @@ import {
     StandardFormField,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
+    StandardFormSubsectionTitle,
 } from '../../../../components'
 import {
     composeAsyncValidators,
@@ -23,7 +24,16 @@ import {
     useSyncSelectedSectionWithScroll,
     useValidator,
 } from '../../../../lib'
-import { ValidationStrategyField } from './fields'
+import {
+    BlockEntryFormField,
+    RepeatableField,
+    StandardIntervalField,
+    NextScheduleDateField,
+    ValidationStrategyField,
+    AllowGenerateNextVisitField,
+    RemindCompletedField,
+    PeriodTypeField,
+} from './fields'
 import { StageCreationAndSchedulingFormContents } from './StageCreationAndSchedulingFormContents'
 import { StageDataFormContents } from './StageDataFormContents'
 import { stageSchemaSection } from './StageForm'
@@ -121,24 +131,43 @@ export const StageFormContents = ({
                     name={descriptor.getSection('stageConfiguration').name}
                 >
                     <StandardFormSectionTitle>
-                        {i18n.t('Configuration options')}
+                        {i18n.t('Data entry options')}
                     </StandardFormSectionTitle>
                     <StandardFormSectionDescription>
                         {i18n.t(
-                            'Set up more advanced options for this program stage.'
+                            'Set up how data is collected for events in this program stage.'
                         )}
                     </StandardFormSectionDescription>
+                    <StandardFormField>
+                        <FeatureTypeField />
+                    </StandardFormField>
                     <StandardFormField>
                         <Field
                             name="enableUserAssignment"
                             type="checkbox"
                             component={CheckboxFieldFF}
-                            label={i18n.t('Allow user assignment of events')}
+                            label={i18n.t(
+                                'Allow events to be assigned to users'
+                            )}
                             dataTest="formfields-enableUserAssignment"
                         />
                     </StandardFormField>
                     <StandardFormField>
-                        <FeatureTypeField />
+                        <RepeatableField />
+                    </StandardFormField>
+                    {values.repeatable && (
+                        <div style={{ marginInlineStart: '24px' }}>
+                            <StandardFormField>
+                                <StandardIntervalField />
+                            </StandardFormField>
+                            <StandardFormField>
+                                <NextScheduleDateField />
+                            </StandardFormField>
+                        </div>
+                    )}
+
+                    <StandardFormField>
+                        <PeriodTypeField />
                     </StandardFormField>
                     {showValidationStrategy && (
                         <StandardFormField>
@@ -150,20 +179,56 @@ export const StageFormContents = ({
                             name="preGenerateUID"
                             type="checkbox"
                             component={CheckboxFieldFF}
-                            label={i18n.t('Pre-generate event UID')}
+                            label={i18n.t('Generate offline event IDs')}
                             dataTest="formfields-preGenerateUID"
                         />
                     </StandardFormField>
+                    <StandardFormSubsectionTitle>
+                        {i18n.t('Completion options')}
+                    </StandardFormSubsectionTitle>
+                    <StandardFormSectionDescription>
+                        {i18n.t(
+                            'Decide what should happen after a user completes this event.'
+                        )}
+                    </StandardFormSectionDescription>
+
+                    <StandardFormField>
+                        <AllowGenerateNextVisitField />
+                    </StandardFormField>
+                    <StandardFormField>
+                        <RemindCompletedField />
+                    </StandardFormField>
+                    <StandardFormField>
+                        <BlockEntryFormField />
+                    </StandardFormField>
                 </SectionedFormSection>
+                <StageCreationAndSchedulingFormContents
+                    name={
+                        descriptor.getSection('stageCreationAndScheduling').name
+                    }
+                    sectionLabel={
+                        descriptor.getSection('stageCreationAndScheduling')
+                            .label
+                    }
+                />
+                <StageDataFormContents
+                    name={descriptor.getSection('stageData').name}
+                    sectionLabel={descriptor.getSection('stageData').label}
+                />
+                <StageFormFormContents
+                    isSubsection={isSubsection}
+                    name={descriptor.getSection('stageForm').name}
+                    sectionLabel={descriptor.getSection('stageForm').label}
+                />
                 <SectionedFormSection
                     name={descriptor.getSection('stageTerminology').name}
                 >
                     <StandardFormSectionTitle>
-                        {i18n.t('Custom terminology')}
+                        {i18n.t('Customization')}
                     </StandardFormSectionTitle>
                     <StandardFormSectionDescription>
                         {i18n.t(
-                            'Customise the wording of labels for this stage.'
+                            'Override default labels with program stage-specific terms.'
                         )}
                     </StandardFormSectionDescription>
                     <StandardFormField>
@@ -207,24 +272,6 @@ export const StageFormContents = ({
                         />
                     </StandardFormField>
                 </SectionedFormSection>
-                <StageCreationAndSchedulingFormContents
-                    name={
-                        descriptor.getSection('stageCreationAndScheduling').name
-                    }
-                    sectionLabel={
-                        descriptor.getSection('stageCreationAndScheduling')
-                            .label
-                    }
-                />
-                <StageDataFormContents
-                    name={descriptor.getSection('stageData').name}
-                    sectionLabel={descriptor.getSection('stageData').label}
-                />
-                <StageFormFormContents
-                    isSubsection={isSubsection}
-                    name={descriptor.getSection('stageForm').name}
-                    sectionLabel={i18n.t('Program stage form')}
-                />
                 <CustomAttributesSection
                     schemaSection={SCHEMA_SECTIONS.programStage}
                     sectionedLayout

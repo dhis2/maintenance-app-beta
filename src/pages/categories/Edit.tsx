@@ -51,6 +51,7 @@ export const Component = () => {
             onSubmit={useOnSubmitEdit({ section, modelId })}
             initialValues={categoryQuery.data}
             validate={validate}
+            fetchError={!!categoryQuery.error}
         >
             <DefaultEditFormContents section={section}>
                 <CategoryFormFields />

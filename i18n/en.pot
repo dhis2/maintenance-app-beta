@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-03-20T08:09:24.158Z\n"
-"PO-Revision-Date: 2026-03-20T08:09:24.158Z\n"
+"POT-Creation-Date: 2026-04-01T13:52:40.474Z\n"
+"PO-Revision-Date: 2026-04-01T13:52:40.474Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -1978,11 +1978,11 @@ msgstr "Message template"
 msgid "Program stage label"
 msgstr "Program stage label"
 
-msgid "Due date label"
-msgstr "Due date label"
+msgid "Scheduled date label"
+msgstr "Scheduled date label"
 
-msgid "Execution date label"
-msgstr "Execution date label"
+msgid "Report date label"
+msgstr "Report date label"
 
 msgid "Event label"
 msgstr "Event label"
@@ -2010,6 +2010,18 @@ msgstr "Organisation unit label"
 
 msgid "Relationship label"
 msgstr "Relationship label"
+
+msgid "Enrollment label (Plural)"
+msgstr "Enrollment label (Plural)"
+
+msgid "Event label (Plural)"
+msgstr "Event label (Plural)"
+
+msgid "Program stage label (Plural)"
+msgstr "Program stage label (Plural)"
+
+msgid "Names"
+msgstr "Names"
 
 msgid "Unknown error"
 msgstr "Unknown error"

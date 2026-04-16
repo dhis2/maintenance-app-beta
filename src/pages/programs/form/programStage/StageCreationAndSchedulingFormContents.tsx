@@ -6,21 +6,14 @@ import {
     StandardFormField,
     StandardFormSectionDescription,
     StandardFormSectionTitle,
-    StandardFormSubsectionTitle,
 } from '../../../../components'
 import {
-    AllowGenerateNextVisitField,
     AutoGenerateEventField,
     GeneratedByEnrollmentDateField,
     HideDueDateField,
     MinDaysFromStartField,
-    NextScheduleDateField,
     OpenAfterEnrollmentField,
-    PeriodTypeField,
-    RemindCompletedField,
-    RepeatableField,
     ReportDateToUseField,
-    StandardIntervalField,
 } from './fields'
 
 export const StageCreationAndSchedulingFormContents = React.memo(
@@ -62,71 +55,35 @@ export const StageCreationAndSchedulingFormContents = React.memo(
                 <StandardFormSectionTitle>
                     {sectionLabel}
                 </StandardFormSectionTitle>
-                <StandardFormSubsectionTitle>
-                    {i18n.t('Event repetition')}
-                </StandardFormSubsectionTitle>
                 <StandardFormSectionDescription>
                     {i18n.t(
-                        'Define the frequency of events within this stage.'
+                        'Set up automatic event creation and scheduling in this program stage.'
                     )}
                 </StandardFormSectionDescription>
-                <StandardFormField>
-                    <RepeatableField />
-                </StandardFormField>
-                <StandardFormField>
-                    <StandardIntervalField />
-                </StandardFormField>
 
-                <StandardFormSubsectionTitle>
-                    {i18n.t('Event scheduling')}
-                </StandardFormSubsectionTitle>
-                <StandardFormSectionDescription>
-                    {i18n.t(
-                        'Configure how and when events in this stage are scheduled.'
-                    )}
-                </StandardFormSectionDescription>
-                <StandardFormField>
-                    <GeneratedByEnrollmentDateField />
-                </StandardFormField>
                 <StandardFormField>
                     <AutoGenerateEventField />
                 </StandardFormField>
                 {autoGenerateEvent && (
-                    <StandardFormField>
-                        <OpenAfterEnrollmentField />
-                    </StandardFormField>
-                )}
-                {autoGenerateEvent && (
-                    <StandardFormField>
-                        <ReportDateToUseField />
-                    </StandardFormField>
+                    <div style={{ marginInlineStart: '24px' }}>
+                        <StandardFormField>
+                            <OpenAfterEnrollmentField />
+                        </StandardFormField>
+                        {openAfterEnrollment && (
+                            <StandardFormField>
+                                <ReportDateToUseField />
+                            </StandardFormField>
+                        )}
+                    </div>
                 )}
                 <StandardFormField>
                     <MinDaysFromStartField />
                 </StandardFormField>
                 <StandardFormField>
+                    <GeneratedByEnrollmentDateField />
+                </StandardFormField>
+                <StandardFormField>
                     <HideDueDateField />
-                </StandardFormField>
-                <StandardFormField>
-                    <PeriodTypeField />
-                </StandardFormField>
-                <StandardFormField>
-                    <NextScheduleDateField />
-                </StandardFormField>
-
-                <StandardFormSubsectionTitle>
-                    {i18n.t('Completion options')}
-                </StandardFormSubsectionTitle>
-                <StandardFormSectionDescription>
-                    {i18n.t(
-                        'Decide what should happen after a user completes this event.'
-                    )}
-                </StandardFormSectionDescription>
-                <StandardFormField>
-                    <AllowGenerateNextVisitField />
-                </StandardFormField>
-                <StandardFormField>
-                    <RemindCompletedField />
                 </StandardFormField>
             </SectionedFormSection>
         )
