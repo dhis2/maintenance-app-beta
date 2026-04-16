@@ -1,6 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import { RadioFieldFF, SingleSelectFieldFF } from '@dhis2/ui'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { Field, useField, useForm } from 'react-final-form'
 import { HorizontalFieldGroup, StandardFormField } from '../../../components'
 import { getConstantTranslation, SECTIONS_MAP, useSchema } from '../../../lib'
@@ -11,23 +11,29 @@ const section = SECTIONS_MAP.analyticsTableHook
 export function PhaseField() {
     const form = useForm()
     const schema = useSchema(section.name)
-    const { input: phaseInput } = useField<string | undefined>('phase', {
-        subscription: { value: true },
-    })
+    const { input: phaseInput, meta: phaseMeta } = useField<string | undefined>(
+        'phase',
+        {
+            subscription: { value: true, dirty: true },
+        }
+    )
     const selectedPhase = phaseInput.value
 
-    const { input: analyticsTableInput } = useField('analyticsTableType', {
-        subscription: { value: true },
-    })
-    const { input: resourceTableInput } = useField('resourceTableType', {
-        subscription: { value: true },
-    })
+    const { input: analyticsTableInput, meta: analyticsTableMeta } = useField(
+        'analyticsTableType',
+        {
+            subscription: { value: true, dirty: true },
+        }
+    )
+    const { input: resourceTableInput, meta: resourceTableMeta } = useField(
+        'resourceTableType',
+        {
+            subscription: { value: true, dirty: true },
+        }
+    )
 
-    const prevPhaseRef = useRef<string | undefined>(undefined)
     useEffect(() => {
-        const prevPhase = prevPhaseRef.current
-        prevPhaseRef.current = selectedPhase
-        if (prevPhase === undefined) {
+        if (!phaseMeta.dirty) {
             return
         }
         if (
@@ -39,25 +45,21 @@ export function PhaseField() {
         ) {
             form.change('resourceTableType', undefined)
         }
-    }, [selectedPhase, form])
+    }, [selectedPhase, phaseMeta.dirty, form])
 
-    const isFirstAnalyticsRender = useRef(true)
     useEffect(() => {
-        if (isFirstAnalyticsRender.current) {
-            isFirstAnalyticsRender.current = false
+        if (!analyticsTableMeta.dirty) {
             return
         }
         form.blur('analyticsTableType')
-    }, [analyticsTableInput.value, form])
+    }, [analyticsTableInput.value, analyticsTableMeta.dirty, form])
 
-    const isFirstResourceRender = useRef(true)
     useEffect(() => {
-        if (isFirstResourceRender.current) {
-            isFirstResourceRender.current = false
+        if (!resourceTableMeta.dirty) {
             return
         }
         form.blur('resourceTableType')
-    }, [resourceTableInput.value, form])
+    }, [resourceTableInput.value, resourceTableMeta.dirty, form])
 
     const phaseOptions =
         schema?.properties.phase?.constants?.map((constant) => ({
