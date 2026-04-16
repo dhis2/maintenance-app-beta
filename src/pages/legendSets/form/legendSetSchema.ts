@@ -18,13 +18,6 @@ const legendItemSchema = z.object({
 
 export type LegendItem = z.infer<typeof legendItemSchema>
 
-// const legendSetBaseSchema = z.object({
-//     code: z.string().trim().optional(),
-//     legends: z.array(legendItemSchema).default([]),
-// })
-
-//
-
 export const legendSetBaseSchema = z.object({
     name: z.string().trim(),
     code: z.string().trim().optional(),
@@ -37,6 +30,9 @@ export const legendSetListSchema = identifiable
 export const legendSetFormSchema = identifiable
     .merge(withAttributeValues)
     .merge(legendSetBaseSchema)
+    .extend({
+        legends: z.array(legendItemSchema).default([]),
+    })
 
 export type LegendSetFormValues = z.infer<typeof legendSetFormSchema>
 
