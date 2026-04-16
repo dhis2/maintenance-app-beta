@@ -16,6 +16,7 @@ export function CategoryOptionGroupSetField() {
                 },
             }}
             refreshResource="categoryOptionGroupSets"
+            clearable
         />
     )
 }
