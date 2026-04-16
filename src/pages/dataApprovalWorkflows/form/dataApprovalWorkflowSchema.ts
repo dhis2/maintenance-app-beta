@@ -35,7 +35,6 @@ const dataApprovalWorkflowBaseSchema = z.object({
 export const dataApprovalWorkflowFormSchema = identifiable
     .merge(dataApprovalWorkflowBaseSchema)
     .extend({
-        code: z.string().trim().optional(),
         periodType: z.string().trim(),
         categoryCombo: z.object({ id: z.string() }),
     })

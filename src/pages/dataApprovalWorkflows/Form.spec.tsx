@@ -144,19 +144,6 @@ describe('Data approval workflows form tests', () => {
             expect(createMock).not.toHaveBeenCalled()
         })
 
-        it('should show an error if code field is too long', async () => {
-            const { screen } = await renderForm()
-            const longText = randomLongString(57)
-            await uiActions.enterInputFieldValue('code', longText, screen)
-            await uiAssertions.expectInputToErrorWhenExceedsLength(
-                'code',
-                50,
-                screen
-            )
-            await uiActions.submitForm(screen)
-            expect(createMock).not.toHaveBeenCalled()
-        })
-
         it('should show an error if name field is a duplicate', async () => {
             const existingName = faker.company.name()
             const { screen } = await renderForm({
@@ -170,18 +157,6 @@ describe('Data approval workflows form tests', () => {
             expect(createMock).not.toHaveBeenCalled()
         })
 
-        it('should show an error if code field is a duplicate', async () => {
-            const existingCode = faker.science.chemicalElement().symbol
-            const { screen } = await renderForm({
-                matchingExistingElementFilter: `code:ieq:${existingCode}`,
-            })
-            await uiAssertions.expectCodeToErrorWhenDuplicate(
-                existingCode,
-                screen
-            )
-            await uiActions.submitForm(screen)
-            expect(createMock).not.toHaveBeenCalled()
-        })
     })
 
     describe('New', () => {
@@ -243,7 +218,6 @@ describe('Data approval workflows form tests', () => {
         it('should contain all needed fields', async () => {
             const { screen } = await renderForm()
             uiAssertions.expectNameFieldExist('', screen)
-            uiAssertions.expectCodeFieldExist('', screen)
             expect(
                 screen.getByTestId('formfields-periodtype')
             ).toBeInTheDocument()
@@ -268,10 +242,8 @@ describe('Data approval workflows form tests', () => {
         it('should submit the data', async () => {
             const { screen, periodTypes } = await renderForm()
             const aName = faker.word.words()
-            const aCode = faker.science.chemicalElement().symbol
 
             await uiActions.enterName(aName, screen)
-            await uiActions.enterCode(aCode, screen)
             await uiActions.pickOptionFromSelect(
                 screen.getByTestId('formfields-periodtype'),
                 2,
@@ -289,7 +261,6 @@ describe('Data approval workflows form tests', () => {
                 expect.objectContaining({
                     data: expect.objectContaining({
                         name: aName,
-                        code: aCode,
                         periodType: periodTypes[2],
                         categoryCombo: expect.objectContaining({
                             id: DEFAULT_CATEGORYCOMBO_SELECT_OPTION.id,
@@ -375,9 +346,9 @@ describe('Data approval workflows form tests', () => {
 
         it('should submit updated data when a field is changed', async () => {
             const { screen, dataApprovalWorkflow } = await renderForm()
-            const newCode = faker.science.chemicalElement().symbol
+            const newName = faker.word.words()
 
-            await uiActions.enterCode(newCode, screen)
+            await uiActions.enterName(newName, screen)
             await uiActions.submitForm(screen)
 
             await waitFor(() =>
@@ -387,8 +358,8 @@ describe('Data approval workflows form tests', () => {
                         data: [
                             {
                                 op: 'replace',
-                                path: '/code',
-                                value: newCode,
+                                path: '/name',
+                                value: newName,
                             },
                         ],
                     })

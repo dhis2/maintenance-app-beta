@@ -12,7 +12,6 @@ import { validate } from './form/dataApprovalWorkflowSchema'
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     'name',
-    'code',
     'periodType',
     'categoryCombo[id,displayName]',
     'dataApprovalLevels[id,displayName]',

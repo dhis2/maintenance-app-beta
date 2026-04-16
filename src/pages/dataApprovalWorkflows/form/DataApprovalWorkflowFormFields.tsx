@@ -1,7 +1,6 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import {
-    CodeField,
     NameField,
     StandardFormField,
     StandardFormSection,
@@ -24,22 +23,13 @@ export default function DataApprovalWorkflowFormFields() {
                     <NameField schemaSection={section} />
                 </StandardFormField>
                 <StandardFormField>
-                    <CodeField schemaSection={section} />
-                </StandardFormField>
-                <StandardFormField>
                     <PeriodTypeField />
                 </StandardFormField>
                 <StandardFormField>
-                    <CategoryComboField />
-                </StandardFormField>
-            </StandardFormSection>
-
-            <StandardFormSection>
-                <StandardFormSectionTitle>
-                    {i18n.t('Data approval levels')}
-                </StandardFormSectionTitle>
-                <StandardFormField>
                     <DataApprovalLevelsField />
+                </StandardFormField>
+                <StandardFormField>
+                    <CategoryComboField />
                 </StandardFormField>
             </StandardFormSection>
         </>

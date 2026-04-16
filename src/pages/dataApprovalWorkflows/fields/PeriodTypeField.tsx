@@ -1,5 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
-import { Field as FieldUI } from '@dhis2/ui'
+import { Box, Field as FieldUI } from '@dhis2/ui'
 import React from 'react'
 import { useField } from 'react-final-form'
 import { PeriodTypeSelect } from '../../../components/metadataFormControls/PeriodTypeSelect/PeriodTypeSelect'
@@ -20,14 +20,16 @@ export function PeriodTypeField() {
             error={meta.touched && !!meta.error}
             validationText={meta.touched ? meta.error : undefined}
         >
-            <PeriodTypeSelect
-                selected={input.value}
-                invalid={meta.touched && !!meta.error}
-                onChange={(selected: string) => {
-                    input.onChange(selected)
-                    input.onBlur()
-                }}
-            />
+            <Box width="400px" minWidth="100px">
+                <PeriodTypeSelect
+                    selected={input.value}
+                    invalid={meta.touched && !!meta.error}
+                    onChange={(selected: string) => {
+                        input.onChange(selected)
+                        input.onBlur()
+                    }}
+                />
+            </Box>
         </FieldUI>
     )
 }

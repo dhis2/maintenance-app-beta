@@ -8,6 +8,7 @@ export function DataApprovalLevelsField() {
             name="dataApprovalLevels"
             label={i18n.t('Data approval levels')}
             dataTest="formfields-dataapprovallevels"
+            inputWidth="400px"
             query={{
                 resource: 'dataApprovalLevels',
                 params: {
