@@ -11,7 +11,7 @@ export function PriorityField() {
         parse: (value?: string) =>
             value === undefined || value === ''
                 ? undefined
-                : Number.parseFloat(value),
+                : Number.parseInt(value, 10),
     })
 
     return (
