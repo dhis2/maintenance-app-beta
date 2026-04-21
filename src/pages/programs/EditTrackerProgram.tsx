@@ -56,7 +56,7 @@ const fieldFilters = [
     'useFirstStageDuringRegistration',
     'ignoreOverdueEvents',
     'dataEntryForm[id,displayName,htmlCode]',
-    'programSections[id,displayName,description,access,sortOrder]',
+    'programSections[id,displayName,description,access,sortOrder,trackedEntityAttributes[id]]',
     'programTrackedEntityAttributes[id,displayName,valueType,renderType,allowFutureDate,mandatory,searchable,displayInList,trackedEntityAttribute[id,displayName,unique,optionSet,valueType]]',
     'style[color,icon]',
     'programStageLabel',
