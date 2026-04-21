@@ -1,3 +1,10 @@
+## [0.151.1](https://github.com/dhis2/metadata-management-app/compare/v0.151.0...v0.151.1) (2026-04-21)
+
+
+### Bug Fixes
+
+* disable focus trap in drawer content ([#882](https://github.com/dhis2/metadata-management-app/issues/882)) ([28518c2](https://github.com/dhis2/metadata-management-app/commit/28518c2648aef6652d38819c46868da3e7c4c523))
+
 # [0.151.0](https://github.com/dhis2/metadata-management-app/compare/v0.150.3...v0.151.0) (2026-04-13)
 
 
