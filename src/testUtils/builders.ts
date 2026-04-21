@@ -33,7 +33,10 @@ import {
 } from '../pages/categoryOptionGroupSets/form/categoryOptionGroupSetSchema'
 import { categoryOptionListSchema } from '../pages/categoryOptions/form/categoryOptionSchema'
 import { ConstantsListSchema } from '../pages/constants/form/ConstantFormSchema'
-import { dataApprovalLevelListSchema } from '../pages/dataApprovalLevels/form/dataApprovalLevelsSchema'
+import {
+    dataApprovalLevelFormSchema,
+    dataApprovalLevelListSchema,
+} from '../pages/dataApprovalLevels/form/dataApprovalLevelsSchema'
 import {
     dataApprovalWorkflowFormSchema,
     dataApprovalWorkflowListSchema,
@@ -388,6 +391,13 @@ export const testdataApprovalLevelList = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(dataApprovalLevelListSchema, { stringMap }),
+    ...overwrites,
+})
+
+export const testDataApprovalLevelForm = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(dataApprovalLevelFormSchema, { stringMap }),
     ...overwrites,
 })
 
