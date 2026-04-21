@@ -79,6 +79,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Data element group'),
         titlePlural: i18n.t('Data element groups'),
         parentSectionKey: 'dataElement',
+        duplicable: true,
     },
     dataElementGroupSet: {
         name: SchemaName.dataElementGroupSet,
@@ -86,6 +87,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Data element group set'),
         titlePlural: i18n.t('Data element group sets'),
         parentSectionKey: 'dataElement',
+        duplicable: true,
     },
     dataSet: {
         name: SchemaName.dataSet,

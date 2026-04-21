@@ -1007,4 +1007,21 @@ export const modelListViewsConfig = {
         },
         filters: {},
     },
+    analyticsTableHook: {
+        columns: {
+            default: [DESCRIPTORS.name, 'lastUpdated'],
+            available: [
+                'phase',
+                'resourceTableType',
+                'analyticsTableType',
+                'sql',
+            ],
+            overrideDefaultAvailable: true,
+        },
+        filters: {
+            default: [],
+            available: [],
+            overrideDefaultAvailable: true,
+        },
+    },
 } satisfies SectionListViewConfig<SectionName>

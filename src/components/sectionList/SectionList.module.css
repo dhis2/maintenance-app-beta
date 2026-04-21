@@ -53,6 +53,12 @@
     padding-bottom: var(--spacers-dp4);
 }
 
+.listRowText {
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    min-width: 0;
+}
+
 .listRow.active td {
     background-color: var(--colors-grey200);
 }
