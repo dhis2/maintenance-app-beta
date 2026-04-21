@@ -6,6 +6,27 @@ import { HorizontalFieldGroup, StandardFormField } from '../../../components'
 import { getConstantTranslation, SECTIONS_MAP, useSchema } from '../../../lib'
 import { AnalyticsTableHook } from '../../../types/generated'
 
+const validateResourceTableType = (
+    value: string | undefined,
+    { phase }: { phase?: string }
+) => {
+    if (phase === AnalyticsTableHook.phase.RESOURCE_TABLE_POPULATED && !value) {
+        return i18n.t('Required')
+    }
+}
+
+const validateAnalyticsTableType = (
+    value: string | undefined,
+    { phase }: { phase?: string }
+) => {
+    if (
+        phase === AnalyticsTableHook.phase.ANALYTICS_TABLE_POPULATED &&
+        !value
+    ) {
+        return i18n.t('Required')
+    }
+}
+
 const section = SECTIONS_MAP.analyticsTableHook
 
 export function PhaseField() {
@@ -21,15 +42,11 @@ export function PhaseField() {
 
     const { input: analyticsTableInput, meta: analyticsTableMeta } = useField(
         'analyticsTableType',
-        {
-            subscription: { value: true, dirty: true },
-        }
+        { subscription: { value: true, dirty: true, touched: true } }
     )
     const { input: resourceTableInput, meta: resourceTableMeta } = useField(
         'resourceTableType',
-        {
-            subscription: { value: true, dirty: true },
-        }
+        { subscription: { value: true, dirty: true, touched: true } }
     )
 
     useEffect(() => {
@@ -48,18 +65,28 @@ export function PhaseField() {
     }, [selectedPhase, phaseMeta.dirty, form])
 
     useEffect(() => {
-        if (!analyticsTableMeta.dirty) {
+        if (!analyticsTableMeta.dirty && !analyticsTableMeta.touched) {
             return
         }
         form.blur('analyticsTableType')
-    }, [analyticsTableInput.value, analyticsTableMeta.dirty, form])
+    }, [
+        analyticsTableInput.value,
+        analyticsTableMeta.dirty,
+        analyticsTableMeta.touched,
+        form,
+    ])
 
     useEffect(() => {
-        if (!resourceTableMeta.dirty) {
+        if (!resourceTableMeta.dirty && !resourceTableMeta.touched) {
             return
         }
         form.blur('resourceTableType')
-    }, [resourceTableInput.value, resourceTableMeta.dirty, form])
+    }, [
+        resourceTableInput.value,
+        resourceTableMeta.dirty,
+        resourceTableMeta.touched,
+        form,
+    ])
 
     const phaseOptions =
         schema?.properties.phase?.constants?.map((constant) => ({
@@ -112,6 +139,7 @@ export function PhaseField() {
                         name="resourceTableType"
                         label={i18n.t('Which resource table')}
                         options={resourceTableOptions}
+                        validate={validateResourceTableType}
                         required
                         clearable
                         inputWidth="400px"
@@ -127,6 +155,7 @@ export function PhaseField() {
                         name="analyticsTableType"
                         label={i18n.t('Which analytics table')}
                         options={analyticsTableOptions}
+                        validate={validateAnalyticsTableType}
                         required
                         clearable
                         inputWidth="400px"
