@@ -65,7 +65,7 @@ export function ProgramRuleVariableField({
                       ({
                           id: '',
                           name,
-                          displayName: undefined,
+                          displayName: name,
                       } as ProgramRuleVariableModel)
                     : undefined
 
