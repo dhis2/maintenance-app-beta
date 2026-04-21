@@ -1,3 +1,10 @@
+## [0.151.2](https://github.com/dhis2/metadata-management-app/compare/v0.151.1...v0.151.2) (2026-04-21)
+
+
+### Bug Fixes
+
+* wrapping list items, breadcrumbs and drawer z index ([#885](https://github.com/dhis2/metadata-management-app/issues/885)) ([9ac5cfa](https://github.com/dhis2/metadata-management-app/commit/9ac5cfabf9084aa010029b5def18cd693dc07cac)), closes [#876](https://github.com/dhis2/metadata-management-app/issues/876)
+
 ## [0.151.1](https://github.com/dhis2/metadata-management-app/compare/v0.151.0...v0.151.1) (2026-04-21)
 
 
