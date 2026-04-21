@@ -45,6 +45,9 @@
     font-size: 18px;
     font-weight: 500;
     margin-bottom: var(--spacers-dp12);
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    min-width: 0;
 }
 
 .detailsPanelCloseButton {
@@ -94,6 +97,9 @@
 .detailItemValue {
     font-size: 14px;
     text-align: right;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    min-width: 0;
 }
 
 .detailItemValueButton {

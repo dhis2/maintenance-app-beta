@@ -7,6 +7,10 @@ import {
     UserSchema,
 } from '../lib/form/modelFormSchemas'
 import {
+    analyticsTableHookListSchema,
+    analyticsTableHookFormSchema,
+} from '../pages/analyticsTableHooks/form'
+import {
     attributeListSchema,
     attributeFormSchema,
 } from '../pages/attributes/form'
@@ -34,6 +38,11 @@ import {
     dataApprovalLevelListSchema,
 } from '../pages/dataApprovalLevels/form/dataApprovalLevelsSchema'
 import { dataApprovalWorkflowListSchema } from '../pages/dataApprovalWorkflows/form/dataApprovalWorkflowSchema'
+import { dataApprovalLevelListSchema } from '../pages/dataApprovalLevels/form/dataApprovalLevelsSchema'
+import {
+    dataApprovalWorkflowFormSchema,
+    dataApprovalWorkflowListSchema,
+} from '../pages/dataApprovalWorkflows/form/dataApprovalWorkflowSchema'
 import { dataElementGroupListSchema } from '../pages/dataElementGroups/form/dataElementGroupSchema'
 import { dataElementGroupSetSchema } from '../pages/dataElementGroupSets/form'
 import { dataElementListSchema } from '../pages/dataElements/form/dataElementSchema'
@@ -363,6 +372,18 @@ export const testProgramRule = (overwrites: Record<any, any> = {}) => ({
     ...overwrites,
 })
 
+export const testAnalyticsTableHook = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(analyticsTableHookListSchema, { stringMap }),
+    ...overwrites,
+})
+
+export const testAnalyticsTableHookForm = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(analyticsTableHookFormSchema, { stringMap }),
+    ...overwrites,
+})
+
 export const testAttributeList = (overwrites: Record<any, any> = {}) => ({
     ...generateMock(attributeListSchema, { stringMap }),
     ...overwrites,
@@ -386,6 +407,13 @@ export const testDataApprovalWorkflowList = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(dataApprovalWorkflowListSchema, { stringMap }),
+    ...overwrites,
+})
+
+export const testDataApprovalWorkflowForm = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(dataApprovalWorkflowFormSchema, { stringMap }),
     ...overwrites,
 })
 
