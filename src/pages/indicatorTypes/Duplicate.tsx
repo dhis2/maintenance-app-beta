@@ -13,9 +13,7 @@ import { IndicatorTypesFormFields } from './form/IndicatorTypesFormFields'
 const fieldFilters = [...DEFAULT_FIELD_FILTERS, 'name', 'factor'] as const
 
 const section = SECTIONS_MAP.indicatorType
-type IndicatorTypesDuplicateFormValues = IndicatorTypesFormValues & {
-    attributeValues?: { attribute: { id: string }; value: string }[]
-}
+type IndicatorTypesDuplicateFormValues = IndicatorTypesFormValues
 
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()

@@ -46,7 +46,6 @@ export type PredictorFormValues = PickWithFieldFilters<
     typeof fieldFilters
 > & {
     id: string
-    attributeValues?: { attribute: { id: string }; value: string }[]
 }
 
 const section = SECTIONS_MAP.predictor

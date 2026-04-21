@@ -24,9 +24,7 @@ const fieldFilters = [
 export type IndicatorGroupSetFormValues = PickWithFieldFilters<
     IndicatorGroupSet,
     typeof fieldFilters
-> & {
-    attributeValues?: { attribute: { id: string }; value: string }[]
-}
+>
 
 const section = SECTIONS_MAP.indicatorGroupSet
 

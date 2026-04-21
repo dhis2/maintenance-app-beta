@@ -21,9 +21,7 @@ const fieldFilters = [
 export type PredictorGroupFormValues = PickWithFieldFilters<
     PredictorGroup,
     typeof fieldFilters
-> & {
-    attributeValues?: { attribute: { id: string }; value: string }[]
-}
+>
 
 const section = SECTIONS_MAP.predictorGroup
 
