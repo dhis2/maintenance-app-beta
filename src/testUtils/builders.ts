@@ -37,8 +37,6 @@ import {
     dataApprovalLevelFormSchema,
     dataApprovalLevelListSchema,
 } from '../pages/dataApprovalLevels/form/dataApprovalLevelsSchema'
-import { dataApprovalWorkflowListSchema } from '../pages/dataApprovalWorkflows/form/dataApprovalWorkflowSchema'
-import { dataApprovalLevelListSchema } from '../pages/dataApprovalLevels/form/dataApprovalLevelsSchema'
 import {
     dataApprovalWorkflowFormSchema,
     dataApprovalWorkflowListSchema,
