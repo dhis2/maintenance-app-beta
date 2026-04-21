@@ -21,8 +21,9 @@ export function PriorityField() {
             dataTest="priority-field"
             inputWidth="120px"
             label={i18n.t('Priority')}
+            min="1"
             helpText={i18n.t(
-                'Can be 0 or negative. Leave empty if not needed.'
+                'Enter a number to set run order. Lower numbers run first. Leave empty to use the default order.'
             )}
         />
     )
