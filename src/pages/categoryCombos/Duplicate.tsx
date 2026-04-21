@@ -47,7 +47,10 @@ export const Component = () => {
     return (
         <FormBase
             onSubmit={useOnSubmitNew({ section })}
-            initialValues={omit(categoryCombo.data, 'id')}
+            initialValues={{
+                attributeValues: [],
+                ...omit(categoryCombo.data, 'id'),
+            }}
             validate={validate}
             includeAttributes={false}
             fetchError={!!categoryCombo.error}
