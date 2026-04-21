@@ -8,7 +8,6 @@ import { DEFAULT_FIELD_FILTERS, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { CategoryCombo, PickWithFieldFilters } from '../../types/generated'
 import { validate, CategoryComboFormFields } from './form'
-import { CategoryComboFormValues as CategoryComboSchemaFormValues } from './form/categoryComboSchema'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -22,8 +21,7 @@ const fieldFilters = [
 export type CategoryComboFormValues = PickWithFieldFilters<
     CategoryCombo,
     typeof fieldFilters
-> &
-    Pick<CategoryComboSchemaFormValues, 'attributeValues'> & { id: string }
+> & { id: string }
 
 const section = SECTIONS_MAP.categoryCombo
 
@@ -48,7 +46,6 @@ export const Component = () => {
         <FormBase
             onSubmit={useOnSubmitNew({ section })}
             initialValues={{
-                attributeValues: [],
                 ...omit(categoryCombo.data, 'id'),
             }}
             validate={validate}
