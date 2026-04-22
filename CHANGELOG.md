@@ -1,3 +1,14 @@
+## [0.151.3](https://github.com/dhis2/metadata-management-app/compare/v0.151.2...v0.151.3) (2026-04-22)
+
+
+### Bug Fixes
+
+* check for uniqueness of option codes ([#827](https://github.com/dhis2/metadata-management-app/issues/827)) ([c36bdc7](https://github.com/dhis2/metadata-management-app/commit/c36bdc7e835ed2e152788b4d66c8ccbaf3b73137))
+* clean up translations [DHIS2-21010] ([#847](https://github.com/dhis2/metadata-management-app/issues/847)) ([1cddd3f](https://github.com/dhis2/metadata-management-app/commit/1cddd3fc7538ab70c001ea21880d6b071c800441))
+* make name and code unique for option ([#871](https://github.com/dhis2/metadata-management-app/issues/871)) ([28f67f6](https://github.com/dhis2/metadata-management-app/commit/28f67f673c127e6334b9846e34a6d9fc266959b3))
+* update translatable field label ([#869](https://github.com/dhis2/metadata-management-app/issues/869)) ([155590b](https://github.com/dhis2/metadata-management-app/commit/155590bbacb71bf213390b7cdf69f08aeb8bb116))
+* use default name field for program stage [DHIS2-21346] ([#888](https://github.com/dhis2/metadata-management-app/issues/888)) ([b4a0136](https://github.com/dhis2/metadata-management-app/commit/b4a0136cfbcb6aea21e58a8160491ce6f005c88a))
+
 ## [0.151.2](https://github.com/dhis2/metadata-management-app/compare/v0.151.1...v0.151.2) (2026-04-21)
 
 
