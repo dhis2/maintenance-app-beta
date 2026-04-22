@@ -7,6 +7,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "POT-Creation-Date: 2026-04-21T07:41:51.031Z\n"
 "PO-Revision-Date: 2026-04-21T07:41:51.031Z\n"
+"POT-Creation-Date: 2026-04-21T13:31:01.480Z\n"
+"PO-Revision-Date: 2026-04-21T13:31:01.481Z\n"
 
 msgid "schemas"
 msgstr "schemas"
