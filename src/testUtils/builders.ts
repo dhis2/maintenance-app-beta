@@ -33,8 +33,14 @@ import {
 } from '../pages/categoryOptionGroupSets/form/categoryOptionGroupSetSchema'
 import { categoryOptionListSchema } from '../pages/categoryOptions/form/categoryOptionSchema'
 import { ConstantsListSchema } from '../pages/constants/form/ConstantFormSchema'
-import { dataApprovalLevelListSchema } from '../pages/dataApprovalLevels/form/dataApprovalLevelsSchema'
-import { dataApprovalWorkflowListSchema } from '../pages/dataApprovalWorkflows/form/dataApprovalWorkflowSchema'
+import {
+    dataApprovalLevelFormSchema,
+    dataApprovalLevelListSchema,
+} from '../pages/dataApprovalLevels/form/dataApprovalLevelsSchema'
+import {
+    dataApprovalWorkflowFormSchema,
+    dataApprovalWorkflowListSchema,
+} from '../pages/dataApprovalWorkflows/form/dataApprovalWorkflowSchema'
 import { dataElementGroupListSchema } from '../pages/dataElementGroups/form/dataElementGroupSchema'
 import { dataElementGroupSetSchema } from '../pages/dataElementGroupSets/form'
 import { dataElementListSchema } from '../pages/dataElements/form/dataElementSchema'
@@ -388,10 +394,24 @@ export const testdataApprovalLevelList = (
     ...overwrites,
 })
 
+export const testDataApprovalLevelForm = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(dataApprovalLevelFormSchema, { stringMap }),
+    ...overwrites,
+})
+
 export const testDataApprovalWorkflowList = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(dataApprovalWorkflowListSchema, { stringMap }),
+    ...overwrites,
+})
+
+export const testDataApprovalWorkflowForm = (
+    overwrites: Record<any, any> = {}
+) => ({
+    ...generateMock(dataApprovalWorkflowFormSchema, { stringMap }),
     ...overwrites,
 })
 

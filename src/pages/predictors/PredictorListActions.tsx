@@ -7,6 +7,7 @@ import {
     CalendarInputProps,
     colors,
     FlyoutMenu,
+    IconDuplicate16,
     IconEdit16,
     IconLaunch16,
     IconMore16,
@@ -33,6 +34,7 @@ import {
     BaseListModel,
     TOOLTIPS,
     useLocationSearchState,
+    useModelSectionHandleOrThrow,
     useSchemaFromHandle,
     selectedLocale,
     useSystemSetting,
@@ -164,6 +166,7 @@ export const PredictorListActions = ({
     onDeleteSuccess,
 }: PredictorListActionsProps) => {
     const schema = useSchemaFromHandle()
+    const section = useModelSectionHandleOrThrow()
     const [open, setOpen] = useState(false)
     const [showRunNowModal, setShowRunNowModal] = useState(false)
     const ref = useRef(null)
@@ -182,6 +185,10 @@ export const PredictorListActions = ({
             state: preservedSearchState,
         }
     )
+    const handleDuplicateClick = useLinkClickHandler({
+        pathname: 'duplicate',
+        search: `?duplicatedId=${model.id}`,
+    })
 
     return (
         <>
@@ -222,6 +229,25 @@ export const PredictorListActions = ({
                                         href={href}
                                     />
                                 </TooltipWrapper>
+                                {section.duplicable && (
+                                    <TooltipWrapper
+                                        condition={!editable}
+                                        content={TOOLTIPS.noDuplicateAccess}
+                                    >
+                                        <MenuItem
+                                            dense
+                                            disabled={!editable}
+                                            label={i18n.t('Duplicate')}
+                                            icon={<IconDuplicate16 />}
+                                            onClick={(_, e) => {
+                                                handleDuplicateClick(e)
+                                                setOpen(false)
+                                            }}
+                                            target="_blank"
+                                            href={href}
+                                        />
+                                    </TooltipWrapper>
+                                )}
                                 <MenuItem
                                     dense
                                     label={i18n.t('Show details')}

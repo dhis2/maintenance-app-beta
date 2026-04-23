@@ -208,7 +208,7 @@ export const defaultValueFormatter = <
     return values
 }
 
-export const useOnSubmitNew = <TFormValues extends ModelWithAttributeValues>({
+export const useOnSubmitNew = <TFormValues extends Record<string, unknown>>({
     section,
 }: UseOnSubmitNewOptions) => {
     const createModel = useCreateModel(section.namePlural)
