@@ -19,8 +19,14 @@ export const getMandatoryAttributesMissingFromSections = (
         return []
     }
 
+    const sections: SectionWithAttributes[] = Array.isArray(
+        values.programSections
+    )
+        ? (values.programSections as SectionWithAttributes[])
+        : []
+
     const assignedAttributeIds = new Set(
-        (values.programSections as SectionWithAttributes[])
+        sections
             .filter((section) => !section.deleted)
             .flatMap((section) =>
                 (section.trackedEntityAttributes ?? []).map(
@@ -31,6 +37,8 @@ export const getMandatoryAttributesMissingFromSections = (
 
     return mandatoryAttributes.filter(
         (attribute) =>
-            !assignedAttributeIds.has(attribute.trackedEntityAttribute.id)
+            !assignedAttributeIds.has(
+                attribute.trackedEntityAttribute?.id ?? ''
+            )
     )
 }

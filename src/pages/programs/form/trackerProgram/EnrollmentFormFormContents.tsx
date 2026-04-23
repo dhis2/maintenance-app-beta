@@ -221,19 +221,18 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
                                 <NoticeBox
                                     warning
                                     className={styles.sectionWarningNotice}
+                                    title={i18n.t(
+                                        'Mandatory tracked entity attributes are not included in this form.'
+                                    )}
                                 >
-                                    <div className={styles.sectionWarningTitle}>
-                                        {i18n.t(
-                                            'Mandatory tracked entity attributes are not included in this form.'
-                                        )}
-                                    </div>
                                     <div
                                         className={
                                             styles.sectionWarningDescription
                                         }
                                     >
                                         {i18n.t(
-                                            'The following attributes are marked as required but not assigned to any section:'
+                                            'The following attributes are marked as required but not assigned to any section:',
+                                            { nsSeparator: ':' }
                                         )}
                                     </div>
                                     <ul className={styles.sectionWarningList}>

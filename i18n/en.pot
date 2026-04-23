@@ -5,10 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-04-21T07:41:51.031Z\n"
-"PO-Revision-Date: 2026-04-21T07:41:51.031Z\n"
-"POT-Creation-Date: 2026-04-21T13:31:01.480Z\n"
-"PO-Revision-Date: 2026-04-21T13:31:01.481Z\n"
+"POT-Creation-Date: 2026-04-23T07:30:47.003Z\n"
+"PO-Revision-Date: 2026-04-23T07:30:47.003Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -2712,6 +2710,9 @@ msgstr "The numeric value to be used as the constant."
 msgid "Please enter a number"
 msgstr "Please enter a number"
 
+msgid "Configuration"
+msgstr "Configuration"
+
 msgid "Available data element groups"
 msgstr "Available data element groups"
 
@@ -2966,9 +2967,6 @@ msgstr "Subject"
 
 msgid "Used as template for the message field."
 msgstr "Used as template for the message field."
-
-msgid "{{fieldLabel}} (required)"
-msgstr "{{fieldLabel}} (required)"
 
 msgid "Message"
 msgstr "Message"
@@ -3628,8 +3626,8 @@ msgstr "Exit without saving"
 msgid "Create {{modelName}} "
 msgstr "Create {{modelName}} "
 
-msgid "Country (required)"
-msgstr "Country (required)"
+msgid "Country"
+msgstr "Country"
 
 msgid "Failed to load countries"
 msgstr "Failed to load countries"
@@ -3637,8 +3635,8 @@ msgstr "Failed to load countries"
 msgid "Select a country"
 msgstr "Select a country"
 
-msgid "Language (required)"
-msgstr "Language (required)"
+msgid "Language"
+msgstr "Language"
 
 msgid "Failed to load languages"
 msgstr "Failed to load languages"
@@ -3714,9 +3712,6 @@ msgstr "Save option"
 
 msgid "Saving an option does not save other changes to the option set"
 msgstr "Saving an option does not save other changes to the option set"
-
-msgid "Code is already in use"
-msgstr "Code is already in use"
 
 msgid "Option created"
 msgstr "Option created"
@@ -4358,12 +4353,6 @@ msgstr "Configure how this predictor is calculated."
 msgid "Organisation units providing data"
 msgstr "Organisation units providing data"
 
-msgid "Sequential sample count (required)"
-msgstr "Sequential sample count (required)"
-
-msgid "Annual sample count (required)"
-msgstr "Annual sample count (required)"
-
 msgid "generator"
 msgstr "generator"
 
@@ -4624,9 +4613,6 @@ msgstr "Organisation unit field"
 msgid "Set up the basic information for this program indicator."
 msgstr "Set up the basic information for this program indicator."
 
-msgid "Configuration"
-msgstr "Configuration"
-
 msgid "Choose the program and data types this program indicator applies to."
 msgstr "Choose the program and data types this program indicator applies to."
 
@@ -4688,17 +4674,11 @@ msgstr "Please enter a maximum of {{max}} characters"
 msgid "A variable with this name already exists in this program."
 msgstr "A variable with this name already exists in this program."
 
-msgid "Source type (required)"
-msgstr "Source type (required)"
-
 msgid "Set up the basic information for this program rule variable."
 msgstr "Set up the basic information for this program rule variable."
 
 msgid "Configure how this variable works."
 msgstr "Configure how this variable works."
-
-msgid "Program (required)"
-msgstr "Program (required)"
 
 msgid "Program cannot be changed after creation"
 msgstr "Program cannot be changed after creation"
@@ -4722,8 +4702,8 @@ msgstr "Set up condition expression"
 msgid "Expression can not be edited after saving"
 msgstr "Expression can not be edited after saving"
 
-msgid "Expression (required) *"
-msgstr "Expression (required) *"
+msgid "Expression *"
+msgstr "Expression *"
 
 msgid "Feedback widget"
 msgstr "Feedback widget"
@@ -4731,14 +4711,11 @@ msgstr "Feedback widget"
 msgid "Program indicator widget"
 msgstr "Program indicator widget"
 
-msgid "Display widget (required)"
-msgstr "Display widget (required)"
+msgid "Display widget"
+msgstr "Display widget"
 
 msgid "Message template can not be edited after saving"
 msgstr "Message template can not be edited after saving"
-
-msgid "Message template (required)"
-msgstr "Message template (required)"
 
 msgid ""
 "Enter a number to set run order. Lower numbers run first. Leave empty to "
@@ -4755,9 +4732,6 @@ msgstr "Program stage to trigger rule"
 
 msgid "Select a specific program stage that the rule should only trigger on."
 msgstr "Select a specific program stage that the rule should only trigger on."
-
-msgid "Program stage section to hide (required)"
-msgstr "Program stage section to hide (required)"
 
 msgid "Program stage section to hide"
 msgstr "Program stage section to hide"
@@ -4792,8 +4766,8 @@ msgstr "Configure the program rule action."
 msgid "This program rule action will not be editable after saving."
 msgstr "This program rule action will not be editable after saving."
 
-msgid "Action type (required)"
-msgstr "Action type (required)"
+msgid "Action type"
+msgstr "Action type"
 
 msgid "Save action"
 msgstr "Save action"
@@ -5024,9 +4998,6 @@ msgstr "Unknown action type"
 
 msgid "Program Rule"
 msgstr "Program Rule"
-
-msgid "Name (required)"
-msgstr "Name (required)"
 
 msgid "Program stages to trigger rule"
 msgstr "Program stages to trigger rule"
@@ -5397,9 +5368,6 @@ msgstr "Saving a stage does not save other changes to the program"
 msgid "Stage form saved"
 msgstr "Stage form saved"
 
-msgid "A stage with this name already exists. Please choose another name."
-msgstr "A stage with this name already exists. Please choose another name."
-
 msgid "Configure the basic information for this program stage."
 msgstr "Configure the basic information for this program stage."
 
@@ -5617,6 +5585,9 @@ msgid ""
 msgstr ""
 "Displays a form with attributes in the order they were added to the "
 "enrollment"
+
+msgid "Mandatory tracked entity attributes are not included in this form."
+msgstr "Mandatory tracked entity attributes are not included in this form."
 
 msgid "Enrollment: Settings"
 msgstr "Enrollment: Settings"
