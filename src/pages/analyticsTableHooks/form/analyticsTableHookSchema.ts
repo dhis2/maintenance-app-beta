@@ -1,4 +1,3 @@
-import i18n from '@dhis2/d2-i18n'
 import { z } from 'zod'
 import { createFormValidate, modelFormSchemas } from '../../../lib'
 import { getDefaults } from '../../../lib/zod/getDefaults'
@@ -34,29 +33,11 @@ export const analyticsTableHookListSchema = analyticsTableHookBaseSchema
     })
     .merge(withDefaultListColumns)
 
-const validatingAnalyticsTableHookFormSchema = analyticsTableHookFormSchema
-    .extend({
+const validatingAnalyticsTableHookFormSchema =
+    analyticsTableHookFormSchema.extend({
         name: z.string().trim().min(1),
         sql: z.string().min(1),
     })
-    .refine(
-        (data) =>
-            data.phase !== AnalyticsTableHook.phase.RESOURCE_TABLE_POPULATED ||
-            !!data.resourceTableType,
-        {
-            message: i18n.t('Required'),
-            path: ['resourceTableType'],
-        }
-    )
-    .refine(
-        (data) =>
-            data.phase !== AnalyticsTableHook.phase.ANALYTICS_TABLE_POPULATED ||
-            !!data.analyticsTableType,
-        {
-            message: i18n.t('Required'),
-            path: ['analyticsTableType'],
-        }
-    )
 
 export const initialValues = getDefaults(analyticsTableHookFormSchema)
 export const validate = createFormValidate(

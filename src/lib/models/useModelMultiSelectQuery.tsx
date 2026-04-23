@@ -66,18 +66,22 @@ export const useModelMultiSelectQuery = <
         () => queryResult.data?.pages.flatMap((page) => page[modelName]) ?? [],
         [queryResult.data, modelName]
     )
+    const normalizedSelected = useMemo(
+        () => (Array.isArray(selected) ? selected : []),
+        [selected]
+    )
     // in case selected dont have a displayName and are not in available data- resolve ids to a displayable model
     const selectedWithoutData = useMemo(
         () =>
-            selected
-                ?.filter(
+            normalizedSelected
+                .filter(
                     (s) =>
                         s.displayName === undefined &&
                         flatData.length > 0 &&
                         !flatData.find((d) => d.id === s.id)
                 )
                 .map((s) => s.id),
-        [selected, flatData]
+        [normalizedSelected, flatData]
     )
 
     const selectedQuery = useQuery({
@@ -97,7 +101,7 @@ export const useModelMultiSelectQuery = <
 
     const resolvedSelected = useMemo(
         () =>
-            selected?.map((s) => {
+            normalizedSelected.map((s) => {
                 if (s.displayName === undefined) {
                     return (
                         flatData.find((d) => d.id === s.id) ||
@@ -109,7 +113,7 @@ export const useModelMultiSelectQuery = <
                 }
                 return s
             }),
-        [selected, flatData, selectedQuery.data, modelName]
+        [normalizedSelected, flatData, selectedQuery.data, modelName]
     )
 
     return {
