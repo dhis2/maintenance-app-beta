@@ -37,12 +37,15 @@ export const programStageTriggerOptions = [
 
 export const NotificationTimingSection = ({
     isStageNotification,
+    isEditMode = false,
 }: {
     isStageNotification: boolean
+    isEditMode?: boolean
 }) => {
     const { input: triggerInput, meta: triggerMeta } = useField(
         'notificationTrigger'
     )
+
     const form = useForm()
     const isScheduledDays = [
         'SCHEDULED_DAYS_DUE_DATE',
@@ -72,11 +75,13 @@ export const NotificationTimingSection = ({
     const triggerInputChange = triggerInput.onChange
     const formChange = form.change
     useEffect(() => {
-        triggerInputChange('COMPLETION')
+        if (!isEditMode) {
+            triggerInputChange('COMPLETION')
+        }
         if (!isStageNotification) {
             formChange('sendRepeatable', undefined)
         }
-    }, [isStageNotification, formChange, triggerInputChange])
+    }, [isEditMode, isStageNotification, formChange, triggerInputChange])
 
     const handleBeforeAfterChange = (newValue: 'BEFORE' | 'AFTER') => {
         const absValue = Math.abs(Number(relativeScheduledDaysInput.value) || 0)
