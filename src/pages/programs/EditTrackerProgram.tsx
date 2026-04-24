@@ -17,6 +17,7 @@ import { Section } from '../../components/formCreators/SectionFormList'
 import { useHandleOnSubmitEditFormDeletions } from '../../components/sectionedForm/useHandleOnSubmitEditFormDeletions'
 import {
     createFormError,
+    ATTRIBUTE_VALUES_FIELD_FILTERS,
     DEFAULT_FIELD_FILTERS,
     SectionedFormProvider,
     SECTIONS_MAP,
@@ -36,6 +37,7 @@ import { TrackerProgramFormContents } from './form/trackerProgram/TrackerProgram
 import { TrackerProgramFormDescriptor } from './form/trackerProgram/trackerProgramFormDescriptor'
 
 const fieldFilters = [
+    ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     ...DEFAULT_FIELD_FILTERS,
     'programType',
     'name',
