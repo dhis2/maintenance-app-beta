@@ -29,6 +29,10 @@
     padding-block-end: var(--spacers-dp8);
 }
 
+.orgUnitRow td span {
+    cursor: default;
+}
+
 .orgUnitRow.clickable:hover td:nth-child(2) span {
     text-decoration: underline;
 }
