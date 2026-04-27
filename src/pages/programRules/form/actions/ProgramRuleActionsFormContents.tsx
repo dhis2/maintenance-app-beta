@@ -113,6 +113,7 @@ const ProgramRuleActionListNewOrEdit = () => {
                 <DrawerPortal
                     isOpen={isActionFormOpen}
                     onClose={onCloseActionForm}
+                    disableFocusTrap={true}
                 >
                     {actionFormOpen !== undefined && (
                         <EditOrNewProgramRuleActionForm
