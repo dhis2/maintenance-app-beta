@@ -12,7 +12,6 @@ import { validate } from './form/dataApprovalLevelsSchema'
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     'name',
-    'code',
     'orgUnitLevel',
     'categoryOptionGroupSet[id,displayName]',
 ] as const

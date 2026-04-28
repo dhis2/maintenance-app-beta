@@ -22,7 +22,6 @@ export const dataApprovalLevelFormSchema = identifiable
     .merge(dataApprovalLevelBaseSchema)
     .extend({
         orgUnitLevel: z.number(),
-        code: z.string().trim().optional(),
     })
 
 export const dataApprovalLevelListSchema = dataApprovalLevelBaseSchema
