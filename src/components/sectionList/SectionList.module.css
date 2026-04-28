@@ -85,3 +85,11 @@
 .listEmpty {
     text-align: center;
 }
+
+.listRow td pre {
+    cursor: default;
+}
+
+.listRow td span {
+    cursor: default;
+}
