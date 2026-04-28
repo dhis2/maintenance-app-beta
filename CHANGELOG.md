@@ -1,3 +1,10 @@
+## [0.151.4](https://github.com/dhis2/metadata-management-app/compare/v0.151.3...v0.151.4) (2026-04-28)
+
+
+### Bug Fixes
+
+* attributes schema cleanup [DHIS2-21322] [DHIS2-21323] ([#896](https://github.com/dhis2/metadata-management-app/issues/896)) ([56e3853](https://github.com/dhis2/metadata-management-app/commit/56e38534faa047e2c51e06fd43833f1a011cb2dc))
+
 ## [0.151.3](https://github.com/dhis2/metadata-management-app/compare/v0.151.2...v0.151.3) (2026-04-22)
 
 
