@@ -232,7 +232,7 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
                                     >
                                         {i18n.t(
                                             'The following attributes are marked as required but not assigned to any section:',
-                                            { nsSeparator: ':' }
+                                            { nsSeparator: '~:~' }
                                         )}
                                     </div>
                                     <ul className={styles.sectionWarningList}>
@@ -242,13 +242,13 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
                                                     key={
                                                         attribute
                                                             .trackedEntityAttribute
-                                                            .id
+                                                            ?.id
                                                     }
                                                 >
                                                     {
                                                         attribute
                                                             .trackedEntityAttribute
-                                                            .displayName
+                                                            ?.displayName
                                                     }
                                                 </li>
                                             )
