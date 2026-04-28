@@ -3,8 +3,7 @@ import i18n from '@dhis2/d2-i18n'
 import React, { useCallback } from 'react'
 import { useParams } from 'react-router-dom'
 import { ModelSingleSelectRefreshableFormField } from '../../../../components/metadataFormControls/ModelSingleSelect/ModelSingleSelectRefreshableField'
-
-type QueryResponse = { result: { pager: { total: number } } }
+import { WrapQueryResponse } from '../../../../types/query'
 
 export function CategoryOptionGroupSetField() {
     const engine = useDataEngine()
@@ -34,7 +33,7 @@ export function CategoryOptionGroupSetField() {
                     resource: 'dataApprovalLevels',
                     params: { pageSize: 1, fields: 'id', filter },
                 },
-            })) as QueryResponse
+            })) as WrapQueryResponse<{ pager: { total: number } }>
 
             if (response.result.pager.total > 0) {
                 return i18n.t(
