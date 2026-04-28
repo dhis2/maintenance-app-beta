@@ -1,6 +1,6 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Button } from '@dhis2/ui'
+import { Button, NoticeBox } from '@dhis2/ui'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useField, UseFieldConfig } from 'react-final-form'
 import {
@@ -27,6 +27,7 @@ import { SchemaName } from '../../../../types'
 import { ProgramValues } from '../../EditTrackerProgram'
 import { EditOrNewEnrollmentSectionForm } from '../sectionForm/EntrollmentSectionForm'
 import styles from './EnrollmentFormFormContents.module.css'
+import { getMandatoryAttributesMissingFromSections } from './mandatoryEnrollmentAttributes'
 
 const useProgramField = <T extends keyof ProgramValues>(
     name: T,
@@ -43,6 +44,14 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
     const trackedEntityAttributes = useProgramField(
         'programTrackedEntityAttributes'
     ).input.value
+    const missingMandatoryAttributes = useMemo(
+        () =>
+            getMandatoryAttributesMissingFromSections({
+                programTrackedEntityAttributes: trackedEntityAttributes,
+                programSections: sections,
+            }),
+        [trackedEntityAttributes, sections]
+    )
     const [selectedFormType, setSelectedFormType] = useState<FormType>(
         FormType.DEFAULT
     )
@@ -207,6 +216,47 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
                         level={'primary'}
                         otherProps={{ sectionsLength: sections.length }}
                         withReordering
+                        warningNotice={
+                            missingMandatoryAttributes.length > 0 ? (
+                                <NoticeBox
+                                    warning
+                                    className={styles.sectionWarningNotice}
+                                    title={i18n.t(
+                                        'Mandatory tracked entity attributes are not included in this form.'
+                                    )}
+                                >
+                                    <div
+                                        className={
+                                            styles.sectionWarningDescription
+                                        }
+                                    >
+                                        {i18n.t(
+                                            'The following attributes are marked as required but not assigned to any section:',
+                                            { nsSeparator: ':' }
+                                        )}
+                                    </div>
+                                    <ul className={styles.sectionWarningList}>
+                                        {missingMandatoryAttributes.map(
+                                            (attribute) => (
+                                                <li
+                                                    key={
+                                                        attribute
+                                                            .trackedEntityAttribute
+                                                            .id
+                                                    }
+                                                >
+                                                    {
+                                                        attribute
+                                                            .trackedEntityAttribute
+                                                            .displayName
+                                                    }
+                                                </li>
+                                            )
+                                        )}
+                                    </ul>
+                                </NoticeBox>
+                            ) : null
+                        }
                     />
                 )}
                 {selectedFormType === FormType.CUSTOM && (
