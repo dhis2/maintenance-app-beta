@@ -161,21 +161,36 @@ describe('Organisation unit list', () => {
             getRelativeTime(new Date(root1Level2Child1.lastUpdated!))
         )
 
-        expect(tableRows[3]).toHaveTextContent(root1Level2Child2.displayName!)
-        expect(tableRows[3]).toHaveTextContent(root1Level2Child2.code!)
-        expect(tableRows[3]).toHaveTextContent(
+        let rowsAfterLoad = tableRows
+        if (tableRows[3].textContent?.includes('Load more for Root1')) {
+            await userEvent.click(tableRows[3])
+            await waitFor(() =>
+                expect(
+                    screen.getByText(root1Level2Child2.displayName!)
+                ).toBeInTheDocument()
+            )
+            rowsAfterLoad = screen.getAllByTestId('dhis2-uicore-datatablerow')
+        }
+
+        expect(rowsAfterLoad[3]).toHaveTextContent(
+            root1Level2Child2.displayName!
+        )
+        expect(rowsAfterLoad[3]).toHaveTextContent(root1Level2Child2.code!)
+        expect(rowsAfterLoad[3]).toHaveTextContent(
             getRelativeTime(new Date(root1Level2Child2.lastUpdated!))
         )
 
-        expect(tableRows[4]).toHaveTextContent(rootOrg2.displayName!)
-        expect(tableRows[4]).toHaveTextContent(rootOrg2.code!)
-        expect(tableRows[4]).toHaveTextContent(
+        expect(rowsAfterLoad[4]).toHaveTextContent(rootOrg2.displayName!)
+        expect(rowsAfterLoad[4]).toHaveTextContent(rootOrg2.code!)
+        expect(rowsAfterLoad[4]).toHaveTextContent(
             getRelativeTime(new Date(rootOrg2.lastUpdated!))
         )
 
-        expect(tableRows[5]).toHaveTextContent(root2Level3Child.displayName!)
-        expect(tableRows[5]).toHaveTextContent(root2Level3Child.code!)
-        expect(tableRows[5]).toHaveTextContent(
+        expect(rowsAfterLoad[5]).toHaveTextContent(
+            root2Level3Child.displayName!
+        )
+        expect(rowsAfterLoad[5]).toHaveTextContent(root2Level3Child.code!)
+        expect(rowsAfterLoad[5]).toHaveTextContent(
             getRelativeTime(new Date(root2Level3Child.lastUpdated!))
         )
     })
