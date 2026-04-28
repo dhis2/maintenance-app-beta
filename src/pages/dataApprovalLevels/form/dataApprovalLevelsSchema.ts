@@ -1,7 +1,11 @@
 import { z } from 'zod'
-import { modelFormSchemas } from '../../../lib'
+import {
+    getDefaultsOld,
+    createFormValidate,
+    modelFormSchemas,
+} from '../../../lib'
 
-const { withDefaultListColumns, withAttributeValues } = modelFormSchemas
+const { identifiable, withDefaultListColumns } = modelFormSchemas
 
 const dataApprovalLevelBaseSchema = z.object({
     name: z.string().trim(),
@@ -13,6 +17,17 @@ const dataApprovalLevelBaseSchema = z.object({
         .optional(),
 })
 
-export const dataApprovalLevelListSchema = dataApprovalLevelBaseSchema
-    .merge(withDefaultListColumns)
-    .merge(withAttributeValues)
+export const dataApprovalLevelFormSchema = identifiable
+    .merge(dataApprovalLevelBaseSchema)
+    .extend({
+        orgUnitLevel: z.number(),
+        code: z.string().trim().optional(),
+    })
+
+export const dataApprovalLevelListSchema = dataApprovalLevelBaseSchema.merge(
+    withDefaultListColumns
+)
+
+export const initialValues = getDefaultsOld(dataApprovalLevelFormSchema)
+
+export const validate = createFormValidate(dataApprovalLevelFormSchema)
