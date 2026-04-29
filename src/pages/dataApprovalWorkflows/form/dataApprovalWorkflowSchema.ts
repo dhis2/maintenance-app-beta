@@ -5,8 +5,7 @@ import {
     modelFormSchemas,
 } from '../../../lib'
 
-const { identifiable, withDefaultListColumns, withAttributeValues } =
-    modelFormSchemas
+const { identifiable, withDefaultListColumns } = modelFormSchemas
 
 const dataApprovalWorkflowBaseSchema = z.object({
     name: z.string().trim(),
@@ -39,9 +38,8 @@ export const dataApprovalWorkflowFormSchema = identifiable
         categoryCombo: z.object({ id: z.string() }),
     })
 
-export const dataApprovalWorkflowListSchema = dataApprovalWorkflowBaseSchema
-    .merge(withDefaultListColumns)
-    .merge(withAttributeValues)
+export const dataApprovalWorkflowListSchema =
+    dataApprovalWorkflowBaseSchema.merge(withDefaultListColumns)
 
 export const initialValues = getDefaultsOld(dataApprovalWorkflowFormSchema)
 

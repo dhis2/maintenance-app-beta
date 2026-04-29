@@ -8,8 +8,12 @@ import {
 } from '../../../../lib'
 import { sharingSettingsSchema } from '../common/sharingSettingsSchema'
 
-const { identifiable, withDefaultListColumns, modelReference } =
-    modelFormSchemas
+const {
+    identifiable,
+    withDefaultListColumns,
+    withAttributeValues,
+    modelReference,
+} = modelFormSchemas
 
 const trackerProgramBaseSchema = z.object({
     code: z.string().optional(),
@@ -87,14 +91,15 @@ const trackerProgramBaseSchema = z.object({
 
 export const trackerProgramFormSchema = identifiable
     .merge(trackerProgramBaseSchema)
+    .merge(withAttributeValues)
     .extend({
         shortName: z.string(),
         programType: z.enum(['WITH_REGISTRATION']).default('WITH_REGISTRATION'),
     })
 
-export const trackerProgramListSchema = trackerProgramBaseSchema.merge(
-    withDefaultListColumns
-)
+export const trackerProgramListSchema = trackerProgramBaseSchema
+    .merge(withDefaultListColumns)
+    .merge(withAttributeValues)
 
 export const trackerProgramInitialValues = getDefaultsOld(
     trackerProgramFormSchema
