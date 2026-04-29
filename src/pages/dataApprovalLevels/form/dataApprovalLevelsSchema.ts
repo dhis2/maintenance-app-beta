@@ -5,8 +5,7 @@ import {
     modelFormSchemas,
 } from '../../../lib'
 
-const { identifiable, withDefaultListColumns, withAttributeValues } =
-    modelFormSchemas
+const { identifiable, withDefaultListColumns } = modelFormSchemas
 
 const dataApprovalLevelBaseSchema = z.object({
     name: z.string().trim(),
@@ -25,9 +24,9 @@ export const dataApprovalLevelFormSchema = identifiable
         code: z.string().trim().optional(),
     })
 
-export const dataApprovalLevelListSchema = dataApprovalLevelBaseSchema
-    .merge(withDefaultListColumns)
-    .merge(withAttributeValues)
+export const dataApprovalLevelListSchema = dataApprovalLevelBaseSchema.merge(
+    withDefaultListColumns
+)
 
 export const initialValues = getDefaultsOld(dataApprovalLevelFormSchema)
 
