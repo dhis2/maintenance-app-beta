@@ -267,6 +267,7 @@ describe('Category combos form tests', () => {
                                     displayName: categories[0].displayName,
                                 }),
                             ],
+                            attributeValues: [],
                             dataDimensionType: 'DISAGGREGATION',
                             skipTotal: false,
                         }),

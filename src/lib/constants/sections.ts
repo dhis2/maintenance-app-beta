@@ -43,7 +43,6 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Category combination'),
         titlePlural: i18n.t('Category combinations'),
         parentSectionKey: 'category',
-        duplicable: true,
     },
     categoryOptionCombo: {
         name: SchemaName.categoryOptionCombo,
@@ -58,7 +57,6 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Category option group'),
         titlePlural: i18n.t('Category option groups'),
         parentSectionKey: 'category',
-        duplicable: true,
     },
     categoryOptionGroupSet: {
         name: SchemaName.categoryOptionGroupSet,
@@ -66,7 +64,6 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Category option group set'),
         titlePlural: i18n.t('Category option group sets'),
         parentSectionKey: 'category',
-        duplicable: true,
     },
     dataElement: {
         name: SchemaName.dataElement,
