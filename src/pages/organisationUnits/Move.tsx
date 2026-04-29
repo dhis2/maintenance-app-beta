@@ -12,6 +12,10 @@ import {
     useNavigateWithSearchState,
 } from '../../lib'
 import { MoveFormContent } from './move/MoveFormContents'
+import {
+    moveOrgUnitFormValidate,
+    MoveOrgUnitFormValues,
+} from './move/MoveOrgUnitSchema'
 
 type OrgUnit = {
     id: string
@@ -21,11 +25,6 @@ type OrgUnit = {
 
 type OrgUnitPathResponse = {
     organisationUnits: OrgUnit[]
-}
-
-type MoveFormValues = {
-    target: OrgUnit | undefined
-    sources: OrgUnit[]
 }
 
 const ORG_UNIT_RESOURCE = SECTIONS_MAP.organisationUnit.namePlural
@@ -61,7 +60,7 @@ export const Component = () => {
         enabled: preselectedIds.length > 0,
     })
 
-    const initialValues: MoveFormValues = useMemo(
+    const initialValues: MoveOrgUnitFormValues = useMemo(
         () => ({
             target: undefined,
             sources: preselectedData?.organisationUnits ?? [],
@@ -69,7 +68,7 @@ export const Component = () => {
         [preselectedData]
     )
 
-    const onSubmit = async (values: MoveFormValues) => {
+    const onSubmit = async (values: MoveOrgUnitFormValues) => {
         const moveResults = await Promise.allSettled(
             values.sources.map((source) =>
                 dataEngine.mutate({
@@ -120,6 +119,7 @@ export const Component = () => {
         <Form
             initialValues={initialValues}
             onSubmit={onSubmit}
+            validate={moveOrgUnitFormValidate}
             subscription={{
                 values: false,
                 submitting: true,

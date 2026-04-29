@@ -1,7 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
 import { Field, IconArrowRight24, OrganisationUnitTree } from '@dhis2/ui'
 import React, { useMemo, useState } from 'react'
-import { useField } from 'react-final-form'
+import { useField, useForm } from 'react-final-form'
 import { useCurrentUserRootOrgUnits } from '../../../lib/user/currentUserStore'
 import css from './Move.module.css'
 
@@ -21,8 +21,23 @@ export const MoveOrgUnitFormFields = () => {
     const roots = useCurrentUserRootOrgUnits()
     const rootIds = useMemo(() => roots.map((ou) => ou.id), [roots])
     const rootPaths = useMemo(() => roots.map((ou) => ou.path), [roots])
-    const { input: sourceInput, meta: sourceMeta } = useField('sources')
-    const { input: targetInput, meta: targetMeta } = useField('target')
+    const form = useForm()
+    const { input: targetInput, meta: targetMeta } = useField('target', {
+        validateFields: ['sources'],
+    })
+    const { input: sourceInput, meta: sourceMeta } = useField('sources', {
+        validate: (value: SourceOrgUnit[]) => {
+            const target = form.getState().values.target
+            if (!target?.id) {
+                return false
+            }
+            return value.some((source) => target.path.includes(source.id)) // source.path.includes(target.id))
+                ? i18n.t(
+                      'Can not move an organisation unit to one of its descendants.'
+                  )
+                : false
+        },
+    })
 
     const selectedSourcePaths = useMemo(
         () => sourceInput.value?.map((s: { path: string }) => s.path),
@@ -85,10 +100,8 @@ export const MoveOrgUnitFormFields = () => {
                 </span>
                 <Field
                     name="source"
-                    error={sourceInput.touched && sourceMeta.error}
-                    validationText={
-                        sourceMeta.touched ? sourceMeta.error : undefined
-                    }
+                    error={sourceMeta.error}
+                    validationText={sourceMeta.error}
                 >
                     <div className={css.treeWrapper}>
                         <OrganisationUnitTree

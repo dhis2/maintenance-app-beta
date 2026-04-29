@@ -9,7 +9,9 @@ import { MoveOrgUnitFormFields } from './MoveOrgUnitFormFields'
 import { MoveOrgUnitSummary } from './MoveOrgUnitSummary'
 
 export const MoveFormContent = () => {
-    const { values } = useFormState({ subscription: { values: true } })
+    const { values, valid } = useFormState({
+        subscription: { values: true, valid: true },
+    })
 
     return (
         <div className={css.moveForm}>
@@ -34,7 +36,9 @@ export const MoveFormContent = () => {
                 <Button
                     primary
                     type="submit"
-                    disabled={values.sources?.length === 0 || !values.target}
+                    disabled={
+                        values.sources?.length === 0 || !values.target || !valid
+                    }
                 >
                     {i18n.t('Move')}
                 </Button>
