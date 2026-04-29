@@ -13,7 +13,7 @@ export const MoveOrgUnitSummary = ({
     sources,
     target,
 }: MoveOrgUnitSummaryProps) => {
-    if (sources.length === 0) {
+    if (sources?.length === 0) {
         return null
     }
 
@@ -21,14 +21,14 @@ export const MoveOrgUnitSummary = ({
         ? i18n.t(
               '{{count}} organisation units, and any units inside, will be moved to {{targetName}}.',
               {
-                  count: sources.length,
+                  count: sources?.length,
                   targetName: target.displayName,
                   interpolation: { escapeValue: false },
               }
           )
         : i18n.t(
               '{{count}} organisation units, and any units inside, will be moved. Choose an organisation to move them into.',
-              { count: sources.length }
+              { count: sources?.length }
           )
 
     return (

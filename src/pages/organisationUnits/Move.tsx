@@ -1,29 +1,45 @@
+import { useAlert, useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { Button, ButtonStrip } from '@dhis2/ui'
-import { useQuery } from '@tanstack/react-query'
-import React, { useEffect, useMemo, useState } from 'react'
-import { LinkButton } from '../../components/LinkButton'
-import { useLocationWithState } from '../../lib'
-import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import css from './move/Move.module.css'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
+import React, { useMemo } from 'react'
+import { Form } from 'react-final-form'
 import {
-    MoveOrgUnitFormFields,
-    OrgUnitTarget,
-    SourceOrgUnit,
-} from './move/MoveOrgUnitFormFields'
-import { MoveOrgUnitSummary } from './move/MoveOrgUnitSummary'
+    createFormError,
+    getSectionPath,
+    SECTIONS_MAP,
+    useBoundResourceQueryFn,
+    useLocationWithState,
+    useNavigateWithSearchState,
+} from '../../lib'
+import { MoveFormContent } from './move/MoveFormContents'
+
+type OrgUnit = {
+    id: string
+    path: string
+    displayName: string
+}
 
 type OrgUnitPathResponse = {
-    organisationUnits: Array<{
-        id: string
-        path: string
-        displayName: string
-    }>
+    organisationUnits: OrgUnit[]
 }
+
+type MoveFormValues = {
+    target: OrgUnit | undefined
+    sources: OrgUnit[]
+}
+
+const ORG_UNIT_RESOURCE = SECTIONS_MAP.organisationUnit.namePlural
 
 export const Component = () => {
     const location = useLocationWithState<{ selectedModels: Set<string> }>()
     const queryFn = useBoundResourceQueryFn()
+    const dataEngine = useDataEngine()
+    const navigate = useNavigateWithSearchState()
+    const queryClient = useQueryClient()
+    const { show: showSuccess } = useAlert(
+        i18n.t('Organisation units successfully moved'),
+        { success: true }
+    )
 
     const preselectedIds: string[] = useMemo(
         () => Array.from(location.state?.selectedModels ?? []),
@@ -45,43 +61,76 @@ export const Component = () => {
         enabled: preselectedIds.length > 0,
     })
 
-    const [sources, setSources] = useState<SourceOrgUnit[]>([])
-    const [target, setTarget] = useState<OrgUnitTarget | undefined>()
+    const initialValues: MoveFormValues = useMemo(
+        () => ({
+            target: undefined,
+            sources: preselectedData?.organisationUnits ?? [],
+        }),
+        [preselectedData]
+    )
 
-    useEffect(() => {
-        if (preselectedData?.organisationUnits) {
-            setSources(preselectedData.organisationUnits)
+    const onSubmit = async (values: MoveFormValues) => {
+        const moveResults = await Promise.allSettled(
+            values.sources.map((source) =>
+                dataEngine.mutate({
+                    resource: ORG_UNIT_RESOURCE,
+                    id: source.id,
+                    type: 'json-patch',
+                    data: [
+                        {
+                            op: 'replace',
+                            path: '/parent',
+                            value: { id: values.target!.id },
+                        },
+                    ],
+                } as const)
+            )
+        )
+
+        const moveFailures = moveResults
+            .map((result, index) => ({
+                ...result,
+                orgUnitName: values.sources[index].displayName,
+            }))
+            .filter((result) => result.status === 'rejected')
+
+        queryClient.invalidateQueries({
+            queryKey: [{ resource: ORG_UNIT_RESOURCE }],
+        })
+
+        if (moveFailures.length > 0) {
+            return createFormError({
+                message: i18n.t(
+                    'There was an error moving organisation units: {{orgUnitNames}}',
+                    {
+                        orgUnitNames: moveFailures
+                            .map((f) => f.orgUnitName)
+                            .join(', '),
+                        nsSeparator: '~-~',
+                    }
+                ),
+            })
         }
-    }, [preselectedData])
+
+        showSuccess()
+        navigate(`/${getSectionPath(ORG_UNIT_RESOURCE)}`)
+    }
 
     return (
-        <div className={css.moveForm}>
-            <h2 className={css.title}>{i18n.t('Move organisation units')}</h2>
-            <div className={css.description}>
-                <p>
-                    {i18n.t(
-                        'Choose the organisation units to move and their new position in the hierarchy. All descendants move with them.'
-                    )}
-                </p>
-            </div>
-
-            <MoveOrgUnitFormFields
-                sources={sources}
-                onSourcesChange={setSources}
-                target={target}
-                onTargetChange={setTarget}
-            />
-
-            <MoveOrgUnitSummary sources={sources} target={target} />
-
-            <ButtonStrip className={css.actions}>
-                <Button primary disabled={sources.length === 0 || !target}>
-                    {i18n.t('Move')}
-                </Button>
-                <LinkButton secondary to="../">
-                    {i18n.t('Cancel')}
-                </LinkButton>
-            </ButtonStrip>
-        </div>
+        <Form
+            initialValues={initialValues}
+            onSubmit={onSubmit}
+            subscription={{
+                values: false,
+                submitting: true,
+                submitSucceeded: true,
+            }}
+        >
+            {({ handleSubmit }) => (
+                <form onSubmit={handleSubmit}>
+                    <MoveFormContent />
+                </form>
+            )}
+        </Form>
     )
 }

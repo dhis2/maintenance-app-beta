@@ -1,6 +1,7 @@
 import i18n from '@dhis2/d2-i18n'
-import { IconArrowRight24, OrganisationUnitTree } from '@dhis2/ui'
+import { Field, IconArrowRight24, OrganisationUnitTree } from '@dhis2/ui'
 import React, { useMemo, useState } from 'react'
+import { useField } from 'react-final-form'
 import { useCurrentUserRootOrgUnits } from '../../../lib/user/currentUserStore'
 import css from './Move.module.css'
 
@@ -16,26 +17,16 @@ export type SourceOrgUnit = {
     path: string
 }
 
-type MoveOrgUnitFormFieldsProps = {
-    sources: SourceOrgUnit[]
-    onSourcesChange: (sources: SourceOrgUnit[]) => void
-    target: OrgUnitTarget | undefined
-    onTargetChange: (target: OrgUnitTarget | undefined) => void
-}
-
-export const MoveOrgUnitFormFields = ({
-    sources,
-    onSourcesChange,
-    target,
-    onTargetChange,
-}: MoveOrgUnitFormFieldsProps) => {
+export const MoveOrgUnitFormFields = () => {
     const roots = useCurrentUserRootOrgUnits()
     const rootIds = useMemo(() => roots.map((ou) => ou.id), [roots])
     const rootPaths = useMemo(() => roots.map((ou) => ou.path), [roots])
+    const { input: sourceInput, meta: sourceMeta } = useField('sources')
+    const { input: targetInput, meta: targetMeta } = useField('target')
 
     const selectedSourcePaths = useMemo(
-        () => sources.map((s) => s.path),
-        [sources]
+        () => sourceInput.value?.map((s: { path: string }) => s.path),
+        [sourceInput.value]
     )
 
     const sourceInitiallyExpanded = useMemo(
@@ -57,10 +48,13 @@ export const MoveOrgUnitFormFields = ({
         selected: string[]
     }) => {
         const newSources = selected.map((selectedPath) => {
-            const existing = sources.find((s) => s.path === selectedPath)
+            const existing = sourceInput.value.find(
+                (s: { path: string }) => s.path === selectedPath
+            )
             return existing ?? { id, path, displayName }
         })
-        onSourcesChange(newSources)
+        sourceInput.onChange(newSources)
+        sourceInput.onBlur()
     }
 
     const handleTargetChange = ({
@@ -73,10 +67,10 @@ export const MoveOrgUnitFormFields = ({
         path: string
         selected: string[]
     }) => {
-        if (target?.path === path) {
-            onTargetChange(undefined)
+        if (targetInput.value?.path === path) {
+            targetInput.onChange(undefined)
         } else {
-            onTargetChange({ id, displayName, path })
+            targetInput.onChange({ id, displayName, path })
         }
         if (!targetExpanded.includes(path)) {
             setTargetExpanded((prev) => [...prev, path])
@@ -89,15 +83,23 @@ export const MoveOrgUnitFormFields = ({
                 <span className={css.treeFieldLabel}>
                     {i18n.t('Organisation units to move')}
                 </span>
-                <div className={css.treeWrapper}>
-                    <OrganisationUnitTree
-                        key={sourceInitiallyExpanded.join(',')}
-                        roots={rootIds}
-                        selected={selectedSourcePaths}
-                        initiallyExpanded={sourceInitiallyExpanded}
-                        onChange={handleSourceChange}
-                    />
-                </div>
+                <Field
+                    name="source"
+                    error={sourceInput.touched && sourceMeta.error}
+                    validationText={
+                        sourceMeta.touched ? sourceMeta.error : undefined
+                    }
+                >
+                    <div className={css.treeWrapper}>
+                        <OrganisationUnitTree
+                            key={sourceInitiallyExpanded.join(',')}
+                            roots={rootIds}
+                            selected={selectedSourcePaths}
+                            initiallyExpanded={sourceInitiallyExpanded}
+                            onChange={handleSourceChange}
+                        />
+                    </div>
+                </Field>
             </div>
 
             <IconArrowRight24 />
@@ -106,15 +108,27 @@ export const MoveOrgUnitFormFields = ({
                 <span className={css.treeFieldLabel}>
                     {i18n.t('Move into')}
                 </span>
-                <div className={css.treeWrapper}>
-                    <OrganisationUnitTree
-                        roots={rootIds}
-                        singleSelection
-                        selected={target ? [target.path] : []}
-                        initiallyExpanded={targetExpanded}
-                        onChange={handleTargetChange}
-                    />
-                </div>
+                <Field
+                    name="target"
+                    error={targetInput.touched && targetMeta.error}
+                    validationText={
+                        targetMeta.touched ? targetMeta.error : undefined
+                    }
+                >
+                    <div className={css.treeWrapper}>
+                        <OrganisationUnitTree
+                            roots={rootIds}
+                            singleSelection
+                            selected={
+                                targetInput.value
+                                    ? [targetInput.value.path]
+                                    : []
+                            }
+                            initiallyExpanded={targetExpanded}
+                            onChange={handleTargetChange}
+                        />
+                    </div>
+                </Field>
             </div>
         </div>
     )
