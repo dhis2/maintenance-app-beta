@@ -210,7 +210,6 @@ describe('Option group sets form tests', () => {
             const { screen, optionSets } = await renderForm()
 
             uiAssertions.expectNameFieldExist('', screen)
-            uiAssertions.expectInputFieldToExist('shortName', '', screen)
             uiAssertions.expectCodeFieldExist('', screen)
             uiAssertions.expectTextAreaFieldToExist('description', '', screen)
             uiAssertions.expectCheckboxFieldToExist(
@@ -372,11 +371,6 @@ describe('Option group sets form tests', () => {
             screen.debug()
 
             uiAssertions.expectNameFieldExist(optionGroupSet.name, screen)
-            uiAssertions.expectInputFieldToExist(
-                'shortName',
-                optionGroupSet.shortName,
-                screen
-            )
             uiAssertions.expectCodeFieldExist(optionGroupSet.code, screen)
             uiAssertions.expectTextAreaFieldToExist(
                 'description',

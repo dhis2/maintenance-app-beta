@@ -14,7 +14,6 @@ import { validate } from './form/optionGroupSetSchema'
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     'name',
-    'shortName',
     'code',
     'description',
     'dataDimensions',
