@@ -17,7 +17,7 @@ const TAGGED_NAME_PATTERN = /^#\{(.+)\}$/
 
 const toTaggedName = (name: string) => `#{${name}}`
 const fromTaggedName = (value: string) =>
-    value.match(TAGGED_NAME_PATTERN)?.[1] ?? value
+    TAGGED_NAME_PATTERN.exec(value)?.[1] ?? value
 
 const PROGRAM_RULE_VARIABLES_QUERY = (programId: string) => ({
     resource: 'programRuleVariables' as const,
