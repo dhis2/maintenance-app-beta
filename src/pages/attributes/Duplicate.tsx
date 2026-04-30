@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { omit } from 'lodash'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { DuplicationNoticeBox } from '../../components/form/DuplicationNoticeBox'
 import {
@@ -49,7 +49,10 @@ export const Component = () => {
         queryKey: [query],
         queryFn: queryFn<AttributeFormValues>,
     })
-    const duplicateData = omit(attributesQuery.data, 'id')
+    const duplicateData = useMemo(
+        () => omit(attributesQuery.data, 'id'),
+        [attributesQuery.data]
+    )
 
     return (
         <SectionedFormWrapper
