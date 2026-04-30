@@ -5,10 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-04-21T07:41:51.031Z\n"
-"PO-Revision-Date: 2026-04-21T07:41:51.031Z\n"
-"POT-Creation-Date: 2026-04-21T13:31:01.480Z\n"
-"PO-Revision-Date: 2026-04-21T13:31:01.481Z\n"
+"POT-Creation-Date: 2026-04-29T10:43:06.265Z\n"
+"PO-Revision-Date: 2026-04-29T10:43:06.265Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -58,6 +56,9 @@ msgstr "Merge {{modelName}}"
 
 msgid "Duplicate {{modelName}}"
 msgstr "Duplicate {{modelName}}"
+
+msgid "Results"
+msgstr "Results"
 
 msgid "Metadata Integrity Checks"
 msgstr "Metadata Integrity Checks"
@@ -2200,6 +2201,12 @@ msgstr "Please provide a time."
 msgid "Please provide a date."
 msgstr "Please provide a date."
 
+msgid "SQL type"
+msgstr "SQL type"
+
+msgid "Cache strategy"
+msgstr "Cache strategy"
+
 msgid "Period type"
 msgstr "Period type"
 
@@ -2712,6 +2719,9 @@ msgstr "The numeric value to be used as the constant."
 msgid "Please enter a number"
 msgstr "Please enter a number"
 
+msgid "Configuration"
+msgstr "Configuration"
+
 msgid "Available data element groups"
 msgstr "Available data element groups"
 
@@ -2966,9 +2976,6 @@ msgstr "Subject"
 
 msgid "Used as template for the message field."
 msgstr "Used as template for the message field."
-
-msgid "{{fieldLabel}} (required)"
-msgstr "{{fieldLabel}} (required)"
 
 msgid "Message"
 msgstr "Message"
@@ -3628,8 +3635,8 @@ msgstr "Exit without saving"
 msgid "Create {{modelName}} "
 msgstr "Create {{modelName}} "
 
-msgid "Country (required)"
-msgstr "Country (required)"
+msgid "Country"
+msgstr "Country"
 
 msgid "Failed to load countries"
 msgstr "Failed to load countries"
@@ -3637,8 +3644,8 @@ msgstr "Failed to load countries"
 msgid "Select a country"
 msgstr "Select a country"
 
-msgid "Language (required)"
-msgstr "Language (required)"
+msgid "Language"
+msgstr "Language"
 
 msgid "Failed to load languages"
 msgstr "Failed to load languages"
@@ -3714,9 +3721,6 @@ msgstr "Save option"
 
 msgid "Saving an option does not save other changes to the option set"
 msgstr "Saving an option does not save other changes to the option set"
-
-msgid "Code is already in use"
-msgstr "Code is already in use"
 
 msgid "Option created"
 msgstr "Option created"
@@ -4358,12 +4362,6 @@ msgstr "Configure how this predictor is calculated."
 msgid "Organisation units providing data"
 msgstr "Organisation units providing data"
 
-msgid "Sequential sample count (required)"
-msgstr "Sequential sample count (required)"
-
-msgid "Annual sample count (required)"
-msgstr "Annual sample count (required)"
-
 msgid "generator"
 msgstr "generator"
 
@@ -4624,9 +4622,6 @@ msgstr "Organisation unit field"
 msgid "Set up the basic information for this program indicator."
 msgstr "Set up the basic information for this program indicator."
 
-msgid "Configuration"
-msgstr "Configuration"
-
 msgid "Choose the program and data types this program indicator applies to."
 msgstr "Choose the program and data types this program indicator applies to."
 
@@ -4688,17 +4683,11 @@ msgstr "Please enter a maximum of {{max}} characters"
 msgid "A variable with this name already exists in this program."
 msgstr "A variable with this name already exists in this program."
 
-msgid "Source type (required)"
-msgstr "Source type (required)"
-
 msgid "Set up the basic information for this program rule variable."
 msgstr "Set up the basic information for this program rule variable."
 
 msgid "Configure how this variable works."
 msgstr "Configure how this variable works."
-
-msgid "Program (required)"
-msgstr "Program (required)"
 
 msgid "Program cannot be changed after creation"
 msgstr "Program cannot be changed after creation"
@@ -4722,8 +4711,8 @@ msgstr "Set up condition expression"
 msgid "Expression can not be edited after saving"
 msgstr "Expression can not be edited after saving"
 
-msgid "Expression (required) *"
-msgstr "Expression (required) *"
+msgid "Expression *"
+msgstr "Expression *"
 
 msgid "Feedback widget"
 msgstr "Feedback widget"
@@ -4731,14 +4720,11 @@ msgstr "Feedback widget"
 msgid "Program indicator widget"
 msgstr "Program indicator widget"
 
-msgid "Display widget (required)"
-msgstr "Display widget (required)"
+msgid "Display widget"
+msgstr "Display widget"
 
 msgid "Message template can not be edited after saving"
 msgstr "Message template can not be edited after saving"
-
-msgid "Message template (required)"
-msgstr "Message template (required)"
 
 msgid ""
 "Enter a number to set run order. Lower numbers run first. Leave empty to "
@@ -4755,9 +4741,6 @@ msgstr "Program stage to trigger rule"
 
 msgid "Select a specific program stage that the rule should only trigger on."
 msgstr "Select a specific program stage that the rule should only trigger on."
-
-msgid "Program stage section to hide (required)"
-msgstr "Program stage section to hide (required)"
 
 msgid "Program stage section to hide"
 msgstr "Program stage section to hide"
@@ -4792,8 +4775,8 @@ msgstr "Configure the program rule action."
 msgid "This program rule action will not be editable after saving."
 msgstr "This program rule action will not be editable after saving."
 
-msgid "Action type (required)"
-msgstr "Action type (required)"
+msgid "Action type"
+msgstr "Action type"
 
 msgid "Save action"
 msgstr "Save action"
@@ -5024,9 +5007,6 @@ msgstr "Unknown action type"
 
 msgid "Program Rule"
 msgstr "Program Rule"
-
-msgid "Name (required)"
-msgstr "Name (required)"
 
 msgid "Program stages to trigger rule"
 msgstr "Program stages to trigger rule"
@@ -5396,9 +5376,6 @@ msgstr "Saving a stage does not save other changes to the program"
 
 msgid "Stage form saved"
 msgstr "Stage form saved"
-
-msgid "A stage with this name already exists. Please choose another name."
-msgstr "A stage with this name already exists. Please choose another name."
 
 msgid "Configure the basic information for this program stage."
 msgstr "Configure the basic information for this program stage."
@@ -5793,6 +5770,201 @@ msgid ""
 msgstr ""
 "Relationship name seen from receiving entity is required when bidirectional "
 "is checked"
+
+msgid "Excel (.xlsx)"
+msgstr "Excel (.xlsx)"
+
+msgid "CSV (.csv)"
+msgstr "CSV (.csv)"
+
+msgid "PDF (.pdf)"
+msgstr "PDF (.pdf)"
+
+msgid "HTML (.html)"
+msgstr "HTML (.html)"
+
+msgid "XML (.xml)"
+msgstr "XML (.xml)"
+
+msgid "JSON (.json)"
+msgstr "JSON (.json)"
+
+msgid "Refresh materialized view"
+msgstr "Refresh materialized view"
+
+msgid "Run query"
+msgstr "Run query"
+
+msgid "Create or update view"
+msgstr "Create or update view"
+
+msgid "Could not load SQL view"
+msgstr "Could not load SQL view"
+
+msgid "The SQL view metadata could not be loaded. Please go back and try again."
+msgstr "The SQL view metadata could not be loaded. Please go back and try again."
+
+msgid "Back to SQL views"
+msgstr "Back to SQL views"
+
+msgid "Materialized SQL view"
+msgstr "Materialized SQL view"
+
+msgid "SQL query"
+msgstr "SQL query"
+
+msgid "Variables required"
+msgstr "Variables required"
+
+msgid "Provide variables and run"
+msgstr "Provide variables and run"
+
+msgid "No results available yet"
+msgstr "No results available yet"
+
+msgid "Refresh this materialized view before viewing results."
+msgstr "Refresh this materialized view before viewing results."
+
+msgid "Create or update this view before viewing results."
+msgstr "Create or update this view before viewing results."
+
+msgid "Show server message"
+msgstr "Show server message"
+
+msgid "Could not load results"
+msgstr "Could not load results"
+
+msgid ""
+"Check that the SQL uses only SELECT statements and does not query "
+"restricted tables."
+msgstr ""
+"Check that the SQL uses only SELECT statements and does not query "
+"restricted tables."
+
+msgid "No rows returned"
+msgstr "No rows returned"
+
+msgid "The query ran successfully but returned no rows."
+msgstr "The query ran successfully but returned no rows."
+
+msgid "Showing first {{shown}} of {{total}} rows"
+msgstr "Showing first {{shown}} of {{total}} rows"
+
+msgid "Show more rows"
+msgstr "Show more rows"
+
+msgid "View results"
+msgstr "View results"
+
+msgid "Download data"
+msgstr "Download data"
+
+msgid "Query variables"
+msgstr "Query variables"
+
+msgid "An unknown error occurred."
+msgstr "An unknown error occurred."
+
+msgid "Materialized view refreshed."
+msgstr "Materialized view refreshed."
+
+msgid "SQL view created or updated."
+msgstr "SQL view created or updated."
+
+msgid "Current user ID"
+msgstr "Current user ID"
+
+msgid "Current username"
+msgstr "Current username"
+
+msgid "Available variables"
+msgstr "Available variables"
+
+msgid "These tokens are resolved by the server when the query runs."
+msgstr "These tokens are resolved by the server when the query runs."
+
+msgid "Insert at cursor"
+msgstr "Insert at cursor"
+
+msgid ""
+"You can also use custom ${name} placeholders. Their values are requested "
+"when the query is run."
+msgstr ""
+"You can also use custom ${name} placeholders. Their values are requested "
+"when the query is run."
+
+msgid "Respect system setting"
+msgstr "Respect system setting"
+
+msgid "No cache"
+msgstr "No cache"
+
+msgid "Cache for 1 minute"
+msgstr "Cache for 1 minute"
+
+msgid "Cache for 5 minutes"
+msgstr "Cache for 5 minutes"
+
+msgid "Cache for 10 minutes"
+msgstr "Cache for 10 minutes"
+
+msgid "Cache for 15 minutes"
+msgstr "Cache for 15 minutes"
+
+msgid "Cache for 30 minutes"
+msgstr "Cache for 30 minutes"
+
+msgid "Cache for 1 hour"
+msgstr "Cache for 1 hour"
+
+msgid "Cache until 6am tomorrow"
+msgstr "Cache until 6am tomorrow"
+
+msgid "Cache for two weeks"
+msgstr "Cache for two weeks"
+
+msgid ""
+"A standard SQL view. Must be created or updated before results are "
+"available."
+msgstr ""
+"A standard SQL view. Must be created or updated before results are "
+"available."
+
+msgid ""
+"Persisted to disk for faster reads. Must be refreshed to reflect changes in "
+"the underlying tables."
+msgstr ""
+"Persisted to disk for faster reads. Must be refreshed to reflect changes in "
+"the underlying tables."
+
+msgid ""
+"A plain SQL query that runs each time you view results. Supports inline "
+"${variable} placeholders."
+msgstr ""
+"A plain SQL query that runs each time you view results. Supports inline "
+"${variable} placeholders."
+
+msgid "SQL type cannot be changed after creation."
+msgstr "SQL type cannot be changed after creation."
+
+msgid ""
+"Only SELECT statements are allowed. Some sensitive tables, including user "
+"information, cannot be queried."
+msgstr ""
+"Only SELECT statements are allowed. Some sensitive tables, including user "
+"information, cannot be queried."
+
+msgid "Set up how this SQL view is identified and described."
+msgstr "Set up how this SQL view is identified and described."
+
+msgid "Controls how long results are cached on the server before re-execution."
+msgstr "Controls how long results are cached on the server before re-execution."
+
+msgid "SQL definition"
+msgstr "SQL definition"
+
+msgid "Choose the type of SQL view and write the query."
+msgstr "Choose the type of SQL view and write the query."
 
 msgid "SW | Starts with"
 msgstr "SW | Starts with"

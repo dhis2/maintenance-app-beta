@@ -133,6 +133,17 @@ export const modelListViewsConfig = {
             default: ['dataElement', 'dataElementGroupSet'],
         },
     },
+    sqlView: {
+        columns: {
+            default: [
+                DESCRIPTORS.name,
+                { label: i18n.t('SQL type'), path: 'type' },
+                'lastUpdated',
+                DESCRIPTORS.publicAccess,
+            ],
+        },
+        filters: {},
+    },
     dataElementGroupSet: {
         columns: {
             available: [DESCRIPTORS.shortName],

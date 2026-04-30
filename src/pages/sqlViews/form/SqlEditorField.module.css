@@ -1,0 +1,25 @@
+.editorRow {
+    display: flex;
+    align-items: stretch;
+    gap: 12px;
+    max-width: 100%;
+}
+
+.editor {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.editor textarea {
+    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Monaco,
+        'Liberation Mono', 'DejaVu Sans Mono', 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.55;
+    tab-size: 4;
+    -moz-tab-size: 4;
+}
+
+.rightAddon {
+    flex: 0 0 220px;
+    align-self: stretch;
+}
