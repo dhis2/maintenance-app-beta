@@ -13,6 +13,12 @@ type ProgramRuleVariableModel = {
     displayName?: string
 }
 
+const TAGGED_NAME_PATTERN = /^#\{(.+)\}$/
+
+const toTaggedName = (name: string) => `#{${name}}`
+const fromTaggedName = (value: string) =>
+    value.match(TAGGED_NAME_PATTERN)?.[1] ?? value
+
 const PROGRAM_RULE_VARIABLES_QUERY = (programId: string) => ({
     resource: 'programRuleVariables' as const,
     params: {
@@ -59,7 +65,7 @@ export function ProgramRuleVariableField({
     return (
         <Field name="content">
             {({ input, meta }) => {
-                const name = (input.value as string) ?? ''
+                const name = fromTaggedName((input.value as string) ?? '')
                 const selected = name
                     ? available.find((v) => v.name === name) ??
                       ({
@@ -82,7 +88,9 @@ export function ProgramRuleVariableField({
                                 selected={selected}
                                 available={available}
                                 onChange={(value) => {
-                                    input.onChange(value?.name ?? '')
+                                    input.onChange(
+                                        value ? toTaggedName(value.name) : ''
+                                    )
                                     input.onBlur()
                                 }}
                                 clearable
