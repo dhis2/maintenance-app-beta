@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { omit } from 'lodash'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import {
     DefaultFormFooter,
@@ -64,10 +64,15 @@ export const Component = () => {
         queryFn: queryFn<ValidationRuleFormValues>,
     })
 
+    const initialValues = useMemo(
+        () => omit(validationRuleQuery.data, 'id'),
+        [validationRuleQuery.data]
+    )
+
     return (
         <FormBase
             onSubmit={useOnSubmitNew({ section })}
-            initialValues={omit(validationRuleQuery.data, 'id')}
+            initialValues={initialValues}
             validate={validate}
             fetchError={!!validationRuleQuery.error}
         >

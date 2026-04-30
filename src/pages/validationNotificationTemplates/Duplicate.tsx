@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { omit } from 'lodash'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { DuplicationNoticeBox } from '../../components/form/DuplicationNoticeBox'
 import {
@@ -51,15 +51,19 @@ export const Component = () => {
         queryFn: queryFn<ValidationNotificationTemplateFormValues>,
     })
 
+    const initialValues = useMemo(
+        () =>
+            omit(
+                validationNotificationTemplateQuery.data,
+                'id'
+            ) as ValidationNotificationTemplate,
+        [validationNotificationTemplateQuery.data]
+    )
+
     return (
         <SectionedFormWrapper
             onSubmit={useOnSubmitNew({ section })}
-            initialValues={
-                omit(
-                    validationNotificationTemplateQuery.data,
-                    'id'
-                ) as ValidationNotificationTemplate
-            }
+            initialValues={initialValues}
             validate={validate}
             cancelTo={`/${getSectionPath(section)}`}
             fetchError={!!validationNotificationTemplateQuery.error}
