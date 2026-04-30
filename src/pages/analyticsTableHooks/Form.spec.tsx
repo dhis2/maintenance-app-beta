@@ -46,7 +46,13 @@ describe('Analytics table hooks form tests', () => {
             { section, mockSchema },
             (
                 routeOptions,
-                { matchingExistingElementFilter = undefined } = {}
+                {
+                    matchingExistingElementFilter = undefined,
+                    matchingHookOverrides = {},
+                }: {
+                    matchingExistingElementFilter?: string
+                    matchingHookOverrides?: Record<string, unknown>
+                } = {}
             ) => {
                 const screen = render(
                     <TestComponentWithRouter
@@ -66,7 +72,9 @@ describe('Analytics table hooks form tests', () => {
                                         return {
                                             pager: { total: 1 },
                                             analyticsTableHooks: [
-                                                testAnalyticsTableHookForm(),
+                                                testAnalyticsTableHookForm(
+                                                    matchingHookOverrides
+                                                ),
                                             ],
                                         }
                                     }
@@ -224,6 +232,29 @@ describe('Analytics table hooks form tests', () => {
                         }),
                     })
                 )
+            )
+        })
+
+        it('should show an error if phase, target table, and SQL match an existing hook', async () => {
+            const sql = 'SELECT 1'
+            const { screen } = await renderForm({
+                matchingExistingElementFilter: `phase:eq:RESOURCE_TABLE_POPULATED`,
+                matchingHookOverrides: { sql },
+            })
+            await uiActions.enterName(faker.person.firstName(), screen)
+            await uiActions.pickRadioField('phase', 'Resource tables', screen)
+            const resourceTableField = screen.getByTestId(
+                'formfields-resourceTableType'
+            )
+            await uiActions.pickOptionFromSelect(resourceTableField, 0, screen)
+            await uiActions.enterInputFieldValue('sql', sql, screen)
+            await uiActions.submitForm(screen)
+
+            expect(createMock).not.toHaveBeenCalled()
+            uiAssertions.expectFieldToHaveError(
+                'formfields-sql',
+                'An analytics table hook with this phase, target table, and SQL already exists.',
+                screen
             )
         })
 
