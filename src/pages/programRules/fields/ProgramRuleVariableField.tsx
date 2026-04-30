@@ -6,18 +6,13 @@ import { Field } from 'react-final-form'
 import { useDebouncedCallback } from 'use-debounce'
 import { BaseModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/BaseModelSingleSelect'
 import { useBoundResourceQueryFn } from '../../../lib'
+import { fromTaggedName, toTaggedName } from '../programRuleVariableTag'
 
 type ProgramRuleVariableModel = {
     id: string
     name: string
     displayName?: string
 }
-
-const TAGGED_NAME_PATTERN = /^#\{(.+)\}$/
-
-const toTaggedName = (name: string) => `#{${name}}`
-const fromTaggedName = (value: string) =>
-    TAGGED_NAME_PATTERN.exec(value)?.[1] ?? value
 
 const PROGRAM_RULE_VARIABLES_QUERY = (programId: string) => ({
     resource: 'programRuleVariables' as const,
