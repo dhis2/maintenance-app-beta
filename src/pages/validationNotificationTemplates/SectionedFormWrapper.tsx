@@ -79,12 +79,14 @@ export const SectionedFormWrapper = ({
     validate,
     children,
     cancelTo,
+    fetchError,
 }: FormBasePropsModifed<ValidationNotificationTemplateFormValues>) => (
     <FormBase
         onSubmit={onSubmit}
         initialValues={initialValues}
         validate={validate}
         includeAttributes={false}
+        fetchError={fetchError}
     >
         {({ handleSubmit }) => (
             <SectionedFormProvider

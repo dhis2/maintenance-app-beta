@@ -237,6 +237,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Validation rule'),
         titlePlural: i18n.t('Validation rules'),
         parentSectionKey: 'validation',
+        duplicable: true,
     },
     validationRuleGroup: {
         name: SchemaName.validationRuleGroup,
@@ -244,6 +245,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Validation rule group'),
         titlePlural: i18n.t('Validation rule groups'),
         parentSectionKey: 'validation',
+        duplicable: true,
     },
     validationNotificationTemplate: {
         name: SchemaName.validationNotificationTemplate,
@@ -251,6 +253,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Validation notification'),
         titlePlural: i18n.t('Validation notifications'),
         parentSectionKey: 'validation',
+        duplicable: true,
     },
     constant: {
         name: SchemaName.constant,
