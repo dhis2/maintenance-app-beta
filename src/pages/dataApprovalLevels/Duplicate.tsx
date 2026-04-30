@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { omit } from 'lodash'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { FormBase } from '../../components'
 import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormContents'
@@ -42,10 +42,15 @@ export const Component = () => {
         queryFn: queryFn<DataApprovalLevelFormValues>,
     })
 
+    const initialValues = useMemo(
+        () => omit(dataApprovalLevelQuery.data, 'id'),
+        [dataApprovalLevelQuery.data]
+    )
+
     return (
         <FormBase
             onSubmit={useOnSubmitNew({ section })}
-            initialValues={omit(dataApprovalLevelQuery.data, 'id')}
+            initialValues={initialValues}
             validate={validate}
             fetchError={!!dataApprovalLevelQuery.error}
             includeAttributes={false}
