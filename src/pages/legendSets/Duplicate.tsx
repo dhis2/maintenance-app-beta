@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { omit } from 'lodash'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { FormBase } from '../../components'
 import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormContents'
@@ -10,6 +10,7 @@ import {
     SECTIONS_MAP,
     useOnSubmitNew,
 } from '../../lib'
+import { generateDhis2Id } from '../../lib/models/uid'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { LegendSet, PickWithFieldFilters } from '../../types/generated'
 import { LegendSetFormFields } from './form/LegendSetFormFields'
@@ -20,7 +21,7 @@ const fieldFilters = [
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
     'code',
-    'legends[id,name,startValue,endValue,color,legendSet[id]]',
+    'legends[name,startValue,endValue,color,legendSet[id]]',
 ] as const
 
 type LegendSetFormValues = PickWithFieldFilters<LegendSet, typeof fieldFilters>
@@ -44,10 +45,23 @@ export const Component = () => {
         queryFn: queryFn<LegendSetFormValues>,
     })
 
+    const initialValues = useMemo(() => {
+        const originalData = omit(legendSetQuery.data, 'id')
+        return originalData.legends
+            ? {
+                  ...originalData,
+                  legends: originalData.legends.map((legend) => ({
+                      ...(legend as Record<string, unknown>),
+                      id: generateDhis2Id(),
+                  })),
+              }
+            : originalData
+    }, [legendSetQuery.data])
+
     return (
         <FormBase
             onSubmit={useOnSubmitNew({ section })}
-            initialValues={omit(legendSetQuery.data, 'id')}
+            initialValues={initialValues}
             validate={validate}
             fetchError={!!legendSetQuery.error}
         >
