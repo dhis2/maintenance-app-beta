@@ -77,12 +77,14 @@ export const SectionedFormWrapper = ({
     validate,
     children,
     cancelTo,
+    fetchError,
 }: FormBasePropsModifed<Attribute>) => (
     <FormBase
         onSubmit={onSubmit}
         initialValues={initialValues}
         validate={validate}
         includeAttributes={false}
+        fetchError={fetchError}
     >
         {({ handleSubmit }) => (
             <SectionedFormProvider formDescriptor={AttributesFormDescriptor}>
