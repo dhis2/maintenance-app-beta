@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-04-15T07:54:17.109Z\n"
-"PO-Revision-Date: 2026-04-15T07:54:17.109Z\n"
+"POT-Creation-Date: 2026-04-23T07:30:47.003Z\n"
+"PO-Revision-Date: 2026-04-23T07:30:47.003Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -54,9 +54,6 @@ msgstr "New {{modelName}}"
 msgid "Merge {{modelName}}"
 msgstr "Merge {{modelName}}"
 
-msgid "Move organisation units"
-msgstr "Move organisation units"
-
 msgid "Duplicate {{modelName}}"
 msgstr "Duplicate {{modelName}}"
 
@@ -77,9 +74,6 @@ msgstr "No menu items found for"
 
 msgid "Overview"
 msgstr "Overview"
-
-msgid "Hierarchy operations"
-msgstr "Hierarchy operations"
 
 msgid "Search menu items"
 msgstr "Search menu items"
@@ -1208,9 +1202,6 @@ msgstr "{{number}} selected"
 msgid "Merge..."
 msgstr "Merge..."
 
-msgid "Move..."
-msgstr "Move..."
-
 msgid "Choose a Locale to translate from the menu above"
 msgstr "Choose a Locale to translate from the menu above"
 
@@ -1904,6 +1895,78 @@ msgstr "On complete"
 msgid "On update and insert"
 msgstr "On update and insert"
 
+msgid "Resource tables"
+msgstr "Resource tables"
+
+msgid "Analytics tables"
+msgstr "Analytics tables"
+
+msgid "Data value"
+msgstr "Data value"
+
+msgid "Completeness"
+msgstr "Completeness"
+
+msgid "Completeness target"
+msgstr "Completeness target"
+
+msgid "Organisation unit target"
+msgstr "Organisation unit target"
+
+msgid "Validation result"
+msgstr "Validation result"
+
+msgid "Ownership"
+msgstr "Ownership"
+
+msgid "Tracked entity instance events"
+msgstr "Tracked entity instance events"
+
+msgid "Tracked entity instance enrollments"
+msgstr "Tracked entity instance enrollments"
+
+msgid "Organisation unit structure"
+msgstr "Organisation unit structure"
+
+msgid "Data set organisation unit category"
+msgstr "Data set organisation unit category"
+
+msgid "Category option combo name"
+msgstr "Category option combo name"
+
+msgid "Data element group set structure"
+msgstr "Data element group set structure"
+
+msgid "Indicator group set structure"
+msgstr "Indicator group set structure"
+
+msgid "Organisation unit group set structure"
+msgstr "Organisation unit group set structure"
+
+msgid "Category structure"
+msgstr "Category structure"
+
+msgid "Data element structure"
+msgstr "Data element structure"
+
+msgid "Period structure"
+msgstr "Period structure"
+
+msgid "Date period structure"
+msgstr "Date period structure"
+
+msgid "Data element category option combo"
+msgstr "Data element category option combo"
+
+msgid "Data approval remap level"
+msgstr "Data approval remap level"
+
+msgid "Data approval min level"
+msgstr "Data approval min level"
+
+msgid "Tracked entity instance relationship count"
+msgstr "Tracked entity instance relationship count"
+
 msgid "Data element in newest event in program stage"
 msgstr "Data element in newest event in program stage"
 
@@ -1933,6 +1996,9 @@ msgstr "Attribute category combination"
 
 msgid "Analytics type"
 msgstr "Analytics type"
+
+msgid "Analytics table type"
+msgstr "Analytics table type"
 
 msgid "Bidirectional"
 msgstr "Bidirectional"
@@ -1979,6 +2045,9 @@ msgstr "Relationship name seen from initiating entity"
 msgid "Ignore data approval"
 msgstr "Ignore data approval"
 
+msgid "Phase"
+msgstr "Phase"
+
 msgid "Source type"
 msgstr "Source type"
 
@@ -1993,6 +2062,12 @@ msgstr "Referral"
 
 msgid "Sharing"
 msgstr "Sharing"
+
+msgid "SQL"
+msgstr "SQL"
+
+msgid "Resource table type"
+msgstr "Resource table type"
 
 msgid "Relationship name seen from receiving entity"
 msgstr "Relationship name seen from receiving entity"
@@ -2072,8 +2147,8 @@ msgstr "Event label (Plural)"
 msgid "Program stage label (Plural)"
 msgstr "Program stage label (Plural)"
 
-msgid "Names"
-msgstr "Names"
+msgid "Name (Plural)"
+msgstr "Name (Plural)"
 
 msgid "Unknown error"
 msgstr "Unknown error"
@@ -2336,8 +2411,17 @@ msgstr "Sequential skip count"
 msgid "Organisation unit providing data"
 msgstr "Organisation unit providing data"
 
+msgid "Which resource table"
+msgstr "Which resource table"
+
+msgid "Which analytics table"
+msgstr "Which analytics table"
+
 msgid "Basic information"
 msgstr "Basic information"
+
+msgid "Set up the basic information for this analytics table hook."
+msgstr "Set up the basic information for this analytics table hook."
 
 msgid "Data and options"
 msgstr "Data and options"
@@ -2626,6 +2710,9 @@ msgstr "The numeric value to be used as the constant."
 msgid "Please enter a number"
 msgstr "Please enter a number"
 
+msgid "Configuration"
+msgstr "Configuration"
+
 msgid "Available data element groups"
 msgstr "Available data element groups"
 
@@ -2880,9 +2967,6 @@ msgstr "Subject"
 
 msgid "Used as template for the message field."
 msgstr "Used as template for the message field."
-
-msgid "{{fieldLabel}} (required)"
-msgstr "{{fieldLabel}} (required)"
 
 msgid "Message"
 msgstr "Message"
@@ -3536,14 +3620,74 @@ msgstr "No indicators available. Remove one from source."
 msgid "What should happen to the source indicators after the merge is complete?"
 msgstr "What should happen to the source indicators after the merge is complete?"
 
+msgid "Set up the basic information for this legend."
+msgstr "Set up the basic information for this legend."
+
+msgid "Legend items"
+msgstr "Legend items"
+
+msgid "Create legend items to define value ranges and associated colors."
+msgstr "Create legend items to define value ranges and associated colors."
+
+msgid "End value must be greater than start value"
+msgstr "End value must be greater than start value"
+
+msgid "Legend items must not overlap"
+msgstr "Legend items must not overlap"
+
+msgid "Legend items must not have gaps"
+msgstr "Legend items must not have gaps"
+
+msgid "Name is required"
+msgstr "Name is required"
+
+msgid "Must be greater than start value"
+msgstr "Must be greater than start value"
+
+msgid "Add legend item"
+msgstr "Add legend item"
+
+msgid "Edit legend item"
+msgstr "Edit legend item"
+
+msgid "Start value"
+msgstr "Start value"
+
+msgid "End value"
+msgstr "End value"
+
+msgid "Add"
+msgstr "Add"
+
+msgid "Number of legend items"
+msgstr "Number of legend items"
+
+msgid "Color scale"
+msgstr "Color scale"
+
+msgid "Create legend items"
+msgstr "Create legend items"
+
+msgid "Replace existing items?"
+msgstr "Replace existing items?"
+
+msgid "This will replace all existing legend items."
+msgstr "This will replace all existing legend items."
+
+msgid "Proceed"
+msgstr "Proceed"
+
+msgid "No legend items yet. Add items manually or use the generator above."
+msgstr "No legend items yet. Add items manually or use the generator above."
+
 msgid "Exit without saving"
 msgstr "Exit without saving"
 
 msgid "Create {{modelName}} "
 msgstr "Create {{modelName}} "
 
-msgid "Country (required)"
-msgstr "Country (required)"
+msgid "Country"
+msgstr "Country"
 
 msgid "Failed to load countries"
 msgstr "Failed to load countries"
@@ -3551,8 +3695,8 @@ msgstr "Failed to load countries"
 msgid "Select a country"
 msgstr "Select a country"
 
-msgid "Language (required)"
-msgstr "Language (required)"
+msgid "Language"
+msgstr "Language"
 
 msgid "Failed to load languages"
 msgstr "Failed to load languages"
@@ -3628,9 +3772,6 @@ msgstr "Save option"
 
 msgid "Saving an option does not save other changes to the option set"
 msgstr "Saving an option does not save other changes to the option set"
-
-msgid "Code is already in use"
-msgstr "Code is already in use"
 
 msgid "Option created"
 msgstr "Option created"
@@ -3730,18 +3871,6 @@ msgstr "Choose the organisation units to include in this group."
 
 msgid "Error saving organisation unit levels"
 msgstr "Error saving organisation unit levels"
-
-msgid ""
-"Select the organisation units you want to move on the left, and choose the "
-"new parent on the right. The moved units and all their descendants will be "
-"relocated in the hierarchy."
-msgstr ""
-"Select the organisation units you want to move on the left, and choose the "
-"new parent on the right. The moved units and all their descendants will be "
-"relocated in the hierarchy."
-
-msgid "Move"
-msgstr "Move"
 
 msgid "Longitude"
 msgstr "Longitude"
@@ -3863,18 +3992,6 @@ msgstr "No organisation units available"
 
 msgid "Load more for {{orgUnitName}}"
 msgstr "Load more for {{orgUnitName}}"
-
-msgid "Organisation units to move (source)"
-msgstr "Organisation units to move (source)"
-
-msgid "Move into (target)"
-msgstr "Move into (target)"
-
-msgid "Summary"
-msgstr "Summary"
-
-msgid "Select one or more organisation units on the left to move."
-msgstr "Select one or more organisation units on the left to move."
 
 msgid "Metadata management"
 msgstr "Metadata management"
@@ -4296,12 +4413,6 @@ msgstr "Configure how this predictor is calculated."
 msgid "Organisation units providing data"
 msgstr "Organisation units providing data"
 
-msgid "Sequential sample count (required)"
-msgstr "Sequential sample count (required)"
-
-msgid "Annual sample count (required)"
-msgstr "Annual sample count (required)"
-
 msgid "generator"
 msgstr "generator"
 
@@ -4562,9 +4673,6 @@ msgstr "Organisation unit field"
 msgid "Set up the basic information for this program indicator."
 msgstr "Set up the basic information for this program indicator."
 
-msgid "Configuration"
-msgstr "Configuration"
-
 msgid "Choose the program and data types this program indicator applies to."
 msgstr "Choose the program and data types this program indicator applies to."
 
@@ -4626,17 +4734,11 @@ msgstr "Please enter a maximum of {{max}} characters"
 msgid "A variable with this name already exists in this program."
 msgstr "A variable with this name already exists in this program."
 
-msgid "Source type (required)"
-msgstr "Source type (required)"
-
 msgid "Set up the basic information for this program rule variable."
 msgstr "Set up the basic information for this program rule variable."
 
 msgid "Configure how this variable works."
 msgstr "Configure how this variable works."
-
-msgid "Program (required)"
-msgstr "Program (required)"
 
 msgid "Program cannot be changed after creation"
 msgstr "Program cannot be changed after creation"
@@ -4660,8 +4762,8 @@ msgstr "Set up condition expression"
 msgid "Expression can not be edited after saving"
 msgstr "Expression can not be edited after saving"
 
-msgid "Expression (required) *"
-msgstr "Expression (required) *"
+msgid "Expression *"
+msgstr "Expression *"
 
 msgid "Feedback widget"
 msgstr "Feedback widget"
@@ -4669,17 +4771,18 @@ msgstr "Feedback widget"
 msgid "Program indicator widget"
 msgstr "Program indicator widget"
 
-msgid "Display widget (required)"
-msgstr "Display widget (required)"
+msgid "Display widget"
+msgstr "Display widget"
 
 msgid "Message template can not be edited after saving"
 msgstr "Message template can not be edited after saving"
 
-msgid "Message template (required)"
-msgstr "Message template (required)"
-
-msgid "Can be 0 or negative. Leave empty if not needed."
-msgstr "Can be 0 or negative. Leave empty if not needed."
+msgid ""
+"Enter a number to set run order. Lower numbers run first. Leave empty to "
+"use the default order."
+msgstr ""
+"Enter a number to set run order. Lower numbers run first. Leave empty to "
+"use the default order."
 
 msgid "Program rule variable to assign to"
 msgstr "Program rule variable to assign to"
@@ -4689,9 +4792,6 @@ msgstr "Program stage to trigger rule"
 
 msgid "Select a specific program stage that the rule should only trigger on."
 msgstr "Select a specific program stage that the rule should only trigger on."
-
-msgid "Program stage section to hide (required)"
-msgstr "Program stage section to hide (required)"
 
 msgid "Program stage section to hide"
 msgstr "Program stage section to hide"
@@ -4726,8 +4826,8 @@ msgstr "Configure the program rule action."
 msgid "This program rule action will not be editable after saving."
 msgstr "This program rule action will not be editable after saving."
 
-msgid "Action type (required)"
-msgstr "Action type (required)"
+msgid "Action type"
+msgstr "Action type"
 
 msgid "Save action"
 msgstr "Save action"
@@ -4958,9 +5058,6 @@ msgstr "Unknown action type"
 
 msgid "Program Rule"
 msgstr "Program Rule"
-
-msgid "Name (required)"
-msgstr "Name (required)"
 
 msgid "Program stages to trigger rule"
 msgstr "Program stages to trigger rule"
@@ -5331,9 +5428,6 @@ msgstr "Saving a stage does not save other changes to the program"
 msgid "Stage form saved"
 msgstr "Stage form saved"
 
-msgid "A stage with this name already exists. Please choose another name."
-msgstr "A stage with this name already exists. Please choose another name."
-
 msgid "Configure the basic information for this program stage."
 msgstr "Configure the basic information for this program stage."
 
@@ -5552,6 +5646,9 @@ msgstr ""
 "Displays a form with attributes in the order they were added to the "
 "enrollment"
 
+msgid "Mandatory tracked entity attributes are not included in this form."
+msgstr "Mandatory tracked entity attributes are not included in this form."
+
 msgid "Enrollment: Settings"
 msgstr "Enrollment: Settings"
 
@@ -5714,9 +5811,6 @@ msgstr "Initiating side constraint"
 
 msgid "Receiving side constraint"
 msgstr "Receiving side constraint"
-
-msgid "Name is required"
-msgstr "Name is required"
 
 msgid "Relationship name seen from initiating entity is required"
 msgstr "Relationship name seen from initiating entity is required"

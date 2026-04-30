@@ -9,7 +9,6 @@ import {
     randomLongString,
     testCategory,
     testCategoryComboForm,
-    testCustomAttribute,
 } from '../../testUtils/builders'
 import { generateRenderer } from '../../testUtils/generateRenderer'
 import TestComponentWithRouter from '../../testUtils/TestComponentWithRouter'
@@ -50,14 +49,12 @@ describe('Category combos form tests', () => {
                 routeOptions,
                 { matchingExistingElementFilter = undefined } = {}
             ) => {
-                const attributes = [testCustomAttribute({ mandatory: false })]
                 const categories = [testCategory(), testCategory()]
 
                 const screen = render(
                     <TestComponentWithRouter
                         path={`/${section.namePlural}`}
                         customData={{
-                            attributes: () => ({ attributes }),
                             categories: () => ({ categories, pager: {} }),
                             categoryCombos: (type: any, params: any) => {
                                 if (type === 'create') {
@@ -169,7 +166,6 @@ describe('Category combos form tests', () => {
                 routeOptions,
                 { matchingExistingElementFilter = undefined } = {}
             ) => {
-                const attributes = [testCustomAttribute({ mandatory: false })]
                 const categories = [
                     testCategory({ categoryOptionsSize: 3 }),
                     testCategory({ categoryOptionsSize: 5 }),
@@ -180,7 +176,6 @@ describe('Category combos form tests', () => {
                     <TestComponentWithRouter
                         path={`/${section.namePlural}`}
                         customData={{
-                            attributes: () => ({ attributes }),
                             categories: () => ({
                                 categories,
                                 pager: {},
@@ -292,7 +287,6 @@ describe('Category combos form tests', () => {
                     matchingExistingElementFilter = undefined,
                 } = {}
             ) => {
-                const attributes = [testCustomAttribute({ mandatory: false })]
                 const categories = [testCategory(), testCategory()]
                 const categoryCombo = testCategoryComboForm({
                     id: id,
@@ -313,7 +307,6 @@ describe('Category combos form tests', () => {
                         path={`/${section.namePlural}/:id`}
                         initialEntries={[`/${section.namePlural}/${id}`]}
                         customData={{
-                            attributes: () => ({ attributes }),
                             categories: () => ({
                                 categories,
                                 pager: {},
