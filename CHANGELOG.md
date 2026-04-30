@@ -1,3 +1,13 @@
+## [0.151.5](https://github.com/dhis2/metadata-management-app/compare/v0.151.4...v0.151.5) (2026-04-30)
+
+
+### Bug Fixes
+
+* update category combo form test ([#901](https://github.com/dhis2/metadata-management-app/issues/901)) ([9732ab9](https://github.com/dhis2/metadata-management-app/commit/9732ab939d5409067e58e9bb43e9b407f7380adc))
+* update category combo schema ([cef072e](https://github.com/dhis2/metadata-management-app/commit/cef072eed90521ec3068b9224005ceda4d31c37d))
+* update category combo test ([#905](https://github.com/dhis2/metadata-management-app/issues/905)) ([cdc3cba](https://github.com/dhis2/metadata-management-app/commit/cdc3cbaeadbb194c0b97eef88c1ef47cb503dce4))
+* update workflow node versions ([#902](https://github.com/dhis2/metadata-management-app/issues/902)) ([0c36a9f](https://github.com/dhis2/metadata-management-app/commit/0c36a9fdb072b329e2db1ce1bf20ad0a705c6e4e))
+
 ## [0.151.4](https://github.com/dhis2/metadata-management-app/compare/v0.151.3...v0.151.4) (2026-04-28)
 
 
