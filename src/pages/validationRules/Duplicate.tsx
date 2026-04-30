@@ -9,6 +9,7 @@ import {
     SectionedFormErrorNotice,
     SectionedFormLayout,
 } from '../../components'
+import { DuplicationNoticeBox } from '../../components/form/DuplicationNoticeBox'
 import {
     ATTRIBUTE_VALUES_FIELD_FILTERS,
     DEFAULT_FIELD_FILTERS,
@@ -78,6 +79,7 @@ export const Component = () => {
                         sidebar={<DefaultSectionedFormSidebar />}
                     >
                         <form onSubmit={handleSubmit}>
+                            <DuplicationNoticeBox section={section} />
                             <ValidationRuleFormFields />
                             <DefaultFormFooter cancelTo="/validationRules" />
                         </form>

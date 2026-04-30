@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { omit } from 'lodash'
 import React from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { DuplicationNoticeBox } from '../../components/form/DuplicationNoticeBox'
 import {
     DEFAULT_FIELD_FILTERS,
     SECTIONS_MAP,
@@ -63,7 +64,10 @@ export const Component = () => {
             cancelTo={`/${getSectionPath(section)}`}
             fetchError={!!validationNotificationTemplateQuery.error}
         >
-            <ValidationNotificationTemplateFormFields />
+            <>
+                <DuplicationNoticeBox section={section} />
+                <ValidationNotificationTemplateFormFields />
+            </>
         </SectionedFormWrapper>
     )
 }
