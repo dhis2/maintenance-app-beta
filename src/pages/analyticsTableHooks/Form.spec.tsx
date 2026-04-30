@@ -253,7 +253,7 @@ describe('Analytics table hooks form tests', () => {
             expect(createMock).not.toHaveBeenCalled()
             uiAssertions.expectFieldToHaveError(
                 'formfields-sql',
-                'An analytics table hook with this phase, target table, and SQL already exists.',
+                'An analytics table hook with this table and SQL already exists.',
                 screen
             )
         })

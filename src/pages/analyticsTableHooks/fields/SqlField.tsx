@@ -26,8 +26,9 @@ export function SqlField() {
 
     const validate = useCallback(
         async (sql?: string, allValues?: FormValues) => {
+            const trimmedSql = sql?.trim()
             const phase = allValues?.phase
-            if (!sql || !phase) {
+            if (!trimmedSql || !phase) {
                 return undefined
             }
 
@@ -55,7 +56,7 @@ export function SqlField() {
             })) as WrapQueryResponse<{ analyticsTableHooks: ExistingHook[] }>
 
             const hits = response.result.analyticsTableHooks ?? []
-            return hits.some((hook) => hook.sql === sql)
+            return hits.some((hook) => hook.sql?.trim() === trimmedSql)
                 ? i18n.t(
                       'An analytics table hook with this table and SQL already exists.'
                   )
