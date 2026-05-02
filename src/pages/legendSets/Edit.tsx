@@ -3,60 +3,56 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { DefaultEditFormContents, FormBase } from '../../components'
 import {
-    ATTRIBUTE_VALUES_FIELD_FILTERS,
     DEFAULT_FIELD_FILTERS,
+    ATTRIBUTE_VALUES_FIELD_FILTERS,
     SECTIONS_MAP,
     useOnSubmitEdit,
 } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import {
-    PickWithFieldFilters,
-    ValidationRuleGroup,
-} from '../../types/generated'
-import { ValidationRuleGroupsFormFields } from './form/ValidationRuleGroupsFormFields'
-import { validate } from './form/validationRuleGroupsSchema'
+import { LegendSet, PickWithFieldFilters } from '../../types/generated'
+import { LegendSetFormFields } from './form/LegendSetFormFields'
+import { validate } from './form/legendSetSchema'
 
-const fieldFilters = [
-    ...ATTRIBUTE_VALUES_FIELD_FILTERS,
+export const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
+    ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
     'code',
-    'description',
-    'validationRules[id,displayName]',
+    'legends[id,name,startValue,endValue,color,legendSet[id]]',
 ] as const
 
-export type ValidationRuleGroupFormValues = PickWithFieldFilters<
-    ValidationRuleGroup,
+type LegendSetEditFormValues = PickWithFieldFilters<
+    LegendSet,
     typeof fieldFilters
-> & { id: string }
+>
+
+const section = SECTIONS_MAP.legendSet
 
 export const Component = () => {
-    const modelId = useParams().id as string
-    const section = SECTIONS_MAP.validationRuleGroup
     const queryFn = useBoundResourceQueryFn()
+    const modelId = useParams().id as string
 
     const query = {
-        resource: 'validationRuleGroups',
+        resource: 'legendSets',
         id: modelId,
         params: {
             fields: fieldFilters.concat(),
         },
     }
 
-    const validationRuleGroupQuery = useQuery({
+    const legendSetQuery = useQuery({
         queryKey: [query],
-        queryFn: queryFn<ValidationRuleGroupFormValues>,
+        queryFn: queryFn<LegendSetEditFormValues>,
     })
-    const initialValues = validationRuleGroupQuery.data
 
     return (
         <FormBase
             onSubmit={useOnSubmitEdit({ section, modelId })}
-            initialValues={initialValues}
+            initialValues={legendSetQuery.data}
             validate={validate}
         >
             <DefaultEditFormContents section={section}>
-                <ValidationRuleGroupsFormFields />
+                <LegendSetFormFields />
             </DefaultEditFormContents>
         </FormBase>
     )

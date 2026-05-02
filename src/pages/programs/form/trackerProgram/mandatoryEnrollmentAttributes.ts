@@ -37,8 +37,12 @@ export const getMandatoryAttributesMissingFromSections = (
 
     return mandatoryAttributes.filter(
         (attribute) =>
+<<<<<<< HEAD
             !assignedAttributeIds.has(
                 attribute.trackedEntityAttribute?.id ?? ''
             )
+=======
+            !assignedAttributeIds.has(attribute.trackedEntityAttribute.id)
+>>>>>>> 9b8bb46cfca2c399b51a9fb3aa8256fd34ca8a50
     )
 }

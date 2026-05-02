@@ -68,6 +68,10 @@ const renderList = async ({
                         return { statusCode: 204 }
                     }
                 },
+                organisationUnitGroups: {
+                    organisationUnitGroups: [],
+                    pager: { page: 1, pageCount: 0, total: 0 },
+                },
                 userDataStore,
             }}
             routeOptions={routeOptions}
@@ -161,36 +165,21 @@ describe('Organisation unit list', () => {
             getRelativeTime(new Date(root1Level2Child1.lastUpdated!))
         )
 
-        let rowsAfterLoad = tableRows
-        if (tableRows[3].textContent?.includes('Load more for Root1')) {
-            await userEvent.click(tableRows[3])
-            await waitFor(() =>
-                expect(
-                    screen.getByText(root1Level2Child2.displayName!)
-                ).toBeInTheDocument()
-            )
-            rowsAfterLoad = screen.getAllByTestId('dhis2-uicore-datatablerow')
-        }
-
-        expect(rowsAfterLoad[3]).toHaveTextContent(
-            root1Level2Child2.displayName!
-        )
-        expect(rowsAfterLoad[3]).toHaveTextContent(root1Level2Child2.code!)
-        expect(rowsAfterLoad[3]).toHaveTextContent(
+        expect(tableRows[3]).toHaveTextContent(root1Level2Child2.displayName!)
+        expect(tableRows[3]).toHaveTextContent(root1Level2Child2.code!)
+        expect(tableRows[3]).toHaveTextContent(
             getRelativeTime(new Date(root1Level2Child2.lastUpdated!))
         )
 
-        expect(rowsAfterLoad[4]).toHaveTextContent(rootOrg2.displayName!)
-        expect(rowsAfterLoad[4]).toHaveTextContent(rootOrg2.code!)
-        expect(rowsAfterLoad[4]).toHaveTextContent(
+        expect(tableRows[4]).toHaveTextContent(rootOrg2.displayName!)
+        expect(tableRows[4]).toHaveTextContent(rootOrg2.code!)
+        expect(tableRows[4]).toHaveTextContent(
             getRelativeTime(new Date(rootOrg2.lastUpdated!))
         )
 
-        expect(rowsAfterLoad[5]).toHaveTextContent(
-            root2Level3Child.displayName!
-        )
-        expect(rowsAfterLoad[5]).toHaveTextContent(root2Level3Child.code!)
-        expect(rowsAfterLoad[5]).toHaveTextContent(
+        expect(tableRows[5]).toHaveTextContent(root2Level3Child.displayName!)
+        expect(tableRows[5]).toHaveTextContent(root2Level3Child.code!)
+        expect(tableRows[5]).toHaveTextContent(
             getRelativeTime(new Date(root2Level3Child.lastUpdated!))
         )
     })

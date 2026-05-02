@@ -221,18 +221,31 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
                                 <NoticeBox
                                     warning
                                     className={styles.sectionWarningNotice}
+<<<<<<< HEAD
                                     title={i18n.t(
                                         'Mandatory tracked entity attributes are not included in this form.'
                                     )}
                                 >
+=======
+                                >
+                                    <div className={styles.sectionWarningTitle}>
+                                        {i18n.t(
+                                            'Mandatory tracked entity attributes are not included in this form.'
+                                        )}
+                                    </div>
+>>>>>>> 9b8bb46cfca2c399b51a9fb3aa8256fd34ca8a50
                                     <div
                                         className={
                                             styles.sectionWarningDescription
                                         }
                                     >
                                         {i18n.t(
+<<<<<<< HEAD
                                             'The following attributes are marked as required but not assigned to any section:',
                                             { nsSeparator: '~:~' }
+=======
+                                            'The following attributes are marked as required but not assigned to any section:'
+>>>>>>> 9b8bb46cfca2c399b51a9fb3aa8256fd34ca8a50
                                         )}
                                     </div>
                                     <ul className={styles.sectionWarningList}>
@@ -242,13 +255,21 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
                                                     key={
                                                         attribute
                                                             .trackedEntityAttribute
+<<<<<<< HEAD
                                                             ?.id
+=======
+                                                            .id
+>>>>>>> 9b8bb46cfca2c399b51a9fb3aa8256fd34ca8a50
                                                     }
                                                 >
                                                     {
                                                         attribute
                                                             .trackedEntityAttribute
+<<<<<<< HEAD
                                                             ?.displayName
+=======
+                                                            .displayName
+>>>>>>> 9b8bb46cfca2c399b51a9fb3aa8256fd34ca8a50
                                                     }
                                                 </li>
                                             )
