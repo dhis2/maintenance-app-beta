@@ -23,17 +23,3 @@
     margin-top: var(--spacers-dp12);
     max-width: 720px;
 }
-
-.sectionWarningTitle {
-    font-weight: 500;
-    margin-bottom: var(--spacers-dp8);
-}
-
-.sectionWarningDescription {
-    margin-bottom: var(--spacers-dp8);
-}
-
-.sectionWarningList {
-    margin: 0;
-    padding-left: var(--spacers-dp16);
-}
