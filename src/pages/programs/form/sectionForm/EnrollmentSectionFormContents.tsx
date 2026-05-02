@@ -24,6 +24,9 @@ import {
 import { BaseModelTransfer } from '../../../../components/metadataFormControls/ModelTransfer/BaseModelTransfer'
 import { useBoundResourceQueryFn } from '../../../../lib'
 import { DisplayableModel } from '../../../../types/models'
+import { MandatoryAttributesWarning } from '../trackerProgram/MandatoryAttributesWarning'
+import { getMandatoryAttributesMissingFromSections } from '../trackerProgram/mandatoryEnrollmentAttributes'
+import styles from './EnrollmentSectionFormContents.module.css'
 import {
     enrollmentSectionSchemaSection,
     SectionFormValues,
@@ -51,6 +54,7 @@ const displayOptions = [
 export type ProgramAttributesType = {
     programTrackedEntityAttributes: {
         trackedEntityAttribute: DisplayableModel
+        mandatory: boolean
     }[]
     programSections: { trackedEntityAttributes: { id: string }[]; id: string }[]
 }
@@ -64,7 +68,7 @@ export const EnrollmentSectionFormContents = ({
     })
 
     const { input: attributesInput, meta: attributesMeta } = useField<
-        (DisplayableModel & { categoryCombo: { id: string } })[]
+        DisplayableModel[]
     >('trackedEntityAttributes', {
         multiple: true,
         validateFields: [],
@@ -79,7 +83,7 @@ export const EnrollmentSectionFormContents = ({
                 id: values.program.id,
                 params: {
                     fields: [
-                        'programTrackedEntityAttributes[trackedEntityAttribute[id,displayName]]',
+                        'programTrackedEntityAttributes[trackedEntityAttribute[id,displayName],mandatory]',
                         'programSections[trackedEntityAttributes, id]',
                     ].concat(),
                 },
@@ -91,16 +95,34 @@ export const EnrollmentSectionFormContents = ({
         if (!data?.programSections || !data?.programTrackedEntityAttributes) {
             return []
         }
-        const otherSectionsAttributes = data.programSections
-            .filter((section) => section.id !== values.id)
-            .flatMap((section) =>
-                section.trackedEntityAttributes?.map((tea) => tea.id)
-            )
+        const otherSectionsAttributeIds = new Set(
+            data.programSections
+                .filter((section) => section.id !== values.id)
+                .flatMap((section) =>
+                    section.trackedEntityAttributes?.map((tea) => tea.id)
+                )
+        )
 
         return data.programTrackedEntityAttributes
             .map((tea) => tea.trackedEntityAttribute)
-            .filter((tea) => !otherSectionsAttributes.includes(tea.id))
+            .filter((tea) => !otherSectionsAttributeIds.has(tea.id))
     }, [data, values.id])
+
+    const missingMandatoryAttributes = useMemo(() => {
+        const otherSections = (data?.programSections ?? []).filter(
+            (s) => s.id !== values.id
+        )
+        const currentSection = {
+            trackedEntityAttributes: attributesInput.value.map((a) => ({
+                id: a.id,
+            })),
+        }
+        return getMandatoryAttributesMissingFromSections({
+            programTrackedEntityAttributes:
+                data?.programTrackedEntityAttributes,
+            programSections: [...otherSections, currentSection],
+        })
+    }, [data, values.id, attributesInput.value])
 
     const formContent = (
         <div>
@@ -164,6 +186,12 @@ export const EnrollmentSectionFormContents = ({
                             'Choose what data is collected for this section.'
                         )}
                     </StandardFormSectionDescription>
+                    <div className={styles.notice}>
+                        <MandatoryAttributesWarning
+                            missingAttributes={missingMandatoryAttributes}
+                            className={styles.mandatoryWarningNotice}
+                        />{' '}
+                    </div>
                     <StandardFormField>
                         <Field
                             error={attributesMeta.invalid}
@@ -233,9 +261,6 @@ export const EnrollmentSectionFormContents = ({
                     submitting={submitting ?? false}
                     onSubmitClick={() => form.submit()}
                     onCancelClick={onCancel}
-                    infoMessage={i18n.t(
-                        'Saving a section does not save other changes to the program'
-                    )}
                 />
             }
         >

@@ -1,42 +1,37 @@
-import { ProgramValues } from '../../EditTrackerProgram'
+type ProgramTEA = {
+    mandatory: boolean
+    trackedEntityAttribute: { id: string; displayName: string }
+}
 
-type SectionWithAttributes = ProgramValues['programSections'][number] & {
+type ProgramSection = {
+    id?: string
     deleted?: boolean
     trackedEntityAttributes?: Array<{ id: string }>
 }
 
-export const getMandatoryAttributesMissingFromSections = (
-    values: Pick<
-        ProgramValues,
-        'programTrackedEntityAttributes' | 'programSections'
-    >
-) => {
-    const mandatoryAttributes = (
-        values.programTrackedEntityAttributes ?? []
-    ).filter((attribute) => attribute.mandatory)
-
+export const getMandatoryAttributesMissingFromSections = ({
+    programTrackedEntityAttributes = [],
+    programSections = [],
+}: {
+    programTrackedEntityAttributes?: ProgramTEA[]
+    programSections?: ProgramSection[]
+}): ProgramTEA[] => {
+    const mandatoryAttributes = programTrackedEntityAttributes.filter(
+        (attr) => attr.mandatory
+    )
     if (mandatoryAttributes.length === 0) {
         return []
     }
 
-    const sections: SectionWithAttributes[] = Array.isArray(
-        values.programSections
-    )
-        ? (values.programSections as SectionWithAttributes[])
-        : []
-
     const assignedAttributeIds = new Set(
-        sections
+        programSections
             .filter((section) => !section.deleted)
             .flatMap((section) =>
-                (section.trackedEntityAttributes ?? []).map(
-                    (attribute) => attribute.id
-                )
+                (section.trackedEntityAttributes ?? []).map((attr) => attr.id)
             )
     )
 
     return mandatoryAttributes.filter(
-        (attribute) =>
-            !assignedAttributeIds.has(attribute.trackedEntityAttribute.id)
+        (attr) => !assignedAttributeIds.has(attr.trackedEntityAttribute.id)
     )
 }
