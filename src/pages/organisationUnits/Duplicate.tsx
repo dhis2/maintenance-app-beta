@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { omit } from 'lodash'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { FormBase } from '../../components'
 import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormContents'
@@ -53,10 +53,15 @@ export const Component = () => {
         queryKey: [query],
         queryFn: queryFn<OrgUnitFormValues>,
     })
+    const initialValues = useMemo(
+        () => omit(orgUnit.data, 'id'),
+        [orgUnit.data]
+    )
+
     return (
         <FormBase
             onSubmit={onSubmit}
-            initialValues={omit(orgUnit.data, 'id')}
+            initialValues={initialValues}
             validate={validate}
             fetchError={!!orgUnit.error}
         >

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { omit } from 'lodash'
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useForm } from 'react-final-form'
 import { useSearchParams } from 'react-router-dom'
 import {
@@ -75,10 +75,15 @@ export const Component = () => {
         queryFn: queryFn<IndicatorFormValues>,
     })
 
+    const initialValues = useMemo(
+        () => omit(indicatorQuery.data, 'id'),
+        [indicatorQuery.data]
+    )
+
     return (
         <FormBase
             onSubmit={useOnSubmitNew({ section })}
-            initialValues={omit(indicatorQuery.data, 'id')}
+            initialValues={initialValues}
             validate={validate}
             subscription={{}}
             fetchError={!!indicatorQuery.error}

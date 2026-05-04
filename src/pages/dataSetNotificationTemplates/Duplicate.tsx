@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { omit } from 'lodash'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import {
     DefaultFormFooter,
@@ -60,8 +60,10 @@ export const Component = () => {
         enabled: !!duplicatedModelId,
     })
 
-    const initialValues: Partial<DataSetNotificationResult> | undefined =
-        template ? omit(template, 'id') : undefined
+    const initialValues = useMemo(
+        () => (template ? omit(template, 'id') : undefined),
+        [template]
+    )
 
     return (
         <FormBase

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { omit } from 'lodash'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { FormBase } from '../../components'
 import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormContents'
@@ -45,10 +45,15 @@ export const Component = () => {
         queryFn: queryFn<IndicatorGroupSetFormValues>,
     })
 
+    const initialValues = useMemo(
+        () => omit(indicatorGroupSetQuery.data, 'id'),
+        [indicatorGroupSetQuery.data]
+    )
+
     return (
         <FormBase
             onSubmit={useOnSubmitNew({ section })}
-            initialValues={omit(indicatorGroupSetQuery.data, 'id')}
+            initialValues={initialValues}
             validate={validate}
             includeAttributes={false}
             fetchError={!!indicatorGroupSetQuery.error}

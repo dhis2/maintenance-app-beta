@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { omit } from 'lodash'
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useForm } from 'react-final-form'
 import { useSearchParams } from 'react-router-dom'
 import {
@@ -49,10 +49,15 @@ export const Component = () => {
         ] as const,
     })
 
+    const initialValues = useMemo(
+        () => omit(programIndicators.data, 'id'),
+        [programIndicators.data]
+    )
+
     return (
         <FormBase
             onSubmit={useOnSubmitNew({ section })}
-            initialValues={omit(programIndicators.data, 'id')}
+            initialValues={initialValues}
             validate={validate}
             subscription={{}}
             fetchError={!!programIndicators.error}
