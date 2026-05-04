@@ -1,16 +1,16 @@
 import { useQuery } from '@tanstack/react-query'
 import { omit } from 'lodash'
-import React, { useEffect, useMemo } from 'react'
-import { useForm } from 'react-final-form'
+import React, { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import {
     DefaultSectionedFormSidebar,
     FormBase,
     SectionedFormErrorNotice,
     SectionedFormLayout,
+    TriggerDuplicateValidation,
+    DuplicationNoticeBox,
 } from '../../components'
 import { DefaultFormFooter } from '../../components/form/DefaultFormFooter'
-import { DuplicationNoticeBox } from '../../components/form/DuplicationNoticeBox'
 import { SectionedFormProvider, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { fieldFilters, ProgramIndicatorValues } from './form/fieldFilters'
@@ -19,17 +19,6 @@ import { ProgramIndicatorsFormFields } from './form/ProgramIndicatorFormFields'
 import { validate } from './form/programIndicatorsFormSchema'
 
 const section = SECTIONS_MAP.programIndicator
-
-const TriggerDuplicateValidation = () => {
-    const form = useForm()
-    useEffect(() => {
-        form.getRegisteredFields().forEach((field) => {
-            form.focus(field)
-            form.blur(field)
-        })
-    }, [form])
-    return null
-}
 
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()

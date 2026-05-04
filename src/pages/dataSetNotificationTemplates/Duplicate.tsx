@@ -8,8 +8,8 @@ import {
     FormBase,
     SectionedFormErrorNotice,
     SectionedFormLayout,
+    DuplicationNoticeBox,
 } from '../../components'
-import { DuplicationNoticeBox } from '../../components/form/DuplicationNoticeBox'
 import {
     getSectionPath,
     SectionedFormProvider,
