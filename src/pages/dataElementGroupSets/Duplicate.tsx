@@ -50,14 +50,23 @@ export const Component = () => {
         queryFn: queryFn<DataElementGroupSetFormValues>,
     })
 
-    const initialValues = useMemo(
-        () => omit(dataElementGroupSet.data, 'id'),
-        [dataElementGroupSet.data]
-    )
+    const onSubmit = useOnSubmitNew<Omit<DataElementGroupSetFormValues, 'id'>>({
+        section,
+    })
+
+    const initialValues = useMemo(() => {
+        return dataElementGroupSet.data
+            ? omit(dataElementGroupSet.data, 'id')
+            : undefined
+    }, [dataElementGroupSet.data])
+
+    if (!initialValues) {
+        return null
+    }
 
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({ section })}
+            onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
             fetchError={!!dataElementGroupSet.error}

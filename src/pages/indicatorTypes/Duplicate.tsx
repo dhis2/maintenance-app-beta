@@ -32,14 +32,23 @@ export const Component = () => {
         queryFn: queryFn<IndicatorTypesDuplicateFormValues>,
     })
 
-    const initialValues = useMemo(
-        () => omit(indicatorTypeQuery.data, 'id'),
-        [indicatorTypeQuery.data]
-    )
+    const onSubmit = useOnSubmitNew<
+        Omit<IndicatorTypesDuplicateFormValues, 'id'>
+    >({ section })
+
+    const initialValues = useMemo(() => {
+        return indicatorTypeQuery.data
+            ? omit(indicatorTypeQuery.data, 'id')
+            : undefined
+    }, [indicatorTypeQuery.data])
+
+    if (!initialValues) {
+        return null
+    }
 
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({ section })}
+            onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
             includeAttributes={false}

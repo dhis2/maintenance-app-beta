@@ -51,14 +51,23 @@ export const Component = () => {
         queryFn: queryFn<CategoryOptionGroupFormValues>,
     })
 
-    const initialValues = useMemo(
-        () => omit(categoryOptionGroupQuery.data, 'id'),
-        [categoryOptionGroupQuery.data]
-    )
+    const onSubmit = useOnSubmitNew<Omit<CategoryOptionGroupFormValues, 'id'>>({
+        section,
+    })
+
+    const initialValues = useMemo(() => {
+        return categoryOptionGroupQuery.data
+            ? omit(categoryOptionGroupQuery.data, 'id')
+            : undefined
+    }, [categoryOptionGroupQuery.data])
+
+    if (!initialValues) {
+        return null
+    }
 
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({ section })}
+            onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
             fetchError={!!categoryOptionGroupQuery.error}

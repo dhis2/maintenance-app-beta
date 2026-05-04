@@ -49,14 +49,23 @@ export const Component = () => {
         queryFn: queryFn<IndicatorGroupFormValues>,
     })
 
-    const initialValues = useMemo(
-        () => omit(indicatorGroupQuery.data, 'id'),
-        [indicatorGroupQuery.data]
-    )
+    const onSubmit = useOnSubmitNew<Omit<IndicatorGroupFormValues, 'id'>>({
+        section,
+    })
+
+    const initialValues = useMemo(() => {
+        return indicatorGroupQuery.data
+            ? omit(indicatorGroupQuery.data, 'id')
+            : undefined
+    }, [indicatorGroupQuery.data])
+
+    if (!initialValues) {
+        return null
+    }
 
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({ section })}
+            onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
             fetchError={!!indicatorGroupQuery.error}

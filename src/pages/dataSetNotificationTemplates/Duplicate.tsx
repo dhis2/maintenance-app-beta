@@ -60,16 +60,22 @@ export const Component = () => {
         enabled: !!duplicatedModelId,
     })
 
+    const onSubmit = useOnSubmitNew<Omit<DataSetNotificationResult, 'id'>>({
+        section: SECTIONS_MAP.dataSetNotificationTemplate,
+    })
+
     const initialValues = useMemo(
         () => (template ? omit(template, 'id') : undefined),
         [template]
     )
 
+    if (!initialValues) {
+        return null
+    }
+
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({
-                section: SECTIONS_MAP.dataSetNotificationTemplate,
-            })}
+            onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
             valueFormatter={transformFormValues}

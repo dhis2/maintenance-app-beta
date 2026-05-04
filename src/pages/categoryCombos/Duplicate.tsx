@@ -42,14 +42,21 @@ export const Component = () => {
         queryFn: queryFn<CategoryComboFormValues>,
     })
 
-    const initialValues = useMemo(
-        () => omit(categoryCombo.data, 'id'),
-        [categoryCombo.data]
-    )
+    const onSubmit = useOnSubmitNew<Omit<CategoryComboFormValues, 'id'>>({
+        section,
+    })
+
+    const initialValues = useMemo(() => {
+        return categoryCombo.data ? omit(categoryCombo.data, 'id') : undefined
+    }, [categoryCombo.data])
+
+    if (!initialValues) {
+        return null
+    }
 
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({ section })}
+            onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
             includeAttributes={false}

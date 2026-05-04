@@ -58,14 +58,21 @@ export const Component = () => {
         queryFn: queryFn<DataElementFormValues>,
     })
 
-    const initialValues = useMemo(
-        () => omit(dataElement.data, 'id'),
-        [dataElement.data]
-    )
+    const onSubmit = useOnSubmitNew<Omit<DataElementFormValues, 'id'>>({
+        section,
+    })
+
+    const initialValues = useMemo(() => {
+        return dataElement.data ? omit(dataElement.data, 'id') : undefined
+    }, [dataElement.data])
+
+    if (!initialValues) {
+        return null
+    }
 
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({ section })}
+            onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
             fetchError={!!dataElement.error}

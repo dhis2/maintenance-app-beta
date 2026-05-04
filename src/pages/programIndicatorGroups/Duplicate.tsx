@@ -43,14 +43,23 @@ export const Component = () => {
         queryFn: queryFn<ProgramIndicatorGroupsFormValues>,
     })
 
-    const initialValues = useMemo(
-        () => omit(programIndicatorGroupsQuery.data, 'id'),
-        [programIndicatorGroupsQuery.data]
-    )
+    const onSubmit = useOnSubmitNew<
+        Omit<ProgramIndicatorGroupsFormValues, 'id'>
+    >({ section })
+
+    const initialValues = useMemo(() => {
+        return programIndicatorGroupsQuery.data
+            ? omit(programIndicatorGroupsQuery.data, 'id')
+            : undefined
+    }, [programIndicatorGroupsQuery.data])
+
+    if (!initialValues) {
+        return null
+    }
 
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({ section })}
+            onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
             includeAttributes={false}

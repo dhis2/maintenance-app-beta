@@ -75,14 +75,21 @@ export const Component = () => {
         queryFn: queryFn<IndicatorFormValues>,
     })
 
-    const initialValues = useMemo(
-        () => omit(indicatorQuery.data, 'id'),
-        [indicatorQuery.data]
-    )
+    const onSubmit = useOnSubmitNew<Omit<IndicatorFormValues, 'id'>>({
+        section,
+    })
+
+    const initialValues = useMemo(() => {
+        return indicatorQuery.data ? omit(indicatorQuery.data, 'id') : undefined
+    }, [indicatorQuery.data])
+
+    if (!initialValues) {
+        return null
+    }
 
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({ section })}
+            onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
             subscription={{}}
@@ -95,8 +102,8 @@ export const Component = () => {
                     >
                         <form onSubmit={handleSubmit}>
                             <DuplicationNoticeBox section={section} />
-                            <TriggerDuplicateValidation />
                             <IndicatorFormFields />
+                            <TriggerDuplicateValidation />
                             <DefaultFormFooter cancelTo="/indicators" />
                         </form>
                         <SectionedFormErrorNotice />

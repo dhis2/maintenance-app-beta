@@ -79,14 +79,21 @@ export const Component = () => {
         queryFn: queryFn<PredictorFormValues>,
     })
 
-    const initialValues = useMemo(
-        () => omit(predictorQuery.data, 'id'),
-        [predictorQuery.data]
-    )
+    const onSubmit = useOnSubmitNew<Omit<PredictorFormValues, 'id'>>({
+        section,
+    })
+
+    const initialValues = useMemo(() => {
+        return predictorQuery.data ? omit(predictorQuery.data, 'id') : undefined
+    }, [predictorQuery.data])
+
+    if (!initialValues) {
+        return null
+    }
 
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({ section })}
+            onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
             subscription={{}}
@@ -100,8 +107,8 @@ export const Component = () => {
                     >
                         <form onSubmit={handleSubmit}>
                             <DuplicationNoticeBox section={section} />
-                            <TriggerDuplicateValidation />
                             <PredictorFormFields />
+                            <TriggerDuplicateValidation />
                             <DefaultFormFooter cancelTo="/predictors" />
                         </form>
                         <SectionedFormErrorNotice />

@@ -42,14 +42,23 @@ export const Component = () => {
         queryFn: queryFn<PredictorGroupFormValues>,
     })
 
-    const initialValues = useMemo(
-        () => omit(predictorGroupsQuery.data, 'id'),
-        [predictorGroupsQuery.data]
-    )
+    const onSubmit = useOnSubmitNew<Omit<PredictorGroupFormValues, 'id'>>({
+        section,
+    })
+
+    const initialValues = useMemo(() => {
+        return predictorGroupsQuery.data
+            ? omit(predictorGroupsQuery.data, 'id')
+            : undefined
+    }, [predictorGroupsQuery.data])
+
+    if (!initialValues) {
+        return null
+    }
 
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({ section })}
+            onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
             includeAttributes={false}

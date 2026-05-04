@@ -53,10 +53,13 @@ export const Component = () => {
         queryKey: [query],
         queryFn: queryFn<OrgUnitFormValues>,
     })
-    const initialValues = useMemo(
-        () => omit(orgUnit.data, 'id'),
-        [orgUnit.data]
-    )
+    const initialValues = useMemo(() => {
+        return orgUnit.data ? omit(orgUnit.data, 'id') : undefined
+    }, [orgUnit.data])
+
+    if (!initialValues) {
+        return null
+    }
 
     return (
         <FormBase

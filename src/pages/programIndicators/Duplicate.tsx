@@ -49,14 +49,23 @@ export const Component = () => {
         ] as const,
     })
 
-    const initialValues = useMemo(
-        () => omit(programIndicators.data, 'id'),
-        [programIndicators.data]
-    )
+    const onSubmit = useOnSubmitNew<Omit<ProgramIndicatorValues, 'id'>>({
+        section,
+    })
+
+    const initialValues = useMemo(() => {
+        return programIndicators.data
+            ? omit(programIndicators.data, 'id')
+            : undefined
+    }, [programIndicators.data])
+
+    if (!initialValues) {
+        return null
+    }
 
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({ section })}
+            onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
             subscription={{}}
@@ -71,8 +80,8 @@ export const Component = () => {
                     >
                         <form onSubmit={handleSubmit}>
                             <DuplicationNoticeBox section={section} />
-                            <TriggerDuplicateValidation />
                             <ProgramIndicatorsFormFields />
+                            <TriggerDuplicateValidation />
                             <DefaultFormFooter cancelTo="/programIndicators" />
                         </form>
                         <SectionedFormErrorNotice />
