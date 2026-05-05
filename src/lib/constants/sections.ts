@@ -174,6 +174,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Tracked entity attribute'),
         titlePlural: i18n.t('Tracked entity attributes'),
         parentSectionKey: 'programs',
+        duplicable: true,
     },
     trackedEntityType: {
         name: SchemaName.trackedEntityType,
@@ -181,6 +182,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Tracked entity type'),
         titlePlural: i18n.t('Tracked entity types'),
         parentSectionKey: 'programs',
+        duplicable: true,
     },
     program: {
         name: SchemaName.program,
@@ -218,6 +220,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Program rule variable'),
         titlePlural: i18n.t('Program rule variables'),
         parentSectionKey: 'programs',
+        duplicable: true,
     },
     programStage: {
         name: SchemaName.programStage,
@@ -232,6 +235,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Relationship type'),
         titlePlural: i18n.t('Relationship types'),
         parentSectionKey: 'programs',
+        duplicable: true,
     },
 
     validationRule: {
