@@ -55,14 +55,21 @@ export const Component = () => {
         queryFn: queryFn<OrganisationUnitGroupSetFormValues>,
     })
 
+    const onSubmit = useOnSubmitNew<
+        Omit<OrganisationUnitGroupSetFormValues, 'id'>
+    >({ section })
+
     const initialValues = useMemo(
-        () => omit(organisationUnitGroupSetQuery.data, 'id'),
+        () =>
+            organisationUnitGroupSetQuery.data
+                ? omit(organisationUnitGroupSetQuery.data, 'id')
+                : undefined,
         [organisationUnitGroupSetQuery.data]
     )
 
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({ section })}
+            onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
             fetchError={!!organisationUnitGroupSetQuery.error}
