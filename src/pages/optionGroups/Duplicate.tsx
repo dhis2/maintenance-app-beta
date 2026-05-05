@@ -29,6 +29,10 @@ export const Component = () => {
         queryFn: queryFn<OptionGroupFormValues>,
     })
 
+    const onSubmit = useOnSubmitNew<Omit<OptionGroupFormValues, 'id'>>({
+        section,
+    })
+
     const initialValues = useMemo(
         () => omit(optionGroupQuery.data, 'id'),
         [optionGroupQuery.data]
@@ -36,7 +40,7 @@ export const Component = () => {
 
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({ section })}
+            onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
             fetchError={!!optionGroupQuery.error}
