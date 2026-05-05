@@ -19,11 +19,13 @@ type ModelListResponse = WrapQueryResponse<PagedResponse<BaseListModel, string>>
 
 export type DefaultSectionListProps = {
     filters?: string[]
+    order?: string
     ActionsComponent?: React.ComponentType<DefaultListActionProps>
     ToolbarComponent?: React.ComponentType<DefaultToolbarProps>
 }
 export const DefaultSectionList = ({
     filters,
+    order,
     ActionsComponent,
     ToolbarComponent,
 }: DefaultSectionListProps) => {
@@ -40,6 +42,7 @@ export const DefaultSectionList = ({
             params: {
                 ...initialParams,
                 filter: initialParams.filter.concat(filters ?? []),
+                order: initialParams.order ?? order,
                 fields: columns
                     .map((column) => getFieldFilter(schema, column.path))
                     .concat(DEFAULT_FIELD_FILTERS),
