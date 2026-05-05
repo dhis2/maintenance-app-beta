@@ -45,9 +45,16 @@ export const Component = () => {
         queryFn: queryFn<LegendSetFormValues>,
     })
 
+    const onSubmit = useOnSubmitNew<Omit<LegendSetFormValues, 'id'>>({
+        section,
+    })
+
     const initialValues = useMemo(() => {
+        if (!legendSetQuery.data) {
+            return undefined
+        }
         const originalData = omit(legendSetQuery.data, 'id')
-        return originalData.legends
+        const result = originalData.legends
             ? {
                   ...originalData,
                   legends: originalData.legends.map((legend) => ({
@@ -56,11 +63,14 @@ export const Component = () => {
                   })),
               }
             : originalData
+        // PickWithFieldFilters cannot resolve the nested legendSet[id] filter,
+        // so legends is typed as never[] — cast to align with the submit type
+        return result as unknown as Omit<LegendSetFormValues, 'id'>
     }, [legendSetQuery.data])
 
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({ section })}
+            onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
             fetchError={!!legendSetQuery.error}

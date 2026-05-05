@@ -2,7 +2,10 @@ import { useQuery } from '@tanstack/react-query'
 import { omit } from 'lodash'
 import React, { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { DuplicationNoticeBox } from '../../components/form/DuplicationNoticeBox'
+import {
+    DuplicationNoticeBox,
+    TriggerDuplicateValidation,
+} from '../../components'
 import {
     DEFAULT_FIELD_FILTERS,
     SECTIONS_MAP,
@@ -49,22 +52,28 @@ export const Component = () => {
         queryKey: [query],
         queryFn: queryFn<AttributeFormValues>,
     })
-    const duplicateData = useMemo(
-        () => omit(attributesQuery.data, 'id'),
+    const onSubmit = useOnSubmitNew<Attribute>({ section })
+
+    const initialValues = useMemo(
+        () =>
+            attributesQuery.data
+                ? (omit(attributesQuery.data, 'id') as Attribute)
+                : undefined,
         [attributesQuery.data]
     )
 
     return (
         <SectionedFormWrapper
-            onSubmit={useOnSubmitNew({ section })}
-            initialValues={duplicateData as Attribute}
+            onSubmit={onSubmit}
+            initialValues={initialValues}
             validate={validate}
             cancelTo={`/${getSectionPath(section)}`}
             fetchError={!!attributesQuery.error}
         >
             <>
                 <DuplicationNoticeBox section={section} />
-                <AttributeFormFields initialValues={duplicateData ?? {}} />
+                <AttributeFormFields initialValues={initialValues} />
+                <TriggerDuplicateValidation />
             </>
         </SectionedFormWrapper>
     )

@@ -32,14 +32,21 @@ export const Component = () => {
         queryFn: queryFn<AnalyticsTableHookFormValues>,
     })
 
+    const onSubmit = useOnSubmitNew<Omit<AnalyticsTableHookFormValues, 'id'>>({
+        section,
+    })
+
     const initialValues = useMemo(
-        () => omit(analyticsTableHookQuery.data, 'id'),
+        () =>
+            analyticsTableHookQuery.data
+                ? omit(analyticsTableHookQuery.data, 'id')
+                : undefined,
         [analyticsTableHookQuery.data]
     )
 
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({ section })}
+            onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
             fetchError={!!analyticsTableHookQuery.error}

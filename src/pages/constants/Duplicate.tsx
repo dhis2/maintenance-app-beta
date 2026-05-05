@@ -29,14 +29,18 @@ export const Component = () => {
         queryFn: queryFn<ConstantFormValues>,
     })
 
+    const onSubmit = useOnSubmitNew<Omit<ConstantFormValues, 'id'>>({
+        section,
+    })
+
     const initialValues = useMemo(
-        () => omit(constantQuery.data, 'id'),
+        () => (constantQuery.data ? omit(constantQuery.data, 'id') : undefined),
         [constantQuery.data]
     )
 
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({ section })}
+            onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
             fetchError={!!constantQuery.error}
