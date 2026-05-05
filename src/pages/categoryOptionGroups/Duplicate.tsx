@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { omit } from 'lodash'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { FormBase } from '../../components'
 import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormContents'
@@ -51,10 +51,20 @@ export const Component = () => {
         queryFn: queryFn<CategoryOptionGroupFormValues>,
     })
 
+    const onSubmit = useOnSubmitNew<Omit<CategoryOptionGroupFormValues, 'id'>>({
+        section,
+    })
+
+    const initialValues = useMemo(() => {
+        return categoryOptionGroupQuery.data
+            ? omit(categoryOptionGroupQuery.data, 'id')
+            : undefined
+    }, [categoryOptionGroupQuery.data])
+
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({ section })}
-            initialValues={omit(categoryOptionGroupQuery.data, 'id')}
+            onSubmit={onSubmit}
+            initialValues={initialValues}
             validate={validate}
             fetchError={!!categoryOptionGroupQuery.error}
         >

@@ -1,4 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
+import { fromTaggedName } from '../../programRuleVariableTag'
 import { ProgramRuleActionListItem } from './types'
 
 const LOCATION_LABELS: Record<string, string> = {
@@ -41,8 +42,9 @@ export function getProgramRuleActionListLabel(
     const targetAssign = [
         dataElement?.displayName,
         trackedEntityAttribute?.displayName,
-        programRuleVariable?.displayName,
-        content,
+        programRuleVariable?.displayName &&
+            fromTaggedName(programRuleVariable.displayName),
+        content && fromTaggedName(content),
     ]
         .filter(Boolean)
         .join(', ')
