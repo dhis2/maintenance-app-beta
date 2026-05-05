@@ -5,11 +5,12 @@ import { useSearchParams } from 'react-router-dom'
 import {
     DefaultFormFooter,
     DefaultSectionedFormSidebar,
+    DuplicationNoticeBox,
     FormBase,
     SectionedFormErrorNotice,
     SectionedFormLayout,
+    TriggerDuplicateValidation,
 } from '../../components'
-import { DuplicationNoticeBox } from '../../components/form/DuplicationNoticeBox'
 import {
     SectionedFormProvider,
     SECTIONS_MAP,
@@ -43,14 +44,21 @@ export const Component = () => {
         queryFn: queryFn<ProgramRuleVariableFormValues>,
     })
 
+    const onSubmit = useOnSubmitNew<Omit<ProgramRuleVariableFormValues, 'id'>>({
+        section,
+    })
+
     const initialValues = useMemo(
-        () => omit(programRuleVariableQuery.data, 'id'),
+        () =>
+            programRuleVariableQuery.data
+                ? omit(programRuleVariableQuery.data, 'id')
+                : undefined,
         [programRuleVariableQuery.data]
     )
 
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({ section })}
+            onSubmit={onSubmit}
             initialValues={initialValues}
             modelName={section.name}
             includeAttributes={false}
@@ -68,6 +76,7 @@ export const Component = () => {
                         <form onSubmit={handleSubmit}>
                             <DuplicationNoticeBox section={section} />
                             <ProgramRuleVariableFormFields />
+                            <TriggerDuplicateValidation />
                             <DefaultFormFooter cancelTo="/programRuleVariables" />
                         </form>
                         <SectionedFormErrorNotice />

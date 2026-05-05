@@ -5,11 +5,12 @@ import { useSearchParams } from 'react-router-dom'
 import {
     DefaultFormFooter,
     DefaultSectionedFormSidebar,
+    DuplicationNoticeBox,
     FormBase,
     SectionedFormErrorNotice,
     SectionedFormLayout,
+    TriggerDuplicateValidation,
 } from '../../components'
-import { DuplicationNoticeBox } from '../../components/form/DuplicationNoticeBox'
 import {
     ATTRIBUTE_VALUES_FIELD_FILTERS,
     DEFAULT_FIELD_FILTERS,
@@ -63,14 +64,21 @@ export const Component = () => {
         queryFn: queryFn<TrackedEntityTypeFormValues>,
     })
 
+    const onSubmit = useOnSubmitNew<Omit<TrackedEntityTypeFormValues, 'id'>>({
+        section,
+    })
+
     const initialValues = useMemo(
-        () => omit(trackedEntityTypeQuery.data, 'id'),
+        () =>
+            trackedEntityTypeQuery.data
+                ? omit(trackedEntityTypeQuery.data, 'id')
+                : undefined,
         [trackedEntityTypeQuery.data]
     )
 
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({ section })}
+            onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validateTrackedEntityType}
             fetchError={!!trackedEntityTypeQuery.error}
@@ -85,6 +93,7 @@ export const Component = () => {
                         <form onSubmit={handleSubmit}>
                             <DuplicationNoticeBox section={section} />
                             <TrackedEntityTypeFormFields />
+                            <TriggerDuplicateValidation />
                             <DefaultFormFooter cancelTo="/trackedEntityTypes" />
                         </form>
                         <SectionedFormErrorNotice />

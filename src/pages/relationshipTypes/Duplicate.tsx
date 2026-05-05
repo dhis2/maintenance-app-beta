@@ -5,11 +5,12 @@ import { useSearchParams } from 'react-router-dom'
 import {
     DefaultFormFooter,
     DefaultSectionedFormSidebar,
+    DuplicationNoticeBox,
     FormBase,
     SectionedFormErrorNotice,
     SectionedFormLayout,
+    TriggerDuplicateValidation,
 } from '../../components'
-import { DuplicationNoticeBox } from '../../components/form/DuplicationNoticeBox'
 import {
     SectionedFormProvider,
     SECTIONS_MAP,
@@ -43,14 +44,21 @@ export const Component = () => {
         queryFn: queryFn<RelationshipTypeFormValues>,
     })
 
+    const onSubmit = useOnSubmitNew<Omit<RelationshipTypeFormValues, 'id'>>({
+        section,
+    })
+
     const initialValues = useMemo(
-        () => omit(relationshipTypeQuery.data, 'id'),
+        () =>
+            relationshipTypeQuery.data
+                ? omit(relationshipTypeQuery.data, 'id')
+                : undefined,
         [relationshipTypeQuery.data]
     )
 
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({ section })}
+            onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validateRelationshipType}
             fetchError={!!relationshipTypeQuery.error}
@@ -66,6 +74,7 @@ export const Component = () => {
                         <form onSubmit={handleSubmit}>
                             <DuplicationNoticeBox section={section} />
                             <RelationshipTypeFormFields />
+                            <TriggerDuplicateValidation />
                             <DefaultFormFooter cancelTo="/relationshipTypes" />
                         </form>
                         <SectionedFormErrorNotice />

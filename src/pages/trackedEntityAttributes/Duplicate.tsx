@@ -4,12 +4,13 @@ import React, { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import {
     DefaultSectionedFormSidebar,
+    DuplicationNoticeBox,
     FormBase,
     SectionedFormErrorNotice,
     SectionedFormLayout,
+    TriggerDuplicateValidation,
 } from '../../components'
 import { DefaultFormFooter } from '../../components/form/DefaultFormFooter'
-import { DuplicationNoticeBox } from '../../components/form/DuplicationNoticeBox'
 import {
     FEATURES,
     SectionedFormProvider,
@@ -59,14 +60,23 @@ export const Component = () => {
         queryFn: queryFn<TrackedEntityAttributeFormValues>,
     })
 
+    const onSubmit = useOnSubmitNew<
+        Omit<TrackedEntityAttributeFormValues, 'id'>
+    >({
+        section,
+    })
+
     const initialValues = useMemo(
-        () => omit(trackedEntityAttributeQuery.data, 'id'),
+        () =>
+            trackedEntityAttributeQuery.data
+                ? omit(trackedEntityAttributeQuery.data, 'id')
+                : undefined,
         [trackedEntityAttributeQuery.data]
     )
 
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({ section })}
+            onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
             fetchError={!!trackedEntityAttributeQuery.error}
@@ -79,6 +89,7 @@ export const Component = () => {
                         <form onSubmit={handleSubmit}>
                             <DuplicationNoticeBox section={section} />
                             <TrackedEntityAttributeFormContents />
+                            <TriggerDuplicateValidation />
                             <DefaultFormFooter />
                         </form>
                         <SectionedFormErrorNotice />
