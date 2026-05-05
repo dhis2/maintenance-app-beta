@@ -6,7 +6,7 @@ import { StandardFormSection } from '../standardForm'
 import classes from './DefaultFormContents.module.css'
 import { DefaultFormErrorNotice } from './DefaultFormErrorNotice'
 import { DefaultFormFooter } from './DefaultFormFooter'
-import { DuplicationNoticeBox } from './DuplicationNoticeBox'
+import { DuplicationNoticeBox } from './duplicates'
 import { TranslatedFieldsNoticeBox } from './TranslatedFieldsNoticeBox'
 
 type DefaultFormContentsProps = {

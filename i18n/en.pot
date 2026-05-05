@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-04-23T07:30:47.003Z\n"
-"PO-Revision-Date: 2026-04-23T07:30:47.003Z\n"
+"POT-Creation-Date: 2026-05-04T11:59:10.487Z\n"
+"PO-Revision-Date: 2026-05-04T11:59:10.487Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -2710,8 +2710,12 @@ msgstr "The numeric value to be used as the constant."
 msgid "Please enter a number"
 msgstr "Please enter a number"
 
-msgid "Configuration"
-msgstr "Configuration"
+msgid ""
+"An approval level for this organisation unit level and category option "
+"group set combination already exists."
+msgstr ""
+"An approval level for this organisation unit level and category option "
+"group set combination already exists."
 
 msgid "Available data element groups"
 msgstr "Available data element groups"
@@ -3629,56 +3633,56 @@ msgstr "Legend items"
 msgid "Create legend items to define value ranges and associated colors."
 msgstr "Create legend items to define value ranges and associated colors."
 
-msgid "End value must be greater than start value"
-msgstr "End value must be greater than start value"
-
-msgid "Legend items must not overlap"
-msgstr "Legend items must not overlap"
-
-msgid "Legend items must not have gaps"
-msgstr "Legend items must not have gaps"
-
-msgid "Name is required"
-msgstr "Name is required"
-
-msgid "Must be greater than start value"
-msgstr "Must be greater than start value"
-
-msgid "Add legend item"
-msgstr "Add legend item"
-
-msgid "Edit legend item"
-msgstr "Edit legend item"
-
 msgid "Start value"
 msgstr "Start value"
 
 msgid "End value"
 msgstr "End value"
 
-msgid "Add"
-msgstr "Add"
-
-msgid "Number of legend items"
-msgstr "Number of legend items"
+msgid "Items"
+msgstr "Items"
 
 msgid "Color scale"
 msgstr "Color scale"
 
+msgid "End value must be greater than start value."
+msgstr "End value must be greater than start value."
+
+msgid "Legend items must not overlap."
+msgstr "Legend items must not overlap."
+
+msgid "Legend items must not have gaps."
+msgstr "Legend items must not have gaps."
+
+msgid "Generate a new legend..."
+msgstr "Generate a new legend..."
+
+msgid "Legend generator"
+msgstr "Legend generator"
+
+msgid "Replace existing legend items"
+msgstr "Replace existing legend items"
+
+msgid "Generating new legend items will replace all legend items in the table."
+msgstr "Generating new legend items will replace all legend items in the table."
+
 msgid "Create legend items"
 msgstr "Create legend items"
 
-msgid "Replace existing items?"
-msgstr "Replace existing items?"
+msgid "Generate a legend"
+msgstr "Generate a legend"
 
-msgid "This will replace all existing legend items."
-msgstr "This will replace all existing legend items."
+msgid "Generate legend items"
+msgstr "Generate legend items"
 
-msgid "Proceed"
-msgstr "Proceed"
+msgid "Manually add legend items"
+msgstr "Manually add legend items"
 
-msgid "No legend items yet. Add items manually or use the generator above."
-msgstr "No legend items yet. Add items manually or use the generator above."
+msgid "Add legend item"
+msgstr "Add legend item"
+
+msgid "Change color"
+msgstr "Change color"
 
 msgid "Exit without saving"
 msgstr "Exit without saving"
@@ -4672,6 +4676,9 @@ msgstr "Organisation unit field"
 
 msgid "Set up the basic information for this program indicator."
 msgstr "Set up the basic information for this program indicator."
+
+msgid "Configuration"
+msgstr "Configuration"
 
 msgid "Choose the program and data types this program indicator applies to."
 msgstr "Choose the program and data types this program indicator applies to."
@@ -5811,6 +5818,9 @@ msgstr "Initiating side constraint"
 
 msgid "Receiving side constraint"
 msgstr "Receiving side constraint"
+
+msgid "Name is required"
+msgstr "Name is required"
 
 msgid "Relationship name seen from initiating entity is required"
 msgstr "Relationship name seen from initiating entity is required"
