@@ -8,7 +8,6 @@ import {
     DescriptionField,
     ModelTransferField,
     NameField,
-    ShortNameField,
     StandardFormField,
     StandardFormSection,
     StandardFormSectionDescription,
@@ -40,14 +39,6 @@ function OptionGroupSetFormFields() {
                 <StandardFormField>
                     <NameField schemaSection={schemaSection} />
                 </StandardFormField>
-
-                <StandardFormField>
-                    <ShortNameField
-                        schemaSection={schemaSection}
-                        isRequired={false}
-                    />
-                </StandardFormField>
-
                 <StandardFormField>
                     <CodeField schemaSection={schemaSection} />
                 </StandardFormField>

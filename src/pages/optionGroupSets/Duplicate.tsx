@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/react-query'
-import React from 'react'
-import { useParams } from 'react-router-dom'
-import { DefaultEditFormContents, FormBase } from '../../components'
-import { DEFAULT_FIELD_FILTERS, SECTIONS_MAP, useOnSubmitEdit } from '../../lib'
+import { omit } from 'lodash'
+import React, { useMemo } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import { FormBase } from '../../components'
+import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormContents'
+import { DEFAULT_FIELD_FILTERS, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { PickWithFieldFilters } from '../../types/generated'
 import { OptionGroupSet } from '../../types/models'
@@ -24,13 +26,16 @@ export type OptionGroupSetFormValues = PickWithFieldFilters<
     typeof fieldFilters
 >
 
+const section = SECTIONS_MAP.optionGroupSet
+
 export const Component = () => {
-    const section = SECTIONS_MAP.optionGroupSet
     const queryFn = useBoundResourceQueryFn()
-    const modelId = useParams().id as string
+    const [searchParams] = useSearchParams()
+    const duplicatedModelId = searchParams.get('duplicatedId') as string
+
     const query = {
         resource: 'optionGroupSets',
-        id: modelId,
+        id: duplicatedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
@@ -40,16 +45,26 @@ export const Component = () => {
         queryFn: queryFn<OptionGroupSetFormValues>,
     })
 
+    const onSubmit = useOnSubmitNew<Omit<OptionGroupSetFormValues, 'id'>>({
+        section,
+    })
+
+    const initialValues = useMemo(
+        () => omit(optionGroupSetQuery.data, 'id'),
+        [optionGroupSetQuery.data]
+    )
+
     return (
         <FormBase
-            onSubmit={useOnSubmitEdit({ section, modelId })}
-            initialValues={optionGroupSetQuery.data}
+            onSubmit={onSubmit}
+            initialValues={initialValues}
             validate={validate}
+            fetchError={!!optionGroupSetQuery.error}
             includeAttributes={false}
         >
-            <DefaultEditFormContents section={section}>
+            <DefaultDuplicateFormContents section={section}>
                 <OptionGroupSetFormFields />
-            </DefaultEditFormContents>
+            </DefaultDuplicateFormContents>
         </FormBase>
     )
 }

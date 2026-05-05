@@ -268,6 +268,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Option group'),
         titlePlural: i18n.t('Option groups'),
         parentSectionKey: 'optionSet',
+        duplicable: true,
     },
     attribute: {
         name: SchemaName.attribute,
@@ -289,6 +290,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Option group set'),
         titlePlural: i18n.t('Option group sets'),
         parentSectionKey: 'optionSet',
+        duplicable: true,
     },
     predictor: {
         name: SchemaName.predictor,
