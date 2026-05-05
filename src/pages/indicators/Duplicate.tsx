@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { omit } from 'lodash'
-import React, { useEffect } from 'react'
-import { useForm } from 'react-final-form'
+import React, { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import {
     DefaultFormFooter,
@@ -9,8 +8,9 @@ import {
     FormBase,
     SectionedFormErrorNotice,
     SectionedFormLayout,
+    TriggerDuplicateValidation,
+    DuplicationNoticeBox,
 } from '../../components'
-import { DuplicationNoticeBox } from '../../components/form/DuplicationNoticeBox'
 import {
     ATTRIBUTE_VALUES_FIELD_FILTERS,
     DEFAULT_FIELD_FILTERS,
@@ -47,17 +47,6 @@ const fieldFilters = [
 
 const section = SECTIONS_MAP.indicator
 
-const TriggerDuplicateValidation = () => {
-    const form = useForm()
-    useEffect(() => {
-        form.getRegisteredFields().forEach((field) => {
-            form.focus(field)
-            form.blur(field)
-        })
-    }, [form])
-    return null
-}
-
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
@@ -75,10 +64,18 @@ export const Component = () => {
         queryFn: queryFn<IndicatorFormValues>,
     })
 
+    const onSubmit = useOnSubmitNew<Omit<IndicatorFormValues, 'id'>>({
+        section,
+    })
+
+    const initialValues = useMemo(() => {
+        return indicatorQuery.data ? omit(indicatorQuery.data, 'id') : undefined
+    }, [indicatorQuery.data])
+
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({ section })}
-            initialValues={omit(indicatorQuery.data, 'id')}
+            onSubmit={onSubmit}
+            initialValues={initialValues}
             validate={validate}
             subscription={{}}
             fetchError={!!indicatorQuery.error}
@@ -90,8 +87,8 @@ export const Component = () => {
                     >
                         <form onSubmit={handleSubmit}>
                             <DuplicationNoticeBox section={section} />
-                            <TriggerDuplicateValidation />
                             <IndicatorFormFields />
+                            <TriggerDuplicateValidation />
                             <DefaultFormFooter cancelTo="/indicators" />
                         </form>
                         <SectionedFormErrorNotice />

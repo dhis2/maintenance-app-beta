@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { omit } from 'lodash'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import {
     DefaultFormFooter,
@@ -8,8 +8,8 @@ import {
     FormBase,
     SectionedFormErrorNotice,
     SectionedFormLayout,
+    DuplicationNoticeBox,
 } from '../../components'
-import { DuplicationNoticeBox } from '../../components/form/DuplicationNoticeBox'
 import {
     getSectionPath,
     SectionedFormProvider,
@@ -60,14 +60,18 @@ export const Component = () => {
         enabled: !!duplicatedModelId,
     })
 
-    const initialValues: Partial<DataSetNotificationResult> | undefined =
-        template ? omit(template, 'id') : undefined
+    const onSubmit = useOnSubmitNew<Omit<DataSetNotificationResult, 'id'>>({
+        section: SECTIONS_MAP.dataSetNotificationTemplate,
+    })
+
+    const initialValues = useMemo(
+        () => (template ? omit(template, 'id') : undefined),
+        [template]
+    )
 
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({
-                section: SECTIONS_MAP.dataSetNotificationTemplate,
-            })}
+            onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
             valueFormatter={transformFormValues}
