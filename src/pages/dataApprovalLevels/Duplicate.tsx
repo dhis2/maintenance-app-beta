@@ -42,14 +42,21 @@ export const Component = () => {
         queryFn: queryFn<DataApprovalLevelFormValues>,
     })
 
+    const onSubmit = useOnSubmitNew<Omit<DataApprovalLevelFormValues, 'id'>>({
+        section,
+    })
+
     const initialValues = useMemo(
-        () => omit(dataApprovalLevelQuery.data, 'id'),
+        () =>
+            dataApprovalLevelQuery.data
+                ? omit(dataApprovalLevelQuery.data, 'id')
+                : undefined,
         [dataApprovalLevelQuery.data]
     )
 
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({ section })}
+            onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
             fetchError={!!dataApprovalLevelQuery.error}

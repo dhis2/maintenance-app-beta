@@ -43,14 +43,23 @@ export const Component = () => {
         queryFn: queryFn<DataApprovalWorkflowFormValues>,
     })
 
+    const onSubmit = useOnSubmitNew<Omit<DataApprovalWorkflowFormValues, 'id'>>(
+        {
+            section,
+        }
+    )
+
     const initialValues = useMemo(
-        () => omit(dataApprovalWorkflowQuery.data, 'id'),
+        () =>
+            dataApprovalWorkflowQuery.data
+                ? omit(dataApprovalWorkflowQuery.data, 'id')
+                : undefined,
         [dataApprovalWorkflowQuery.data]
     )
 
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({ section })}
+            onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
             fetchError={!!dataApprovalWorkflowQuery.error}
