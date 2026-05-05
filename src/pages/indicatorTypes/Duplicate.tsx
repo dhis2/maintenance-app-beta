@@ -42,10 +42,6 @@ export const Component = () => {
             : undefined
     }, [indicatorTypeQuery.data])
 
-    if (!initialValues) {
-        return null
-    }
-
     return (
         <FormBase
             onSubmit={onSubmit}

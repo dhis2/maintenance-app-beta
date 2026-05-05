@@ -53,10 +53,6 @@ export const Component = () => {
             : undefined
     }, [programIndicatorGroupsQuery.data])
 
-    if (!initialValues) {
-        return null
-    }
-
     return (
         <FormBase
             onSubmit={onSubmit}

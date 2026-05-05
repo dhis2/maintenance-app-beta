@@ -57,10 +57,6 @@ export const Component = () => {
         return orgUnit.data ? omit(orgUnit.data, 'id') : undefined
     }, [orgUnit.data])
 
-    if (!initialValues) {
-        return null
-    }
-
     return (
         <FormBase
             onSubmit={onSubmit}

@@ -56,10 +56,6 @@ export const Component = () => {
         return categoryQuery.data ? omit(categoryQuery.data, 'id') : undefined
     }, [categoryQuery.data])
 
-    if (!initialValues) {
-        return null
-    }
-
     return (
         <FormBase
             onSubmit={onSubmit}

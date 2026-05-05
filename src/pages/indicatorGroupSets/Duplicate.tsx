@@ -55,10 +55,6 @@ export const Component = () => {
             : undefined
     }, [indicatorGroupSetQuery.data])
 
-    if (!initialValues) {
-        return null
-    }
-
     return (
         <FormBase
             onSubmit={onSubmit}

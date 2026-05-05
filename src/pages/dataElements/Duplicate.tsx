@@ -66,10 +66,6 @@ export const Component = () => {
         return dataElement.data ? omit(dataElement.data, 'id') : undefined
     }, [dataElement.data])
 
-    if (!initialValues) {
-        return null
-    }
-
     return (
         <FormBase
             onSubmit={onSubmit}

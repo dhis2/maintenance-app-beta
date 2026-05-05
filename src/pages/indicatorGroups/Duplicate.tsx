@@ -59,10 +59,6 @@ export const Component = () => {
             : undefined
     }, [indicatorGroupQuery.data])
 
-    if (!initialValues) {
-        return null
-    }
-
     return (
         <FormBase
             onSubmit={onSubmit}

@@ -76,10 +76,6 @@ export const Component = () => {
         return predictorQuery.data ? omit(predictorQuery.data, 'id') : undefined
     }, [predictorQuery.data])
 
-    if (!initialValues) {
-        return null
-    }
-
     return (
         <FormBase
             onSubmit={onSubmit}

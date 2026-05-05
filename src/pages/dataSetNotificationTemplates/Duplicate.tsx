@@ -69,10 +69,6 @@ export const Component = () => {
         [template]
     )
 
-    if (!initialValues) {
-        return null
-    }
-
     return (
         <FormBase
             onSubmit={onSubmit}

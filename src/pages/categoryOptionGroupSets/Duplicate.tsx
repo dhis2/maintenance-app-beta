@@ -62,10 +62,6 @@ export const Component = () => {
             : undefined
     }, [categoryOptionGroupSetQuery.data])
 
-    if (!initialValues) {
-        return null
-    }
-
     return (
         <FormBase
             onSubmit={onSubmit}

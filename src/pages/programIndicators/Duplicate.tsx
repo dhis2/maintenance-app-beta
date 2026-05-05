@@ -48,10 +48,6 @@ export const Component = () => {
             : undefined
     }, [programIndicators.data])
 
-    if (!initialValues) {
-        return null
-    }
-
     return (
         <FormBase
             onSubmit={onSubmit}

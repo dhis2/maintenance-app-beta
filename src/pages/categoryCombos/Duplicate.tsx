@@ -50,10 +50,6 @@ export const Component = () => {
         return categoryCombo.data ? omit(categoryCombo.data, 'id') : undefined
     }, [categoryCombo.data])
 
-    if (!initialValues) {
-        return null
-    }
-
     return (
         <FormBase
             onSubmit={onSubmit}

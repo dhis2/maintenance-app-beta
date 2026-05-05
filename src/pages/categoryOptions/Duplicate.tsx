@@ -56,10 +56,6 @@ export const Component = () => {
             : undefined
     }, [categoryOptionCombo.data])
 
-    if (!initialValues) {
-        return null
-    }
-
     return (
         <FormBase
             onSubmit={onSubmit}

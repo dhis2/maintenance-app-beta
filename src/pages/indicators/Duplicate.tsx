@@ -72,10 +72,6 @@ export const Component = () => {
         return indicatorQuery.data ? omit(indicatorQuery.data, 'id') : undefined
     }, [indicatorQuery.data])
 
-    if (!initialValues) {
-        return null
-    }
-
     return (
         <FormBase
             onSubmit={onSubmit}

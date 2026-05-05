@@ -60,10 +60,6 @@ export const Component = () => {
             : undefined
     }, [dataElementGroupSet.data])
 
-    if (!initialValues) {
-        return null
-    }
-
     return (
         <FormBase
             onSubmit={onSubmit}
