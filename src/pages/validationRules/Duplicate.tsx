@@ -5,11 +5,12 @@ import { useSearchParams } from 'react-router-dom'
 import {
     DefaultFormFooter,
     DefaultSectionedFormSidebar,
+    DuplicationNoticeBox,
     FormBase,
     SectionedFormErrorNotice,
     SectionedFormLayout,
+    TriggerDuplicateValidation,
 } from '../../components'
-import { DuplicationNoticeBox } from '../../components/form/DuplicationNoticeBox'
 import {
     ATTRIBUTE_VALUES_FIELD_FILTERS,
     DEFAULT_FIELD_FILTERS,
@@ -64,14 +65,21 @@ export const Component = () => {
         queryFn: queryFn<ValidationRuleFormValues>,
     })
 
+    const onSubmit = useOnSubmitNew<Omit<ValidationRuleFormValues, 'id'>>({
+        section,
+    })
+
     const initialValues = useMemo(
-        () => omit(validationRuleQuery.data, 'id'),
+        () =>
+            validationRuleQuery.data
+                ? omit(validationRuleQuery.data, 'id')
+                : undefined,
         [validationRuleQuery.data]
     )
 
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({ section })}
+            onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
             fetchError={!!validationRuleQuery.error}
@@ -86,6 +94,7 @@ export const Component = () => {
                         <form onSubmit={handleSubmit}>
                             <DuplicationNoticeBox section={section} />
                             <ValidationRuleFormFields />
+                            <TriggerDuplicateValidation />
                             <DefaultFormFooter cancelTo="/validationRules" />
                         </form>
                         <SectionedFormErrorNotice />

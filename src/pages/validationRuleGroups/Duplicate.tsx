@@ -51,14 +51,21 @@ export const Component = () => {
         queryFn: queryFn<ValidationRuleGroupFormValues>,
     })
 
+    const onSubmit = useOnSubmitNew<Omit<ValidationRuleGroupFormValues, 'id'>>({
+        section,
+    })
+
     const initialValues = useMemo(
-        () => omit(validationRuleGroupQuery.data, 'id'),
+        () =>
+            validationRuleGroupQuery.data
+                ? omit(validationRuleGroupQuery.data, 'id')
+                : undefined,
         [validationRuleGroupQuery.data]
     )
 
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({ section })}
+            onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
             fetchError={!!validationRuleGroupQuery.error}

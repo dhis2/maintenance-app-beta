@@ -2,7 +2,10 @@ import { useQuery } from '@tanstack/react-query'
 import { omit } from 'lodash'
 import React, { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { DuplicationNoticeBox } from '../../components/form/DuplicationNoticeBox'
+import {
+    DuplicationNoticeBox,
+    TriggerDuplicateValidation,
+} from '../../components'
 import {
     DEFAULT_FIELD_FILTERS,
     SECTIONS_MAP,
@@ -51,18 +54,24 @@ export const Component = () => {
         queryFn: queryFn<ValidationNotificationTemplateFormValues>,
     })
 
+    const onSubmit = useOnSubmitNew<ValidationNotificationTemplateFormValues>({
+        section,
+    })
+
     const initialValues = useMemo(
         () =>
-            omit(
-                validationNotificationTemplateQuery.data,
-                'id'
-            ) as ValidationNotificationTemplate,
+            validationNotificationTemplateQuery.data
+                ? (omit(
+                      validationNotificationTemplateQuery.data,
+                      'id'
+                  ) as ValidationNotificationTemplate)
+                : undefined,
         [validationNotificationTemplateQuery.data]
     )
 
     return (
         <SectionedFormWrapper
-            onSubmit={useOnSubmitNew({ section })}
+            onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
             cancelTo={`/${getSectionPath(section)}`}
@@ -71,6 +80,7 @@ export const Component = () => {
             <>
                 <DuplicationNoticeBox section={section} />
                 <ValidationNotificationTemplateFormFields />
+                <TriggerDuplicateValidation />
             </>
         </SectionedFormWrapper>
     )
