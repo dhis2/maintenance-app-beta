@@ -17,15 +17,15 @@ export function useValidator({
     property,
     modelId,
     caseSensitive = false,
-    customValidator,
     customFilterUniqueness,
+    customValidator,
 }: {
     schemaSection: SchemaSection
     property: string
     modelId?: string
     caseSensitive?: boolean
-    customValidator?: Validator
     customFilterUniqueness?: string
+    customValidator?: Validator
 }) {
     const schema = useSchema(schemaSection.name)
     const propertyDetails = schema.properties[property]

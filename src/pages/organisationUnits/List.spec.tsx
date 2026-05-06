@@ -68,6 +68,10 @@ const renderList = async ({
                         return { statusCode: 204 }
                     }
                 },
+                organisationUnitGroups: {
+                    organisationUnitGroups: [],
+                    pager: { page: 1, pageCount: 0, total: 0 },
+                },
                 userDataStore,
             }}
             routeOptions={routeOptions}

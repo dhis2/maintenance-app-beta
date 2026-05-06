@@ -18,3 +18,8 @@
 .hidden {
     display: none;
 }
+
+.sectionWarningNotice {
+    margin-top: var(--spacers-dp12);
+    max-width: 720px;
+}

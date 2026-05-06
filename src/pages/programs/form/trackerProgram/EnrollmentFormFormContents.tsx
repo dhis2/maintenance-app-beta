@@ -2,7 +2,7 @@ import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import { Button } from '@dhis2/ui'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { useField, UseFieldConfig } from 'react-final-form'
+import { useField, UseFieldConfig, useFormState } from 'react-final-form'
 import {
     createSearchParams,
     Link,
@@ -27,6 +27,8 @@ import { SchemaName } from '../../../../types'
 import { ProgramValues } from '../../EditTrackerProgram'
 import { EditOrNewEnrollmentSectionForm } from '../sectionForm/EntrollmentSectionForm'
 import styles from './EnrollmentFormFormContents.module.css'
+import { MandatoryAttributesWarning } from './MandatoryAttributesWarning'
+import { getMandatoryAttributesMissingFromSections } from './mandatoryEnrollmentAttributes'
 
 const useProgramField = <T extends keyof ProgramValues>(
     name: T,
@@ -40,9 +42,18 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
 }) {
     const sections = useProgramField('programSections').input.value
     const dataEntryForm = useProgramField('dataEntryForm').input.value
-    const trackedEntityAttributes = useProgramField(
-        'programTrackedEntityAttributes'
-    ).input.value
+    const { initialValues } = useFormState({
+        subscription: { initialValues: true },
+    })
+    const missingMandatoryAttributes = useMemo(
+        () =>
+            getMandatoryAttributesMissingFromSections({
+                programTrackedEntityAttributes:
+                    initialValues?.programTrackedEntityAttributes,
+                programSections: sections,
+            }),
+        [initialValues?.programTrackedEntityAttributes, sections]
+    )
     const [selectedFormType, setSelectedFormType] = useState<FormType>(
         FormType.DEFAULT
     )
@@ -171,7 +182,9 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
             <TabbedFormTypePicker
                 sectionsLength={sections.length}
                 hasDataEntryForm={!!dataEntryForm}
-                hasDataToDisplay={trackedEntityAttributes.length > 0}
+                hasDataToDisplay={
+                    !!initialValues?.programTrackedEntityAttributes?.length
+                }
                 onFormTypeChange={setSelectedFormType}
                 selectedFormType={selectedFormType}
                 modelId={modelId}
@@ -207,6 +220,12 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
                         level={'primary'}
                         otherProps={{ sectionsLength: sections.length }}
                         withReordering
+                        warningNotice={
+                            <MandatoryAttributesWarning
+                                missingAttributes={missingMandatoryAttributes}
+                                className={styles.sectionWarningNotice}
+                            />
+                        }
                     />
                 )}
                 {selectedFormType === FormType.CUSTOM && (

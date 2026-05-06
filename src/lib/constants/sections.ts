@@ -27,6 +27,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Category'),
         titlePlural: i18n.t('Categories'),
         parentSectionKey: 'category',
+        duplicable: true,
     },
     categoryOption: {
         name: SchemaName.categoryOption,
@@ -34,6 +35,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Category option'),
         titlePlural: i18n.t('Category options'),
         parentSectionKey: 'category',
+        duplicable: true,
     },
     categoryCombo: {
         name: SchemaName.categoryCombo,
@@ -41,6 +43,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Category combination'),
         titlePlural: i18n.t('Category combinations'),
         parentSectionKey: 'category',
+        duplicable: true,
     },
     categoryOptionCombo: {
         name: SchemaName.categoryOptionCombo,
@@ -55,6 +58,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Category option group'),
         titlePlural: i18n.t('Category option groups'),
         parentSectionKey: 'category',
+        duplicable: true,
     },
     categoryOptionGroupSet: {
         name: SchemaName.categoryOptionGroupSet,
@@ -62,6 +66,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Category option group set'),
         titlePlural: i18n.t('Category option group sets'),
         parentSectionKey: 'category',
+        duplicable: true,
     },
     dataElement: {
         name: SchemaName.dataElement,
@@ -69,6 +74,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Data element'),
         titlePlural: i18n.t('Data elements'),
         parentSectionKey: 'dataElement',
+        duplicable: true,
     },
     dataElementGroup: {
         name: SchemaName.dataElementGroup,
@@ -76,6 +82,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Data element group'),
         titlePlural: i18n.t('Data element groups'),
         parentSectionKey: 'dataElement',
+        duplicable: true,
     },
     dataElementGroupSet: {
         name: SchemaName.dataElementGroupSet,
@@ -83,6 +90,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Data element group set'),
         titlePlural: i18n.t('Data element group sets'),
         parentSectionKey: 'dataElement',
+        duplicable: true,
     },
     dataSet: {
         name: SchemaName.dataSet,
@@ -97,6 +105,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Data set notification'),
         titlePlural: i18n.t('Data set notifications'),
         parentSectionKey: 'dataSet',
+        duplicable: true,
     },
     indicator: {
         name: SchemaName.indicator,
@@ -104,6 +113,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Indicator'),
         titlePlural: i18n.t('Indicators'),
         parentSectionKey: 'indicator',
+        duplicable: true,
     },
     indicatorType: {
         name: SchemaName.indicatorType,
@@ -111,6 +121,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Indicator type'),
         titlePlural: i18n.t('Indicator types'),
         parentSectionKey: 'indicator',
+        duplicable: true,
     },
     indicatorGroup: {
         name: SchemaName.indicatorGroup,
@@ -118,6 +129,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Indicator group'),
         titlePlural: i18n.t('Indicator groups'),
         parentSectionKey: 'indicator',
+        duplicable: true,
     },
     indicatorGroupSet: {
         name: SchemaName.indicatorGroupSet,
@@ -125,6 +137,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Indicator group set'),
         titlePlural: i18n.t('Indicator group sets'),
         parentSectionKey: 'indicator',
+        duplicable: true,
     },
     organisationUnit: {
         name: SchemaName.organisationUnit,
@@ -132,6 +145,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Organisation unit'),
         titlePlural: i18n.t('Organisation units'),
         parentSectionKey: 'organisationUnit',
+        duplicable: true,
     },
     organisationUnitGroup: {
         name: SchemaName.organisationUnitGroup,
@@ -139,6 +153,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Organisation unit group'),
         titlePlural: i18n.t('Organisation unit groups'),
         parentSectionKey: 'organisationUnit',
+        duplicable: true,
     },
     organisationUnitGroupSet: {
         name: SchemaName.organisationUnitGroupSet,
@@ -146,6 +161,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Organisation unit group set'),
         titlePlural: i18n.t('Organisation unit group sets'),
         parentSectionKey: 'organisationUnit',
+        duplicable: true,
     },
     organisationUnitLevel: {
         name: SchemaName.organisationUnitLevel,
@@ -181,6 +197,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Program indicator'),
         titlePlural: i18n.t('Program indicators'),
         parentSectionKey: 'indicator',
+        duplicable: true,
     },
     programIndicatorGroup: {
         name: SchemaName.programIndicatorGroup,
@@ -188,6 +205,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Program indicator group'),
         titlePlural: i18n.t('Program indicator groups'),
         parentSectionKey: 'indicator',
+        duplicable: true,
     },
     programRule: {
         name: SchemaName.programRule,
@@ -224,6 +242,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Validation rule'),
         titlePlural: i18n.t('Validation rules'),
         parentSectionKey: 'validation',
+        duplicable: true,
     },
     validationRuleGroup: {
         name: SchemaName.validationRuleGroup,
@@ -231,6 +250,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Validation rule group'),
         titlePlural: i18n.t('Validation rule groups'),
         parentSectionKey: 'validation',
+        duplicable: true,
     },
     validationNotificationTemplate: {
         name: SchemaName.validationNotificationTemplate,
@@ -238,6 +258,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Validation notification'),
         titlePlural: i18n.t('Validation notifications'),
         parentSectionKey: 'validation',
+        duplicable: true,
     },
     constant: {
         name: SchemaName.constant,
@@ -245,6 +266,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Constant'),
         titlePlural: i18n.t('Constants'),
         parentSectionKey: 'other',
+        duplicable: true,
     },
     optionGroup: {
         name: SchemaName.optionGroup,
@@ -252,6 +274,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Option group'),
         titlePlural: i18n.t('Option groups'),
         parentSectionKey: 'optionSet',
+        duplicable: true,
     },
     attribute: {
         name: SchemaName.attribute,
@@ -259,6 +282,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Attribute'),
         titlePlural: i18n.t('Attributes'),
         parentSectionKey: 'other',
+        duplicable: true,
     },
     optionSet: {
         name: SchemaName.optionSet,
@@ -273,6 +297,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Option group set'),
         titlePlural: i18n.t('Option group sets'),
         parentSectionKey: 'optionSet',
+        duplicable: true,
     },
     predictor: {
         name: SchemaName.predictor,
@@ -280,6 +305,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Predictor'),
         titlePlural: i18n.t('Predictors'),
         parentSectionKey: 'indicator',
+        duplicable: true,
     },
     pushAnalysis: {
         name: SchemaName.pushAnalysis,
@@ -302,6 +328,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Data approval level'),
         titlePlural: i18n.t('Data approval levels'),
         parentSectionKey: 'dataApproval',
+        duplicable: true,
     },
     dataApprovalWorkflow: {
         name: SchemaName.dataApprovalWorkflow,
@@ -309,6 +336,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Data approval workflow'),
         titlePlural: i18n.t('Data approval workflows'),
         parentSectionKey: 'dataApproval',
+        duplicable: true,
     },
     sqlView: {
         name: SchemaName.sqlView,
@@ -323,6 +351,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Legend'),
         titlePlural: i18n.t('Legends'),
         parentSectionKey: 'other',
+        duplicable: true,
     },
     analyticsTableHook: {
         name: SchemaName.analyticsTableHook,
@@ -330,6 +359,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Analytics table hook'),
         titlePlural: i18n.t('Analytics table hooks'),
         parentSectionKey: 'other',
+        duplicable: true,
     },
     icon: {
         name: SchemaName.icon,
@@ -344,6 +374,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Predictor group'),
         titlePlural: i18n.t('Predictor groups'),
         parentSectionKey: 'indicator',
+        duplicable: true,
     },
 } as const satisfies SchemaSectionMap
 
