@@ -263,6 +263,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Constant'),
         titlePlural: i18n.t('Constants'),
         parentSectionKey: 'other',
+        duplicable: true,
     },
     optionGroup: {
         name: SchemaName.optionGroup,
@@ -278,6 +279,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Attribute'),
         titlePlural: i18n.t('Attributes'),
         parentSectionKey: 'other',
+        duplicable: true,
     },
     optionSet: {
         name: SchemaName.optionSet,
@@ -346,6 +348,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Legend'),
         titlePlural: i18n.t('Legends'),
         parentSectionKey: 'other',
+        duplicable: true,
     },
     analyticsTableHook: {
         name: SchemaName.analyticsTableHook,
@@ -353,6 +356,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Analytics table hook'),
         titlePlural: i18n.t('Analytics table hooks'),
         parentSectionKey: 'other',
+        duplicable: true,
     },
     icon: {
         name: SchemaName.icon,
