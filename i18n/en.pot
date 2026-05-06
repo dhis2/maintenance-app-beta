@@ -5653,9 +5653,6 @@ msgstr ""
 "Displays a form with attributes in the order they were added to the "
 "enrollment"
 
-msgid "Mandatory tracked entity attributes are not included in this form."
-msgstr "Mandatory tracked entity attributes are not included in this form."
-
 msgid "Enrollment: Settings"
 msgstr "Enrollment: Settings"
 
@@ -5683,6 +5680,16 @@ msgid ""
 msgstr ""
 "Do not create overdue events when automatically creating program stage "
 "events"
+
+msgid "Mandatory tracked entity attributes are not included in this form."
+msgstr "Mandatory tracked entity attributes are not included in this form."
+
+msgid ""
+"The following attributes are marked as required but not assigned to any "
+"section:"
+msgstr ""
+"The following attributes are marked as required but not assigned to any "
+"section:"
 
 msgid "Custom label for \"Incident date\""
 msgstr "Custom label for \"Incident date\""
