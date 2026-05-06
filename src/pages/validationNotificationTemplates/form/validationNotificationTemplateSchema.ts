@@ -9,12 +9,8 @@ import { ValidationNotificationTemplate } from '../../../types/generated'
 
 /*  Note that this describes what we send to the server,
     and not what is stored in the form. */
-const {
-    identifiable,
-    referenceCollection,
-    withAttributeValues,
-    withDefaultListColumns,
-} = modelFormSchemas
+const { identifiable, referenceCollection, withDefaultListColumns } =
+    modelFormSchemas
 
 const validationNotificationTemplateBaseSchema = z.object({
     code: z.string().trim().optional(),
@@ -25,7 +21,6 @@ const validationNotificationTemplateBaseSchema = z.object({
 })
 
 export const validationNotificationTemplateFormSchema = identifiable
-    .merge(withAttributeValues)
     .merge(validationNotificationTemplateBaseSchema)
     .extend({
         recipientUserGroups: referenceCollection.default([]),

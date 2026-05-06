@@ -37,12 +37,8 @@ export function CategoriesField() {
         validateFields: [],
     })
 
-    const selectedCategories = Array.isArray(input.value) ? input.value : []
     const generatedCocsCount =
-        selectedCategories.reduce(
-            (acc, cat) => acc * (cat.categoryOptionsSize ?? 0),
-            1
-        ) || 0
+        input.value?.reduce((acc, cat) => acc * cat.categoryOptionsSize, 1) || 0
     return (
         <div className={css.categoriesFieldWrapper}>
             <Field
@@ -52,7 +48,7 @@ export function CategoriesField() {
                 name={fieldName}
             >
                 <ModelTransfer
-                    selected={selectedCategories}
+                    selected={input.value}
                     onChange={({ selected }) => {
                         input.onChange(selected)
                         input.onBlur()
@@ -80,7 +76,7 @@ export function CategoriesField() {
                 )}
                 <CategoriesFieldWarnings
                     catComboId={catComboId}
-                    selectedCategories={selectedCategories}
+                    selectedCategories={input.value}
                 />
             </div>
         </div>

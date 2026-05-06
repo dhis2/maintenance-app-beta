@@ -8,8 +8,12 @@ import {
 } from '../../../../lib'
 import { sharingSettingsSchema } from '../common/sharingSettingsSchema'
 
-const { identifiable, withDefaultListColumns, modelReference } =
-    modelFormSchemas
+const {
+    identifiable,
+    withDefaultListColumns,
+    modelReference,
+    withAttributeValues,
+} = modelFormSchemas
 
 const eventProgramBaseSchema = z.object({
     code: z.string().optional(),
@@ -79,6 +83,7 @@ const eventProgramBaseSchema = z.object({
 
 export const eventProgramFormSchema = identifiable
     .merge(eventProgramBaseSchema)
+    .merge(withAttributeValues)
     .extend({
         shortName: z.string(),
         programType: z
@@ -86,9 +91,9 @@ export const eventProgramFormSchema = identifiable
             .default('WITHOUT_REGISTRATION'),
     })
 
-export const eventProgramListSchema = eventProgramBaseSchema.merge(
-    withDefaultListColumns
-)
+export const eventProgramListSchema = eventProgramBaseSchema
+    .merge(withDefaultListColumns)
+    .merge(withAttributeValues)
 
 export const eventProgramInitialValues = getDefaultsOld(eventProgramFormSchema)
 

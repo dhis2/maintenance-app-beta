@@ -144,19 +144,6 @@ describe('Data approval levels form tests', () => {
             expect(createMock).not.toHaveBeenCalled()
         })
 
-        it('should show an error if code field is too long', async () => {
-            const { screen } = await renderForm()
-            const longText = randomLongString(57)
-            await uiActions.enterInputFieldValue('code', longText, screen)
-            await uiAssertions.expectInputToErrorWhenExceedsLength(
-                'code',
-                50,
-                screen
-            )
-            await uiActions.submitForm(screen)
-            expect(createMock).not.toHaveBeenCalled()
-        })
-
         it('should show an error if name field is a duplicate', async () => {
             const existingName = faker.company.name()
             const { screen } = await renderForm({
@@ -170,16 +157,30 @@ describe('Data approval levels form tests', () => {
             expect(createMock).not.toHaveBeenCalled()
         })
 
-        it('should show an error if code field is a duplicate', async () => {
-            const existingCode = faker.science.chemicalElement().symbol
+        it('should show an error if the org unit level and category option group set combination already exists', async () => {
             const { screen } = await renderForm({
-                matchingExistingElementFilter: `code:ieq:${existingCode}`,
+                matchingExistingElementFilter: 'orgUnitLevel:eq:1',
             })
-            await uiAssertions.expectCodeToErrorWhenDuplicate(
-                existingCode,
+
+            await uiActions.enterName(faker.word.words(), screen)
+            await uiActions.pickOptionFromSelect(
+                screen.getByTestId('formfields-orgunitlevel'),
+                0,
                 screen
             )
+            await uiActions.pickOptionFromSelect(
+                screen.getByTestId('formfields-categoryoptiongroupset'),
+                0,
+                screen
+            )
+
             await uiActions.submitForm(screen)
+
+            uiAssertions.expectFieldToHaveError(
+                'formfields-categoryoptiongroupset',
+                'An approval level for this organisation unit level and category option group set combination already exists.',
+                screen
+            )
             expect(createMock).not.toHaveBeenCalled()
         })
     })
@@ -236,7 +237,6 @@ describe('Data approval levels form tests', () => {
         it('should contain all needed fields', async () => {
             const { screen } = await renderForm()
             uiAssertions.expectNameFieldExist('', screen)
-            uiAssertions.expectCodeFieldExist('', screen)
             expect(
                 screen.getByTestId('formfields-orgunitlevel')
             ).toBeInTheDocument()
@@ -258,10 +258,8 @@ describe('Data approval levels form tests', () => {
         it('should submit the data', async () => {
             const { screen, organisationUnitLevels } = await renderForm()
             const aName = faker.word.words()
-            const aCode = faker.science.chemicalElement().symbol
 
             await uiActions.enterName(aName, screen)
-            await uiActions.enterCode(aCode, screen)
             await uiActions.pickOptionFromSelect(
                 screen.getByTestId('formfields-orgunitlevel'),
                 0,
@@ -274,7 +272,6 @@ describe('Data approval levels form tests', () => {
                 expect.objectContaining({
                     data: expect.objectContaining({
                         name: aName,
-                        code: aCode,
                         orgUnitLevel: organisationUnitLevels[0].level,
                     }),
                 })
@@ -349,9 +346,9 @@ describe('Data approval levels form tests', () => {
 
         it('should submit updated data when a field is changed', async () => {
             const { screen, dataApprovalLevel } = await renderForm()
-            const newCode = faker.science.chemicalElement().symbol
+            const newName = faker.word.words()
 
-            await uiActions.enterCode(newCode, screen)
+            await uiActions.enterName(newName, screen)
             await uiActions.submitForm(screen)
 
             await waitFor(() =>
@@ -361,8 +358,8 @@ describe('Data approval levels form tests', () => {
                         data: [
                             {
                                 op: 'replace',
-                                path: '/code',
-                                value: newCode,
+                                path: '/name',
+                                value: newName,
                             },
                         ],
                     })

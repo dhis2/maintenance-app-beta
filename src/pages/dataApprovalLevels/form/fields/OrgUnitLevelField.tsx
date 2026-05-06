@@ -6,7 +6,7 @@ import { required as requiredValidator } from '../../../../lib'
 
 export function OrgUnitLevelField() {
     const { input, meta } = useField('orgUnitLevel', {
-        validateFields: [],
+        validateFields: ['categoryOptionGroupSet'],
         validate: requiredValidator,
         format: (level) =>
             level == null

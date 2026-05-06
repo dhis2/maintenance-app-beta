@@ -6,6 +6,7 @@ import { Field } from 'react-final-form'
 import { useDebouncedCallback } from 'use-debounce'
 import { BaseModelSingleSelect } from '../../../components/metadataFormControls/ModelSingleSelect/BaseModelSingleSelect'
 import { useBoundResourceQueryFn } from '../../../lib'
+import { fromTaggedName, toTaggedName } from '../programRuleVariableTag'
 
 type ProgramRuleVariableModel = {
     id: string
@@ -59,7 +60,7 @@ export function ProgramRuleVariableField({
     return (
         <Field name="content">
             {({ input, meta }) => {
-                const name = (input.value as string) ?? ''
+                const name = fromTaggedName((input.value as string) ?? '')
                 const selected = name
                     ? available.find((v) => v.name === name) ??
                       ({
@@ -82,7 +83,9 @@ export function ProgramRuleVariableField({
                                 selected={selected}
                                 available={available}
                                 onChange={(value) => {
-                                    input.onChange(value?.name ?? '')
+                                    input.onChange(
+                                        value ? toTaggedName(value.name) : ''
+                                    )
                                     input.onBlur()
                                 }}
                                 clearable

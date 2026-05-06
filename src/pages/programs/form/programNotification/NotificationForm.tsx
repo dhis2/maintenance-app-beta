@@ -129,6 +129,7 @@ type OnSubmitWithClose = (
 
 export type NotificationFormProps = {
     isTrackerProgram: boolean
+    isEditMode?: boolean
     programStageId: string | undefined
     notification?: PartialNotificationFormValues
     onCancel?: () => void
@@ -137,6 +138,7 @@ export type NotificationFormProps = {
 
 export const NotificationForm = ({
     isTrackerProgram,
+    isEditMode = false,
     programStageId,
     notification,
     onSubmit,
@@ -190,6 +192,7 @@ export const NotificationForm = ({
                                     <ProgramNotificationsFormFields
                                         setSelectedSection={setSelectedSection}
                                         isTrackerProgram={isTrackerProgram}
+                                        isEditMode={isEditMode}
                                     />
                                     <SectionedFormErrorNotice />
                                 </div>
@@ -306,6 +309,7 @@ export const EditNotificationForm = ({
             onCancel={onCancel}
             isTrackerProgram={isTrackerProgram}
             programStageId={programStageId}
+            isEditMode={true}
         />
     )
 }

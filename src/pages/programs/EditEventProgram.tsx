@@ -18,6 +18,7 @@ import { useHandleOnSubmitEditFormDeletions } from '../../components/sectionedFo
 import {
     createFormError,
     createJsonPatchOperations,
+    ATTRIBUTE_VALUES_FIELD_FILTERS,
     DEFAULT_FIELD_FILTERS,
     parseErrorResponse,
     SectionedFormProvider,
@@ -41,6 +42,7 @@ import {
 import { ProgramStageListItem } from './form/trackerProgram/ProgramStagesFormContents'
 
 const fieldFilters = [
+    ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     ...DEFAULT_FIELD_FILTERS,
     'programType',
     'name',

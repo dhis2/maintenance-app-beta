@@ -69,7 +69,7 @@ export function ValidationRuleGroupsFormFields() {
                     />
                 </StandardFormField>
             </StandardFormSection>
-            <CustomAttributesSection schemaSection={SCHEMA_SECTIONS.program} />
+            <CustomAttributesSection schemaSection={schemaSection} />
         </>
     )
 }

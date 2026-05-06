@@ -2,7 +2,7 @@ import i18n from '@dhis2/d2-i18n'
 import { NoticeBox } from '@dhis2/ui'
 import React from 'react'
 import { useFormState } from 'react-final-form'
-import { ModelSection } from '../../types'
+import { ModelSection } from '../../../types'
 import css from './DuplicationNoticeBox.module.css'
 
 export function DuplicationNoticeBox({
