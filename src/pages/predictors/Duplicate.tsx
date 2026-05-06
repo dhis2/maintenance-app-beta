@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { omit } from 'lodash'
-import React, { useEffect } from 'react'
-import { useForm } from 'react-final-form'
+import React, { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import {
     DefaultFormFooter,
@@ -9,8 +8,9 @@ import {
     FormBase,
     SectionedFormErrorNotice,
     SectionedFormLayout,
+    TriggerDuplicateValidation,
+    DuplicationNoticeBox,
 } from '../../components'
-import { DuplicationNoticeBox } from '../../components/form/DuplicationNoticeBox'
 import {
     DEFAULT_FIELD_FILTERS,
     SectionedFormProvider,
@@ -50,17 +50,6 @@ export type PredictorFormValues = PickWithFieldFilters<
 
 const section = SECTIONS_MAP.predictor
 
-const TriggerDuplicateValidation = () => {
-    const form = useForm()
-    useEffect(() => {
-        form.getRegisteredFields().forEach((field) => {
-            form.focus(field)
-            form.blur(field)
-        })
-    }, [form])
-    return null
-}
-
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
@@ -79,10 +68,18 @@ export const Component = () => {
         queryFn: queryFn<PredictorFormValues>,
     })
 
+    const onSubmit = useOnSubmitNew<Omit<PredictorFormValues, 'id'>>({
+        section,
+    })
+
+    const initialValues = useMemo(() => {
+        return predictorQuery.data ? omit(predictorQuery.data, 'id') : undefined
+    }, [predictorQuery.data])
+
     return (
         <FormBase
-            onSubmit={useOnSubmitNew({ section })}
-            initialValues={omit(predictorQuery.data, 'id')}
+            onSubmit={onSubmit}
+            initialValues={initialValues}
             validate={validate}
             subscription={{}}
             includeAttributes={false}
@@ -95,8 +92,8 @@ export const Component = () => {
                     >
                         <form onSubmit={handleSubmit}>
                             <DuplicationNoticeBox section={section} />
-                            <TriggerDuplicateValidation />
                             <PredictorFormFields />
+                            <TriggerDuplicateValidation />
                             <DefaultFormFooter cancelTo="/predictors" />
                         </form>
                         <SectionedFormErrorNotice />
