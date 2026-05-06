@@ -261,6 +261,9 @@ export const EnrollmentSectionFormContents = ({
                     submitting={submitting ?? false}
                     onSubmitClick={() => form.submit()}
                     onCancelClick={onCancel}
+                    infoMessage={i18n.t(
+                        'Saving a section does not save other changes to the program'
+                    )}
                 />
             }
         >
