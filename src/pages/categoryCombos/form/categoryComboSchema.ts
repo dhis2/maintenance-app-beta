@@ -4,12 +4,8 @@ import { getDefaultsOld, modelFormSchemas } from '../../../lib'
 import { createFormValidate } from '../../../lib/form/validate'
 import { CategoryCombo } from './../../../types/generated/models'
 
-const {
-    identifiable,
-    withAttributeValues,
-    modelReference,
-    withDefaultListColumns,
-} = modelFormSchemas
+const { identifiable, modelReference, withDefaultListColumns } =
+    modelFormSchemas
 
 const GENERATED_COC_LIMIT = 50000
 
@@ -19,7 +15,6 @@ export const categoryComboBaseSchema = z.object({
 })
 
 export const categoryComboFormSchema = identifiable
-    .merge(withAttributeValues)
     .merge(categoryComboBaseSchema)
     .extend({
         skipTotal: z.boolean().default(false),
