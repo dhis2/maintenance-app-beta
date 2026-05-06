@@ -28,11 +28,9 @@ export const optionGroupSetFormSchema = identifiable
         optionGroups: referenceCollection.default([]),
     })
 
-export const optionGroupSetListSchema = optionGroupSetBaseSchema
-    .merge(withDefaultListColumns)
-    .extend({
-        displayShortName: z.string(),
-    })
+export const optionGroupSetListSchema = optionGroupSetBaseSchema.merge(
+    withDefaultListColumns
+)
 
 export const initialValues = getDefaultsOld(optionGroupSetFormSchema)
 

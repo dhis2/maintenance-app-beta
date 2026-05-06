@@ -36,6 +36,10 @@
 .selectionCell {
     padding-inline-end: 0 !important;
 }
+.orgUnitRow td span {
+    cursor: default;
+}
+
 .orgUnitRow.clickable:hover td:nth-child(2) span {
     text-decoration: underline;
 }

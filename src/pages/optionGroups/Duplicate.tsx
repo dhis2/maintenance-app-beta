@@ -4,16 +4,13 @@ import React, { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { FormBase } from '../../components'
 import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormContents'
-import { DEFAULT_FIELD_FILTERS, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
+import { SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import { IndicatorTypesFormValues } from './Edit'
-import { validate } from './form'
-import { IndicatorTypesFormFields } from './form/IndicatorTypesFormFields'
+import { fieldFilters } from './form/fieldFilters'
+import { OptionGroupFormFields } from './form/OptionGroupFormFields'
+import { OptionGroupFormValues, validate } from './form/OptionGroupFormSchema'
 
-const fieldFilters = [...DEFAULT_FIELD_FILTERS, 'name', 'factor'] as const
-
-const section = SECTIONS_MAP.indicatorType
-type IndicatorTypesDuplicateFormValues = IndicatorTypesFormValues
+const section = SECTIONS_MAP.optionGroup
 
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
@@ -21,37 +18,36 @@ export const Component = () => {
     const duplicatedModelId = searchParams.get('duplicatedId') as string
 
     const query = {
-        resource: 'indicatorTypes',
+        resource: 'optionGroups',
         id: duplicatedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
     }
-    const indicatorTypeQuery = useQuery({
+    const optionGroupQuery = useQuery({
         queryKey: [query],
-        queryFn: queryFn<IndicatorTypesDuplicateFormValues>,
+        queryFn: queryFn<OptionGroupFormValues>,
     })
 
-    const onSubmit = useOnSubmitNew<
-        Omit<IndicatorTypesDuplicateFormValues, 'id'>
-    >({ section })
+    const onSubmit = useOnSubmitNew<Omit<OptionGroupFormValues, 'id'>>({
+        section,
+    })
 
-    const initialValues = useMemo(() => {
-        return indicatorTypeQuery.data
-            ? omit(indicatorTypeQuery.data, 'id')
-            : undefined
-    }, [indicatorTypeQuery.data])
+    const initialValues = useMemo(
+        () => omit(optionGroupQuery.data, 'id'),
+        [optionGroupQuery.data]
+    )
 
     return (
         <FormBase
             onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
+            fetchError={!!optionGroupQuery.error}
             includeAttributes={false}
-            fetchError={!!indicatorTypeQuery.error}
         >
             <DefaultDuplicateFormContents section={section}>
-                <IndicatorTypesFormFields />
+                <OptionGroupFormFields />
             </DefaultDuplicateFormContents>
         </FormBase>
     )

@@ -6,24 +6,25 @@ import { FormBase } from '../../components'
 import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormContents'
 import { DEFAULT_FIELD_FILTERS, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import { PredictorGroup, PickWithFieldFilters } from '../../types/generated'
-import { PredictorGroupFormFields } from './form/PredictorGroupFormFields'
-import { validate } from './form/predictorGroupSchema'
+import { PickWithFieldFilters } from '../../types/generated'
+import { DataApprovalWorkflow } from '../../types/models'
+import DataApprovalWorkflowFormFields from './form/DataApprovalWorkflowFormFields'
+import { validate } from './form/dataApprovalWorkflowSchema'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     'name',
-    'code',
-    'description',
-    'predictors[id,displayName]',
+    'periodType',
+    'categoryCombo[id,displayName]',
+    'dataApprovalLevels[id,displayName]',
 ] as const
 
-export type PredictorGroupFormValues = PickWithFieldFilters<
-    PredictorGroup,
+type DataApprovalWorkflowFormValues = PickWithFieldFilters<
+    DataApprovalWorkflow,
     typeof fieldFilters
 >
 
-const section = SECTIONS_MAP.predictorGroup
+const section = SECTIONS_MAP.dataApprovalWorkflow
 
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
@@ -31,37 +32,41 @@ export const Component = () => {
     const duplicatedModelId = searchParams.get('duplicatedId') as string
 
     const query = {
-        resource: 'predictorGroups',
+        resource: 'dataApprovalWorkflows',
         id: duplicatedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
     }
-    const predictorGroupsQuery = useQuery({
+    const dataApprovalWorkflowQuery = useQuery({
         queryKey: [query],
-        queryFn: queryFn<PredictorGroupFormValues>,
+        queryFn: queryFn<DataApprovalWorkflowFormValues>,
     })
 
-    const onSubmit = useOnSubmitNew<Omit<PredictorGroupFormValues, 'id'>>({
-        section,
-    })
+    const onSubmit = useOnSubmitNew<Omit<DataApprovalWorkflowFormValues, 'id'>>(
+        {
+            section,
+        }
+    )
 
-    const initialValues = useMemo(() => {
-        return predictorGroupsQuery.data
-            ? omit(predictorGroupsQuery.data, 'id')
-            : undefined
-    }, [predictorGroupsQuery.data])
+    const initialValues = useMemo(
+        () =>
+            dataApprovalWorkflowQuery.data
+                ? omit(dataApprovalWorkflowQuery.data, 'id')
+                : undefined,
+        [dataApprovalWorkflowQuery.data]
+    )
 
     return (
         <FormBase
             onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
+            fetchError={!!dataApprovalWorkflowQuery.error}
             includeAttributes={false}
-            fetchError={!!predictorGroupsQuery.error}
         >
             <DefaultDuplicateFormContents section={section}>
-                <PredictorGroupFormFields />
+                <DataApprovalWorkflowFormFields />
             </DefaultDuplicateFormContents>
         </FormBase>
     )

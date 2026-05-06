@@ -6,14 +6,24 @@ import { FormBase } from '../../components'
 import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormContents'
 import { DEFAULT_FIELD_FILTERS, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import { IndicatorTypesFormValues } from './Edit'
-import { validate } from './form'
-import { IndicatorTypesFormFields } from './form/IndicatorTypesFormFields'
+import { PickWithFieldFilters } from '../../types/generated'
+import { DataApprovalLevel } from '../../types/models'
+import DataApprovalLevelFormFields from './form/DataApprovalLevelFormFields'
+import { validate } from './form/dataApprovalLevelsSchema'
 
-const fieldFilters = [...DEFAULT_FIELD_FILTERS, 'name', 'factor'] as const
+const fieldFilters = [
+    ...DEFAULT_FIELD_FILTERS,
+    'name',
+    'orgUnitLevel',
+    'categoryOptionGroupSet[id,displayName]',
+] as const
 
-const section = SECTIONS_MAP.indicatorType
-type IndicatorTypesDuplicateFormValues = IndicatorTypesFormValues
+type DataApprovalLevelFormValues = PickWithFieldFilters<
+    DataApprovalLevel,
+    typeof fieldFilters
+>
+
+const section = SECTIONS_MAP.dataApprovalLevel
 
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
@@ -21,37 +31,39 @@ export const Component = () => {
     const duplicatedModelId = searchParams.get('duplicatedId') as string
 
     const query = {
-        resource: 'indicatorTypes',
+        resource: 'dataApprovalLevels',
         id: duplicatedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
     }
-    const indicatorTypeQuery = useQuery({
+    const dataApprovalLevelQuery = useQuery({
         queryKey: [query],
-        queryFn: queryFn<IndicatorTypesDuplicateFormValues>,
+        queryFn: queryFn<DataApprovalLevelFormValues>,
     })
 
-    const onSubmit = useOnSubmitNew<
-        Omit<IndicatorTypesDuplicateFormValues, 'id'>
-    >({ section })
+    const onSubmit = useOnSubmitNew<Omit<DataApprovalLevelFormValues, 'id'>>({
+        section,
+    })
 
-    const initialValues = useMemo(() => {
-        return indicatorTypeQuery.data
-            ? omit(indicatorTypeQuery.data, 'id')
-            : undefined
-    }, [indicatorTypeQuery.data])
+    const initialValues = useMemo(
+        () =>
+            dataApprovalLevelQuery.data
+                ? omit(dataApprovalLevelQuery.data, 'id')
+                : undefined,
+        [dataApprovalLevelQuery.data]
+    )
 
     return (
         <FormBase
             onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
+            fetchError={!!dataApprovalLevelQuery.error}
             includeAttributes={false}
-            fetchError={!!indicatorTypeQuery.error}
         >
             <DefaultDuplicateFormContents section={section}>
-                <IndicatorTypesFormFields />
+                <DataApprovalLevelFormFields />
             </DefaultDuplicateFormContents>
         </FormBase>
     )

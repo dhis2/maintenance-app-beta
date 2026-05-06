@@ -4,30 +4,26 @@ import React, { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { FormBase } from '../../components'
 import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormContents'
-import {
-    ATTRIBUTE_VALUES_FIELD_FILTERS,
-    SECTIONS_MAP,
-    useOnSubmitNew,
-} from '../../lib'
+import { DEFAULT_FIELD_FILTERS, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import { CategoryOptionFormValues } from './Edit'
-import { CategoryOptionFormFields, validate } from './form'
-import { transformFormValues } from './form/categoryOptionSchema'
+import { CategoryCombo, PickWithFieldFilters } from '../../types/generated'
+import { validate, CategoryComboFormFields } from './form'
 
 const fieldFilters = [
-    ...ATTRIBUTE_VALUES_FIELD_FILTERS,
+    ...DEFAULT_FIELD_FILTERS,
     'name',
-    'displayName',
-    'formName',
     'code',
-    'shortName',
-    'description',
-    'startDate',
-    'endDate',
-    'organisationUnits[id,displayName,path]',
+    'categories[id,displayName,categoryOptions~size~rename(categoryOptionsSize)],',
+    'skipTotal',
+    'dataDimensionType',
 ] as const
 
-const section = SECTIONS_MAP.categoryOption
+export type CategoryComboFormValues = PickWithFieldFilters<
+    CategoryCombo,
+    typeof fieldFilters
+> & { id: string }
+
+const section = SECTIONS_MAP.categoryCombo
 
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
@@ -35,37 +31,35 @@ export const Component = () => {
     const duplicatedModelId = searchParams.get('duplicatedId') as string
 
     const query = {
-        resource: 'categoryOptions',
+        resource: 'categoryCombos',
         id: duplicatedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
     }
-    const categoryOptionCombo = useQuery({
+    const categoryCombo = useQuery({
         queryKey: [query],
-        queryFn: queryFn<CategoryOptionFormValues>,
+        queryFn: queryFn<CategoryComboFormValues>,
     })
 
-    const onSubmit = useOnSubmitNew<Omit<CategoryOptionFormValues, 'id'>>({
+    const onSubmit = useOnSubmitNew<Omit<CategoryComboFormValues, 'id'>>({
         section,
     })
 
     const initialValues = useMemo(() => {
-        return categoryOptionCombo.data
-            ? omit(categoryOptionCombo.data, 'id')
-            : undefined
-    }, [categoryOptionCombo.data])
+        return categoryCombo.data ? omit(categoryCombo.data, 'id') : undefined
+    }, [categoryCombo.data])
 
     return (
         <FormBase
             onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
-            valueFormatter={transformFormValues}
-            fetchError={!!categoryOptionCombo.error}
+            includeAttributes={false}
+            fetchError={!!categoryCombo.error}
         >
             <DefaultDuplicateFormContents section={section}>
-                <CategoryOptionFormFields />
+                <CategoryComboFormFields />
             </DefaultDuplicateFormContents>
         </FormBase>
     )
