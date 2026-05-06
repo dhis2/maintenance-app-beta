@@ -323,6 +323,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Data approval level'),
         titlePlural: i18n.t('Data approval levels'),
         parentSectionKey: 'dataApproval',
+        duplicable: true,
     },
     dataApprovalWorkflow: {
         name: SchemaName.dataApprovalWorkflow,
@@ -330,6 +331,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Data approval workflow'),
         titlePlural: i18n.t('Data approval workflows'),
         parentSectionKey: 'dataApproval',
+        duplicable: true,
     },
     sqlView: {
         name: SchemaName.sqlView,
