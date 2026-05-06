@@ -50,9 +50,9 @@ export const EnrollmentFormFormContents = React.memo(function FormFormContents({
             getMandatoryAttributesMissingFromSections({
                 programTrackedEntityAttributes:
                     initialValues?.programTrackedEntityAttributes,
-                programSections: initialValues?.programSections,
+                programSections: sections,
             }),
-        [initialValues]
+        [initialValues?.programTrackedEntityAttributes, sections]
     )
     const [selectedFormType, setSelectedFormType] = useState<FormType>(
         FormType.DEFAULT
