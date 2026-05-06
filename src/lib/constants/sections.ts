@@ -153,6 +153,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Organisation unit group'),
         titlePlural: i18n.t('Organisation unit groups'),
         parentSectionKey: 'organisationUnit',
+        duplicable: true,
     },
     organisationUnitGroupSet: {
         name: SchemaName.organisationUnitGroupSet,
@@ -160,6 +161,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Organisation unit group set'),
         titlePlural: i18n.t('Organisation unit group sets'),
         parentSectionKey: 'organisationUnit',
+        duplicable: true,
     },
     organisationUnitLevel: {
         name: SchemaName.organisationUnitLevel,
