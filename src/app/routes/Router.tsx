@@ -150,6 +150,7 @@ const EditBreadcrumbItem = ({
         ? i18n.t('Edit: {{objectName}}', {
               objectName: data.displayName,
               interpolation: { escapeValue: false },
+              nsSeparator: '~:~',
           })
         : i18n.t('Edit')
 

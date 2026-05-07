@@ -48,10 +48,16 @@ export const TabbedFormTypePicker = React.memo(function FormFormContents({
                     title={i18n.t('Form type based on current setup')}
                     className={classes.formTypeInfo}
                 >
-                    <div>{i18n.t('Web: {{webFormType}}', { webFormType })}</div>
+                    <div>
+                        {i18n.t('Web: {{webFormType}}', {
+                            webFormType,
+                            nsSeparator: '~:~',
+                        })}
+                    </div>
                     <div>
                         {i18n.t('Android: {{androidFormType}}', {
                             androidFormType,
+                            nsSeparator: '~:~',
                         })}
                     </div>
                 </NoticeBox>

@@ -28,7 +28,7 @@ export function IconPicker({
                 aria-label={
                     icon
                         ? `${i18n.t('Icon')}: ${icon}`
-                        : i18n.t('Icon: none selected')
+                        : i18n.t('Icon: none selected', { nsSeparator: '~:~' })
                 }
             >
                 <span className={classes.label}>{i18n.t('Icon')}</span>

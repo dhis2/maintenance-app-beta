@@ -112,6 +112,7 @@ export const Component = () => {
                         {
                             programNames,
                             interpolation: { escapeValue: false },
+                            nsSeparator: '~:~',
                         }
                     ),
                     warning: true,

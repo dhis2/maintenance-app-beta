@@ -129,7 +129,8 @@ const ProgramNotificationListNewOrEdit = ({
                             item={{
                                 ...notification,
                                 description: i18n.t(
-                                    'Notification type: Program'
+                                    'Notification type: Program',
+                                    { nsSeparator: '~:~' }
                                 ),
                             }}
                             schemaName={SchemaName.programNotificationTemplate}
