@@ -170,6 +170,7 @@ export const RoleAccess = ({
                 <RoleAccessBox
                     title={i18n.t('Program: {{name}}', {
                         name: values.name || i18n.t('Untitled'),
+                        nsSeparator: '~:~',
                     })}
                     type="program"
                     sharing={values.sharing}
@@ -187,6 +188,7 @@ export const RoleAccess = ({
                             key={stage.id}
                             title={i18n.t('Stage: {{name}}', {
                                 name: stage.displayName,
+                                nsSeparator: '~:~',
                             })}
                             type="stage"
                             sharing={stage.sharing}

@@ -90,7 +90,8 @@ export const VALIDATION_MESSAGES = {
     ),
     OPTIONGROUP_GROUP: i18n.t('Option group is required'),
     SETMANDATORYFIELD: i18n.t(
-        'Select at least one: data element or tracked entity attribute'
+        'Select at least one: data element or tracked entity attribute',
+        { nsSeparator: '~:~' }
     ),
     STATIC_TEXT_REQUIRED: i18n.t('Static text is required'),
 } as const

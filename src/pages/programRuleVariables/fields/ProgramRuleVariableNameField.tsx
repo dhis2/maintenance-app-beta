@@ -47,7 +47,8 @@ const forbiddenWordsValidator: FormFieldValidator<string> = (value) => {
     }
     if (containsForbiddenWord(value)) {
         return i18n.t(
-            'Program rule variable name contains forbidden words: and, or, not.'
+            'Program rule variable name contains forbidden words: and, or, not.',
+            { nsSeparator: '~:~' }
         )
     }
     return undefined
@@ -160,7 +161,8 @@ export function ProgramRuleVariableNameField() {
                     inputWidth="400px"
                     label={i18n.t('Name')}
                     helpText={i18n.t(
-                        'Variable name cannot contain the words: and, or, not.'
+                        'Variable name cannot contain the words: and, or, not.',
+                        { nsSeparator: '~:~' }
                     )}
                 />
             )}

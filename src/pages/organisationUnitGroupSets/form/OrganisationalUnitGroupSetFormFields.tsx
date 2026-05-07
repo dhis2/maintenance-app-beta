@@ -37,7 +37,8 @@ export const OrganisationalUnitGroupSetFormFields = () => {
                         component={CheckboxFieldFF}
                         name="compulsory"
                         label={i18n.t(
-                            'Compulsory: all organisation units must belong to at least one group in this group set.'
+                            'Compulsory: all organisation units must belong to at least one group in this group set.',
+                            { nsSeparator: '~:~' }
                         )}
                         type="checkbox"
                         validateFields={[]}

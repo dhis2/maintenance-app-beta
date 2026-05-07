@@ -10,7 +10,8 @@ export function CompulsoryField() {
             dataTest="formfields-compulsory"
             name="compulsory"
             label={i18n.t(
-                'Compulsory: all data elements must belong to at least one group in this group set.'
+                'Compulsory: all data elements must belong to at least one group in this group set.',
+                { nsSeparator: '~:~' }
             )}
             type="checkbox"
             validateFields={[]}

@@ -35,7 +35,7 @@ export function ColorPicker({
                 aria-label={
                     color
                         ? `${i18n.t('Color')}: ${color}`
-                        : i18n.t('Color: none selected')
+                        : i18n.t('Color: none selected', { nsSeparator: '~:~' })
                 }
             >
                 <span className={classes.label}>{i18n.t('Color')}</span>
