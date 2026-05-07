@@ -1,3 +1,11 @@
+# [0.152.0](https://github.com/dhis2/metadata-management-app/compare/v0.151.5...v0.152.0) (2026-05-07)
+
+
+### Features
+
+* latest changes from dev ([e894345](https://github.com/dhis2/metadata-management-app/commit/e89434509bc124c1b6779a2df4ba3b76a2496ea9)), closes [#827](https://github.com/dhis2/metadata-management-app/issues/827) [#849](https://github.com/dhis2/metadata-management-app/issues/849) [#818](https://github.com/dhis2/metadata-management-app/issues/818) [#841](https://github.com/dhis2/metadata-management-app/issues/841) [#841](https://github.com/dhis2/metadata-management-app/issues/841) [#831](https://github.com/dhis2/metadata-management-app/issues/831)
+* release post freeze ([#920](https://github.com/dhis2/metadata-management-app/issues/920)) ([28dd08d](https://github.com/dhis2/metadata-management-app/commit/28dd08d14687bc6bea84ad3dfe196b665ec66df0))
+
 ## [0.151.5](https://github.com/dhis2/metadata-management-app/compare/v0.151.4...v0.151.5) (2026-04-30)
 
 
