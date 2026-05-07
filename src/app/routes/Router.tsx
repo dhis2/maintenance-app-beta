@@ -159,6 +159,7 @@ const EditBreadcrumbItem = ({
 const sectionsNoNewRoute = new Set<SchemaSection | NonSchemaSection>([
     SECTIONS_MAP.categoryOptionCombo,
     SECTIONS_MAP.organisationUnitLevel,
+    SECTIONS_MAP.icon,
 ])
 
 const schemaSectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
