@@ -34,8 +34,8 @@ export const StageFormFormContents = ({
     name: string
     isTrackerProgram?: boolean
 }) => {
-    const { values, initialValues } = useFormState({
-        subscription: { values: true, initialValues: true },
+    const { values } = useFormState({
+        subscription: { values: true },
     })
     const currentSections = isTrackerProgram
         ? values.programStageSections
@@ -48,19 +48,16 @@ export const StageFormFormContents = ({
         ? values.programStageDataElements?.length > 0
         : values.programStages?.[0]?.programStageDataElements?.length > 0
 
-    const initialDataElements = isTrackerProgram
-        ? initialValues?.programStageDataElements
-        : initialValues?.programStages?.[0]?.programStageDataElements
-    const initialSections = isTrackerProgram
-        ? initialValues?.programStageSections
-        : initialValues?.programStages?.[0]?.programStageSections
+    const currentDataElements = isTrackerProgram
+        ? values.programStageDataElements
+        : values.programStages?.[0]?.programStageDataElements
     const missingMandatoryDataElements = useMemo(
         () =>
             getMandatoryDataElementsMissingFromSections({
-                programStageDataElements: initialDataElements,
-                programStageSections: initialSections,
+                programStageDataElements: currentDataElements,
+                programStageSections: currentSections,
             }),
-        [initialDataElements, initialSections]
+        [currentDataElements, currentSections]
     )
 
     const [selectedFormType, setSelectedFormType] = useState<FormType>(
