@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-06T08:00:18.412Z\n"
-"PO-Revision-Date: 2026-05-06T08:00:18.412Z\n"
+"POT-Creation-Date: 2026-05-11T06:09:54.085Z\n"
+"PO-Revision-Date: 2026-05-11T06:09:54.085Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -2411,6 +2411,12 @@ msgstr "Sequential skip count"
 msgid "Organisation unit providing data"
 msgstr "Organisation unit providing data"
 
+msgid "Key"
+msgstr "Key"
+
+msgid "Keywords"
+msgstr "Keywords"
+
 msgid "Which resource table"
 msgstr "Which resource table"
 
@@ -3415,6 +3421,60 @@ msgstr "Display Options"
 msgid "Advanced"
 msgstr "Advanced"
 
+msgid "Icon saved successfully"
+msgstr "Icon saved successfully"
+
+msgid "Failed to load icon"
+msgstr "Failed to load icon"
+
+msgid "Could not load icon \"{{key}}\""
+msgstr "Could not load icon \"{{key}}\""
+
+msgid "System icon"
+msgstr "System icon"
+
+msgid "System icons cannot be edited. Only custom icons can be modified."
+msgstr "System icons cannot be edited. Only custom icons can be modified."
+
+msgid "Exit without saving"
+msgstr "Exit without saving"
+
+msgid "Save and exit"
+msgstr "Save and exit"
+
+msgid "Only custom icons can be edited"
+msgstr "Only custom icons can be edited"
+
+msgid "Search by name, keyword or description"
+msgstr "Search by name, keyword or description"
+
+msgid "Clear filter"
+msgstr "Clear filter"
+
+msgid "Icon created successfully"
+msgstr "Icon created successfully"
+
+msgid "Create icon"
+msgstr "Create icon"
+
+msgid "Icon file"
+msgstr "Icon file"
+
+msgid "Icon preview"
+msgstr "Icon preview"
+
+msgid "Upload icon"
+msgstr "Upload icon"
+
+msgid "SVG, PNG or GIF"
+msgstr "SVG, PNG or GIF"
+
+msgid "A unique identifier for this icon"
+msgstr "A unique identifier for this icon"
+
+msgid "Comma-separated list of keywords"
+msgstr "Comma-separated list of keywords"
+
 msgid "Set up the basic information for this indicator group set."
 msgstr "Set up the basic information for this indicator group set."
 
@@ -3683,9 +3743,6 @@ msgstr "Add legend item"
 
 msgid "Change color"
 msgstr "Change color"
-
-msgid "Exit without saving"
-msgstr "Exit without saving"
 
 msgid "Create {{modelName}} "
 msgstr "Create {{modelName}} "
@@ -4707,9 +4764,6 @@ msgid ""
 msgstr ""
 "Configure a filter to control which data is evaulated by the main "
 "expression."
-
-msgid "Clear filter"
-msgstr "Clear filter"
 
 msgid "Period boundaries"
 msgstr "Period boundaries"

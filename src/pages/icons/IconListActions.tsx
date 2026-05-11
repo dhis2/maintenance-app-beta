@@ -3,17 +3,18 @@ import {
     Button,
     colors,
     FlyoutMenu,
+    IconEdit16,
     IconInfo16,
     IconMore24,
     MenuItem,
     Popover,
 } from '@dhis2/ui'
 import React, { useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { ListActions } from '../../components/sectionList/listActions'
 import { DeleteAction } from '../../components/sectionList/listActions/DeleteAction'
 import css from '../../components/sectionList/listActions/SectionListActions.module.css'
-import { TooltipWrapper } from '../../components/tooltip'
-import { TOOLTIPS } from '../../lib'
+import { getSectionPath, SECTIONS_MAP } from '../../lib'
 import { IconModel } from './List'
 
 type IconListActionsProps = {
@@ -29,8 +30,7 @@ export const IconListActions = ({
 }: IconListActionsProps) => {
     const [open, setOpen] = useState(false)
     const ref = useRef(null)
-
-    const deletable = model.custom
+    const navigate = useNavigate()
 
     return (
         <ListActions>
@@ -61,21 +61,29 @@ export const IconListActions = ({
                                     setOpen(false)
                                 }}
                             />
-                            <TooltipWrapper
-                                condition={!deletable}
-                                content={TOOLTIPS.noDeleteAccess}
-                            >
-                                <DeleteAction
-                                    modelId={model.key}
-                                    modelDisplayName={model.key}
-                                    disabled={!deletable}
-                                    onDeleteSuccess={() => {
-                                        onDeleteSuccess(model)
-                                        setOpen(false)
-                                    }}
-                                    onCancel={() => setOpen(false)}
-                                />
-                            </TooltipWrapper>
+                            <MenuItem
+                                dense
+                                label={i18n.t('Edit')}
+                                icon={<IconEdit16 />}
+                                onClick={() => {
+                                    navigate(
+                                        `/${getSectionPath(
+                                            SECTIONS_MAP.icon
+                                        )}/${model.key}`
+                                    )
+                                    setOpen(false)
+                                }}
+                            />
+                            <DeleteAction
+                                disabled={false}
+                                modelId={model.key}
+                                modelDisplayName={model.key}
+                                onDeleteSuccess={() => {
+                                    onDeleteSuccess(model)
+                                    setOpen(false)
+                                }}
+                                onCancel={() => setOpen(false)}
+                            />
                         </FlyoutMenu>
                     </Popover>
                 )}
