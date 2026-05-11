@@ -52,7 +52,7 @@ export function IconNewFormFields() {
     )
 }
 
-export function IconEditFormFields({ href }: { href?: string }) {
+export function IconEditFormFields({ href }: Readonly<{ href?: string }>) {
     return (
         <StandardFormSection>
             <StandardFormSectionTitle>
