@@ -75,6 +75,7 @@ import {
     stageListSchema,
 } from '../pages/programs/form'
 import { relationshipTypeListSchema } from '../pages/relationshipTypes/form/RelationshipTypeFormSchema'
+import { sqlViewListSchema } from '../pages/sqlViews/form/sqlViewSchema'
 import { trackedEntityAttributeListSchema } from '../pages/trackedEntityAttributes/form/TrackedEntityAttributeFormSchema'
 import { trackedEntityTypeListSchema } from '../pages/trackedEntityTypes/form'
 import {
@@ -93,6 +94,7 @@ import {
     OrganisationUnit,
     Program,
     ProgramTrackedEntityAttribute,
+    SqlView,
 } from '../types/generated'
 
 const { withDefaultListColumns } = modelFormSchemas
@@ -452,6 +454,11 @@ export const testFormProgramIndicatorGroup = (
     overwrites: Record<any, any> = {}
 ) => ({
     ...generateMock(programIndicatorGroupListSchema, { stringMap }),
+    ...overwrites,
+})
+
+export const testSqlViews = (overwrites: Record<any, any> = {}) => ({
+    ...generateMock(sqlViewListSchema, { stringMap }),
     ...overwrites,
 })
 

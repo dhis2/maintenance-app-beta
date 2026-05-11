@@ -22,7 +22,9 @@ export const Component = () => {
                 }
                 // disableFocusTrap
             >
-                {selectedSqlViewId && <div>Results:</div>}
+                {selectedSqlViewId && (
+                    <div data-test="sql-view-results">Results:</div>
+                )}
             </DrawerPortal>
             <DefaultSectionList
                 ActionsComponent={(props) => (
