@@ -6,76 +6,66 @@ import { FormBase } from '../../components'
 import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormContents'
 import {
     ATTRIBUTE_VALUES_FIELD_FILTERS,
-    DEFAULT_FIELD_FILTERS,
     SECTIONS_MAP,
     useOnSubmitNew,
 } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import {
-    OrganisationUnitGroup,
-    PickWithFieldFilters,
-} from '../../types/generated'
-import { validate } from './form'
-import { OrganisationalUnitGroupFormFields } from './form/OrganisationalUnitGroupFormFields'
+import { CategoryOptionFormValues } from './Edit'
+import { CategoryOptionFormFields, validate } from './form'
+import { transformFormValues } from './form/categoryOptionSchema'
 
 const fieldFilters = [
-    ...DEFAULT_FIELD_FILTERS,
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
-    'shortName',
+    'displayName',
+    'formName',
     'code',
+    'shortName',
     'description',
-    'compulsory',
-    'color',
-    'symbol',
+    'startDate',
+    'endDate',
     'organisationUnits[id,displayName,path]',
 ] as const
 
-export type OrganisationUnitGroupFormValues = PickWithFieldFilters<
-    OrganisationUnitGroup,
-    typeof fieldFilters
->
-
-const section = SECTIONS_MAP.organisationUnitGroup
+const section = SECTIONS_MAP.categoryOption
 
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const duplicatedModelId = searchParams.get('duplicatedId') as string
+    const duplicatedModelId = searchParams.get('clonedId') as string
 
     const query = {
-        resource: 'organisationUnitGroups',
+        resource: 'categoryOptions',
         id: duplicatedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
     }
-    const organisationUnitGroupQuery = useQuery({
+    const categoryOptionCombo = useQuery({
         queryKey: [query],
-        queryFn: queryFn<OrganisationUnitGroupFormValues>,
+        queryFn: queryFn<CategoryOptionFormValues>,
     })
 
-    const onSubmit = useOnSubmitNew<
-        Omit<OrganisationUnitGroupFormValues, 'id'>
-    >({ section })
+    const onSubmit = useOnSubmitNew<Omit<CategoryOptionFormValues, 'id'>>({
+        section,
+    })
 
-    const initialValues = useMemo(
-        () =>
-            organisationUnitGroupQuery.data
-                ? omit(organisationUnitGroupQuery.data, 'id')
-                : undefined,
-        [organisationUnitGroupQuery.data]
-    )
+    const initialValues = useMemo(() => {
+        return categoryOptionCombo.data
+            ? omit(categoryOptionCombo.data, 'id')
+            : undefined
+    }, [categoryOptionCombo.data])
 
     return (
         <FormBase
             onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
-            fetchError={!!organisationUnitGroupQuery.error}
+            valueFormatter={transformFormValues}
+            fetchError={!!categoryOptionCombo.error}
         >
             <DefaultDuplicateFormContents section={section}>
-                <OrganisationalUnitGroupFormFields />
+                <CategoryOptionFormFields />
             </DefaultDuplicateFormContents>
         </FormBase>
     )

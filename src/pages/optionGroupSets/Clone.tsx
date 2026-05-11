@@ -7,64 +7,63 @@ import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormC
 import { DEFAULT_FIELD_FILTERS, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { PickWithFieldFilters } from '../../types/generated'
-import { IndicatorGroupSet } from '../../types/models'
-import IndicatorGroupSetFormFields from './form/IndicatorGroupSetFormFields'
-import { validate } from './form/indicatorGroupSetSchema'
+import { OptionGroupSet } from '../../types/models'
+import OptionGroupSetFormFields from './form/OptionGroupSetFormFields'
+import { validate } from './form/optionGroupSetSchema'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     'name',
-    'shortName',
     'code',
     'description',
-    'compulsory',
-    'indicatorGroups[id,displayName]',
+    'dataDimensions',
+    'optionSet[id,displayName]',
+    'optionGroups[id,displayName]',
 ] as const
 
-export type IndicatorGroupSetFormValues = PickWithFieldFilters<
-    IndicatorGroupSet,
+export type OptionGroupSetFormValues = PickWithFieldFilters<
+    OptionGroupSet,
     typeof fieldFilters
 >
 
-const section = SECTIONS_MAP.indicatorGroupSet
+const section = SECTIONS_MAP.optionGroupSet
 
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const duplicatedModelId = searchParams.get('duplicatedId') as string
+    const duplicatedModelId = searchParams.get('clonedId') as string
 
     const query = {
-        resource: 'indicatorGroupSets',
+        resource: 'optionGroupSets',
         id: duplicatedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
     }
-    const indicatorGroupSetQuery = useQuery({
+    const optionGroupSetQuery = useQuery({
         queryKey: [query],
-        queryFn: queryFn<IndicatorGroupSetFormValues>,
+        queryFn: queryFn<OptionGroupSetFormValues>,
     })
 
-    const onSubmit = useOnSubmitNew<Omit<IndicatorGroupSetFormValues, 'id'>>({
+    const onSubmit = useOnSubmitNew<Omit<OptionGroupSetFormValues, 'id'>>({
         section,
     })
 
-    const initialValues = useMemo(() => {
-        return indicatorGroupSetQuery.data
-            ? omit(indicatorGroupSetQuery.data, 'id')
-            : undefined
-    }, [indicatorGroupSetQuery.data])
+    const initialValues = useMemo(
+        () => omit(optionGroupSetQuery.data, 'id'),
+        [optionGroupSetQuery.data]
+    )
 
     return (
         <FormBase
             onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
+            fetchError={!!optionGroupSetQuery.error}
             includeAttributes={false}
-            fetchError={!!indicatorGroupSetQuery.error}
         >
             <DefaultDuplicateFormContents section={section}>
-                <IndicatorGroupSetFormFields />
+                <OptionGroupSetFormFields />
             </DefaultDuplicateFormContents>
         </FormBase>
     )

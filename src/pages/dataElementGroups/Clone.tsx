@@ -10,11 +10,8 @@ import {
     useBoundResourceQueryFn,
     useOnSubmitNew,
 } from '../../lib'
-import {
-    DataElementGroupSet,
-    PickWithFieldFilters,
-} from '../../types/generated'
-import { DataElementGroupSetFormFields, validate } from './form'
+import { DataElementGroup, PickWithFieldFilters } from '../../types/generated'
+import { DataElementGroupFormFields, validate } from './form'
 
 const fieldFilters = [
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
@@ -22,53 +19,51 @@ const fieldFilters = [
     'shortName',
     'code',
     'description',
-    'compulsory',
-    'dataDimension',
-    'dataElementGroups[id,displayName]',
+    'dataElements[id,displayName]',
 ] as const
 
-export type DataElementGroupSetFormValues = PickWithFieldFilters<
-    DataElementGroupSet,
+export type DataElementGroupFormValues = PickWithFieldFilters<
+    DataElementGroup,
     typeof fieldFilters
 > & { id: string }
 
 export const Component = () => {
-    const section = SECTIONS_MAP.dataElementGroupSet
+    const section = SECTIONS_MAP.dataElementGroup
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const duplicatedModelId = searchParams.get('duplicatedId') as string
+    const duplicatedModelId = searchParams.get('clonedId') as string
 
     const query = {
-        resource: 'dataElementGroupSets',
+        resource: 'dataElementGroups',
         id: duplicatedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
     }
-    const dataElementGroupSet = useQuery({
+    const dataElementGroup = useQuery({
         queryKey: [query],
-        queryFn: queryFn<DataElementGroupSetFormValues>,
+        queryFn: queryFn<DataElementGroupFormValues>,
     })
 
-    const onSubmit = useOnSubmitNew<Omit<DataElementGroupSetFormValues, 'id'>>({
+    const onSubmit = useOnSubmitNew<Omit<DataElementGroupFormValues, 'id'>>({
         section,
     })
 
     const initialValues = useMemo(() => {
-        return dataElementGroupSet.data
-            ? omit(dataElementGroupSet.data, 'id')
+        return dataElementGroup.data
+            ? omit(dataElementGroup.data, 'id')
             : undefined
-    }, [dataElementGroupSet.data])
+    }, [dataElementGroup.data])
 
     return (
         <FormBase
             onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
-            fetchError={!!dataElementGroupSet.error}
+            fetchError={!!dataElementGroup.error}
         >
             <DefaultDuplicateFormContents section={section}>
-                <DataElementGroupSetFormFields />
+                <DataElementGroupFormFields />
             </DefaultDuplicateFormContents>
         </FormBase>
     )

@@ -12,69 +12,65 @@ import {
     DuplicationNoticeBox,
 } from '../../components'
 import {
+    ATTRIBUTE_VALUES_FIELD_FILTERS,
     DEFAULT_FIELD_FILTERS,
     SectionedFormProvider,
     SECTIONS_MAP,
     useOnSubmitNew,
 } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import { PickWithFieldFilters, Predictor } from '../../types/generated'
-import { PredictorFormDescriptor } from './form/formDescriptor'
-import { PredictorFormFields } from './form/PredictorFormFields'
-import { validate } from './form/predictorSchema'
+import { IndicatorFormDescriptor } from './form/formDescriptor'
+import { IndicatorFormFields } from './form/IndicatorFormFields'
+import { IndicatorFormValues, validate } from './form/indicatorSchema'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
+    ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
     'shortName',
     'code',
     'description',
-    'periodType',
-    'output',
-    'outputCombo[id,displayName,categoryCombo[id,displayName,isDefault]]',
-    'organisationUnitDescendants',
-    'sequentialSampleCount',
-    'annualSampleCount',
-    'sequentialSkipCount',
-    'generator',
-    'sampleSkipTest',
-    'organisationUnitLevels[id,displayName]',
+    'numerator',
+    'numeratorDescription',
+    'denominator',
+    'indicatorType',
+    'denominatorDescription',
+    'annualized',
+    'decimals',
+    'url',
+    'aggregateExportCategoryOptionCombo',
+    'aggregateExportAttributeOptionCombo',
+    'indicatorType[id,displayName]',
+    'legendSets[id,displayName]',
+    'style[color,icon]',
 ] as const
 
-export type PredictorFormValues = PickWithFieldFilters<
-    Predictor,
-    typeof fieldFilters
-> & {
-    id: string
-}
-
-const section = SECTIONS_MAP.predictor
+const section = SECTIONS_MAP.indicator
 
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const duplicatedModelId = searchParams.get('duplicatedId') as string
+    const duplicatedModelId = searchParams.get('clonedId') as string
 
     const query = {
-        resource: 'predictors',
+        resource: 'indicators',
         id: duplicatedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
     }
-
-    const predictorQuery = useQuery({
+    const indicatorQuery = useQuery({
         queryKey: [query],
-        queryFn: queryFn<PredictorFormValues>,
+        queryFn: queryFn<IndicatorFormValues>,
     })
 
-    const onSubmit = useOnSubmitNew<Omit<PredictorFormValues, 'id'>>({
+    const onSubmit = useOnSubmitNew<Omit<IndicatorFormValues, 'id'>>({
         section,
     })
 
     const initialValues = useMemo(() => {
-        return predictorQuery.data ? omit(predictorQuery.data, 'id') : undefined
-    }, [predictorQuery.data])
+        return indicatorQuery.data ? omit(indicatorQuery.data, 'id') : undefined
+    }, [indicatorQuery.data])
 
     return (
         <FormBase
@@ -82,19 +78,18 @@ export const Component = () => {
             initialValues={initialValues}
             validate={validate}
             subscription={{}}
-            includeAttributes={false}
-            fetchError={!!predictorQuery.error}
+            fetchError={!!indicatorQuery.error}
         >
             {({ handleSubmit }) => (
-                <SectionedFormProvider formDescriptor={PredictorFormDescriptor}>
+                <SectionedFormProvider formDescriptor={IndicatorFormDescriptor}>
                     <SectionedFormLayout
                         sidebar={<DefaultSectionedFormSidebar />}
                     >
                         <form onSubmit={handleSubmit}>
                             <DuplicationNoticeBox section={section} />
-                            <PredictorFormFields />
+                            <IndicatorFormFields />
                             <TriggerDuplicateValidation />
-                            <DefaultFormFooter cancelTo="/predictors" />
+                            <DefaultFormFooter cancelTo="/indicators" />
                         </form>
                         <SectionedFormErrorNotice />
                     </SectionedFormLayout>

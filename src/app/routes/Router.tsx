@@ -77,7 +77,7 @@ function createOverviewLazyRouteFunction(
 
 function createSectionLazyRouteFunction(
     section: Section,
-    componentFileName: 'New' | 'Edit' | 'List' | 'Merge' | 'Duplicate' | 'Move'
+    componentFileName: 'New' | 'Edit' | 'List' | 'Merge' | 'Clone' | 'Move'
 ) {
     return async () => {
         try {
@@ -97,14 +97,11 @@ function createSectionLazyRouteFunction(
                             isNew={componentFileName === 'New'}
                         />
                     ) : (
-                        <NoticeBox
-                            title={i18n.t('Duplication not available yet.')}
-                        >
+                        <NoticeBox title={i18n.t('Cloning not available yet.')}>
                             <p>
-                                {i18n.t(
-                                    '{{-sectionName}} cannot be duplicated.',
-                                    { sectionName: section.titlePlural }
-                                )}
+                                {i18n.t('{{-sectionName}} cannot be cloned.', {
+                                    sectionName: section.titlePlural,
+                                })}
                             </p>
                         </NoticeBox>
                     ),
@@ -269,12 +266,12 @@ const schemaSectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
             {
                 <Route
                     path={`${routePaths.duplicate}`}
-                    lazy={createSectionLazyRouteFunction(section, 'Duplicate')}
+                    lazy={createSectionLazyRouteFunction(section, 'Clone')}
                     handle={
                         {
                             crumb: (matchInfo) => (
                                 <BreadcrumbItem
-                                    label={i18n.t('Duplicate {{modelName}}', {
+                                    label={i18n.t('Clone {{modelName}}', {
                                         modelName: section.title,
                                     })}
                                     to={matchInfo.pathname}

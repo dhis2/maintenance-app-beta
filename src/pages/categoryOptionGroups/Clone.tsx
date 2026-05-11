@@ -6,64 +6,70 @@ import { FormBase } from '../../components'
 import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormContents'
 import {
     ATTRIBUTE_VALUES_FIELD_FILTERS,
+    DEFAULT_FIELD_FILTERS,
     SECTIONS_MAP,
-    useBoundResourceQueryFn,
     useOnSubmitNew,
 } from '../../lib'
-import { DataElementGroup, PickWithFieldFilters } from '../../types/generated'
-import { DataElementGroupFormFields, validate } from './form'
+import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
+import { PickWithFieldFilters } from '../../types/generated'
+import { CategoryOptionGroup } from '../../types/models'
+import CategoryOptionGroupFormFields from './form/CategoryOptionGroupFormFields'
+import { validate } from './form/categoryOptionGroupSchema'
 
 const fieldFilters = [
+    ...DEFAULT_FIELD_FILTERS,
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
     'shortName',
     'code',
     'description',
-    'dataElements[id,displayName]',
+    'categoryOptions[id,displayName]',
+    'dataDimensionType',
 ] as const
 
-export type DataElementGroupFormValues = PickWithFieldFilters<
-    DataElementGroup,
+export type CategoryOptionGroupFormValues = PickWithFieldFilters<
+    CategoryOptionGroup,
     typeof fieldFilters
 > & { id: string }
 
+const section = SECTIONS_MAP.categoryOptionGroup
+
 export const Component = () => {
-    const section = SECTIONS_MAP.dataElementGroup
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const duplicatedModelId = searchParams.get('duplicatedId') as string
+    const duplicatedModelId = searchParams.get('clonedId') as string
 
     const query = {
-        resource: 'dataElementGroups',
+        resource: 'categoryOptionGroups',
         id: duplicatedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
     }
-    const dataElementGroup = useQuery({
+    const categoryOptionGroupQuery = useQuery({
         queryKey: [query],
-        queryFn: queryFn<DataElementGroupFormValues>,
+        queryFn: queryFn<CategoryOptionGroupFormValues>,
     })
 
-    const onSubmit = useOnSubmitNew<Omit<DataElementGroupFormValues, 'id'>>({
+    const onSubmit = useOnSubmitNew<Omit<CategoryOptionGroupFormValues, 'id'>>({
         section,
     })
 
     const initialValues = useMemo(() => {
-        return dataElementGroup.data
-            ? omit(dataElementGroup.data, 'id')
+        return categoryOptionGroupQuery.data
+            ? omit(categoryOptionGroupQuery.data, 'id')
             : undefined
-    }, [dataElementGroup.data])
+    }, [categoryOptionGroupQuery.data])
 
     return (
         <FormBase
             onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
-            fetchError={!!dataElementGroup.error}
+            fetchError={!!categoryOptionGroupQuery.error}
         >
             <DefaultDuplicateFormContents section={section}>
-                <DataElementGroupFormFields />
+                <CategoryOptionGroupFormFields />
             </DefaultDuplicateFormContents>
         </FormBase>
     )

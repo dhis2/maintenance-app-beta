@@ -15,7 +15,7 @@ export function DuplicationNoticeBox({
     })
     return (
         <NoticeBox
-            title={i18n.t('Duplicating {{- duplicatedModelName}}', {
+            title={i18n.t('Cloning {{- duplicatedModelName}}', {
                 duplicatedModelName: initialValues?.displayName,
             })}
             className={css.noticeBox}

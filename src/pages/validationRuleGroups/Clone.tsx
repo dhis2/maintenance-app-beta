@@ -12,59 +12,55 @@ import {
 } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import {
-    OrganisationUnitGroupSet,
     PickWithFieldFilters,
+    ValidationRuleGroup,
 } from '../../types/generated'
-import { validate } from './form'
-import { OrganisationalUnitGroupSetFormFields } from './form/OrganisationalUnitGroupSetFormFields'
+import { ValidationRuleGroupsFormFields } from './form/ValidationRuleGroupsFormFields'
+import { validate } from './form/validationRuleGroupsSchema'
 
 const fieldFilters = [
-    ...DEFAULT_FIELD_FILTERS,
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
+    ...DEFAULT_FIELD_FILTERS,
     'name',
-    'shortName',
     'code',
     'description',
-    'compulsory',
-    'dataDimension',
-    'includeSubhierarchyInAnalytics',
-    'organisationUnitGroups[id,displayName]',
+    'validationRules[id,displayName]',
 ] as const
 
-export type OrganisationUnitGroupSetFormValues = PickWithFieldFilters<
-    OrganisationUnitGroupSet,
+export type ValidationRuleGroupFormValues = PickWithFieldFilters<
+    ValidationRuleGroup,
     typeof fieldFilters
->
+> & { id: string }
 
-const section = SECTIONS_MAP.organisationUnitGroupSet
+const section = SECTIONS_MAP.validationRuleGroup
 
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const duplicatedModelId = searchParams.get('duplicatedId') as string
+    const duplicatedModelId = searchParams.get('clonedId') as string
 
     const query = {
-        resource: 'organisationUnitGroupSets',
+        resource: 'validationRuleGroups',
         id: duplicatedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
     }
-    const organisationUnitGroupSetQuery = useQuery({
+    const validationRuleGroupQuery = useQuery({
         queryKey: [query],
-        queryFn: queryFn<OrganisationUnitGroupSetFormValues>,
+        queryFn: queryFn<ValidationRuleGroupFormValues>,
     })
 
-    const onSubmit = useOnSubmitNew<
-        Omit<OrganisationUnitGroupSetFormValues, 'id'>
-    >({ section })
+    const onSubmit = useOnSubmitNew<Omit<ValidationRuleGroupFormValues, 'id'>>({
+        section,
+    })
 
     const initialValues = useMemo(
         () =>
-            organisationUnitGroupSetQuery.data
-                ? omit(organisationUnitGroupSetQuery.data, 'id')
+            validationRuleGroupQuery.data
+                ? omit(validationRuleGroupQuery.data, 'id')
                 : undefined,
-        [organisationUnitGroupSetQuery.data]
+        [validationRuleGroupQuery.data]
     )
 
     return (
@@ -72,10 +68,10 @@ export const Component = () => {
             onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
-            fetchError={!!organisationUnitGroupSetQuery.error}
+            fetchError={!!validationRuleGroupQuery.error}
         >
             <DefaultDuplicateFormContents section={section}>
-                <OrganisationalUnitGroupSetFormFields />
+                <ValidationRuleGroupsFormFields />
             </DefaultDuplicateFormContents>
         </FormBase>
     )

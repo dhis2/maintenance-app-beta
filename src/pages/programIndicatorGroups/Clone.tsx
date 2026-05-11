@@ -6,51 +6,52 @@ import { FormBase } from '../../components'
 import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormContents'
 import { DEFAULT_FIELD_FILTERS, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import { PredictorGroup, PickWithFieldFilters } from '../../types/generated'
-import { PredictorGroupFormFields } from './form/PredictorGroupFormFields'
-import { validate } from './form/predictorGroupSchema'
+import { PickWithFieldFilters, ProgramIndicatorGroup } from '../../types/models'
+import { validate } from './form'
+import { ProgramIndicatorGroupsFormFields } from './form/ProgramIndicatorGroupsFormFields'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     'name',
     'code',
-    'description',
-    'predictors[id,displayName]',
+    'programIndicators[id,displayName]',
 ] as const
 
-export type PredictorGroupFormValues = PickWithFieldFilters<
-    PredictorGroup,
+export type ProgramIndicatorGroupsFormValues = PickWithFieldFilters<
+    ProgramIndicatorGroup,
     typeof fieldFilters
->
+> & {
+    id: string
+}
 
-const section = SECTIONS_MAP.predictorGroup
+const section = SECTIONS_MAP.programIndicatorGroup
 
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const duplicatedModelId = searchParams.get('duplicatedId') as string
+    const duplicatedModelId = searchParams.get('clonedId') as string
 
     const query = {
-        resource: 'predictorGroups',
+        resource: 'programIndicatorGroups',
         id: duplicatedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
     }
-    const predictorGroupsQuery = useQuery({
+    const programIndicatorGroupsQuery = useQuery({
         queryKey: [query],
-        queryFn: queryFn<PredictorGroupFormValues>,
+        queryFn: queryFn<ProgramIndicatorGroupsFormValues>,
     })
 
-    const onSubmit = useOnSubmitNew<Omit<PredictorGroupFormValues, 'id'>>({
-        section,
-    })
+    const onSubmit = useOnSubmitNew<
+        Omit<ProgramIndicatorGroupsFormValues, 'id'>
+    >({ section })
 
     const initialValues = useMemo(() => {
-        return predictorGroupsQuery.data
-            ? omit(predictorGroupsQuery.data, 'id')
+        return programIndicatorGroupsQuery.data
+            ? omit(programIndicatorGroupsQuery.data, 'id')
             : undefined
-    }, [predictorGroupsQuery.data])
+    }, [programIndicatorGroupsQuery.data])
 
     return (
         <FormBase
@@ -58,10 +59,10 @@ export const Component = () => {
             initialValues={initialValues}
             validate={validate}
             includeAttributes={false}
-            fetchError={!!predictorGroupsQuery.error}
+            fetchError={!!programIndicatorGroupsQuery.error}
         >
             <DefaultDuplicateFormContents section={section}>
-                <PredictorGroupFormFields />
+                <ProgramIndicatorGroupsFormFields />
             </DefaultDuplicateFormContents>
         </FormBase>
     )

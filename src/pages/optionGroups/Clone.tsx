@@ -6,42 +6,36 @@ import { FormBase } from '../../components'
 import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormContents'
 import { SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import { AnalyticsTableHookFormFields } from './form/AnalyticsTableHookFormFields'
-import {
-    AnalyticsTableHookFormValues,
-    validate,
-} from './form/analyticsTableHookSchema'
 import { fieldFilters } from './form/fieldFilters'
+import { OptionGroupFormFields } from './form/OptionGroupFormFields'
+import { OptionGroupFormValues, validate } from './form/OptionGroupFormSchema'
 
-const section = SECTIONS_MAP.analyticsTableHook
+const section = SECTIONS_MAP.optionGroup
 
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const duplicatedModelId = searchParams.get('duplicatedId') as string
+    const duplicatedModelId = searchParams.get('clonedId') as string
 
     const query = {
-        resource: 'analyticsTableHooks',
+        resource: 'optionGroups',
         id: duplicatedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
     }
-    const analyticsTableHookQuery = useQuery({
+    const optionGroupQuery = useQuery({
         queryKey: [query],
-        queryFn: queryFn<AnalyticsTableHookFormValues>,
+        queryFn: queryFn<OptionGroupFormValues>,
     })
 
-    const onSubmit = useOnSubmitNew<Omit<AnalyticsTableHookFormValues, 'id'>>({
+    const onSubmit = useOnSubmitNew<Omit<OptionGroupFormValues, 'id'>>({
         section,
     })
 
     const initialValues = useMemo(
-        () =>
-            analyticsTableHookQuery.data
-                ? omit(analyticsTableHookQuery.data, 'id')
-                : undefined,
-        [analyticsTableHookQuery.data]
+        () => omit(optionGroupQuery.data, 'id'),
+        [optionGroupQuery.data]
     )
 
     return (
@@ -49,11 +43,11 @@ export const Component = () => {
             onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
-            fetchError={!!analyticsTableHookQuery.error}
+            fetchError={!!optionGroupQuery.error}
             includeAttributes={false}
         >
             <DefaultDuplicateFormContents section={section}>
-                <AnalyticsTableHookFormFields />
+                <OptionGroupFormFields />
             </DefaultDuplicateFormContents>
         </FormBase>
     )

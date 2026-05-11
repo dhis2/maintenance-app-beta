@@ -7,51 +7,54 @@ import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormC
 import { DEFAULT_FIELD_FILTERS, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { PickWithFieldFilters } from '../../types/generated'
-import { DataApprovalLevel } from '../../types/models'
-import DataApprovalLevelFormFields from './form/DataApprovalLevelFormFields'
-import { validate } from './form/dataApprovalLevelsSchema'
+import { DataApprovalWorkflow } from '../../types/models'
+import DataApprovalWorkflowFormFields from './form/DataApprovalWorkflowFormFields'
+import { validate } from './form/dataApprovalWorkflowSchema'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     'name',
-    'orgUnitLevel',
-    'categoryOptionGroupSet[id,displayName]',
+    'periodType',
+    'categoryCombo[id,displayName]',
+    'dataApprovalLevels[id,displayName]',
 ] as const
 
-type DataApprovalLevelFormValues = PickWithFieldFilters<
-    DataApprovalLevel,
+type DataApprovalWorkflowFormValues = PickWithFieldFilters<
+    DataApprovalWorkflow,
     typeof fieldFilters
 >
 
-const section = SECTIONS_MAP.dataApprovalLevel
+const section = SECTIONS_MAP.dataApprovalWorkflow
 
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const duplicatedModelId = searchParams.get('duplicatedId') as string
+    const duplicatedModelId = searchParams.get('clonedId') as string
 
     const query = {
-        resource: 'dataApprovalLevels',
+        resource: 'dataApprovalWorkflows',
         id: duplicatedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
     }
-    const dataApprovalLevelQuery = useQuery({
+    const dataApprovalWorkflowQuery = useQuery({
         queryKey: [query],
-        queryFn: queryFn<DataApprovalLevelFormValues>,
+        queryFn: queryFn<DataApprovalWorkflowFormValues>,
     })
 
-    const onSubmit = useOnSubmitNew<Omit<DataApprovalLevelFormValues, 'id'>>({
-        section,
-    })
+    const onSubmit = useOnSubmitNew<Omit<DataApprovalWorkflowFormValues, 'id'>>(
+        {
+            section,
+        }
+    )
 
     const initialValues = useMemo(
         () =>
-            dataApprovalLevelQuery.data
-                ? omit(dataApprovalLevelQuery.data, 'id')
+            dataApprovalWorkflowQuery.data
+                ? omit(dataApprovalWorkflowQuery.data, 'id')
                 : undefined,
-        [dataApprovalLevelQuery.data]
+        [dataApprovalWorkflowQuery.data]
     )
 
     return (
@@ -59,11 +62,11 @@ export const Component = () => {
             onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
-            fetchError={!!dataApprovalLevelQuery.error}
+            fetchError={!!dataApprovalWorkflowQuery.error}
             includeAttributes={false}
         >
             <DefaultDuplicateFormContents section={section}>
-                <DataApprovalLevelFormFields />
+                <DataApprovalWorkflowFormFields />
             </DefaultDuplicateFormContents>
         </FormBase>
     )

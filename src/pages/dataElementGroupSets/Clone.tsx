@@ -6,68 +6,69 @@ import { FormBase } from '../../components'
 import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormContents'
 import {
     ATTRIBUTE_VALUES_FIELD_FILTERS,
-    DEFAULT_FIELD_FILTERS,
     SECTIONS_MAP,
+    useBoundResourceQueryFn,
     useOnSubmitNew,
 } from '../../lib'
-import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import { PickWithFieldFilters } from '../../types/generated'
-import { IndicatorGroup } from '../../types/models'
-import IndicatorGroupFormFields from './form/IndicatorGroupFormFields'
-import { validate } from './form/indicatorGroupSchema'
+import {
+    DataElementGroupSet,
+    PickWithFieldFilters,
+} from '../../types/generated'
+import { DataElementGroupSetFormFields, validate } from './form'
 
 const fieldFilters = [
-    ...DEFAULT_FIELD_FILTERS,
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
+    'shortName',
     'code',
     'description',
-    'indicators[id,displayName]',
+    'compulsory',
+    'dataDimension',
+    'dataElementGroups[id,displayName]',
 ] as const
 
-export type IndicatorGroupFormValues = PickWithFieldFilters<
-    IndicatorGroup,
+export type DataElementGroupSetFormValues = PickWithFieldFilters<
+    DataElementGroupSet,
     typeof fieldFilters
->
-
-const section = SECTIONS_MAP.indicatorGroup
+> & { id: string }
 
 export const Component = () => {
+    const section = SECTIONS_MAP.dataElementGroupSet
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const duplicatedModelId = searchParams.get('duplicatedId') as string
+    const duplicatedModelId = searchParams.get('clonedId') as string
 
     const query = {
-        resource: 'indicatorGroups',
+        resource: 'dataElementGroupSets',
         id: duplicatedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
     }
-    const indicatorGroupQuery = useQuery({
+    const dataElementGroupSet = useQuery({
         queryKey: [query],
-        queryFn: queryFn<IndicatorGroupFormValues>,
+        queryFn: queryFn<DataElementGroupSetFormValues>,
     })
 
-    const onSubmit = useOnSubmitNew<Omit<IndicatorGroupFormValues, 'id'>>({
+    const onSubmit = useOnSubmitNew<Omit<DataElementGroupSetFormValues, 'id'>>({
         section,
     })
 
     const initialValues = useMemo(() => {
-        return indicatorGroupQuery.data
-            ? omit(indicatorGroupQuery.data, 'id')
+        return dataElementGroupSet.data
+            ? omit(dataElementGroupSet.data, 'id')
             : undefined
-    }, [indicatorGroupQuery.data])
+    }, [dataElementGroupSet.data])
 
     return (
         <FormBase
             onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
-            fetchError={!!indicatorGroupQuery.error}
+            fetchError={!!dataElementGroupSet.error}
         >
             <DefaultDuplicateFormContents section={section}>
-                <IndicatorGroupFormFields />
+                <DataElementGroupSetFormFields />
             </DefaultDuplicateFormContents>
         </FormBase>
     )

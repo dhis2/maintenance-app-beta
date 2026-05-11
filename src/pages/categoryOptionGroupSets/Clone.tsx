@@ -11,67 +11,66 @@ import {
     useOnSubmitNew,
 } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import {
-    PickWithFieldFilters,
-    ValidationRuleGroup,
-} from '../../types/generated'
-import { ValidationRuleGroupsFormFields } from './form/ValidationRuleGroupsFormFields'
-import { validate } from './form/validationRuleGroupsSchema'
+import { PickWithFieldFilters } from '../../types/generated'
+import { CategoryOptionGroupSet } from '../../types/models'
+import CategoryOptionGroupSetFormFields from './form/CategoryOptionGroupSetFormFields'
+import { validate } from './form/categoryOptionGroupSetSchema'
 
 const fieldFilters = [
-    ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     ...DEFAULT_FIELD_FILTERS,
+    ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
+    'shortName',
     'code',
     'description',
-    'validationRules[id,displayName]',
+    'categoryOptionGroups[id,displayName]',
+    'dataDimension',
+    'dataDimensionType',
 ] as const
 
-export type ValidationRuleGroupFormValues = PickWithFieldFilters<
-    ValidationRuleGroup,
+export type CategoryOptionGroupSetFormValues = PickWithFieldFilters<
+    CategoryOptionGroupSet,
     typeof fieldFilters
 > & { id: string }
 
-const section = SECTIONS_MAP.validationRuleGroup
+const section = SECTIONS_MAP.categoryOptionGroupSet
 
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const duplicatedModelId = searchParams.get('duplicatedId') as string
+    const duplicatedModelId = searchParams.get('clonedId') as string
 
     const query = {
-        resource: 'validationRuleGroups',
+        resource: 'categoryOptionGroupSets',
         id: duplicatedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
     }
-    const validationRuleGroupQuery = useQuery({
+    const categoryOptionGroupSetQuery = useQuery({
         queryKey: [query],
-        queryFn: queryFn<ValidationRuleGroupFormValues>,
+        queryFn: queryFn<CategoryOptionGroupSetFormValues>,
     })
 
-    const onSubmit = useOnSubmitNew<Omit<ValidationRuleGroupFormValues, 'id'>>({
-        section,
-    })
+    const onSubmit = useOnSubmitNew<
+        Omit<CategoryOptionGroupSetFormValues, 'id'>
+    >({ section })
 
-    const initialValues = useMemo(
-        () =>
-            validationRuleGroupQuery.data
-                ? omit(validationRuleGroupQuery.data, 'id')
-                : undefined,
-        [validationRuleGroupQuery.data]
-    )
+    const initialValues = useMemo(() => {
+        return categoryOptionGroupSetQuery.data
+            ? omit(categoryOptionGroupSetQuery.data, 'id')
+            : undefined
+    }, [categoryOptionGroupSetQuery.data])
 
     return (
         <FormBase
             onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
-            fetchError={!!validationRuleGroupQuery.error}
+            fetchError={!!categoryOptionGroupSetQuery.error}
         >
             <DefaultDuplicateFormContents section={section}>
-                <ValidationRuleGroupsFormFields />
+                <CategoryOptionGroupSetFormFields />
             </DefaultDuplicateFormContents>
         </FormBase>
     )

@@ -7,51 +7,51 @@ import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormC
 import { DEFAULT_FIELD_FILTERS, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { PickWithFieldFilters } from '../../types/generated'
-import { OptionGroupSet } from '../../types/models'
-import OptionGroupSetFormFields from './form/OptionGroupSetFormFields'
-import { validate } from './form/optionGroupSetSchema'
+import { DataApprovalLevel } from '../../types/models'
+import DataApprovalLevelFormFields from './form/DataApprovalLevelFormFields'
+import { validate } from './form/dataApprovalLevelsSchema'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     'name',
-    'code',
-    'description',
-    'dataDimensions',
-    'optionSet[id,displayName]',
-    'optionGroups[id,displayName]',
+    'orgUnitLevel',
+    'categoryOptionGroupSet[id,displayName]',
 ] as const
 
-export type OptionGroupSetFormValues = PickWithFieldFilters<
-    OptionGroupSet,
+type DataApprovalLevelFormValues = PickWithFieldFilters<
+    DataApprovalLevel,
     typeof fieldFilters
 >
 
-const section = SECTIONS_MAP.optionGroupSet
+const section = SECTIONS_MAP.dataApprovalLevel
 
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const duplicatedModelId = searchParams.get('duplicatedId') as string
+    const duplicatedModelId = searchParams.get('clonedId') as string
 
     const query = {
-        resource: 'optionGroupSets',
+        resource: 'dataApprovalLevels',
         id: duplicatedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
     }
-    const optionGroupSetQuery = useQuery({
+    const dataApprovalLevelQuery = useQuery({
         queryKey: [query],
-        queryFn: queryFn<OptionGroupSetFormValues>,
+        queryFn: queryFn<DataApprovalLevelFormValues>,
     })
 
-    const onSubmit = useOnSubmitNew<Omit<OptionGroupSetFormValues, 'id'>>({
+    const onSubmit = useOnSubmitNew<Omit<DataApprovalLevelFormValues, 'id'>>({
         section,
     })
 
     const initialValues = useMemo(
-        () => omit(optionGroupSetQuery.data, 'id'),
-        [optionGroupSetQuery.data]
+        () =>
+            dataApprovalLevelQuery.data
+                ? omit(dataApprovalLevelQuery.data, 'id')
+                : undefined,
+        [dataApprovalLevelQuery.data]
     )
 
     return (
@@ -59,11 +59,11 @@ export const Component = () => {
             onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
-            fetchError={!!optionGroupSetQuery.error}
+            fetchError={!!dataApprovalLevelQuery.error}
             includeAttributes={false}
         >
             <DefaultDuplicateFormContents section={section}>
-                <OptionGroupSetFormFields />
+                <DataApprovalLevelFormFields />
             </DefaultDuplicateFormContents>
         </FormBase>
     )

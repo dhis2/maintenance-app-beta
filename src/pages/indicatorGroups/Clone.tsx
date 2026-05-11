@@ -4,62 +4,70 @@ import React, { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { FormBase } from '../../components'
 import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormContents'
-import { DEFAULT_FIELD_FILTERS, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
+import {
+    ATTRIBUTE_VALUES_FIELD_FILTERS,
+    DEFAULT_FIELD_FILTERS,
+    SECTIONS_MAP,
+    useOnSubmitNew,
+} from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import { CategoryCombo, PickWithFieldFilters } from '../../types/generated'
-import { validate, CategoryComboFormFields } from './form'
+import { PickWithFieldFilters } from '../../types/generated'
+import { IndicatorGroup } from '../../types/models'
+import IndicatorGroupFormFields from './form/IndicatorGroupFormFields'
+import { validate } from './form/indicatorGroupSchema'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
+    ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
     'code',
-    'categories[id,displayName,categoryOptions~size~rename(categoryOptionsSize)],',
-    'skipTotal',
-    'dataDimensionType',
+    'description',
+    'indicators[id,displayName]',
 ] as const
 
-export type CategoryComboFormValues = PickWithFieldFilters<
-    CategoryCombo,
+export type IndicatorGroupFormValues = PickWithFieldFilters<
+    IndicatorGroup,
     typeof fieldFilters
-> & { id: string }
+>
 
-const section = SECTIONS_MAP.categoryCombo
+const section = SECTIONS_MAP.indicatorGroup
 
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const duplicatedModelId = searchParams.get('duplicatedId') as string
+    const duplicatedModelId = searchParams.get('clonedId') as string
 
     const query = {
-        resource: 'categoryCombos',
+        resource: 'indicatorGroups',
         id: duplicatedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
     }
-    const categoryCombo = useQuery({
+    const indicatorGroupQuery = useQuery({
         queryKey: [query],
-        queryFn: queryFn<CategoryComboFormValues>,
+        queryFn: queryFn<IndicatorGroupFormValues>,
     })
 
-    const onSubmit = useOnSubmitNew<Omit<CategoryComboFormValues, 'id'>>({
+    const onSubmit = useOnSubmitNew<Omit<IndicatorGroupFormValues, 'id'>>({
         section,
     })
 
     const initialValues = useMemo(() => {
-        return categoryCombo.data ? omit(categoryCombo.data, 'id') : undefined
-    }, [categoryCombo.data])
+        return indicatorGroupQuery.data
+            ? omit(indicatorGroupQuery.data, 'id')
+            : undefined
+    }, [indicatorGroupQuery.data])
 
     return (
         <FormBase
             onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
-            includeAttributes={false}
-            fetchError={!!categoryCombo.error}
+            fetchError={!!indicatorGroupQuery.error}
         >
             <DefaultDuplicateFormContents section={section}>
-                <CategoryComboFormFields />
+                <IndicatorGroupFormFields />
             </DefaultDuplicateFormContents>
         </FormBase>
     )

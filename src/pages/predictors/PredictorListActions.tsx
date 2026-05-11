@@ -186,8 +186,8 @@ export const PredictorListActions = ({
         }
     )
     const handleDuplicateClick = useLinkClickHandler({
-        pathname: 'duplicate',
-        search: `?duplicatedId=${model.id}`,
+        pathname: 'clone',
+        search: `?clonedId=${model.id}`,
     })
 
     return (
@@ -237,7 +237,7 @@ export const PredictorListActions = ({
                                         <MenuItem
                                             dense
                                             disabled={!editable}
-                                            label={i18n.t('Duplicate')}
+                                            label={i18n.t('Clone')}
                                             icon={<IconDuplicate16 />}
                                             onClick={(_, e) => {
                                                 handleDuplicateClick(e)

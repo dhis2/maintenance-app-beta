@@ -128,8 +128,8 @@ export const ActionMore = ({
     )
 
     const handleDuplicateClick = useLinkClickHandler({
-        pathname: 'duplicate',
-        search: `?duplicatedId=${model.id}`,
+        pathname: 'clone',
+        search: `?clonedId=${model.id}`,
     })
 
     return (
@@ -190,7 +190,7 @@ export const ActionMore = ({
                                 <MenuItem
                                     dense
                                     disabled={!editable}
-                                    label={i18n.t('Duplicate')}
+                                    label={i18n.t('Clone')}
                                     icon={<IconDuplicate16 />}
                                     onClick={(_, e) => {
                                         handleDuplicateClick(e)

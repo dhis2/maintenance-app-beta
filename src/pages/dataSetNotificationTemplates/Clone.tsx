@@ -42,7 +42,7 @@ const fieldFilters = [
 
 export const Component = () => {
     const [searchParams] = useSearchParams()
-    const duplicatedModelId = searchParams.get('duplicatedId') as string
+    const duplicatedModelId = searchParams.get('clonedId') as string
 
     const queryFn = useBoundResourceQueryFn()
     const section = SECTIONS_MAP.dataSetNotificationTemplate

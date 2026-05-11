@@ -4,67 +4,68 @@ import React, { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { FormBase } from '../../components'
 import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormContents'
-import {
-    ATTRIBUTE_VALUES_FIELD_FILTERS,
-    SECTIONS_MAP,
-    useOnSubmitNew,
-} from '../../lib'
+import { ATTRIBUTE_VALUES_FIELD_FILTERS, SECTIONS_MAP } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
-import { PickWithFieldFilters } from '../../types/generated'
-import { Category } from '../../types/models'
-import { validate } from './form'
-import { CategoryFormFields } from './form/CategoryFormFields'
+import { OrgUnitFormValues } from './Edit'
+import { OrganisationUnitFormField, validate } from './form'
+import { useOnSaveOrgUnits } from './New'
 
 const fieldFilters = [
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
     'displayName',
-    'shortName',
     'code',
+    'shortName',
+    'openingDate',
+    'closedDate',
+    'comment',
+    'image[id,name]',
     'description',
-    'categoryOptions[id,displayName]',
-    'dataDimension',
-    'dataDimensionType',
+    'contactPerson',
+    'address',
+    'email',
+    'phoneNumber',
+    'url',
+    'geometry',
+    'dataSets[id,displayName]',
+    'programs[id,displayName]',
+    'level',
+    'path',
+    'parent[id,path,displayName]',
 ] as const
 
-export type CategoryFormValues = PickWithFieldFilters<
-    Category,
-    typeof fieldFilters
->
+const section = SECTIONS_MAP.organisationUnit
 
 export const Component = () => {
-    const section = SECTIONS_MAP.category
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const duplicatedModelId = searchParams.get('duplicatedId') as string
+    const duplicatedModelId = searchParams.get('clonedId') as string
+    const onSubmit = useOnSaveOrgUnits()
 
     const query = {
-        resource: 'categories',
+        resource: 'organisationUnits',
         id: duplicatedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
     }
-    const categoryQuery = useQuery({
+    const orgUnit = useQuery({
         queryKey: [query],
-        queryFn: queryFn<CategoryFormValues>,
+        queryFn: queryFn<OrgUnitFormValues>,
     })
-
-    const onSubmit = useOnSubmitNew<Omit<CategoryFormValues, 'id'>>({ section })
-
     const initialValues = useMemo(() => {
-        return categoryQuery.data ? omit(categoryQuery.data, 'id') : undefined
-    }, [categoryQuery.data])
+        return orgUnit.data ? omit(orgUnit.data, 'id') : undefined
+    }, [orgUnit.data])
 
     return (
         <FormBase
             onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
-            fetchError={!!categoryQuery.error}
+            fetchError={!!orgUnit.error}
         >
             <DefaultDuplicateFormContents section={section}>
-                <CategoryFormFields />
+                <OrganisationUnitFormField />
             </DefaultDuplicateFormContents>
         </FormBase>
     )

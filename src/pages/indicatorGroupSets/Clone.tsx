@@ -7,66 +7,64 @@ import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormC
 import { DEFAULT_FIELD_FILTERS, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { PickWithFieldFilters } from '../../types/generated'
-import { DataApprovalWorkflow } from '../../types/models'
-import DataApprovalWorkflowFormFields from './form/DataApprovalWorkflowFormFields'
-import { validate } from './form/dataApprovalWorkflowSchema'
+import { IndicatorGroupSet } from '../../types/models'
+import IndicatorGroupSetFormFields from './form/IndicatorGroupSetFormFields'
+import { validate } from './form/indicatorGroupSetSchema'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     'name',
-    'periodType',
-    'categoryCombo[id,displayName]',
-    'dataApprovalLevels[id,displayName]',
+    'shortName',
+    'code',
+    'description',
+    'compulsory',
+    'indicatorGroups[id,displayName]',
 ] as const
 
-type DataApprovalWorkflowFormValues = PickWithFieldFilters<
-    DataApprovalWorkflow,
+export type IndicatorGroupSetFormValues = PickWithFieldFilters<
+    IndicatorGroupSet,
     typeof fieldFilters
 >
 
-const section = SECTIONS_MAP.dataApprovalWorkflow
+const section = SECTIONS_MAP.indicatorGroupSet
 
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const duplicatedModelId = searchParams.get('duplicatedId') as string
+    const duplicatedModelId = searchParams.get('clonedId') as string
 
     const query = {
-        resource: 'dataApprovalWorkflows',
+        resource: 'indicatorGroupSets',
         id: duplicatedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
     }
-    const dataApprovalWorkflowQuery = useQuery({
+    const indicatorGroupSetQuery = useQuery({
         queryKey: [query],
-        queryFn: queryFn<DataApprovalWorkflowFormValues>,
+        queryFn: queryFn<IndicatorGroupSetFormValues>,
     })
 
-    const onSubmit = useOnSubmitNew<Omit<DataApprovalWorkflowFormValues, 'id'>>(
-        {
-            section,
-        }
-    )
+    const onSubmit = useOnSubmitNew<Omit<IndicatorGroupSetFormValues, 'id'>>({
+        section,
+    })
 
-    const initialValues = useMemo(
-        () =>
-            dataApprovalWorkflowQuery.data
-                ? omit(dataApprovalWorkflowQuery.data, 'id')
-                : undefined,
-        [dataApprovalWorkflowQuery.data]
-    )
+    const initialValues = useMemo(() => {
+        return indicatorGroupSetQuery.data
+            ? omit(indicatorGroupSetQuery.data, 'id')
+            : undefined
+    }, [indicatorGroupSetQuery.data])
 
     return (
         <FormBase
             onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
-            fetchError={!!dataApprovalWorkflowQuery.error}
             includeAttributes={false}
+            fetchError={!!indicatorGroupSetQuery.error}
         >
             <DefaultDuplicateFormContents section={section}>
-                <DataApprovalWorkflowFormFields />
+                <IndicatorGroupSetFormFields />
             </DefaultDuplicateFormContents>
         </FormBase>
     )

@@ -14,59 +14,52 @@ import {
 } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { PickWithFieldFilters } from '../../types/generated'
-import { ValidationNotificationTemplate } from '../../types/models'
-import { ValidationNotificationTemplateFormFields, validate } from './form'
+import { Attribute } from '../../types/models'
+import { AttributeFormFields, ATTRIBUTE_BOOLEANS, validate } from './form'
 import { SectionedFormWrapper } from './SectionedFormWrapper'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
+    ...ATTRIBUTE_BOOLEANS,
     'name',
+    'description',
     'code',
-    'validationRules[id,displayName]',
-    'sendStrategy',
-    'subjectTemplate',
-    'messageTemplate',
-    'recipientUserGroups[id,displayName]',
-    'notifyUsersInHierarchyOnly',
+    'shortName',
+    'mandatory',
+    'unique',
+    'valueType',
+    'optionSet',
+    'sortOrder',
 ] as const
 
-type ValidationNotificationTemplateFormValues = PickWithFieldFilters<
-    ValidationNotificationTemplate,
-    typeof fieldFilters
->
+type AttributeFormValues = PickWithFieldFilters<Attribute, typeof fieldFilters>
 
-const section = SECTIONS_MAP.validationNotificationTemplate
+const section = SECTIONS_MAP.attribute
 
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const duplicatedModelId = searchParams.get('duplicatedId') as string
+    const duplicatedModelId = searchParams.get('clonedId') as string
 
     const query = {
-        resource: 'validationNotificationTemplates',
+        resource: 'attributes',
         id: duplicatedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
     }
-    const validationNotificationTemplateQuery = useQuery({
+    const attributesQuery = useQuery({
         queryKey: [query],
-        queryFn: queryFn<ValidationNotificationTemplateFormValues>,
+        queryFn: queryFn<AttributeFormValues>,
     })
-
-    const onSubmit = useOnSubmitNew<ValidationNotificationTemplateFormValues>({
-        section,
-    })
+    const onSubmit = useOnSubmitNew<Attribute>({ section })
 
     const initialValues = useMemo(
         () =>
-            validationNotificationTemplateQuery.data
-                ? (omit(
-                      validationNotificationTemplateQuery.data,
-                      'id'
-                  ) as ValidationNotificationTemplate)
+            attributesQuery.data
+                ? (omit(attributesQuery.data, 'id') as Attribute)
                 : undefined,
-        [validationNotificationTemplateQuery.data]
+        [attributesQuery.data]
     )
 
     return (
@@ -75,11 +68,11 @@ export const Component = () => {
             initialValues={initialValues}
             validate={validate}
             cancelTo={`/${getSectionPath(section)}`}
-            fetchError={!!validationNotificationTemplateQuery.error}
+            fetchError={!!attributesQuery.error}
         >
             <>
                 <DuplicationNoticeBox section={section} />
-                <ValidationNotificationTemplateFormFields />
+                <AttributeFormFields initialValues={initialValues} />
                 <TriggerDuplicateValidation />
             </>
         </SectionedFormWrapper>
