@@ -42,6 +42,7 @@ export function SectionFormSectionsList<TValues extends Section, TExtraProps>({
     SectionFormComponent,
     withReordering,
     otherProps,
+    warningNotice,
 }: Readonly<{
     sectionsFieldName: string
     schemaName: SchemaName
@@ -49,6 +50,7 @@ export function SectionFormSectionsList<TValues extends Section, TExtraProps>({
     SectionFormComponent: SectionFormComponent<TValues, TExtraProps>
     withReordering: boolean
     otherProps?: TExtraProps
+    warningNotice?: React.ReactNode
 }>) {
     const [sectionFormOpen, setSectionFormOpen] = useState<
         DisplayableModel | null | undefined
@@ -128,6 +130,7 @@ export function SectionFormSectionsList<TValues extends Section, TExtraProps>({
                 <p className={css.description}>
                     {i18n.t('Configure data and options for form sections.')}
                 </p>
+                {warningNotice}
             </div>
 
             <div className={css.sectionItems}>

@@ -203,7 +203,7 @@ export const modelListViewsConfig = {
             default: [DESCRIPTORS.name, 'code', 'lastUpdated'],
         },
         filters: {
-            default: [],
+            default: ['organisationUnitGroup'],
             overrideDefaultAvailable: true,
         },
     },
@@ -1006,5 +1006,22 @@ export const modelListViewsConfig = {
             available: ['description'],
         },
         filters: {},
+    },
+    analyticsTableHook: {
+        columns: {
+            default: [DESCRIPTORS.name, 'lastUpdated'],
+            available: [
+                'phase',
+                'resourceTableType',
+                'analyticsTableType',
+                'sql',
+            ],
+            overrideDefaultAvailable: true,
+        },
+        filters: {
+            default: [],
+            available: [],
+            overrideDefaultAvailable: true,
+        },
     },
 } satisfies SectionListViewConfig<SectionName>

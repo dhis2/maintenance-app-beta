@@ -18,8 +18,7 @@ import {
     CustomAttributesSection,
 } from '../../../../components'
 import {
-    NameField,
-    CodeField,
+    NameFieldWithAdditionalUniquenessConstraint,
     DescriptionField,
     ColorAndIconField,
 } from '../../../../components/form/fields'
@@ -36,6 +35,7 @@ import {
 } from '../../../../lib'
 import { Option } from '../../../../types/generated'
 import { PickWithFieldFilters } from '../../../../types/models'
+import { OptionCodeField } from './OptionCodeField'
 import { initialOptionValues } from './optionSchema'
 import { DrawerState } from './OptionsListTable'
 
@@ -47,6 +47,7 @@ export const OptionFormContents = ({
     onCancel?: (s: DrawerState) => void
 }) => {
     const form = useForm()
+    const optionId = useParams().id as string
     const { submitting, values } = useFormState({
         subscription: { submitting: true, values: true },
     })
@@ -66,19 +67,30 @@ export const OptionFormContents = ({
                         {i18n.t('Set up the information for this option.')}
                     </StandardFormSectionDescription>
                     <StandardFormField>
-                        <NameField
+                        <NameFieldWithAdditionalUniquenessConstraint
                             schemaSection={optionSchemaSection}
                             modelId={values.id}
+                            additionalNameUniquenessConstraint={
+                                optionId
+                                    ? `optionSet.id:eq:${optionId}`
+                                    : undefined
+                            }
                         />
                     </StandardFormField>
                     <StandardFormField>
-                        <CodeField
+                        <OptionCodeField
                             schemaSection={optionSchemaSection}
                             modelId={values.id}
                             required={true}
                             disabled={editCodeDisabled}
+                            additionalCodeUniquenessConstraint={
+                                optionId
+                                    ? `optionSet.id:eq:${optionId}`
+                                    : undefined
+                            }
                         />
                     </StandardFormField>
+
                     <StandardFormField>
                         <DescriptionField />
                     </StandardFormField>
@@ -150,10 +162,11 @@ type OptionFormProps = {
 export const OptionForm = ({ option, onSubmit, onCancel }: OptionFormProps) => {
     const optionSetId = useParams().id as string
 
-    const initialValues: SubmittedOptionFormValues | undefined = useMemo(
-        () => option ?? (initialOptionValues as SubmittedOptionFormValues),
-        [option]
-    )
+    const initialValues: SubmittedOptionFormValues | undefined = useMemo(() => {
+        const startingInitialValues =
+            option ?? (initialOptionValues as SubmittedOptionFormValues)
+        return { ...startingInitialValues, optionSet: { id: optionSetId } }
+    }, [option, optionSetId])
 
     const valueFormatter = useCallback(
         (values: SubmittedOptionFormValues) => {
@@ -164,10 +177,11 @@ export const OptionForm = ({ option, onSubmit, onCancel }: OptionFormProps) => {
         },
         [optionSetId]
     )
+
     return (
         <FormBase
             modelName={optionSchemaSection.name}
-            initialValues={{ ...initialValues, optionSet: { id: optionSetId } }}
+            initialValues={initialValues}
             onSubmit={onSubmit}
             valueFormatter={valueFormatter}
             includeAttributes={true}

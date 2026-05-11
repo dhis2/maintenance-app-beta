@@ -33,7 +33,8 @@ function IndicatorGroupSetFormFields() {
                         component={CheckboxFieldFF}
                         name="compulsory"
                         label={i18n.t(
-                            'Compulsory: all indicators must belong to at least one group in this group set.'
+                            'Compulsory: all indicators must belong to at least one group in this group set.',
+                            { nsSeparator: '~:~' }
                         )}
                         type="checkbox"
                     />

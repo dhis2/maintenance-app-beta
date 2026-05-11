@@ -1,4 +1,5 @@
 import i18n from '@dhis2/d2-i18n'
+import { NoticeBox } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 import {
@@ -77,7 +78,7 @@ function createOverviewLazyRouteFunction(
 
 function createSectionLazyRouteFunction(
     section: Section,
-    componentFileName: 'New' | 'Edit' | 'List' | 'Merge'
+    componentFileName: 'New' | 'Edit' | 'List' | 'Merge' | 'Duplicate' | 'Move'
 ) {
     return async () => {
         try {
@@ -91,11 +92,22 @@ function createSectionLazyRouteFunction(
             // fallback to redirect to legacy
             if (isModuleNotFoundError(e)) {
                 return {
-                    element: (
+                    element: section.duplicable ? (
                         <LegacyAppRedirect
                             section={section}
                             isNew={componentFileName === 'New'}
                         />
+                    ) : (
+                        <NoticeBox
+                            title={i18n.t('Duplication not available yet.')}
+                        >
+                            <p>
+                                {i18n.t(
+                                    '{{-sectionName}} cannot be duplicated.',
+                                    { sectionName: section.titlePlural }
+                                )}
+                            </p>
+                        </NoticeBox>
                     ),
                 }
             }
@@ -148,6 +160,7 @@ const EditBreadcrumbItem = ({
         ? i18n.t('Edit: {{objectName}}', {
               objectName: data.displayName,
               interpolation: { escapeValue: false },
+              nsSeparator: '~:~',
           })
         : i18n.t('Edit')
 
@@ -247,6 +260,40 @@ const schemaSectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
                     />
                 </Route>
             )}
+            {section === SECTIONS_MAP.organisationUnit && (
+                <Route
+                    path={routePaths.move}
+                    lazy={() => import('../../pages/organisationUnits/Move')}
+                    handle={
+                        {
+                            crumb: (matchInfo) => (
+                                <BreadcrumbItem
+                                    label={i18n.t('Move organisation units')}
+                                    to={matchInfo.pathname}
+                                />
+                            ),
+                        } satisfies RouteHandle
+                    }
+                />
+            )}
+            {
+                <Route
+                    path={`${routePaths.duplicate}`}
+                    lazy={createSectionLazyRouteFunction(section, 'Duplicate')}
+                    handle={
+                        {
+                            crumb: (matchInfo) => (
+                                <BreadcrumbItem
+                                    label={i18n.t('Duplicate {{modelName}}', {
+                                        modelName: section.title,
+                                    })}
+                                    to={matchInfo.pathname}
+                                />
+                            ),
+                        } satisfies RouteHandle
+                    }
+                />
+            }
             <Route path=":id" element={<VerifyModelId />}>
                 <Route
                     index

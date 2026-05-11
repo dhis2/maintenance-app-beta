@@ -1,3 +1,11 @@
+.filterRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+    margin-bottom: var(--spacers-dp8);
+}
+
 .expandButton {
     border: 0 !important;
 }
@@ -19,6 +27,17 @@
 .orgUnitRow td {
     padding-block-start: var(--spacers-dp8);
     padding-block-end: var(--spacers-dp8);
+}
+
+.orgUnitRow td:first-child {
+    padding-left: var(--spacers-dp4);
+}
+
+.selectionCell {
+    padding-inline-end: 0 !important;
+}
+.orgUnitRow td span {
+    cursor: default;
 }
 
 .orgUnitRow.clickable:hover td:nth-child(2) span {

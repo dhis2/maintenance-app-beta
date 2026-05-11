@@ -43,3 +43,11 @@
     margin: var(--spacers-dp8) 0;
     width: fit-content;
 }
+
+.mandatoryWarningNotice {
+    margin-bottom: var(--spacers-dp12);
+}
+
+.notice {
+    max-width: 1050px;
+}

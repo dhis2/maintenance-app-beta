@@ -1,12 +1,13 @@
 import i18n from '@dhis2/d2-i18n'
 import { CheckboxFieldFF, InputFieldFF } from '@dhis2/ui'
-import React, { useMemo } from 'react'
+import React from 'react'
 import { Field, useFormState } from 'react-final-form'
 import {
     ColorAndIconField,
     CustomAttributesSection,
     DescriptionField,
     FeatureTypeField,
+    NameField,
     SectionedFormSection,
     SectionedFormSections,
     StandardFormField,
@@ -15,11 +16,9 @@ import {
     StandardFormSubsectionTitle,
 } from '../../../../components'
 import {
-    composeAsyncValidators,
     FEATURES,
     SCHEMA_SECTIONS,
     useFeatureAvailable,
-    useIsFieldValueUnique,
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
     useValidator,
@@ -54,29 +53,6 @@ export const StageFormContents = ({
         FEATURES.validationStrategy
     )
 
-    const checkDuplicateName = useIsFieldValueUnique({
-        model: 'programStages',
-        field: 'name',
-        id: values.id,
-        message: i18n.t(
-            'A stage with this name already exists. Please choose another name.'
-        ),
-    })
-
-    const baseNameValidator = useValidator({
-        schemaSection: stageSchemaSection,
-        property: 'name',
-    })
-
-    const nameValidator = useMemo(
-        () =>
-            composeAsyncValidators<string>([
-                baseNameValidator,
-                checkDuplicateName,
-            ]),
-        [baseNameValidator, checkDuplicateName]
-    )
-
     const executionDateLabelValidator = useValidator({
         schemaSection: stageSchemaSection,
         property: 'executionDateLabel',
@@ -108,18 +84,7 @@ export const StageFormContents = ({
                             'Configure the basic information for this program stage.'
                         )}
                     </StandardFormSectionDescription>
-                    <StandardFormField>
-                        <Field
-                            name="name"
-                            component={InputFieldFF}
-                            validate={nameValidator}
-                            validateFields={[]}
-                            dataTest="formfields-name"
-                            required
-                            inputWidth="400px"
-                            label={i18n.t('Name')}
-                        />
-                    </StandardFormField>
+                    <NameField schemaSection={SCHEMA_SECTIONS.programStage} />
                     <StandardFormField>
                         <DescriptionField />
                     </StandardFormField>

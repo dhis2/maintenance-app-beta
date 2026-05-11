@@ -212,6 +212,51 @@ const VALIDATION_STRATEGY = {
     ON_UPDATE_AND_INSERT: i18n.t('On update and insert'),
 }
 
+const ANALYTICS_TABLE_HOOK_PHASE = {
+    RESOURCE_TABLE_POPULATED: i18n.t('Resource tables'),
+    ANALYTICS_TABLE_POPULATED: i18n.t('Analytics tables'),
+}
+
+const ANALYTICS_TABLE_TYPE = {
+    DATA_VALUE: i18n.t('Data value'),
+    COMPLETENESS: i18n.t('Completeness'),
+    COMPLETENESS_TARGET: i18n.t('Completeness target'),
+    ORG_UNIT_TARGET: i18n.t('Organisation unit target'),
+    VALIDATION_RESULT: i18n.t('Validation result'),
+    OWNERSHIP: i18n.t('Ownership'),
+    TRACKED_ENTITY_INSTANCE_EVENTS: i18n.t('Tracked entity instance events'),
+    TRACKED_ENTITY_INSTANCE_ENROLLMENTS: i18n.t(
+        'Tracked entity instance enrollments'
+    ),
+    TRACKED_ENTITY_INSTANCE: i18n.t('Tracked entity instance'),
+}
+
+const RESOURCE_TABLE_TYPE = {
+    ORG_UNIT_STRUCTURE: i18n.t('Organisation unit structure'),
+    DATA_SET_ORG_UNIT_CATEGORY: i18n.t('Data set organisation unit category'),
+    CATEGORY_OPTION_COMBO_NAME: i18n.t('Category option combo name'),
+    DATA_ELEMENT_GROUP_SET_STRUCTURE: i18n.t(
+        'Data element group set structure'
+    ),
+    INDICATOR_GROUP_SET_STRUCTURE: i18n.t('Indicator group set structure'),
+    ORG_UNIT_GROUP_SET_STRUCTURE: i18n.t(
+        'Organisation unit group set structure'
+    ),
+    CATEGORY_STRUCTURE: i18n.t('Category structure'),
+    DATA_ELEMENT_STRUCTURE: i18n.t('Data element structure'),
+    DATA_SET: i18n.t('Data set'),
+    PERIOD_STRUCTURE: i18n.t('Period structure'),
+    DATE_PERIOD_STRUCTURE: i18n.t('Date period structure'),
+    DATA_ELEMENT_CATEGORY_OPTION_COMBO: i18n.t(
+        'Data element category option combo'
+    ),
+    DATA_APPROVAL_REMAP_LEVEL: i18n.t('Data approval remap level'),
+    DATA_APPROVAL_MIN_LEVEL: i18n.t('Data approval min level'),
+    TEI_RELATIONSHIP_COUNT: i18n.t(
+        'Tracked entity instance relationship count'
+    ),
+}
+
 const PROGRAM_RULE_VARIABLE_SOURCE_TYPE = {
     DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE: i18n.t(
         'Data element in newest event in program stage'
@@ -246,6 +291,9 @@ const allConstantTranslations: Record<string, string> = {
     ...MISSING_VALUE_STRATEGY,
     ...VALIDATION_STRATEGY,
     ...PROGRAM_RULE_VARIABLE_SOURCE_TYPE,
+    ...ANALYTICS_TABLE_HOOK_PHASE,
+    ...ANALYTICS_TABLE_TYPE,
+    ...RESOURCE_TABLE_TYPE,
 }
 
 export const getConstantTranslation = (constant: string): string => {

@@ -172,6 +172,7 @@ export const RoleAccessBox = ({
                                     prefix,
                                     name: entity.displayName,
                                     interpolation: { escapeValue: false },
+                                    nsSeparator: '~:~',
                                 })}
                             </div>
                             <div

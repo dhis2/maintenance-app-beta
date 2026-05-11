@@ -82,7 +82,8 @@ export const AttributeFormFields = ({
                         component={CheckboxFieldFF}
                         name="mandatory"
                         label={i18n.t(
-                            'Mandatory: all objects must have a value for this attribute'
+                            'Mandatory: all objects must have a value for this attribute',
+                            { nsSeparator: '~:~' }
                         )}
                         type="checkbox"
                         dataTest="formfields-mandatory"

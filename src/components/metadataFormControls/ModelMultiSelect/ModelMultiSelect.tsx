@@ -34,6 +34,10 @@ export const ModelMultiSelect = <TModel extends PartialLoadedDisplayableModel>({
     ...baseModelSingleSelectProps
 }: ModelMultiSelectProps<TModel>) => {
     const [searchTerm, setSearchTerm] = useState('')
+    const normalizedSelected = useMemo(
+        () => (Array.isArray(selected) ? selected : []),
+        [selected]
+    )
     const searchFilter = `identifiable:token:${searchTerm}`
     const filter: string[] = searchTerm ? [searchFilter] : []
     const params = query.params
@@ -53,13 +57,13 @@ export const ModelMultiSelect = <TModel extends PartialLoadedDisplayableModel>({
         availableQuery,
     } = useModelMultiSelectQuery({
         query: queryObject,
-        selected,
+        selected: normalizedSelected,
     })
     const onChange = baseModelSingleSelectProps.onChange
     // if we had to fetch selected data, update the form value
     // this basically adds the displayName to the formState
     useEffect(() => {
-        const selectedWithoutData = (selected ?? []).filter(
+        const selectedWithoutData = normalizedSelected.filter(
             (s) => s.displayName === undefined
         )
         if (selectedWithoutData.length < 1) {
@@ -72,7 +76,7 @@ export const ModelMultiSelect = <TModel extends PartialLoadedDisplayableModel>({
         if (hasLoadedSelected) {
             onChange({ selected: selectedData })
         }
-    }, [selected, selectedData, onChange])
+    }, [normalizedSelected, selectedData, onChange])
 
     const resolvedAvailable = useMemo(
         () => (transform ? transform(availableData) : availableData),

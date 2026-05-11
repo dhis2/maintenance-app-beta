@@ -1,3 +1,53 @@
+# [0.152.0](https://github.com/dhis2/metadata-management-app/compare/v0.151.5...v0.152.0) (2026-05-07)
+
+
+### Features
+
+* latest changes from dev ([e894345](https://github.com/dhis2/metadata-management-app/commit/e89434509bc124c1b6779a2df4ba3b76a2496ea9)), closes [#827](https://github.com/dhis2/metadata-management-app/issues/827) [#849](https://github.com/dhis2/metadata-management-app/issues/849) [#818](https://github.com/dhis2/metadata-management-app/issues/818) [#841](https://github.com/dhis2/metadata-management-app/issues/841) [#841](https://github.com/dhis2/metadata-management-app/issues/841) [#831](https://github.com/dhis2/metadata-management-app/issues/831)
+* release post freeze ([#920](https://github.com/dhis2/metadata-management-app/issues/920)) ([28dd08d](https://github.com/dhis2/metadata-management-app/commit/28dd08d14687bc6bea84ad3dfe196b665ec66df0))
+
+## [0.151.5](https://github.com/dhis2/metadata-management-app/compare/v0.151.4...v0.151.5) (2026-04-30)
+
+
+### Bug Fixes
+
+* update category combo form test ([#901](https://github.com/dhis2/metadata-management-app/issues/901)) ([9732ab9](https://github.com/dhis2/metadata-management-app/commit/9732ab939d5409067e58e9bb43e9b407f7380adc))
+* update category combo schema ([cef072e](https://github.com/dhis2/metadata-management-app/commit/cef072eed90521ec3068b9224005ceda4d31c37d))
+* update category combo test ([#905](https://github.com/dhis2/metadata-management-app/issues/905)) ([cdc3cba](https://github.com/dhis2/metadata-management-app/commit/cdc3cbaeadbb194c0b97eef88c1ef47cb503dce4))
+* update workflow node versions ([#902](https://github.com/dhis2/metadata-management-app/issues/902)) ([0c36a9f](https://github.com/dhis2/metadata-management-app/commit/0c36a9fdb072b329e2db1ce1bf20ad0a705c6e4e))
+
+## [0.151.4](https://github.com/dhis2/metadata-management-app/compare/v0.151.3...v0.151.4) (2026-04-28)
+
+
+### Bug Fixes
+
+* attributes schema cleanup [DHIS2-21322] [DHIS2-21323] ([#896](https://github.com/dhis2/metadata-management-app/issues/896)) ([56e3853](https://github.com/dhis2/metadata-management-app/commit/56e38534faa047e2c51e06fd43833f1a011cb2dc))
+
+## [0.151.3](https://github.com/dhis2/metadata-management-app/compare/v0.151.2...v0.151.3) (2026-04-22)
+
+
+### Bug Fixes
+
+* check for uniqueness of option codes ([#827](https://github.com/dhis2/metadata-management-app/issues/827)) ([c36bdc7](https://github.com/dhis2/metadata-management-app/commit/c36bdc7e835ed2e152788b4d66c8ccbaf3b73137))
+* clean up translations [DHIS2-21010] ([#847](https://github.com/dhis2/metadata-management-app/issues/847)) ([1cddd3f](https://github.com/dhis2/metadata-management-app/commit/1cddd3fc7538ab70c001ea21880d6b071c800441))
+* make name and code unique for option ([#871](https://github.com/dhis2/metadata-management-app/issues/871)) ([28f67f6](https://github.com/dhis2/metadata-management-app/commit/28f67f673c127e6334b9846e34a6d9fc266959b3))
+* update translatable field label ([#869](https://github.com/dhis2/metadata-management-app/issues/869)) ([155590b](https://github.com/dhis2/metadata-management-app/commit/155590bbacb71bf213390b7cdf69f08aeb8bb116))
+* use default name field for program stage [DHIS2-21346] ([#888](https://github.com/dhis2/metadata-management-app/issues/888)) ([b4a0136](https://github.com/dhis2/metadata-management-app/commit/b4a0136cfbcb6aea21e58a8160491ce6f005c88a))
+
+## [0.151.2](https://github.com/dhis2/metadata-management-app/compare/v0.151.1...v0.151.2) (2026-04-21)
+
+
+### Bug Fixes
+
+* wrapping list items, breadcrumbs and drawer z index ([#885](https://github.com/dhis2/metadata-management-app/issues/885)) ([9ac5cfa](https://github.com/dhis2/metadata-management-app/commit/9ac5cfabf9084aa010029b5def18cd693dc07cac)), closes [#876](https://github.com/dhis2/metadata-management-app/issues/876)
+
+## [0.151.1](https://github.com/dhis2/metadata-management-app/compare/v0.151.0...v0.151.1) (2026-04-21)
+
+
+### Bug Fixes
+
+* disable focus trap in drawer content ([#882](https://github.com/dhis2/metadata-management-app/issues/882)) ([28518c2](https://github.com/dhis2/metadata-management-app/commit/28518c2648aef6652d38819c46868da3e7c4c523))
+
 # [0.151.0](https://github.com/dhis2/metadata-management-app/compare/v0.150.3...v0.151.0) (2026-04-13)
 
 
