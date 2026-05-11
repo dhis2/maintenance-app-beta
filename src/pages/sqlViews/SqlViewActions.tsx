@@ -101,17 +101,6 @@ export const useRunSqlView = () => {
     return { run, running }
 }
 
-export const getRunActionLabel = (type: SqlView.type | undefined) => {
-    switch (type) {
-        case SqlView.type.QUERY:
-            return i18n.t('Run query')
-        case SqlView.type.MATERIALIZED_VIEW:
-        case SqlView.type.VIEW:
-        default:
-            return i18n.t('Create or update view')
-    }
-}
-
 export const SqlViewActions = ({
     model,
     onShowDetailsClick,
@@ -138,7 +127,6 @@ export const SqlViewActions = ({
         { state: preservedSearchState }
     )
 
-    const runActionLabel = getRunActionLabel(sqlViewModel.type)
     const isQuery = sqlViewModel.type === SqlView.type.QUERY
 
     const handleRun = async () => {
@@ -205,13 +193,16 @@ export const SqlViewActions = ({
                             <MenuItem
                                 dense
                                 disabled={running || !editable}
-                                label={runActionLabel}
+                                label={
+                                    sqlViewModel.type === SqlView.type.QUERY
+                                        ? i18n.t('Run query')
+                                        : i18n.t('Create or update view')
+                                }
                                 icon={
-                                    sqlViewModel.type ===
-                                    SqlView.type.MATERIALIZED_VIEW ? (
-                                        <IconSync16 />
-                                    ) : (
+                                    sqlViewModel.type === SqlView.type.QUERY ? (
                                         <IconLaunch16 />
+                                    ) : (
+                                        <IconSync16 />
                                     )
                                 }
                                 onClick={handleRun}

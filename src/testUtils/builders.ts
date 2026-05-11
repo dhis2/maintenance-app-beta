@@ -94,7 +94,6 @@ import {
     OrganisationUnit,
     Program,
     ProgramTrackedEntityAttribute,
-    SqlView,
 } from '../types/generated'
 
 const { withDefaultListColumns } = modelFormSchemas
