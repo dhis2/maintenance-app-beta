@@ -1,3 +1,10 @@
+# [0.153.0](https://github.com/dhis2/metadata-management-app/compare/v0.152.0...v0.153.0) (2026-05-11)
+
+
+### Features
+
+* sql view list ([#919](https://github.com/dhis2/metadata-management-app/issues/919)) ([5cf30c7](https://github.com/dhis2/metadata-management-app/commit/5cf30c7131590490f7dc2fd6444448483ed03083))
+
 # [0.152.0](https://github.com/dhis2/metadata-management-app/compare/v0.151.5...v0.152.0) (2026-05-07)
 
 
