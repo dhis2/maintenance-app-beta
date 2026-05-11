@@ -11,6 +11,7 @@ import {
     DetailsPanelContent,
 } from '../../components/sectionList/detailsPanel'
 import { useModelListView } from '../../components/sectionList/listView'
+import { BooleanValue } from '../../components/sectionList/modelValue/BooleanValue'
 import { ModelValueRenderer } from '../../components/sectionList/modelValue/ModelValueRenderer'
 import { TextValue } from '../../components/sectionList/modelValue/TextValue'
 import { SectionList } from '../../components/sectionList/SectionList'
@@ -56,6 +57,7 @@ export const Component = () => {
         result: {
             resource: 'icons',
             params: {
+                type: 'CUSTOM',
                 page: paginationParams.page,
                 pageSize: paginationParams.pageSize,
                 ...(debouncedSearch.trim()
@@ -98,6 +100,10 @@ export const Component = () => {
                 return <TextValue value={(value as string[]).join(', ')} />
             }
 
+            if (path === 'custom') {
+                return <BooleanValue value={true} />
+            }
+
             if (value === undefined || value === null) {
                 return null
             }
@@ -105,8 +111,6 @@ export const Component = () => {
             const propertyType: SchemaFieldPropertyType =
                 path === 'lastUpdated' || path === 'created'
                     ? SchemaFieldPropertyType.DATE
-                    : path === 'custom'
-                    ? SchemaFieldPropertyType.BOOLEAN
                     : SchemaFieldPropertyType.TEXT
 
             return (
@@ -196,11 +200,11 @@ export const Component = () => {
                                         {detailsIcon.description}
                                     </DetailItem>
                                 )}
-                                <DetailItem label={i18n.t('Custom')}>
-                                    {detailsIcon.custom
-                                        ? i18n.t('Yes')
-                                        : i18n.t('No')}
-                                </DetailItem>
+                                {detailsIcon.custom && (
+                                    <DetailItem label={i18n.t('Custom')}>
+                                        <BooleanValue value={true} />
+                                    </DetailItem>
+                                )}
                                 {!!detailsIcon.keywords?.length && (
                                     <DetailItem label={i18n.t('Keywords')}>
                                         {detailsIcon.keywords.join(', ')}

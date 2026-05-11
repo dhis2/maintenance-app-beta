@@ -26,6 +26,7 @@ import {
     getOverviewPath,
     isMergableSection,
     useBoundResourceQueryFn,
+    useSectionHandle,
 } from '../../lib'
 import { OverviewSection } from '../../types'
 import { Layout, BreadcrumbItem } from '../layout'
@@ -117,6 +118,14 @@ function createSectionLazyRouteFunction(
 
 const VerifyModelId = () => {
     const { id } = useParams()
+    const section = useSectionHandle()
+    console.log('VerifyModelId', { id, section, sectionsWithNonUidId })
+    if (section && sectionsWithNonUidId.has(section)) {
+        if (!id) {
+            throw new Error('Invalid model id.')
+        }
+        return <Outlet />
+    }
 
     if (!isValidUid(id)) {
         throw new Error('Invalid model id.')
@@ -160,8 +169,9 @@ const EditBreadcrumbItem = ({
 const sectionsNoNewRoute = new Set<SchemaSection | NonSchemaSection>([
     SECTIONS_MAP.categoryOptionCombo,
     SECTIONS_MAP.organisationUnitLevel,
-    SECTIONS_MAP.icon,
 ])
+
+const sectionsWithNonUidId = new Set<Section>([SECTIONS_MAP.icon])
 
 const schemaSectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
     <Route
