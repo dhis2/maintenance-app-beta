@@ -183,7 +183,7 @@ export const SqlViewResults = ({ id }: SqlViewResultsProps) => {
     }
 
     return (
-        <div className={css.page}>
+        <div className={css.page} data-test="sql-view-results">
             <header className={css.header}>
                 <h1 className={css.title}>{sqlView.displayName}</h1>
                 <ButtonStrip>
