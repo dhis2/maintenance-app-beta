@@ -248,7 +248,7 @@ export const SqlViewResults = ({ id }: SqlViewResultsProps) => {
                     <p>
                         {i18n.t(
                             'This query needs values for {{count}} variables before it can run.',
-                            { count: 1 } //userDefinedVariables.length }
+                            { count: userDefinedVariables.length }
                         )}
                     </p>
                     <Button small onClick={() => setShowVariableModal(true)}>
@@ -305,36 +305,36 @@ export const SqlViewResults = ({ id }: SqlViewResultsProps) => {
                                 )}
                             </NoticeBox>
                         ) : (
-                            <>
-                                <div className={css.tableWrapper}>
-                                    <table className={css.table}>
-                                        <thead>
-                                            <tr>
-                                                {(grid?.headers ?? []).map(
-                                                    (header, idx) => (
-                                                        <th key={idx}>
-                                                            {header.column ??
-                                                                header.name ??
-                                                                ''}
-                                                        </th>
-                                                    )
-                                                )}
+                            <div className={css.tableWrapper}>
+                                <table className={css.table}>
+                                    <thead>
+                                        <tr>
+                                            {(grid?.headers ?? []).map(
+                                                (header, idx) => (
+                                                    <th
+                                                        key={header.name ?? idx}
+                                                    >
+                                                        {header.column ??
+                                                            header.name ??
+                                                            ''}
+                                                    </th>
+                                                )
+                                            )}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {rows.map((row, rIdx) => (
+                                            <tr key={rIdx}>
+                                                {row.map((cell, cIdx) => (
+                                                    <td key={cIdx}>
+                                                        {cell ?? ''}
+                                                    </td>
+                                                ))}
                                             </tr>
-                                        </thead>
-                                        <tbody>
-                                            {rows.map((row, rIdx) => (
-                                                <tr key={rIdx}>
-                                                    {row.map((cell, cIdx) => (
-                                                        <td key={cIdx}>
-                                                            {cell ?? ''}
-                                                        </td>
-                                                    ))}
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
                         )}
                     </>
                 )}
