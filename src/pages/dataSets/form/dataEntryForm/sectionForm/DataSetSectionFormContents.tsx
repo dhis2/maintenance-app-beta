@@ -351,7 +351,7 @@ export const DataSetSectionFormContents = ({
                                     'Content to display before a section'
                                 )}
                                 helpText={i18n.t(
-                                    'HTML links and basic styling can be included'
+                                    'Markdown formatting is supported'
                                 )}
                                 format={(value) =>
                                     typeof value === 'string'
@@ -370,7 +370,7 @@ export const DataSetSectionFormContents = ({
                                 )}
                                 validateFields={[]}
                                 helpText={i18n.t(
-                                    'HTML links and basic styling can be included'
+                                    'Markdown formatting is supported'
                                 )}
                                 format={(value) =>
                                     typeof value === 'string'
