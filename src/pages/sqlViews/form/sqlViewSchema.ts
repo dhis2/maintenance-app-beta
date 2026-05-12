@@ -1,16 +1,29 @@
 import { z } from 'zod'
-import { modelFormSchemas } from '../../../lib'
+import {
+    getDefaultsOld,
+    modelFormSchemas,
+    createFormValidate,
+} from '../../../lib'
 import { SqlView } from '../../../types/generated'
 
-const { withDefaultListColumns } = modelFormSchemas
+const { identifiable, withAttributeValues, withDefaultListColumns } =
+    modelFormSchemas
 
-const sqlViewBaseSchema = z.object({
-    type: z.nativeEnum(SqlView.type),
-    cacheStrategy: z.nativeEnum(SqlView.cacheStrategy),
-    sqlQuery: z.string(),
-})
-export const sqlViewListSchema = sqlViewBaseSchema
-    .merge(withDefaultListColumns)
-    .extend({
-        code: z.string().optional(),
+const sqlViewBaseSchema = z
+    .object({
+        type: z.nativeEnum(SqlView.type).default(SqlView.type.VIEW),
+        cacheStrategy: z
+            .nativeEnum(SqlView.cacheStrategy)
+            .default(SqlView.cacheStrategy.RESPECT_SYSTEM_SETTING),
+        sqlQuery: z.string(),
+        description: z.string().trim().optional(),
     })
+    .merge(identifiable)
+
+export const sqlViewListSchema = sqlViewBaseSchema.merge(withDefaultListColumns)
+
+export const sqlViewFormSchema = sqlViewBaseSchema.merge(withAttributeValues)
+
+export const initialValues = getDefaultsOld(sqlViewFormSchema)
+
+export const validate = createFormValidate(sqlViewFormSchema)
