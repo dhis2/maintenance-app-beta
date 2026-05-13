@@ -44,8 +44,7 @@ export const useSyncGroupMembership = ({
             const addPromises = added.map((groupId) =>
                 dataEngine
                     .mutate({
-                        resource: collectionResource,
-                        id: groupId,
+                        resource: `${collectionResource}/${groupId}`,
                         type: 'create',
                         data: {},
                     })
