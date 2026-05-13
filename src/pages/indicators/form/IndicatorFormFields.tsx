@@ -7,7 +7,6 @@ import {
     CustomAttributesSection,
     DefaultIdentifiableFields,
     DescriptionField,
-    GroupsFormSection,
     ModelTransferField,
     SectionedFormSection,
     SectionedFormSections,
@@ -21,6 +20,7 @@ import {
     useSyncSelectedSectionWithScroll,
 } from '../../../lib'
 import { IndicatorFormDescriptor } from './formDescriptor'
+import { IndicatorGroupsField } from './IndicatorGroupsField'
 import { IndicatorTypeField } from './IndicatorTypeField'
 import { NumeratorDenominatorFields } from './NumeratorDenominatorFields'
 
@@ -163,12 +163,17 @@ export const IndicatorFormFields = () => {
                     />
                 </StandardFormField>
             </SectionedFormSection>
-            <GroupsFormSection
-                objectName={i18n.t('indicator')}
-                groupResource="indicatorGroups"
-                fieldName="indicatorGroups"
-                sectionedLayout
-            />
+            <SectionedFormSection name={descriptor.getSection('groups').name}>
+                <StandardFormSectionTitle>
+                    {i18n.t('Groups')}
+                </StandardFormSectionTitle>
+                <StandardFormSectionDescription>
+                    {i18n.t('Choose the groups this indicator belongs to.')}
+                </StandardFormSectionDescription>
+                <StandardFormField>
+                    <IndicatorGroupsField />
+                </StandardFormField>
+            </SectionedFormSection>
             <SectionedFormSection
                 name={descriptor.getSection('mappingSettings').name}
             >

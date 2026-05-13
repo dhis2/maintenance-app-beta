@@ -1,7 +1,6 @@
 export * from './fields'
 export { DefaultEditFormContents } from './DefaultFormContents'
 export * from './attributes'
-export * from './groups'
 export * from './helpers'
 export * from './useFormStateErrors'
 export * from './DefaultFormFooter'
