@@ -1,3 +1,10 @@
+## [0.153.1](https://github.com/dhis2/metadata-management-app/compare/v0.153.0...v0.153.1) (2026-05-13)
+
+
+### Bug Fixes
+
+* **DHIS2-21475:** add iso8601 to gregorian calendar mapping workaround ([#934](https://github.com/dhis2/metadata-management-app/issues/934)) ([82d091a](https://github.com/dhis2/metadata-management-app/commit/82d091a751bbcf7416ff104b14d36d26df56da60))
+
 # [0.153.0](https://github.com/dhis2/metadata-management-app/compare/v0.152.0...v0.153.0) (2026-05-11)
 
 
