@@ -1,3 +1,10 @@
+# [0.154.0](https://github.com/dhis2/metadata-management-app/compare/v0.153.1...v0.154.0) (2026-05-13)
+
+
+### Features
+
+* create results content ([#930](https://github.com/dhis2/metadata-management-app/issues/930)) ([a6f5833](https://github.com/dhis2/metadata-management-app/commit/a6f5833cfabb4da1d35597ee389e0358836a0f4f))
+
 ## [0.153.1](https://github.com/dhis2/metadata-management-app/compare/v0.153.0...v0.153.1) (2026-05-13)
 
 
