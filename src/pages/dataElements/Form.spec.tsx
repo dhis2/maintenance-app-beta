@@ -18,6 +18,7 @@ import {
     testCategoryCombo,
     testCustomAttribute,
     testDataElement,
+    testDataElementGroup,
     testLegendSet,
     testOptionSet,
     testOrgUnitLevel,
@@ -390,6 +391,10 @@ describe('Data elements form tests', () => {
                     testOrgUnitLevel({ level: 2 }),
                     testOrgUnitLevel({ level: 3 }),
                 ]
+                const dataElementGroups = [
+                    testDataElementGroup(),
+                    testDataElementGroup(),
+                ]
                 const screen = render(
                     <TestComponentWithRouter
                         path={`/${section.namePlural}`}
@@ -404,6 +409,10 @@ describe('Data elements form tests', () => {
                             organisationUnitLevels: () => ({
                                 pager: {},
                                 organisationUnitLevels,
+                            }),
+                            dataElementGroups: () => ({
+                                pager: {},
+                                dataElementGroups,
                             }),
                             dataElements: (type: any, params: any) => {
                                 if (type === 'create') {
@@ -430,6 +439,7 @@ describe('Data elements form tests', () => {
                     optionSets,
                     legendSets,
                     organisationUnitLevels,
+                    dataElementGroups,
                 }
             }
         )
@@ -440,6 +450,7 @@ describe('Data elements form tests', () => {
                 optionSets,
                 legendSets,
                 organisationUnitLevels,
+                dataElementGroups,
                 attributes,
             } = await renderForm()
             uiAssertions.expectNameFieldExist('', screen)
@@ -533,6 +544,12 @@ describe('Data elements form tests', () => {
                     selected: [],
                     options: organisationUnitLevels,
                 },
+                screen
+            )
+
+            await uiAssertions.expectTransferFieldToExistWithOptions(
+                'formfields-dataElementGroups',
+                { lhs: dataElementGroups, rhs: [] },
                 screen
             )
 
