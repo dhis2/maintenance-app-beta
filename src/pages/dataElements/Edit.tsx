@@ -7,7 +7,7 @@ import {
     DEFAULT_FIELD_FILTERS,
     SECTIONS_MAP,
     useBoundResourceQueryFn,
-    useOnSubmitEdit,
+    useOnSubmitEditWithGroups,
 } from '../../lib'
 import { DataElement, PickWithFieldFilters } from '../../types/generated'
 import { DataElementFormFields, validate } from './form'
@@ -58,10 +58,10 @@ export const Component = () => {
     })
     return (
         <FormBase
-            onSubmit={useOnSubmitEdit({
+            onSubmit={useOnSubmitEditWithGroups({
                 modelId,
                 section,
-                groups: { resource: 'dataElementGroups' },
+                groupResource: 'dataElementGroups',
             })}
             initialValues={dataElement.data}
             validate={validate}
