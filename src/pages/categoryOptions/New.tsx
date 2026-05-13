@@ -1,7 +1,7 @@
 import React from 'react'
 import { FormBase } from '../../components'
 import { DefaultNewFormContents } from '../../components/form/DefaultFormContents'
-import { SECTIONS_MAP, useOnSubmitNewWithGroups } from '../../lib'
+import { SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { validate } from './form'
 import { CategoryOptionFormFields } from './form/CategoryOptionFormFields'
 import { initialValues, transformFormValues } from './form/categoryOptionSchema'
@@ -11,10 +11,9 @@ const section = SECTIONS_MAP.categoryOption
 export const Component = () => {
     return (
         <FormBase
-            onSubmit={useOnSubmitNewWithGroups({
+            onSubmit={useOnSubmitNew({
                 section,
-                groupsFieldName: 'categoryOptionGroups',
-                groupResource: 'categoryOptionGroups',
+                groups: { resource: 'categoryOptionGroups' },
             })}
             initialValues={initialValues}
             validate={validate}

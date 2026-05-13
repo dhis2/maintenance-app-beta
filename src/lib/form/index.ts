@@ -10,10 +10,6 @@ export {
     useOnEditCompletedSuccessfully,
     defaultValueFormatter,
 } from './useOnSubmit'
-export {
-    useOnSubmitEditWithGroups,
-    useOnSubmitNewWithGroups,
-} from './useOnSubmitWithGroups'
 export { useSyncGroupMembership } from './useSyncGroupMembership'
 export { modelFormSchemas } from './modelFormSchemas'
 export * from './sectionedForm'

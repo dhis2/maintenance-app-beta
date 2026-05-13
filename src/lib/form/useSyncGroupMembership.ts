@@ -18,28 +18,27 @@ export type GroupSyncArgs = {
     removed: string[]
 }
 
-type UseSyncGroupMembershipOptions = {
+type UseSyncGroupMembershipConfig = {
     resource: string
     groupResource: string
 }
 
-export const useSyncGroupMembership = ({
-    resource,
-    groupResource,
-}: UseSyncGroupMembershipOptions) => {
+export const useSyncGroupMembership = (
+    config?: UseSyncGroupMembershipConfig
+) => {
     const dataEngine = useDataEngine()
 
-    const sync = useCallback(
+    return useCallback(
         async ({
             modelId,
             added,
             removed,
         }: GroupSyncArgs): Promise<GroupSyncResult> => {
-            if (added.length === 0 && removed.length === 0) {
+            if (!config || (added.length === 0 && removed.length === 0)) {
                 return { ok: true, errors: [] }
             }
 
-            const collectionResource = `${resource}/${modelId}/${groupResource}`
+            const collectionResource = `${config.resource}/${modelId}/${config.groupResource}`
 
             const addPromises = added.map((groupId) =>
                 dataEngine
@@ -98,8 +97,6 @@ export const useSyncGroupMembership = ({
 
             return { ok: errors.length === 0, errors }
         },
-        [dataEngine, resource, groupResource]
+        [dataEngine, config?.resource, config?.groupResource]
     )
-
-    return { sync }
 }

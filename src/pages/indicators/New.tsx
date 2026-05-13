@@ -6,11 +6,7 @@ import {
     SectionedFormErrorNotice,
     SectionedFormLayout,
 } from '../../components'
-import {
-    SectionedFormProvider,
-    SECTIONS_MAP,
-    useOnSubmitNewWithGroups,
-} from '../../lib'
+import { SectionedFormProvider, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { IndicatorFormDescriptor } from './form/formDescriptor'
 import { IndicatorFormFields } from './form/IndicatorFormFields'
 import { initialValues, validate } from './form/indicatorSchema'
@@ -20,10 +16,9 @@ const section = SECTIONS_MAP.indicator
 export const Component = () => {
     return (
         <FormBase
-            onSubmit={useOnSubmitNewWithGroups({
+            onSubmit={useOnSubmitNew({
                 section,
-                groupsFieldName: 'indicatorGroups',
-                groupResource: 'indicatorGroups',
+                groups: { resource: 'indicatorGroups' },
             })}
             initialValues={initialValues}
             validate={validate}
