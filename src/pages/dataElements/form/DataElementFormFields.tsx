@@ -10,6 +10,7 @@ import {
     CustomAttributesSection,
     DefaultIdentifiableFields,
     DescriptionField,
+    GroupsFormSection,
     ValueTypeField,
 } from '../../../components'
 import { SCHEMA_SECTIONS } from '../../../lib'
@@ -144,6 +145,12 @@ export function DataElementFormFields() {
                     <AggregationLevelsField />
                 </StandardFormField>
             </StandardFormSection>
+
+            <GroupsFormSection
+                objectName={i18n.t('data element')}
+                groupResource="dataElementGroups"
+                fieldName="dataElementGroups"
+            />
 
             <CustomAttributesSection schemaSection={section} />
         </>

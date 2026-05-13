@@ -7,6 +7,7 @@ import {
     CustomAttributesSection,
     DefaultIdentifiableFields,
     DescriptionField,
+    GroupsFormSection,
     ModelTransferField,
     SectionedFormSection,
     SectionedFormSections,
@@ -162,6 +163,12 @@ export const IndicatorFormFields = () => {
                     />
                 </StandardFormField>
             </SectionedFormSection>
+            <GroupsFormSection
+                objectName={i18n.t('indicator')}
+                groupResource="indicatorGroups"
+                fieldName="indicatorGroups"
+                sectionedLayout
+            />
             <SectionedFormSection
                 name={descriptor.getSection('mappingSettings').name}
             >

@@ -6,6 +6,7 @@ import {
     CustomAttributesSection,
     DefaultIdentifiableFields,
     DescriptionField,
+    GroupsFormSection,
     OrganisationUnitTreeWithToolbarFormField,
     StandardFormField,
     StandardFormSection,
@@ -69,6 +70,12 @@ export const CategoryOptionFormFields = () => {
                     <OrganisationUnitTreeWithToolbarFormField />
                 </StandardFormField>
             </StandardFormSection>
+
+            <GroupsFormSection
+                objectName={i18n.t('category option')}
+                groupResource="categoryOptionGroups"
+                fieldName="categoryOptionGroups"
+            />
 
             <CustomAttributesSection schemaSection={section} />
         </>
