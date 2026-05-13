@@ -163,6 +163,7 @@ export const StageForm = ({ stage, onSubmit, onCancel }: StageFormProps) => {
     const programId = useParams().id as string
     const customAttributes = useCustomAttributesQuery({
         enabled: true,
+        modelName: SchemaName.programStage,
     })
     const initialValues: PartialStageFormValues | undefined = useMemo(() => {
         const initialValues = stage ?? {
