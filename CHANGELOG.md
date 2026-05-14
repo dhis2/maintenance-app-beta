@@ -1,3 +1,10 @@
+## [0.154.1](https://github.com/dhis2/metadata-management-app/compare/v0.154.0...v0.154.1) (2026-05-14)
+
+
+### Bug Fixes
+
+* non available route notice ([#936](https://github.com/dhis2/metadata-management-app/issues/936)) ([e81d775](https://github.com/dhis2/metadata-management-app/commit/e81d7755d50a2111235412e16974ba1a3aa42f2b))
+
 # [0.154.0](https://github.com/dhis2/metadata-management-app/compare/v0.153.1...v0.154.0) (2026-05-13)
 
 
