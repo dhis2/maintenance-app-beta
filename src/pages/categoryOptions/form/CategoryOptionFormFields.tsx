@@ -6,6 +6,7 @@ import {
     CustomAttributesSection,
     DefaultIdentifiableFields,
     DescriptionField,
+    GroupMembershipField,
     OrganisationUnitTreeWithToolbarFormField,
     StandardFormField,
     StandardFormSection,
@@ -14,7 +15,6 @@ import {
 } from '../../../components'
 import { DateField } from '../../../components/form/fields/DateField'
 import { SECTIONS_MAP } from '../../../lib'
-import { CategoryOptionGroupsField } from '../fields'
 
 const section = SECTIONS_MAP.categoryOption
 
@@ -83,7 +83,7 @@ export const CategoryOptionFormFields = () => {
                 </StandardFormSectionDescription>
 
                 <StandardFormField>
-                    <CategoryOptionGroupsField />
+                    <GroupMembershipField resource="categoryOptionGroups" />
                 </StandardFormField>
             </StandardFormSection>
 

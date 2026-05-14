@@ -7,6 +7,7 @@ import {
     CustomAttributesSection,
     DefaultIdentifiableFields,
     DescriptionField,
+    GroupMembershipField,
     ModelTransferField,
     SectionedFormSection,
     SectionedFormSections,
@@ -20,7 +21,6 @@ import {
     useSyncSelectedSectionWithScroll,
 } from '../../../lib'
 import { IndicatorFormDescriptor } from './formDescriptor'
-import { IndicatorGroupsField } from './IndicatorGroupsField'
 import { IndicatorTypeField } from './IndicatorTypeField'
 import { NumeratorDenominatorFields } from './NumeratorDenominatorFields'
 
@@ -171,7 +171,7 @@ export const IndicatorFormFields = () => {
                     {i18n.t('Choose the groups this indicator belongs to.')}
                 </StandardFormSectionDescription>
                 <StandardFormField>
-                    <IndicatorGroupsField />
+                    <GroupMembershipField resource="indicatorGroups" />
                 </StandardFormField>
             </SectionedFormSection>
             <SectionedFormSection

@@ -211,39 +211,38 @@ export const useOnSubmitNewWithGroups = <
                 return createFormError(response.error)
             }
 
-            if (selectedGroups.length > 0) {
-                const responseData = response.data as
-                    | { response?: { uid?: string; id?: string } }
-                    | undefined
-                const newId =
-                    responseData?.response?.uid ?? responseData?.response?.id
-                if (newId) {
-                    const outcome = await syncGroupMembership({
-                        modelId: newId,
-                        added: selectedGroups.map((g) => g.id),
-                        removed: [],
+            const responseData = response.data as
+                | { response?: { uid?: string; id?: string } }
+                | undefined
+            const newId =
+                responseData?.response?.uid ?? responseData?.response?.id
+
+            if (selectedGroups.length > 0 && newId) {
+                const outcome = await syncGroupMembership({
+                    modelId: newId,
+                    added: selectedGroups.map((g) => g.id),
+                    removed: [],
+                })
+                if (!outcome.ok) {
+                    groupSyncFailureAlert.show({
+                        message: i18n.t(
+                            'Created successfully, but failed to update groups'
+                        ),
                     })
-                    if (!outcome.ok) {
-                        groupSyncFailureAlert.show({
-                            message: i18n.t(
-                                'Created successfully, but failed to update groups'
-                            ),
-                        })
-                        queryClient.invalidateQueries({
-                            queryKey: [{ resource: section.namePlural }],
-                        })
-                        const currentSearch = searchParams.toString()
-                            ? `?${searchParams.toString()}`
-                            : ''
-                        navigate({
-                            pathname: `/${section.namePlural}/${newId}`,
-                            search: currentSearch,
-                        })
-                        return {
-                            [FORM_ERROR]: i18n.t(
-                                'Created successfully, but failed to update groups'
-                            ),
-                        }
+                    queryClient.invalidateQueries({
+                        queryKey: [{ resource: section.namePlural }],
+                    })
+                    const currentSearch = searchParams.toString()
+                        ? `?${searchParams.toString()}`
+                        : ''
+                    navigate({
+                        pathname: `/${section.namePlural}/${newId}`,
+                        search: currentSearch,
+                    })
+                    return {
+                        [FORM_ERROR]: i18n.t(
+                            'Created successfully, but failed to update groups'
+                        ),
                     }
                 }
             }

@@ -1,1 +1,0 @@
-export { CategoryOptionGroupsField } from './CategoryOptionGroupsField'

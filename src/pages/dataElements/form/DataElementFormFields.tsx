@@ -10,13 +10,13 @@ import {
     CustomAttributesSection,
     DefaultIdentifiableFields,
     DescriptionField,
+    GroupMembershipField,
     ValueTypeField,
 } from '../../../components'
 import { SCHEMA_SECTIONS } from '../../../lib'
 import {
     AggregationLevelsField,
     CategoryComboField,
-    DataElementGroupsField,
     DomainField,
     FieldMaskField,
     FormNameField,
@@ -156,7 +156,7 @@ export function DataElementFormFields() {
                 </StandardFormSectionDescription>
 
                 <StandardFormField>
-                    <DataElementGroupsField />
+                    <GroupMembershipField resource="dataElementGroups" />
                 </StandardFormField>
             </StandardFormSection>
 
