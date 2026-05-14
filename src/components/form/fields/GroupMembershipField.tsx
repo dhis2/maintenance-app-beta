@@ -1,14 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
 import React from 'react'
-import { ModelTransferField } from '../ModelTransfer'
+import { ModelTransferField } from '../../metadataFormControls'
 
 type GroupMembershipFieldProps = {
-    /*
-        API resource for the group collection (e.g. 'dataElementGroups',
-        'categoryOptionGroups', 'indicatorGroups'). Also used as the form field
-        name so the value flows through PATCH/POST and the dedicated
-        POST/DELETE endpoints handled by useSyncGroupMembership.
-    */
     resource: string
 }
 

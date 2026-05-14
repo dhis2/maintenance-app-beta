@@ -44,10 +44,6 @@ const diffGroupIds = (next: GroupRef[] = [], prev: GroupRef[] = []) => {
 type UseOnSubmitEditWithGroupsOptions = {
     section: ModelSection
     modelId: string
-    /*
-        Form field name and API collection resource. Must match the field name
-        used by the form's Transfer and the field filter on the Edit query.
-    */
     groupResource: string
 }
 
@@ -76,8 +72,6 @@ export const useOnSubmitEditWithGroups = <
                 (formState.initialValues as Record<string, unknown>) ?? {}
 
             const groupsDirty = !!dirtyFields[groupResource]
-            // Strip the groups field from the JSON-PATCH input; it is synced
-            // via dedicated POST/DELETE endpoints, not via PATCH.
             delete dirtyFields[groupResource]
             const valuesForPatch = (() => {
                 const copy = { ...values } as Record<string, unknown>

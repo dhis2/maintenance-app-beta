@@ -70,7 +70,6 @@ export const CategoryOptionFormFields = () => {
                     <OrganisationUnitTreeWithToolbarFormField />
                 </StandardFormField>
             </StandardFormSection>
-
             <StandardFormSection>
                 <StandardFormSectionTitle>
                     {i18n.t('Groups')}
