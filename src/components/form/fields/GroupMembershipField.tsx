@@ -2,9 +2,9 @@ import i18n from '@dhis2/d2-i18n'
 import React from 'react'
 import { ModelTransferField } from '../../metadataFormControls'
 
-type GroupMembershipFieldProps = {
+type GroupMembershipFieldProps = Readonly<{
     resource: string
-}
+}>
 
 export function GroupMembershipField({ resource }: GroupMembershipFieldProps) {
     return (
