@@ -271,6 +271,7 @@ export const ListInFormItem = ({
                             onClick={() => {
                                 navigator.clipboard.writeText(item.id)
                             }}
+                            disabled={disabled}
                         />
                         <MoreDropdownDivider />
                         <MoreDropdownItem
