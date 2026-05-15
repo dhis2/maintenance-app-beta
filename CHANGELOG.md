@@ -1,3 +1,10 @@
+## [0.154.2](https://github.com/dhis2/metadata-management-app/compare/v0.154.1...v0.154.2) (2026-05-15)
+
+
+### Bug Fixes
+
+* duplicate issues [DHIS2-21299] ([#925](https://github.com/dhis2/metadata-management-app/issues/925)) ([cea9d18](https://github.com/dhis2/metadata-management-app/commit/cea9d18b26943232257553b316f49931c73a66da))
+
 ## [0.154.1](https://github.com/dhis2/metadata-management-app/compare/v0.154.0...v0.154.1) (2026-05-14)
 
 
