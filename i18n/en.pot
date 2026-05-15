@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-11T12:05:07.114Z\n"
-"PO-Revision-Date: 2026-05-11T12:05:07.114Z\n"
+"POT-Creation-Date: 2026-05-13T08:11:47.456Z\n"
+"PO-Revision-Date: 2026-05-13T08:11:47.456Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -2275,6 +2275,15 @@ msgstr "Initiating entity type"
 
 msgid "Receiving entity type"
 msgstr "Receiving entity type"
+
+msgid "SQL type"
+msgstr "SQL type"
+
+msgid "Cache strategy"
+msgstr "Cache strategy"
+
+msgid "SQL query"
+msgstr "SQL query"
 
 msgid "Unique"
 msgstr "Unique"
@@ -5950,6 +5959,27 @@ msgid ""
 msgstr ""
 "Relationship name seen from receiving entity is required when bidirectional "
 "is checked"
+
+msgid "SQL view results"
+msgstr "SQL view results"
+
+msgid "Materialized view refreshed."
+msgstr "Materialized view refreshed."
+
+msgid "SQL view created or updated."
+msgstr "SQL view created or updated."
+
+msgid "An unknown error occurred."
+msgstr "An unknown error occurred."
+
+msgid "View results"
+msgstr "View results"
+
+msgid "Run query"
+msgstr "Run query"
+
+msgid "Create or update view"
+msgstr "Create or update view"
 
 msgid "SW | Starts with"
 msgstr "SW | Starts with"

@@ -6,6 +6,7 @@ import { FormBase } from '../../components'
 import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormContents'
 import {
     ATTRIBUTE_VALUES_FIELD_FILTERS,
+    DEFAULT_FIELD_FILTERS,
     SECTIONS_MAP,
     useBoundResourceQueryFn,
     useOnSubmitNew,
@@ -14,8 +15,10 @@ import { DataElementGroup, PickWithFieldFilters } from '../../types/generated'
 import { DataElementGroupFormFields, validate } from './form'
 
 const fieldFilters = [
+    ...DEFAULT_FIELD_FILTERS,
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
+    'displayName',
     'shortName',
     'code',
     'description',
