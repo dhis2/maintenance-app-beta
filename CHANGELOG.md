@@ -1,3 +1,31 @@
+## [0.154.2](https://github.com/dhis2/metadata-management-app/compare/v0.154.1...v0.154.2) (2026-05-15)
+
+
+### Bug Fixes
+
+* duplicate issues [DHIS2-21299] ([#925](https://github.com/dhis2/metadata-management-app/issues/925)) ([cea9d18](https://github.com/dhis2/metadata-management-app/commit/cea9d18b26943232257553b316f49931c73a66da))
+
+## [0.154.1](https://github.com/dhis2/metadata-management-app/compare/v0.154.0...v0.154.1) (2026-05-14)
+
+
+### Bug Fixes
+
+* non available route notice ([#936](https://github.com/dhis2/metadata-management-app/issues/936)) ([e81d775](https://github.com/dhis2/metadata-management-app/commit/e81d7755d50a2111235412e16974ba1a3aa42f2b))
+
+# [0.154.0](https://github.com/dhis2/metadata-management-app/compare/v0.153.1...v0.154.0) (2026-05-13)
+
+
+### Features
+
+* create results content ([#930](https://github.com/dhis2/metadata-management-app/issues/930)) ([a6f5833](https://github.com/dhis2/metadata-management-app/commit/a6f5833cfabb4da1d35597ee389e0358836a0f4f))
+
+## [0.153.1](https://github.com/dhis2/metadata-management-app/compare/v0.153.0...v0.153.1) (2026-05-13)
+
+
+### Bug Fixes
+
+* **DHIS2-21475:** add iso8601 to gregorian calendar mapping workaround ([#934](https://github.com/dhis2/metadata-management-app/issues/934)) ([82d091a](https://github.com/dhis2/metadata-management-app/commit/82d091a751bbcf7416ff104b14d36d26df56da60))
+
 # [0.153.0](https://github.com/dhis2/metadata-management-app/compare/v0.152.0...v0.153.0) (2026-05-11)
 
 

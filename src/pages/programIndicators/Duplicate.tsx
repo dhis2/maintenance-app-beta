@@ -12,6 +12,7 @@ import {
 } from '../../components'
 import { DefaultFormFooter } from '../../components/form/DefaultFormFooter'
 import { SectionedFormProvider, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
+import { generateDhis2Id } from '../../lib/models/uid'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { fieldFilters, ProgramIndicatorValues } from './form/fieldFilters'
 import { ProgramIndicatorFormDescriptor } from './form/formDescriptor'
@@ -43,9 +44,23 @@ export const Component = () => {
     })
 
     const initialValues = useMemo(() => {
-        return programIndicators.data
-            ? omit(programIndicators.data, 'id')
-            : undefined
+        if (!programIndicators.data) {
+            return undefined
+        }
+        const originalData = omit(programIndicators.data, 'id')
+        const result = originalData.analyticsPeriodBoundaries
+            ? {
+                  ...originalData,
+                  analyticsPeriodBoundaries:
+                      originalData.analyticsPeriodBoundaries.map(
+                          (boundary) => ({
+                              ...(boundary as Record<string, unknown>),
+                              id: generateDhis2Id(),
+                          })
+                      ),
+              }
+            : originalData
+        return result as unknown as Omit<ProgramIndicatorValues, 'id'>
     }, [programIndicators.data])
 
     return (
