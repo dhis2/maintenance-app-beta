@@ -1,3 +1,15 @@
+# [0.155.0](https://github.com/dhis2/metadata-management-app/compare/v0.154.2...v0.155.0) (2026-05-15)
+
+
+### Bug Fixes
+
+* add program rule duplicates [DHIS2-21249] ([286f07c](https://github.com/dhis2/metadata-management-app/commit/286f07c01cb6ac55a21e33fb8c2e4ed511b7aae6))
+
+
+### Features
+
+* sql view form [DHIS2-21243] ([5e52a24](https://github.com/dhis2/metadata-management-app/commit/5e52a249257dde9cbab5f8cadf0d850754b450ec))
+
 ## [0.154.2](https://github.com/dhis2/metadata-management-app/compare/v0.154.1...v0.154.2) (2026-05-15)
 
 
