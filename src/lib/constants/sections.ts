@@ -213,6 +213,7 @@ export const SCHEMA_SECTIONS = {
         title: i18n.t('Program rule'),
         titlePlural: i18n.t('Program rules'),
         parentSectionKey: 'programs',
+        duplicable: true,
     },
     programRuleVariable: {
         name: SchemaName.programRuleVariable,

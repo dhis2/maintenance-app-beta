@@ -4857,6 +4857,12 @@ msgstr ""
 msgid "Program Rule Variable"
 msgstr "Program Rule Variable"
 
+msgid "Program rule created but ID cannot be determined"
+msgstr "Program rule created but ID cannot be determined"
+
+msgid "Some program rule actions failed to save"
+msgstr "Some program rule actions failed to save"
+
 msgid "Edit condition expression"
 msgstr "Edit condition expression"
 
@@ -4938,6 +4944,9 @@ msgstr "Save action"
 
 msgid "Set up the actions that happen when the program rule runs."
 msgstr "Set up the actions that happen when the program rule runs."
+
+msgid "Program rule must be saved before actions can be modified"
+msgstr "Program rule must be saved before actions can be modified"
 
 msgid "Action will be deleted when the program rule is saved."
 msgstr "Action will be deleted when the program rule is saved."
