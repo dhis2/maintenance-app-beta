@@ -18,18 +18,12 @@ import {
 import { usePatchModel } from './usePatchModel'
 import { useSyncGroupMembership } from './useSyncGroupMembership'
 
-/*
-    Orchestrators for forms whose object has group membership.
-    They compose the generic submit primitives (usePatchModel / useCreateModel /
-    useOnEditCompletedSuccessfully) with useSyncGroupMembership, which manages
-    group membership through dedicated POST/DELETE endpoints on
-    `/api/{resource}/{id}/{groupResource}/{groupId}`.
-
-    The groups form field is stripped from the JSON-PATCH (edit) or POST body
-    (new), and the diff of added/removed group IDs is applied after the base
-    save succeeds. If group sync fails, a critical alert is shown and the form
-    stays open so the user can retry.
-*/
+/**
+ * Submit hooks for forms with group membership. Strips the groups field from
+ * the save payload and syncs membership changes via dedicated POST/DELETE
+ * endpoints after the base save succeeds. On group sync failure, a critical
+ * alert is shown and the form remains open for retry.
+ */
 
 type GroupRef = { id: string }
 

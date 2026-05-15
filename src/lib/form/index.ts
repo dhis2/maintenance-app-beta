@@ -14,7 +14,6 @@ export {
     useOnSubmitEditWithGroups,
     useOnSubmitNewWithGroups,
 } from './useOnSubmitWithGroups'
-export { useSyncGroupMembership } from './useSyncGroupMembership'
 export { modelFormSchemas } from './modelFormSchemas'
 export * from './sectionedForm'
 export * from './useCreateModel'
