@@ -92,23 +92,24 @@ function createSectionLazyRouteFunction(
             // fallback to redirect to legacy
             if (isModuleNotFoundError(e)) {
                 return {
-                    element: section.duplicable ? (
-                        <LegacyAppRedirect
-                            section={section}
-                            isNew={componentFileName === 'New'}
-                        />
-                    ) : (
-                        <NoticeBox
-                            title={i18n.t('Duplication not available yet.')}
-                        >
-                            <p>
-                                {i18n.t(
-                                    '{{-sectionName}} cannot be duplicated.',
-                                    { sectionName: section.titlePlural }
-                                )}
-                            </p>
-                        </NoticeBox>
-                    ),
+                    element:
+                        componentFileName !== 'Duplicate' ? (
+                            <LegacyAppRedirect
+                                section={section}
+                                isNew={componentFileName === 'New'}
+                            />
+                        ) : (
+                            <NoticeBox
+                                title={i18n.t('Duplication not available yet.')}
+                            >
+                                <p>
+                                    {i18n.t(
+                                        '{{-sectionName}} cannot be duplicated.',
+                                        { sectionName: section.titlePlural }
+                                    )}
+                                </p>
+                            </NoticeBox>
+                        ),
                 }
             }
             throw e
