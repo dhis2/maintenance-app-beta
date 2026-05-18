@@ -318,6 +318,9 @@ export const EditStageForm = ({
         }
 
         showSuccess({ success: true })
+        queryClient.invalidateQueries({
+            queryKey: [{ resource: 'programStages' }],
+        })
         if (
             nonDeletedProgramStageSections.length !==
             formValues.programStageSections?.length

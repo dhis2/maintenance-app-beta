@@ -34,8 +34,8 @@ export const StageFormFormContents = ({
     name: string
     isTrackerProgram?: boolean
 }) => {
-    const { values } = useFormState({
-        subscription: { values: true },
+    const { values, initialValues } = useFormState({
+        subscription: { values: true, initialValues: true },
     })
     const currentSections = isTrackerProgram
         ? values.programStageSections
@@ -45,8 +45,8 @@ export const StageFormFormContents = ({
         : values.programStages?.[0]?.dataEntryForm
     const stageId = isTrackerProgram ? values.id : values.programStages[0]?.id
     const hasDataElements = isTrackerProgram
-        ? values.programStageDataElements?.length > 0
-        : values.programStages?.[0]?.programStageDataElements?.length > 0
+        ? initialValues.programStageDataElements?.length > 0
+        : initialValues.programStages?.[0]?.programStageDataElements?.length > 0
 
     const currentDataElements = isTrackerProgram
         ? values.programStageDataElements
