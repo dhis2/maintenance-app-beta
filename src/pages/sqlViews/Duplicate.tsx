@@ -5,72 +5,66 @@ import { useSearchParams } from 'react-router-dom'
 import { FormBase } from '../../components'
 import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormContents'
 import {
-    DEFAULT_FIELD_FILTERS,
     ATTRIBUTE_VALUES_FIELD_FILTERS,
+    DEFAULT_FIELD_FILTERS,
     SECTIONS_MAP,
-    useBoundResourceQueryFn,
     useOnSubmitNew,
 } from '../../lib'
-import {
-    DataElementGroupSet,
-    PickWithFieldFilters,
-} from '../../types/generated'
-import { DataElementGroupSetFormFields, validate } from './form'
+import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
+import { SqlView, PickWithFieldFilters } from '../../types/generated'
+import { SqlViewFormFields, validate } from './form'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
-    'shortName',
-    'code',
     'description',
-    'compulsory',
-    'dataDimension',
-    'dataElementGroups[id,displayName]',
+    'type',
+    'cacheStrategy',
+    'sqlQuery',
 ] as const
 
-export type DataElementGroupSetFormValues = PickWithFieldFilters<
-    DataElementGroupSet,
+export type SqlViewFormValues = PickWithFieldFilters<
+    SqlView,
     typeof fieldFilters
-> & { id: string }
+>
+
+const section = SECTIONS_MAP.sqlView
 
 export const Component = () => {
-    const section = SECTIONS_MAP.dataElementGroupSet
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
     const duplicatedModelId = searchParams.get('duplicatedId') as string
 
     const query = {
-        resource: 'dataElementGroupSets',
+        resource: 'sqlViews',
         id: duplicatedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
     }
-    const dataElementGroupSet = useQuery({
+    const sqlViewQuery = useQuery({
         queryKey: [query],
-        queryFn: queryFn<DataElementGroupSetFormValues>,
+        queryFn: queryFn<SqlViewFormValues>,
     })
 
-    const onSubmit = useOnSubmitNew<Omit<DataElementGroupSetFormValues, 'id'>>({
+    const onSubmit = useOnSubmitNew<Omit<SqlViewFormValues, 'id'>>({
         section,
     })
 
     const initialValues = useMemo(() => {
-        return dataElementGroupSet.data
-            ? omit(dataElementGroupSet.data, 'id')
-            : undefined
-    }, [dataElementGroupSet.data])
+        return sqlViewQuery.data ? omit(sqlViewQuery.data, 'id') : undefined
+    }, [sqlViewQuery.data])
 
     return (
         <FormBase
             onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
-            fetchError={!!dataElementGroupSet.error}
+            fetchError={!!sqlViewQuery.error}
         >
             <DefaultDuplicateFormContents section={section}>
-                <DataElementGroupSetFormFields />
+                <SqlViewFormFields />
             </DefaultDuplicateFormContents>
         </FormBase>
     )
