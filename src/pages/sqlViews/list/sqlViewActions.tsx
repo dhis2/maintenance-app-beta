@@ -3,6 +3,7 @@ import i18n from '@dhis2/d2-i18n'
 import {
     Button,
     FlyoutMenu,
+    IconDuplicate16,
     IconEdit16,
     IconInfo16,
     IconLaunch16,
@@ -19,19 +20,20 @@ import { useHref, useLinkClickHandler } from 'react-router-dom'
 import {
     ActionShowDetails,
     ListActions,
-} from '../../components/sectionList/listActions'
-import { DefaultListActionProps } from '../../components/sectionList/listActions/DefaultListActions'
-import { DeleteAction } from '../../components/sectionList/listActions/DeleteAction'
-import { TooltipWrapper } from '../../components/tooltip'
+} from '../../../components/sectionList/listActions'
+import { DefaultListActionProps } from '../../../components/sectionList/listActions/DefaultListActions'
+import { DeleteAction } from '../../../components/sectionList/listActions/DeleteAction'
+import { TooltipWrapper } from '../../../components/tooltip'
 import {
     BaseListModel,
     TOOLTIPS,
     useLocationSearchState,
+    useModelSectionHandleOrThrow,
     useSchemaFromHandle,
     canDeleteModel,
     canEditModel,
-} from '../../lib'
-import { SqlView } from '../../types/generated'
+} from '../../../lib'
+import { SqlView } from '../../../types/generated'
 
 type SqlViewListModel = BaseListModel & {
     type?: SqlView.type
@@ -39,6 +41,17 @@ type SqlViewListModel = BaseListModel & {
 export type SqlViewActionResult = {
     success: boolean
     errorMessage?: string
+}
+
+export const getRunActionLabel = (type: SqlView.type | undefined) => {
+    switch (type) {
+        case SqlView.type.QUERY:
+            return i18n.t('Run query')
+        case SqlView.type.MATERIALIZED_VIEW:
+        case SqlView.type.VIEW:
+        default:
+            return i18n.t('Create or update view')
+    }
 }
 
 export const useRunSqlView = () => {
@@ -88,6 +101,7 @@ export const useRunSqlView = () => {
                 errorAlert.show({
                     message: i18n.t('Could not run SQL view: {{error}}', {
                         error: errorMessage,
+                        nsSeparator: '~:~',
                     }),
                 })
                 return { success: false, errorMessage }
@@ -111,6 +125,7 @@ export const SqlViewActions = ({
 }: DefaultListActionProps & { onOpenResultsDrawer: (id: string) => void }) => {
     const sqlViewModel = model as SqlViewListModel
     const schema = useSchemaFromHandle()
+    const section = useModelSectionHandleOrThrow()
     const deletable = canDeleteModel(model)
     const editable = canEditModel(model)
     const shareable = schema.shareable
@@ -126,6 +141,10 @@ export const SqlViewActions = ({
         { pathname: model.id },
         { state: preservedSearchState }
     )
+    const handleDuplicateClick = useLinkClickHandler({
+        pathname: 'duplicate',
+        search: `?duplicatedId=${model.id}`,
+    })
 
     const isQuery = sqlViewModel.type === SqlView.type.QUERY
 
@@ -193,11 +212,7 @@ export const SqlViewActions = ({
                             <MenuItem
                                 dense
                                 disabled={running || !editable}
-                                label={
-                                    sqlViewModel.type === SqlView.type.QUERY
-                                        ? i18n.t('Run query')
-                                        : i18n.t('Create or update view')
-                                }
+                                label={getRunActionLabel(sqlViewModel.type)}
                                 icon={
                                     sqlViewModel.type === SqlView.type.QUERY ? (
                                         <IconLaunch16 />
@@ -227,6 +242,23 @@ export const SqlViewActions = ({
                                     href={href}
                                 />
                             </TooltipWrapper>
+                            {section.duplicable && (
+                                <TooltipWrapper
+                                    condition={!editable}
+                                    content={TOOLTIPS.noDuplicateAccess}
+                                >
+                                    <MenuItem
+                                        dense
+                                        disabled={!editable}
+                                        label={i18n.t('Duplicate')}
+                                        icon={<IconDuplicate16 />}
+                                        onClick={(_, e) => {
+                                            handleDuplicateClick(e)
+                                            setOpen(false)
+                                        }}
+                                    />
+                                </TooltipWrapper>
+                            )}
                             <MenuItem
                                 dense
                                 label={i18n.t('Show details')}

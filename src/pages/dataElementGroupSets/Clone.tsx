@@ -5,6 +5,7 @@ import { useSearchParams } from 'react-router-dom'
 import { FormBase } from '../../components'
 import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormContents'
 import {
+    DEFAULT_FIELD_FILTERS,
     ATTRIBUTE_VALUES_FIELD_FILTERS,
     SECTIONS_MAP,
     useBoundResourceQueryFn,
@@ -17,6 +18,7 @@ import {
 import { DataElementGroupSetFormFields, validate } from './form'
 
 const fieldFilters = [
+    ...DEFAULT_FIELD_FILTERS,
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
     'shortName',

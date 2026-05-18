@@ -11,6 +11,7 @@ import {
     DuplicationNoticeBox,
 } from '../../components'
 import {
+    DEFAULT_FIELD_FILTERS,
     getSectionPath,
     SectionedFormProvider,
     SECTIONS_MAP,
@@ -26,7 +27,9 @@ import {
 import { formDescriptor } from './form/formDescriptor'
 
 const fieldFilters = [
+    ...DEFAULT_FIELD_FILTERS,
     'name',
+    'displayName',
     'code',
     'subjectTemplate',
     'messageTemplate',
@@ -46,7 +49,7 @@ export const Component = () => {
 
     const queryFn = useBoundResourceQueryFn()
     const section = SECTIONS_MAP.dataSetNotificationTemplate
-    const { data: template } = useQuery({
+    const template = useQuery({
         queryKey: [
             {
                 resource: 'dataSetNotificationTemplates',
@@ -65,8 +68,8 @@ export const Component = () => {
     })
 
     const initialValues = useMemo(
-        () => (template ? omit(template, 'id') : undefined),
-        [template]
+        () => (template.data ? omit(template.data, 'id') : undefined),
+        [template.data]
     )
 
     return (
@@ -76,7 +79,7 @@ export const Component = () => {
             validate={validate}
             valueFormatter={transformFormValues}
             includeAttributes={false}
-            fetchError={!!template}
+            fetchError={!!template.error}
         >
             {({ handleSubmit }) => (
                 <SectionedFormProvider formDescriptor={formDescriptor}>

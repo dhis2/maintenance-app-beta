@@ -8,65 +8,63 @@ import {
     ATTRIBUTE_VALUES_FIELD_FILTERS,
     DEFAULT_FIELD_FILTERS,
     SECTIONS_MAP,
-    useBoundResourceQueryFn,
     useOnSubmitNew,
 } from '../../lib'
-import { DataElementGroup, PickWithFieldFilters } from '../../types/generated'
-import { DataElementGroupFormFields, validate } from './form'
+import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
+import { SqlView, PickWithFieldFilters } from '../../types/generated'
+import { SqlViewFormFields, validate } from './form'
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
     ...ATTRIBUTE_VALUES_FIELD_FILTERS,
     'name',
-    'displayName',
-    'shortName',
-    'code',
     'description',
-    'dataElements[id,displayName]',
+    'type',
+    'cacheStrategy',
+    'sqlQuery',
 ] as const
 
-export type DataElementGroupFormValues = PickWithFieldFilters<
-    DataElementGroup,
+export type SqlViewFormValues = PickWithFieldFilters<
+    SqlView,
     typeof fieldFilters
-> & { id: string }
+>
+
+const section = SECTIONS_MAP.sqlView
 
 export const Component = () => {
-    const section = SECTIONS_MAP.dataElementGroup
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
     const duplicatedModelId = searchParams.get('clonedId') as string
 
     const query = {
-        resource: 'dataElementGroups',
+        resource: 'sqlViews',
         id: duplicatedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
     }
-    const dataElementGroup = useQuery({
+    const sqlViewQuery = useQuery({
         queryKey: [query],
-        queryFn: queryFn<DataElementGroupFormValues>,
+        queryFn: queryFn<SqlViewFormValues>,
     })
 
-    const onSubmit = useOnSubmitNew<Omit<DataElementGroupFormValues, 'id'>>({
+    const onSubmit = useOnSubmitNew<Omit<SqlViewFormValues, 'id'>>({
         section,
     })
 
     const initialValues = useMemo(() => {
-        return dataElementGroup.data
-            ? omit(dataElementGroup.data, 'id')
-            : undefined
-    }, [dataElementGroup.data])
+        return sqlViewQuery.data ? omit(sqlViewQuery.data, 'id') : undefined
+    }, [sqlViewQuery.data])
 
     return (
         <FormBase
             onSubmit={onSubmit}
             initialValues={initialValues}
             validate={validate}
-            fetchError={!!dataElementGroup.error}
+            fetchError={!!sqlViewQuery.error}
         >
             <DefaultDuplicateFormContents section={section}>
-                <DataElementGroupFormFields />
+                <SqlViewFormFields />
             </DefaultDuplicateFormContents>
         </FormBase>
     )
