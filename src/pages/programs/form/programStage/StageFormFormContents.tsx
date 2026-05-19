@@ -45,19 +45,20 @@ export const StageFormFormContents = ({
         : values.programStages?.[0]?.dataEntryForm
     const stageId = isTrackerProgram ? values.id : values.programStages[0]?.id
     const hasDataElements = isTrackerProgram
-        ? initialValues.programStageDataElements?.length > 0
-        : initialValues.programStages?.[0]?.programStageDataElements?.length > 0
+        ? values.programStageDataElements?.length > 0
+        : values.programStages?.[0]?.programStageDataElements?.length > 0
 
-    const currentDataElements = isTrackerProgram
-        ? values.programStageDataElements
-        : values.programStages?.[0]?.programStageDataElements
+    const initialDataElements = isTrackerProgram
+        ? initialValues.programStageDataElements
+        : initialValues.programStages?.[0]?.programStageDataElements
+
     const missingMandatoryDataElements = useMemo(
         () =>
             getMandatoryDataElementsMissingFromSections({
-                programStageDataElements: currentDataElements,
+                programStageDataElements: initialDataElements,
                 programStageSections: currentSections,
             }),
-        [currentDataElements, currentSections]
+        [initialDataElements, currentSections]
     )
 
     const [selectedFormType, setSelectedFormType] = useState<FormType>(
