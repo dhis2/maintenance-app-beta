@@ -1,9 +1,6 @@
 import { useAlert } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import { useQueryClient } from '@tanstack/react-query'
-import { FORM_ERROR } from 'final-form'
 import { useMemo } from 'react'
-import { useSearchParams } from 'react-router-dom'
 import { ModelSection } from '../../types'
 import { IdentifiableObject } from '../../types/generated'
 import { useNavigateWithSearchState } from '../routeUtils'
@@ -14,6 +11,7 @@ import {
     defaultNavigateTo,
     EnhancedOnSubmit,
     useOnEditCompletedSuccessfully,
+    useOnNewCompletedSuccessfully,
 } from './useOnSubmit'
 import { usePatchModel } from './usePatchModel'
 import { useSyncGroupMembership } from './useSyncGroupMembership'
@@ -54,9 +52,6 @@ export const useOnSubmitEditWithGroups = <
         resource: section.namePlural,
         groupResource,
     })
-    const groupSyncFailureAlert = useAlert(({ message }) => message, {
-        critical: true,
-    })
 
     return useMemo<EnhancedOnSubmit<TFormValues>>(
         () => async (values, form, options) => {
@@ -66,6 +61,7 @@ export const useOnSubmitEditWithGroups = <
                 (formState.initialValues as Record<string, unknown>) ?? {}
 
             const groupsDirty = !!dirtyFields[groupResource]
+
             delete dirtyFields[groupResource]
             const valuesForPatch = (() => {
                 const copy = { ...values } as Record<string, unknown>
@@ -84,15 +80,20 @@ export const useOnSubmitEditWithGroups = <
                     ? defaultNavigateTo
                     : options.navigateTo
 
-            let withChanges = false
-            let response: Awaited<ReturnType<typeof patchDirtyFields>> | null =
-                null
+            if (jsonPatchOperations.length < 1 && !groupsDirty) {
+                onEditCompletedSuccessfully({
+                    withChanges: false,
+                    response: null,
+                    navigateTo,
+                    submitAction: options?.submitAction,
+                })
+                return
+            }
             if (jsonPatchOperations.length > 0) {
-                response = await patchDirtyFields(jsonPatchOperations)
+                const response = await patchDirtyFields(jsonPatchOperations)
                 if (response.error) {
                     return createFormError(response.error)
                 }
-                withChanges = true
             }
 
             if (groupsDirty) {
@@ -103,41 +104,32 @@ export const useOnSubmitEditWithGroups = <
                     | GroupRef[]
                     | undefined
                 const { added, removed } = diffGroupIds(next, prev)
-                if (added.length > 0 || removed.length > 0) {
-                    const outcome = await syncGroupMembership({
-                        modelId,
-                        added,
-                        removed,
+                const outcome = await syncGroupMembership({
+                    modelId,
+                    added,
+                    removed,
+                })
+                if (!outcome.ok) {
+                    return createFormError({
+                        message: i18n.t(
+                            'Saved successfully, but failed to update groups'
+                        ),
+                        ...outcome,
                     })
-                    if (!outcome.ok) {
-                        groupSyncFailureAlert.show({
-                            message: i18n.t(
-                                'Saved successfully, but failed to update groups'
-                            ),
-                        })
-                        return {
-                            [FORM_ERROR]: i18n.t(
-                                'Saved successfully, but failed to update groups'
-                            ),
-                        }
-                    }
-                    withChanges = true
                 }
             }
 
             onEditCompletedSuccessfully({
-                withChanges,
-                response,
+                withChanges: true,
+                response: undefined,
                 navigateTo,
                 submitAction: options?.submitAction,
             })
-            return undefined
         },
         [
             patchDirtyFields,
             onEditCompletedSuccessfully,
             syncGroupMembership,
-            groupSyncFailureAlert,
             modelId,
             groupResource,
         ]
@@ -160,30 +152,18 @@ export const useOnSubmitNewWithGroups = <
         resource: section.namePlural,
         groupResource,
     })
-    const queryClient = useQueryClient()
+    const onNewCompletedSuccessfully = useOnNewCompletedSuccessfully(section)
     const navigate = useNavigateWithSearchState()
-    const [searchParams] = useSearchParams()
     const saveAlert = useAlert(
         ({ message }) => message,
         (options) => options
     )
-    const groupSyncFailureAlert = useAlert(({ message }) => message, {
-        critical: true,
-    })
 
     return useMemo<EnhancedOnSubmit<TFormValues>>(
         () => async (values, _form, options) => {
             if (!values) {
-                console.error('Tried to save new object without any changes', {
-                    values,
-                })
-                saveAlert.show({
-                    message: i18n.t('Cannot save empty object'),
-                    error: true,
-                })
-                return
+                return onNewCompletedSuccessfully({ withChanges: false })
             }
-
             const selectedGroups =
                 ((values as Record<string, unknown>)[groupResource] as
                     | GroupRef[]
@@ -211,65 +191,43 @@ export const useOnSubmitNewWithGroups = <
                     added: selectedGroups.map((g) => g.id),
                     removed: [],
                 })
+
                 if (!outcome.ok) {
-                    groupSyncFailureAlert.show({
+                    navigate({
+                        pathname: `/${section.namePlural}/${newId}`,
+                    })
+                    saveAlert.show({
                         message: i18n.t(
                             'Created successfully, but failed to update groups'
                         ),
+                        error: true,
+                        critical: true,
                     })
-                    queryClient.invalidateQueries({
-                        queryKey: [{ resource: section.namePlural }],
-                    })
-                    const currentSearch = searchParams.toString()
-                        ? `?${searchParams.toString()}`
-                        : ''
-                    navigate({
-                        pathname: `/${section.namePlural}/${newId}`,
-                        search: currentSearch,
-                    })
-                    return {
-                        [FORM_ERROR]: i18n.t(
-                            'Created successfully, but failed to update groups'
-                        ),
-                    }
+                    return
                 }
             }
-
-            saveAlert.show({
-                message: i18n.t('Created successfully'),
-                success: true,
-            })
-            queryClient.invalidateQueries({
-                queryKey: [{ resource: section.namePlural }],
-            })
-
             const navigateTo =
                 options?.navigateTo === undefined
                     ? defaultNavigateTo
                     : options.navigateTo
-            if (navigateTo) {
-                const navTo = navigateTo({
-                    section,
-                    submitAction: options?.submitAction,
-                    responseData: response.data,
-                    searchParams,
-                })
-                if (navTo) {
-                    navigate(navTo)
-                }
-            }
+
+            onNewCompletedSuccessfully({
+                withChanges: true,
+                response,
+                navigateTo,
+                submitAction: options?.submitAction,
+            })
+
             return response
         },
         [
             createModel,
             syncGroupMembership,
-            queryClient,
-            navigate,
-            searchParams,
-            saveAlert,
-            groupSyncFailureAlert,
-            section,
             groupResource,
+            onNewCompletedSuccessfully,
+            navigate,
+            section.namePlural,
+            saveAlert,
         ]
     )
 }
