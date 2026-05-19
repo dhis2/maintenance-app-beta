@@ -1042,15 +1042,17 @@ export const modelListViewsConfig = {
     icon: {
         columns: {
             available: [
-                { label: i18n.t('Icon'), path: 'href' },
                 { label: i18n.t('Key'), path: 'key' },
+                { label: i18n.t('Icon'), path: 'href' },
+                { label: i18n.t('Custom'), path: 'custom' },
                 { label: i18n.t('Keywords'), path: 'keywords' },
                 'lastUpdated',
+                'created',
+                'createdBy',
             ],
             default: [
-                { label: i18n.t('Icon'), path: 'href' },
                 { label: i18n.t('Key'), path: 'key' },
-                'lastUpdated',
+                { label: i18n.t('Icon'), path: 'href' },
             ],
             overrideDefaultAvailable: true,
         },

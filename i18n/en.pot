@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-05-13T08:11:47.456Z\n"
-"PO-Revision-Date: 2026-05-13T08:11:47.456Z\n"
+"POT-Creation-Date: 2026-05-18T21:32:23.573Z\n"
+"PO-Revision-Date: 2026-05-18T21:32:23.573Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -3470,59 +3470,11 @@ msgstr "Display Options"
 msgid "Advanced"
 msgstr "Advanced"
 
-msgid "Icon saved successfully"
-msgstr "Icon saved successfully"
-
-msgid "Failed to load icon"
-msgstr "Failed to load icon"
-
-msgid "Could not load icon \"{{key}}\""
-msgstr "Could not load icon \"{{key}}\""
-
-msgid "System icon"
-msgstr "System icon"
-
-msgid "System icons cannot be edited. Only custom icons can be modified."
-msgstr "System icons cannot be edited. Only custom icons can be modified."
-
-msgid "Exit without saving"
-msgstr "Exit without saving"
-
-msgid "Save and exit"
-msgstr "Save and exit"
-
-msgid "Only custom icons can be edited"
-msgstr "Only custom icons can be edited"
-
 msgid "Search by name, keyword or description"
 msgstr "Search by name, keyword or description"
 
 msgid "Clear filter"
 msgstr "Clear filter"
-
-msgid "Icon created successfully"
-msgstr "Icon created successfully"
-
-msgid "Create icon"
-msgstr "Create icon"
-
-msgid "Icon file"
-msgstr "Icon file"
-
-msgid "Icon preview"
-msgstr "Icon preview"
-
-msgid "Upload icon"
-msgstr "Upload icon"
-
-msgid "SVG, PNG or GIF"
-msgstr "SVG, PNG or GIF"
-
-msgid "A unique identifier for this icon"
-msgstr "A unique identifier for this icon"
-
-msgid "Comma-separated list of keywords"
-msgstr "Comma-separated list of keywords"
 
 msgid "Set up the basic information for this indicator group set."
 msgstr "Set up the basic information for this indicator group set."
@@ -3799,6 +3751,9 @@ msgstr "Add legend item"
 
 msgid "Change color"
 msgstr "Change color"
+
+msgid "Exit without saving"
+msgstr "Exit without saving"
 
 msgid "Create {{modelName}} "
 msgstr "Create {{modelName}} "
@@ -6017,47 +5972,54 @@ msgstr ""
 msgid "SQL view results"
 msgstr "SQL view results"
 
-msgid "Materialized view refreshed."
-msgstr "Materialized view refreshed."
+msgid "Excel (.xlsx)"
+msgstr "Excel (.xlsx)"
 
-msgid "SQL view created or updated."
-msgstr "SQL view created or updated."
+msgid "CSV (.csv)"
+msgstr "CSV (.csv)"
 
-msgid "An unknown error occurred."
-msgstr "An unknown error occurred."
+msgid "PDF (.pdf)"
+msgstr "PDF (.pdf)"
 
-msgid "View results"
-msgstr "View results"
+msgid "HTML (.html)"
+msgstr "HTML (.html)"
 
-msgid "Run query"
-msgstr "Run query"
+msgid "XML (.xml)"
+msgstr "XML (.xml)"
 
-msgid "Create or update view"
-msgstr "Create or update view"
+msgid "JSON (.json)"
+msgstr "JSON (.json)"
 
-msgid "SQL view results"
-msgstr "SQL view results"
+msgid "Could not load SQL view"
+msgstr "Could not load SQL view"
 
-msgid "Materialized view refreshed."
-msgstr "Materialized view refreshed."
+msgid "The SQL view metadata could not be loaded. Please go back and try again."
+msgstr "The SQL view metadata could not be loaded. Please go back and try again."
 
-msgid "SQL view created or updated."
-msgstr "SQL view created or updated."
+msgid "Variables required"
+msgstr "Variables required"
 
-msgid "An unknown error occurred."
-msgstr "An unknown error occurred."
+msgid "Provide variables and run"
+msgstr "Provide variables and run"
 
-msgid "Could not run SQL view: {{error}}"
-msgstr "Could not run SQL view: {{error}}"
+msgid "No results available yet"
+msgstr "No results available yet"
 
-msgid "View results"
-msgstr "View results"
+msgid "Could not load results"
+msgstr "Could not load results"
 
-msgid "Run query"
-msgstr "Run query"
+msgid ""
+"Check that the SQL uses only SELECT statements and does not query "
+"restricted tables."
+msgstr ""
+"Check that the SQL uses only SELECT statements and does not query "
+"restricted tables."
 
-msgid "Create or update view"
-msgstr "Create or update view"
+msgid "No rows returned"
+msgstr "No rows returned"
+
+msgid "The query ran successfully but returned no rows."
+msgstr "The query ran successfully but returned no rows."
 
 msgid "Current user id"
 msgstr "Current user id"
@@ -6102,6 +6064,30 @@ msgid ""
 msgstr ""
 "Query only: Neither query nor results stored in the database. Supports "
 "inline $(variable) references."
+
+msgid "Query variables"
+msgstr "Query variables"
+
+msgid "Run query"
+msgstr "Run query"
+
+msgid "Create or update view"
+msgstr "Create or update view"
+
+msgid "Materialized view refreshed."
+msgstr "Materialized view refreshed."
+
+msgid "SQL view created or updated."
+msgstr "SQL view created or updated."
+
+msgid "An unknown error occurred."
+msgstr "An unknown error occurred."
+
+msgid "Could not run SQL view: {{error}}"
+msgstr "Could not run SQL view: {{error}}"
+
+msgid "View results"
+msgstr "View results"
 
 msgid "SW | Starts with"
 msgstr "SW | Starts with"

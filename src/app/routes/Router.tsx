@@ -120,15 +120,11 @@ function createSectionLazyRouteFunction(
 const VerifyModelId = () => {
     const { id } = useParams()
     const section = useSectionHandle()
-    console.log('VerifyModelId', { id, section, sectionsWithNonUidId })
     if (section && sectionsWithNonUidId.has(section)) {
         if (!id) {
             throw new Error('Invalid model id.')
         }
-        return <Outlet />
-    }
-
-    if (!isValidUid(id)) {
+    } else if (!isValidUid(id)) {
         throw new Error('Invalid model id.')
     }
     return <Outlet />

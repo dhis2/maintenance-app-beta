@@ -3,6 +3,7 @@ import i18n from '@dhis2/d2-i18n'
 import { Button, Input } from '@dhis2/ui'
 import { useQuery } from '@tanstack/react-query'
 import React, { useCallback, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { ClientDateTime } from '../../components/date'
 import {
     DetailItem,
@@ -21,7 +22,9 @@ import { DefaultToolbar } from '../../components/sectionList/toolbar'
 import { SelectedColumn } from '../../components/sectionList/types'
 import {
     getIn,
+    getSectionPath,
     SchemaFieldPropertyType,
+    SECTIONS_MAP,
     useDebouncedState,
     usePaginationQueryParams,
 } from '../../lib'
@@ -46,6 +49,7 @@ type IconsListResponse = WrapQueryResponse<PagedResponse<IconModel, 'icons'>>
 export const Component = () => {
     const { columns: headerColumns } = useModelListView()
     const engine = useDataEngine()
+    const navigate = useNavigate()
     const [paginationParams] = usePaginationQueryParams()
     const {
         liveValue: searchValue,
@@ -58,6 +62,16 @@ export const Component = () => {
             resource: 'icons',
             params: {
                 type: 'CUSTOM',
+                fields: [
+                    'key',
+                    'description',
+                    'href',
+                    'custom',
+                    'keywords',
+                    'lastUpdated',
+                    'created',
+                    'createdBy[id,displayName]',
+                ],
                 page: paginationParams.page,
                 pageSize: paginationParams.pageSize,
                 ...(debouncedSearch.trim()
@@ -82,6 +96,13 @@ export const Component = () => {
         setDetailsIcon((prev) => (prev?.key === icon.key ? undefined : icon))
     }, [])
 
+    const handleRowClick = useCallback(
+        (icon: IconModel) => {
+            navigate(`/${getSectionPath(SECTIONS_MAP.icon)}/${icon.key}`)
+        },
+        [navigate]
+    )
+
     const renderColumnValue = useCallback(
         ({ path }: SelectedColumn, icon: IconModel) => {
             if (path === 'href') {
@@ -102,6 +123,14 @@ export const Component = () => {
 
             if (path === 'custom') {
                 return <BooleanValue value={true} />
+            }
+
+            if (path === 'createdBy') {
+                return (
+                    <TextValue
+                        value={(value as IconModel['createdBy'])?.displayName}
+                    />
+                )
             }
 
             if (value === undefined || value === null) {
@@ -162,7 +191,7 @@ export const Component = () => {
                             key={icon.key}
                             modelData={icon}
                             selectedColumns={headerColumns}
-                            onClick={handleDetailsClick}
+                            onClick={handleRowClick}
                             active={icon.key === detailsIcon?.key}
                             renderColumnValue={renderColumnValue}
                             renderActions={() => (
