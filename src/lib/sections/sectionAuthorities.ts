@@ -34,6 +34,9 @@ function canCreateModelInSection(
     schemas: ModelSchemas
 ): boolean {
     if (isSchemaSection(section)) {
+        if (section === SECTIONS_MAP.icon) {
+            return true
+        }
         const schema = schemas[section.name]
         return canCreate(schema, userAuthorities)
     } else {
