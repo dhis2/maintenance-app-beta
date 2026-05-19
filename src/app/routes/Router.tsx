@@ -91,20 +91,24 @@ function createSectionLazyRouteFunction(
             // fallback to redirect to legacy
             if (isModuleNotFoundError(e)) {
                 return {
-                    element: section.duplicable ? (
-                        <LegacyAppRedirect
-                            section={section}
-                            isNew={componentFileName === 'New'}
-                        />
-                    ) : (
-                        <NoticeBox title={i18n.t('Cloning not available yet.')}>
-                            <p>
-                                {i18n.t('{{-sectionName}} cannot be cloned.', {
-                                    sectionName: section.titlePlural,
-                                })}
-                            </p>
-                        </NoticeBox>
-                    ),
+                    element:
+                        componentFileName !== 'Clone' ? (
+                            <LegacyAppRedirect
+                                section={section}
+                                isNew={componentFileName === 'New'}
+                            />
+                        ) : (
+                            <NoticeBox
+                                title={i18n.t('Cloning not available yet.')}
+                            >
+                                <p>
+                                    {i18n.t(
+                                        '{{-sectionName}} cannot be cloned.',
+                                        { sectionName: section.titlePlural }
+                                    )}
+                                </p>
+                            </NoticeBox>
+                        ),
                 }
             }
             throw e
@@ -265,7 +269,7 @@ const schemaSectionRoutes = Object.values(SECTIONS_MAP).map((section) => (
             )}
             {
                 <Route
-                    path={`${routePaths.duplicate}`}
+                    path={`${routePaths.clone}`}
                     lazy={createSectionLazyRouteFunction(section, 'Clone')}
                     handle={
                         {

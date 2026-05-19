@@ -8,7 +8,7 @@ import {
     FormBase,
     SectionedFormErrorNotice,
     SectionedFormLayout,
-    DuplicationNoticeBox,
+    CloneNoticeBox,
 } from '../../components'
 import {
     DEFAULT_FIELD_FILTERS,
@@ -45,7 +45,7 @@ const fieldFilters = [
 
 export const Component = () => {
     const [searchParams] = useSearchParams()
-    const duplicatedModelId = searchParams.get('clonedId') as string
+    const clonedModelId = searchParams.get('clonedId') as string
 
     const queryFn = useBoundResourceQueryFn()
     const section = SECTIONS_MAP.dataSetNotificationTemplate
@@ -53,14 +53,14 @@ export const Component = () => {
         queryKey: [
             {
                 resource: 'dataSetNotificationTemplates',
-                id: duplicatedModelId,
+                id: clonedModelId,
                 params: {
                     fields: fieldFilters.join(','),
                 },
             },
         ],
         queryFn: queryFn<DataSetNotificationResult>,
-        enabled: !!duplicatedModelId,
+        enabled: !!clonedModelId,
     })
 
     const onSubmit = useOnSubmitNew<Omit<DataSetNotificationResult, 'id'>>({
@@ -86,7 +86,7 @@ export const Component = () => {
                     <SectionedFormLayout
                         sidebar={<DefaultSectionedFormSidebar />}
                     >
-                        <DuplicationNoticeBox section={section} />
+                        <CloneNoticeBox section={section} />
                         <form onSubmit={handleSubmit}>
                             <DataSetNotificationsFormFields />
                             <SectionedFormErrorNotice />

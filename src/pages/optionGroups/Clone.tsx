@@ -3,7 +3,7 @@ import { omit } from 'lodash'
 import React, { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { FormBase } from '../../components'
-import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormContents'
+import { DefaultCloneFormContents } from '../../components/form/DefaultFormContents'
 import { SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { fieldFilters } from './form/fieldFilters'
@@ -15,11 +15,11 @@ const section = SECTIONS_MAP.optionGroup
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const duplicatedModelId = searchParams.get('clonedId') as string
+    const clonedModelId = searchParams.get('clonedId') as string
 
     const query = {
         resource: 'optionGroups',
-        id: duplicatedModelId,
+        id: clonedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
@@ -46,9 +46,9 @@ export const Component = () => {
             fetchError={!!optionGroupQuery.error}
             includeAttributes={false}
         >
-            <DefaultDuplicateFormContents section={section}>
+            <DefaultCloneFormContents section={section}>
                 <OptionGroupFormFields />
-            </DefaultDuplicateFormContents>
+            </DefaultCloneFormContents>
         </FormBase>
     )
 }

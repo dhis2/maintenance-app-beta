@@ -3,7 +3,7 @@ import { omit } from 'lodash'
 import React, { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { FormBase } from '../../components'
-import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormContents'
+import { DefaultCloneFormContents } from '../../components/form/DefaultFormContents'
 import {
     ATTRIBUTE_VALUES_FIELD_FILTERS,
     SECTIONS_MAP,
@@ -36,11 +36,11 @@ export const Component = () => {
     const section = SECTIONS_MAP.category
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const duplicatedModelId = searchParams.get('clonedId') as string
+    const clonedModelId = searchParams.get('clonedId') as string
 
     const query = {
         resource: 'categories',
-        id: duplicatedModelId,
+        id: clonedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
@@ -63,9 +63,9 @@ export const Component = () => {
             validate={validate}
             fetchError={!!categoryQuery.error}
         >
-            <DefaultDuplicateFormContents section={section}>
+            <DefaultCloneFormContents section={section}>
                 <CategoryFormFields />
-            </DefaultDuplicateFormContents>
+            </DefaultCloneFormContents>
         </FormBase>
     )
 }

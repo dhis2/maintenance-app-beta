@@ -4,11 +4,11 @@ import React, { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import {
     DefaultSectionedFormSidebar,
-    DuplicationNoticeBox,
+    CloneNoticeBox,
     FormBase,
     SectionedFormErrorNotice,
     SectionedFormLayout,
-    TriggerDuplicateValidation,
+    TriggerCloneValidation,
 } from '../../components'
 import { DefaultFormFooter } from '../../components/form/DefaultFormFooter'
 import {
@@ -32,7 +32,7 @@ const section = SECTIONS_MAP.trackedEntityAttribute
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const duplicatedModelId = searchParams.get('clonedId') as string
+    const clonedModelId = searchParams.get('clonedId') as string
     const isSearchPerformanceAvailable = useFeatureAvailable(
         FEATURES.searchPerformance
     )
@@ -50,7 +50,7 @@ export const Component = () => {
 
     const query = {
         resource: 'trackedEntityAttributes',
-        id: duplicatedModelId,
+        id: clonedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
@@ -87,9 +87,9 @@ export const Component = () => {
                         sidebar={<DefaultSectionedFormSidebar />}
                     >
                         <form onSubmit={handleSubmit}>
-                            <DuplicationNoticeBox section={section} />
+                            <CloneNoticeBox section={section} />
                             <TrackedEntityAttributeFormContents />
-                            <TriggerDuplicateValidation />
+                            <TriggerCloneValidation />
                             <DefaultFormFooter />
                         </form>
                         <SectionedFormErrorNotice />

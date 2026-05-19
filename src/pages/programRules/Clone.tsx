@@ -9,11 +9,11 @@ import {
     DefaultFormFooter,
     DefaultSectionedFormSidebar,
     DrawerRoot,
-    DuplicationNoticeBox,
+    CloneNoticeBox,
     FormBase,
     SectionedFormErrorNotice,
     SectionedFormLayout,
-    TriggerDuplicateValidation,
+    TriggerCloneValidation,
 } from '../../components'
 import {
     createFormError,
@@ -36,11 +36,11 @@ const section = SECTIONS_MAP.programRule
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const duplicatedModelId = searchParams.get('clonedId') as string
+    const clonedModelId = searchParams.get('clonedId') as string
 
     const query = {
         resource: 'programRules',
-        id: duplicatedModelId,
+        id: clonedModelId,
         params: { fields: [...fieldFilters] },
     }
     const programRuleQuery = useQuery({
@@ -165,9 +165,9 @@ export const Component = () => {
                     >
                         <DrawerRoot />
                         <form onSubmit={handleSubmit}>
-                            <DuplicationNoticeBox section={section} />
+                            <CloneNoticeBox section={section} />
                             <ProgramRuleFormFields />
-                            <TriggerDuplicateValidation />
+                            <TriggerCloneValidation />
                             <DefaultFormFooter cancelTo="/programRules" />
                         </form>
                         <SectionedFormErrorNotice />

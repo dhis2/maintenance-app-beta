@@ -7,8 +7,8 @@ import {
     FormBase,
     SectionedFormErrorNotice,
     SectionedFormLayout,
-    TriggerDuplicateValidation,
-    DuplicationNoticeBox,
+    TriggerCloneValidation,
+    CloneNoticeBox,
 } from '../../components'
 import { DefaultFormFooter } from '../../components/form/DefaultFormFooter'
 import { SectionedFormProvider, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
@@ -24,14 +24,14 @@ const section = SECTIONS_MAP.programIndicator
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const duplicatedModelId = searchParams.get('clonedId') as string
+    const clonedModelId = searchParams.get('clonedId') as string
 
     const programIndicators = useQuery({
         queryFn: queryFn<ProgramIndicatorValues>,
         queryKey: [
             {
                 resource: 'programIndicators',
-                id: duplicatedModelId,
+                id: clonedModelId,
                 params: {
                     fields: fieldFilters.concat(),
                 },
@@ -79,9 +79,9 @@ export const Component = () => {
                         sidebar={<DefaultSectionedFormSidebar />}
                     >
                         <form onSubmit={handleSubmit}>
-                            <DuplicationNoticeBox section={section} />
+                            <CloneNoticeBox section={section} />
                             <ProgramIndicatorsFormFields />
-                            <TriggerDuplicateValidation />
+                            <TriggerCloneValidation />
                             <DefaultFormFooter cancelTo="/programIndicators" />
                         </form>
                         <SectionedFormErrorNotice />

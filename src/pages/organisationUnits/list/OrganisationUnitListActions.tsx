@@ -83,7 +83,7 @@ const OrganisationUnitActionMore = ({
         { state: preservedSearchState }
     )
 
-    const handleDuplicateClick = useLinkClickHandler({
+    const handleCloneClick = useLinkClickHandler({
         pathname: 'clone',
         search: `?clonedId=${model.id}`,
     })
@@ -130,7 +130,7 @@ const OrganisationUnitActionMore = ({
                             label={i18n.t('Clone')}
                             icon={<IconDuplicate16 />}
                             onClick={(_, e) => {
-                                handleDuplicateClick(e)
+                                handleCloneClick(e)
                                 setOpen(false)
                             }}
                             target="_blank"

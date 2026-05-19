@@ -8,8 +8,8 @@ import {
     FormBase,
     SectionedFormErrorNotice,
     SectionedFormLayout,
-    TriggerDuplicateValidation,
-    DuplicationNoticeBox,
+    TriggerCloneValidation,
+    CloneNoticeBox,
 } from '../../components'
 import {
     DEFAULT_FIELD_FILTERS,
@@ -53,11 +53,11 @@ const section = SECTIONS_MAP.predictor
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const duplicatedModelId = searchParams.get('clonedId') as string
+    const clonedModelId = searchParams.get('clonedId') as string
 
     const query = {
         resource: 'predictors',
-        id: duplicatedModelId,
+        id: clonedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
@@ -91,9 +91,9 @@ export const Component = () => {
                         sidebar={<DefaultSectionedFormSidebar />}
                     >
                         <form onSubmit={handleSubmit}>
-                            <DuplicationNoticeBox section={section} />
+                            <CloneNoticeBox section={section} />
                             <PredictorFormFields />
-                            <TriggerDuplicateValidation />
+                            <TriggerCloneValidation />
                             <DefaultFormFooter cancelTo="/predictors" />
                         </form>
                         <SectionedFormErrorNotice />

@@ -3,7 +3,7 @@ import { omit } from 'lodash'
 import React, { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { FormBase } from '../../components'
-import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormContents'
+import { DefaultCloneFormContents } from '../../components/form/DefaultFormContents'
 import { DEFAULT_FIELD_FILTERS, SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { PickWithFieldFilters } from '../../types/generated'
@@ -29,11 +29,11 @@ const section = SECTIONS_MAP.dataApprovalWorkflow
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const duplicatedModelId = searchParams.get('clonedId') as string
+    const clonedModelId = searchParams.get('clonedId') as string
 
     const query = {
         resource: 'dataApprovalWorkflows',
-        id: duplicatedModelId,
+        id: clonedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
@@ -65,9 +65,9 @@ export const Component = () => {
             fetchError={!!dataApprovalWorkflowQuery.error}
             includeAttributes={false}
         >
-            <DefaultDuplicateFormContents section={section}>
+            <DefaultCloneFormContents section={section}>
                 <DataApprovalWorkflowFormFields />
-            </DefaultDuplicateFormContents>
+            </DefaultCloneFormContents>
         </FormBase>
     )
 }

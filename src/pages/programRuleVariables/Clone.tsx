@@ -5,11 +5,11 @@ import { useSearchParams } from 'react-router-dom'
 import {
     DefaultFormFooter,
     DefaultSectionedFormSidebar,
-    DuplicationNoticeBox,
+    CloneNoticeBox,
     FormBase,
     SectionedFormErrorNotice,
     SectionedFormLayout,
-    TriggerDuplicateValidation,
+    TriggerCloneValidation,
 } from '../../components'
 import {
     SectionedFormProvider,
@@ -30,11 +30,11 @@ const section = SECTIONS_MAP.programRuleVariable
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const duplicatedModelId = searchParams.get('clonedId') as string
+    const clonedModelId = searchParams.get('clonedId') as string
 
     const query = {
         resource: 'programRuleVariables',
-        id: duplicatedModelId,
+        id: clonedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
@@ -74,9 +74,9 @@ export const Component = () => {
                         sidebar={<DefaultSectionedFormSidebar />}
                     >
                         <form onSubmit={handleSubmit}>
-                            <DuplicationNoticeBox section={section} />
+                            <CloneNoticeBox section={section} />
                             <ProgramRuleVariableFormFields />
-                            <TriggerDuplicateValidation />
+                            <TriggerCloneValidation />
                             <DefaultFormFooter cancelTo="/programRuleVariables" />
                         </form>
                         <SectionedFormErrorNotice />

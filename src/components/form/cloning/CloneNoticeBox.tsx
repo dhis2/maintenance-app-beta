@@ -3,9 +3,9 @@ import { NoticeBox } from '@dhis2/ui'
 import React from 'react'
 import { useFormState } from 'react-final-form'
 import { ModelSection } from '../../../types'
-import css from './DuplicationNoticeBox.module.css'
+import css from './CloneNoticeBox.module.css'
 
-export function DuplicationNoticeBox({
+export function CloneNoticeBox({
     section,
 }: {
     readonly section: ModelSection
@@ -15,8 +15,8 @@ export function DuplicationNoticeBox({
     })
     return (
         <NoticeBox
-            title={i18n.t('Cloning {{- duplicatedModelName}}', {
-                duplicatedModelName: initialValues?.displayName,
+            title={i18n.t('Cloning {{- clonedModelName}}', {
+                clonedModelName: initialValues?.displayName,
             })}
             className={css.noticeBox}
         >

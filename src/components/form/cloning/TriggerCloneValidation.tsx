@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useForm } from 'react-final-form'
 
-export const TriggerDuplicateValidation = () => {
+export const TriggerCloneValidation = () => {
     const form = useForm()
     useEffect(() => {
         form.getRegisteredFields().forEach((field) => {

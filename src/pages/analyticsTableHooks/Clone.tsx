@@ -3,7 +3,7 @@ import { omit } from 'lodash'
 import React, { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { FormBase } from '../../components'
-import { DefaultDuplicateFormContents } from '../../components/form/DefaultFormContents'
+import { DefaultCloneFormContents } from '../../components/form/DefaultFormContents'
 import { SECTIONS_MAP, useOnSubmitNew } from '../../lib'
 import { useBoundResourceQueryFn } from '../../lib/query/useBoundQueryFn'
 import { AnalyticsTableHookFormFields } from './form/AnalyticsTableHookFormFields'
@@ -18,11 +18,11 @@ const section = SECTIONS_MAP.analyticsTableHook
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const duplicatedModelId = searchParams.get('clonedId') as string
+    const clonedModelId = searchParams.get('clonedId') as string
 
     const query = {
         resource: 'analyticsTableHooks',
-        id: duplicatedModelId,
+        id: clonedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
@@ -52,9 +52,9 @@ export const Component = () => {
             fetchError={!!analyticsTableHookQuery.error}
             includeAttributes={false}
         >
-            <DefaultDuplicateFormContents section={section}>
+            <DefaultCloneFormContents section={section}>
                 <AnalyticsTableHookFormFields />
-            </DefaultDuplicateFormContents>
+            </DefaultCloneFormContents>
         </FormBase>
     )
 }

@@ -2,10 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { omit } from 'lodash'
 import React, { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import {
-    DuplicationNoticeBox,
-    TriggerDuplicateValidation,
-} from '../../components'
+import { CloneNoticeBox, TriggerCloneValidation } from '../../components'
 import {
     DEFAULT_FIELD_FILTERS,
     SECTIONS_MAP,
@@ -40,11 +37,11 @@ const section = SECTIONS_MAP.validationNotificationTemplate
 export const Component = () => {
     const queryFn = useBoundResourceQueryFn()
     const [searchParams] = useSearchParams()
-    const duplicatedModelId = searchParams.get('clonedId') as string
+    const clonedModelId = searchParams.get('clonedId') as string
 
     const query = {
         resource: 'validationNotificationTemplates',
-        id: duplicatedModelId,
+        id: clonedModelId,
         params: {
             fields: fieldFilters.concat(),
         },
@@ -78,9 +75,9 @@ export const Component = () => {
             fetchError={!!validationNotificationTemplateQuery.error}
         >
             <>
-                <DuplicationNoticeBox section={section} />
+                <CloneNoticeBox section={section} />
                 <ValidationNotificationTemplateFormFields />
-                <TriggerDuplicateValidation />
+                <TriggerCloneValidation />
             </>
         </SectionedFormWrapper>
     )
