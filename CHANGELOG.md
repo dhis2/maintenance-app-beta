@@ -1,3 +1,10 @@
+# [0.156.0](https://github.com/dhis2/metadata-management-app/compare/v0.155.0...v0.156.0) (2026-05-18)
+
+
+### Features
+
+* program type duplicates ([#914](https://github.com/dhis2/metadata-management-app/issues/914)) ([894a955](https://github.com/dhis2/metadata-management-app/commit/894a955761e1b675101dd471d6df8ab8a57c5ba4))
+
 # [0.155.0](https://github.com/dhis2/metadata-management-app/compare/v0.154.2...v0.155.0) (2026-05-15)
 
 
