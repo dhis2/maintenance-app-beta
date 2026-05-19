@@ -35,28 +35,31 @@ function IconKeyField() {
 export function IconFormFields({
     mode,
     href,
-}: {
+}: Readonly<{
     mode: 'new' | 'edit'
     href?: string
-}) {
+}>) {
+    const imageSection =
+        mode === 'new' ? (
+            <StandardFormField>
+                <IconFileField />
+            </StandardFormField>
+        ) : href ? (
+            <StandardFormField>
+                <img
+                    src={href}
+                    alt={i18n.t('Icon preview')}
+                    style={{ width: 48, height: 48, display: 'block' }}
+                />
+            </StandardFormField>
+        ) : null
+
     return (
         <StandardFormSection>
             <StandardFormSectionTitle>
                 {i18n.t('Basic information')}
             </StandardFormSectionTitle>
-            {mode === 'new' ? (
-                <StandardFormField>
-                    <IconFileField />
-                </StandardFormField>
-            ) : href ? (
-                <StandardFormField>
-                    <img
-                        src={href}
-                        alt={i18n.t('Icon preview')}
-                        style={{ width: 48, height: 48, display: 'block' }}
-                    />
-                </StandardFormField>
-            ) : null}
+            {imageSection}
             <StandardFormField>
                 {mode === 'new' ? (
                     <IconKeyField />
