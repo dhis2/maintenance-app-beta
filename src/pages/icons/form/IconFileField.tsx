@@ -1,7 +1,5 @@
-import { useDataEngine } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
 import {
-    CircularLoader,
     Field as UIField,
     FileInput,
     FileInputChangeHandler,
@@ -27,14 +25,9 @@ const filenameToKey = (filename: string) =>
         .toLowerCase()
 
 export function IconFileField() {
-    const dataEngine = useDataEngine()
     const form = useForm()
-    const { input, meta } = useField<string>('fileResourceId')
+    const { input, meta } = useField<File | null | undefined>('file')
 
-    const [uploading, setUploading] = useState(false)
-    const [uploadedFilename, setUploadedFilename] = useState<
-        string | undefined
-    >()
     const [preview, setPreview] = useState<string | undefined>()
 
     const handleChange: FileInputChangeHandler = async ({ files }) => {
@@ -43,44 +36,21 @@ export function IconFileField() {
             return
         }
 
-        setUploading(true)
-        input.onChange('')
+        input.onChange(file)
         input.onBlur()
 
-        try {
-            const response = (await dataEngine.mutate({
-                resource: 'fileResources',
-                type: 'create',
-                data: { file, domain: 'ICON' },
-            })) as { response: { fileResource: { id: string; name: string } } }
-
-            const { id, name } = response.response.fileResource
-            input.onChange(id)
-            input.onBlur()
-
-            setUploadedFilename(name)
-
-            // Auto-populate key only if the user hasn't typed one yet
-            const currentKey = form.getState().values.key
-            if (!currentKey) {
-                form.change('key', filenameToKey(name))
-            }
-
-            const base64 = await fileToBase64(file)
-            setPreview(base64)
-        } catch {
-            input.onChange('')
-            input.onBlur()
-            setUploadedFilename(undefined)
-        } finally {
-            setUploading(false)
+        const currentKey = form.getState().values.key
+        if (!currentKey) {
+            form.change('key', filenameToKey(file.name))
         }
+
+        const base64 = await fileToBase64(file)
+        setPreview(base64)
     }
 
     const handleRemove = () => {
-        input.onChange('')
+        input.onChange(null)
         input.onBlur()
-        setUploadedFilename(undefined)
         setPreview(undefined)
     }
 
@@ -89,7 +59,7 @@ export function IconFileField() {
     return (
         <UIField
             label={i18n.t('Icon file')}
-            name="fileResourceId"
+            name="file"
             required
             error={hasError}
             validationText={hasError ? meta.error : undefined}
@@ -106,22 +76,22 @@ export function IconFileField() {
                     }}
                 />
             )}
-            {uploading ? (
-                <CircularLoader small />
-            ) : (
-                <FileInput
-                    accept="image/png"
-                    buttonLabel={i18n.t('Upload icon')}
-                    multiple={false}
-                    name="iconFile"
-                    onChange={handleChange}
-                    error={hasError}
-                />
-            )}
+            <FileInput
+                accept="image/png"
+                buttonLabel={
+                    input.value instanceof File
+                        ? i18n.t('Change icon')
+                        : i18n.t('Upload icon')
+                }
+                multiple={false}
+                name="iconFile"
+                onChange={handleChange}
+                error={hasError}
+            />
             <FileList>
-                {uploadedFilename && !uploading && (
+                {input.value instanceof File && (
                     <FileListItem
-                        label={uploadedFilename}
+                        label={input.value.name}
                         onRemove={handleRemove}
                         removeText={i18n.t('Remove')}
                     />

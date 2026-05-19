@@ -12,21 +12,28 @@ import classes from '../../components/form/DefaultFormContents.module.css'
 import { DefaultFormErrorNotice } from '../../components/form/DefaultFormErrorNotice'
 import {
     getSectionPath,
+    getDefaultsOld,
     SECTIONS_MAP,
     useNavigateWithSearchState,
 } from '../../lib'
 import { createFormError } from '../../lib/form/createFormError'
 import { EnhancedOnSubmit } from '../../lib/form/useOnSubmit'
 import {
-    IconNewFormFields,
-    newInitialValues,
+    IconFormFields,
+    iconNewFormSchema,
     stringToKeywords,
     validateNew,
 } from './form'
 
 const section = SECTIONS_MAP.icon
 
-type IconNewSubmitValues = typeof newInitialValues & { id?: string }
+type IconNewSubmitValues = {
+    key?: string
+    description?: string
+    keywords?: string
+    file?: File | null
+    id?: string
+}
 
 const useOnSubmitNewIcon = (): EnhancedOnSubmit<IconNewSubmitValues> => {
     const dataEngine = useDataEngine()
@@ -39,11 +46,15 @@ const useOnSubmitNewIcon = (): EnhancedOnSubmit<IconNewSubmitValues> => {
 
     return useMemo(
         () => async (values) => {
-            if (!values.fileResourceId) {
-                return { fileResourceId: i18n.t('Required') }
-            }
-
             try {
+                const uploadResponse = (await dataEngine.mutate({
+                    resource: 'fileResources',
+                    type: 'create',
+                    data: { file: values.file, domain: 'ICON' },
+                })) as { response: { fileResource: { id: string } } }
+
+                const fileResourceId = uploadResponse.response.fileResource.id
+
                 await dataEngine.mutate({
                     resource: 'icons',
                     type: 'create',
@@ -51,7 +62,7 @@ const useOnSubmitNewIcon = (): EnhancedOnSubmit<IconNewSubmitValues> => {
                         key: values.key,
                         description: values.description ?? '',
                         keywords: stringToKeywords(values.keywords),
-                        fileResourceId: values.fileResourceId,
+                        fileResourceId,
                     },
                 })
 
@@ -79,7 +90,7 @@ export const Component = () => {
     return (
         <FormBase
             initialValues={
-                newInitialValues as typeof newInitialValues & { id?: string }
+                getDefaultsOld(iconNewFormSchema) as IconNewSubmitValues
             }
             onSubmit={onSubmit}
             validate={validateNew}
@@ -87,7 +98,7 @@ export const Component = () => {
         >
             {({ handleSubmit, submitting }) => (
                 <div className={classes.form}>
-                    <IconNewFormFields />
+                    <IconFormFields mode="new" />
                     <StandardFormSection>
                         <DefaultFormErrorNotice />
                     </StandardFormSection>

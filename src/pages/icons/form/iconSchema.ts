@@ -13,10 +13,12 @@ export type IconModel = {
 }
 
 export const iconNewFormSchema = z.object({
-    key: z.string().min(1),
+    key: z.string().min(1, 'Required'),
     description: z.string().optional(),
     keywords: z.string().optional(),
-    fileResourceId: z.string().min(1),
+    file: z.any().refine((v) => v instanceof File, {
+        message: 'An icon image is required',
+    }),
 })
 
 export const iconEditFormSchema = z.object({
@@ -26,18 +28,6 @@ export const iconEditFormSchema = z.object({
 
 export type IconNewFormValues = z.input<typeof iconNewFormSchema>
 export type IconEditFormValues = z.input<typeof iconEditFormSchema>
-
-export const newInitialValues: IconNewFormValues = {
-    key: '',
-    description: '',
-    keywords: '',
-    fileResourceId: '',
-}
-
-export const editInitialValues: IconEditFormValues = {
-    description: '',
-    keywords: '',
-}
 
 export const validateNew = createFormValidate(iconNewFormSchema)
 export const validateEdit = createFormValidate(iconEditFormSchema)

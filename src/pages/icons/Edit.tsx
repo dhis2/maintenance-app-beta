@@ -21,7 +21,7 @@ import {
 import { createFormError } from '../../lib/form/createFormError'
 import { EnhancedOnSubmit } from '../../lib/form/useOnSubmit'
 import {
-    IconEditFormFields,
+    IconFormFields,
     IconModel,
     keywordsToString,
     stringToKeywords,
@@ -92,7 +92,7 @@ export const Component = () => {
 
     const initialValues: IconEditSubmitValues | undefined = data
         ? {
-              key: iconKey,
+              key: data.key,
               description: data.description ?? '',
               keywords: keywordsToString(data.keywords),
           }
@@ -125,7 +125,7 @@ export const Component = () => {
         >
             {({ handleSubmit, submitting }) => (
                 <div className={classes.form}>
-                    <IconEditFormFields href={data?.href} />
+                    <IconFormFields mode="edit" href={data?.href} />
                     <StandardFormSection>
                         <DefaultFormErrorNotice />
                     </StandardFormSection>
