@@ -75,9 +75,9 @@ const eventProgramBaseSchema = z.object({
         ]),
     organisationUnits: z.array(modelReference).default([]),
     sharing: sharingSettingsSchema.optional(),
-    expiryDays: z.coerce.number().int().min(0).default(0),
-    expiryPeriodType: z.string().optional().default('Weekly'),
-    completeEventsExpiryDays: z.coerce.number().int().min(0).default(0),
+    expiryDays: z.coerce.number().int().min(0).optional(),
+    expiryPeriodType: z.string().nullable().optional(),
+    completeEventsExpiryDays: z.coerce.number().int().min(0).optional(),
     openDaysAfterCoEndDate: z.coerce.number().min(0).default(0),
 })
 

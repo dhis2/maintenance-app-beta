@@ -1,10 +1,8 @@
 import i18n from '@dhis2/d2-i18n'
 import { Checkbox, InputFieldFF } from '@dhis2/ui'
 import React, { useEffect, useState } from 'react'
-import { useField } from 'react-final-form'
-import type { FieldMetaState } from 'react-final-form'
+import { Field as FieldRFF, useField } from 'react-final-form'
 import setupClasses from '../common/SetupFormContents.module.css'
-import { formatNumericInput, parseNumericInput } from './numericInputParsing'
 
 function isEnabled(value: unknown): boolean {
     if (value == null || value === '') {
@@ -15,10 +13,7 @@ function isEnabled(value: unknown): boolean {
 }
 
 export function CompleteEventsExpiryDaysField() {
-    const { input, meta } = useField('completeEventsExpiryDays', {
-        parse: parseNumericInput,
-        format: formatNumericInput,
-    })
+    const { input } = useField('completeEventsExpiryDays')
     const [checked, setChecked] = useState(() => isEnabled(input.value))
 
     useEffect(() => {
@@ -27,11 +22,11 @@ export function CompleteEventsExpiryDaysField() {
         }
     }, [input.value])
 
-    const num = Number(input.value)
-
-    const onToggle = (next: boolean) => {
-        setChecked(next)
-        input.onChange(next ? num || 7 : 0)
+    const onToggle = (isChecked: boolean) => {
+        setChecked(isChecked)
+        if (!isChecked) {
+            input.onChange(0)
+        }
         input.onBlur()
     }
 
@@ -44,12 +39,24 @@ export function CompleteEventsExpiryDaysField() {
             />
             {checked && (
                 <div className={setupClasses.expiryDaysRow}>
-                    <InputFieldFF
-                        input={input}
-                        meta={meta as FieldMetaState<string | undefined>}
+                    <FieldRFF
+                        name="completeEventsExpiryDays"
+                        component={InputFieldFF}
+                        type="number"
+                        min="0"
                         inputWidth="150px"
                         label={i18n.t('Number of days')}
                         dataTest="formfields-completeEventsExpiryDays"
+                        format={(value: unknown) => value?.toString()}
+                        parse={(value: unknown) => {
+                            if (value === undefined || value === null) {
+                                return null
+                            }
+                            if (value === '') {
+                                return 0
+                            }
+                            return Number.parseInt(value as string, 10)
+                        }}
                     />
                 </div>
             )}
