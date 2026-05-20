@@ -25,9 +25,9 @@ const generateContract = <T extends ZodRawShape>({
         responseStatus: 200,
         jsonSchema: `contracts/metadata-management-app/${name}/json-schema.json`,
     }
+    // @ts-expect-error - zod-to-json-schema types incompatible with deep ZodObject generics
     const schema = zodToJsonSchema(expectedSchema.extend({ id: z.string() }), {
         name,
-        // @ts-expect-error - zod-to-json-schema types omit true for rejectedAdditionalProperties
         rejectedAdditionalProperties: true,
         $refStrategy: 'none',
     })
