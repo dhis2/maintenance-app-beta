@@ -4286,6 +4286,27 @@ msgstr ""
 msgid "Choose the groups to include in this organisation unit group set."
 msgstr "Choose the groups to include in this organisation unit group set."
 
+msgid "Color and symbol"
+msgstr "Color and symbol"
+
+msgid "Choose a symbol"
+msgstr "Choose a symbol"
+
+msgid "Available symbols"
+msgstr "Available symbols"
+
+msgid "Choose symbol"
+msgstr "Choose symbol"
+
+msgid "Remove symbol"
+msgstr "Remove symbol"
+
+msgid "Symbol"
+msgstr "Symbol"
+
+msgid "Symbol: none selected"
+msgstr "Symbol: none selected"
+
 msgid "Set up the basic information for this organisation unit group."
 msgstr "Set up the basic information for this organisation unit group."
 
