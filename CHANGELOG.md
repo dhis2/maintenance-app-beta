@@ -1,3 +1,10 @@
+# [0.183.0](https://github.com/dhis2/metadata-management-app/compare/v0.182.0...v0.183.0) (2026-10-12)
+
+
+### Features
+
+* add color symbol picker to orgUnitGroup [DHIS2-22040] ([#1044](https://github.com/dhis2/metadata-management-app/issues/1044)) ([2d14cfe](https://github.com/dhis2/metadata-management-app/commit/2d14cfecb5da8acdeb02c7be922f4f98aa976e7d))
+
 # [0.182.0](https://github.com/dhis2/metadata-management-app/compare/v0.181.0...v0.182.0) (2026-10-06)
 
 
