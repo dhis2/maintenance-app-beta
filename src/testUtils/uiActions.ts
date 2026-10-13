@@ -58,9 +58,12 @@ const applyNewExpressionWithinModal = async (
         anExpression,
         screen
     )
-    await userEvent.click(
-        within(editNumeratorModal).getByTestId('apply-expression-button')
+    const applyButton = within(editNumeratorModal).getByTestId(
+        'apply-expression-button'
     )
+    // apply stays disabled until the expression has been validated
+    await waitFor(() => expect(applyButton).toBeEnabled())
+    await userEvent.click(applyButton)
 }
 const clearInputField = async (
     fieldName: string,
