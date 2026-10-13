@@ -97,6 +97,18 @@ const openSingleSelect = async (
         'dhis2-uicore-select-menu-menuwrapper'
     )
     expect(optionsWrapper).toBeVisible()
+    // model selects show a loader in the menu until their options are fetched,
+    // and some fields only fill their options in an effect after loading
+    await waitFor(() => {
+        expect(
+            within(optionsWrapper).queryByTestId('dhis2-uicore-circularloader')
+        ).not.toBeInTheDocument()
+        expect(
+            within(optionsWrapper).getAllByTestId(
+                'dhis2-uicore-singleselectoption'
+            ).length
+        ).toBeGreaterThan(0)
+    })
     return within(optionsWrapper).getAllByTestId(
         'dhis2-uicore-singleselectoption'
     )
