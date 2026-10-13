@@ -404,7 +404,6 @@ describe('Option group sets form tests', () => {
         it('contain all needed field prefilled', async () => {
             const { screen, optionGroups, optionSets, optionGroupSet } =
                 await renderForm()
-            screen.debug()
 
             uiAssertions.expectNameFieldExist(optionGroupSet.name, screen)
             uiAssertions.expectCodeFieldExist(optionGroupSet.code, screen)
