@@ -373,7 +373,10 @@ describe('TrackedEntityAttributes form tests', () => {
         )
 
         it('renders with prefilled values', async () => {
-            const { screen, trackedEntityAttribute } = await renderForm()
+            // the list schema used by the builder has no name, so set one
+            const { screen, trackedEntityAttribute } = await renderForm({
+                trackedEntityAttributeOverwrites: { name: faker.word.words() },
+            })
             uiAssertions.expectNameFieldExist(
                 trackedEntityAttribute.name,
                 screen
