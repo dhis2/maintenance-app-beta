@@ -29,7 +29,7 @@ import { Component } from './List'
 describe('Organisation unit list tests', () => {
     const originalWarn = console.warn
     jest.spyOn(console, 'warn').mockImplementation((value) => {
-        if (!value.match(/No server timezone/)) {
+        if (typeof value === 'string' && !value.match(/No server timezone/)) {
             originalWarn(value)
         }
     })
