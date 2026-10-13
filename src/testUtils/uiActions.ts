@@ -203,7 +203,7 @@ const pickOptionInTransfer = async (
     const transfer = screen.getByTestId(transferTestId)
     expect(transfer).toBeVisible()
     const lhs = within(transfer).getByTestId(`${transferTestId}-leftside`)
-    const lhsOptionToPick = within(lhs).getByText(optionText, {
+    const lhsOptionToPick = await within(lhs).findByText(optionText, {
         selector: '[data-test="dhis2-uicore-transferoption"]',
     })
     await userEvent.dblClick(lhsOptionToPick)
