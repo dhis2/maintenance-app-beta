@@ -589,6 +589,10 @@ describe('Organisation unit list', () => {
 
         const detailsPanel = await screen.findByTestId('details-panel')
         expect(detailsPanel).toBeVisible()
+        // the panel shell renders before its content has been fetched
+        await waitFor(() => {
+            expect(detailsPanel).toHaveTextContent(child1.id!)
+        })
         expect(detailsPanel).toHaveTextContent(child1.displayName!)
         expect(detailsPanel).toHaveTextContent(child1.code!)
         expect(detailsPanel).toHaveTextContent(child1.id!)
@@ -639,6 +643,10 @@ describe('Organisation unit list', () => {
 
         const detailsPanel = await screen.findByTestId('details-panel')
         expect(detailsPanel).toBeVisible()
+        // the panel shell renders before its content has been fetched
+        await waitFor(() => {
+            expect(detailsPanel).toHaveTextContent(child1.id!)
+        })
         expect(detailsPanel).toHaveTextContent(child1.displayName!)
         expect(detailsPanel).toHaveTextContent(child1.code!)
         expect(detailsPanel).toHaveTextContent(child1.id!)
