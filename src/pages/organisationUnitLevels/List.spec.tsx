@@ -94,7 +94,10 @@ describe('Organisation unit list tests', () => {
         elements.forEach((element, index) => {
             expect(tableRows[index]).toHaveTextContent(element.displayName)
             if (element.offlineLevels) {
-                expect(tableRows[index]).toHaveTextContent(
+                const offlineLevelsCell = within(
+                    tableRows[index]
+                ).getAllByTestId('dhis2-uicore-datatablecell')[2]
+                expect(offlineLevelsCell).toHaveTextContent(
                     element.offlineLevels.toString()
                 )
             }
