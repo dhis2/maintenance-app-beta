@@ -350,7 +350,7 @@ describe('Category combos form tests', () => {
         it('should submit the data and return to the list view on success when a field is changed', async () => {
             const { screen, categoryCombo } = await renderForm()
 
-            const newCode = faker.word.words()
+            const newCode = faker.string.alphanumeric(10)
             await uiActions.enterCode(newCode, screen)
             await uiActions.submitForm(screen)
 
