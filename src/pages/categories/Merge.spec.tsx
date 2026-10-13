@@ -74,6 +74,11 @@ describe('data element merge additional tests', () => {
         await pickFirstSource(screen)
         await pickTarget(screen)
 
+        await waitFor(() =>
+            expect(
+                screen.queryByText(/merging cannot be undone/i)
+            ).not.toBeInTheDocument()
+        )
         await waitFor(() => expect(getMergeButton(screen)).toBeDisabled())
         await userEvent.hover(getMergeButton(screen))
         expect(
@@ -81,11 +86,6 @@ describe('data element merge additional tests', () => {
                 'Category options of source and target categories do not match'
             )
         ).toBeInTheDocument()
-        await waitFor(() =>
-            expect(
-                screen.queryByText(/merging cannot be undone/i)
-            ).not.toBeInTheDocument()
-        )
     })
     it('disables merge button and hides ConfirmationField when source and target have overlapping category combos', async () => {
         const cat1 = testCategory({
@@ -110,6 +110,11 @@ describe('data element merge additional tests', () => {
         await pickFirstSource(screen)
         await pickTarget(screen)
 
+        await waitFor(() =>
+            expect(
+                screen.queryByText(/merging cannot be undone/i)
+            ).not.toBeInTheDocument()
+        )
         await waitFor(() => expect(getMergeButton(screen)).toBeDisabled())
         await userEvent.hover(getMergeButton(screen))
         expect(
@@ -117,11 +122,6 @@ describe('data element merge additional tests', () => {
                 'Categories must have unique, non-overlapping category combos'
             )
         ).toBeInTheDocument()
-        await waitFor(() =>
-            expect(
-                screen.queryByText(/merging cannot be undone/i)
-            ).not.toBeInTheDocument()
-        )
     })
     it('prompts for confirmation when source and target have matching category options and category combos', async () => {
         const cat1 = testCategory({

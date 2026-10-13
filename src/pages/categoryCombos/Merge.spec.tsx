@@ -73,6 +73,12 @@ describe('category combination merge additional tests', () => {
         await pickFirstSource(screen)
         await pickTarget(screen)
 
+        // the confirmation field disappears once the categories have been compared
+        await waitFor(() =>
+            expect(
+                screen.queryByText(/merging cannot be undone/i)
+            ).not.toBeInTheDocument()
+        )
         await waitFor(() => expect(getMergeButton(screen)).toBeDisabled())
         await userEvent.hover(getMergeButton(screen))
         expect(
@@ -80,11 +86,6 @@ describe('category combination merge additional tests', () => {
                 'Categories of source and target category combinations do not match'
             )
         ).toBeInTheDocument()
-        await waitFor(() =>
-            expect(
-                screen.queryByText(/merging cannot be undone/i)
-            ).not.toBeInTheDocument()
-        )
     })
 
     it('prompts for confirmation when source and target categories match', async () => {
