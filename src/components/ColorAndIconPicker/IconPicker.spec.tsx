@@ -37,7 +37,7 @@ describe('IconPicker', () => {
 
         const iconButton = screen.getByTestId('iconpicker-trigger')
         expect(iconButton).toBeInTheDocument()
-        expect(iconButton.children).not.toContain('IMG')
+        expect(within(iconButton).queryByRole('img')).toBeNull()
         expect(screen.queryByAltText('test')).not.toBeInTheDocument()
     })
 
