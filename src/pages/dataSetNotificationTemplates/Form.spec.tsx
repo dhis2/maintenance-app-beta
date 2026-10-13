@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { render, within } from '@testing-library/react'
+import { render, waitFor, within } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/dataSetNotificationTemplatesSchema.json'
@@ -528,26 +528,28 @@ describe('DataSetNotificationTemplate form tests', () => {
                 screen
             )
             await uiActions.submitForm(screen)
-            expect(createMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        name: aName,
-                        code: aCode,
-                        dataSets: [
-                            expect.objectContaining({
-                                id: dataSets[1].id,
-                            }),
-                        ],
-                        subjectTemplate: aSubject,
-                        messageTemplate: aMessage,
-                        sendStrategy: undefined,
-                        notificationRecipient: 'USER_GROUP',
-                        recipientUserGroup: {
-                            id: userGroups[userGroupsSelectIndex].id,
-                        },
-                        notifyUsersInHierarchyOnly: true,
-                    }),
-                })
+            await waitFor(() =>
+                expect(createMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            name: aName,
+                            code: aCode,
+                            dataSets: [
+                                expect.objectContaining({
+                                    id: dataSets[1].id,
+                                }),
+                            ],
+                            subjectTemplate: aSubject,
+                            messageTemplate: aMessage,
+                            sendStrategy: undefined,
+                            notificationRecipient: 'USER_GROUP',
+                            recipientUserGroup: {
+                                id: userGroups[userGroupsSelectIndex].id,
+                            },
+                            notifyUsersInHierarchyOnly: true,
+                        }),
+                    })
+                )
             )
         })
     })
@@ -693,12 +695,14 @@ describe('DataSetNotificationTemplate form tests', () => {
             const newCode = faker.word.words()
             await uiActions.enterCode(newCode, screen)
             await uiActions.submitForm(screen)
-            expect(updateMock).toHaveBeenCalledWith({
-                data: [{ op: 'replace', path: '/code', value: newCode }],
-                id: dataSetNotificationTemplate.id,
-                params: undefined,
-                resource: 'dataSetNotificationTemplates',
-            })
+            await waitFor(() =>
+                expect(updateMock).toHaveBeenCalledWith({
+                    data: [{ op: 'replace', path: '/code', value: newCode }],
+                    id: dataSetNotificationTemplate.id,
+                    params: undefined,
+                    resource: 'dataSetNotificationTemplates',
+                })
+            )
         })
 
         it('should have a cancel button with a link back to the list view', async () => {

@@ -138,7 +138,7 @@ describe('Indicator types form tests', () => {
 
             await uiActions.enterName(faker.company.name(), screen)
             await uiActions.submitForm(screen)
-            expect(createMock).toHaveBeenCalled()
+            await waitFor(() => expect(createMock).toHaveBeenCalled())
         })
     })
     describe('New', () => {
@@ -213,7 +213,7 @@ describe('Indicator types form tests', () => {
                 type: 'spinbutton',
             })
             await uiActions.submitForm(screen)
-            expect(createMock).toHaveBeenCalledTimes(1)
+            await waitFor(() => expect(createMock).toHaveBeenCalledTimes(1))
             expect(createMock).toHaveBeenLastCalledWith(
                 expect.objectContaining({
                     id: undefined,
@@ -312,7 +312,7 @@ describe('Indicator types form tests', () => {
             })
 
             await uiActions.submitForm(screen)
-            expect(updateMock).toHaveBeenCalledTimes(1)
+            await waitFor(() => expect(updateMock).toHaveBeenCalledTimes(1))
             expect(updateMock).toHaveBeenLastCalledWith(
                 expect.objectContaining({
                     id: indicatorType.id,

@@ -251,17 +251,19 @@ describe('TrackedEntityAttributes form tests', () => {
                 screen
             )
             await uiActions.submitForm(screen)
-            expect(createMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        name: aName,
-                        formName: aFormName,
-                        shortName: aShortName,
-                        code: aCode,
-                        description: aDescription,
-                    }),
-                })
-            )
+            await waitFor(() => {
+                expect(createMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            name: aName,
+                            formName: aFormName,
+                            shortName: aShortName,
+                            code: aCode,
+                            description: aDescription,
+                        }),
+                    })
+                )
+            })
         })
 
         it('submits with value type and aggregation type', async () => {
@@ -275,16 +277,18 @@ describe('TrackedEntityAttributes form tests', () => {
                 screen
             )
             await uiActions.submitForm(screen)
-            expect(createMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        name: aName,
-                        shortName: aShortName,
-                        valueType: 'TEXT',
-                        aggregationType: 'NONE',
-                    }),
-                })
-            )
+            await waitFor(() => {
+                expect(createMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            name: aName,
+                            shortName: aShortName,
+                            valueType: 'TEXT',
+                            aggregationType: 'NONE',
+                        }),
+                    })
+                )
+            })
         })
     })
 
@@ -402,11 +406,13 @@ describe('TrackedEntityAttributes form tests', () => {
             const newName = faker.word.words()
             await uiActions.enterName(newName, screen)
             await uiActions.submitForm(screen)
-            expect(updateMock).toHaveBeenCalledWith({
-                data: [{ op: 'replace', path: '/name', value: newName }],
-                id: trackedEntityAttribute.id,
-                params: undefined,
-                resource: 'trackedEntityAttributes',
+            await waitFor(() => {
+                expect(updateMock).toHaveBeenCalledWith({
+                    data: [{ op: 'replace', path: '/name', value: newName }],
+                    id: trackedEntityAttribute.id,
+                    params: undefined,
+                    resource: 'trackedEntityAttributes',
+                })
             })
         })
     })

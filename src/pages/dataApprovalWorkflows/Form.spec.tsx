@@ -295,16 +295,18 @@ describe('Data approval workflows form tests', () => {
 
             await uiActions.submitForm(screen)
 
-            expect(createMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        name: aName,
-                        periodType: periodTypes[2],
-                        categoryCombo: expect.objectContaining({
-                            id: DEFAULT_CATEGORYCOMBO_SELECT_OPTION.id,
+            await waitFor(() =>
+                expect(createMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            name: aName,
+                            periodType: periodTypes[2],
+                            categoryCombo: expect.objectContaining({
+                                id: DEFAULT_CATEGORYCOMBO_SELECT_OPTION.id,
+                            }),
                         }),
-                    }),
-                })
+                    })
+                )
             )
         })
     })

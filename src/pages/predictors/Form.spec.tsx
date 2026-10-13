@@ -672,7 +672,7 @@ describe('Predictors form tests', () => {
 
             await uiActions.submitForm(screen)
 
-            expect(createMock).toHaveBeenCalledTimes(1)
+            await waitFor(() => expect(createMock).toHaveBeenCalledTimes(1))
             expect(createMock).toHaveBeenLastCalledWith(
                 expect.objectContaining({
                     data: expect.objectContaining({
@@ -1032,26 +1032,28 @@ describe('Predictors form tests', () => {
                 useDefaultCategoryOptionCombo: true,
             })
 
-            expect(
-                screen.queryByTestId('formfields-outputCombo-validation')
-            ).not.toBeInTheDocument()
-
             const newName = faker.internet.userName()
             await uiActions.enterName(newName, screen)
             await uiActions.submitForm(screen)
 
-            expect(updateMock).toHaveBeenCalledWith({
-                data: [
-                    {
-                        op: 'replace',
-                        path: '/name',
-                        value: newName,
-                    },
-                ],
-                id: predictor.id,
-                params: undefined,
-                resource: 'predictors',
+            await waitFor(() => {
+                expect(updateMock).toHaveBeenCalledWith({
+                    data: [
+                        {
+                            op: 'replace',
+                            path: '/name',
+                            value: newName,
+                        },
+                    ],
+                    id: predictor.id,
+                    params: undefined,
+                    resource: 'predictors',
+                })
             })
+            // checked after submitting, when required errors would show
+            expect(
+                screen.queryByTestId('formfields-outputCombo-validation')
+            ).not.toBeInTheDocument()
         })
 
         it('should submit the data successfully when a field is changed', async () => {
@@ -1062,17 +1064,19 @@ describe('Predictors form tests', () => {
 
             await uiActions.submitForm(screen)
 
-            expect(updateMock).toHaveBeenCalledWith({
-                data: [
-                    {
-                        op: 'replace',
-                        path: '/name',
-                        value: newName,
-                    },
-                ],
-                id: predictor.id,
-                params: undefined,
-                resource: 'predictors',
+            await waitFor(() => {
+                expect(updateMock).toHaveBeenCalledWith({
+                    data: [
+                        {
+                            op: 'replace',
+                            path: '/name',
+                            value: newName,
+                        },
+                    ],
+                    id: predictor.id,
+                    params: undefined,
+                    resource: 'predictors',
+                })
             })
         })
 

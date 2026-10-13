@@ -326,20 +326,22 @@ describe('Category option groups sets form tests', () => {
 
             await uiActions.submitForm(screen)
 
-            expect(createMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        name: aName,
-                        shortName: aShortName,
-                        categoryOptionGroups: [
-                            expect.objectContaining({
-                                displayName:
-                                    categoryOptionGroups[1].displayName,
-                                id: categoryOptionGroups[1].id,
-                            }),
-                        ],
-                    }),
-                })
+            await waitFor(() =>
+                expect(createMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            name: aName,
+                            shortName: aShortName,
+                            categoryOptionGroups: [
+                                expect.objectContaining({
+                                    displayName:
+                                        categoryOptionGroups[1].displayName,
+                                    id: categoryOptionGroups[1].id,
+                                }),
+                            ],
+                        }),
+                    })
+                )
             )
         })
     })

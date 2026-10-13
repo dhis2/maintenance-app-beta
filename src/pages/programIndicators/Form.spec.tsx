@@ -882,33 +882,35 @@ describe('Program indicator form tests', () => {
             )
 
             await uiActions.submitForm(screen)
-            expect(createMock).toHaveBeenCalledTimes(1)
-            expect(createMock).toHaveBeenLastCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        id: undefined,
-                        program: expect.objectContaining({
-                            id: programWithoutRegistration.id,
+            await waitFor(() => {
+                expect(createMock).toHaveBeenCalledTimes(1)
+                expect(createMock).toHaveBeenLastCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            id: undefined,
+                            program: expect.objectContaining({
+                                id: programWithoutRegistration.id,
+                            }),
+                            name: aName,
+                            shortName: aShortName,
+                            code: aCode,
+                            description: aDescription,
+                            decimals: 1,
+                            aggregationType: 'SUM',
+                            analyticsType: 'EVENT',
+                            displayInForm: false,
+                            aggregateExportAttributeOptionCombo: undefined,
+                            aggregateExportCategoryOptionCombo: undefined,
+                            aggregateExportDataElement: undefined,
+                            legendSets: [],
+                            attributeValues: [],
+                            expression: undefined,
+                            filter: undefined,
+                            analyticsPeriodBoundaries: [],
                         }),
-                        name: aName,
-                        shortName: aShortName,
-                        code: aCode,
-                        description: aDescription,
-                        decimals: 1,
-                        aggregationType: 'SUM',
-                        analyticsType: 'EVENT',
-                        displayInForm: false,
-                        aggregateExportAttributeOptionCombo: undefined,
-                        aggregateExportCategoryOptionCombo: undefined,
-                        aggregateExportDataElement: undefined,
-                        legendSets: [],
-                        attributeValues: [],
-                        expression: undefined,
-                        filter: undefined,
-                        analyticsPeriodBoundaries: [],
-                    }),
-                })
-            )
+                    })
+                )
+            })
         })
         it('should submit the expression and a filter', async () => {
             const programWithoutRegistration = testProgram({
@@ -976,32 +978,34 @@ describe('Program indicator form tests', () => {
             )
 
             await uiActions.submitForm(screen)
-            expect(createMock).toHaveBeenCalledTimes(1)
-            expect(createMock).toHaveBeenLastCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        id: undefined,
-                        program: expect.objectContaining({
-                            id: programWithoutRegistration.id,
+            await waitFor(() => {
+                expect(createMock).toHaveBeenCalledTimes(1)
+                expect(createMock).toHaveBeenLastCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            id: undefined,
+                            program: expect.objectContaining({
+                                id: programWithoutRegistration.id,
+                            }),
+                            name: aName,
+                            shortName: aShortName,
+                            code: undefined,
+                            decimals: undefined,
+                            aggregationType: undefined,
+                            analyticsType: 'EVENT',
+                            displayInForm: false,
+                            aggregateExportAttributeOptionCombo: undefined,
+                            aggregateExportCategoryOptionCombo: undefined,
+                            aggregateExportDataElement: undefined,
+                            legendSets: [],
+                            attributeValues: [],
+                            expression: anExpression,
+                            filter: aFilter,
+                            analyticsPeriodBoundaries: [],
                         }),
-                        name: aName,
-                        shortName: aShortName,
-                        code: undefined,
-                        decimals: undefined,
-                        aggregationType: undefined,
-                        analyticsType: 'EVENT',
-                        displayInForm: false,
-                        aggregateExportAttributeOptionCombo: undefined,
-                        aggregateExportCategoryOptionCombo: undefined,
-                        aggregateExportDataElement: undefined,
-                        legendSets: [],
-                        attributeValues: [],
-                        expression: anExpression,
-                        filter: aFilter,
-                        analyticsPeriodBoundaries: [],
-                    }),
-                })
-            )
+                    })
+                )
+            })
         })
         it('should submit analytics period boundaries', async () => {
             const programWithoutRegistration = testProgram({
@@ -1061,40 +1065,42 @@ describe('Program indicator form tests', () => {
             )
 
             await uiActions.submitForm(screen)
-            expect(createMock).toHaveBeenCalledTimes(1)
-            expect(createMock).toHaveBeenLastCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        id: undefined,
-                        program: expect.objectContaining({
-                            id: programWithoutRegistration.id,
+            await waitFor(() => {
+                expect(createMock).toHaveBeenCalledTimes(1)
+                expect(createMock).toHaveBeenLastCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            id: undefined,
+                            program: expect.objectContaining({
+                                id: programWithoutRegistration.id,
+                            }),
+                            name: aName,
+                            shortName: aShortName,
+                            code: undefined,
+                            decimals: undefined,
+                            aggregationType: undefined,
+                            analyticsType: 'EVENT',
+                            displayInForm: false,
+                            aggregateExportAttributeOptionCombo: undefined,
+                            aggregateExportCategoryOptionCombo: undefined,
+                            aggregateExportDataElement: undefined,
+                            legendSets: [],
+                            attributeValues: [],
+                            expression: undefined,
+                            filter: undefined,
+                            analyticsPeriodBoundaries: [
+                                {
+                                    boundaryTarget: 'INCIDENT_DATE',
+                                    analyticsPeriodBoundaryType:
+                                        'BEFORE_START_OF_REPORTING_PERIOD',
+                                    offsetPeriodType: periodTypes[0],
+                                    offsetPeriods: 5,
+                                },
+                            ],
                         }),
-                        name: aName,
-                        shortName: aShortName,
-                        code: undefined,
-                        decimals: undefined,
-                        aggregationType: undefined,
-                        analyticsType: 'EVENT',
-                        displayInForm: false,
-                        aggregateExportAttributeOptionCombo: undefined,
-                        aggregateExportCategoryOptionCombo: undefined,
-                        aggregateExportDataElement: undefined,
-                        legendSets: [],
-                        attributeValues: [],
-                        expression: undefined,
-                        filter: undefined,
-                        analyticsPeriodBoundaries: [
-                            {
-                                boundaryTarget: 'INCIDENT_DATE',
-                                analyticsPeriodBoundaryType:
-                                    'BEFORE_START_OF_REPORTING_PERIOD',
-                                offsetPeriodType: periodTypes[0],
-                                offsetPeriods: 5,
-                            },
-                        ],
-                    }),
-                })
-            )
+                    })
+                )
+            })
         })
         it('should submit the advanced options', async () => {
             const programWithoutRegistration = testProgram({
@@ -1168,32 +1174,36 @@ describe('Program indicator form tests', () => {
             )
 
             await uiActions.submitForm(screen)
-            expect(createMock).toHaveBeenCalledTimes(1)
-            expect(createMock).toHaveBeenLastCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        id: undefined,
-                        program: expect.objectContaining({
-                            id: programWithoutRegistration.id,
+            await waitFor(() => {
+                expect(createMock).toHaveBeenCalledTimes(1)
+                expect(createMock).toHaveBeenLastCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            id: undefined,
+                            program: expect.objectContaining({
+                                id: programWithoutRegistration.id,
+                            }),
+                            name: aName,
+                            shortName: aShortName,
+                            code: undefined,
+                            decimals: undefined,
+                            aggregationType: undefined,
+                            analyticsType: 'EVENT',
+                            displayInForm: true,
+                            aggregateExportAttributeOptionCombo:
+                                anAttOptionExport,
+                            aggregateExportCategoryOptionCombo:
+                                aCatOptionExport,
+                            aggregateExportDataElement: anAggDataExport,
+                            legendSets: [],
+                            attributeValues: [],
+                            expression: undefined,
+                            filter: undefined,
+                            analyticsPeriodBoundaries: [],
                         }),
-                        name: aName,
-                        shortName: aShortName,
-                        code: undefined,
-                        decimals: undefined,
-                        aggregationType: undefined,
-                        analyticsType: 'EVENT',
-                        displayInForm: true,
-                        aggregateExportAttributeOptionCombo: anAttOptionExport,
-                        aggregateExportCategoryOptionCombo: aCatOptionExport,
-                        aggregateExportDataElement: anAggDataExport,
-                        legendSets: [],
-                        attributeValues: [],
-                        expression: undefined,
-                        filter: undefined,
-                        analyticsPeriodBoundaries: [],
-                    }),
-                })
-            )
+                    })
+                )
+            })
         })
         it('should submit the legends', async () => {
             const programWithoutRegistration = testProgram({
@@ -1252,34 +1262,38 @@ describe('Program indicator form tests', () => {
                 screen
             )
             await uiActions.submitForm(screen)
-            expect(createMock).toHaveBeenCalledTimes(1)
-            expect(createMock).toHaveBeenLastCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        id: undefined,
-                        program: expect.objectContaining({
-                            id: programWithoutRegistration.id,
+            await waitFor(() => {
+                expect(createMock).toHaveBeenCalledTimes(1)
+                expect(createMock).toHaveBeenLastCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            id: undefined,
+                            program: expect.objectContaining({
+                                id: programWithoutRegistration.id,
+                            }),
+                            name: aName,
+                            shortName: aShortName,
+                            code: undefined,
+                            decimals: undefined,
+                            aggregationType: undefined,
+                            analyticsType: 'EVENT',
+                            displayInForm: false,
+                            aggregateExportAttributeOptionCombo: undefined,
+                            aggregateExportCategoryOptionCombo: undefined,
+                            aggregateExportDataElement: undefined,
+                            legendSets: [
+                                expect.objectContaining({
+                                    id: legendSets[0].id,
+                                }),
+                            ],
+                            attributeValues: [],
+                            expression: undefined,
+                            filter: undefined,
+                            analyticsPeriodBoundaries: [],
                         }),
-                        name: aName,
-                        shortName: aShortName,
-                        code: undefined,
-                        decimals: undefined,
-                        aggregationType: undefined,
-                        analyticsType: 'EVENT',
-                        displayInForm: false,
-                        aggregateExportAttributeOptionCombo: undefined,
-                        aggregateExportCategoryOptionCombo: undefined,
-                        aggregateExportDataElement: undefined,
-                        legendSets: [
-                            expect.objectContaining({ id: legendSets[0].id }),
-                        ],
-                        attributeValues: [],
-                        expression: undefined,
-                        filter: undefined,
-                        analyticsPeriodBoundaries: [],
-                    }),
-                })
-            )
+                    })
+                )
+            })
         })
         it('should submit the attributes', async () => {
             const programWithoutRegistration = testProgram({
@@ -1338,39 +1352,41 @@ describe('Program indicator form tests', () => {
             ).getByRole('textbox') as HTMLInputElement
             await uiActions.pasteIntoInput(attributeInput, anAttribute)
             await uiActions.submitForm(screen)
-            expect(createMock).toHaveBeenCalledTimes(1)
-            expect(createMock).toHaveBeenLastCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        id: undefined,
-                        program: expect.objectContaining({
-                            id: programWithoutRegistration.id,
+            await waitFor(() => {
+                expect(createMock).toHaveBeenCalledTimes(1)
+                expect(createMock).toHaveBeenLastCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            id: undefined,
+                            program: expect.objectContaining({
+                                id: programWithoutRegistration.id,
+                            }),
+                            name: aName,
+                            shortName: aShortName,
+                            code: undefined,
+                            decimals: undefined,
+                            aggregationType: undefined,
+                            analyticsType: 'EVENT',
+                            displayInForm: false,
+                            aggregateExportAttributeOptionCombo: undefined,
+                            aggregateExportCategoryOptionCombo: undefined,
+                            aggregateExportDataElement: undefined,
+                            legendSets: [],
+                            attributeValues: [
+                                {
+                                    attribute: expect.objectContaining({
+                                        id: attributes[0].id,
+                                    }),
+                                    value: anAttribute,
+                                },
+                            ],
+                            expression: undefined,
+                            filter: undefined,
+                            analyticsPeriodBoundaries: [],
                         }),
-                        name: aName,
-                        shortName: aShortName,
-                        code: undefined,
-                        decimals: undefined,
-                        aggregationType: undefined,
-                        analyticsType: 'EVENT',
-                        displayInForm: false,
-                        aggregateExportAttributeOptionCombo: undefined,
-                        aggregateExportCategoryOptionCombo: undefined,
-                        aggregateExportDataElement: undefined,
-                        legendSets: [],
-                        attributeValues: [
-                            {
-                                attribute: expect.objectContaining({
-                                    id: attributes[0].id,
-                                }),
-                                value: anAttribute,
-                            },
-                        ],
-                        expression: undefined,
-                        filter: undefined,
-                        analyticsPeriodBoundaries: [],
-                    }),
-                })
-            )
+                    })
+                )
+            })
         })
     })
     describe('Edit', () => {
@@ -1858,11 +1874,13 @@ describe('Program indicator form tests', () => {
                 screen
             )
             await uiActions.submitForm(screen)
-            expect(updateMock).toHaveBeenCalledWith({
-                data: [{ op: 'replace', path: '/decimals', value: 0 }],
-                id: programIndicator.id,
-                params: undefined,
-                resource: 'programIndicators',
+            await waitFor(() => {
+                expect(updateMock).toHaveBeenCalledWith({
+                    data: [{ op: 'replace', path: '/decimals', value: 0 }],
+                    id: programIndicator.id,
+                    params: undefined,
+                    resource: 'programIndicators',
+                })
             })
         })
         it('displays 0 decimals correctly', async () => {

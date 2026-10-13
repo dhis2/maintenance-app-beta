@@ -243,26 +243,28 @@ describe('Validation Rule Groups form tests', () => {
 
             await uiActions.submitForm(screen)
 
-            expect(createMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        name: aName,
-                        code: aCode,
-                        validationRules: [
-                            expect.objectContaining({
-                                id: validationRules[1].id,
-                            }),
-                        ],
-                        attributeValues: [
-                            {
-                                attribute: expect.objectContaining({
-                                    id: attributes[0].id,
+            await waitFor(() =>
+                expect(createMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            name: aName,
+                            code: aCode,
+                            validationRules: [
+                                expect.objectContaining({
+                                    id: validationRules[1].id,
                                 }),
-                                value: anAttribute,
-                            },
-                        ],
-                    }),
-                })
+                            ],
+                            attributeValues: [
+                                {
+                                    attribute: expect.objectContaining({
+                                        id: attributes[0].id,
+                                    }),
+                                    value: anAttribute,
+                                },
+                            ],
+                        }),
+                    })
+                )
             )
         })
 

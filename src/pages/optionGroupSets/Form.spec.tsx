@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { act, render, within } from '@testing-library/react'
+import { act, render, waitFor, within } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/optionGroupSetsSchema.json'
@@ -312,19 +312,21 @@ describe('Option group sets form tests', () => {
 
             await uiActions.submitForm(screen)
 
-            expect(createMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        name: aName,
-                        code: aCode,
-                        description: aDescription,
-                        optionSet: expect.objectContaining({
-                            id: optionSets[2].id,
+            await waitFor(() => {
+                expect(createMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            name: aName,
+                            code: aCode,
+                            description: aDescription,
+                            optionSet: expect.objectContaining({
+                                id: optionSets[2].id,
+                            }),
+                            dataDimension: true,
                         }),
-                        dataDimension: true,
-                    }),
-                })
-            )
+                    })
+                )
+            })
         })
     })
     describe('Edit', () => {

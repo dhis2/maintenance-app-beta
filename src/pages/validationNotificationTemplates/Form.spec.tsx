@@ -397,26 +397,31 @@ describe('Validation Notification form tests', () => {
 
             await uiActions.submitForm(screen)
 
-            expect(createMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        name: aName,
-                        code: aCode,
-                        validationRules: [
-                            expect.objectContaining({
-                                id: validationRules[1].id,
-                            }),
-                        ],
-                        subjectTemplate: aSubject,
-                        messageTemplate: aMessage,
-                        sendStrategy:
-                            notificationTypeOptions[notificationOptionIndex].id,
-                        recipientUserGroups: [
-                            expect.objectContaining({ id: userGroups[1].id }),
-                        ],
-                        notifyUsersInHierarchyOnly: true,
-                    }),
-                })
+            await waitFor(() =>
+                expect(createMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            name: aName,
+                            code: aCode,
+                            validationRules: [
+                                expect.objectContaining({
+                                    id: validationRules[1].id,
+                                }),
+                            ],
+                            subjectTemplate: aSubject,
+                            messageTemplate: aMessage,
+                            sendStrategy:
+                                notificationTypeOptions[notificationOptionIndex]
+                                    .id,
+                            recipientUserGroups: [
+                                expect.objectContaining({
+                                    id: userGroups[1].id,
+                                }),
+                            ],
+                            notifyUsersInHierarchyOnly: true,
+                        }),
+                    })
+                )
             )
         })
     })

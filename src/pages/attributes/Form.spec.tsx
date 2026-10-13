@@ -211,11 +211,13 @@ describe('Attributes form tests', () => {
             await userEvent.click(submitButton)
 
             // check that the appropriate resource (optionSet) was called with entered optionSet form values
-            expect(optionSetCreateMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({ name: optName }),
-                    resource: 'optionSets',
-                })
+            await waitFor(() =>
+                expect(optionSetCreateMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({ name: optName }),
+                        resource: 'optionSets',
+                    })
+                )
             )
         })
     })
@@ -513,21 +515,23 @@ describe('Attributes form tests', () => {
 
             await uiActions.submitForm(screen)
 
-            expect(createMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        name: aName,
-                        code: aCode,
-                        description: aDescription,
-                        optionSet: expect.objectContaining({
-                            id: optionSets[1].id,
+            await waitFor(() =>
+                expect(createMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            name: aName,
+                            code: aCode,
+                            description: aDescription,
+                            optionSet: expect.objectContaining({
+                                id: optionSets[1].id,
+                            }),
+                            sortOrder: aSortOrder,
+                            ...selectedObjectAttributes,
+                            mandatory: true,
+                            unique: true,
                         }),
-                        sortOrder: aSortOrder,
-                        ...selectedObjectAttributes,
-                        mandatory: true,
-                        unique: true,
-                    }),
-                })
+                    })
+                )
             )
         })
     })

@@ -268,26 +268,30 @@ describe('Data element groups form tests', () => {
             await uiActions.pasteIntoInput(attributeInput, anAttribute)
             await uiActions.submitForm(screen)
 
-            expect(createMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        name: aName,
-                        shortName: aShortName,
-                        code: aCode,
-                        description: aDescription,
-                        dataElements: [
-                            expect.objectContaining({ id: dataElements[1].id }),
-                        ],
-                        attributeValues: [
-                            {
-                                attribute: expect.objectContaining({
-                                    id: attributes[0].id,
+            await waitFor(() =>
+                expect(createMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            name: aName,
+                            shortName: aShortName,
+                            code: aCode,
+                            description: aDescription,
+                            dataElements: [
+                                expect.objectContaining({
+                                    id: dataElements[1].id,
                                 }),
-                                value: anAttribute,
-                            },
-                        ],
-                    }),
-                })
+                            ],
+                            attributeValues: [
+                                {
+                                    attribute: expect.objectContaining({
+                                        id: attributes[0].id,
+                                    }),
+                                    value: anAttribute,
+                                },
+                            ],
+                        }),
+                    })
+                )
             )
         })
     })

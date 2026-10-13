@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { render } from '@testing-library/react'
+import { render, waitFor } from '@testing-library/react'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/constant.json'
 import { FOOTER_ID } from '../../app/layout/Layout'
@@ -209,16 +209,18 @@ describe('Constants form tests', () => {
             })
             await uiActions.submitForm(screen)
 
-            expect(createMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        name: aName,
-                        shortName: aShortName,
-                        code: aCode,
-                        description: aDescription,
-                        value: String(aValue),
-                    }),
-                })
+            await waitFor(() =>
+                expect(createMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            name: aName,
+                            shortName: aShortName,
+                            code: aCode,
+                            description: aDescription,
+                            value: String(aValue),
+                        }),
+                    })
+                )
             )
         })
 

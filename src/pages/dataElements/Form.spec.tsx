@@ -320,15 +320,17 @@ describe('Data elements form tests', () => {
             expect(catComboSelectInput).toHaveClass('disabled')
 
             await uiActions.submitForm(screen)
-            expect(createMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        categoryCombo: expect.objectContaining({
-                            id: DEFAULT_CATEGORYCOMBO_SELECT_OPTION.id,
+            await waitFor(() => {
+                expect(createMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            categoryCombo: expect.objectContaining({
+                                id: DEFAULT_CATEGORYCOMBO_SELECT_OPTION.id,
+                            }),
                         }),
-                    }),
-                })
-            )
+                    })
+                )
+            })
         })
         it('should change aggregation type to NONE and disable if value type is of certain type', async () => {
             const { screen } = await renderForm()
@@ -380,13 +382,15 @@ describe('Data elements form tests', () => {
             })
 
             await uiActions.submitForm(screen)
-            expect(createMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        aggregationType: 'NONE',
-                    }),
-                })
-            )
+            await waitFor(() => {
+                expect(createMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            aggregationType: 'NONE',
+                        }),
+                    })
+                )
+            })
         })
         it('should not have multi text as a value type by default', async () => {
             const { screen } = await renderForm()
@@ -521,16 +525,18 @@ describe('Data elements form tests', () => {
             )
 
             await uiActions.submitForm(screen)
-            expect(createMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        valueType: optionSets[0].valueType,
-                        optionSet: expect.objectContaining({
-                            id: optionSets[0].id,
+            await waitFor(() => {
+                expect(createMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            valueType: optionSets[0].valueType,
+                            optionSet: expect.objectContaining({
+                                id: optionSets[0].id,
+                            }),
                         }),
-                    }),
-                })
-            )
+                    })
+                )
+            })
         })
     })
     describe('New', () => {
@@ -782,30 +788,32 @@ describe('Data elements form tests', () => {
             )
             await uiActions.submitForm(screen)
 
-            expect(createMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        name: aName,
-                        shortName: aShortName,
-                        code: aCode,
-                        formName: aFormName,
-                        description: aDescription,
-                        url: aUrl,
-                        fieldMask: aFieldMask,
-                        zeroIsSignificant: true,
-                        domainType: 'AGGREGATE',
-                        valueType: 'LONG_TEXT',
-                        categoryCombo: expect.objectContaining({
-                            id: DEFAULT_CATEGORY_COMBO.id,
+            await waitFor(() => {
+                expect(createMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            name: aName,
+                            shortName: aShortName,
+                            code: aCode,
+                            formName: aFormName,
+                            description: aDescription,
+                            url: aUrl,
+                            fieldMask: aFieldMask,
+                            zeroIsSignificant: true,
+                            domainType: 'AGGREGATE',
+                            valueType: 'LONG_TEXT',
+                            categoryCombo: expect.objectContaining({
+                                id: DEFAULT_CATEGORY_COMBO.id,
+                            }),
+                            optionSet: undefined,
+                            commentOptionSet: undefined,
+                            legendSets: [],
+                            aggregationLevels: [],
+                            attributeValues: [],
                         }),
-                        optionSet: undefined,
-                        commentOptionSet: undefined,
-                        legendSets: [],
-                        aggregationLevels: [],
-                        attributeValues: [],
-                    }),
-                })
-            )
+                    })
+                )
+            })
         })
         it('should submit the disaggregation and option sets', async () => {
             const { screen, categoryCombos, optionSets } = await renderForm()
@@ -837,32 +845,34 @@ describe('Data elements form tests', () => {
             )
             await uiActions.submitForm(screen)
 
-            expect(createMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        name: aName,
-                        shortName: aShortName,
-                        code: undefined,
-                        formName: undefined,
-                        description: undefined,
-                        url: undefined,
-                        fieldMask: undefined,
-                        zeroIsSignificant: false,
-                        domainType: 'AGGREGATE',
-                        valueType: 'NUMBER',
-                        categoryCombo: expect.objectContaining({
-                            id: categoryCombos[0].id,
+            await waitFor(() => {
+                expect(createMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            name: aName,
+                            shortName: aShortName,
+                            code: undefined,
+                            formName: undefined,
+                            description: undefined,
+                            url: undefined,
+                            fieldMask: undefined,
+                            zeroIsSignificant: false,
+                            domainType: 'AGGREGATE',
+                            valueType: 'NUMBER',
+                            categoryCombo: expect.objectContaining({
+                                id: categoryCombos[0].id,
+                            }),
+                            optionSet: undefined,
+                            commentOptionSet: expect.objectContaining({
+                                id: optionSets[1].id,
+                            }),
+                            legendSets: [],
+                            aggregationLevels: [],
+                            attributeValues: [],
                         }),
-                        optionSet: undefined,
-                        commentOptionSet: expect.objectContaining({
-                            id: optionSets[1].id,
-                        }),
-                        legendSets: [],
-                        aggregationLevels: [],
-                        attributeValues: [],
-                    }),
-                })
-            )
+                    })
+                )
+            })
         })
         it('should submit the legend set and aggregation levels', async () => {
             const { screen, legendSets, organisationUnitLevels } =
@@ -891,35 +901,39 @@ describe('Data elements form tests', () => {
 
             await uiActions.submitForm(screen)
 
-            expect(createMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        name: aName,
-                        shortName: aShortName,
-                        code: undefined,
-                        formName: undefined,
-                        description: undefined,
-                        url: undefined,
-                        fieldMask: undefined,
-                        zeroIsSignificant: false,
-                        domainType: 'AGGREGATE',
-                        valueType: 'NUMBER',
-                        categoryCombo: expect.objectContaining({
-                            id: DEFAULT_CATEGORY_COMBO.id,
+            await waitFor(() => {
+                expect(createMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            name: aName,
+                            shortName: aShortName,
+                            code: undefined,
+                            formName: undefined,
+                            description: undefined,
+                            url: undefined,
+                            fieldMask: undefined,
+                            zeroIsSignificant: false,
+                            domainType: 'AGGREGATE',
+                            valueType: 'NUMBER',
+                            categoryCombo: expect.objectContaining({
+                                id: DEFAULT_CATEGORY_COMBO.id,
+                            }),
+                            optionSet: undefined,
+                            commentOptionSet: undefined,
+                            legendSets: [
+                                expect.objectContaining({
+                                    id: legendSets[1].id,
+                                }),
+                            ],
+                            aggregationLevels: [
+                                organisationUnitLevels[1].level,
+                                organisationUnitLevels[2].level,
+                            ],
+                            attributeValues: [],
                         }),
-                        optionSet: undefined,
-                        commentOptionSet: undefined,
-                        legendSets: [
-                            expect.objectContaining({ id: legendSets[1].id }),
-                        ],
-                        aggregationLevels: [
-                            organisationUnitLevels[1].level,
-                            organisationUnitLevels[2].level,
-                        ],
-                        attributeValues: [],
-                    }),
-                })
-            )
+                    })
+                )
+            })
         })
         it('should submit the attributes', async () => {
             const { screen, attributes } = await renderForm()
@@ -940,37 +954,39 @@ describe('Data elements form tests', () => {
             await uiActions.pasteIntoInput(attributeInput, anAttribute)
             await uiActions.submitForm(screen)
 
-            expect(createMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        name: aName,
-                        shortName: aShortName,
-                        code: undefined,
-                        formName: undefined,
-                        description: undefined,
-                        url: undefined,
-                        fieldMask: undefined,
-                        zeroIsSignificant: false,
-                        domainType: 'AGGREGATE',
-                        valueType: 'NUMBER',
-                        categoryCombo: expect.objectContaining({
-                            id: DEFAULT_CATEGORY_COMBO.id,
+            await waitFor(() => {
+                expect(createMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            name: aName,
+                            shortName: aShortName,
+                            code: undefined,
+                            formName: undefined,
+                            description: undefined,
+                            url: undefined,
+                            fieldMask: undefined,
+                            zeroIsSignificant: false,
+                            domainType: 'AGGREGATE',
+                            valueType: 'NUMBER',
+                            categoryCombo: expect.objectContaining({
+                                id: DEFAULT_CATEGORY_COMBO.id,
+                            }),
+                            optionSet: undefined,
+                            commentOptionSet: undefined,
+                            legendSets: [],
+                            aggregationLevels: [],
+                            attributeValues: [
+                                {
+                                    attribute: expect.objectContaining({
+                                        id: attributes[0].id,
+                                    }),
+                                    value: anAttribute,
+                                },
+                            ],
                         }),
-                        optionSet: undefined,
-                        commentOptionSet: undefined,
-                        legendSets: [],
-                        aggregationLevels: [],
-                        attributeValues: [
-                            {
-                                attribute: expect.objectContaining({
-                                    id: attributes[0].id,
-                                }),
-                                value: anAttribute,
-                            },
-                        ],
-                    }),
-                })
-            )
+                    })
+                )
+            })
         })
         it('should let user select value type without showing warning modal', async () => {
             const { screen } = await renderForm()

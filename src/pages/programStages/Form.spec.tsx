@@ -1,4 +1,4 @@
-import { render, within } from '@testing-library/react'
+import { render, waitFor, within } from '@testing-library/react'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/programStages.json'
 import { FOOTER_ID } from '../../app/layout/Layout'
@@ -136,16 +136,18 @@ describe('Program Stage form tests', () => {
             )
             await uiActions.submitForm(screen)
 
-            expect(createMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        name: aName,
-                        program: expect.objectContaining({
-                            id: programs[0].id,
+            await waitFor(() => {
+                expect(createMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            name: aName,
+                            program: expect.objectContaining({
+                                id: programs[0].id,
+                            }),
                         }),
-                    }),
-                })
-            )
+                    })
+                )
+            })
         })
 
         it('has a cancel link back to the list view', async () => {

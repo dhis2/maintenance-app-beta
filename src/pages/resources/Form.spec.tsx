@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { render, within } from '@testing-library/react'
+import { render, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/document.json'
@@ -157,24 +157,28 @@ describe('Resources form tests', () => {
 
             await uiActions.submitAndCloseForm(screen)
 
-            expect(createFileResourceMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        file,
-                        domain: 'DOCUMENT',
-                    }),
-                })
+            await waitFor(() =>
+                expect(createFileResourceMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            file,
+                            domain: 'DOCUMENT',
+                        }),
+                    })
+                )
             )
-            expect(createDocumentMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        name: aName,
-                        type: 'UPLOAD_FILE',
-                        external: false,
-                        attachment: true,
-                        url: uploadedFileResourceId,
-                    }),
-                })
+            await waitFor(() =>
+                expect(createDocumentMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            name: aName,
+                            type: 'UPLOAD_FILE',
+                            external: false,
+                            attachment: true,
+                            url: uploadedFileResourceId,
+                        }),
+                    })
+                )
             )
         })
 
@@ -217,18 +221,20 @@ describe('Resources form tests', () => {
 
             await uiActions.submitAndCloseForm(screen)
 
-            expect(createFileResourceMock).not.toHaveBeenCalled()
-            expect(createDocumentMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        name: aName,
-                        type: 'EXTERNAL_URL',
-                        external: true,
-                        attachment: false,
-                        url: 'https://www.dhis2.org',
-                    }),
-                })
+            await waitFor(() =>
+                expect(createDocumentMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            name: aName,
+                            type: 'EXTERNAL_URL',
+                            external: true,
+                            attachment: false,
+                            url: 'https://www.dhis2.org',
+                        }),
+                    })
+                )
             )
+            expect(createFileResourceMock).not.toHaveBeenCalled()
         })
 
         it('should trim leading and trailing whitespace from the name and url before saving', async () => {
@@ -247,13 +253,15 @@ describe('Resources form tests', () => {
 
             await uiActions.submitAndCloseForm(screen)
 
-            expect(createDocumentMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        name: aName,
-                        url: 'https://www.dhis2.org',
-                    }),
-                })
+            await waitFor(() =>
+                expect(createDocumentMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            name: aName,
+                            url: 'https://www.dhis2.org',
+                        }),
+                    })
+                )
             )
         })
 
@@ -358,15 +366,17 @@ describe('Resources form tests', () => {
             await uiActions.enterName(newName, screen)
             await uiActions.submitAndCloseForm(screen)
 
-            expect(updateDocumentMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        name: newName,
-                        type: 'EXTERNAL_URL',
-                        external: true,
-                        url: resource.url,
-                    }),
-                })
+            await waitFor(() =>
+                expect(updateDocumentMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            name: newName,
+                            type: 'EXTERNAL_URL',
+                            external: true,
+                            url: resource.url,
+                        }),
+                    })
+                )
             )
         })
 
@@ -382,14 +392,16 @@ describe('Resources form tests', () => {
             await uiActions.enterName(newName, screen)
             await uiActions.submitAndCloseForm(screen)
 
-            expect(updateDocumentMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        name: newName,
-                        type: 'EXTERNAL_URL',
-                        url: resource.url,
-                    }),
-                })
+            await waitFor(() =>
+                expect(updateDocumentMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            name: newName,
+                            type: 'EXTERNAL_URL',
+                            url: resource.url,
+                        }),
+                    })
+                )
             )
         })
 
@@ -411,10 +423,12 @@ describe('Resources form tests', () => {
             await uiActions.enterName(faker.company.name(), screen)
             await uiActions.submitAndCloseForm(screen)
 
-            expect(updateDocumentMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({ sharing }),
-                })
+            await waitFor(() =>
+                expect(updateDocumentMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({ sharing }),
+                    })
+                )
             )
         })
 
@@ -459,22 +473,26 @@ describe('Resources form tests', () => {
 
             await uiActions.submitAndCloseForm(screen)
 
-            expect(createFileResourceMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        file,
-                        domain: 'DOCUMENT',
-                    }),
-                })
+            await waitFor(() =>
+                expect(createFileResourceMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            file,
+                            domain: 'DOCUMENT',
+                        }),
+                    })
+                )
             )
-            expect(updateDocumentMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        type: 'UPLOAD_FILE',
-                        external: false,
-                        url: uploadedFileResourceId,
-                    }),
-                })
+            await waitFor(() =>
+                expect(updateDocumentMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            type: 'UPLOAD_FILE',
+                            external: false,
+                            url: uploadedFileResourceId,
+                        }),
+                    })
+                )
             )
         })
     })

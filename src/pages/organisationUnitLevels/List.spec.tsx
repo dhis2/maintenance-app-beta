@@ -138,7 +138,9 @@ describe('Organisation unit list tests', () => {
             name: newName,
             offlineLevels: 3,
         }
-        expect(updateOrgUnitLevelsMock).toHaveBeenCalledTimes(1)
+        await waitFor(() =>
+            expect(updateOrgUnitLevelsMock).toHaveBeenCalledTimes(1)
+        )
         expect(updateOrgUnitLevelsMock).toHaveBeenCalledWith(
             expect.objectContaining({
                 data: {

@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { act, render, within } from '@testing-library/react'
+import { act, render, waitFor, within } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/relationshipTypes.json'
@@ -439,29 +439,31 @@ describe('Relationship types form tests', () => {
             )
             await uiActions.submitForm(screen)
 
-            expect(createMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        name: aName,
-                        code: aCode,
-                        description: aDescription,
-                        fromToName: aFromToName,
-                        bidirectional: false,
-                        fromConstraint: expect.objectContaining({
-                            relationshipEntity: 'PROGRAM_INSTANCE',
-                            program: expect.objectContaining({
-                                id: programs[0].id,
+            await waitFor(() => {
+                expect(createMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            name: aName,
+                            code: aCode,
+                            description: aDescription,
+                            fromToName: aFromToName,
+                            bidirectional: false,
+                            fromConstraint: expect.objectContaining({
+                                relationshipEntity: 'PROGRAM_INSTANCE',
+                                program: expect.objectContaining({
+                                    id: programs[0].id,
+                                }),
+                            }),
+                            toConstraint: expect.objectContaining({
+                                relationshipEntity: 'PROGRAM_INSTANCE',
+                                program: expect.objectContaining({
+                                    id: programs[0].id,
+                                }),
                             }),
                         }),
-                        toConstraint: expect.objectContaining({
-                            relationshipEntity: 'PROGRAM_INSTANCE',
-                            program: expect.objectContaining({
-                                id: programs[0].id,
-                            }),
-                        }),
-                    }),
-                })
-            )
+                    })
+                )
+            })
         })
     })
 

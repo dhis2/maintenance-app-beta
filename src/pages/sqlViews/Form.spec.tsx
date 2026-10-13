@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { render, within } from '@testing-library/react'
+import { render, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/sqlView.json'
@@ -207,15 +207,17 @@ describe('SQL Views form tests', () => {
 
             await uiActions.submitForm(screen)
 
-            expect(createMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        name: aName,
-                        description: aDescription,
-                        type: SqlViewType.VIEW,
-                        sqlQuery: aSqlQuery,
-                    }),
-                })
+            await waitFor(() =>
+                expect(createMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            name: aName,
+                            description: aDescription,
+                            type: SqlViewType.VIEW,
+                            sqlQuery: aSqlQuery,
+                        }),
+                    })
+                )
             )
         })
     })

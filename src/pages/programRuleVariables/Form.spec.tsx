@@ -755,7 +755,9 @@ describe('Program Rule Variable form tests', () => {
                 const expectedCall = expect.objectContaining({
                     data: expect.objectContaining(expectedData),
                 })
-                expect(createMock).toHaveBeenCalledWith(expectedCall)
+                await waitFor(() =>
+                    expect(createMock).toHaveBeenCalledWith(expectedCall)
+                )
             })
 
             it('should submit form with CALCULATED_VALUE source type', async () => {
@@ -789,7 +791,9 @@ describe('Program Rule Variable form tests', () => {
                 const expectedCall = expect.objectContaining({
                     data: expect.objectContaining(expectedData),
                 })
-                expect(createMock).toHaveBeenCalledWith(expectedCall)
+                await waitFor(() =>
+                    expect(createMock).toHaveBeenCalledWith(expectedCall)
+                )
             })
 
             it('should submit form with TEI_ATTRIBUTE source type', async () => {
@@ -840,7 +844,9 @@ describe('Program Rule Variable form tests', () => {
                 const expectedCall = expect.objectContaining({
                     data: expect.objectContaining(expectedData),
                 })
-                expect(createMock).toHaveBeenCalledWith(expectedCall)
+                await waitFor(() =>
+                    expect(createMock).toHaveBeenCalledWith(expectedCall)
+                )
             })
         })
 

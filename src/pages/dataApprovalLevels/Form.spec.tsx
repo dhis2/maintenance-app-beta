@@ -307,13 +307,15 @@ describe('Data approval levels form tests', () => {
 
             await uiActions.submitForm(screen)
 
-            expect(createMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        name: aName,
-                        orgUnitLevel: organisationUnitLevels[0].level,
-                    }),
-                })
+            await waitFor(() =>
+                expect(createMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            name: aName,
+                            orgUnitLevel: organisationUnitLevels[0].level,
+                        }),
+                    })
+                )
             )
         })
     })

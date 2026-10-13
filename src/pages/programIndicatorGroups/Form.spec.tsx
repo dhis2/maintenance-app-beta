@@ -246,7 +246,7 @@ describe('Program indicator groups form tests', () => {
                 screen
             )
             await uiActions.submitForm(screen)
-            expect(createMock).toHaveBeenCalledTimes(1)
+            await waitFor(() => expect(createMock).toHaveBeenCalledTimes(1))
             expect(createMock).toHaveBeenLastCalledWith(
                 expect.objectContaining({
                     id: undefined,
@@ -384,7 +384,7 @@ describe('Program indicator groups form tests', () => {
                 screen
             )
             await uiActions.submitForm(screen)
-            expect(updateMock).toHaveBeenCalledTimes(1)
+            await waitFor(() => expect(updateMock).toHaveBeenCalledTimes(1))
             const patchPayload = updateMock.mock.calls[0][0]
             expect(patchPayload).toEqual(
                 expect.objectContaining({

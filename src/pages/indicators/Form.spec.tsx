@@ -648,7 +648,7 @@ describe('Indicators form tests', () => {
             )
 
             await uiActions.submitForm(screen)
-            expect(createMock).toHaveBeenCalledTimes(1)
+            await waitFor(() => expect(createMock).toHaveBeenCalledTimes(1))
             expect(createMock).toHaveBeenLastCalledWith(
                 expect.objectContaining({
                     data: expect.objectContaining({
@@ -739,7 +739,7 @@ describe('Indicators form tests', () => {
             )
 
             await uiActions.submitForm(screen)
-            expect(createMock).toHaveBeenCalledTimes(1)
+            await waitFor(() => expect(createMock).toHaveBeenCalledTimes(1))
             expect(createMock).toHaveBeenLastCalledWith(
                 expect.objectContaining({
                     data: expect.objectContaining({
@@ -817,7 +817,7 @@ describe('Indicators form tests', () => {
             )
 
             await uiActions.submitForm(screen)
-            expect(createMock).toHaveBeenCalledTimes(1)
+            await waitFor(() => expect(createMock).toHaveBeenCalledTimes(1))
             expect(createMock).toHaveBeenLastCalledWith(
                 expect.objectContaining({
                     data: expect.objectContaining({
@@ -898,7 +898,7 @@ describe('Indicators form tests', () => {
             await uiActions.pasteIntoInput(attributeInput, anAttribute)
 
             await uiActions.submitForm(screen)
-            expect(createMock).toHaveBeenCalledTimes(1)
+            await waitFor(() => expect(createMock).toHaveBeenCalledTimes(1))
             expect(createMock).toHaveBeenLastCalledWith(
                 expect.objectContaining({
                     data: expect.objectContaining({
@@ -1160,18 +1160,20 @@ describe('Indicators form tests', () => {
 
             await uiActions.submitForm(screen)
 
-            expect(updateMock).toHaveBeenCalledWith({
-                data: [
-                    {
-                        op: 'replace',
-                        path: '/name',
-                        value: newName,
-                    },
-                ],
-                id: indicator.id,
-                params: undefined,
-                resource: 'indicators',
-            })
+            await waitFor(() =>
+                expect(updateMock).toHaveBeenCalledWith({
+                    data: [
+                        {
+                            op: 'replace',
+                            path: '/name',
+                            value: newName,
+                        },
+                    ],
+                    id: indicator.id,
+                    params: undefined,
+                    resource: 'indicators',
+                })
+            )
         })
 
         it('should do nothing when no field is changed', async () => {
@@ -1200,12 +1202,14 @@ describe('Indicators form tests', () => {
                 screen
             )
             await uiActions.submitForm(screen)
-            expect(updateMock).toHaveBeenCalledWith({
-                data: [{ op: 'replace', path: '/decimals', value: 0 }],
-                id: indicator.id,
-                params: undefined,
-                resource: 'indicators',
-            })
+            await waitFor(() =>
+                expect(updateMock).toHaveBeenCalledWith({
+                    data: [{ op: 'replace', path: '/decimals', value: 0 }],
+                    id: indicator.id,
+                    params: undefined,
+                    resource: 'indicators',
+                })
+            )
         })
 
         it('displays 0 decimals correctly', async () => {

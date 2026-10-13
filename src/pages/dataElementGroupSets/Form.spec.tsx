@@ -262,30 +262,32 @@ describe('Data element group sets form tests', () => {
             await uiActions.pasteIntoInput(attributeInput, anAttribute)
             await uiActions.submitForm(screen)
 
-            expect(createMock).toHaveBeenCalledWith(
-                expect.objectContaining({
-                    data: expect.objectContaining({
-                        name: aName,
-                        shortName: aShortName,
-                        code: aCode,
-                        description: aDescription,
-                        dataElementGroups: [
-                            expect.objectContaining({
-                                id: dataElementGroups[1].id,
-                            }),
-                        ],
-                        compulsory: true,
-                        dataDimension: true,
-                        attributeValues: [
-                            {
-                                attribute: expect.objectContaining({
-                                    id: attributes[0].id,
+            await waitFor(() =>
+                expect(createMock).toHaveBeenCalledWith(
+                    expect.objectContaining({
+                        data: expect.objectContaining({
+                            name: aName,
+                            shortName: aShortName,
+                            code: aCode,
+                            description: aDescription,
+                            dataElementGroups: [
+                                expect.objectContaining({
+                                    id: dataElementGroups[1].id,
                                 }),
-                                value: anAttribute,
-                            },
-                        ],
-                    }),
-                })
+                            ],
+                            compulsory: true,
+                            dataDimension: true,
+                            attributeValues: [
+                                {
+                                    attribute: expect.objectContaining({
+                                        id: attributes[0].id,
+                                    }),
+                                    value: anAttribute,
+                                },
+                            ],
+                        }),
+                    })
+                )
             )
         })
     })
