@@ -19,8 +19,6 @@ import { uiAssertions } from '../../testUtils/uiAssertions'
 import { Component as Edit } from './Edit'
 import { Component as New } from './New'
 
-jest.retryTimes(2, { logErrorsBeforeRetry: true })
-
 const section = SECTIONS_MAP.trackedEntityAttribute
 const mockSchema = schemaMock
 

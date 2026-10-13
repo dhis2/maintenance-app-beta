@@ -25,8 +25,6 @@ jest.mock('use-debounce', () => ({
     useDebouncedCallback: (fn: any) => fn,
 }))
 
-jest.retryTimes(2, { logErrorsBeforeRetry: true })
-
 describe('Program indicator groups form tests', () => {
     const createMock = jest.fn()
     const updateMock = jest.fn()

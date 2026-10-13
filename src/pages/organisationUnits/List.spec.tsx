@@ -16,8 +16,6 @@ import TestComponentWithRouter from '../../testUtils/TestComponentWithRouter'
 import type { OrganisationUnit } from '../../types/generated'
 import { Component as OrgUnitsList } from './List'
 
-jest.retryTimes(2, { logErrorsBeforeRetry: true })
-
 const deleteOrgUnitMock = jest.fn()
 const renderList = async ({
     rootOrgUnits = [testOrgUnit()] as Partial<OrganisationUnit>[],
