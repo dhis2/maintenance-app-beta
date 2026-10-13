@@ -1654,6 +1654,11 @@ describe('Program indicator form tests', () => {
                 },
                 overridePrograms,
             })
+            await waitFor(() => {
+                expect(screen.getByTestId('org-unit-field')).toHaveTextContent(
+                    orgUnitOption.label
+                )
+            })
 
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('programs-field'),
@@ -1716,6 +1721,11 @@ describe('Program indicator form tests', () => {
                     analyticsType: 'EVENT',
                 },
                 overridePrograms,
+            })
+            await waitFor(() => {
+                expect(screen.getByTestId('org-unit-field')).toHaveTextContent(
+                    orgUnitOption.label
+                )
             })
 
             await uiAssertions.expectSelectToExistWithOptions(

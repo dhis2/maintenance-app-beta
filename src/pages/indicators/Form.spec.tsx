@@ -1092,9 +1092,11 @@ describe('Indicators form tests', () => {
                 screen
             )
 
-            expect(
-                screen.getByTestId('numerator-expression-description')
-            ).toHaveTextContent('A description')
+            await waitFor(() =>
+                expect(
+                    screen.getByTestId('numerator-expression-description')
+                ).toHaveTextContent('A description')
+            )
 
             uiAssertions.expectTextAreaFieldToExist(
                 'numerator',
@@ -1102,9 +1104,11 @@ describe('Indicators form tests', () => {
                 screen
             )
 
-            expect(
-                screen.getByTestId('denominator-expression-description')
-            ).toHaveTextContent('A description')
+            await waitFor(() =>
+                expect(
+                    screen.getByTestId('denominator-expression-description')
+                ).toHaveTextContent('A description')
+            )
 
             uiAssertions.expectTextAreaFieldToExist(
                 'denominator',

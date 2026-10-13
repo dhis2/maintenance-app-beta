@@ -671,6 +671,14 @@ describe('DataSetNotificationTemplate form tests', () => {
                 screen
             )
 
+            // selected label shows "Loading..." until the userGroups query resolves
+            await waitFor(() =>
+                expect(
+                    within(
+                        screen.getByTestId('formfields-recipientUserGroup')
+                    ).getByTestId('dhis2-uicore-select-input')
+                ).toHaveTextContent(userGroups[0].displayName)
+            )
             await uiAssertions.expectSelectToExistWithOptions(
                 screen.getByTestId('formfields-recipientUserGroup'),
                 {

@@ -1319,7 +1319,7 @@ describe('Data elements form tests', () => {
             )!
             await userEvent.click(valueTypeOption)
 
-            expect(screen.getByText(warningText)).toBeInTheDocument()
+            expect(await screen.findByText(warningText)).toBeInTheDocument()
 
             // click confirm
             await userEvent.click(
@@ -1407,7 +1407,7 @@ describe('Data elements form tests', () => {
                 screen
             )
 
-            expect(screen.getByText(warningText)).toBeInTheDocument()
+            expect(await screen.findByText(warningText)).toBeInTheDocument()
 
             // click confirm
             await userEvent.click(
@@ -1458,7 +1458,7 @@ describe('Data elements form tests', () => {
                 screen
             )
 
-            expect(screen.getByText(warningText)).toBeInTheDocument()
+            expect(await screen.findByText(warningText)).toBeInTheDocument()
 
             // click confirm
             await userEvent.click(
