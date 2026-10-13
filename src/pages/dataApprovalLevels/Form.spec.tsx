@@ -213,10 +213,12 @@ describe('Data approval levels form tests', () => {
 
             await uiActions.submitForm(screen)
 
-            uiAssertions.expectFieldToHaveError(
-                'formfields-categoryoptiongroupset',
-                'An approval level for this organisation unit level and category option group set combination already exists.',
-                screen
+            await waitFor(() =>
+                uiAssertions.expectFieldToHaveError(
+                    'formfields-categoryoptiongroupset',
+                    'An approval level for this organisation unit level and category option group set combination already exists.',
+                    screen
+                )
             )
             expect(createMock).not.toHaveBeenCalled()
         })

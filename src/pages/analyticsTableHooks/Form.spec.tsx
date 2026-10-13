@@ -250,12 +250,14 @@ describe('Analytics table hooks form tests', () => {
             await uiActions.enterInputFieldValue('sql', sql, screen)
             await uiActions.submitForm(screen)
 
-            expect(createMock).not.toHaveBeenCalled()
-            uiAssertions.expectFieldToHaveError(
-                'formfields-sql',
-                'An analytics table hook with this table and SQL already exists.',
-                screen
+            await waitFor(() =>
+                uiAssertions.expectFieldToHaveError(
+                    'formfields-sql',
+                    'An analytics table hook with this table and SQL already exists.',
+                    screen
+                )
             )
+            expect(createMock).not.toHaveBeenCalled()
         })
 
         it('should clear resourceTableType when switching phase to Analytics tables', async () => {

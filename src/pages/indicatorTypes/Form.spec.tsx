@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { render } from '@testing-library/react'
+import { render, waitFor } from '@testing-library/react'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/indicatorTypes.json'
 import { FOOTER_ID } from '../../app/layout/Layout'
@@ -128,10 +128,12 @@ describe('Indicator types form tests', () => {
                 screen,
                 { type: 'spinbutton' }
             )
-            uiAssertions.expectInputFieldToHaveWarning(
-                `formfields-factor`,
-                'An indicator type with this factor already exists',
-                screen
+            await waitFor(() =>
+                uiAssertions.expectInputFieldToHaveWarning(
+                    `formfields-factor`,
+                    'An indicator type with this factor already exists',
+                    screen
+                )
             )
 
             await uiActions.enterName(faker.company.name(), screen)

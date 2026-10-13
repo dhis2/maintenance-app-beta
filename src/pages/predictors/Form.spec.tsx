@@ -263,7 +263,8 @@ describe('Predictors form tests', () => {
                 screen
             )
 
-            const error = within(editModal).getByTestId(
+            // shown once the async expression validation has responded
+            const error = await within(editModal).findByTestId(
                 `expression-builder-modal-input-validation`
             )
             expect(error).toBeVisible()

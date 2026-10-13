@@ -576,15 +576,19 @@ describe('Program indicator form tests', () => {
                 screen
             )
 
-            const error = within(editModal).getByTestId(
+            const error = await within(editModal).findByTestId(
                 `expression-builder-modal-input-validation`
             )
             expect(error).toBeVisible()
-            expect(error).toHaveTextContent('Invalid expression')
+            await waitFor(() =>
+                expect(error).toHaveTextContent('Invalid expression')
+            )
 
-            expect(
-                within(editModal).getByTestId('apply-expression-button')
-            ).toBeDisabled()
+            await waitFor(() =>
+                expect(
+                    within(editModal).getByTestId('apply-expression-button')
+                ).toBeDisabled()
+            )
         })
         it('should show an error if filter field is malformed', async () => {
             const { screen } = await renderForm({
@@ -607,15 +611,19 @@ describe('Program indicator form tests', () => {
                 screen
             )
 
-            const error = within(editModal).getByTestId(
+            const error = await within(editModal).findByTestId(
                 `expression-builder-modal-input-validation`
             )
             expect(error).toBeVisible()
-            expect(error).toHaveTextContent('Invalid expression')
+            await waitFor(() =>
+                expect(error).toHaveTextContent('Invalid expression')
+            )
 
-            expect(
-                within(editModal).getByTestId('apply-expression-button')
-            ).toBeDisabled()
+            await waitFor(() =>
+                expect(
+                    within(editModal).getByTestId('apply-expression-button')
+                ).toBeDisabled()
+            )
         })
     })
     describe('New', () => {

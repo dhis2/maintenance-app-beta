@@ -207,10 +207,12 @@ describe('Indicators form tests', () => {
             })
             await uiActions.enterCode(`  ${existingCode}  `, screen)
             await userEvent.click(screen.getByTestId('formfields-code-label'))
-            uiAssertions.expectFieldToHaveError(
-                'formfields-code',
-                'This field requires a unique value, please choose another one. Leading and trailing spaces will be removed when saving',
-                screen
+            await waitFor(() =>
+                uiAssertions.expectFieldToHaveError(
+                    'formfields-code',
+                    'This field requires a unique value, please choose another one. Leading and trailing spaces will be removed when saving',
+                    screen
+                )
             )
             await uiActions.submitForm(screen)
             expect(createMock).not.toHaveBeenCalled()
@@ -237,11 +239,13 @@ describe('Indicators form tests', () => {
                 screen
             )
 
-            const error = within(editModal).getByTestId(
+            const error = await within(editModal).findByTestId(
                 `expression-builder-modal-input-validation`
             )
             expect(error).toBeVisible()
-            expect(error).toHaveTextContent('Invalid expression')
+            await waitFor(() =>
+                expect(error).toHaveTextContent('Invalid expression')
+            )
 
             expect(
                 within(editModal).getByTestId('apply-expression-button')
@@ -269,9 +273,11 @@ describe('Indicators form tests', () => {
                 screen
             )
 
-            expect(
-                within(editModal).getByTestId('apply-expression-button')
-            ).toBeEnabled()
+            await waitFor(() =>
+                expect(
+                    within(editModal).getByTestId('apply-expression-button')
+                ).toBeEnabled()
+            )
             await userEvent.click(
                 within(editModal).getByTestId('cancel-expression-button')
             )
@@ -300,11 +306,13 @@ describe('Indicators form tests', () => {
                 screen
             )
 
-            const error = within(editModal).getByTestId(
+            const error = await within(editModal).findByTestId(
                 `expression-builder-modal-input-validation`
             )
             expect(error).toBeVisible()
-            expect(error).toHaveTextContent('Invalid expression')
+            await waitFor(() =>
+                expect(error).toHaveTextContent('Invalid expression')
+            )
 
             expect(
                 within(editModal).getByTestId('apply-expression-button')
@@ -332,9 +340,11 @@ describe('Indicators form tests', () => {
                 screen
             )
 
-            expect(
-                within(editModal).getByTestId('apply-expression-button')
-            ).toBeEnabled()
+            await waitFor(() =>
+                expect(
+                    within(editModal).getByTestId('apply-expression-button')
+                ).toBeEnabled()
+            )
             await userEvent.click(
                 within(editModal).getByTestId('cancel-expression-button')
             )
