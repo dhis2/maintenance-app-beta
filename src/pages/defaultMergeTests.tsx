@@ -177,9 +177,11 @@ export const generateDefaultMergeTests = ({
 
             await userEvent.click(screen.getByRole('link', { name: 'Cancel' }))
 
-            expect(
-                screen.queryByTestId(SOURCES_TEST_ID)
-            ).not.toBeInTheDocument()
+            await waitFor(() => {
+                expect(
+                    screen.queryByTestId(SOURCES_TEST_ID)
+                ).not.toBeInTheDocument()
+            })
         })
 
         it('keeps the merge button disabled until a source and a target have been selected', async () => {
@@ -221,9 +223,9 @@ export const generateDefaultMergeTests = ({
             const screen = await renderMerge({ [mergeResource]: mergeMock })
             const { source, target } = await fillInValidMergeForm(screen)
 
-            const mergeButton = getMergeButton(screen)
-            await waitFor(() => expect(mergeButton).toBeEnabled())
-            await userEvent.click(mergeButton)
+            // re-query: the button is re-mounted when its tooltip wrapper goes away
+            await waitFor(() => expect(getMergeButton(screen)).toBeEnabled())
+            await userEvent.click(getMergeButton(screen))
 
             expect(await screen.findByText(/merge complete/i)).toBeVisible()
             expect(mergeMock).toHaveBeenCalledTimes(1)
@@ -252,12 +254,14 @@ export const generateDefaultMergeTests = ({
             const screen = await renderMerge({ [mergeResource]: mergeMock })
             await fillInValidMergeForm(screen)
 
-            const mergeButton = getMergeButton(screen)
-            await waitFor(() => expect(mergeButton).toBeEnabled())
-            await userEvent.click(mergeButton)
+            // re-query: the button is re-mounted when its tooltip wrapper goes away
+            await waitFor(() => expect(getMergeButton(screen)).toBeEnabled())
+            await userEvent.click(getMergeButton(screen))
 
-            expect(await screen.findByText(/merging/i)).toBeVisible()
+            // "Merging..." / "Merging 1 ...", not the "Merging cannot be undone" heading
+            expect(await screen.findByText(/merging.*\.\.\./i)).toBeVisible()
 
+            await waitFor(() => expect(mergeMock).toHaveBeenCalled())
             resolveMerge({ httpStatus: 'OK' })
 
             expect(await screen.findByText(/merge complete/i)).toBeVisible()
