@@ -437,11 +437,6 @@ describe('Organisation unit list', () => {
             otherOrgUnits: [child1, child2],
         })
 
-        const setOrganisationUnitsSpy = jest.spyOn(
-            useSystemOrgUnitsStore.getState(),
-            'setOrganisationUnits'
-        )
-
         const tableRows = screen.getAllByTestId('dhis2-uicore-datatablerow')
         expect(tableRows.length).toBe(4)
 
@@ -469,8 +464,15 @@ describe('Organisation unit list', () => {
                 expect.objectContaining({ id: child1.id })
             )
         })
-        expect(setOrganisationUnitsSpy).not.toHaveBeenCalled()
-        setOrganisationUnitsSpy.mockRestore()
+        // modal closes in the same handler that would reset the system org units
+        await waitFor(() => {
+            expect(
+                screen.queryByTestId('delete-confirmation-modal')
+            ).not.toBeInTheDocument()
+        })
+        expect(useSystemOrgUnitsStore.getState().organisationUnits).toEqual([
+            rootOrg,
+        ])
     })
 
     it('resets system organisation units when root org unit is deleted', async () => {
