@@ -1445,8 +1445,7 @@ describe('Program indicator form tests', () => {
                             attributes: () => ({ attributes }),
                             programs: (_: any, params: any) => {
                                 if (
-                                    params.params.id ===
-                                    programWithoutRegistration.id
+                                    params.id === programWithoutRegistration.id
                                 ) {
                                     return {
                                         programStages: [],
