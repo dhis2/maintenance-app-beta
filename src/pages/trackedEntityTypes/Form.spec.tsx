@@ -28,7 +28,7 @@ jest.mock('use-debounce', () => ({
 
 const testTrackedEntityAttribute = (overwrites: Record<any, any> = {}) => ({
     id: randomDhis2Id(),
-    displayName: faker.person.firstName(),
+    displayName: `${faker.person.firstName()} ${randomDhis2Id()}`,
     valueType: 'TEXT',
     ...overwrites,
 })
@@ -381,7 +381,7 @@ describe('Tracked entity types form tests', () => {
             const leftside = within(transferField).getByTestId(
                 'dhis2-uicore-transfer-leftside'
             )
-            const optionToPick = within(leftside).getByText(
+            const optionToPick = await within(leftside).findByText(
                 trackedEntityAttributes[0].displayName,
                 {
                     selector: '[data-test="dhis2-uicore-transferoption"]',
