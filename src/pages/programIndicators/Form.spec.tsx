@@ -1790,12 +1790,23 @@ describe('Program indicator form tests', () => {
             const { screen, programIndicator } = await renderForm({
                 programIndicatorOverwrites: { orgUnitField: 'EVENT' },
             })
+            // the value is only remapped once the org unit options have loaded
+            await uiActions.openSingleSelect(
+                screen.getByTestId('org-unit-field'),
+                screen
+            )
+            await uiActions.closeSingleSelectIfOpen(
+                screen.getByTestId('org-unit-field'),
+                screen
+            )
             await uiActions.submitForm(screen)
-            expect(updateMock).toHaveBeenCalledWith({
-                data: [{ op: 'add', path: '/orgUnitField', value: null }],
-                id: programIndicator.id,
-                params: undefined,
-                resource: 'programIndicators',
+            await waitFor(() => {
+                expect(updateMock).toHaveBeenCalledWith({
+                    data: [{ op: 'add', path: '/orgUnitField', value: null }],
+                    id: programIndicator.id,
+                    params: undefined,
+                    resource: 'programIndicators',
+                })
             })
         })
         it('shows null orgUnitField value with appropriate label', async () => {
