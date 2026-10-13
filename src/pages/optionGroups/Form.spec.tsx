@@ -281,7 +281,7 @@ describe('OptionGroups form tests', () => {
 
         it('submits updated name', async () => {
             const { screen, optionGroup } = await renderForm()
-            const newName = faker.word.words()
+            const newName = `${optionGroup.name} updated`
             await uiActions.enterName(newName, screen)
             await uiActions.submitForm(screen)
             await waitFor(() => {

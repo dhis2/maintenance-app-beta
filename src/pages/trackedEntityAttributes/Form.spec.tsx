@@ -396,14 +396,16 @@ describe('TrackedEntityAttributes form tests', () => {
         })
 
         it('submits updated name', async () => {
+            const oldName = faker.word.words()
             const { screen, trackedEntityAttribute } = await renderForm({
                 trackedEntityAttributeOverwrites: {
-                    name: faker.word.words(),
+                    name: oldName,
                     valueType: 'TEXT',
                     aggregationType: 'NONE',
                 },
             })
-            const newName = faker.word.words()
+            // derived from the old name so the two can never be equal
+            const newName = `${oldName} updated`
             await uiActions.enterName(newName, screen)
             await uiActions.submitForm(screen)
             await waitFor(() => {
