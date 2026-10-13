@@ -277,7 +277,7 @@ describe('Option group sets form tests', () => {
             )
             expect(
                 screen.queryByText(
-                    'You must select an option set before you can select options.'
+                    'Choose an option set to start adding option groups.'
                 )
             ).toBeNull()
         })
