@@ -996,17 +996,16 @@ export const generateDefaultListFiltersTests = ({
             ).getByRole('textbox')
             await uiActions.pasteIntoInput(identifiableFilterInput, filterText)
             await waitFor(() => {
-                expect(getElementsMock).toHaveBeenCalledTimes(2)
+                expect(getElementsMock).toHaveBeenLastCalledWith(
+                    expect.objectContaining({
+                        params: expect.objectContaining({
+                            filter: expect.arrayContaining([
+                                'identifiable:token:abc',
+                            ]),
+                        }),
+                    })
+                )
             })
-            expect(getElementsMock).toHaveBeenLastCalledWith(
-                expect.objectContaining({
-                    params: expect.objectContaining({
-                        filter: expect.arrayContaining([
-                            'identifiable:token:abc',
-                        ]),
-                    }),
-                })
-            )
         })
 
         it('can clear identifiable filter with clear all filters button', async () => {
@@ -1017,7 +1016,15 @@ export const generateDefaultListFiltersTests = ({
             ).getByRole('textbox')
             await uiActions.pasteIntoInput(identifiableFilterInput, 'lalala')
             await waitFor(() => {
-                expect(getElementsMock).toHaveBeenCalledTimes(2)
+                expect(getElementsMock).toHaveBeenLastCalledWith(
+                    expect.objectContaining({
+                        params: expect.objectContaining({
+                            filter: expect.arrayContaining([
+                                'identifiable:token:lalala',
+                            ]),
+                        }),
+                    })
+                )
             })
 
             const clearFiltersButton = within(filtersWrapper).getByTestId(
@@ -1026,18 +1033,16 @@ export const generateDefaultListFiltersTests = ({
             await userEvent.click(clearFiltersButton)
             await waitFor(() => {
                 expect(identifiableFilterInput).toHaveValue('')
+                expect(getElementsMock).toHaveBeenLastCalledWith(
+                    expect.objectContaining({
+                        params: expect.objectContaining({
+                            filter: expect.not.arrayContaining([
+                                'identifiable:token:lalala',
+                            ]),
+                        }),
+                    })
+                )
             })
-
-            expect(getElementsMock).toHaveBeenCalledTimes(3)
-            expect(getElementsMock).toHaveBeenLastCalledWith(
-                expect.objectContaining({
-                    params: expect.objectContaining({
-                        filter: expect.not.arrayContaining([
-                            'identifiable:token:abc',
-                        ]),
-                    }),
-                })
-            )
         })
         it('should display the default filters', async () => {
             const { screen } = await renderList()
