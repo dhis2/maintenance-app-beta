@@ -7,6 +7,7 @@ import TestComponentWithRouter, {
     CustomData,
 } from '../../testUtils/TestComponentWithRouter'
 import {
+    enterMatchingConfirmationCode,
     generateDefaultMergeTests,
     getMergeButton,
     pickFirstSource,
@@ -50,7 +51,7 @@ generateDefaultMergeTests({
     renderMerge,
 })
 
-describe('data element merge additional tests', () => {
+describe('category merge additional tests', () => {
     it('disables merge button and hides ConfirmationField when source and target have different category options', async () => {
         const cat1 = testCategory({
             categoryOptions: [{ id: 'co-1' }],
@@ -153,6 +154,8 @@ describe('data element merge additional tests', () => {
                 screen.queryByText(/merging cannot be undone/i)
             ).toBeInTheDocument()
         )
+        await enterMatchingConfirmationCode(screen)
+        await waitFor(() => expect(getMergeButton(screen)).toBeEnabled())
     })
     it('prompts for confirmation when source and target have matching category options and some categories are missing category combos', async () => {
         const cat1 = testCategory({
@@ -184,5 +187,7 @@ describe('data element merge additional tests', () => {
                 screen.queryByText(/merging cannot be undone/i)
             ).toBeInTheDocument()
         )
+        await enterMatchingConfirmationCode(screen)
+        await waitFor(() => expect(getMergeButton(screen)).toBeEnabled())
     })
 })

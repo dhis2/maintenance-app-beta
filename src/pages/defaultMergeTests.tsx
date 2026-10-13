@@ -75,7 +75,7 @@ const getAvailableSourceLabels = async (screen: RenderResult) => {
     return labels
 }
 
-const enterMatchingConfirmationCode = async (screen: RenderResult) => {
+export const enterMatchingConfirmationCode = async (screen: RenderResult) => {
     const confirmationCodeElement = await screen.findByText(/^merge-/)
     await userEvent.click(screen.getByRole('textbox'))
     await userEvent.paste(confirmationCodeElement.textContent ?? '')

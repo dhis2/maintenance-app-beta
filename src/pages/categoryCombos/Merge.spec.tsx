@@ -7,6 +7,7 @@ import TestComponentWithRouter, {
     CustomData,
 } from '../../testUtils/TestComponentWithRouter'
 import {
+    enterMatchingConfirmationCode,
     generateDefaultMergeTests,
     getMergeButton,
     pickFirstSource,
@@ -110,5 +111,12 @@ describe('category combination merge additional tests', () => {
                 screen.queryByText(/merging cannot be undone/i)
             ).toBeInTheDocument()
         )
+        // the field shows before the categories are compared, so also check
+        // that the merge becomes possible, which a mismatch would prevent
+        await enterMatchingConfirmationCode(screen)
+        await waitFor(() => expect(getMergeButton(screen)).toBeEnabled())
+        expect(
+            screen.getByText(/merging cannot be undone/i)
+        ).toBeInTheDocument()
     })
 })
