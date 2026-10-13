@@ -174,39 +174,47 @@ export const generateDefaultListItemsTests = ({
                 screen
             )
             await userEvent.click(pages[0])
-            expect(getElementsMock).toHaveBeenCalledTimes(2)
-            expect(getElementsMock).toHaveBeenLastCalledWith(
-                expect.objectContaining({
-                    params: expect.objectContaining({
-                        page: 1,
-                        pageSize: 5,
-                    }),
-                })
-            )
+            await waitFor(() => {
+                expect(getElementsMock).toHaveBeenCalledTimes(2)
+                expect(getElementsMock).toHaveBeenLastCalledWith(
+                    expect.objectContaining({
+                        params: expect.objectContaining({
+                            page: 1,
+                            pageSize: 5,
+                        }),
+                    })
+                )
+            })
             await userEvent.click(
-                screen.getByTestId('section-list-pagination-actions-page-next')
+                await screen.findByTestId(
+                    'section-list-pagination-actions-page-next'
+                )
             )
-            expect(getElementsMock).toHaveBeenLastCalledWith(
-                expect.objectContaining({
-                    params: expect.objectContaining({
-                        page: 2,
-                        pageSize: 5,
-                    }),
-                })
-            )
+            await waitFor(() => {
+                expect(getElementsMock).toHaveBeenLastCalledWith(
+                    expect.objectContaining({
+                        params: expect.objectContaining({
+                            page: 2,
+                            pageSize: 5,
+                        }),
+                    })
+                )
+            })
             await userEvent.click(
-                screen.getByTestId(
+                await screen.findByTestId(
                     'section-list-pagination-actions-page-previous'
                 )
             )
-            expect(getElementsMock).toHaveBeenLastCalledWith(
-                expect.objectContaining({
-                    params: expect.objectContaining({
-                        page: 1,
-                        pageSize: 5,
-                    }),
-                })
-            )
+            await waitFor(() => {
+                expect(getElementsMock).toHaveBeenLastCalledWith(
+                    expect.objectContaining({
+                        params: expect.objectContaining({
+                            page: 1,
+                            pageSize: 5,
+                        }),
+                    })
+                )
+            })
         })
         it('can sort the results by columns using a non case sensitive manner', async () => {
             const { screen } = await renderList()
@@ -235,25 +243,29 @@ export const generateDefaultListItemsTests = ({
                             'dhis2-uicore-tableheadercellaction'
                         )
                     )
-                    expect(getElementsMock).toHaveBeenLastCalledWith(
-                        expect.objectContaining({
-                            params: expect.objectContaining({
-                                order: `${columnDescriptor.path}:iasc`,
-                            }),
-                        })
-                    )
+                    await waitFor(() => {
+                        expect(getElementsMock).toHaveBeenLastCalledWith(
+                            expect.objectContaining({
+                                params: expect.objectContaining({
+                                    order: `${columnDescriptor.path}:iasc`,
+                                }),
+                            })
+                        )
+                    })
                     await userEvent.click(
                         within(tableHeaders[index + 1]).getByTestId(
                             'dhis2-uicore-tableheadercellaction'
                         )
                     )
-                    expect(getElementsMock).toHaveBeenLastCalledWith(
-                        expect.objectContaining({
-                            params: expect.objectContaining({
-                                order: `${columnDescriptor.path}:idesc`,
-                            }),
-                        })
-                    )
+                    await waitFor(() => {
+                        expect(getElementsMock).toHaveBeenLastCalledWith(
+                            expect.objectContaining({
+                                params: expect.objectContaining({
+                                    order: `${columnDescriptor.path}:idesc`,
+                                }),
+                            })
+                        )
+                    })
                 }
             }
         })
@@ -649,12 +661,14 @@ export const generateDefaultListRowActionsTests = ({
                         'submit-translations-button'
                     )
                 )
-                expect(updateTranslationsMock).toHaveBeenCalledWith(
-                    expect.objectContaining({
-                        id: `${element.id}/translations`,
-                        data: { translations: expectedTranslations },
-                    })
-                )
+                await waitFor(() => {
+                    expect(updateTranslationsMock).toHaveBeenCalledWith(
+                        expect.objectContaining({
+                            id: `${element.id}/translations`,
+                            data: { translations: expectedTranslations },
+                        })
+                    )
+                })
             }
         })
     })
