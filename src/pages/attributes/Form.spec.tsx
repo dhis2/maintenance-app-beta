@@ -398,7 +398,7 @@ describe('Attributes form tests', () => {
             )
             expect(
                 screen.queryByText(
-                    'Disabled as the value type must match the value type of the selected option set'
+                    'Disabled as the value type must match the value type of the selected option set.'
                 )
             ).toBeNull()
         })
@@ -455,7 +455,7 @@ describe('Attributes form tests', () => {
             )
             expect(
                 screen.queryByText(
-                    'Disabled as the value type must match the value type of the selected option set'
+                    'Disabled as the value type must match the value type of the selected option set.'
                 )
             ).toBeNull()
         })
