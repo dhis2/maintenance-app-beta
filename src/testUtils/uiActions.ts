@@ -2,6 +2,14 @@ import { RenderResult, waitFor, within } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 
 type inputFieldValueTypeOptions = { type?: string; supressTab?: boolean }
+
+// paste the whole value at once: typing fires validation on every keystroke,
+// which is slow for long strings and can trigger intermediate async work
+const pasteIntoInput = async (input: HTMLElement, text: string) => {
+    await userEvent.click(input)
+    await userEvent.paste(text)
+}
+
 const enterInputFieldValue = async (
     fieldName: string,
     text: string,
@@ -12,7 +20,7 @@ const enterInputFieldValue = async (
     const field = screen.getByTestId(`formfields-${fieldName}`)
     const input = within(field).getByRole(type ?? 'textbox') as HTMLInputElement
     await clearInputField(fieldName, screen, type ?? 'textbox')
-    await userEvent.type(input, text)
+    await pasteIntoInput(input, text)
 
     if (!supressTab) {
         await userEvent.tab()
@@ -25,7 +33,7 @@ const enterExpressionInModal = async (
 ) => {
     expect(modal).toBeVisible()
     const input = within(modal).getAllByRole('textbox')[0] as HTMLInputElement
-    await userEvent.type(input, anExpression)
+    await pasteIntoInput(input, anExpression)
     await userEvent.click(
         screen.getByTestId('expression-builder-modal-validate-button')
     )
@@ -241,6 +249,7 @@ export const openListElementActionsMenu = async (
 }
 
 export const uiActions = {
+    pasteIntoInput,
     openModal,
     openSingleSelect,
     closeSingleSelectIfOpen,

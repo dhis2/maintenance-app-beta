@@ -2,6 +2,7 @@ import { FetchError } from '@dhis2/app-runtime'
 import { faker } from '@faker-js/faker'
 import {
     render,
+    waitFor,
     waitForElementToBeRemoved,
     within,
 } from '@testing-library/react'
@@ -118,7 +119,7 @@ describe('Organisation unit list tests', () => {
             within(nameCell).getByTestId('dhis2-uicore-input')
         ).getByRole('textbox')
         await userEvent.clear(nameInput)
-        await userEvent.type(nameInput, newName)
+        await uiActions.pasteIntoInput(nameInput, newName)
         const availableOfflineLevels = await uiActions.openSingleSelect(
             within(orgUnitLevel).getByTestId('dhis2-uicore-singleselect'),
             screen

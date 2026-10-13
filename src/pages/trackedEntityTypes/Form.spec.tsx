@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { render, within } from '@testing-library/react'
+import { render, waitFor, within } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/trackedEntityTypes.json'
@@ -331,13 +331,19 @@ describe('Tracked entity types form tests', () => {
                 screen.getByTestId('formfields-minattributesrequiredtosearch')
             ).getByRole('spinbutton')
             await userEvent.clear(minAttributesInput)
-            await userEvent.type(minAttributesInput, minAttributes.toString())
+            await uiActions.pasteIntoInput(
+                minAttributesInput,
+                minAttributes.toString()
+            )
 
             const maxTeiCountInput = within(
                 screen.getByTestId('formfields-maxteicount')
             ).getByRole('spinbutton')
             await userEvent.clear(maxTeiCountInput)
-            await userEvent.type(maxTeiCountInput, maxTeiCount.toString())
+            await uiActions.pasteIntoInput(
+                maxTeiCountInput,
+                maxTeiCount.toString()
+            )
 
             await uiActions.submitForm(screen)
 
@@ -422,7 +428,7 @@ describe('Tracked entity types form tests', () => {
             const attributeInput = within(
                 screen.getByTestId(`attribute-${attributes[0].id}`)
             ).getByRole('textbox') as HTMLInputElement
-            await userEvent.type(attributeInput, anAttribute)
+            await uiActions.pasteIntoInput(attributeInput, anAttribute)
             await uiActions.submitForm(screen)
 
             expect(createMock).toHaveBeenCalledWith(
@@ -649,7 +655,7 @@ describe('Tracked entity types form tests', () => {
                 screen.getByTestId('formfields-minattributesrequiredtosearch')
             ).getByRole('spinbutton')
             await userEvent.clear(minAttributesInput)
-            await userEvent.type(
+            await uiActions.pasteIntoInput(
                 minAttributesInput,
                 newMinAttributes.toString()
             )

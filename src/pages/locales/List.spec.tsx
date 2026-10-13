@@ -218,7 +218,7 @@ describe('Locales list tests', () => {
         const identifiableFilterInput = within(
             screen.getByTestId('input-search-name')
         ).getByRole('textbox')
-        await userEvent.type(identifiableFilterInput, filterText)
+        await uiActions.pasteIntoInput(identifiableFilterInput, filterText)
         const tableRowsUpdated = screen.getAllByTestId('section-list-row')
         expect(tableRowsUpdated).toHaveLength(1)
     })
@@ -228,7 +228,7 @@ describe('Locales list tests', () => {
         const identifiableFilterInput = within(
             screen.getByTestId('input-search-name')
         ).getByRole('textbox')
-        await userEvent.type(identifiableFilterInput, 'lalala')
+        await uiActions.pasteIntoInput(identifiableFilterInput, 'lalala')
         const tableRowsUpdated = screen.queryAllByTestId('section-list-row')
         expect(tableRowsUpdated).toHaveLength(0)
 

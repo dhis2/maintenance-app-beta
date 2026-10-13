@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { act, render, within } from '@testing-library/react'
+import { act, render, waitFor, within } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/attributeSchema.json'
@@ -206,7 +206,7 @@ describe('Attributes form tests', () => {
                 .getByTestId('formfields-name')
                 .querySelector('input') as HTMLInputElement
             const optName = faker.animal.bird()
-            await userEvent.type(nameInput, optName)
+            await uiActions.pasteIntoInput(nameInput, optName)
 
             await userEvent.click(submitButton)
 

@@ -81,7 +81,7 @@ describe('Program indicator form tests', () => {
                     'apb-custom-target-text-content'
                 )
             ).getByRole('textbox')
-            await userEvent.type(customTextInput, customText)
+            await uiActions.pasteIntoInput(customTextInput, customText)
         }
         if (type !== undefined) {
             const types = await uiActions.openSingleSelect(
@@ -99,7 +99,7 @@ describe('Program indicator form tests', () => {
             const offsetInput = within(
                 within(periodBoundaryModal).getByTestId('apb-offset-input')
             ).getByRole('spinbutton')
-            await userEvent.type(offsetInput, offset.toString())
+            await uiActions.pasteIntoInput(offsetInput, offset.toString())
         }
         if (periodType !== undefined) {
             const periodTypes = await uiActions.openSingleSelect(
@@ -1328,7 +1328,7 @@ describe('Program indicator form tests', () => {
             const attributeInput = within(
                 screen.getByTestId(`attribute-${attributes[0].id}`)
             ).getByRole('textbox') as HTMLInputElement
-            await userEvent.type(attributeInput, anAttribute)
+            await uiActions.pasteIntoInput(attributeInput, anAttribute)
             await uiActions.submitForm(screen)
             expect(createMock).toHaveBeenCalledTimes(1)
             expect(createMock).toHaveBeenLastCalledWith(

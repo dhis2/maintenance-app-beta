@@ -1,6 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { render, within } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { render, waitFor, within } from '@testing-library/react'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/validationRuleGroups.json'
 import { FOOTER_ID } from '../../app/layout/Layout'
@@ -240,7 +239,7 @@ describe('Validation Rule Groups form tests', () => {
             const attributeInput = within(
                 screen.getByTestId(`attribute-${attributes[0].id}`)
             ).getByRole('textbox') as HTMLInputElement
-            await userEvent.type(attributeInput, anAttribute)
+            await uiActions.pasteIntoInput(attributeInput, anAttribute)
 
             await uiActions.submitForm(screen)
 

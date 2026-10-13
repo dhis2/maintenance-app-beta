@@ -33,7 +33,7 @@ export const enterVariableValue = async (
 ) => {
     const field = screen.getByTestId(`variable-input-${varName}`)
     const input = within(field).getByRole('textbox') as HTMLInputElement
-    await userEvent.type(input, value)
+    await uiActions.pasteIntoInput(input, value)
 }
 
 const mockMeta = (overwrites: Record<string, unknown> = {}) =>

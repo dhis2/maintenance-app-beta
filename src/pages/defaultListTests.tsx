@@ -642,7 +642,7 @@ export const generateDefaultListRowActionsTests = ({
                             value: translation,
                         },
                     ]
-                    await userEvent.type(input, translation)
+                    await uiActions.pasteIntoInput(input, translation)
                 }
                 await userEvent.click(
                     within(translationModal).getByTestId(
@@ -994,7 +994,7 @@ export const generateDefaultListFiltersTests = ({
             const identifiableFilterInput = within(
                 within(filtersWrapper).getByTestId('input-search-name')
             ).getByRole('textbox')
-            await userEvent.type(identifiableFilterInput, filterText)
+            await uiActions.pasteIntoInput(identifiableFilterInput, filterText)
             await waitFor(() => {
                 expect(getElementsMock).toHaveBeenCalledTimes(2)
             })
@@ -1015,7 +1015,7 @@ export const generateDefaultListFiltersTests = ({
             const identifiableFilterInput = within(
                 within(filtersWrapper).getByTestId('input-search-name')
             ).getByRole('textbox')
-            await userEvent.type(identifiableFilterInput, 'lalala')
+            await uiActions.pasteIntoInput(identifiableFilterInput, 'lalala')
             await waitFor(() => {
                 expect(getElementsMock).toHaveBeenCalledTimes(2)
             })

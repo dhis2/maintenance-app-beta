@@ -77,10 +77,8 @@ const getAvailableSourceLabels = async (screen: RenderResult) => {
 
 const enterMatchingConfirmationCode = async (screen: RenderResult) => {
     const confirmationCodeElement = await screen.findByText(/^merge-/)
-    await userEvent.type(
-        screen.getByRole('textbox'),
-        confirmationCodeElement.textContent ?? ''
-    )
+    await userEvent.click(screen.getByRole('textbox'))
+    await userEvent.paste(confirmationCodeElement.textContent ?? '')
 }
 
 const fillInValidMergeForm = async (screen: RenderResult) => {
@@ -210,7 +208,8 @@ export const generateDefaultMergeTests = ({
             await pickFirstSource(screen)
             await pickTarget(screen)
 
-            await userEvent.type(screen.getByRole('textbox'), 'wrong-code')
+            await userEvent.click(screen.getByRole('textbox'))
+            await userEvent.paste('wrong-code')
 
             await waitFor(() => expect(getMergeButton(screen)).toBeDisabled())
         })
