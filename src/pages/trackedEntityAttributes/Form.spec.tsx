@@ -33,6 +33,8 @@ describe('TrackedEntityAttributes form tests', () => {
     const updateMock = jest.fn()
 
     beforeEach(() => {
+        createMock.mockClear()
+        updateMock.mockClear()
         const portalRoot = document.createElement('div')
         portalRoot.setAttribute('id', FOOTER_ID)
         document.body.appendChild(portalRoot)

@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor, within } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import React from 'react'
 import '@testing-library/jest-dom'
@@ -25,6 +25,10 @@ const WithProvider = ({ children }: React.PropsWithChildren) => (
 
 describe('IconPicker', () => {
     const mockOnIconPick = jest.fn()
+
+    beforeEach(() => {
+        mockOnIconPick.mockClear()
+    })
 
     it('renders the IconPicker with no selected icon', () => {
         render(<IconPicker icon="test" onIconPick={mockOnIconPick} />, {

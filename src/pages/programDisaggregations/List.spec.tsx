@@ -50,6 +50,9 @@ const renderList = async ({
 }
 
 describe('Program Indicators list', () => {
+    beforeEach(() => {
+        deleteOrgUnitMock.mockClear()
+    })
     it('should show every program indicator', async () => {
         const programsWithMapping1 = testProgram({
             categoryMappings: [testCategoryMapping()],

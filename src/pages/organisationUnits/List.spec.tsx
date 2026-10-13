@@ -123,6 +123,10 @@ describe('Organisation unit list', () => {
         }
     })
 
+    beforeEach(() => {
+        deleteOrgUnitMock.mockClear()
+    })
+
     it('should show every org unit in the right order', async () => {
         const rootOrg1 = testOrgUnit({
             level: 1,
