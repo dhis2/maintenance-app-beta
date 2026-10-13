@@ -476,7 +476,20 @@ describe('Relationship types form tests', () => {
             (routeOptions) => {
                 const attributes = [testCustomAttribute({ mandatory: false })]
                 const programs = [testProgram(), testProgram()]
-                const relationshipType = testRelationshipType()
+                const constraint = {
+                    relationshipEntity: 'PROGRAM_INSTANCE',
+                    program: {
+                        id: programs[0].id,
+                        displayName: programs[0].displayName,
+                    },
+                }
+                const relationshipType = testRelationshipType({
+                    name: faker.company.name(),
+                    bidirectional: false,
+                    toFromName: undefined,
+                    fromConstraint: constraint,
+                    toConstraint: constraint,
+                })
                 const id = relationshipType.id
 
                 const screen = render(

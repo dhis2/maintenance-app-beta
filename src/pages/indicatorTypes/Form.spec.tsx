@@ -238,6 +238,8 @@ describe('Indicator types form tests', () => {
             ) => {
                 const indicatorType = testIndicatorType({
                     id,
+                    // zod-mock can exceed the schema max for factor
+                    factor: faker.number.int({ min: 1, max: 100 }),
                 })
                 const screen = render(
                     <TestComponentWithRouter
