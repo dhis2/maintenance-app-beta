@@ -131,11 +131,12 @@ describe('Data approval levels form tests', () => {
         it('should not submit when required values are missing', async () => {
             const { screen } = await renderForm()
             await uiActions.submitForm(screen)
-            expect(createMock).not.toHaveBeenCalled()
-            uiAssertions.expectFieldToHaveError(
-                'formfields-name',
-                'Required',
-                screen
+            await waitFor(() =>
+                uiAssertions.expectFieldToHaveError(
+                    'formfields-name',
+                    'Required',
+                    screen
+                )
             )
         })
 
@@ -145,6 +146,7 @@ describe('Data approval levels form tests', () => {
             await uiActions.enterName(longText, screen)
             await uiAssertions.expectNameToErrorWhenExceedsLength(screen)
             await uiActions.submitForm(screen)
+            expect(createMock).not.toHaveBeenCalled()
             expect(createMock).not.toHaveBeenCalled()
         })
 

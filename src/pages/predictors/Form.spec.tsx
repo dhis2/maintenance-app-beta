@@ -149,13 +149,14 @@ describe('Predictors form tests', () => {
         it('should not submit when required values are missing', async () => {
             const { screen } = await renderForm()
             await uiActions.submitForm(screen)
+            await waitFor(() => {
+                uiAssertions.expectFieldToHaveError(
+                    'formfields-name',
+                    'Required',
+                    screen
+                )
+            })
             expect(createMock).not.toHaveBeenCalled()
-
-            uiAssertions.expectFieldToHaveError(
-                'formfields-name',
-                'Required',
-                screen
-            )
             uiAssertions.expectFieldToHaveError(
                 'formfields-shortName',
                 'Required',

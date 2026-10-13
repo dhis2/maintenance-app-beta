@@ -313,16 +313,19 @@ describe('Program Rule Variable form tests', () => {
                 const { screen } = await renderForm()
                 await uiActions.submitForm(screen)
 
-                uiAssertions.expectFieldToHaveError(
-                    'formfields-name',
-                    'Required',
-                    screen
-                )
-                uiAssertions.expectFieldToHaveError(
-                    'program-field',
-                    'Required',
-                    screen
-                )
+                await waitFor(() => {
+                    uiAssertions.expectFieldToHaveError(
+                        'formfields-name',
+                        'Required',
+                        screen
+                    )
+                    uiAssertions.expectFieldToHaveError(
+                        'program-field',
+                        'Required',
+                        screen
+                    )
+                })
+                expect(createMock).not.toHaveBeenCalled()
             })
         })
 

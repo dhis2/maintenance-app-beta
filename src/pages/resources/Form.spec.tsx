@@ -132,12 +132,14 @@ describe('Resources form tests', () => {
 
             await uiActions.submitAndCloseForm(screen)
 
-            expect(createDocumentMock).not.toHaveBeenCalled()
-            uiAssertions.expectFieldToHaveError(
-                'formfields-url',
-                'A URL is required',
-                screen
+            await waitFor(() =>
+                uiAssertions.expectFieldToHaveError(
+                    'formfields-url',
+                    'A URL is required',
+                    screen
+                )
             )
+            expect(createDocumentMock).not.toHaveBeenCalled()
         })
 
         it('should upload the file then create the document for a file resource', async () => {
@@ -196,13 +198,15 @@ describe('Resources form tests', () => {
 
             await uiActions.submitAndCloseForm(screen)
 
+            await waitFor(() =>
+                uiAssertions.expectFieldToHaveError(
+                    'formfields-file',
+                    'This file type is not allowed',
+                    screen
+                )
+            )
             expect(createFileResourceMock).not.toHaveBeenCalled()
             expect(createDocumentMock).not.toHaveBeenCalled()
-            uiAssertions.expectFieldToHaveError(
-                'formfields-file',
-                'This file type is not allowed',
-                screen
-            )
         })
 
         it('should create the document directly for a URL resource', async () => {
@@ -279,12 +283,14 @@ describe('Resources form tests', () => {
 
             await uiActions.submitAndCloseForm(screen)
 
-            expect(createDocumentMock).not.toHaveBeenCalled()
-            uiAssertions.expectFieldToHaveError(
-                'formfields-url',
-                'Please provide a valid url',
-                screen
+            await waitFor(() =>
+                uiAssertions.expectFieldToHaveError(
+                    'formfields-url',
+                    'Please provide a valid url',
+                    screen
+                )
             )
+            expect(createDocumentMock).not.toHaveBeenCalled()
         })
     })
 

@@ -109,17 +109,19 @@ describe('Tracked entity types form tests', () => {
         it('should not submit when required values are missing', async () => {
             const { screen } = await renderForm()
             await uiActions.submitForm(screen)
+            await waitFor(() => {
+                uiAssertions.expectFieldToHaveError(
+                    'formfields-name',
+                    'Required',
+                    screen
+                )
+                uiAssertions.expectFieldToHaveError(
+                    'formfields-shortName',
+                    'Required',
+                    screen
+                )
+            })
             expect(createMock).not.toHaveBeenCalled()
-            uiAssertions.expectFieldToHaveError(
-                'formfields-name',
-                'Required',
-                screen
-            )
-            uiAssertions.expectFieldToHaveError(
-                'formfields-shortName',
-                'Required',
-                screen
-            )
         })
 
         it('should show an error if name field is too long', async () => {

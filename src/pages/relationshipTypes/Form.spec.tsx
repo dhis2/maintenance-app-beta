@@ -101,12 +101,14 @@ describe('Relationship types form tests', () => {
         it('should not submit when required values are missing', async () => {
             const { screen } = await renderForm()
             await uiActions.submitForm(screen)
-            expect(createMock).not.toHaveBeenCalled()
-            uiAssertions.expectFieldToHaveError(
-                'formfields-name',
-                'Required',
-                screen
+            await waitFor(() =>
+                uiAssertions.expectFieldToHaveError(
+                    'formfields-name',
+                    'Required',
+                    screen
+                )
             )
+            expect(createMock).not.toHaveBeenCalled()
             uiAssertions.expectFieldToHaveError(
                 'formfields-fromToName',
                 'Required',
@@ -176,12 +178,14 @@ describe('Relationship types form tests', () => {
             const { screen } = await renderForm()
             await uiActions.enterName('Test Name', screen)
             await uiActions.submitForm(screen)
-            expect(createMock).not.toHaveBeenCalled()
-            uiAssertions.expectFieldToHaveError(
-                'formfields-fromToName',
-                'Required',
-                screen
+            await waitFor(() =>
+                uiAssertions.expectFieldToHaveError(
+                    'formfields-fromToName',
+                    'Required',
+                    screen
+                )
             )
+            expect(createMock).not.toHaveBeenCalled()
         })
 
         it('should require toFromName field when bidirectional is checked', async () => {
@@ -204,12 +208,14 @@ describe('Relationship types form tests', () => {
 
             await uiActions.submitForm(screen)
 
-            expect(createMock).not.toHaveBeenCalled()
-            uiAssertions.expectFieldToHaveError(
-                'formfields-toFromName',
-                'Relationship name seen from receiving entity is required when bidirectional is checked',
-                screen
+            await waitFor(() =>
+                uiAssertions.expectFieldToHaveError(
+                    'formfields-toFromName',
+                    'Relationship name seen from receiving entity is required when bidirectional is checked',
+                    screen
+                )
             )
+            expect(createMock).not.toHaveBeenCalled()
         })
 
         it('should show an error if fromToName field is too long', async () => {
