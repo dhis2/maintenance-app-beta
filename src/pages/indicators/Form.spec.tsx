@@ -297,7 +297,7 @@ describe('Indicators form tests', () => {
 
             const anExpression = faker.finance.routingNumber()
             await userEvent.click(
-                screen.getByTestId('edit-numerator-expression-button')
+                screen.getByTestId('edit-denominator-expression-button')
             )
             const editModal = await screen.findByTestId(
                 `expression-builder-modal`
@@ -371,7 +371,7 @@ describe('Indicators form tests', () => {
             const { screen } = await renderForm()
             await uiActions.pickOptionFromSelect(
                 screen.getByTestId('decimals-field'),
-                7,
+                6,
                 screen
             )
             await uiActions.submitForm(screen)
