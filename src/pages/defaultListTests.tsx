@@ -1,5 +1,5 @@
 import { FetchError } from '@dhis2/app-runtime'
-import { render, waitFor, within } from '@testing-library/react'
+import { fireEvent, render, waitFor, within } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import React from 'react'
 import { getSchemaProperty } from '../components/sectionList/modelValue/ModelValue'
@@ -216,59 +216,56 @@ export const generateDefaultListItemsTests = ({
                 )
             })
         })
-        it('can sort the results by columns using a non case sensitive manner', async () => {
-            const { screen } = await renderList()
-
-            const tableHeaders = screen.getAllByTestId(
-                'dhis2-uicore-datatablecellhead'
+        const sortConfigs = modelListViewsConfig[
+            section.name as keyof typeof modelListViewsConfig
+        ] as Record<string, any>
+        const sortableColumns = (
+            (sortConfigs?.columns?.default ??
+                defaultModelViewConfig.columns.default) as ModelPropertyConfig[]
+        )
+            .map((column, index) => ({
+                index,
+                path: toModelPropertyDescriptor(column).path,
+            }))
+            .filter(
+                ({ path }) =>
+                    getSchemaProperty(mockSchema as Schema, path)?.sortable
             )
-            const sectionName =
-                section.name as keyof typeof modelListViewsConfig
-            const configs = modelListViewsConfig[sectionName] as Record<
-                string,
-                any
-            >
-            const columnsToRender =
-                configs?.columns?.default ??
-                defaultModelViewConfig.columns.default
-            for (const [index, column] of columnsToRender.entries()) {
-                const columnDescriptor = toModelPropertyDescriptor(column)
-                const columnProperties = getSchemaProperty(
-                    mockSchema as Schema,
-                    columnDescriptor.path
-                )
-                if (columnProperties?.sortable) {
-                    await userEvent.click(
-                        within(tableHeaders[index + 1]).getByTestId(
-                            'dhis2-uicore-tableheadercellaction'
-                        )
-                    )
+        // one test per column, as each column needs its own sequence of clicks
+        if (sortableColumns.length > 0) {
+            it.each(sortableColumns)(
+                'can sort the results by $path using a non case sensitive manner',
+                async ({ index, path }) => {
+                    const { screen } = await renderList()
+                    const sortButton = within(
+                        screen.getAllByTestId('dhis2-uicore-datatablecellhead')[
+                            index + 1
+                        ]
+                    ).getByTestId('dhis2-uicore-tableheadercellaction')
+
+                    await userEvent.click(sortButton)
                     await waitFor(() => {
                         expect(getElementsMock).toHaveBeenLastCalledWith(
                             expect.objectContaining({
                                 params: expect.objectContaining({
-                                    order: `${columnDescriptor.path}:iasc`,
+                                    order: `${path}:iasc`,
                                 }),
                             })
                         )
                     })
-                    await userEvent.click(
-                        within(tableHeaders[index + 1]).getByTestId(
-                            'dhis2-uicore-tableheadercellaction'
-                        )
-                    )
+                    await userEvent.click(sortButton)
                     await waitFor(() => {
                         expect(getElementsMock).toHaveBeenLastCalledWith(
                             expect.objectContaining({
                                 params: expect.objectContaining({
-                                    order: `${columnDescriptor.path}:idesc`,
+                                    order: `${path}:idesc`,
                                 }),
                             })
                         )
                     })
                 }
-            }
-        })
+            )
+        }
         it('should display error when an API call fails', async () => {
             const customTestData = {
                 [section.namePlural]: (type: any) => {
@@ -654,7 +651,8 @@ export const generateDefaultListRowActionsTests = ({
                             value: translation,
                         },
                     ]
-                    await uiActions.pasteIntoInput(input, translation)
+                    // a single synchronous change event, so the loop needs no await
+                    fireEvent.change(input, { target: { value: translation } })
                 }
                 await userEvent.click(
                     within(translationModal).getByTestId(
