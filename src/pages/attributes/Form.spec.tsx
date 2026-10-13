@@ -197,7 +197,7 @@ describe('Attributes form tests', () => {
                 await screen.findByText('Add new Option set')
             ).toBeInTheDocument()
 
-            const drawerForm = screen.getByTestId('optionSetNewForm')
+            const drawerForm = await screen.findByTestId('optionSetNewForm')
             const submitButton =
                 within(drawerForm).getByTestId('form-submit-button')
             expect(submitButton).toHaveTextContent('Save and close')

@@ -187,7 +187,7 @@ describe('Data approval workflows form tests', () => {
                 await screen.findByText('Add new Category combination')
             ).toBeInTheDocument()
             expect(
-                screen.getByTestId('categoryComboNewForm')
+                await screen.findByTestId('categoryComboNewForm')
             ).toBeInTheDocument()
             expect(
                 within(screen.getByTestId('categoryComboNewForm')).getByTestId(

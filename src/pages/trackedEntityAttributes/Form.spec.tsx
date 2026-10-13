@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { act, render, within } from '@testing-library/react'
+import { act, render, waitFor, within } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import React from 'react'
 import optionSetSchemaMock from '../../__mocks__/schema/optionSet.json'
@@ -149,7 +149,9 @@ describe('TrackedEntityAttributes form tests', () => {
             expect(
                 await screen.findByText('Add new Option set')
             ).toBeInTheDocument()
-            expect(screen.getByTestId('optionSetNewForm')).toBeInTheDocument()
+            expect(
+                await screen.findByTestId('optionSetNewForm')
+            ).toBeInTheDocument()
             expect(
                 within(screen.getByTestId('optionSetNewForm')).getByTestId(
                     'form-submit-button'

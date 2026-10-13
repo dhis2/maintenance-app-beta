@@ -399,7 +399,7 @@ describe('Indicators form tests', () => {
                 await screen.findByText('Add new Indicator type')
             ).toBeInTheDocument()
             expect(
-                screen.getByTestId('indicatorTypeNewForm')
+                await screen.findByTestId('indicatorTypeNewForm')
             ).toBeInTheDocument()
             expect(
                 within(screen.getByTestId('indicatorTypeNewForm')).getByTestId(

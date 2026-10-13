@@ -185,7 +185,7 @@ describe('Data approval levels form tests', () => {
                 await screen.findByText('Add new Category option group set')
             ).toBeInTheDocument()
             expect(
-                screen.getByTestId('categoryOptionGroupSetNewForm')
+                await screen.findByTestId('categoryOptionGroupSetNewForm')
             ).toBeInTheDocument()
             expect(
                 within(
