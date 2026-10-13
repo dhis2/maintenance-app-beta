@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { render } from '@testing-library/react'
+import { render, waitFor } from '@testing-library/react'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/programIndicatorGroupsSchema.json'
 import { FOOTER_ID } from '../../app/layout/Layout'
@@ -218,7 +218,7 @@ describe('Program indicator groups form tests', () => {
             const { screen, programIndicators } = await renderForm()
             uiAssertions.expectNameFieldExist('', screen)
             uiAssertions.expectCodeFieldExist('', screen)
-            uiAssertions.expectTransferFieldToExistWithOptions(
+            await uiAssertions.expectTransferFieldToExistWithOptions(
                 'program-indicators-transfer',
                 { lhs: programIndicators, rhs: [] },
                 screen

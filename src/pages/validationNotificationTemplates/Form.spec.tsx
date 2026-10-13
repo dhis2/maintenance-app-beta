@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'
-import { render, within } from '@testing-library/react'
+import { render, waitFor, within } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import React from 'react'
 import schemaMock from '../../__mocks__/schema/attributeSchema.json'
@@ -377,7 +377,7 @@ describe('Validation Notification form tests', () => {
                 aMessage,
                 screen
             )
-            uiActions.pickRadioField(
+            await uiActions.pickRadioField(
                 'notificationType',
                 notificationTypeOptions[notificationOptionIndex].label,
                 screen
