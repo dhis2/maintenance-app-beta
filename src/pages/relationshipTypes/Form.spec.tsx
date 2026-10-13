@@ -299,16 +299,19 @@ describe('Relationship types form tests', () => {
             // Flush the useEffect so LINK_ONLY_SECTIONS check runs and NewItemForm stays undefined
             await act(async () => {})
 
-            const programField = screen.getByTestId('from-program-selector')
-            const addNewButton = within(programField).getAllByRole('button')[1]
-            await userEvent.click(addNewButton)
+            try {
+                const programField = screen.getByTestId('from-program-selector')
+                const addNewButton =
+                    within(programField).getAllByRole('button')[1]
+                await userEvent.click(addNewButton)
 
-            expect(windowOpenSpy).toHaveBeenCalledWith(
-                expect.stringContaining('/programs/new'),
-                '_blank'
-            )
-
-            windowOpenSpy.mockRestore()
+                expect(windowOpenSpy).toHaveBeenCalledWith(
+                    expect.stringContaining('/programs/new'),
+                    '_blank'
+                )
+            } finally {
+                windowOpenSpy.mockRestore()
+            }
         })
     })
 

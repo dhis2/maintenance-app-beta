@@ -334,23 +334,25 @@ describe('Program Rule Variable form tests', () => {
                     .spyOn(window, 'open')
                     .mockImplementation(() => null)
 
-                // Flush the useEffect so LINK_ONLY_SECTIONS check runs and NewItemForm stays undefined
-                await act(async () => {})
+                try {
+                    // Flush the useEffect so LINK_ONLY_SECTIONS check runs and NewItemForm stays undefined
+                    await act(async () => {})
 
-                const programField = screen.getByTestId('program-field')
-                const addNewButton =
-                    within(programField).getAllByRole('button')[1]
-                await userEvent.click(addNewButton)
+                    const programField = screen.getByTestId('program-field')
+                    const addNewButton =
+                        within(programField).getAllByRole('button')[1]
+                    await userEvent.click(addNewButton)
 
-                expect(windowOpenSpy).toHaveBeenCalledWith(
-                    expect.stringContaining('/programs/new'),
-                    '_blank'
-                )
-                expect(
-                    screen.queryByText('Add new Program')
-                ).not.toBeInTheDocument()
-
-                windowOpenSpy.mockRestore()
+                    expect(windowOpenSpy).toHaveBeenCalledWith(
+                        expect.stringContaining('/programs/new'),
+                        '_blank'
+                    )
+                    expect(
+                        screen.queryByText('Add new Program')
+                    ).not.toBeInTheDocument()
+                } finally {
+                    windowOpenSpy.mockRestore()
+                }
             })
         })
     })
