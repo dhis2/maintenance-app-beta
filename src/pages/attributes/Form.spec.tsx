@@ -544,16 +544,18 @@ describe('Attributes form tests', () => {
                     testOptionSet(),
                     testOptionSet(),
                 ]
+                // MULTI_TEXT would be reset by the option set without valueType
+                const valueTypes = VALUE_TYPES_OPTIONS.filter(
+                    (o) => o.value !== 'MULTI_TEXT'
+                )
                 const attribute = testAttribute({
                     optionSet: {
                         id: optionSets[1].id,
                         displayName: optionSets[1].displayName,
                     },
                     valueType:
-                        VALUE_TYPES_OPTIONS[
-                            Math.floor(
-                                Math.random() * VALUE_TYPES_OPTIONS.length
-                            )
+                        valueTypes[
+                            Math.floor(Math.random() * valueTypes.length)
                         ]?.value,
                 })
 
