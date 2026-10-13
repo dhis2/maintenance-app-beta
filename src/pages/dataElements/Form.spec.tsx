@@ -1269,7 +1269,13 @@ describe('Data elements form tests', () => {
                     optionSet: null,
                 },
             })
-            await uiActions.submitForm(screen)
+            await uiActions.submitAndCloseForm(screen)
+            // leaving the form shows the submit has completed
+            await waitFor(() => {
+                expect(
+                    screen.queryByTestId('formfields-name')
+                ).not.toBeInTheDocument()
+            })
             expect(updateMock).not.toHaveBeenCalled()
         })
         it('should have multi text as a value type if data element has option set with that value type', async () => {

@@ -414,7 +414,12 @@ describe('Categories form tests', () => {
 
         it('should do nothing and return to the list view on success when no field is changed', async () => {
             const { screen } = await renderForm()
-            await uiActions.submitForm(screen)
+            await uiActions.submitAndCloseForm(screen)
+            await waitFor(() =>
+                expect(
+                    screen.queryByTestId('formfields-name')
+                ).not.toBeInTheDocument()
+            )
             expect(updateMock).not.toHaveBeenCalled()
         })
     })

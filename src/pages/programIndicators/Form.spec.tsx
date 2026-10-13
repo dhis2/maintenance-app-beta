@@ -1871,7 +1871,17 @@ describe('Program indicator form tests', () => {
                     analyticsType: 'EVENT',
                 },
             })
-            await uiActions.submitForm(screen)
+            await waitFor(() => {
+                expect(screen.getByTestId('org-unit-field')).toHaveTextContent(
+                    orgUnitOption.label
+                )
+            })
+            await uiActions.submitAndCloseForm(screen)
+            await waitFor(() => {
+                expect(
+                    screen.queryByTestId('formfields-name')
+                ).not.toBeInTheDocument()
+            })
             expect(updateMock).not.toHaveBeenCalled()
         })
         it('update decimals to 0', async () => {
@@ -1916,7 +1926,12 @@ describe('Program indicator form tests', () => {
             const { screen } = await renderForm({
                 programIndicatorOverwrites: { orgUnitField: null },
             })
-            await uiActions.submitForm(screen)
+            await uiActions.submitAndCloseForm(screen)
+            await waitFor(() => {
+                expect(
+                    screen.queryByTestId('formfields-name')
+                ).not.toBeInTheDocument()
+            })
             expect(updateMock).not.toHaveBeenCalled()
         })
     })

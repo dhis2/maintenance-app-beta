@@ -1182,7 +1182,12 @@ describe('Indicators form tests', () => {
 
         it('should do nothing when no field is changed', async () => {
             const { screen } = await renderForm()
-            await uiActions.submitForm(screen)
+            await uiActions.submitAndCloseForm(screen)
+            await waitFor(() =>
+                expect(
+                    screen.queryByTestId('formfields-name')
+                ).not.toBeInTheDocument()
+            )
             expect(updateMock).not.toHaveBeenCalled()
         })
 

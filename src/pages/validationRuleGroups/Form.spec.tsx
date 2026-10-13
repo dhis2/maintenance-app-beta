@@ -303,7 +303,7 @@ describe('Validation Rule Groups form tests', () => {
                                 pager: {},
                             }),
                             validationRuleGroups: (type: any, params: any) => {
-                                if (type === 'update') {
+                                if (type === 'json-patch') {
                                     updateMock(params)
                                     return { statusCode: 204 }
                                 }
@@ -348,7 +348,12 @@ describe('Validation Rule Groups form tests', () => {
 
         it('does not submit when no changes are made', async () => {
             const { screen } = await renderForm()
-            await uiActions.submitForm(screen)
+            await uiActions.submitAndCloseForm(screen)
+            await waitFor(() =>
+                expect(
+                    screen.queryByTestId('formfields-name')
+                ).not.toBeInTheDocument()
+            )
             expect(updateMock).not.toHaveBeenCalled()
         })
 
