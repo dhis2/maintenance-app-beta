@@ -26,7 +26,7 @@ describe('useBulkDeleteMutation', () => {
         jest.clearAllMocks()
     })
 
-    it('resolves with a fulfilled result for every successfully deleted id', async () => {
+    it('marks every successfully deleted id as deleted', async () => {
         const mutate = jest.fn().mockResolvedValue({ httpStatusCode: 200 })
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         mockedUseDataEngine.mockReturnValue({ mutate } as any)
@@ -37,8 +37,8 @@ describe('useBulkDeleteMutation', () => {
         await waitFor(() => expect(result.current.isSuccess).toBe(true))
 
         expect(result.current.data).toEqual([
-            { id: 'id1', status: 'fulfilled' },
-            { id: 'id2', status: 'fulfilled' },
+            { id: 'id1', status: 'deleted' },
+            { id: 'id2', status: 'deleted' },
         ])
     })
 
@@ -79,20 +79,20 @@ describe('useBulkDeleteMutation', () => {
 
         await waitFor(() => expect(result.current.isSuccess).toBe(true))
 
-        expect(result.current.data?.[0]).toEqual({
-            id: 'id1',
-            status: 'fulfilled',
-        })
-        expect(result.current.data?.[1]).toMatchObject({
-            id: 'id2',
-            status: 'rejected',
-        })
-        const rejected = result.current.data?.[1]
-        if (rejected?.status === 'rejected') {
-            expect(rejected.error.errors[0]).toMatchObject({
-                message: 'Object is referenced by another object',
-                errorType: 'errorReport',
-            })
-        }
+        expect(result.current.data).toMatchObject([
+            { id: 'id1', status: 'deleted' },
+            {
+                id: 'id2',
+                status: 'failed',
+                error: {
+                    errors: [
+                        {
+                            message: 'Object is referenced by another object',
+                            errorType: 'errorReport',
+                        },
+                    ],
+                },
+            },
+        ])
     })
 })

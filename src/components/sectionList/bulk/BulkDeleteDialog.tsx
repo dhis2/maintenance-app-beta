@@ -22,6 +22,14 @@ type BulkDeleteDialogProps = {
     onDeleteSuccess: () => void
 }
 
+const mergeRetryResults = (
+    previous: BulkDeleteResult[],
+    retried: BulkDeleteResult[]
+) =>
+    previous.map(
+        (result) => retried.find(({ id }) => id === result.id) ?? result
+    )
+
 export const BulkDeleteDialog = ({
     selectedModels,
     onClose,
@@ -29,43 +37,43 @@ export const BulkDeleteDialog = ({
 }: BulkDeleteDialogProps) => {
     const schema = useSchemaFromHandle()
     const number = selectedModels.size
-    const [failedResults, setFailedResults] = useState<BulkDeleteResult[]>()
+    const [results, setResults] = useState<BulkDeleteResult[]>()
 
     const { show: showSuccessAlert } = useAlert(
         i18n.t('Successfully deleted {{number}} items', { number }),
         { success: true }
     )
 
+    const closeAfterDelete = () => {
+        onDeleteSuccess()
+        onClose()
+    }
+
     const mutation = useBulkDeleteMutation(schema.plural, {
-        onSuccess: (results) => {
-            const merged = failedResults
-                ? failedResults.map(
-                      (previous) =>
-                          results.find((result) => result.id === previous.id) ??
-                          previous
-                  )
-                : results
-            if (merged.every((result) => result.status === 'fulfilled')) {
+        onSuccess: (latestResults) => {
+            const allResults = results
+                ? mergeRetryResults(results, latestResults)
+                : latestResults
+            const allDeleted = allResults.every(
+                ({ status }) => status === 'deleted'
+            )
+            if (allDeleted) {
                 showSuccessAlert()
-                onDeleteSuccess()
-                onClose()
+                closeAfterDelete()
             } else {
-                setFailedResults(merged)
+                setResults(allResults)
             }
         },
     })
 
-    if (failedResults) {
+    if (results) {
         return (
             <BulkDeleteErrorsDialog
                 schema={schema}
-                results={failedResults}
+                results={results}
                 retrying={mutation.isLoading}
                 onRetry={(ids) => mutation.mutate({ ids })}
-                onClose={() => {
-                    onDeleteSuccess()
-                    onClose()
-                }}
+                onClose={closeAfterDelete}
             />
         )
     }

@@ -25,6 +25,8 @@ import {
 } from './bulkDeleteErrorSummary'
 import { BulkDeleteResult } from './useBulkDeleteMutation'
 
+type FailedResult = Extract<BulkDeleteResult, { status: 'failed' }>
+
 type FailedItem = {
     id: string
     displayName: string
@@ -57,8 +59,8 @@ export const BulkDeleteErrorsDialog = ({
     onRetry,
     onClose,
 }: BulkDeleteErrorsDialogProps) => {
-    const failed = results.flatMap((result) =>
-        result.status === 'rejected' ? [result] : []
+    const failed = results.filter(
+        (result): result is FailedResult => result.status === 'failed'
     )
 
     const { selected } =
@@ -137,6 +139,7 @@ export const BulkDeleteErrorsDialog = ({
 const FailedItemRow = ({ item }: { item: FailedItem }) => {
     const [showDetails, setShowDetails] = useState(false)
     const detailsId = useId()
+    const ChevronIcon = showDetails ? IconChevronDown16 : IconChevronRight16
 
     return (
         <li>
@@ -149,11 +152,7 @@ const FailedItemRow = ({ item }: { item: FailedItem }) => {
                     onClick={() => setShowDetails((prev) => !prev)}
                 >
                     <span className={css.errorRowChevron}>
-                        {showDetails ? (
-                            <IconChevronDown16 />
-                        ) : (
-                            <IconChevronRight16 />
-                        )}
+                        <ChevronIcon />
                     </span>
                     <span className={css.errorRowText}>
                         <span className={css.errorRowDisplayName}>

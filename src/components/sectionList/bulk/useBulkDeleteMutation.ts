@@ -1,15 +1,14 @@
 import { useDataEngine } from '@dhis2/app-runtime'
 import { useMutation, UseMutationOptions } from '@tanstack/react-query'
 import { ApiErrorReport, parseErrorResponse } from '../../../lib'
-import { ImportSummary } from '../../../types'
 
 type MutationFnArgs = {
     ids: string[]
 }
 
 export type BulkDeleteResult =
-    | { id: string; status: 'fulfilled' }
-    | { id: string; status: 'rejected'; error: ApiErrorReport }
+    | { id: string; status: 'deleted' }
+    | { id: string; status: 'failed'; error: ApiErrorReport }
 
 type Options = Omit<
     UseMutationOptions<BulkDeleteResult[], unknown, MutationFnArgs>,
@@ -24,28 +23,24 @@ export function useBulkDeleteMutation(
 
     return useMutation({
         ...options,
-        mutationFn: async ({ ids }: MutationFnArgs) => {
-            const settled = await Promise.allSettled(
-                ids.map(
-                    (id) =>
-                        engine.mutate({
+        mutationFn: ({ ids }: MutationFnArgs) =>
+            Promise.all(
+                ids.map(async (id): Promise<BulkDeleteResult> => {
+                    try {
+                        await engine.mutate({
                             resource: schemaResource,
                             id,
                             type: 'delete',
-                        }) as Promise<ImportSummary>
-                )
-            )
-
-            return settled.map(
-                (result, index): BulkDeleteResult =>
-                    result.status === 'fulfilled'
-                        ? { id: ids[index], status: 'fulfilled' }
-                        : {
-                              id: ids[index],
-                              status: 'rejected',
-                              error: parseErrorResponse(result.reason),
-                          }
-            )
-        },
+                        })
+                        return { id, status: 'deleted' }
+                    } catch (error) {
+                        return {
+                            id,
+                            status: 'failed',
+                            error: parseErrorResponse(error),
+                        }
+                    }
+                })
+            ),
     })
 }
