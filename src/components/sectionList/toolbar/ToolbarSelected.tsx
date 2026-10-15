@@ -40,7 +40,9 @@ export const ToolbarSelected = ({
     const handleClose = () => setSharingDialogOpen(false)
     const handleDeleteSuccess = () => {
         if (maybeSchema) {
-            queryClient.invalidateQueries({ queryKey: [maybeSchema.plural] })
+            queryClient.invalidateQueries({
+                queryKey: [{ result: { resource: maybeSchema.plural } }],
+            })
         }
         onDeselectAll()
     }
