@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--spacers-dp16);
+    margin-top: var(--spacers-dp16);
 }
 
 .sharingEntitySelect {
@@ -82,18 +83,23 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    border-top: 1px solid var(--colors-grey300);
-}
-
-.errorRow {
-    border-bottom: 1px solid var(--colors-grey300);
 }
 
 .errorRowHeader {
     display: flex;
     align-items: center;
     gap: var(--spacers-dp8);
+    position: relative;
     padding-inline-end: var(--spacers-dp8);
+}
+
+.errorList > li + li .errorRowHeader::before {
+    content: '';
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: var(--spacers-dp32);
+    inset-inline-end: 0;
+    border-top: 1px solid var(--colors-grey200);
 }
 
 .errorRowHeader:hover {
@@ -157,14 +163,13 @@
 
 .errorRowDetails {
     margin: 0 var(--spacers-dp8) var(--spacers-dp12) var(--spacers-dp32);
-    padding: var(--spacers-dp8) var(--spacers-dp12) var(--spacers-dp8)
-        var(--spacers-dp24);
-    background-color: var(--colors-grey050);
-    border-radius: 4px;
-    color: var(--colors-grey800);
-    font-family: Menlo, Courier, monospace;
-    font-size: 12px;
-    line-height: 1.5;
+    background-color: var(--colors-white);
+    border: 1px solid var(--colors-grey300);
+    overflow: auto;
+    padding: var(--spacers-dp8);
+    max-height: 400px;
     white-space: pre-wrap;
-    word-break: break-word;
+    font-size: 12px;
+    line-height: 1.2;
+    font-family: Menlo, Courier, monospace;
 }

@@ -28,10 +28,16 @@ describe('getBulkDeleteErrorSummary', () => {
         ).toBe('Not found, it may already have been deleted')
     })
 
+    it('explains conflict errors', () => {
+        expect(
+            getBulkDeleteErrorSummary(createReport({ httpStatusCode: 409 }))
+        ).toBe('In use by other metadata or data')
+    })
+
     it('falls back to a generic message for other errors', () => {
-        expect(getBulkDeleteErrorSummary(createReport())).toBe(
-            'Cannot be deleted'
-        )
+        expect(
+            getBulkDeleteErrorSummary(createReport({ httpStatusCode: 500 }))
+        ).toBe('Cannot be deleted')
     })
 })
 

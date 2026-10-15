@@ -7,6 +7,7 @@ import {
     IconChevronRight16,
     IconCopy16,
     IconLaunch16,
+    IconSync16,
     Modal,
     ModalActions,
     ModalContent,
@@ -111,16 +112,17 @@ export const BulkDeleteErrorsDialog = ({
                         onClick={handleCopy}
                         disabled={retrying}
                     >
-                        {i18n.t('Copy errors')}
+                        {i18n.t('Copy as list')}
                     </Button>
                     <ButtonStrip end>
                         <Button
                             secondary
+                            icon={<IconSync16 />}
                             loading={retrying}
                             onClick={() => onRetry(failed.map(({ id }) => id))}
                             dataTest="bulk-delete-errors-retry-button"
                         >
-                            {i18n.t('Retry failed items')}
+                            {i18n.t('Retry')}
                         </Button>
                         <Button primary onClick={onClose} disabled={retrying}>
                             {i18n.t('Close')}
@@ -137,7 +139,7 @@ const FailedItemRow = ({ item }: { item: FailedItem }) => {
     const detailsId = useId()
 
     return (
-        <li className={css.errorRow}>
+        <li>
             <div className={css.errorRowHeader}>
                 <button
                     type="button"
@@ -177,11 +179,9 @@ const FailedItemRow = ({ item }: { item: FailedItem }) => {
                 </Tooltip>
             </div>
             {showDetails && (
-                <ul id={detailsId} className={css.errorRowDetails}>
-                    {item.details.map((detail, index) => (
-                        <li key={index}>{detail}</li>
-                    ))}
-                </ul>
+                <pre id={detailsId} className={css.errorRowDetails}>
+                    {item.details.join('\n')}
+                </pre>
             )}
         </li>
     )

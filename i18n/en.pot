@@ -1007,11 +1007,8 @@ msgstr "Errors copied to clipboard"
 msgid "{{failedCount}} of {{total}} items could not be deleted"
 msgstr "{{failedCount}} of {{total}} items could not be deleted"
 
-msgid "Copy errors"
-msgstr "Copy errors"
-
-msgid "Retry failed items"
-msgstr "Retry failed items"
+msgid "Copy as list"
+msgstr "Copy as list"
 
 msgid "Close"
 msgstr "Close"
@@ -1060,6 +1057,9 @@ msgstr "You do not have permission to delete this item"
 
 msgid "Not found, it may already have been deleted"
 msgstr "Not found, it may already have been deleted"
+
+msgid "In use by other metadata or data"
+msgstr "In use by other metadata or data"
 
 msgid "Cannot be deleted"
 msgstr "Cannot be deleted"

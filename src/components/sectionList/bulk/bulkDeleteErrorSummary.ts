@@ -8,6 +8,9 @@ export const getBulkDeleteErrorSummary = (error: ApiErrorReport): string => {
     if (error.httpStatusCode === 404) {
         return i18n.t('Not found, it may already have been deleted')
     }
+    if (error.httpStatusCode === 409) {
+        return i18n.t('In use by other metadata or data')
+    }
     return i18n.t('Cannot be deleted')
 }
 
