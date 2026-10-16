@@ -619,6 +619,16 @@ describe('Program indicator form tests', () => {
         })
     })
     describe('New', () => {
+        const eventPeriodBoundaries = [
+            {
+                analyticsPeriodBoundaryType: 'AFTER_START_OF_REPORTING_PERIOD',
+                boundaryTarget: 'EVENT_DATE',
+            },
+            {
+                analyticsPeriodBoundaryType: 'BEFORE_START_OF_REPORTING_PERIOD',
+                boundaryTarget: 'EVENT_DATE',
+            },
+        ]
         const renderForm = generateRenderer(
             { section, mockSchema },
             (
@@ -897,7 +907,7 @@ describe('Program indicator form tests', () => {
                         attributeValues: [],
                         expression: undefined,
                         filter: undefined,
-                        analyticsPeriodBoundaries: [],
+                        analyticsPeriodBoundaries: eventPeriodBoundaries,
                     }),
                 })
             )
@@ -990,7 +1000,7 @@ describe('Program indicator form tests', () => {
                         attributeValues: [],
                         expression: anExpression,
                         filter: aFilter,
-                        analyticsPeriodBoundaries: [],
+                        analyticsPeriodBoundaries: eventPeriodBoundaries,
                     }),
                 })
             )
@@ -1076,6 +1086,7 @@ describe('Program indicator form tests', () => {
                         expression: undefined,
                         filter: undefined,
                         analyticsPeriodBoundaries: [
+                            ...eventPeriodBoundaries,
                             {
                                 boundaryTarget: 'INCIDENT_DATE',
                                 analyticsPeriodBoundaryType:
@@ -1083,6 +1094,99 @@ describe('Program indicator form tests', () => {
                                 offsetPeriodType: periodTypes[0],
                                 offsetPeriods: 5,
                             },
+                        ],
+                    }),
+                })
+            )
+        })
+        it('should reset analytics period boundaries when toggling the analytics type', async () => {
+            const programWithoutRegistration = testProgram({
+                programType: 'WITHOUT_REGISTRATION' as ProgramType,
+            })
+            const aName = faker.internet.userName()
+            const aShortName = faker.internet.userName()
+
+            const periodTypes = ['Daily', 'Monthly', 'Yearly']
+            const { screen } = await renderForm({
+                customTestData: {
+                    programs: (type: any, params: any) => {
+                        if (params.id === programWithoutRegistration.id) {
+                            return {
+                                programStages: [],
+                            }
+                        }
+                        return Promise.resolve({
+                            programs: [
+                                programWithoutRegistration,
+                                testProgram(),
+                            ],
+                        })
+                    },
+                    periodTypes: () => ({
+                        periodTypes: periodTypes.map((pt) => ({ name: pt })),
+                    }),
+                },
+            })
+
+            await uiActions.enterName(aName, screen)
+            await uiActions.enterInputFieldValue(
+                'shortName',
+                aShortName,
+                screen
+            )
+            const programOptions = await uiActions.openSingleSelect(
+                screen.getByTestId('programs-field'),
+                screen
+            )
+            await userEvent.click(programOptions[0])
+            await uiActions.closeSingleSelectIfOpen(
+                screen.getByTestId('programs-field'),
+                screen
+            )
+
+            await uiActions.pickRadioField(
+                'analyticsType',
+                'Event: Uses data from all events within a program stage',
+                screen
+            )
+            const eventBoundaries = screen.getAllByTestId(
+                'analytics-period-boundary'
+            )
+            expect(eventBoundaries).toHaveLength(2)
+            eventBoundaries.forEach((boundary: HTMLElement) =>
+                expect(boundary).toHaveTextContent('Event date')
+            )
+
+            await uiActions.pickRadioField(
+                'analyticsType',
+                'Enrollment: Uses data combined from the latest events across the enrollment',
+                screen
+            )
+            const enrollmentBoundaries = screen.getAllByTestId(
+                'analytics-period-boundary'
+            )
+            expect(enrollmentBoundaries).toHaveLength(2)
+            enrollmentBoundaries.forEach((boundary: HTMLElement) =>
+                expect(boundary).toHaveTextContent('Enrollment date')
+            )
+
+            await uiActions.submitForm(screen)
+            expect(createMock).toHaveBeenCalledTimes(1)
+            expect(createMock).toHaveBeenLastCalledWith(
+                expect.objectContaining({
+                    data: expect.objectContaining({
+                        analyticsType: 'ENROLLMENT',
+                        analyticsPeriodBoundaries: [
+                            expect.objectContaining({
+                                boundaryTarget: 'ENROLLMENT_DATE',
+                                analyticsPeriodBoundaryType:
+                                    'AFTER_START_OF_REPORTING_PERIOD',
+                            }),
+                            expect.objectContaining({
+                                boundaryTarget: 'ENROLLMENT_DATE',
+                                analyticsPeriodBoundaryType:
+                                    'BEFORE_START_OF_REPORTING_PERIOD',
+                            }),
                         ],
                     }),
                 })
@@ -1182,7 +1286,7 @@ describe('Program indicator form tests', () => {
                         attributeValues: [],
                         expression: undefined,
                         filter: undefined,
-                        analyticsPeriodBoundaries: [],
+                        analyticsPeriodBoundaries: eventPeriodBoundaries,
                     }),
                 })
             )
@@ -1268,7 +1372,7 @@ describe('Program indicator form tests', () => {
                         attributeValues: [],
                         expression: undefined,
                         filter: undefined,
-                        analyticsPeriodBoundaries: [],
+                        analyticsPeriodBoundaries: eventPeriodBoundaries,
                     }),
                 })
             )
@@ -1359,7 +1463,7 @@ describe('Program indicator form tests', () => {
                         ],
                         expression: undefined,
                         filter: undefined,
-                        analyticsPeriodBoundaries: [],
+                        analyticsPeriodBoundaries: eventPeriodBoundaries,
                     }),
                 })
             )

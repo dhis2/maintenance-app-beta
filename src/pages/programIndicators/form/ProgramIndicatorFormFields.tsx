@@ -33,6 +33,10 @@ import {
     useSectionedFormContext,
     useSyncSelectedSectionWithScroll,
 } from '../../../lib'
+import {
+    AnalyticsPeriodBoundary,
+    AnalyticsPeriodBoundaryType,
+} from '../../../types/models'
 import { AnalyticsPeriodBoundariesField } from './AnalyticsPeriodBoundariesField'
 import { ProgramIndicatorFormDescriptor } from './formDescriptor'
 import { OrgUnitField } from './OrgUnitField'
@@ -58,6 +62,7 @@ export const ProgramIndicatorsFormFields = () => {
         type: 'radio',
         value: 'ENROLLMENT',
     })
+
     useSyncSelectedSectionWithScroll()
     const programFilters = [
         'id,displayName,programType,programTrackedEntityAttributes[trackedEntityAttribute[id,displayName,valueType]]',
@@ -68,6 +73,10 @@ export const ProgramIndicatorsFormFields = () => {
     const { apiVersion } = useConfig()
     const hasPiDisaggregation = apiVersion >= 42
     const schema = useSchema(SECTIONS_MAP.programIndicator.name)
+
+    const { input: analyticsPeriodBoundariesInput } = useField<
+        Partial<AnalyticsPeriodBoundary>[]
+    >('analyticsPeriodBoundaries')
 
     return (
         <SectionedFormSections>
@@ -143,14 +152,48 @@ export const ProgramIndicatorsFormFields = () => {
                             label={`${ANALYTICS_TYPE.EVENT}: ${i18n.t(
                                 'Uses data from all events within a program stage'
                             )}`}
-                            input={eventField.input}
+                            input={{
+                                ...eventField.input,
+                                onChange: (event) => {
+                                    eventField.input.onChange(event)
+                                    analyticsPeriodBoundariesInput.onChange([
+                                        {
+                                            analyticsPeriodBoundaryType:
+                                                AnalyticsPeriodBoundaryType.AFTER_START_OF_REPORTING_PERIOD,
+                                            boundaryTarget: 'EVENT_DATE',
+                                        },
+                                        {
+                                            analyticsPeriodBoundaryType:
+                                                AnalyticsPeriodBoundaryType.BEFORE_START_OF_REPORTING_PERIOD,
+                                            boundaryTarget: 'EVENT_DATE',
+                                        },
+                                    ])
+                                },
+                            }}
                             meta={eventField.meta}
                         />
                         <RadioFieldFF
                             label={`${ANALYTICS_TYPE.ENROLLMENT}: ${i18n.t(
                                 'Uses data combined from the latest events across the enrollment'
                             )}`}
-                            input={enrollmentField.input}
+                            input={{
+                                ...enrollmentField.input,
+                                onChange: (event) => {
+                                    enrollmentField.input.onChange(event)
+                                    analyticsPeriodBoundariesInput.onChange([
+                                        {
+                                            analyticsPeriodBoundaryType:
+                                                AnalyticsPeriodBoundaryType.AFTER_START_OF_REPORTING_PERIOD,
+                                            boundaryTarget: 'ENROLLMENT_DATE',
+                                        },
+                                        {
+                                            analyticsPeriodBoundaryType:
+                                                AnalyticsPeriodBoundaryType.BEFORE_START_OF_REPORTING_PERIOD,
+                                            boundaryTarget: 'ENROLLMENT_DATE',
+                                        },
+                                    ])
+                                },
+                            }}
                             meta={enrollmentField.meta}
                         />
                     </FieldGroup>
