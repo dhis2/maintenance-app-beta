@@ -1162,6 +1162,29 @@ describe('Program indicator form tests', () => {
                 'Enrollment: Uses data combined from the latest events across the enrollment',
                 screen
             )
+            expect(
+                screen.getByTestId('analytics-type-change-modal')
+            ).toBeVisible()
+            await userEvent.click(
+                screen.getByTestId('analytics-type-change-cancel')
+            )
+            expect(
+                screen.queryByTestId('analytics-type-change-modal')
+            ).not.toBeInTheDocument()
+            screen
+                .getAllByTestId('analytics-period-boundary')
+                .forEach((boundary: HTMLElement) =>
+                    expect(boundary).toHaveTextContent('Event date')
+                )
+
+            await uiActions.pickRadioField(
+                'analyticsType',
+                'Enrollment: Uses data combined from the latest events across the enrollment',
+                screen
+            )
+            await userEvent.click(
+                screen.getByTestId('analytics-type-change-continue')
+            )
             const enrollmentBoundaries = screen.getAllByTestId(
                 'analytics-period-boundary'
             )
@@ -1968,6 +1991,53 @@ describe('Program indicator form tests', () => {
                 'href',
                 `/${section.namePlural}`
             )
+        })
+        it('should show a confirmation modal when changing the analytics type and keep the values on cancel', async () => {
+            const { screen } = await renderForm({
+                programIndicatorOverwrites: {
+                    analyticsType: 'EVENT',
+                    orgUnitField: null,
+                },
+            })
+
+            await uiActions.pickRadioField(
+                'analyticsType',
+                'Enrollment: Uses data combined from the latest events across the enrollment',
+                screen
+            )
+            expect(
+                screen.getByTestId('analytics-type-change-modal')
+            ).toBeVisible()
+
+            await userEvent.click(
+                screen.getByTestId('analytics-type-change-cancel')
+            )
+            expect(
+                screen.queryByTestId('analytics-type-change-modal')
+            ).not.toBeInTheDocument()
+
+            uiAssertions.expectRadioFieldToExist(
+                'analyticsType',
+                [
+                    {
+                        label: PROGRAM_INDICATOR_SPECIFIC_TRANSLATIONS.EVENT,
+                        checked: true,
+                    },
+                    {
+                        label: PROGRAM_INDICATOR_SPECIFIC_TRANSLATIONS.ENROLLMENT,
+                        checked: false,
+                    },
+                ],
+                screen
+            )
+            const boundariesList = screen.getAllByTestId(
+                'analytics-period-boundary'
+            )
+            expect(boundariesList).toHaveLength(1)
+            expect(boundariesList[0]).toHaveTextContent('Incident date')
+
+            await uiActions.submitForm(screen)
+            expect(updateMock).not.toHaveBeenCalled()
         })
         it('should do nothing and return to the list view on success when no field is changed', async () => {
             const { screen } = await renderForm({
