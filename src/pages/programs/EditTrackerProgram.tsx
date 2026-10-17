@@ -46,7 +46,7 @@ const PLURAL_LABEL_FIELD_FILTERS = [
     'notesLabel',
     'trackedEntityAttributesLabel',
 ] as const
-const ENABLE_CHANGE_LOG_FIELD = 'enableChangeLog'
+const ENABLE_CHANGE_LOG_FIELD_FILTERS = ['enableChangeLog'] as const
 
 const ENROLLMENT_AOC_FIELD_FILTERS = [
     'enrollmentCategoryCombo[id,displayName]',
@@ -101,7 +101,7 @@ const fieldFilters = [
     'minAttributesRequiredToSearch',
     'maxTeiCountToReturn',
     'accessLevel',
-    ENABLE_CHANGE_LOG_FIELD,
+    ...ENABLE_CHANGE_LOG_FIELD_FILTERS,
 ] as const
 
 export type ProgramsFromFilters = PickWithFieldFilters<
@@ -291,13 +291,15 @@ export const EditTrackerProgram = () => {
 
     const requestedFields = useMemo(() => {
         const pluralFilters: readonly string[] = PLURAL_LABEL_FIELD_FILTERS
+        const enableChangeLogFilters: readonly string[] =
+            ENABLE_CHANGE_LOG_FIELD_FILTERS
         const enrollmentAOCFilters: readonly string[] =
             ENROLLMENT_AOC_FIELD_FILTERS
         return fieldFilters.filter((f) => {
             if (!showPluralLabels && pluralFilters.includes(f)) {
                 return false
             }
-            if (!showEnableChangeLog && f === ENABLE_CHANGE_LOG_FIELD) {
+            if (!showEnableChangeLog && enableChangeLogFilters.includes(f)) {
                 return false
             }
             if (!showEnrollmentAOC && enrollmentAOCFilters.includes(f)) {

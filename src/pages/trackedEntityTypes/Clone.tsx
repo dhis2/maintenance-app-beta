@@ -28,7 +28,7 @@ import {
     validateTrackedEntityType,
 } from './form'
 
-const ENABLE_CHANGE_LOG_FIELD = 'enableChangeLog'
+const ENABLE_CHANGE_LOG_FIELD_FILTERS = ['enableChangeLog'] as const
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -38,7 +38,7 @@ const fieldFilters = [
     'description',
     'style[color,icon]',
     'allowAuditLog',
-    ENABLE_CHANGE_LOG_FIELD,
+    ...ENABLE_CHANGE_LOG_FIELD_FILTERS,
     'minAttributesRequiredToSearch',
     'maxTeiCountToReturn',
     'featureType',
@@ -62,7 +62,9 @@ export const Component = () => {
         if (showEnableChangeLog) {
             return fieldFilters.concat()
         }
-        return fieldFilters.filter((f) => f !== ENABLE_CHANGE_LOG_FIELD)
+        const enableChangeLogFilters: readonly string[] =
+            ENABLE_CHANGE_LOG_FIELD_FILTERS
+        return fieldFilters.filter((f) => !enableChangeLogFilters.includes(f))
     }, [showEnableChangeLog])
 
     const query = {

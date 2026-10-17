@@ -28,7 +28,7 @@ import {
     validateTrackedEntityType,
 } from './form'
 const PLURAL_LABEL_FIELD_FILTERS = ['trackedEntityTypesLabel'] as const
-const ENABLE_CHANGE_LOG_FIELD = 'enableChangeLog'
+const ENABLE_CHANGE_LOG_FIELD_FILTERS = ['enableChangeLog'] as const
 
 const fieldFilters = [
     ...DEFAULT_FIELD_FILTERS,
@@ -39,7 +39,7 @@ const fieldFilters = [
     'description',
     'style[color,icon]',
     'allowAuditLog',
-    ENABLE_CHANGE_LOG_FIELD,
+    ...ENABLE_CHANGE_LOG_FIELD_FILTERS,
     'minAttributesRequiredToSearch',
     'maxTeiCountToReturn',
     'featureType',
@@ -75,11 +75,13 @@ export const Component = () => {
 
     const requestedFields = useMemo(() => {
         const pluralFilters: readonly string[] = PLURAL_LABEL_FIELD_FILTERS
+        const enableChangeLogFilters: readonly string[] =
+            ENABLE_CHANGE_LOG_FIELD_FILTERS
         return fieldFilters.filter((f) => {
             if (!showPluralLabels && pluralFilters.includes(f)) {
                 return false
             }
-            if (!showEnableChangeLog && f === ENABLE_CHANGE_LOG_FIELD) {
+            if (!showEnableChangeLog && enableChangeLogFilters.includes(f)) {
                 return false
             }
             return true
