@@ -1,13 +1,6 @@
 import { useTimeZoneConversion } from '@dhis2/app-runtime'
 import i18n from '@dhis2/d2-i18n'
-import {
-    Button,
-    CheckboxFieldFF,
-    Field,
-    IconAdd16,
-    Input,
-    InputFieldFF,
-} from '@dhis2/ui'
+import { Button, Field, IconAdd16, Input, InputFieldFF } from '@dhis2/ui'
 import React, { useEffect } from 'react'
 import {
     Field as FieldRFF,
@@ -40,6 +33,7 @@ import { DisplayableModel } from '../../../../types/models'
 import {
     CompleteEventsExpiryDaysField,
     DisplayFrontPageListField,
+    EnableChangeLogField,
     ExpiryDaysWithPeriodTypeField,
     OpenDaysAfterCoEndDateField,
 } from '../fields'
@@ -267,15 +261,7 @@ export const SetupFormContents = React.memo(function SetupFormContents({
             )}
             {showEnableChangeLog && (
                 <StandardFormField>
-                    <FieldRFF
-                        name="enableChangeLog"
-                        type="checkbox"
-                        component={CheckboxFieldFF}
-                        dataTest="formfields-enableChangeLog"
-                        label={i18n.t(
-                            'Record change history for event data values'
-                        )}
-                    />
+                    <EnableChangeLogField />
                 </StandardFormField>
             )}
         </SectionedFormSection>

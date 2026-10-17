@@ -588,7 +588,7 @@ export const modelListViewsConfig = {
                 'displayDescription',
                 'allowAuditLog',
                 {
-                    label: i18n.t('Record change history'),
+                    label: i18n.t('Record change history for attribute values'),
                     path: 'enableChangeLog',
                     minApiVersion: 43,
                 },
@@ -751,11 +751,13 @@ export const modelListViewsConfig = {
                 'created',
                 'description',
                 {
-                    label: i18n.t('Display front page list'),
+                    label: i18n.t('Start page in web Capture app'),
                     path: 'displayFrontPageList',
                 },
                 {
-                    label: i18n.t('Record change history'),
+                    label: i18n.t(
+                        'Record change history for event data values'
+                    ),
                     path: 'enableChangeLog',
                     minApiVersion: 43,
                 },
