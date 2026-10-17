@@ -5,8 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2026-10-17T17:01:48.701Z\n"
-"PO-Revision-Date: 2026-10-17T17:01:48.701Z\n"
+"POT-Creation-Date: 2026-10-17T17:55:55.361Z\n"
+"PO-Revision-Date: 2026-10-17T17:55:55.361Z\n"
 
 msgid "schemas"
 msgstr "schemas"
@@ -6013,9 +6013,6 @@ msgstr "Configure data items"
 msgid "Data elements can be collected in different ways with different options."
 msgstr "Data elements can be collected in different ways with different options."
 
-msgid "Allow provided elsewhere"
-msgstr "Allow provided elsewhere"
-
 msgid "Display in reports"
 msgstr "Display in reports"
 
@@ -6739,9 +6736,6 @@ msgstr "Image and File type attributes are not searchable"
 
 msgid "Maximum number of tracked entity instances to return when searching"
 msgstr "Maximum number of tracked entity instances to return when searching"
-
-msgid "Enable tracked entity instance audit log"
-msgstr "Enable tracked entity instance audit log"
 
 msgid "Set up the basic information for this tracked entity type."
 msgstr "Set up the basic information for this tracked entity type."
