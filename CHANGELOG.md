@@ -1,3 +1,10 @@
+# [0.184.0](https://github.com/dhis2/metadata-management-app/compare/v0.183.0...v0.184.0) (2026-10-18)
+
+
+### Features
+
+* [DHIS2-22184] Changelog toggle for TET and program ([#1046](https://github.com/dhis2/metadata-management-app/issues/1046)) ([641167a](https://github.com/dhis2/metadata-management-app/commit/641167a154696ec89ce3ebefc4f048b3da47bc39))
+
 # [0.183.0](https://github.com/dhis2/metadata-management-app/compare/v0.182.0...v0.183.0) (2026-10-12)
 
 
