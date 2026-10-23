@@ -1,3 +1,10 @@
+## [0.184.1](https://github.com/dhis2/metadata-management-app/compare/v0.184.0...v0.184.1) (2026-10-23)
+
+
+### Bug Fixes
+
+* remove path and level in clone [DHIS2-22127] ([#1048](https://github.com/dhis2/metadata-management-app/issues/1048)) ([771ef27](https://github.com/dhis2/metadata-management-app/commit/771ef270d7d840092633862aa5413ea283057ca7))
+
 # [0.184.0](https://github.com/dhis2/metadata-management-app/compare/v0.183.0...v0.184.0) (2026-10-18)
 
 
